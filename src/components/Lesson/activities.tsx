@@ -2,15 +2,33 @@ import { ReactNode, useId, useMemo, useState } from 'react';
 import { PiArrowDown, PiArrowUp, PiCheckBold, PiXBold } from 'react-icons/pi';
 import { recordAnswer } from '../../lessons/progress';
 import { fillMatches, parseFill, stableShuffle } from '../../lessons/tools';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { CodeBlock } from '../Guide/CodeBlock';
 import { Inline } from '../Guide/inline';
 import { Block, useLessonId } from './context';
 
-function ActivityHeader({ kind, id, text }: { kind: string; id: string; text: string }) {
+function ActivityHeader({
+  kind,
+  id,
+  text,
+  fieldName,
+  narrationClipId,
+  buttonLabel = 'Ouvir atividade',
+}: {
+  kind: string;
+  id: string;
+  text: string;
+  fieldName?: string;
+  narrationClipId?: string;
+  buttonLabel?: string;
+}) {
   return (
     <header className="lesson-activity-head">
-      <span className="lesson-activity-kind">{kind}</span>
-      <p id={id}>
+      <div className="narration-heading-row">
+        <span className="lesson-activity-kind">{kind}</span>
+        {narrationClipId && <NarrationBlockButton clipId={narrationClipId} label={buttonLabel} />}
+      </div>
+      <p id={id} data-narration-field={fieldName}>
         <Inline text={text} />
       </p>
     </header>
@@ -32,7 +50,15 @@ function Feedback({ tone, children }: { tone?: 'right' | 'wrong'; children?: Rea
   );
 }
 
-export function Quiz({ block, activityId }: { block: Block<'quiz'>; activityId: string }) {
+export function Quiz({
+  block,
+  activityId,
+  narrationClipId,
+}: {
+  block: Block<'quiz'>;
+  activityId: string;
+  narrationClipId?: string;
+}) {
   const lessonId = useLessonId();
   const labelId = useId();
   const [tried, setTried] = useState<number[]>([]);
@@ -51,8 +77,16 @@ export function Quiz({ block, activityId }: { block: Block<'quiz'>; activityId: 
       className="lesson-activity"
       aria-labelledby={labelId}
       data-solved={solved || undefined}
+      data-narration-clip={narrationClipId}
     >
-      <ActivityHeader kind="Pergunta" id={labelId} text={block.question} />
+      <ActivityHeader
+        kind="Pergunta"
+        id={labelId}
+        text={block.question}
+        fieldName={narrationClipId ? 'question' : undefined}
+        narrationClipId={narrationClipId}
+        buttonLabel="Ouvir pergunta"
+      />
       {block.code && <CodeBlock language={block.language || 'código'} code={block.code} compact />}
       <ul className="lesson-options">
         {block.options.map((option, index) => {
@@ -74,7 +108,7 @@ export function Quiz({ block, activityId }: { block: Block<'quiz'>; activityId: 
                     String.fromCharCode(65 + index)
                   )}
                 </span>
-                <span>
+                <span data-narration-field={narrationClipId ? `option:${index}` : undefined}>
                   <Inline text={option.text} />
                 </span>
                 {state && (
@@ -106,7 +140,15 @@ export function Quiz({ block, activityId }: { block: Block<'quiz'>; activityId: 
   );
 }
 
-export function Order({ block, activityId }: { block: Block<'order'>; activityId: string }) {
+export function Order({
+  block,
+  activityId,
+  narrationClipId,
+}: {
+  block: Block<'order'>;
+  activityId: string;
+  narrationClipId?: string;
+}) {
   const lessonId = useLessonId();
   const labelId = useId();
   const [order, setOrder] = useState(() =>
@@ -142,8 +184,15 @@ export function Order({ block, activityId }: { block: Block<'order'>; activityId
       className="lesson-activity"
       aria-labelledby={labelId}
       data-solved={(checked && allRight) || undefined}
+      data-narration-clip={narrationClipId}
     >
-      <ActivityHeader kind="Coloque em ordem" id={labelId} text={block.prompt} />
+      <ActivityHeader
+        kind="Coloque em ordem"
+        id={labelId}
+        text={block.prompt}
+        fieldName={narrationClipId ? 'prompt' : undefined}
+        narrationClipId={narrationClipId}
+      />
       <ol className="lesson-order">
         {order.map((item, position) => {
           const state = checked ? (item === position ? 'right' : 'wrong') : undefined;
@@ -207,7 +256,15 @@ export function Order({ block, activityId }: { block: Block<'order'>; activityId
   );
 }
 
-export function Classify({ block, activityId }: { block: Block<'classify'>; activityId: string }) {
+export function Classify({
+  block,
+  activityId,
+  narrationClipId,
+}: {
+  block: Block<'classify'>;
+  activityId: string;
+  narrationClipId?: string;
+}) {
   const lessonId = useLessonId();
   const labelId = useId();
   const items = useMemo(
@@ -231,15 +288,26 @@ export function Classify({ block, activityId }: { block: Block<'classify'>; acti
       className="lesson-activity"
       aria-labelledby={labelId}
       data-solved={(checked && right === items.length) || undefined}
+      data-narration-clip={narrationClipId}
     >
-      <ActivityHeader kind="Classifique" id={labelId} text={block.prompt} />
+      <ActivityHeader
+        kind="Classifique"
+        id={labelId}
+        text={block.prompt}
+        fieldName={narrationClipId ? 'prompt' : undefined}
+        narrationClipId={narrationClipId}
+      />
       <ul className="lesson-classify">
         {items.map((item, index) => {
           const state = checked ? (answers[index] === item.bucket ? 'right' : 'wrong') : undefined;
           return (
             <li key={item.text} data-state={state}>
               <fieldset>
-                <legend>
+                <legend
+                  data-narration-field={
+                    narrationClipId ? `item:${block.items.indexOf(item)}` : undefined
+                  }
+                >
                   <Inline text={item.text} />
                 </legend>
                 <div className="lesson-buckets">
@@ -254,7 +322,13 @@ export function Classify({ block, activityId }: { block: Block<'classify'>; acti
                           setChecked(false);
                         }}
                       />
-                      <span>{bucket}</span>
+                      <span
+                        data-narration-field={
+                          index === 0 && narrationClipId ? `bucket:${bucketIndex}` : undefined
+                        }
+                      >
+                        {bucket}
+                      </span>
                     </label>
                   ))}
                 </div>
@@ -296,7 +370,15 @@ export function Classify({ block, activityId }: { block: Block<'classify'>; acti
   );
 }
 
-export function Fill({ block, activityId }: { block: Block<'fill'>; activityId: string }) {
+export function Fill({
+  block,
+  activityId,
+  narrationClipId,
+}: {
+  block: Block<'fill'>;
+  activityId: string;
+  narrationClipId?: string;
+}) {
   const lessonId = useLessonId();
   const labelId = useId();
   const parts = useMemo(() => parseFill(block.template), [block.template]);
@@ -322,8 +404,15 @@ export function Fill({ block, activityId }: { block: Block<'fill'>; activityId: 
       className="lesson-activity"
       aria-labelledby={labelId}
       data-solved={(checked && allRight) || undefined}
+      data-narration-clip={narrationClipId}
     >
-      <ActivityHeader kind="Complete o código" id={labelId} text={block.prompt} />
+      <ActivityHeader
+        kind="Complete o código"
+        id={labelId}
+        text={block.prompt}
+        fieldName={narrationClipId ? 'prompt' : undefined}
+        narrationClipId={narrationClipId}
+      />
       <div className="lesson-fill guide-code">
         <div className="guide-code-bar">
           <span>{block.language}</span>

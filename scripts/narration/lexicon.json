@@ -1,0 +1,200 @@
+{
+  "version": "1.0.0",
+  "notes": "Léxico de pronúncia para o Kokoro pt-BR (piloto integracao-front-e-api e base do catálogo). Usa segmentos multilíngues ou IPA verificado na vocab do Kokoro.",
+  "exact": {
+    "API": { "spoken": "a pê i", "lang": "pt-br" },
+    "APIs": { "spoken": "a pê ís", "lang": "pt-br", "ipa": "a pˈe ˈis" },
+    "API_URL": { "spoken": "a pê i anderláine u érre éle", "lang": "pt-br" },
+    "Access-Control-Allow-Origin": { "spoken": "Access Control Allow Origin", "lang": "en-us" },
+    "Allow-Origin": { "spoken": "Allow Origin", "lang": "en-us" },
+    "Content-Type": { "spoken": "Content Type", "lang": "en-us" },
+    "Cross-Origin": { "spoken": "Cross Origin", "lang": "en-us" },
+    "Resource": { "spoken": "Resource", "lang": "en-us" },
+    "Sharing": { "spoken": "Sharing", "lang": "en-us" },
+    "CORS": { "spoken": "córss", "lang": "pt-br", "ipa": "kˈɔɾs" },
+    "cors": { "spoken": "córss", "lang": "pt-br", "ipa": "kˈɔɾs" },
+    "no-cors": {
+      "spoken": "nô córss",
+      "segments": [
+        { "text": "nô", "lang": "pt-br" },
+        { "ipa": "kˈɔɾs" }
+      ]
+    },
+    "HTTP": { "spoken": "agá tê tê pê", "lang": "pt-br" },
+    "HTTPS": { "spoken": "agá tê tê pê ésse", "lang": "pt-br" },
+    "URL": { "spoken": "u érre éle", "lang": "pt-br" },
+    "URLs": { "spoken": "u érre éles", "lang": "pt-br" },
+    "GET": { "spoken": "get", "lang": "en-us" },
+    "POST": { "spoken": "post", "lang": "en-us" },
+    "PATCH": { "spoken": "patch", "lang": "en-us" },
+    "PUT": { "spoken": "put", "lang": "en-us" },
+    "DELETE": { "spoken": "delete", "lang": "en-us" },
+    "OPTIONS": { "spoken": "options", "lang": "en-us" },
+    "JSON": { "spoken": "Jason", "lang": "en-us" },
+    "JSON.stringify": {
+      "spoken": "Jason ponto stringify",
+      "segments": [
+        { "text": "Jason", "lang": "en-us" },
+        { "text": "ponto", "lang": "pt-br" },
+        { "text": "stringify", "lang": "en-us" }
+      ]
+    },
+    "express.json()": {
+      "spoken": "express ponto Jason",
+      "segments": [
+        { "text": "express", "lang": "en-us" },
+        { "text": "ponto", "lang": "pt-br" },
+        { "text": "Jason", "lang": "en-us" }
+      ]
+    },
+    "Express": { "spoken": "Express", "lang": "en-us" },
+    "Node": { "spoken": "Node", "lang": "en-us" },
+    "React": { "spoken": "React", "lang": "en-us" },
+    "Vite": { "spoken": "víti", "lang": "pt-br" },
+    "VITE_": { "spoken": "víti anderláine", "lang": "pt-br" },
+    "VITE_API_URL": { "spoken": "víti anderláine a pê i anderláine u érre éle", "lang": "pt-br" },
+    "VITE_CHAVE_SECRETA=sk_live_...": {
+      "spoken": "víti chave secreta igual sk live",
+      "segments": [
+        { "text": "víti chave secreta igual ésse ká", "lang": "pt-br" },
+        { "text": "live", "lang": "en-us" }
+      ]
+    },
+    "VITE_CHAVE_SECRETA=sk_live_": {
+      "spoken": "víti chave secreta igual sk live",
+      "segments": [
+        { "text": "víti chave secreta igual ésse ká", "lang": "pt-br" },
+        { "text": "live", "lang": "en-us" }
+      ]
+    },
+    "TypeScript": { "spoken": "TypeScript", "lang": "en-us" },
+    "JavaScript": { "spoken": "JavaScript", "lang": "en-us" },
+    "Git": { "spoken": "Git", "lang": "en-us" },
+    "Proxy": { "spoken": "próksi", "lang": "pt-br" },
+    "proxy": { "spoken": "próksi", "lang": "pt-br" },
+    "WhatsApp": { "spoken": "WhatsApp", "lang": "pt-br" },
+    "fetch": { "spoken": "fetch", "lang": "en-us" },
+    "curl": { "spoken": "curl", "lang": "en-us" },
+    "npm": { "spoken": "éne pê éme", "lang": "pt-br" },
+    "run": { "spoken": "run", "lang": "en-us" },
+    "dev": { "spoken": "dev", "lang": "en-us" },
+    "install": { "spoken": "install", "lang": "en-us" },
+    "id": { "spoken": "i dê", "lang": "pt-br" },
+    "mode": { "spoken": "mode", "lang": "en-us" },
+    "body": { "spoken": "body", "lang": "en-us" },
+    "preflight": { "spoken": "preflight", "lang": "en-us" },
+    "localhost": { "spoken": "localhost", "lang": "en-us" },
+    "undefined": { "spoken": "undefined", "lang": "en-us" },
+    "Number": { "spoken": "Number", "lang": "en-us" },
+    "object": { "spoken": "object", "lang": "en-us" },
+    "Object": { "spoken": "Object", "lang": "en-us" },
+    "env": { "spoken": "env", "lang": "en-us" },
+    "sk_live_...": {
+      "spoken": "ésse ká láive",
+      "segments": [
+        { "text": "ésse ká", "lang": "pt-br" },
+        { "text": "live", "lang": "en-us" }
+      ]
+    },
+    ".env": {
+      "spoken": "ponto env",
+      "segments": [
+        { "text": "ponto", "lang": "pt-br" },
+        { "text": "env", "lang": "en-us" }
+      ]
+    },
+    ".env.production": {
+      "spoken": "ponto env ponto production",
+      "segments": [
+        { "text": "ponto", "lang": "pt-br" },
+        { "text": "env", "lang": "en-us" },
+        { "text": "ponto", "lang": "pt-br" },
+        { "text": "production", "lang": "en-us" }
+      ]
+    },
+    "server.js": {
+      "spoken": "server ponto jota ésse",
+      "segments": [
+        { "text": "server", "lang": "en-us" },
+        { "text": "ponto jota ésse", "lang": "pt-br" }
+      ]
+    },
+    "req.body": {
+      "spoken": "req ponto body",
+      "segments": [
+        { "text": "req", "lang": "en-us" },
+        { "text": "ponto", "lang": "pt-br" },
+        { "text": "body", "lang": "en-us" }
+      ]
+    },
+    "resposta.ok": { "spoken": "resposta ponto oquêi", "lang": "pt-br" },
+    "application/json": {
+      "spoken": "application barra Jason",
+      "segments": [
+        { "text": "application", "lang": "en-us" },
+        { "text": "barra", "lang": "pt-br" },
+        { "text": "Jason", "lang": "en-us" }
+      ]
+    },
+    "import.meta.env.VITE_API_URL": {
+      "spoken": "import ponto meta ponto env ponto víti a pê i u érre éle",
+      "segments": [
+        { "text": "import", "lang": "en-us" },
+        { "text": "ponto méta ponto", "lang": "pt-br" },
+        { "text": "env", "lang": "en-us" },
+        { "text": "ponto víti anderláine a pê i anderláine u érre éle", "lang": "pt-br" }
+      ]
+    },
+    "role=\"alert\"": {
+      "spoken": "role igual alert",
+      "segments": [
+        { "text": "role", "lang": "en-us" },
+        { "text": "igual", "lang": "pt-br" },
+        { "text": "alert", "lang": "en-us" }
+      ]
+    },
+    "#descricao": { "spoken": "campo descrição", "lang": "pt-br" },
+    "#valor": { "spoken": "campo valor", "lang": "pt-br" },
+    "descricao": { "spoken": "descrição", "lang": "pt-br" },
+    "+": { "spoken": "mais", "lang": "pt-br" },
+    "201": { "spoken": "duzentos e um", "lang": "pt-br" },
+    "http://localhost:5173": {
+      "spoken": "agá tê tê pê localhost cinco mil cento e setenta e três",
+      "segments": [
+        { "text": "agá tê tê pê", "lang": "pt-br" },
+        { "text": "localhost", "lang": "en-us" },
+        { "text": "cinco mil cento e setenta e três", "lang": "pt-br" }
+      ]
+    },
+    "http://localhost:3000": {
+      "spoken": "agá tê tê pê localhost três mil",
+      "segments": [
+        { "text": "agá tê tê pê", "lang": "pt-br" },
+        { "text": "localhost", "lang": "en-us" },
+        { "text": "três mil", "lang": "pt-br" }
+      ]
+    },
+    "https://api.minhasdespesas.com.br": {
+      "spoken": "agá tê tê pê ésse a pê i ponto minhas despesas ponto com ponto bê érre",
+      "lang": "pt-br"
+    },
+    "localhost:5173": {
+      "spoken": "localhost cinco mil cento e setenta e três",
+      "segments": [
+        { "text": "localhost", "lang": "en-us" },
+        { "text": "cinco mil cento e setenta e três", "lang": "pt-br" }
+      ]
+    },
+    "localhost:3000": {
+      "spoken": "localhost três mil",
+      "segments": [
+        { "text": "localhost", "lang": "en-us" },
+        { "text": "três mil", "lang": "pt-br" }
+      ]
+    },
+    ":5173": { "spoken": "porta cinco mil cento e setenta e três", "lang": "pt-br" },
+    "/api": { "spoken": "barra a pê i", "lang": "pt-br" },
+    "/despesas": { "spoken": "barra despesas", "lang": "pt-br" },
+    "/api/despesas": { "spoken": "barra a pê i barra despesas", "lang": "pt-br" }
+  }
+}

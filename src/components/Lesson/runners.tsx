@@ -8,6 +8,7 @@ import {
   PiPlayFill,
 } from 'react-icons/pi';
 import { recordAnswer } from '../../lessons/progress';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Inline } from '../Guide/inline';
 import { Block, useLessonId } from './context';
 import { pythonLoaded, PythonRun, runPython } from './pythonRunner';
@@ -18,20 +19,25 @@ function RunnerHead({
   kind,
   title,
   task,
+  narrationClipId,
 }: {
   id: string;
   kind: string;
   title: string;
   task?: string;
+  narrationClipId?: string;
 }) {
   return (
     <header className="lesson-playground-head">
-      <span className="lesson-activity-kind">{kind}</span>
-      <h3 id={`${id}-title`}>
+      <div className="narration-heading-row">
+        <span className="lesson-activity-kind">{kind}</span>
+        {narrationClipId && <NarrationBlockButton clipId={narrationClipId} label="Ouvir tarefa" />}
+      </div>
+      <h3 id={`${id}-title`} data-narration-field={narrationClipId ? 'title' : undefined}>
         <Inline text={title} />
       </h3>
       {task && (
-        <p>
+        <p data-narration-field={narrationClipId ? 'task' : undefined}>
           <Inline text={task} />
         </p>
       )}
@@ -100,7 +106,15 @@ interface TerminalLine {
   prompt?: string;
 }
 
-export function Terminal({ block, activityId }: { block: Block<'terminal'>; activityId: string }) {
+export function Terminal({
+  block,
+  activityId,
+  narrationClipId,
+}: {
+  block: Block<'terminal'>;
+  activityId: string;
+  narrationClipId?: string;
+}) {
   const lessonId = useLessonId();
   const id = useId();
   const start = (): TerminalLine[] => (block.intro ? [{ kind: 'intro', text: block.intro }] : []);
@@ -174,8 +188,15 @@ export function Terminal({ block, activityId }: { block: Block<'terminal'>; acti
       className="lesson-playground lesson-terminal"
       aria-labelledby={`${id}-title`}
       data-passed={done || undefined}
+      data-narration-clip={narrationClipId}
     >
-      <RunnerHead id={id} kind="Terminal guiado" title={block.title} task={block.task} />
+      <RunnerHead
+        id={id}
+        kind="Terminal guiado"
+        title={block.title}
+        task={block.task}
+        narrationClipId={narrationClipId}
+      />
       <div className="lesson-terminal-window">
         <div className="lesson-preview-bar">
           <span aria-hidden="true" className="lesson-preview-dots">
@@ -280,7 +301,15 @@ function formatCell(value: unknown) {
   return String(value);
 }
 
-export function SqlLab({ block, activityId }: { block: Block<'sql'>; activityId: string }) {
+export function SqlLab({
+  block,
+  activityId,
+  narrationClipId,
+}: {
+  block: Block<'sql'>;
+  activityId: string;
+  narrationClipId?: string;
+}) {
   const id = useId();
   const [query, setQuery] = useState(block.query);
   const [run, setRun] = useState<SqlRun | null>(null);
@@ -320,8 +349,15 @@ export function SqlLab({ block, activityId }: { block: Block<'sql'>; activityId:
       className="lesson-playground lesson-sql"
       aria-labelledby={`${id}-title`}
       data-passed={passed || undefined}
+      data-narration-clip={narrationClipId}
     >
-      <RunnerHead id={id} kind="SQL ao vivo" title={block.title} task={block.task} />
+      <RunnerHead
+        id={id}
+        kind="SQL ao vivo"
+        title={block.title}
+        task={block.task}
+        narrationClipId={narrationClipId}
+      />
       {run && run.tables.length > 0 && (
         <details className="lesson-sql-schema" open>
           <summary>Tabelas disponíveis</summary>
@@ -435,7 +471,15 @@ export function SqlLab({ block, activityId }: { block: Block<'sql'>; activityId:
   );
 }
 
-export function PythonLab({ block, activityId }: { block: Block<'python'>; activityId: string }) {
+export function PythonLab({
+  block,
+  activityId,
+  narrationClipId,
+}: {
+  block: Block<'python'>;
+  activityId: string;
+  narrationClipId?: string;
+}) {
   const id = useId();
   const [code, setCode] = useState(block.code);
   const [output, setOutput] = useState('');
@@ -473,8 +517,15 @@ export function PythonLab({ block, activityId }: { block: Block<'python'>; activ
       className="lesson-playground lesson-python"
       aria-labelledby={`${id}-title`}
       data-passed={passed || undefined}
+      data-narration-clip={narrationClipId}
     >
-      <RunnerHead id={id} kind="Python ao vivo" title={block.title} task={block.task} />
+      <RunnerHead
+        id={id}
+        kind="Python ao vivo"
+        title={block.title}
+        task={block.task}
+        narrationClipId={narrationClipId}
+      />
       <div className="lesson-editor">
         <div className="lesson-editor-tabs">
           <span className="lesson-editor-label">programa.py</span>

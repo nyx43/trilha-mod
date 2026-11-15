@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { PiArrowsClockwise, PiCheckBold } from 'react-icons/pi';
 import { rateCard } from '../../lessons/progress';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Inline } from '../Guide/inline';
 
 export interface DeckCard {
@@ -9,6 +10,7 @@ export interface DeckCard {
   front: string;
   back: string;
   source?: string;
+  narrationId?: string;
 }
 
 export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: () => void }) {
@@ -59,6 +61,7 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
         key={card.key + String(flipped)}
         className="lesson-card"
         data-flipped={flipped || undefined}
+        data-narration-clip={!flipped ? card.narrationId : undefined}
         initial={reduced ? false : { rotateX: flipped ? -70 : 0, opacity: flipped ? 0.4 : 0 }}
         animate={{ rotateX: 0, opacity: 1 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
@@ -66,14 +69,21 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
         {card.source && <p className="lesson-card-source">{card.source}</p>}
         <p className="lesson-card-side">{flipped ? 'Resposta' : 'Pergunta'}</p>
         <p className="lesson-card-text">
-          <Inline text={flipped ? card.back : card.front} />
+          <span data-narration-field={!flipped && card.narrationId ? 'front' : undefined}>
+            <Inline text={flipped ? card.back : card.front} />
+          </span>
         </p>
       </motion.div>
       <div className="lesson-deck-actions">
         {!flipped ? (
-          <button type="button" className="lesson-button" onClick={() => setFlipped(true)}>
-            Tente lembrar, depois mostre a resposta
-          </button>
+          <>
+            <button type="button" className="lesson-button" onClick={() => setFlipped(true)}>
+              Tente lembrar, depois mostre a resposta
+            </button>
+            {card.narrationId && (
+              <NarrationBlockButton clipId={card.narrationId} label="Ouvir frente" />
+            )}
+          </>
         ) : (
           <>
             <button type="button" className="lesson-button-quiet" onClick={() => answer(false)}>

@@ -9,7 +9,7 @@ import {
   PiLockSimple,
   PiTarget,
 } from 'react-icons/pi';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import { Checklist } from '../components/Guide/Checklist';
 import { CodeBlock } from '../components/Guide/CodeBlock';
 import { GuideBlockView } from '../components/Guide/GuideBlock';
@@ -18,14 +18,11 @@ import MainLayout from '../components/layouts/MainLayout';
 import { Flashcards } from '../components/Lesson/Flashcards';
 import { LessonBlockView } from '../components/Lesson/LessonBlock';
 import { LessonContext } from '../components/Lesson/context';
-import { activityKey } from '../lessons';
-import {
-  cardKey,
-  enrollCards,
-  localDay,
-  updateLesson,
-  useLessonStore,
-} from '../lessons/progress';
+import { activityKey, findLesson } from '../lessons';
+import { NarrationProvider } from '../narration/controller';
+import { NarrationBlockButton, NarrationPlayer } from '../narration/NarrationPlayer';
+import { LessonTutor } from '../tutor/LessonTutor';
+import { cardKey, enrollCards, localDay, updateLesson, useLessonStore } from '../lessons/progress';
 import { LessonContent } from '../lessons/types';
 import {
   findPercurso,
@@ -57,7 +54,9 @@ function PercursoOverview({ percurso }: { percurso: Percurso }) {
   const doneCount = percurso.stages.filter(isStageDone).length;
   const totalMinutes = percurso.stages.reduce((sum, stage) => sum + stage.minutes, 0);
   const nextStage = percurso.stages.find((stage) => !isStageDone(stage)) || percurso.stages[0];
-  const started = doneCount > 0 || percurso.stages.some((s) => s.kind === 'lesson' && !!lessonStore.lessons[s.lessonId]);
+  const started =
+    doneCount > 0 ||
+    percurso.stages.some((s) => s.kind === 'lesson' && !!lessonStore.lessons[s.lessonId]);
 
   useEffect(() => {
     document.title = `${percurso.title} · Trilha Info`;
@@ -105,7 +104,9 @@ function PercursoOverview({ percurso }: { percurso: Percurso }) {
               Conectar frontend e API com <code>fetch</code>, JSON, CORS/proxy e tratamento de{' '}
               <code>400</code>
             </li>
-            <li>Estilizar com Tailwind: classes utilitárias, foco acessível e layout mobile-first</li>
+            <li>
+              Estilizar com Tailwind: classes utilitárias, foco acessível e layout mobile-first
+            </li>
             <li>Executar a missão prática por conta própria e validar os 2 links do GitHub</li>
           </ul>
         </div>
@@ -130,7 +131,8 @@ function PercursoOverview({ percurso }: { percurso: Percurso }) {
         <ol className="lessons-list">
           {percurso.stages.map((stage, index) => {
             const done = isStageDone(stage);
-            const record = stage.kind === 'lesson' ? lessonStore.lessons[stage.lessonId] : undefined;
+            const record =
+              stage.kind === 'lesson' ? lessonStore.lessons[stage.lessonId] : undefined;
             const answered = record ? Object.keys(record.answers).length : 0;
             return (
               <li key={stage.slug} data-done={done || undefined}>
@@ -178,6 +180,22 @@ function PercursoLessonStageView({
   const [showAll, setShowAll] = useState(false);
   const [reached, setReached] = useState(0);
   const focusTarget = useRef<string>();
+  const stageContainerRef = useRef<HTMLElement>(null);
+  const { hash } = useLocation();
+  const sourceLesson = useMemo(
+    () =>
+      findLesson(stage.lessonId) ?? {
+        id: stage.lessonId,
+        title: stage.title,
+        summary: stage.summary,
+        minutes: stage.minutes,
+        objectives: [],
+        updatedAt: '2026-11-01',
+        groupIds: [],
+        load: stage.load,
+      },
+    [stage],
+  );
 
   const percursoStore = usePercursoStore();
   const lessonStore = useLessonStore();
@@ -245,6 +263,25 @@ function PercursoLessonStageView({
     return () => cancelAnimationFrame(frame);
   }, [visible, reached]);
 
+  useEffect(() => {
+    if (!content || !hash) return;
+    const targetId = decodeURIComponent(hash.slice(1));
+    const targetIndex = ids.indexOf(targetId);
+    if (targetIndex < 0) return;
+    focusTarget.current = targetId;
+    if (targetIndex >= visible) {
+      setShowAll(true);
+      return;
+    }
+    const frame = requestAnimationFrame(() => {
+      const heading = document.getElementById(`${targetId}-title`);
+      heading?.focus({ preventScroll: true });
+      heading?.scrollIntoView?.({ block: 'start' });
+    });
+    focusTarget.current = undefined;
+    return () => cancelAnimationFrame(frame);
+  }, [content, hash]);
+
   function advance(nextIndex: number) {
     if (nextIndex !== reached + 1 || nextIndex >= total) return;
     focusTarget.current = ids[nextIndex];
@@ -266,278 +303,350 @@ function PercursoLessonStageView({
   }
 
   return (
-    <LessonContext.Provider value={{ lessonId: stage.lessonId }}>
-      <article className="guide-page lesson-page" aria-labelledby="lesson-title">
-        <header className="guide-hero lesson-hero">
-          <nav className="guide-crumbs" aria-label="Você está em">
-            <ol>
-              <li>
-                <Link to="/">Início</Link>
-              </li>
-              <li>
-                <Link to={`/percurso/${percurso.id}`}>Percurso rápido</Link>
-              </li>
-              <li>{stage.title}</li>
-            </ol>
-          </nav>
-          <p className="lesson-number">
-            Etapa {index + 1} de {percurso.stages.length} · Percurso curto
-          </p>
-          <h1 id="lesson-title">{stage.title}</h1>
-          <p className="guide-summary">{stage.summary}</p>
-          <ul className="guide-facts">
-            <li>
-              <PiClock aria-hidden="true" /> cerca de {stage.minutes} min
-            </li>
-            <li>{stage.sectionIds.length} seções selecionadas</li>
-            <li>Progresso salvo neste navegador</li>
-          </ul>
-          <div className="lesson-progress">
-            <div className="lesson-progress-bar" aria-hidden="true">
-              <span style={{ width: `${percent}%` }} />
-            </div>
-            <p>{done ? 'Etapa concluída' : `${percent}% da etapa`}</p>
-          </div>
-          <div className="lessons-actions">
-            {!done && (
-              <button
-                type="button"
-                className="lesson-button-quiet"
-                onClick={() => setShowAll((prev) => !prev)}
-              >
-                {showAll ? 'Voltar para leitura passo a passo' : 'Mostrar todas as seções'}
-              </button>
-            )}
-            <Link className="lesson-button-quiet" to={`/aula/${stage.lessonId}`}>
-              Abrir aula completa avulsa <PiArrowUpRight aria-hidden="true" />
-            </Link>
-          </div>
-        </header>
-
-        <div className="guide-layout">
-          <nav className="guide-toc lesson-toc" aria-label="Nesta etapa">
-            <p className="guide-toc-title" aria-hidden="true">
-              Nesta etapa
-            </p>
-            {content && (
+    <NarrationProvider
+      lesson={sourceLesson}
+      content={content}
+      containerRef={stageContainerRef}
+      scopeKey={`${stage.lessonId}:percurso:${stage.slug}`}
+      scopeSectionIds={stage.sectionIds}
+      hasMoreHiddenSections={Boolean(content && !showAll && visible < total)}
+    >
+      <LessonContext.Provider value={{ lessonId: stage.lessonId }}>
+        <article
+          ref={stageContainerRef}
+          className="guide-page lesson-page"
+          aria-labelledby="lesson-title"
+        >
+          <header className="guide-hero lesson-hero">
+            <nav className="guide-crumbs" aria-label="Você está em">
               <ol>
-                {ids.map((id, sectionIndex) => {
-                  const title =
-                    sectionIndex < sections.length ? sections[sectionIndex].title : 'Fechamento';
-                  const locked = sectionIndex >= visible;
-                  return (
-                    <li key={id}>
-                      <a
-                        href={locked ? undefined : `#${id}`}
-                        data-locked={locked || undefined}
-                        aria-disabled={locked || undefined}
-                        data-done={sectionIndex < reached || done || undefined}
-                        onClick={
-                          locked
-                            ? undefined
-                            : (event) => {
-                                event.preventDefault();
-                                document.getElementById(`${id}-title`)?.focus({ preventScroll: true });
-                                document.getElementById(id)?.scrollIntoView?.({ block: 'start' });
-                              }
-                        }
-                      >
-                        <span aria-hidden="true">
-                          {sectionIndex < reached || done ? (
-                            <PiCheckBold />
-                          ) : locked ? (
-                            <PiLockSimple />
-                          ) : (
-                            String(sectionIndex + 1).padStart(2, '0')
-                          )}
-                        </span>
-                        {title}
-                        {locked && <span className="sr-only"> (ainda não aberta)</span>}
-                      </a>
-                    </li>
-                  );
-                })}
+                <li>
+                  <Link to="/">Início</Link>
+                </li>
+                <li>
+                  <Link to={`/percurso/${percurso.id}`}>Percurso rápido</Link>
+                </li>
+                <li>{stage.title}</li>
               </ol>
-            )}
-          </nav>
-
-          <div className="guide-body lesson-body">
-            {failed ? (
-              <div className="guide-failed" role="alert">
-                <p>Não foi possível carregar esta etapa. Tente recarregar a página.</p>
-                <button type="button" onClick={() => window.location.reload()}>
-                  Recarregar
+            </nav>
+            <p className="lesson-number">
+              Etapa {index + 1} de {percurso.stages.length} · Percurso curto
+            </p>
+            <h1 id="lesson-title">{stage.title}</h1>
+            <p className="guide-summary">{stage.summary}</p>
+            <ul className="guide-facts">
+              <li>
+                <PiClock aria-hidden="true" /> cerca de {stage.minutes} min
+              </li>
+              <li>{stage.sectionIds.length} seções selecionadas</li>
+              <li>Progresso salvo neste navegador</li>
+            </ul>
+            <div className="lesson-progress">
+              <div className="lesson-progress-bar" aria-hidden="true">
+                <span style={{ width: `${percent}%` }} />
+              </div>
+              <p>{done ? 'Etapa concluída' : `${percent}% da etapa`}</p>
+            </div>
+            <div className="lessons-actions">
+              {!done && (
+                <button
+                  type="button"
+                  className="lesson-button-quiet"
+                  onClick={() => setShowAll((prev) => !prev)}
+                >
+                  {showAll ? 'Voltar para leitura passo a passo' : 'Mostrar todas as seções'}
                 </button>
-              </div>
-            ) : !content ? (
-              <div role="status" aria-label="Carregando etapa">
-                <div className="roadmap-skeleton" />
-                <div className="roadmap-skeleton" />
-              </div>
-            ) : (
-              <>
-                <p className="lesson-hook">
-                  <Inline text={content.hook} />
-                </p>
-                <GuideBlockView
-                  block={{
-                    type: 'callout',
-                    tone: 'tip',
-                    title: 'Como aproveitar esta etapa na entrega',
-                    text: stage.focusNote,
-                  }}
-                  guideId={`percurso-${percurso.id}-${stage.slug}`}
-                />
-                {sections.slice(0, visible).map((section, sectionIndex) => (
-                  <section
-                    key={section.id}
-                    id={section.id}
-                    className="guide-section lesson-section"
-                    aria-labelledby={`${section.id}-title`}
-                  >
-                    <h2 id={`${section.id}-title`} tabIndex={-1}>
-                      <span aria-hidden="true">{String(sectionIndex + 1).padStart(2, '0')}</span>
-                      {section.title}
-                    </h2>
-                    {section.blocks.map((block, blockIndex) => (
-                      <LessonBlockView
-                        key={blockIndex}
-                        block={block}
-                        lessonId={stage.lessonId}
-                        activityId={activityKey(section.id, blockIndex)}
-                      />
-                    ))}
-                    {sectionIndex === visible - 1 && (
-                      <div className="lesson-continue">
-                        <button
-                          type="button"
-                          className="lesson-button"
-                          onClick={() => advance(sectionIndex + 1)}
-                        >
-                          {sectionIndex + 1 < sections.length
-                            ? `Continuar: ${sections[sectionIndex + 1].title}`
-                            : 'Ir para o fechamento'}
-                          <PiArrowRight aria-hidden="true" />
-                        </button>
-                        <span>
-                          Seção {sectionIndex + 1} de {sections.length}
-                        </span>
-                      </div>
-                    )}
-                  </section>
-                ))}
-                {visible === total && (
-                  <section
-                    id={closingId}
-                    className="guide-section lesson-section lesson-closing"
-                    aria-labelledby={`${closingId}-title`}
-                  >
-                    <h2 id={`${closingId}-title`} tabIndex={-1}>
-                      <span aria-hidden="true">{String(total).padStart(2, '0')}</span>
-                      Fechamento
-                    </h2>
-                    <div className="lesson-recap">
-                      <h3>O que levar desta etapa</h3>
-                      <ul className="guide-list">
-                        {content.recap.map((item) => (
-                          <li key={item}>
-                            <Inline text={item} />
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    {stageCards.length > 0 && (
-                      <div className="lesson-recall">
-                        <h3>Cartões de revisão</h3>
-                        <p className="guide-text">
-                          Responda de cabeça antes de virar cada cartão. Ao concluir a etapa, eles
-                          entram na sua <Link to="/aulas#revisao">revisão espaçada</Link>.
-                        </p>
-                        <Flashcards
-                          cards={stageCards.map((card) => ({
-                            key: cardKey(stage.lessonId, card.id),
-                            front: card.front,
-                            back: card.back,
-                          }))}
-                        />
-                      </div>
-                    )}
-                    {stage.slug === 'tailwind-na-pratica' && (
-                      <div className="lesson-mission">
-                        <p className="lesson-activity-kind">Missão da aula de Tailwind</p>
-                        <h3>
-                          <Inline text={content.mission.title} />
-                        </h3>
-                        <p className="guide-text">
-                          <Inline text={content.mission.text} />
-                        </p>
-                        <Checklist
-                          guideId={`aula-${stage.lessonId}`}
-                          listId="missao"
-                          items={content.mission.steps}
-                        />
-                      </div>
-                    )}
-                    <div className="lesson-complete" data-done={done || undefined}>
-                      {done ? (
-                        <p role="status">
-                          <PiCheckBold aria-hidden="true" /> Etapa concluída.
-                          {next && ' Siga para a próxima etapa quando estiver pronto.'}
-                        </p>
-                      ) : (
-                        <button type="button" className="lesson-button" onClick={completeStage}>
-                          <PiCheckBold aria-hidden="true" /> Concluir etapa
-                        </button>
-                      )}
-                      {next && (
-                        <Link className="lesson-button" to={`/percurso/${percurso.id}/${next.slug}`}>
-                          Próxima etapa: {next.title} <PiArrowRight aria-hidden="true" />
-                        </Link>
-                      )}
-                    </div>
-                  </section>
-                )}
-              </>
-            )}
-          </div>
-        </div>
+              )}
+              <Link className="lesson-button-quiet" to={`/aula/${stage.lessonId}`}>
+                Abrir aula completa avulsa <PiArrowUpRight aria-hidden="true" />
+              </Link>
+            </div>
+          </header>
 
-        <footer className="guide-end">
-          <nav className="guide-pager" aria-label="Etapa anterior e próxima">
-            {previous ? (
-              <Link to={`/percurso/${percurso.id}/${previous.slug}`} rel="prev">
-                <PiArrowLeft aria-hidden="true" />
-                <span>
-                  <small>Etapa anterior</small>
-                  {previous.title}
-                </span>
-              </Link>
-            ) : (
-              <Link to={`/percurso/${percurso.id}`} rel="prev">
-                <PiArrowLeft aria-hidden="true" />
-                <span>
-                  <small>Visão geral</small>
-                  Índice do percurso
-                </span>
-              </Link>
-            )}
-            {next && (
-              <Link
-                to={`/percurso/${percurso.id}/${next.slug}`}
-                rel="next"
-                className="guide-pager-next"
-              >
-                <span>
-                  <small>Próxima etapa</small>
-                  {next.title}
-                </span>
-                <PiArrowRight aria-hidden="true" />
-              </Link>
-            )}
-          </nav>
-        </footer>
-      </article>
-    </LessonContext.Provider>
+          <div className="guide-layout">
+            <nav className="guide-toc lesson-toc" aria-label="Nesta etapa">
+              <p className="guide-toc-title" aria-hidden="true">
+                Nesta etapa
+              </p>
+              {content && (
+                <ol>
+                  {ids.map((id, sectionIndex) => {
+                    const title =
+                      sectionIndex < sections.length ? sections[sectionIndex].title : 'Fechamento';
+                    const locked = sectionIndex >= visible;
+                    return (
+                      <li key={id}>
+                        {locked ? (
+                          <span data-locked aria-disabled="true">
+                            <span aria-hidden="true">
+                              <PiLockSimple />
+                            </span>
+                            {title}
+                            <span className="sr-only"> (ainda não aberta)</span>
+                          </span>
+                        ) : (
+                          <a
+                            href={`#${id}`}
+                            data-done={sectionIndex < reached || done || undefined}
+                            onClick={(event) => {
+                              event.preventDefault();
+                              document
+                                .getElementById(`${id}-title`)
+                                ?.focus({ preventScroll: true });
+                              document.getElementById(id)?.scrollIntoView?.({ block: 'start' });
+                            }}
+                          >
+                            <span aria-hidden="true">
+                              {sectionIndex < reached || done ? (
+                                <PiCheckBold />
+                              ) : (
+                                String(sectionIndex + 1).padStart(2, '0')
+                              )}
+                            </span>
+                            {title}
+                          </a>
+                        )}
+                      </li>
+                    );
+                  })}
+                </ol>
+              )}
+              {!done && (
+                <label className="option-check lesson-show-all" htmlFor="percurso-show-all">
+                  <input
+                    id="percurso-show-all"
+                    name="percursoShowAll"
+                    type="checkbox"
+                    checked={showAll}
+                    onChange={(event) => setShowAll(event.target.checked)}
+                  />
+                  Mostrar a aula inteira
+                </label>
+              )}
+            </nav>
+
+            <div className="guide-body lesson-body">
+              {failed ? (
+                <div className="guide-failed" role="alert">
+                  <p>Não foi possível carregar esta etapa. Tente recarregar a página.</p>
+                  <button type="button" onClick={() => window.location.reload()}>
+                    Recarregar
+                  </button>
+                </div>
+              ) : !content ? (
+                <div role="status" aria-label="Carregando etapa">
+                  <div className="roadmap-skeleton" />
+                  <div className="roadmap-skeleton" />
+                </div>
+              ) : (
+                <>
+                  <NarrationPlayer />
+                  <p className="lesson-hook" data-narration-clip="hook">
+                    <span data-narration-field="text">
+                      <Inline text={content.hook} />
+                    </span>{' '}
+                    <NarrationBlockButton clipId="hook" label="Ouvir abertura" />
+                  </p>
+                  <GuideBlockView
+                    block={{
+                      type: 'callout',
+                      tone: 'tip',
+                      title: 'Como aproveitar esta etapa na entrega',
+                      text: stage.focusNote,
+                    }}
+                    guideId={`percurso-${percurso.id}-${stage.slug}`}
+                  />
+                  {sections.slice(0, visible).map((section, sectionIndex) => (
+                    <section
+                      key={section.id}
+                      id={section.id}
+                      className="guide-section lesson-section"
+                      aria-labelledby={`${section.id}-title`}
+                    >
+                      <h2
+                        id={`${section.id}-title`}
+                        tabIndex={-1}
+                        data-narration-clip={`${section.id}:heading`}
+                      >
+                        <span aria-hidden="true">{String(sectionIndex + 1).padStart(2, '0')}</span>
+                        <span data-narration-field="title">{section.title}</span>
+                      </h2>
+                      <div className="narration-clip-controls">
+                        <NarrationBlockButton
+                          clipId={`${section.id}:heading`}
+                          label="Ouvir título"
+                        />
+                      </div>
+                      {section.blocks.map((block, blockIndex) => (
+                        <LessonBlockView
+                          key={blockIndex}
+                          block={block}
+                          lessonId={stage.lessonId}
+                          activityId={activityKey(section.id, blockIndex)}
+                        />
+                      ))}
+                      {sectionIndex === visible - 1 && (
+                        <div className="lesson-continue">
+                          <button
+                            type="button"
+                            className="lesson-button"
+                            onClick={() => advance(sectionIndex + 1)}
+                          >
+                            {sectionIndex + 1 < sections.length
+                              ? `Continuar: ${sections[sectionIndex + 1].title}`
+                              : 'Ir para o fechamento'}
+                            <PiArrowRight aria-hidden="true" />
+                          </button>
+                          <span>
+                            Seção {sectionIndex + 1} de {sections.length}
+                          </span>
+                        </div>
+                      )}
+                    </section>
+                  ))}
+                  {visible === total && (
+                    <section
+                      id={closingId}
+                      className="guide-section lesson-section lesson-closing"
+                      aria-labelledby={`${closingId}-title`}
+                    >
+                      <h2
+                        id={`${closingId}-title`}
+                        tabIndex={-1}
+                        data-narration-clip="fechamento:heading"
+                      >
+                        <span aria-hidden="true">{String(total).padStart(2, '0')}</span>
+                        <span data-narration-field="title">Fechamento</span>
+                      </h2>
+                      <div className="narration-clip-controls">
+                        <NarrationBlockButton clipId="fechamento:heading" label="Ouvir título" />
+                      </div>
+                      <div className="lesson-recap" data-narration-clip="fechamento:recap">
+                        <div className="narration-heading-row">
+                          <h3>O que levar desta etapa</h3>
+                          <NarrationBlockButton
+                            clipId="fechamento:recap"
+                            label="Ouvir fechamento"
+                          />
+                        </div>
+                        <ul className="guide-list">
+                          {content.recap.map((item, recapIndex) => (
+                            <li key={item} data-narration-field={`item:${recapIndex}`}>
+                              <Inline text={item} />
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      {stageCards.length > 0 && (
+                        <div className="lesson-recall">
+                          <h3>Cartões de revisão</h3>
+                          <p className="guide-text">
+                            Responda de cabeça antes de virar cada cartão. Ao concluir a etapa, eles
+                            entram na sua <Link to="/aulas#revisao">revisão espaçada</Link>.
+                          </p>
+                          <Flashcards
+                            cards={stageCards.map((card) => ({
+                              key: cardKey(stage.lessonId, card.id),
+                              front: card.front,
+                              back: card.back,
+                              narrationId: `fechamento:card:${card.id}:front`,
+                            }))}
+                          />
+                        </div>
+                      )}
+                      {stage.slug === 'tailwind-na-pratica' && (
+                        <div className="lesson-mission">
+                          <p className="lesson-activity-kind">Missão da aula de Tailwind</p>
+                          <h3>
+                            <Inline text={content.mission.title} />
+                          </h3>
+                          <p className="guide-text">
+                            <Inline text={content.mission.text} />
+                          </p>
+                          <Checklist
+                            guideId={`aula-${stage.lessonId}`}
+                            listId="missao"
+                            items={content.mission.steps}
+                          />
+                        </div>
+                      )}
+                      <div className="lesson-complete" data-done={done || undefined}>
+                        {done ? (
+                          <p role="status">
+                            <PiCheckBold aria-hidden="true" /> Etapa concluída.
+                            {next && ' Siga para a próxima etapa quando estiver pronto.'}
+                          </p>
+                        ) : (
+                          <button type="button" className="lesson-button" onClick={completeStage}>
+                            <PiCheckBold aria-hidden="true" /> Concluir etapa
+                          </button>
+                        )}
+                        {next && (
+                          <Link
+                            className="lesson-button"
+                            to={`/percurso/${percurso.id}/${next.slug}`}
+                          >
+                            Próxima etapa: {next.title} <PiArrowRight aria-hidden="true" />
+                          </Link>
+                        )}
+                      </div>
+                    </section>
+                  )}
+                </>
+              )}
+            </div>
+          </div>
+
+          <footer className="guide-end">
+            <nav className="guide-pager" aria-label="Etapa anterior e próxima">
+              {previous ? (
+                <Link to={`/percurso/${percurso.id}/${previous.slug}`} rel="prev">
+                  <PiArrowLeft aria-hidden="true" />
+                  <span>
+                    <small>Etapa anterior</small>
+                    {previous.title}
+                  </span>
+                </Link>
+              ) : (
+                <Link to={`/percurso/${percurso.id}`} rel="prev">
+                  <PiArrowLeft aria-hidden="true" />
+                  <span>
+                    <small>Visão geral</small>
+                    Índice do percurso
+                  </span>
+                </Link>
+              )}
+              {next && (
+                <Link
+                  to={`/percurso/${percurso.id}/${next.slug}`}
+                  rel="next"
+                  className="guide-pager-next"
+                >
+                  <span>
+                    <small>Próxima etapa</small>
+                    {next.title}
+                  </span>
+                  <PiArrowRight aria-hidden="true" />
+                </Link>
+              )}
+            </nav>
+          </footer>
+        </article>
+        {content && (
+          <LessonTutor
+            key={stage.slug}
+            title={stage.title}
+            summary={stage.summary}
+            hook={content.hook}
+            sections={sections.slice(0, visible)}
+            suggestedSection={
+              sections.slice(0, visible).find(({ id }) => hash === `#${id}`)?.id ??
+              sections[reached]?.id
+            }
+          />
+        )}
+      </LessonContext.Provider>
+    </NarrationProvider>
   );
 }
 
@@ -618,8 +727,7 @@ function PercursoMissionStageView({
 
         <section className="guide-section lesson-section" aria-labelledby="tarefas-praticas-title">
           <h2 id="tarefas-praticas-title">
-            <span aria-hidden="true">02</span>
-            O que fazer por conta própria
+            <span aria-hidden="true">02</span>O que fazer por conta própria
           </h2>
           <div className="lesson-mission">
             <p className="lesson-activity-kind">Execução prática</p>

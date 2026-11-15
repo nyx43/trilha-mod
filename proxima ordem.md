@@ -1,25 +1,11 @@
 # Próxima ordem
 
-## Tarefa atual
+- [ ] Acompanhar a geração da narração nas 77 aulas e corrigir as falhas identificadas. As vozes são Santa e Dora. A lista de aulas verificadas fica em `src/narration/catalog.json` e os detalhes em `.cache/narration/batch/`.
 
-- [ ] **Testar e aprovar o recomendador “O que preciso estudar?”** na cópia local do Trilha Info antes de iniciar a próxima rodada.
-
-## Como abrir e testar
-
-1. Inicie o servidor local:
+Para retomar se o processo tiver parado, primeiro confirme que não há outro lote em execução. Depois rode:
 
 ```bash
-cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' && npm run dev
+cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' && npm run narration:batch -- --jobs 4
 ```
 
-2. Acesse `http://localhost:5173/aulas` e clique em **Abrir recomendador por enunciado** (ou abra direto `http://localhost:5173/aulas/o-que-estudar`).
-3. Teste os principais cenários:
-   - Colar: `Enviar link do GitHub da API Node com o GitHub do frontend utilizando Tailwind.` (conferir Node/Express, Tailwind, Git/GitHub, React apenas como apoio e abrir a seção indicada de uma aula).
-   - Colar: `Preciso estudar métodos HTTP, erro de CORS e transformada de Fourier.` (conferir indicação de HTTP/CORS, abertura na seção `#cors` e aviso para `transformada de Fourier`).
-   - Testar envio vazio, texto sem acentos/maiúsculas, navegação pelo teclado (`Tab`, `Ctrl+Enter`, `Ajustar termos`) e tela estreita em `360 px`.
-
-## Referências
-
-- Detalhes técnicos, validação e limitações: [RELATORIO_RECOMENDADOR.md](docs/RELATORIO_RECOMENDADOR.md)
-- Histórico e entrega do percurso de Web: [PERCURSO_WEB.md](docs/PERCURSO_WEB.md)
-- Próximas evoluções: [ideias futuras.md](ideias%20futuras.md)
+A correção de termos com `@` foi aplicada após três aulas falharem. Conferir especialmente Tailwind, HTML semântico e CSS responsivo após a nova execução. Alguns tipos de blocos interativos ainda precisam de cobertura de narração.

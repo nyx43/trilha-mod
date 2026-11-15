@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { PiCheck, PiCopy } from 'react-icons/pi';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Inline, plain } from './inline';
 
 export function CodeBlock({
@@ -8,12 +9,14 @@ export function CodeBlock({
   caption,
   output,
   compact = false,
+  narrationClipId,
 }: {
   language: string;
   code: string;
   caption?: string;
   output?: string;
   compact?: boolean;
+  narrationClipId?: string;
 }) {
   const [copied, setCopied] = useState(false);
   useEffect(() => {
@@ -32,9 +35,18 @@ export function CodeBlock({
   }
 
   return (
-    <figure className="guide-code" data-compact={compact || undefined}>
+    <figure
+      className="guide-code"
+      data-compact={compact || undefined}
+      data-narration-clip={caption && narrationClipId ? narrationClipId : undefined}
+    >
       <div className="guide-code-bar">
-        <span>{caption ? <Inline text={caption} /> : language}</span>
+        <span data-narration-field={caption && narrationClipId ? 'caption' : undefined}>
+          {caption ? <Inline text={caption} /> : language}
+        </span>
+        {caption && narrationClipId && (
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir legenda" />
+        )}
         <button type="button" onClick={copy} aria-label={`Copiar código ${language}`}>
           {copied ? <PiCheck aria-hidden="true" /> : <PiCopy aria-hidden="true" />}
           <span aria-hidden="true">{copied ? 'Copiado' : 'Copiar'}</span>

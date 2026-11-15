@@ -1,5 +1,6 @@
 import { PiInfo, PiLightbulb, PiWarning } from 'react-icons/pi';
 import { GuideBlock } from '../../guides/types';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Checklist } from './Checklist';
 import { CodeBlock } from './CodeBlock';
 import {
@@ -18,36 +19,82 @@ const callouts = {
   note: { label: 'Observação', Icon: PiInfo },
 };
 
-export function GuideBlockView({ block, guideId }: { block: GuideBlock; guideId: string }) {
+export function GuideBlockView({
+  block,
+  guideId,
+  narrationClipId,
+}: {
+  block: GuideBlock;
+  guideId: string;
+  narrationClipId?: string;
+}) {
   switch (block.type) {
     case 'text':
       return (
-        <p className="guide-text">
-          <Inline text={block.text} />
+        <p className="guide-text" data-narration-clip={narrationClipId}>
+          <span data-narration-field={narrationClipId ? 'text' : undefined}>
+            <Inline text={block.text} />
+          </span>
+          {narrationClipId && (
+            <>
+              {' '}
+              <NarrationBlockButton clipId={narrationClipId} label="Ouvir parágrafo" />
+            </>
+          )}
         </p>
       );
     case 'list': {
       const List = block.ordered ? 'ol' : 'ul';
+      if (!narrationClipId) {
+        return (
+          <List className="guide-list" data-ordered={block.ordered || undefined}>
+            {block.items.map((item) => (
+              <li key={item}>
+                <Inline text={item} />
+              </li>
+            ))}
+          </List>
+        );
+      }
       return (
-        <List className="guide-list" data-ordered={block.ordered || undefined}>
-          {block.items.map((item) => (
-            <li key={item}>
-              <Inline text={item} />
-            </li>
-          ))}
-        </List>
+        <div className="narration-list-wrap" data-narration-clip={narrationClipId}>
+          <div className="narration-clip-controls">
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir lista" />
+          </div>
+          <List className="guide-list" data-ordered={block.ordered || undefined}>
+            {block.items.map((item, idx) => (
+              <li key={item} data-narration-field={`item:${idx}`}>
+                <Inline text={item} />
+              </li>
+            ))}
+          </List>
+        </div>
       );
     }
     case 'callout': {
       const { label, Icon } = callouts[block.tone];
       return (
-        <aside className="guide-callout" data-tone={block.tone}>
+        <aside
+          className="guide-callout"
+          data-tone={block.tone}
+          data-narration-clip={narrationClipId}
+        >
           <Icon aria-hidden="true" />
           <div>
-            <p className="guide-callout-title">{block.title || label}</p>
-            <p>
+            <p
+              className="guide-callout-title"
+              data-narration-field={narrationClipId && block.title ? 'title' : undefined}
+            >
+              {block.title || label}
+            </p>
+            <p data-narration-field={narrationClipId ? 'text' : undefined}>
               <Inline text={block.text} />
             </p>
+            {narrationClipId && (
+              <div className="narration-clip-controls">
+                <NarrationBlockButton clipId={narrationClipId} label="Ouvir observação" />
+              </div>
+            )}
           </div>
         </aside>
       );
@@ -59,6 +106,7 @@ export function GuideBlockView({ block, guideId }: { block: GuideBlock; guideId:
           code={block.code}
           caption={block.caption}
           output={block.output}
+          narrationClipId={narrationClipId}
         />
       );
     case 'steps':
@@ -110,28 +158,54 @@ export function GuideBlockView({ block, guideId }: { block: GuideBlock; guideId:
       );
     case 'table':
       return (
-        <div className="guide-table" role="region" aria-label={block.caption} tabIndex={0}>
+        <div
+          className="guide-table"
+          role="region"
+          aria-label={block.caption}
+          tabIndex={0}
+          data-narration-clip={narrationClipId}
+        >
+          {narrationClipId && (
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir tabela" />
+          )}
           <table>
-            <caption>{block.caption}</caption>
+            <caption data-narration-field={narrationClipId ? 'caption' : undefined}>
+              {block.caption}
+            </caption>
             <thead>
               <tr>
-                {block.head.map((cell) => (
-                  <th key={cell} scope="col">
+                {block.head.map((cell, index) => (
+                  <th
+                    key={cell}
+                    scope="col"
+                    data-narration-field={narrationClipId ? `head:${index}` : undefined}
+                  >
                     {cell}
                   </th>
                 ))}
               </tr>
             </thead>
             <tbody>
-              {block.rows.map((row) => (
+              {block.rows.map((row, rowIndex) => (
                 <tr key={row.join('|')}>
                   {row.map((cell, index) =>
                     index === 0 ? (
-                      <th key={index} scope="row">
+                      <th
+                        key={index}
+                        scope="row"
+                        data-narration-field={
+                          narrationClipId ? `cell:${rowIndex}:${index}` : undefined
+                        }
+                      >
                         <Inline text={cell} />
                       </th>
                     ) : (
-                      <td key={index}>
+                      <td
+                        key={index}
+                        data-narration-field={
+                          narrationClipId ? `cell:${rowIndex}:${index}` : undefined
+                        }
+                      >
                         <Inline text={cell} />
                       </td>
                     ),
@@ -144,18 +218,23 @@ export function GuideBlockView({ block, guideId }: { block: GuideBlock; guideId:
       );
     case 'terms':
       return (
-        <dl className="guide-terms">
-          {block.items.map((item) => (
-            <div key={item.term}>
-              <dt>
-                <Inline text={item.term} />
-              </dt>
-              <dd>
-                <Inline text={item.text} />
-              </dd>
-            </div>
-          ))}
-        </dl>
+        <div data-narration-clip={narrationClipId}>
+          {narrationClipId && (
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir glossário" />
+          )}
+          <dl className="guide-terms">
+            {block.items.map((item, index) => (
+              <div key={item.term}>
+                <dt data-narration-field={narrationClipId ? `term:${index}` : undefined}>
+                  <Inline text={item.term} />
+                </dt>
+                <dd data-narration-field={narrationClipId ? `definition:${index}` : undefined}>
+                  <Inline text={item.text} />
+                </dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       );
     case 'sequence':
       return <SequenceDiagram block={block} />;

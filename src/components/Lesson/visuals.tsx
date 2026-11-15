@@ -1,4 +1,13 @@
-import { CSSProperties, KeyboardEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
+import {
+  CSSProperties,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion';
 import {
   PiArrowCounterClockwise,
@@ -9,58 +18,124 @@ import {
   PiPlay,
   PiSpeakerHigh,
 } from 'react-icons/pi';
+import { useNarrationOptional } from '../../narration/controller';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { CodeBlock } from '../Guide/CodeBlock';
 import { Inline } from '../Guide/inline';
 import { Block } from './context';
 
-export function Analogy({ block }: { block: Block<'analogy'> }) {
+export function Analogy({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'analogy'>;
+  narrationClipId?: string;
+}) {
   return (
-    <aside className="lesson-analogy">
+    <aside className="lesson-analogy" data-narration-clip={narrationClipId}>
       <PiLightbulbFilament aria-hidden="true" />
       <div>
         <p className="lesson-analogy-kicker">Pense assim</p>
-        <p className="lesson-analogy-title">
+        <p
+          className="lesson-analogy-title"
+          data-narration-field={narrationClipId && block.title ? 'title' : undefined}
+        >
           <Inline text={block.title} />
         </p>
-        <p>
+        <p data-narration-field={narrationClipId ? 'text' : undefined}>
           <Inline text={block.text} />
         </p>
+        {narrationClipId && (
+          <div className="narration-clip-controls">
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir analogia" />
+          </div>
+        )}
       </div>
     </aside>
   );
 }
 
-export function Reveal({ block }: { block: Block<'reveal'> }) {
+export function Reveal({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'reveal'>;
+  narrationClipId?: string;
+}) {
   return (
-    <details className="lesson-reveal">
-      <summary>
-        <span className="lesson-activity-kind">Pare e pense</span>
-        <span>
-          <Inline text={block.question} />
-        </span>
-        <span className="lesson-reveal-action" aria-hidden="true">
-          Ver resposta
-        </span>
-      </summary>
-      <p>
-        <Inline text={block.answer} />
-      </p>
-    </details>
+    <div className="narration-reveal-wrap" data-narration-clip={narrationClipId}>
+      {narrationClipId && (
+        <div className="narration-clip-controls">
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir pergunta" />
+        </div>
+      )}
+      <details className="lesson-reveal">
+        <summary>
+          <span className="lesson-activity-kind">Pare e pense</span>
+          <span data-narration-field={narrationClipId ? 'question' : undefined}>
+            <Inline text={block.question} />
+          </span>
+          <span className="lesson-reveal-action" aria-hidden="true">
+            Ver resposta
+          </span>
+        </summary>
+        <p>
+          <Inline text={block.answer} />
+        </p>
+      </details>
+    </div>
   );
 }
 
-export function Anatomy({ block }: { block: Block<'anatomy'> }) {
+export function Anatomy({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'anatomy'>;
+  narrationClipId?: string;
+}) {
   const labeled = block.parts
     .map((part, index) => ({ part, index }))
     .filter(({ part }) => part.label);
   const [active, setActive] = useState(labeled[0]?.index ?? -1);
   const current = block.parts[active];
+  const narration = useNarrationOptional();
+
+  useEffect(() => {
+    if (!narration || !narrationClipId || narration.activeClipId !== narrationClipId) return;
+    const match = narration.activeField?.match(/^part:(\d+):/);
+    if (!match) return;
+    const target = Number(match[1]);
+    if (
+      Number.isInteger(target) &&
+      target !== active &&
+      target >= 0 &&
+      target < block.parts.length
+    ) {
+      setActive(target);
+    }
+  }, [
+    narration,
+    narration?.activeClipId,
+    narration?.activeField,
+    narrationClipId,
+    active,
+    block.parts.length,
+  ]);
+
   return (
-    <figure className="lesson-anatomy">
+    <figure className="lesson-anatomy" data-narration-clip={narrationClipId}>
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
         <span className="lesson-hint"> Toque nas partes destacadas.</span>
       </figcaption>
+      {narrationClipId && (
+        <div className="narration-clip-controls">
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir anatomia" />
+        </div>
+      )}
       <pre className="lesson-anatomy-code" data-language={block.language}>
         <code>
           {block.parts.map((part, index) =>
@@ -83,9 +158,14 @@ export function Anatomy({ block }: { block: Block<'anatomy'> }) {
       <div className="lesson-anatomy-note" aria-live="polite">
         {current?.label && (
           <motion.div key={active} initial={{ opacity: 0, y: 4 }} animate={{ opacity: 1, y: 0 }}>
-            <p className="lesson-anatomy-label">{current.label}</p>
+            <p
+              className="lesson-anatomy-label"
+              data-narration-field={narrationClipId ? `part:${active}:label` : undefined}
+            >
+              {current.label}
+            </p>
             {current.note && (
-              <p>
+              <p data-narration-field={narrationClipId ? `part:${active}:note` : undefined}>
                 <Inline text={current.note} />
               </p>
             )}
@@ -108,17 +188,22 @@ function useStepper(total: number, delay = 1800) {
     const timer = window.setTimeout(() => setStep((value) => value + 1), delay);
     return () => window.clearTimeout(timer);
   }, [playing, step, total, delay]);
-  return {
-    step,
-    playing,
-    go: (value: number) => {
+  const go = useCallback(
+    (value: number) => {
       setPlaying(false);
       setStep(Math.max(0, Math.min(total - 1, value)));
     },
-    toggle: () => {
-      if (!playing && step >= total - 1) setStep(0);
-      setPlaying((value) => !value);
-    },
+    [total],
+  );
+  const toggle = useCallback(() => {
+    if (!playing && step >= total - 1) setStep(0);
+    setPlaying((value) => !value);
+  }, [playing, step, total]);
+  return {
+    step,
+    playing,
+    go,
+    toggle,
   };
 }
 
@@ -167,17 +252,54 @@ function StepControls({
   );
 }
 
-export function Flow({ block }: { block: Block<'flow'> }) {
+export function Flow({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'flow'>;
+  narrationClipId?: string;
+}) {
   const stepper = useStepper(block.steps.length, 2400);
+  const { step: currentStep, go: goStep } = stepper;
   const reduced = useReducedMotion();
+  const narration = useNarrationOptional();
+
+  useEffect(() => {
+    if (!narration || !narrationClipId || narration.activeClipId !== narrationClipId) return;
+    const match = narration.activeField?.match(/^step:(\d+):/);
+    if (!match) return;
+    const target = Number(match[1]);
+    if (Number.isInteger(target) && target !== currentStep) {
+      goStep(target);
+    }
+  }, [
+    narration,
+    narration?.activeClipId,
+    narration?.activeField,
+    narrationClipId,
+    currentStep,
+    goStep,
+  ]);
+
   const current = block.steps[stepper.step];
   const n = block.actors.length;
   const center = (index: number) => `${((index + 0.5) / n) * 100}%`;
   return (
-    <figure className="lesson-flow" style={{ '--n': n } as CSSProperties}>
+    <figure
+      className="lesson-flow"
+      style={{ '--n': n } as CSSProperties}
+      data-narration-clip={narrationClipId}
+    >
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
       </figcaption>
+      {narrationClipId && (
+        <div className="narration-clip-controls">
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir diagrama" />
+        </div>
+      )}
       <div className="lesson-flow-stage" aria-hidden="true">
         <div className="lesson-flow-actors">
           {block.actors.map((actor, index) => (
@@ -219,10 +341,13 @@ export function Flow({ block }: { block: Block<'flow'> }) {
                 ? block.actors[item.from]
                 : `${block.actors[item.from]} → ${block.actors[item.to]}`}
             </p>
-            <p className="lesson-flow-label">
+            <p
+              className="lesson-flow-label"
+              data-narration-field={narrationClipId ? `step:${index}:label` : undefined}
+            >
               <Inline text={item.label} />
             </p>
-            <p>
+            <p data-narration-field={narrationClipId ? `step:${index}:text` : undefined}>
               <Inline text={item.text} />
             </p>
           </li>
@@ -324,7 +449,13 @@ export function Trace({ block }: { block: Block<'trace'> }) {
   );
 }
 
-export function CodeTabs({ block }: { block: Block<'codeTabs'> }) {
+export function CodeTabs({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'codeTabs'>;
+  narrationClipId?: string;
+}) {
   const [active, setActive] = useState(0);
   const id = useId();
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
@@ -337,9 +468,20 @@ export function CodeTabs({ block }: { block: Block<'codeTabs'> }) {
     refs.current[next]?.focus();
   }
   return (
-    <figure className="lesson-tabs">
+    <figure
+      className="lesson-tabs"
+      data-narration-clip={block.caption && narrationClipId ? narrationClipId : undefined}
+    >
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={block.caption && narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
+        {block.caption && narrationClipId && (
+          <>
+            {' '}
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir legenda" />
+          </>
+        )}
       </figcaption>
       <div role="tablist" aria-label={block.caption}>
         {block.tabs.map((tab, index) => (

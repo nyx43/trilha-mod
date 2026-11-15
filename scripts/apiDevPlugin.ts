@@ -1,15 +1,19 @@
 import { loadEnv, Plugin } from 'vite';
 import { handleContribution, handleLinkInfo } from '../server/contributions';
+import { handleLessonTutor } from '../server/lessonTutor';
+import { tutorPath } from '../src/tutor/types';
 
 const serverKeys = /^(GITHUB_APP_|TURNSTILE_SECRET_KEY|CONTRIBUTIONS_|SITE_URL)/;
 
 // Runs the Vercel functions in api/ during `vite dev`, which does not execute them itself.
 export function apiDevPlugin(): Plugin {
+  let tutorEnv: NodeJS.ProcessEnv = {};
   return {
     name: 'trilha-api-dev',
     apply: 'serve',
     configResolved(config) {
       const env = loadEnv(config.mode, config.envDir || config.root, '');
+      tutorEnv = loadEnv(config.mode, config.envDir || config.root, 'TUTOR_');
       for (const [key, value] of Object.entries(env))
         if (serverKeys.test(key) && process.env[key] === undefined) process.env[key] = value;
     },
@@ -19,6 +23,9 @@ export function apiDevPlugin(): Plugin {
       });
       server.middlewares.use('/api/link-info', (req, res) => {
         handleLinkInfo(req, res);
+      });
+      server.middlewares.use(tutorPath, (req, res) => {
+        return handleLessonTutor(req, res, tutorEnv);
       });
     },
   };

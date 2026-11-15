@@ -1,6 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { PiArrowCounterClockwise, PiCheckBold, PiCircle, PiConfetti, PiEye } from 'react-icons/pi';
 import { recordAnswer } from '../../lessons/progress';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Inline } from '../Guide/inline';
 import { Block, useLessonId } from './context';
 
@@ -77,9 +78,11 @@ function initialCode(block: Block<'playground'>): Code {
 export function Playground({
   block,
   activityId,
+  narrationClipId,
 }: {
   block: Block<'playground'>;
   activityId: string;
+  narrationClipId?: string;
 }) {
   const lessonId = useLessonId();
   const id = useId();
@@ -156,14 +159,20 @@ export function Playground({
       className="lesson-playground"
       aria-labelledby={`${id}-title`}
       data-passed={passed || undefined}
+      data-narration-clip={narrationClipId}
     >
       <header className="lesson-playground-head">
-        <span className="lesson-activity-kind">Mão na massa</span>
-        <h3 id={`${id}-title`}>
+        <div className="narration-heading-row">
+          <span className="lesson-activity-kind">Mão na massa</span>
+          {narrationClipId && (
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir tarefa" />
+          )}
+        </div>
+        <h3 id={`${id}-title`} data-narration-field={narrationClipId ? 'title' : undefined}>
           <Inline text={block.title} />
         </h3>
         {block.task && (
-          <p>
+          <p data-narration-field={narrationClipId ? 'task' : undefined}>
             <Inline text={block.task} />
           </p>
         )}

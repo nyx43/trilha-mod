@@ -80,6 +80,25 @@ O envio de sugestões usa os endpoints `/api/contributions` e `/api/link-info`, 
 
 Sem GitHub App, o desenvolvimento local retorna uma simulação e o JSON da sugestão, sem abrir um pull request. Em produção na Vercel, o envio exige GitHub App e Turnstile configurados. Veja o [formato das sugestões](src/contributions/entries/README.md).
 
+### Tutor opcional nas aulas
+
+Para ativar o minichat, adicione pelo menos uma chave ao arquivo `.env.local` na raiz do projeto. Use um projeto ou conta no plano gratuito do provedor para ficar dentro da cota gratuita.
+
+| Provedor | Variável da chave | Modelo padrão |
+| --- | --- | --- |
+| Google Gemini | `TUTOR_GEMINI_API_KEY` | `gemini-4-hydrogen` |
+| Groq | `TUTOR_GROQ_API_KEY` | `openai/gpt-oss-120b` |
+
+Gere a chave no [Google AI Studio](https://aistudio.google.com/apikey) ou no [console do Groq](https://console.groq.com/keys). Os limites dependem do projeto ou da conta. Consulte a [faixa gratuita do Gemini Hydrogen](https://aistudio.google.com/docs/pricing#gemini-4-hydrogen) e as [cotas do Groq](https://console.groq.com/docs/rate-limits).
+
+Reinicie `npm run dev`, abra `http://127.0.0.1:5173` e clique no botão no canto inferior direito de uma aula. Abra a engrenagem do tutor para escolher um modelo de um provedor configurado. A troca de provedor ou modelo inicia uma nova conversa. O tutor avisa quando a API retorna um erro de limite.
+
+Para ampliar o chat, use o botão ao lado da engrenagem ou arraste o canto superior esquerdo. As respostas aceitam Markdown com tabelas e blocos de código. Use **Ouvir resposta** para ler o texto com as vozes do navegador. A voz pode ser escolhida nas configurações do tutor.
+
+As variáveis `TUTOR_GEMINI_MODEL` e `TUTOR_GROQ_MODEL` permitem escolher outro modelo da sua conta. Para usar uma API compatível, como a NVIDIA, use `TUTOR_API_URL` com o endereço completo de Chat Completions, `TUTOR_MODEL` com o ID do modelo e `TUTOR_API_KEY` se houver autenticação. O endereço deve usar HTTPS ou HTTP para um servidor na própria máquina. [Exemplo de endpoint NVIDIA](https://build.nvidia.com/nvidia/nemotron-3-super-120b-a12b)
+
+O tutor é opcional e atende apenas o navegador da própria máquina em desenvolvimento. A conversa fica na memória da página. A cada envio, o provedor escolhido recebe a dúvida, um trecho da seção e o histórico recente da conversa. No plano gratuito do Gemini, o Google pode usar o conteúdo enviado para melhorar seus serviços. [Termos da API Gemini](https://aistudio.google.com/docs/terms#data-use-unpaid)
+
 Para executar o Vite com uma pasta alternativa de configuração, defina `TRILHA_ENV_DIR`. Uma pasta vazia permite validar o catálogo e o frontend sem carregar a configuração local.
 
 ### Docker

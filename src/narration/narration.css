@@ -1,0 +1,318 @@
+.narration-bar {
+  --narr-surface: var(--learning-surface, var(--site-panel, #151821));
+  --narr-raised: var(--learning-surface-raised, var(--site-surface, #1b202c));
+  --narr-line: var(--learning-line, var(--site-line, #323b4f));
+  --narr-accent: var(--learning-ai, var(--site-ai, #6ee7c8));
+  --narr-accent-ink: #0f172a;
+  --narr-ink: var(--learning-ink, var(--site-ink, #f2f4f8));
+  --narr-muted: var(--learning-muted, var(--site-muted, #a6b0c3));
+  --narr-warn-bg: rgb(245 158 11 / 0.2);
+  --narr-warn-ink: #fcd34d;
+  --narr-hl-bg: rgb(250 204 21 / 0.34);
+  --narr-hl-ink: inherit;
+  margin: 0 0 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--narr-line);
+  border-radius: 12px;
+  background: var(--narr-surface);
+  color: var(--narr-ink);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.narration-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.narration-actions,
+.narration-settings {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.narration-btn,
+.narration-step-btn,
+.narration-chip {
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.2;
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--narr-line);
+  background: var(--narr-raised);
+  color: inherit;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.narration-btn--primary {
+  background: var(--narr-accent);
+  border-color: transparent;
+  color: var(--narr-accent-ink);
+}
+
+.narration-btn:disabled,
+.narration-step-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.narration-field {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  min-width: 0;
+}
+
+.narration-field-label {
+  color: var(--narr-muted);
+}
+
+.narration-select {
+  font: inherit;
+  font-size: 0.84rem;
+  padding: 5px 8px;
+  border-radius: 7px;
+  border: 1px solid var(--narr-line);
+  background: var(--narr-raised);
+  color: inherit;
+  max-width: 100%;
+}
+
+.narration-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.84rem;
+  cursor: pointer;
+}
+
+.narration-speed-menu {
+  position: relative;
+}
+
+.narration-speed-trigger {
+  list-style: none;
+}
+
+.narration-speed-trigger::-webkit-details-marker {
+  display: none;
+}
+
+.narration-speed-popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 30;
+  width: min(320px, calc(100vw - 32px));
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--narr-line);
+  background: var(--narr-raised);
+  color: var(--narr-ink);
+  box-shadow: 0 14px 32px rgb(0 0 0 / 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.narration-range,
+.narration-seek,
+.narration-check input[type='checkbox'] {
+  accent-color: var(--narr-accent);
+}
+
+.narration-speed-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+}
+
+.narration-speed-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.narration-range {
+  flex: 1 1 auto;
+  min-width: 0;
+  width: 100%;
+}
+
+.narration-speed-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.narration-chip {
+  padding: 4px 8px;
+  font-size: 0.78rem;
+}
+
+.narration-chip.is-active {
+  background: var(--narr-accent);
+  color: var(--narr-accent-ink);
+  border-color: transparent;
+}
+
+.narration-speed-shortcuts {
+  margin: 0;
+  font-size: 0.76rem;
+  color: var(--narr-muted);
+}
+
+.narration-speed-shortcuts kbd {
+  padding: 1px 5px;
+  border: 1px solid var(--narr-line);
+  border-radius: 4px;
+  font-size: 0.74rem;
+}
+
+.narration-row--progress {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.narration-seek {
+  width: 100%;
+  min-width: 0;
+}
+
+.narration-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 0.8rem;
+  color: var(--narr-muted);
+}
+
+.narration-clock {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.narration-row--footer {
+  justify-content: space-between;
+}
+
+.narration-status {
+  margin: 0;
+  font-size: 0.83rem;
+  color: var(--narr-muted);
+}
+
+.narration-badge {
+  font-size: 0.76rem;
+  padding: 3px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--narr-line);
+}
+
+.narration-badge--warn {
+  background: var(--narr-warn-bg);
+  color: var(--narr-warn-ink);
+}
+
+.narration-block-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font: inherit;
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 3px 9px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, currentColor 24%, transparent);
+  background: color-mix(in srgb, currentColor 6%, transparent);
+  color: inherit;
+  cursor: pointer;
+  vertical-align: middle;
+}
+
+.narration-block-btn.is-active {
+  background: var(--learning-ai, var(--site-ai, #6ee7c8));
+  color: #0f172a;
+  border-color: transparent;
+}
+
+.narration-block-btn--stale {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.narration-clip-controls {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.narration-heading-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+[data-narration-reading='true'] {
+  outline: 2px solid color-mix(in srgb, #f59e0b 58%, transparent);
+  outline-offset: 4px;
+  border-radius: 6px;
+  background-color: rgb(250 204 21 / 0.08);
+}
+
+::highlight(narr-current) {
+  background-color: rgb(250 204 21 / 0.45);
+  color: inherit;
+}
+
+::highlight(narr-trail-new) {
+  background-color: rgb(250 204 21 / 0.24);
+  color: inherit;
+}
+
+::highlight(narr-trail-mid) {
+  background-color: rgb(250 204 21 / 0.14);
+  color: inherit;
+}
+
+::highlight(narr-trail-old) {
+  background-color: rgb(250 204 21 / 0.06);
+  color: inherit;
+}
+
+@media (forced-colors: active) {
+  [data-narration-reading='true'] {
+    outline: 2px solid Highlight;
+  }
+  ::highlight(narr-current) {
+    background-color: Highlight;
+    color: HighlightText;
+  }
+}
+
+@media (max-width: 640px) {
+  .narration-bar {
+    padding: 12px;
+  }
+  .narration-speed-popover {
+    left: 0;
+    right: 0;
+  }
+}

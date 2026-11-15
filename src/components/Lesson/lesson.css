@@ -137,16 +137,14 @@
 }
 
 /* Table of contents */
-.lesson-toc a[data-locked] {
+.lesson-toc [data-locked] {
+  position: relative;
   opacity: 0.55;
-}
-.lesson-toc a[data-locked]:hover {
-  color: var(--site-muted);
 }
 .lesson-toc a[data-done] span {
   color: var(--lesson-right);
 }
-.lesson-toc a span svg {
+.lesson-toc :is(a, [data-locked]) span svg {
   vertical-align: -2px;
 }
 .lesson-show-all {
