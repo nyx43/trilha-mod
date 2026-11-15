@@ -146,6 +146,22 @@ export const lessons: LessonMeta[] = [
     load: () => import('../content/cssResponsivo'),
   },
   {
+    id: 'tailwind-na-pratica',
+    title: 'Tailwind na prática',
+    summary:
+      'Estilize componentes React com classes utilitárias, foco acessível por teclado, layout mobile-first e integração no Vite.',
+    minutes: 16,
+    groupIds: ['curriculum.css'],
+    objectives: [
+      'Compor espaçamento, cores e layout com classes utilitárias sem perder organização em componentes',
+      'Aplicar foco visível por teclado com focus-visible e área de toque confortável nos botões',
+      'Construir grades e cabeçalhos mobile-first com sm, md e lg sem rolagem horizontal',
+      'Configurar Tailwind CSS num projeto React com Vite usando @tailwindcss/vite',
+    ],
+    updatedAt: '2026-11-14',
+    load: () => import('../content/tailwindNaPratica'),
+  },
+  {
     id: 'acessibilidade-para-todos',
     title: 'Acessibilidade: a web é para todo mundo',
     summary:

@@ -73,6 +73,36 @@ export default function LessonsPage() {
 
         <Review />
 
+        <section aria-labelledby="o-que-estudar-title" className="lessons-review">
+          <div>
+            <p className="lessons-course-kind">Busca por enunciado · Sem IA</p>
+            <h2 id="o-que-estudar-title">O que preciso estudar?</h2>
+            <p>
+              Cole o enunciado de um trabalho, lista de prova ou requisitos de projeto e receba uma
+              sequência curta de aulas do catálogo para abrir, com pré-requisitos e trechos não
+              cobertos sinalizados.
+            </p>
+            <Link className="lesson-button" to="/aulas/o-que-estudar">
+              Abrir recomendador por enunciado <PiArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+
+        <section aria-labelledby="percurso-rapido-title" className="lessons-review">
+          <div>
+            <p className="lessons-course-kind">Percurso curto · Entrega API + Tailwind</p>
+            <h2 id="percurso-rapido-title">Node e Express, React + Fetch, Integração e Tailwind</h2>
+            <p>
+              Roteiro enxuto para revisar API Node, requisições no React, CORS/fetch e Tailwind na
+              prática antes de construir sua entrega com <code>GET /heroes</code> e{' '}
+              <code>POST /heroes</code>.
+            </p>
+            <Link className="lesson-button" to="/percurso/api-react-tailwind">
+              Abrir percurso curto <PiArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+
         <section aria-labelledby="courses-title">
           <h2 id="courses-title" className="lessons-modules-title">
             Escolha um curso

@@ -17,6 +17,8 @@ const GuidesPage = lazy(() => import('./pages/GuidesPage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
 const LessonsPage = lazy(() => import('./pages/LessonsPage'));
 const LessonCoursePage = lazy(() => import('./pages/LessonCoursePage'));
+const StudyRecommenderPage = lazy(() => import('./pages/StudyRecommenderPage'));
+const PercursoPage = lazy(() => import('./pages/PercursoPage'));
 const HorizontalRoadmapPage = lazy(() => import('./pages/HorizontalRoadmapPage'));
 
 const BlogPage = lazy(() => import('./pages/BlogPage'));
@@ -55,8 +57,11 @@ function App() {
           <Route path="/guias" element={<GuidesPage />} />
           <Route path="/guide/:guide" element={<GuidePage />} />
           <Route path="/aulas" element={<LessonsPage />} />
+          <Route path="/aulas/o-que-estudar" element={<StudyRecommenderPage />} />
           <Route path="/aulas/:trilha" element={<LessonCoursePage />} />
           <Route path="/aula/:lesson" element={<LessonPage />} />
+          <Route path="/percurso/:id" element={<PercursoPage />} />
+          <Route path="/percurso/:id/:etapa" element={<PercursoPage />} />
           <Route path="/blog/:title" element={<BlogPostPage />} />
           <Route path="/blog" element={<BlogPage />} />
           <Route

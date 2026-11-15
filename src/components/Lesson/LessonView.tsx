@@ -8,7 +8,7 @@ import {
   PiLockSimple,
   PiTarget,
 } from 'react-icons/pi';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { activityKey, LessonPlace, lessonUrl } from '../../lessons';
 import {
   cardKey,
@@ -34,11 +34,15 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
   const [record, update] = useLessonRecord(lesson.id);
   const [showAll, setShowAll] = useState(false);
   const focusTarget = useRef<string>();
+  const { hash } = useLocation();
   const { course, previous, next } = place;
   const trailGroup = course.groups[lesson.id] || lesson.groupIds[0];
 
   useEffect(() => {
     let current = true;
+    setContent(null);
+    setFailed(false);
+    setShowAll(false);
     lesson
       .load()
       .then((module) => current && setContent(module.content))
@@ -57,12 +61,9 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
   const percent = done ? 100 : Math.round((reached / total) * 100);
   const ids = [...sections.map((section) => section.id), closingId];
 
-  useEffect(() => {
-    const target = focusTarget.current;
-    if (!target) return;
-    focusTarget.current = undefined;
-    const frame = requestAnimationFrame(() => {
-      const heading = document.getElementById(`${target}-title`);
+  function scheduleFocusHeading(targetId: string) {
+    return requestAnimationFrame(() => {
+      const heading = document.getElementById(`${targetId}-title`);
       heading?.focus({ preventScroll: true });
       heading?.scrollIntoView?.({
         block: 'start',
@@ -71,17 +72,35 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
           : 'smooth',
       });
     });
+  }
+
+  useEffect(() => {
+    const target = focusTarget.current;
+    if (!target) return;
+    focusTarget.current = undefined;
+    const frame = scheduleFocusHeading(target);
     return () => cancelAnimationFrame(frame);
   }, [visible, reached]);
 
-  function open(index: number) {
+  useEffect(() => {
+    if (!content || !hash) return;
+    const targetId = decodeURIComponent(hash.slice(1));
+    const targetIndex = ids.indexOf(targetId);
+    if (targetIndex < 0) return;
+    focusTarget.current = targetId;
+    if (targetIndex >= visible) {
+      setShowAll(true);
+      return;
+    }
+    const frame = scheduleFocusHeading(targetId);
+    focusTarget.current = undefined;
+    return () => cancelAnimationFrame(frame);
+  }, [content, hash]);
+
+  function advance(index: number) {
+    if (index !== reached + 1 || index >= total) return;
     focusTarget.current = ids[index];
     update((previous) => ({ ...previous, reached: Math.max(previous.reached, index) }));
-    if (index < visible) {
-      focusTarget.current = undefined;
-      document.getElementById(`${ids[index]}-title`)?.focus();
-      document.getElementById(ids[index])?.scrollIntoView?.({ block: 'start' });
-    }
   }
 
   function complete() {
@@ -166,16 +185,22 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                   return (
                     <li key={id}>
                       <a
-                        href={`#${id}`}
+                        href={locked ? undefined : `#${id}`}
                         data-locked={locked || undefined}
+                        aria-disabled={locked || undefined}
                         data-done={index < reached || done || undefined}
                         aria-current={
                           index === Math.min(reached, visible - 1) && !done ? 'step' : undefined
                         }
-                        onClick={(event) => {
-                          event.preventDefault();
-                          open(index);
-                        }}
+                        onClick={
+                          locked
+                            ? undefined
+                            : (event) => {
+                                event.preventDefault();
+                                document.getElementById(`${id}-title`)?.focus({ preventScroll: true });
+                                document.getElementById(id)?.scrollIntoView?.({ block: 'start' });
+                              }
+                        }
                       >
                         <span aria-hidden="true">
                           {index < reached || done ? (
@@ -248,7 +273,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                         <button
                           type="button"
                           className="lesson-button"
-                          onClick={() => open(index + 1)}
+                          onClick={() => advance(index + 1)}
                         >
                           {index + 1 < sections.length
                             ? `Continuar: ${sections[index + 1].title}`

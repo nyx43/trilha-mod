@@ -33,9 +33,25 @@ describe('Aula', () => {
     ).toBeInTheDocument();
     expect(screen.queryByRole('heading', { name: /O endereço: a URL/ })).not.toBeInTheDocument();
 
+    const toc = screen.getByRole('navigation', { name: 'Nesta aula' });
+    const locked = within(toc).getByText('Fechamento');
+    fireEvent.click(locked);
+    expect(screen.queryByRole('heading', { name: 'Fechamento' })).not.toBeInTheDocument();
+    expect(stored(lessonStoreKey).lessons?.['como-a-web-funciona']).toBeUndefined();
+    expect(within(toc).queryByRole('link', { name: /Fechamento/ })).not.toBeInTheDocument();
+
     fireEvent.click(screen.getByRole('button', { name: /Continuar: O endereço: a URL/ }));
     expect(screen.getByRole('heading', { name: /O endereço: a URL/ })).toBeInTheDocument();
     expect(stored(lessonStoreKey).lessons['como-a-web-funciona'].reached).toBe(1);
+
+    const showAll = screen.getByRole('checkbox', { name: 'Mostrar a aula inteira' });
+    fireEvent.click(showAll);
+    fireEvent.click(within(toc).getByRole('link', { name: 'Fechamento' }));
+    expect(screen.getByRole('heading', { name: 'Fechamento' })).toHaveFocus();
+    expect(stored(lessonStoreKey).lessons['como-a-web-funciona'].reached).toBe(1);
+
+    fireEvent.click(showAll);
+    expect(screen.queryByRole('heading', { name: 'Fechamento' })).not.toBeInTheDocument();
   });
 
   it('explica a resposta errada e registra só a primeira tentativa', async () => {
