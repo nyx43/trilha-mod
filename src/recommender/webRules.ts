@@ -15,6 +15,7 @@ export interface TopicRule {
   sectionByPhrase?: Record<string, SectionTarget>;
   reason: string;
   practiceAction: string;
+  successCriteria?: string;
   /** Lesson IDs to pull in before this lesson as helpful prerequisites when not already requested. */
   prerequisiteIds?: string[];
 }
@@ -71,6 +72,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Explica o fluxo de repositório, commits e publicação de links no GitHub sem perder histórico.',
     practiceAction: 'Inicialize o repositório, faça commits pequenos e confira os arquivos enviados no link do GitHub.',
+    successCriteria:
+      'O repositório abre no GitHub e mostra o último commit, os arquivos do projeto e um README de execução.',
   },
   {
     id: 'web-http-base',
@@ -98,6 +101,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Consolida como navegador, URL, DNS e mensagens HTTP conversam entre cliente e servidor.',
     practiceAction: 'Abra a aba Network do DevTools, faça uma requisição e inspecione método, status e cabeçalhos.',
+    successCriteria:
+      'Você consegue registrar o método, a URL e o status de uma requisição observada no painel Rede.',
   },
   {
     id: 'ferramentas-vite-npm',
@@ -124,6 +129,7 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Mostra como scripts no package.json, Vite e variáveis de ambiente organizam projetos web modernos.',
     practiceAction: 'Confira os scripts em `package.json` e suba o servidor local com Vite sem vazar segredos no front.',
+    successCriteria: 'O servidor abre a página e o navegador recebe apenas variáveis públicas.',
   },
   {
     id: 'html-estrutura',
@@ -136,6 +142,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Base de marcação e estrutura de documentos HTML para páginas web.',
     practiceAction: 'Monte um documento com títulos, listas, links e hierarquia clara de elementos.',
+    successCriteria:
+      'A página abre com um título principal e todos os links apontam para o destino esperado.',
   },
   {
     id: 'html-semantico-forms',
@@ -160,6 +168,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Ensina a usar tags semânticas, labels associados e formulários acessíveis para enviar dados.',
     practiceAction: 'Construa um formulário com `<label>`, `type` adequado nos campos e botão `<button type="submit">`.',
+    successCriteria:
+      'Todo campo recebe foco ao clicar no rótulo e o formulário pode ser enviado pelo teclado.',
   },
   {
     id: 'css-box-seletores',
@@ -180,6 +190,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Explica espaçamento, bordas, unidades e como o navegador calcula o tamanho de cada bloco.',
     practiceAction: 'Inspecione um card no DevTools e ajuste `padding`, `margin` e `box-sizing: border-box`.',
+    successCriteria:
+      'O DevTools mostra o espaçamento previsto e a caixa cabe na largura que você definiu.',
   },
   {
     id: 'css-layout',
@@ -195,6 +207,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Ajuda a organizar barras, linhas e grades responsivas sem hacks de posicionamento.',
     practiceAction: 'Monte uma grade com `gap` e compare quando usar eixo único (Flex) ou duas dimensões (Grid).',
+    successCriteria:
+      'Os itens ficam alinhados e mantêm o espaçamento também quando o contêiner encolhe.',
   },
   {
     id: 'css-responsivo',
@@ -215,6 +229,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'mobile-first', title: 'Mobile first e media queries' },
     reason: 'Mostra como começar a tela para 360 px no celular e adaptar colunas em telas maiores sem rolagem horizontal.',
     practiceAction: 'Teste a tela no modo dispositivo em 360 px e ajuste largura fluida e quebra de grade.',
+    successCriteria:
+      'A página cabe em 360 px sem rolagem horizontal e a grade se reorganiza quando houver espaço.',
   },
   {
     id: 'tailwind',
@@ -234,6 +250,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Ensina a estilizar direto no JSX/HTML com classes utilitárias, foco visível (`focus-visible`) e layout mobile-first.',
     practiceAction: 'Estilize cards e botões com espaçamento utilitário, `focus-visible:ring-2` e grade `grid-cols-1 sm:grid-cols-2`.',
+    successCriteria:
+      'Em 360 px, os cards ficam em uma coluna. Em tela maior, ficam em duas. O foco é visível pelo teclado.',
   },
   {
     id: 'acessibilidade',
@@ -255,6 +273,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Ensina navegação por Tab, foco visível, contraste e semântica para que qualquer pessoa use a interface.',
     practiceAction: 'Percorra toda a página usando apenas Tab e Shift+Tab e confira se o foco fica visível.',
+    successCriteria:
+      'Todos os controles podem ser alcançados e acionados pelo teclado, com foco visível.',
   },
   {
     id: 'js-dom',
@@ -264,6 +284,7 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'eventos', title: 'Reagir ao que a pessoa faz' },
     reason: 'Conecta cliques, envios de formulário e atualização dinâmica de elementos na página.',
     practiceAction: 'Capture um evento de formulário com `preventDefault()` e renderize os itens na tela.',
+    successCriteria: 'O formulário atualiza a lista quando enviado e a página permanece aberta.',
   },
   {
     id: 'js-json-arrays',
@@ -276,6 +297,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Base para manipular listas de registros e converter objetos em JSON na troca com APIs.',
     practiceAction: 'Use `.map()` e `.filter()` em um array de objetos e converta com `JSON.stringify` / `JSON.parse`.',
+    successCriteria:
+      'Com dois exemplos, o filtro mantém apenas os itens esperados e a conversão JSON preserva os dados.',
   },
   {
     id: 'js-assincrono-fetch',
@@ -305,6 +328,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Explica `async/await`, `fetch`, leitura de resposta HTTP (`response.ok`) e os estados de carregando e erro.',
     practiceAction: 'Escreva uma função `async` com `fetch`, trate `if (!res.ok)` e exiba carregando, lista ou mensagem de erro.',
+    successCriteria:
+      'A interface mostra carregamento, exibe os dados na resposta 200 e explica a falha em um erro HTTP.',
     prerequisiteIds: ['como-a-web-funciona'],
   },
   {
@@ -315,6 +340,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'formato-dos-objetos', title: 'Descrever a forma dos objetos' },
     reason: 'Ajuda a tipar payloads de API, props de componentes e evitar erros de campo ausente antes de rodar.',
     practiceAction: 'Crie uma interface para o objeto retornado pela API e tipe a resposta do seu serviço.',
+    successCriteria:
+      'A checagem de tipos aceita um objeto válido e aponta o campo incorreto de um exemplo inválido.',
   },
   {
     id: 'api-rest-http',
@@ -348,6 +375,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Define qual método HTTP (GET, POST, PUT, DELETE) e qual status (200, 201, 400, 404) cada rota deve devolver.',
     practiceAction: 'Mapeie as rotas da API com método, corpo esperado, status de sucesso e erro de validação (`400`).',
+    successCriteria:
+      'Para cada rota, você consegue conferir o método, o corpo e os status previstos com uma requisição.',
     prerequisiteIds: ['como-a-web-funciona'],
   },
   {
@@ -379,6 +408,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Mostra como subir um servidor Node com Express, ler JSON (`express.json()`), definir rotas e tratar erros.',
     practiceAction: 'Crie uma rota GET e uma rota POST no Express validando o body e teste com `curl`.',
+    successCriteria:
+      'GET devolve 200 com a lista. POST válido devolve 201 e POST incompleto devolve 400 com uma mensagem.',
   },
   {
     id: 'banco-sql-consultas',
@@ -391,6 +422,7 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Ensina a consultar, filtrar e agregar registros em bancos relacionais.',
     practiceAction: 'Escreva consultas com `SELECT`, `WHERE` e `ORDER BY` em uma tabela de exemplo.',
+    successCriteria: 'A consulta retorna apenas as linhas do filtro e na ordem esperada.',
   },
   {
     id: 'banco-migracoes-orm',
@@ -417,6 +449,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Conecta rotas da API ao banco com ORM, consultas parametrizadas e histórico de migrações.',
     practiceAction: 'Configure o modelo do banco na API, crie/liste registros pela rota e valide erros de banco.',
+    successCriteria:
+      'Um item cadastrado aparece em GET após reiniciar a API e a falha de banco recebe uma resposta de erro.',
   },
   {
     id: 'autenticacao-jwt',
@@ -441,6 +475,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Diferencia 401 (sem login) de 403 (sem permissão), hash de senha e proteção de rotas com sessão ou JWT.',
     practiceAction: 'Proteja uma rota privada verificando identidade e autorização e teste respostas 401 e 403.',
+    successCriteria:
+      'Sem credencial, a rota responde 401. Com credencial sem permissão, responde 403.',
   },
   {
     id: 'react-base',
@@ -450,6 +486,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'componentes-e-props', title: 'Componentes são funções; props são os argumentos' },
     reason: 'Ensina a quebrar a interface em componentes React, renderizar listas com `.map()` e passar props.',
     practiceAction: 'Crie um componente de item/card reutilizável e renderize uma lista com `key` única.',
+    successCriteria:
+      'Dois itens com dados diferentes aparecem na lista sem aviso de chave duplicada.',
   },
   {
     id: 'react-estado',
@@ -465,6 +503,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'formularios-controlados', title: 'Formulários controlados' },
     reason: 'Controla inputs, cliques e atualização imutável de listas no estado do React.',
     practiceAction: 'Ligue os inputs do formulário ao estado com `useState` e adicione um novo item sem mutar o array.',
+    successCriteria:
+      'Digitar atualiza o campo e enviar acrescenta um item sem apagar os anteriores.',
   },
   {
     id: 'react-effects',
@@ -474,6 +514,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'dependencias', title: 'O array de dependências' },
     reason: 'Explica quando efeitos rodam após a renderização, dependências do `useEffect` e limpeza.',
     practiceAction: 'Escreva um `useEffect` com array de dependências correto e função de limpeza quando necessário.',
+    successCriteria:
+      'O efeito roda quando a dependência muda e a limpeza é chamada ao sair da tela.',
   },
   {
     id: 'react-rotas-fetch',
@@ -494,6 +536,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Mostra como carregar dados da API ao montar um componente React, evitar corrida de requisições e organizar rotas.',
     practiceAction: 'Busque uma lista da API ao abrir a página tratando carregando, lista vazia, erro e cancelamento.',
+    successCriteria:
+      'A tela trata espera, lista vazia, erro e dados. Ao sair, a requisição pendente é cancelada.',
     prerequisiteIds: ['js-assincrono-e-apis', 'react-jsx-componentes-e-props'],
   },
   {
@@ -530,6 +574,8 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Resolve comunicação entre frontend e API, envio de JSON via POST, configuração de CORS no backend e proxy no Vite.',
     practiceAction: 'Configure o cabeçalho CORS na API (ou proxy no Vite) e envie um `POST` em JSON sem perder o formulário em caso de `400`.',
+    successCriteria:
+      'O navegador recebe 201 no cadastro válido. No erro 400, a mensagem aparece e os campos mantêm seus valores.',
     prerequisiteIds: ['como-a-web-funciona'],
   },
   {
@@ -540,6 +586,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'api-pelo-terminal', title: 'Conversando com a API sem tela' },
     reason: 'Ensina a verificar status, cabeçalhos, payloads e casos de erro diretamente contra os endpoints da API.',
     practiceAction: 'Teste seus endpoints com `curl` validando resposta de sucesso (`200`/`201`) e erro (`400`/`404`).',
+    successCriteria:
+      'Os testes conferem status e corpo tanto no sucesso quanto nos casos 400 e 404.',
   },
   {
     id: 'testes-react',
@@ -549,6 +597,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'comportamento-visivel', title: 'Teste o que a pessoa percebe' },
     reason: 'Valida renderização, preenchimento de formulário e mensagens exibidas na tela sem depender de detalhes internos.',
     practiceAction: 'Escreva um teste simulando digitação, clique de envio e verificação do texto exibido.',
+    successCriteria:
+      'O teste envia o formulário, verifica a saída e falha se a mensagem esperada mudar.',
   },
   {
     id: 'docker',
@@ -562,6 +612,7 @@ export const webTopicRules: TopicRule[] = [
     },
     reason: 'Empacota API, banco e frontend com portas e variáveis consistentes entre máquinas.',
     practiceAction: 'Suba o serviço em container expondo a porta certa e conferindo os logs.',
+    successCriteria: 'O serviço responde pela porta publicada e seus logs podem ser consultados.',
   },
   {
     id: 'ci-cd',
@@ -571,6 +622,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'anatomia-do-workflow', title: 'O arquivo que manda na CI' },
     reason: 'Automatiza lint, testes e build a cada push ou pull request no repositório.',
     practiceAction: 'Crie um workflow básico que instala dependências, roda testes e valida o build.',
+    successCriteria:
+      'O workflow instala as dependências do lockfile e executa os testes e o build.',
   },
 ];
 

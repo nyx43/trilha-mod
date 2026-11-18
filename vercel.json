@@ -1,4 +1,7 @@
 {
+  "functions": {
+    "api/lesson-tutor.ts": { "maxDuration": 30 }
+  },
   "redirects": [
     { "source": "/roadmap/community", "destination": "/", "permanent": true },
     { "source": "/hroadmap/community", "destination": "/", "permanent": true }

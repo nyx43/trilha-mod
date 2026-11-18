@@ -4,6 +4,7 @@ import type { IncomingMessage, ServerResponse } from 'node:http';
 import { Readable } from 'node:stream';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { TutorRequest } from '../src/tutor/types';
+import hostedTutor from '../api/lesson-tutor';
 import { handleLessonTutor } from './lessonTutor';
 
 const question: TutorRequest = {
@@ -43,6 +44,7 @@ beforeEach(() => {
 });
 
 afterEach(() => {
+  vi.restoreAllMocks();
   vi.unstubAllEnvs();
   vi.unstubAllGlobals();
 });
@@ -137,6 +139,18 @@ describe('Provedores do tutor', () => {
     expect(sent).not.toHaveProperty('include_reasoning');
   });
 
+  it('dá mais tempo ao Gemini e informa quando a espera expira', async () => {
+    vi.stubEnv('TUTOR_GEMINI_API_KEY', 'chave-gemini-de-teste');
+    const aborted = AbortSignal.abort();
+    const timeout = vi.spyOn(AbortSignal, 'timeout').mockReturnValue(aborted);
+    vi.stubGlobal('fetch', vi.fn().mockRejectedValue(aborted.reason));
+
+    const response = await callTutor('POST', { ...question, provider: 'gemini' });
+    expect(timeout).toHaveBeenCalledWith(120_000);
+    expect(response.status).toBe(504);
+    expect(response.body.error).toContain('Google Gemini não enviou a resposta em 120 segundos');
+  });
+
   it('informa que a cota acabou e mantém a conversa no provedor escolhido', async () => {
     vi.stubEnv('TUTOR_GEMINI_API_KEY', 'chave-gemini-de-teste');
     vi.stubEnv('TUTOR_GROQ_API_KEY', 'chave-groq-de-teste');
@@ -165,5 +179,79 @@ describe('Provedores do tutor', () => {
     expect(target.href).toBe('http://127.0.0.1:9999/v1/chat/completions');
     expect(JSON.parse(request.body).model).toBe('modelo-local');
     expect(request.headers.has('Authorization')).toBe(false);
+  });
+});
+
+describe('Rota hospedada do tutor', () => {
+  const host = 'preview.example';
+  const origin = `https://${host}`;
+
+  beforeEach(() => {
+    vi.stubEnv('TUTOR_ENABLE_HOSTED', 'true');
+    vi.stubEnv('TUTOR_ALLOWED_ORIGINS', origin);
+    vi.stubEnv('VERCEL_URL', '');
+    vi.stubEnv('TUTOR_TURNSTILE_SITE_KEY', 'chave-publica');
+    vi.stubEnv('TUTOR_TURNSTILE_SECRET_KEY', 'chave-privada-de-teste');
+    vi.stubEnv('TUTOR_GROQ_API_KEY', 'chave-groq-de-teste');
+  });
+
+  async function request(method: string, body?: TutorRequest, requestOrigin = origin) {
+    const req = {
+      method,
+      body,
+      headers: { host, origin: requestOrigin, 'content-type': 'application/json' },
+      socket: { remoteAddress: '192.0.2.1' },
+    } as unknown as IncomingMessage;
+    const writeHead = vi.fn();
+    const end = vi.fn();
+    await hostedTutor(req, { writeHead, end } as unknown as ServerResponse);
+    return { code: writeHead.mock.calls[0][0], data: JSON.parse(end.mock.calls[0][0]) };
+  }
+
+  it('fica inativa até o opt-in e publica apenas a chave pública na origem configurada', async () => {
+    vi.stubEnv('TUTOR_ENABLE_HOSTED', 'false');
+    expect((await request('GET')).data).toEqual({ enabled: false, providers: [] });
+    vi.stubEnv('TUTOR_ENABLE_HOSTED', 'true');
+    const result = await request('GET');
+    expect(result.data).toMatchObject({ enabled: true, turnstileSiteKey: 'chave-publica' });
+    expect(JSON.stringify(result)).not.toContain('chave-privada-de-teste');
+    expect((await request('GET', undefined, 'https://outro.example')).data.enabled).toBe(false);
+  });
+
+  it('recusa ausência de token, hostname incorreto e ação incorreta antes de enviar ao provedor', async () => {
+    const upstream = vi.fn();
+    vi.stubGlobal('fetch', upstream);
+    expect((await request('POST', question)).code).toBe(403);
+    expect(upstream).not.toHaveBeenCalled();
+    const input = { ...question, turnstileToken: 'token' };
+    for (const invalid of [
+      { hostname: 'outro.example', action: 'lesson_tutor' },
+      { hostname: host, action: 'contributions' },
+    ]) {
+      upstream.mockClear().mockResolvedValueOnce(Response.json({ success: true, ...invalid }));
+      expect((await request('POST', input)).code).toBe(403);
+      expect(upstream).toHaveBeenCalledTimes(1);
+    }
+    upstream.mockClear();
+    expect((await request('POST', input, 'https://outro.example')).code).toBe(503);
+    expect(upstream).not.toHaveBeenCalled();
+  });
+
+  it('valida o desafio e atende o corpo JSON já interpretado pela Vercel', async () => {
+    const upstream = vi
+      .fn()
+      .mockResolvedValueOnce(
+        Response.json({ success: true, hostname: host, action: 'lesson_tutor' }),
+      )
+      .mockResolvedValueOnce(upstreamSuccess());
+    vi.stubGlobal('fetch', upstream);
+    expect(await request('POST', { ...question, turnstileToken: 'token' })).toEqual({
+      code: 200,
+      data: { reply: 'Qual é a origem do frontend?' },
+    });
+    expect(upstream.mock.calls[0][0]).toMatch(/challenges\.cloudflare\.com/);
+    expect(upstream.mock.calls[0][1].body.get('response')).toBe('token');
+    expect(upstream.mock.calls[1][0].hostname).toBe('api.groq.com');
+    expect(upstream.mock.calls[1][1].body).not.toContain('turnstileToken');
   });
 });

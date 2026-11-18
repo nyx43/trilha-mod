@@ -1,3 +1,3 @@
 # Próxima ordem
 
-Envie os commits verificados para `nyx43/trilha-mod` na branch `feat/percurso-api-tailwind` quando houver autorização explícita para o push.
+Valide na Vercel o deploy de prévia da branch `feat/percurso-api-tailwind`, usando o roteiro de rotas e narração do [relatório](docs/RELATORIO_ESTABILIZACAO.md).

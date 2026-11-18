@@ -87,6 +87,75 @@ describe('Percurso curto API Node, React e Tailwind', () => {
     );
   });
 
+  it('retoma o avanço parcial após recarregar e mantém a conclusão', async () => {
+    const oldRecord = { schemaVersion: 1, completed: { 'api-react-tailwind': ['node-e-express'] } };
+    localStorage.setItem(percursoStoreKey, JSON.stringify(oldRecord));
+    const path = '/percurso/api-react-tailwind/requisicoes-react';
+    const firstView = renderPercurso(path);
+
+    await screen.findByRole('heading', { name: /Buscar dados quando a tela abre/ });
+    fireEvent.click(screen.getByRole('button', { name: /Continuar: Respostas fora de ordem/ }));
+    expect(screen.getByText('25% da etapa')).toBeInTheDocument();
+    expect(JSON.parse(localStorage.getItem(percursoStoreKey) || '{}')).toMatchObject({
+      completed: oldRecord.completed,
+      reached: { 'api-react-tailwind': { 'requisicoes-react': 1 } },
+    });
+    firstView.unmount();
+
+    const resumed = renderPercurso(path);
+    expect(await screen.findByRole('heading', { name: /Respostas fora de ordem/ })).toBeInTheDocument();
+    expect(screen.getByText('25% da etapa')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /Continuar: Quando usar uma biblioteca de dados/ }));
+    expect(screen.getByText('50% da etapa')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Ir para o fechamento' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Concluir etapa' }));
+    expect(JSON.parse(localStorage.getItem(percursoStoreKey) || '{}').completed['api-react-tailwind'])
+      .toEqual(['node-e-express', 'requisicoes-react']);
+    resumed.unmount();
+
+    renderPercurso(path);
+    await screen.findByRole('heading', { name: 'Fechamento' });
+    expect(screen.getByText('Etapa concluída')).toBeInTheDocument();
+  });
+
+  it('permite mostrar todas as seções e abrir uma seção diretamente sem salvar avanço', async () => {
+    const path = '/percurso/api-react-tailwind/requisicoes-react';
+    const firstView = renderPercurso(path);
+    await screen.findByRole('heading', { name: /Buscar dados quando a tela abre/ });
+    fireEvent.click(screen.getByRole('button', { name: 'Mostrar todas as seções' }));
+    expect(screen.getByRole('heading', { name: /Quando usar uma biblioteca de dados/ })).toBeInTheDocument();
+    expect(screen.getByText('0% da etapa')).toBeInTheDocument();
+    expect(localStorage.getItem(percursoStoreKey)).toBeNull();
+    firstView.unmount();
+
+    const directView = renderPercurso(`${path}#bibliotecas-de-dados`);
+    expect(await screen.findByRole('heading', { name: /Quando usar uma biblioteca de dados/ })).toBeInTheDocument();
+    expect(screen.getByText('0% da etapa')).toBeInTheDocument();
+    expect(localStorage.getItem(percursoStoreKey)).toBeNull();
+    directView.unmount();
+
+    renderPercurso(path);
+    await screen.findByRole('heading', { name: /Buscar dados quando a tela abre/ });
+    expect(screen.queryByRole('heading', { name: /Quando usar uma biblioteca de dados/ })).not.toBeInTheDocument();
+    expect(screen.getByText('0% da etapa')).toBeInTheDocument();
+  });
+
+  it('guarda o avanço separadamente para cada etapa', async () => {
+    const react = renderPercurso('/percurso/api-react-tailwind/requisicoes-react');
+    await screen.findByRole('heading', { name: /Buscar dados quando a tela abre/ });
+    fireEvent.click(screen.getByRole('button', { name: /Continuar: Respostas fora de ordem/ }));
+    react.unmount();
+
+    const tailwind = renderPercurso('/percurso/api-react-tailwind/tailwind-na-pratica');
+    await screen.findByRole('heading', { name: /Classes utilitárias no lugar de CSS espalhado/ });
+    expect(screen.getByText('0% da etapa')).toBeInTheDocument();
+    tailwind.unmount();
+
+    renderPercurso('/percurso/api-react-tailwind/requisicoes-react');
+    await screen.findByRole('heading', { name: /Respostas fora de ordem/ });
+    expect(screen.getByText('25% da etapa')).toBeInTheDocument();
+  });
+
   it('apresenta a aula Tailwind na prática com pergunta inicial, feedback, cartões e missão', async () => {
     renderPercurso('/percurso/api-react-tailwind/tailwind-na-pratica');
     expect(
@@ -120,4 +189,21 @@ describe('Percurso curto API Node, React e Tailwind', () => {
     const storedPercurso = JSON.parse(localStorage.getItem(percursoStoreKey) || '{}');
     expect(storedPercurso.completed['api-react-tailwind']).toContain('missao-final');
   });
+
+  it('oferece diagnóstico opcional sem mudar o progresso salvo', () => {
+    const saved = JSON.stringify({ schemaVersion: 1, completed: { 'api-react-tailwind': ['integracao-front-api', 'tailwind-na-pratica'] } });
+    localStorage.setItem(percursoStoreKey, saved);
+    const view = renderPercurso('/percurso/api-react-tailwind');
+    expect(screen.getByText('2 de 5 etapas concluídas')).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('link', { name: /Prática opcional: diagnóstico/ }));
+    expect(screen.getByRole('heading', { name: 'Rota errada (404)' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Cadastro rejeitado (400)' })).toBeInTheDocument();
+    const solutions = screen.getAllByText('Solução — abra depois de tentar');
+    expect(solutions).toHaveLength(2);
+    expect(solutions.every((summary) => !summary.closest('details')?.open)).toBe(true);
+    fireEvent.click(screen.getAllByText('Dica 1')[0]);
+    expect(localStorage.getItem(percursoStoreKey)).toBe(saved);
+    view.unmount();
+  });
+
 });

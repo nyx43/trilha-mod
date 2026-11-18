@@ -28,6 +28,26 @@ const getPage = (path: string) => {
 };
 
 describe('Conteúdo acessível a buscadores e assistentes', () => {
+  it('gera conteúdo estático para o recomendador, o Percurso e suas etapas conhecidas', async () => {
+    const routes = [
+      '/aulas/o-que-estudar',
+      '/percurso/api-react-tailwind',
+      '/percurso/api-react-tailwind/integracao-front-api',
+      '/percurso/api-react-tailwind/diagnostico-web',
+      '/percurso/api-react-tailwind/missao-final',
+    ];
+    for (const path of routes) {
+      const page = getPage(path);
+      const body = await staticPageBody(page, catalogs, posts, root);
+      expect(body).toContain('<h1>');
+      expect(sitemapXML(pages)).toContain(`https://trilha.info${path}</loc>`);
+    }
+    expect(await staticPageBody(getPage(routes[3]), catalogs, posts, root)).toContain(
+      'href="/praticas/diagnostico-web.zip"',
+    );
+    expect(pageForPath(pages, '/percurso/api-react-tailwind/inexistente')).toBeUndefined();
+  });
+
   it('publica as seções e referências de todos os guias e aulas sem JavaScript', async () => {
     for (const meta of [...guides, ...lessons]) {
       const page = getPage(`${'category' in meta ? '/guide/' : '/aula/'}${meta.id}`);

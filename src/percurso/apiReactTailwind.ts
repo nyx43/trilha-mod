@@ -72,7 +72,12 @@ export const apiReactTailwindPercurso: Percurso = {
       sectionIds: ['dados-no-efeito', 'corrida-e-cancelamento', 'bibliotecas-de-dados'],
       focusNote:
         'Aqui estão apenas as 3 seções de requisições da aula “Rotas e requisições”, deixando React Router de fora para manter o percurso curto.',
-      cardIds: ['quatro-estados-react', 'condicao-de-corrida', 'abort-controller', 'tanstack-query'],
+      cardIds: [
+        'quatro-estados-react',
+        'condicao-de-corrida',
+        'abort-controller',
+        'tanstack-query',
+      ],
       load: () => import('../lessons/content/reactRotasERequisicoes'),
     },
     {
@@ -125,6 +130,8 @@ export const apiReactTailwindPercurso: Percurso = {
 };
 
 export const percursos: Percurso[] = [apiReactTailwindPercurso];
+export const diagnosticoWebSlug = 'diagnostico-web';
+export const diagnosticoWebDownload = '/praticas/diagnostico-web.zip';
 
 export function findPercurso(id: string | undefined): Percurso | undefined {
   return percursos.find((item) => item.id === id);
@@ -175,8 +182,12 @@ export const missionCriteria = [
   'Você consegue explicar cada arquivo que escreveu (rotas/controller da API, `fetch`/estados do React e classes utilitárias/responsivas do Tailwind) sem depender de IA.',
 ];
 
-export const missionGithubChecklist = [
-  '**Link 1 — GitHub da API Node**: código próprio enviado ao GitHub (sem `node_modules/`), `package.json` com scripts funcionando e `README.md` explicando como rodar (`npm install`, `npm start`) e os contratos `GET /heroes` e `POST /heroes`.',
-  '**Link 2 — GitHub do frontend React + Tailwind**: código próprio enviado ao GitHub (sem `node_modules/` nem `.env` com segredos), Tailwind configurado no Vite e aplicado com foco e responsividade, e `README.md` explicando como configurar a URL da API e rodar (`npm install`, `npm run dev`).',
-  '**Conferência final dos dois links**: abrir ambos os repositórios no navegador em janela anônima para confirmar que estão acessíveis, com o último commit visível e com os testes manuais feitos por você.',
-];
+export function githubDeliveryChecklist(frontendStack: string) {
+  return [
+    '**Link 1 — GitHub da API Node**: código próprio enviado ao GitHub (sem `node_modules/`), `package.json` com scripts funcionando e `README.md` explicando como rodar (`npm install`, `npm start`) e os contratos `GET /heroes` e `POST /heroes`.',
+    `**Link 2 — GitHub do frontend ${frontendStack}**: código próprio enviado ao GitHub (sem \`node_modules/\` nem \`.env\` com segredos), Tailwind configurado, foco e responsividade, e \`README.md\` explicando como configurar a URL da API e rodar o projeto.`,
+    '**Conferência final dos dois links**: abrir ambos os repositórios no navegador em janela anônima para confirmar que estão acessíveis, com o último commit visível e com os testes manuais feitos por você.',
+  ];
+}
+
+export const missionGithubChecklist = githubDeliveryChecklist('React + Tailwind');

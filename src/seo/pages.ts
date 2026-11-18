@@ -1,6 +1,7 @@
 import { categoryOf, guideCategories, guides } from '../guides';
 import { courseLessons, courses, lessonPlace, lessons } from '../lessons';
 import type { RoadmapCatalog } from '../learning/types';
+import { diagnosticoWebSlug, percursos } from '../percurso/apiReactTailwind';
 
 export const siteUrl = 'https://trilha.info';
 export const cardSize = { width: 1200, height: 630 };
@@ -47,6 +48,25 @@ function plain(text: string): string {
 
 function plural(count: number, one: string, many: string): string {
   return `${count} ${count === 1 ? one : many}`;
+}
+
+function studyPage(
+  path: string,
+  title: string,
+  description: string,
+  kicker: string,
+  facts: string[],
+): SocialPage {
+  return {
+    path,
+    title,
+    documentTitle: `${title} · Trilha Info`,
+    description: clip(description, 220),
+    image: `/og/${path.slice(1).replace(/\//g, '-')}.png`,
+    imageAlt: title,
+    type: 'website',
+    card: { kicker, title, summary: description, facts },
+  };
 }
 
 export function socialPages(catalogs: RoadmapCatalog[], posts: BlogPost[]): SocialPage[] {
@@ -182,6 +202,30 @@ export function socialPages(catalogs: RoadmapCatalog[], posts: BlogPost[]): Soci
   });
 
   const trailPages = catalogs.map(roadmapSocialPage);
+  const percursoPages = percursos.flatMap((percurso) => {
+    const path = `/percurso/${percurso.id}`;
+    return [
+      studyPage(path, percurso.title, percurso.summary, 'Percurso Web', [
+        plural(percurso.stages.length, 'etapa', 'etapas'),
+      ]),
+      ...percurso.stages.map((stage) =>
+        studyPage(`${path}/${stage.slug}`, stage.title, stage.summary, 'Percurso Web', [
+          `${stage.minutes} min`,
+        ]),
+      ),
+      ...(percurso.id === 'api-react-tailwind'
+        ? [
+            studyPage(
+              `${path}/${diagnosticoWebSlug}`,
+              'Diagnóstico de frontend e API',
+              'Investigue uma rota que retorna 404 e um cadastro que retorna 400 em um laboratório local.',
+              'Prática opcional',
+              ['HTTP e DevTools'],
+            ),
+          ]
+        : []),
+    ];
+  });
 
   const postPages = posts.map<SocialPage>((post) => ({
     path: `/blog/${post.url}`,
@@ -199,8 +243,16 @@ export function socialPages(catalogs: RoadmapCatalog[], posts: BlogPost[]): Soci
     guidesIndex,
     ...guidePages,
     lessonsIndex,
+    studyPage(
+      '/aulas/o-que-estudar',
+      'O que preciso estudar?',
+      'Encontre aulas e seções a partir de um enunciado, monte um plano e siga para a prática.',
+      'Planejamento de estudo',
+      ['Catálogo Web', 'Sem cadastro'],
+    ),
     ...coursePages,
     ...lessonPages,
+    ...percursoPages,
     ...trailPages,
     {
       path: '/blog',

@@ -75,6 +75,7 @@ def main():
     selection.add_argument("--lesson", action="append", help="Generate only this lesson (repeatable)")
     selection.add_argument("--remaining", action="store_true", help="Skip lessons already registered in the catalog")
     selection.add_argument("--stale", action="store_true", help="Refresh changed or incomplete lessons already in the catalog")
+    selection.add_argument("--check", action="store_true", help="Check the exported scripts and both voices without generating audio")
     args = parser.parse_args()
     if args.jobs < 1:
         parser.error("--jobs must be at least 1")
@@ -85,6 +86,17 @@ def main():
         parser.error("Unknown lesson ID in requested batch")
     (CACHE / "batch").mkdir(parents=True, exist_ok=True)
     published = set(json.loads(CATALOG.read_text()))
+    if args.check:
+        errors = [f"Missing from the narration catalog: {item}" for item in sorted(set(available_ids) - published)]
+        errors.extend(f"Unknown lesson in the narration catalog: {item}" for item in sorted(published - set(available_ids)))
+        for lesson_id in available_ids:
+            if lesson_id in published and needs_refresh(lesson_id):
+                errors.append(f"Missing or out-of-date narration: {lesson_id}")
+        for error in errors:
+            print(error, file=sys.stderr)
+        if not errors:
+            print(f"Checked {len(available_ids)} lessons with Santa and Dora.")
+        return int(bool(errors))
     if args.remaining:
         targets = [lesson_id for lesson_id in targets if lesson_id not in published]
     if args.stale:

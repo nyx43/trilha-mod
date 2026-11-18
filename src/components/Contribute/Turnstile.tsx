@@ -29,9 +29,13 @@ function loadScript(): Promise<void> {
 export function Turnstile({
   siteKey,
   onToken,
+  action,
+  compact,
 }: {
   siteKey: string;
   onToken: (token: string) => void;
+  action?: string;
+  compact?: boolean;
 }) {
   const container = useRef<HTMLDivElement>(null);
   const callback = useRef(onToken);
@@ -45,6 +49,8 @@ export function Turnstile({
         if (cancelled || !container.current || !window.turnstile) return;
         widget = window.turnstile.render(container.current, {
           sitekey: siteKey,
+          ...(action ? { action } : {}),
+          ...(compact ? { size: 'compact' } : {}),
           language: 'pt-br',
           theme: 'dark',
           callback: (token: string) => callback.current(token),
@@ -57,7 +63,7 @@ export function Turnstile({
       cancelled = true;
       if (widget) window.turnstile?.remove(widget);
     };
-  }, [siteKey]);
+  }, [siteKey, action, compact]);
 
   return <div ref={container} className="contribute-turnstile" />;
 }

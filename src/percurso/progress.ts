@@ -3,11 +3,12 @@ import { useSyncExternalStore } from 'react';
 export interface PercursoStore {
   schemaVersion: 1;
   completed: Record<string, string[]>;
+  reached: Record<string, Record<string, number>>;
 }
 
 export const percursoStoreKey = 'trilha-percurso:v1';
 const changeEvent = 'trilha-percurso-change';
-const emptyStore: PercursoStore = { schemaVersion: 1, completed: {} };
+const emptyStore: PercursoStore = { schemaVersion: 1, completed: {}, reached: {} };
 
 let cachedRaw: string | null | undefined;
 let cachedValue: PercursoStore = emptyStore;
@@ -17,7 +18,7 @@ export function readPercursoStore(): PercursoStore {
   try {
     raw = localStorage.getItem(percursoStoreKey);
   } catch {
-    return emptyStore;
+    return cachedValue;
   }
   if (cachedRaw === raw) return cachedValue;
   let value: PercursoStore = emptyStore;
@@ -30,7 +31,14 @@ export function readPercursoStore(): PercursoStore {
       parsed.completed &&
       typeof parsed.completed === 'object'
     ) {
-      value = { schemaVersion: 1, completed: parsed.completed };
+      value = {
+        schemaVersion: 1,
+        completed: parsed.completed,
+        reached:
+          parsed.reached && typeof parsed.reached === 'object' && !Array.isArray(parsed.reached)
+            ? parsed.reached
+            : {},
+      };
     }
   } catch {
     /* Ignore unreadable local record. */
@@ -44,7 +52,8 @@ function writePercursoStore(next: PercursoStore) {
   try {
     localStorage.setItem(percursoStoreKey, JSON.stringify(next));
   } catch {
-    /* Private mode keeps working in memory. */
+    /* Keep the current session usable when storage is unavailable or full. */
+    cachedValue = next;
   }
   window.dispatchEvent(new Event(changeEvent));
 }
@@ -60,6 +69,20 @@ function subscribe(callback: () => void) {
 
 export function usePercursoStore(): PercursoStore {
   return useSyncExternalStore(subscribe, readPercursoStore, () => emptyStore);
+}
+
+export function advanceStage(percursoId: string, stageSlug: string, reached: number) {
+  const store = readPercursoStore();
+  const stages = store.reached[percursoId] || {};
+  const previous = stages[stageSlug];
+  if (Number.isInteger(previous) && previous >= reached) return;
+  writePercursoStore({
+    ...store,
+    reached: {
+      ...store.reached,
+      [percursoId]: { ...stages, [stageSlug]: reached },
+    },
+  });
 }
 
 export function markStageDone(percursoId: string, stageSlug: string) {

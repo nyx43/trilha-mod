@@ -17,11 +17,19 @@ import {
 } from 'react-icons/pi';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { Turnstile } from '../components/Contribute/Turnstile';
 import type { LessonSection } from '../lessons/types';
 import { lessonTutorContext } from './context';
 import { useTutorSpeech } from './speech';
 import { TutorSettings } from './TutorSettings';
-import { tutorLimits, TutorMessage, tutorPath, TutorRequest, TutorStatus } from './types';
+import {
+  tutorLimits,
+  TutorMessage,
+  tutorPath,
+  TutorRequest,
+  TutorStatus,
+  tutorTurnstileAction,
+} from './types';
 import './tutor.css';
 
 interface Props {
@@ -82,6 +90,9 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
     messages: TutorMessage[];
   }>();
   const [pendingQuestion, setPendingQuestion] = useState('');
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [challengeVersion, setChallengeVersion] = useState(0);
+  const [slowResponse, setSlowResponse] = useState(false);
   const [error, setError] = useState('');
   const [unseenReply, setUnseenReply] = useState(false);
   const container = useRef<HTMLDivElement>(null);
@@ -96,6 +107,7 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
   const stopSpeech = speech.stop;
   const close = useCallback(() => {
     stopSpeech();
+    setTurnstileToken('');
     setOpen(false);
     launcher.current?.focus({ preventScroll: true });
   }, [stopSpeech]);
@@ -107,6 +119,7 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
     provider?.models?.find(({ id }) => id === preferences.modelId) ??
     provider?.models?.find(({ id }) => id === provider.defaultModel);
   const size = preferences.size ?? compact;
+  const waitingForVerification = Boolean(status?.turnstileSiteKey && !turnstileToken);
   const isExpanded = size.width >= expanded.width || size.height >= expanded.height;
   const messages =
     conversation && conversation.providerId === provider?.id && conversation.modelId === model?.id
@@ -124,6 +137,7 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
           setStatus({
             enabled: availability?.enabled === true,
             providers: availability?.providers ?? [],
+            turnstileSiteKey: availability?.turnstileSiteKey,
           });
         }
       })
@@ -195,19 +209,25 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
     const question = content.trim();
     if (!status?.enabled || !question || question.length > tutorLimits.question || inFlight.current)
       return;
+    if (waitingForVerification) return;
 
     const controller = new AbortController();
     inFlight.current = controller;
     scrollTarget.current = 'question';
     setUnseenReply(false);
     setPendingQuestion(question);
+    setSlowResponse(false);
     setError('');
+    const slowTimer = window.setTimeout(() => {
+      if (!controller.signal.aborted) setSlowResponse(true);
+    }, 12_000);
     const userMessage: TutorMessage = { role: 'user', content: question };
     const input: TutorRequest = {
       provider: provider?.id,
       model: model?.id,
       context: lessonTutorContext(title, summary, hook, section),
       messages: [...messages.slice(-tutorLimits.history), userMessage],
+      turnstileToken: status.turnstileSiteKey ? turnstileToken : undefined,
     };
     try {
       const response = await fetch(tutorPath, {
@@ -238,6 +258,11 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
         setError('Não foi possível enviar. Tente novamente.');
       }
     } finally {
+      window.clearTimeout(slowTimer);
+      if (status.turnstileSiteKey && !controller.signal.aborted) {
+        setTurnstileToken('');
+        setChallengeVersion((version) => version + 1);
+      }
       inFlight.current = undefined;
       if (!controller.signal.aborted) setPendingQuestion('');
     }
@@ -364,8 +389,7 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
           )}
           {status?.enabled === false && (
             <p className="lesson-tutor-notice" role="status">
-              O tutor precisa de um provedor de IA. Para usar uma cota gratuita, configure Gemini ou
-              Groq no arquivo <code>.env.local</code> do projeto.
+              O tutor está indisponível neste ambiente.
             </p>
           )}
           {status?.enabled && (
@@ -457,8 +481,25 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
                   </button>
                 )}
                 {speech.speechError && <p role="status">{speech.speechError}</p>}
-                {pendingQuestion && <p role="status">O tutor está preparando uma resposta…</p>}
+                {pendingQuestion && (
+                  <p role="status">
+                    {slowResponse
+                      ? `${
+                          model?.label ?? provider?.label ?? 'O tutor'
+                        } ainda está preparando a resposta…`
+                      : 'O tutor está preparando uma resposta…'}
+                  </p>
+                )}
                 {error && <p role="alert">{error}</p>}
+                {status.turnstileSiteKey && (
+                  <Turnstile
+                    key={challengeVersion}
+                    siteKey={status.turnstileSiteKey}
+                    action={tutorTurnstileAction}
+                    onToken={setTurnstileToken}
+                    compact
+                  />
+                )}
                 <form onSubmit={submit}>
                   <label className="sr-only" htmlFor={`${id}-question`}>
                     Sua dúvida
@@ -476,7 +517,7 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
                   <div className="lesson-tutor-actions">
                     <button
                       type="button"
-                      disabled={!!pendingQuestion}
+                      disabled={!!pendingQuestion || waitingForVerification}
                       onClick={() =>
                         send(
                           'Crie um exercício curto para eu praticar esta seção ou o conceito da minha última dúvida.',
@@ -489,7 +530,7 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
                     <button
                       className="lesson-tutor-send"
                       type="submit"
-                      disabled={!!pendingQuestion || !draft.trim()}
+                      disabled={!!pendingQuestion || waitingForVerification || !draft.trim()}
                     >
                       Enviar
                     </button>

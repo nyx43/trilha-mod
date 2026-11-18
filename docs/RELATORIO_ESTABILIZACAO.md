@@ -68,3 +68,12 @@ KOKORO_THREADS=3 flock -n .cache/narration/geracao.lock npm run narration:batch 
 ```
 
 O push para `nyx43/trilha-mod`, branch `feat/percurso-api-tailwind`, foi bloqueado pela revisão automática, que solicitou autorização explícita do conteúdo e destino. A branch local contém o código, os testes, os relatórios e os áudios verificados. A configuração local espera `yarn` no hook, que estava indisponível. Rodei ESLint diretamente nos arquivos de comportamento alterados, além da suíte e do build.
+
+## Prévia, CI, diagnóstico e plano de aulas — 18/11/2026
+
+- O build gera HTML próprio para o recomendador, a página do Percurso, as cinco etapas e a prática de diagnóstico. Conferi oito acessos diretos a partir do build no Chromium, com HTTP 404 para uma etapa inexistente. Também conferi o download do ZIP e a reprodução da narração com HTTP 206 para um trecho do MP3.
+- O GitHub Actions executa a instalação pelo lockfile, a checagem de tipos, a suíte, a auditoria dos áudios e o build. O lockfile passou a incluir as variantes opcionais de esbuild que o npm exige em uma instalação limpa. `npm run narration:check` conferiu as 78 aulas com Santa e Dora.
+- A prática de diagnóstico oferece um ZIP portátil. Na cópia extraída, passaram 22 testes e 16 verificações de fumaça, incluindo as respostas 404 e 400. O Percurso salva a seção alcançada após o aluno avançar.
+- O tutor tem uma rota da Vercel com ativação explícita. Testei a rota e a interface com respostas simuladas, incluindo validação do Turnstile por pergunta e recusa de origem ou ação incorreta. O README registra as variáveis necessárias para ativar o provedor no ambiente hospedado.
+- O recomendador permite selecionar sugestões, salvar as práticas com critérios e retomar na seção indicada. No caso de API Node e frontend com Tailwind, React começa como opção e o plano inclui o checklist dos dois repositórios. Validei a retomada após recarga no Chromium a 360 px. O texto do enunciado fica fora da URL e do plano salvo.
+- `npm ci`, `npm run check`, `npm run test:run` (287 testes), `npm run narration:check` e `npm run build` passaram localmente. A prévia remota depende de vincular o repositório a um projeto da Vercel. Não havia integração de deploy registrada no GitHub nem uma sessão Vercel disponível.

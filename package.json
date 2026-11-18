@@ -15,6 +15,7 @@
     "icons": "node scripts/generate-icons.mjs",
     "narration:export": "node scripts/narration/export-lessons.mjs",
     "narration:audit": "node scripts/narration/export-lessons.mjs --audit-catalog",
+    "narration:check": "npm run narration:export -- --all --audit-catalog && python3 scripts/narration/build_catalog.py --check",
     "narration:generate": "\"${KOKORO_PYTHON:-.cache/narration/kokoro/venv/bin/python3}\" scripts/narration/generate_narration.py",
     "narration:verify": "python3 scripts/narration/verify_narration.py",
     "narration:batch": "npm run narration:export -- --all --audit-catalog && \"${KOKORO_PYTHON:-.cache/narration/kokoro/venv/bin/python3}\" scripts/narration/build_catalog.py",

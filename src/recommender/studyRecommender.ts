@@ -23,6 +23,7 @@ export interface RecommendedLesson {
   sectionId?: string;
   sectionTitle?: string;
   practiceAction: string;
+  successCriteria: string;
   objectives: string[];
 }
 
@@ -101,7 +102,10 @@ function escapeRegex(value: string): string {
   return value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 }
 
-function findPhraseOccurrences(norm: string, phrase: string): Array<{ start: number; end: number }> {
+function findPhraseOccurrences(
+  norm: string,
+  phrase: string,
+): Array<{ start: number; end: number }> {
   const regex = new RegExp(`(?<![a-z0-9])${escapeRegex(phrase)}(?![a-z0-9])`, 'g');
   const hits: Array<{ start: number; end: number }> = [];
   let match: RegExpExecArray | null;
@@ -251,6 +255,9 @@ function buildLessonCard(
     sectionId: targetSection?.id,
     sectionTitle: targetSection?.title,
     practiceAction,
+    successCriteria:
+      rule?.successCriteria ||
+      'Registre o resultado esperado e confirme que consegue repetir a prática.',
     objectives: lesson.objectives,
   };
 }
@@ -480,10 +487,7 @@ export function recommendStudyPlan(rawInput: string): StudyRecommendation {
       if (!lesson) continue;
       const reason = ctx.signal.reasonByLessonId[supportId] || lesson.summary;
       if (!supportMap.has(supportId)) {
-        supportMap.set(
-          supportId,
-          buildLessonCard(lesson, 'support', [ctx.snippet], reason),
-        );
+        supportMap.set(supportId, buildLessonCard(lesson, 'support', [ctx.snippet], reason));
       }
     }
   }

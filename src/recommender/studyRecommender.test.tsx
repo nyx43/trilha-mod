@@ -1,11 +1,12 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { fireEvent, render, screen, within } from '@testing-library/react';
+import { MemoryRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { describe, expect, it } from 'vitest';
 import { LessonView } from '../components/Lesson/LessonView';
 import { findLesson, lessonPlace } from '../lessons';
 import { lessonStoreKey } from '../lessons/progress';
 import LessonsPage from '../pages/LessonsPage';
 import StudyRecommenderPage from '../pages/StudyRecommenderPage';
+import { lessonPlanStorageKey } from './savedLessonPlan';
 import { recommendStudyPlan } from './studyRecommender';
 import { webTopicRules } from './webRules';
 
@@ -25,10 +26,9 @@ describe('recommendStudyPlan', () => {
       }
       if (rule.sectionByPhrase) {
         for (const target of Object.values(rule.sectionByPhrase)) {
-          expect(
-            byId.get(target.id),
-            `Seção ${target.id} inválida em ${rule.lessonId}`,
-          ).toBe(target.title);
+          expect(byId.get(target.id), `Seção ${target.id} inválida em ${rule.lessonId}`).toBe(
+            target.title,
+          );
         }
       }
     }
@@ -120,7 +120,11 @@ describe('recommendStudyPlan', () => {
     );
 
     expect(prose.sequence.map((item) => item.lesson.id)).toEqual(
-      expect.arrayContaining(['js-assincrono-e-apis', 'tailwind-na-pratica', 'api-rest-e-contratos']),
+      expect.arrayContaining([
+        'js-assincrono-e-apis',
+        'tailwind-na-pratica',
+        'api-rest-e-contratos',
+      ]),
     );
     expect(list.sequence.map((item) => item.lesson.id)).toEqual(
       expect.arrayContaining([
@@ -183,8 +187,12 @@ describe('páginas de Aulas, Recomendador e abertura na seção certa', () => {
     expect(screen.getByText('Não encontrei uma aula para este trecho')).toBeTruthy();
     expect(screen.getByText('transformada de Fourier')).toBeTruthy();
 
-    const corsLink = screen.getByRole('link', { name: /Abrir aula: Integração entre front e API/i });
-    expect(corsLink.getAttribute('href')).toBe('/aula/integracao-front-e-api?trilha=fullstack#cors');
+    const corsLink = screen.getByRole('link', {
+      name: /Abrir aula: Integração entre front e API/i,
+    });
+    expect(corsLink.getAttribute('href')).toBe(
+      '/aula/integracao-front-e-api?trilha=fullstack#cors',
+    );
 
     fireEvent.click(screen.getByRole('button', { name: /Ajustar termos/i }));
     expect(document.activeElement).toBe(textarea);
@@ -204,6 +212,61 @@ describe('páginas de Aulas, Recomendador e abertura na seção certa', () => {
     expect(
       await screen.findByRole('heading', { name: /CORS: a portaria do navegador/i }),
     ).toBeInTheDocument();
+    expect(localStorage.getItem(lessonStoreKey)).toBeNull();
+  });
+
+  it('salva só os passos selecionados, mantém React opcional e retoma a seção depois de recarregar', () => {
+    localStorage.clear();
+    function Address() {
+      const location = useLocation();
+      return (
+        <output aria-label="Endereço atual">
+          {location.pathname}
+          {location.search}
+          {location.hash}
+        </output>
+      );
+    }
+    const route = () => (
+      <MemoryRouter initialEntries={['/aulas/o-que-estudar']}>
+        <Address />
+        <Routes>
+          <Route path="/aulas/o-que-estudar" element={<StudyRecommenderPage />} />
+          <Route path="/aula/:lesson" element={<p>Aula de teste</p>} />
+        </Routes>
+      </MemoryRouter>
+    );
+    const page = render(route());
+    const prompt =
+      'Enviar link do GitHub da API Node com o GitHub do frontend utilizando Tailwind.';
+    fireEvent.change(screen.getByLabelText(/Cole aqui o enunciado/i), {
+      target: { value: prompt },
+    });
+    fireEvent.click(screen.getByRole('button', { name: /Montar sequência de aulas/i }));
+    expect(screen.getByLabelText('Endereço atual')).toHaveTextContent(/^\/aulas\/o-que-estudar$/);
+    fireEvent.click(screen.getByRole('button', { name: 'Montar meu plano' }));
+    const review = screen.getByRole('region', { name: 'Revise seu plano' });
+    const react = within(review).getByRole('checkbox', {
+      name: /JSX, componentes e props.*opcional/i,
+    });
+    expect(react).not.toBeChecked();
+    fireEvent.click(react);
+    fireEvent.click(within(review).getByRole('checkbox', { name: 'Git do zero' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Salvar plano' }));
+    const stored = localStorage.getItem(lessonPlanStorageKey);
+    expect(stored).toContain('react-jsx-componentes-e-props');
+    expect(stored).not.toContain('git-do-zero');
+    expect(stored).not.toContain(prompt);
+    expect(screen.getByRole('heading', { name: 'Checklist dos dois repositórios' })).toBeVisible();
+    const tailwind = screen.getByRole('link', { name: 'Estudar Tailwind na prática' });
+    const target = tailwind.getAttribute('href');
+    expect(target).toMatch(/\/aula\/tailwind-na-pratica\?trilha=.+#.+/);
+    fireEvent.click(tailwind);
+    expect(screen.getByLabelText('Endereço atual').textContent).toBe(target);
+    page.unmount();
+
+    render(route());
+    expect(screen.getByRole('link', { name: 'Retomar plano' })).toHaveAttribute('href', target);
     expect(localStorage.getItem(lessonStoreKey)).toBeNull();
   });
 });

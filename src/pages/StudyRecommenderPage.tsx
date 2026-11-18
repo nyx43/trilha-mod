@@ -13,6 +13,13 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { Inline } from '../components/Guide/inline';
 import MainLayout from '../components/layouts/MainLayout';
 import { useLessonStore } from '../lessons/progress';
+import { LessonPlanPanel } from '../recommender/LessonPlanPanel';
+import {
+  lessonPlanStorageKey,
+  makeLessonPlan,
+  readLessonPlan,
+  SavedLessonPlan,
+} from '../recommender/savedLessonPlan';
 import {
   RecommendationKind,
   RecommendedLesson,
@@ -121,6 +128,9 @@ export default function StudyRecommenderPage() {
   const [draft, setDraft] = useState(initialQuery);
   const [submittedQuery, setSubmittedQuery] = useState(initialQuery);
   const [emptyNotice, setEmptyNotice] = useState(false);
+  const [plan, setPlan] = useState(readLessonPlan);
+  const [selection, setSelection] = useState<string[] | null>(null);
+  const [planError, setPlanError] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const store = useLessonStore();
 
@@ -129,11 +139,16 @@ export default function StudyRecommenderPage() {
   }, []);
 
   useEffect(() => {
-    const paramQuery = searchParams.get('q') || '';
+    const paramQuery = searchParams.get('q');
+    if (paramQuery === null) return;
     setDraft(paramQuery);
     setSubmittedQuery(paramQuery);
-    if (paramQuery.trim()) setEmptyNotice(false);
-  }, [searchParams]);
+    setEmptyNotice(false);
+    setSelection(null);
+    const next = new URLSearchParams(searchParams);
+    next.delete('q');
+    setSearchParams(next, { replace: true });
+  }, [searchParams, setSearchParams]);
 
   const result = useMemo(() => {
     if (!submittedQuery.trim()) return null;
@@ -142,17 +157,16 @@ export default function StudyRecommenderPage() {
 
   function applyQuery(text: string) {
     const trimmed = text.trim();
+    setSelection(null);
     if (!trimmed) {
       setSubmittedQuery('');
       setEmptyNotice(true);
-      setSearchParams({}, { replace: true });
       inputRef.current?.focus();
       return;
     }
     setEmptyNotice(false);
     setDraft(text);
     setSubmittedQuery(text);
-    setSearchParams({ q: text });
   }
 
   function handleSubmit(event: FormEvent) {
@@ -164,13 +178,39 @@ export default function StudyRecommenderPage() {
     setDraft('');
     setSubmittedQuery('');
     setEmptyNotice(false);
-    setSearchParams({}, { replace: true });
+    setSelection(null);
     inputRef.current?.focus();
   }
 
   function focusEditor() {
     inputRef.current?.focus();
     inputRef.current?.scrollIntoView?.({ block: 'center', behavior: 'smooth' });
+  }
+
+  function persistPlan(next: SavedLessonPlan) {
+    try {
+      localStorage.setItem(lessonPlanStorageKey, JSON.stringify(next));
+      setPlan(next);
+      setPlanError('');
+      return true;
+    } catch {
+      setPlanError('Não foi possível salvar o plano neste navegador.');
+      return false;
+    }
+  }
+
+  const suggestions = result ? [...result.sequence, ...result.supportSuggestions] : [];
+
+  function saveSelection() {
+    const chosen = suggestions.filter((item) => selection?.includes(item.lesson.id));
+    if (!chosen.length || !result) return;
+    const showChecklist = ['git-do-zero', 'node-e-express', 'tailwind-na-pratica'].every((id) =>
+      result.sequence.some((item) => item.lesson.id === id),
+    );
+    if (persistPlan(makeLessonPlan(chosen, showChecklist, plan))) {
+      setSelection(null);
+      requestAnimationFrame(() => document.getElementById('rec-saved-plan-title')?.focus());
+    }
   }
 
   return (
@@ -218,9 +258,13 @@ export default function StudyRecommenderPage() {
                 if (emptyNotice && event.target.value.trim()) setEmptyNotice(false);
               }}
               onKeyDown={(event) => {
-                if ((event.ctrlKey || event.metaKey) && event.key === 'Enter') {
+                if (
+                  (event.ctrlKey || event.metaKey) &&
+                  event.key === 'Enter' &&
+                  !event.nativeEvent.isComposing
+                ) {
                   event.preventDefault();
-                  applyQuery(draft);
+                  if (!event.repeat) applyQuery(draft);
                 }
               }}
               placeholder="Ex.: Enviar link do GitHub da API Node com o GitHub do frontend utilizando Tailwind."
@@ -263,6 +307,13 @@ export default function StudyRecommenderPage() {
           </div>
         </section>
 
+        {planError && (
+          <p role="alert" className="rec-alert">
+            {planError}
+          </p>
+        )}
+        {plan && <LessonPlanPanel plan={plan} update={persistPlan} />}
+
         {result && (
           <section aria-labelledby="rec-results-title" className="rec-results">
             <div className="rec-results-header">
@@ -280,6 +331,77 @@ export default function StudyRecommenderPage() {
                 <PiPencilSimple aria-hidden="true" /> Ajustar termos
               </button>
             </div>
+
+            {suggestions.length > 0 && selection === null && (
+              <button
+                type="button"
+                className="lesson-button"
+                onClick={() => {
+                  setSelection(result.sequence.map(({ lesson }) => lesson.id));
+                  requestAnimationFrame(() => document.getElementById('rec-plan-review')?.focus());
+                }}
+              >
+                Montar meu plano
+              </button>
+            )}
+
+            {selection !== null && (
+              <section className="rec-panel" aria-labelledby="rec-plan-review">
+                <h3 id="rec-plan-review" tabIndex={-1}>
+                  Revise seu plano
+                </h3>
+                <p className="guide-text">
+                  Escolha as aulas e práticas que quer salvar neste navegador.
+                </p>
+                <ul className="rec-list">
+                  {suggestions.map((item) => (
+                    <li className="rec-card" key={item.lesson.id}>
+                      <label className="option-check">
+                        <input
+                          type="checkbox"
+                          checked={selection.includes(item.lesson.id)}
+                          onChange={(event) => {
+                            const checked = event.target.checked;
+                            setSelection(
+                              (current) =>
+                                current &&
+                                (checked
+                                  ? [...current, item.lesson.id]
+                                  : current.filter((id) => id !== item.lesson.id)),
+                            );
+                          }}
+                        />
+                        {item.lesson.title}
+                        {item.kind === 'support' && ' (opcional)'}
+                      </label>
+                      <p className="guide-text">
+                        <Inline text={item.practiceAction} />
+                      </p>
+                      <p className="guide-text">
+                        <strong>Como conferir</strong> <Inline text={item.successCriteria} />
+                      </p>
+                    </li>
+                  ))}
+                </ul>
+                <div className="rec-actions">
+                  <button
+                    type="button"
+                    className="lesson-button"
+                    disabled={!selection.length}
+                    onClick={saveSelection}
+                  >
+                    {plan ? 'Atualizar plano salvo' : 'Salvar plano'}
+                  </button>
+                  <button
+                    type="button"
+                    className="lesson-button-quiet"
+                    onClick={() => setSelection(null)}
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </section>
+            )}
 
             {result.sequence.length > 0 && (
               <ol className="rec-list" aria-label="Aulas indicadas pelo enunciado">
@@ -329,8 +451,7 @@ export default function StudyRecommenderPage() {
                         </span>
                       </div>
                       <p className="rec-snippets">
-                        <strong>Trecho:</strong>{' '}
-                        <span className="rec-chip">{weak.snippet}</span>
+                        <strong>Trecho:</strong> <span className="rec-chip">{weak.snippet}</span>
                       </p>
                       <p className="guide-text">{weak.reason}</p>
                       {weak.candidates.length > 0 && (
@@ -366,8 +487,7 @@ export default function StudyRecommenderPage() {
                         </span>
                       </div>
                       <p className="rec-snippets">
-                        <strong>Trecho:</strong>{' '}
-                        <span className="rec-chip">{item.snippet}</span>
+                        <strong>Trecho:</strong> <span className="rec-chip">{item.snippet}</span>
                       </p>
                       <p className="rec-unmatched-msg">{item.message}</p>
                       <button type="button" className="lesson-button-quiet" onClick={focusEditor}>

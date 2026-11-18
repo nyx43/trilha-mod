@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import DiagnosticoPratica from './DiagnosticoPratica';
 import {
   PiArrowLeft,
   PiArrowRight,
@@ -25,6 +26,7 @@ import { LessonTutor } from '../tutor/LessonTutor';
 import { cardKey, enrollCards, localDay, updateLesson, useLessonStore } from '../lessons/progress';
 import { LessonContent } from '../lessons/types';
 import {
+  diagnosticoWebSlug,
   findPercurso,
   missionCriteria,
   missionGithubChecklist,
@@ -34,7 +36,12 @@ import {
   PercursoStage,
   superheroesContractSnippet,
 } from '../percurso/apiReactTailwind';
-import { markStageDone, toggleStageDone, usePercursoStore } from '../percurso/progress';
+import {
+  advanceStage,
+  markStageDone,
+  toggleStageDone,
+  usePercursoStore,
+} from '../percurso/progress';
 import '../components/Guide/guide.css';
 import '../components/Lesson/lesson.css';
 
@@ -56,6 +63,7 @@ function PercursoOverview({ percurso }: { percurso: Percurso }) {
   const nextStage = percurso.stages.find((stage) => !isStageDone(stage)) || percurso.stages[0];
   const started =
     doneCount > 0 ||
+    Object.values(percursoStore.reached[percurso.id] || {}).some((reached) => reached > 0) ||
     percurso.stages.some((s) => s.kind === 'lesson' && !!lessonStore.lessons[s.lessonId]);
 
   useEffect(() => {
@@ -135,29 +143,45 @@ function PercursoOverview({ percurso }: { percurso: Percurso }) {
               stage.kind === 'lesson' ? lessonStore.lessons[stage.lessonId] : undefined;
             const answered = record ? Object.keys(record.answers).length : 0;
             return (
-              <li key={stage.slug} data-done={done || undefined}>
-                <Link to={`/percurso/${percurso.id}/${stage.slug}`}>
-                  <span className="lessons-number" aria-hidden="true">
-                    {done ? <PiCheckBold /> : String(index + 1).padStart(2, '0')}
-                  </span>
-                  <span className="lessons-text">
-                    <strong>{stage.title}</strong>
-                    <span>{stage.summary}</span>
-                    <small>
-                      {stage.minutes} min
-                      {stage.kind === 'lesson'
-                        ? ` · ${stage.sectionIds.length} seções`
-                        : ' · prática própria + checklist'}
-                      {done
-                        ? ' · concluída'
-                        : answered > 0
-                        ? ` · ${answered} atividades respondidas`
-                        : ''}
-                    </small>
-                  </span>
-                  {done && <span className="sr-only">, concluída</span>}
-                </Link>
-              </li>
+              <Fragment key={stage.slug}>
+                <li data-done={done || undefined}>
+                  <Link to={`/percurso/${percurso.id}/${stage.slug}`}>
+                    <span className="lessons-number" aria-hidden="true">
+                      {done ? <PiCheckBold /> : String(index + 1).padStart(2, '0')}
+                    </span>
+                    <span className="lessons-text">
+                      <strong>{stage.title}</strong>
+                      <span>{stage.summary}</span>
+                      <small>
+                        {stage.minutes} min
+                        {stage.kind === 'lesson'
+                          ? ` · ${stage.sectionIds.length} seções`
+                          : ' · prática própria + checklist'}
+                        {done
+                          ? ' · concluída'
+                          : answered > 0
+                          ? ` · ${answered} atividades respondidas`
+                          : ''}
+                      </small>
+                    </span>
+                    {done && <span className="sr-only">, concluída</span>}
+                  </Link>
+                </li>
+                {stage.slug === 'integracao-front-api' && (
+                  <li>
+                    <Link to={`/percurso/${percurso.id}/${diagnosticoWebSlug}`}>
+                      <span className="lessons-number" aria-hidden="true">
+                        +
+                      </span>
+                      <span className="lessons-text">
+                        <strong>Prática opcional: diagnóstico de frontend e API</strong>
+                        <span>Investigue uma rota 404 e um cadastro 400 no laboratório local.</span>
+                        <small>Opcional · sem IA · não altera o progresso</small>
+                      </span>
+                    </Link>
+                  </li>
+                )}
+              </Fragment>
             );
           })}
         </ol>
@@ -178,7 +202,6 @@ function PercursoLessonStageView({
   const [content, setContent] = useState<LessonContent | null>(null);
   const [failed, setFailed] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const [reached, setReached] = useState(0);
   const focusTarget = useRef<string>();
   const stageContainerRef = useRef<HTMLElement>(null);
   const { hash } = useLocation();
@@ -212,7 +235,6 @@ function PercursoLessonStageView({
     let current = true;
     setContent(null);
     setFailed(false);
-    setReached(0);
     setShowAll(false);
     stage
       .load()
@@ -239,6 +261,10 @@ function PercursoLessonStageView({
   }, [content, stage.cardIds]);
 
   const total = sections.length + 1;
+  const savedReached = percursoStore.reached[percurso.id]?.[stage.slug];
+  const reached = Number.isInteger(savedReached)
+    ? Math.max(0, Math.min(savedReached, total - 1))
+    : 0;
   const visible = showAll || done ? total : Math.min(reached + 1, total);
   const percent = done ? 100 : Math.round((Math.min(reached, total - 1) / total) * 100);
   const ids = [...sections.map((section) => section.id), closingId];
@@ -285,13 +311,12 @@ function PercursoLessonStageView({
   function advance(nextIndex: number) {
     if (nextIndex !== reached + 1 || nextIndex >= total) return;
     focusTarget.current = ids[nextIndex];
-    setReached((prev) => Math.max(prev, nextIndex));
+    advanceStage(percurso.id, stage.slug, nextIndex);
   }
 
   function completeStage() {
     if (!content) return;
     markStageDone(percurso.id, stage.slug);
-    setReached(total - 1);
     if (stage.slug !== 'requisicoes-react') {
       updateLesson(stage.lessonId, (prev) => ({
         ...prev,
@@ -581,6 +606,14 @@ function PercursoLessonStageView({
                             <PiCheckBold aria-hidden="true" /> Concluir etapa
                           </button>
                         )}
+                        {stage.slug === 'integracao-front-api' && (
+                          <Link
+                            className="lesson-button-quiet"
+                            to={`/percurso/${percurso.id}/${diagnosticoWebSlug}`}
+                          >
+                            Abrir prática opcional de diagnóstico
+                          </Link>
+                        )}
                         {next && (
                           <Link
                             className="lesson-button"
@@ -851,6 +884,14 @@ export default function PercursoPage() {
     return (
       <MainLayout>
         <PercursoOverview percurso={percurso} />
+      </MainLayout>
+    );
+  }
+
+  if (etapa === diagnosticoWebSlug && percurso.id === 'api-react-tailwind') {
+    return (
+      <MainLayout>
+        <DiagnosticoPratica />
       </MainLayout>
     );
   }

@@ -8,6 +8,12 @@ import { GuideContent } from '../src/guides/types';
 import { courses, courseLessons, findCourse, findLesson } from '../src/lessons';
 import { LessonBlock, LessonContent } from '../src/lessons/types';
 import { RoadmapCatalog } from '../src/learning/types';
+import {
+  diagnosticoWebDownload,
+  diagnosticoWebSlug,
+  findPercurso,
+  percursos,
+} from '../src/percurso/apiReactTailwind';
 import { homeQuestions } from '../src/seo/faq';
 import { BlogPost, siteUrl, SocialPage } from '../src/seo/pages';
 import { applyStructuredData } from '../src/seo/structuredData';
@@ -244,6 +250,8 @@ export async function staticPageBody(
   const guide = page.path.startsWith('/guide/') && findGuide(page.path.slice(7));
   const lesson = page.path.startsWith('/aula/') && findLesson(page.path.slice(6));
   const course = page.path.startsWith('/aulas/') && findCourse(page.path.slice(7));
+  const [, , percursoId, stageSlug] = page.path.split('/');
+  const percurso = page.path.startsWith('/percurso/') && findPercurso(percursoId);
   if (guide) {
     const { content } = await guide.load();
     body += `<p>${guide.minutes} min de leitura · ${e(guide.level)} · Revisado em <time datetime="${
@@ -285,6 +293,35 @@ export async function staticPageBody(
           )}</section>`,
       )
       .join('')}`;
+  } else if (percurso) {
+    const path = `/percurso/${percurso.id}`;
+    if (!stageSlug) {
+      body +=
+        p(percurso.goalNote) +
+        entries(
+          percurso.stages.map((stage) => ({
+            path: `${path}/${stage.slug}`,
+            title: stage.title,
+            description: stage.summary,
+          })),
+        );
+      if (percurso.id === 'api-react-tailwind')
+        body += `<p>${link(
+          `${path}/${diagnosticoWebSlug}`,
+          'Prática opcional de diagnóstico Web',
+        )}</p>`;
+    } else {
+      body += link(path, 'Voltar às etapas do Percurso Web');
+      if (stageSlug === diagnosticoWebSlug)
+        body += `<p>${link(diagnosticoWebDownload, 'Baixar o laboratório local')}</p>`;
+      const stage = percurso.stages.find(({ slug }) => slug === stageSlug);
+      if (stage?.kind === 'lesson') body += p(stage.focusNote);
+    }
+  } else if (page.path === '/aulas/o-que-estudar') {
+    body += p(
+      'Use a versão interativa para analisar seu enunciado e salvar as sugestões escolhidas neste navegador.',
+    );
+    body += listLinks([{ path: '/aulas', title: 'Ver o catálogo de aulas' }]);
   } else if (page.path === '/guias') {
     body += entries(
       guides.map((item) => ({
@@ -294,15 +331,20 @@ export async function staticPageBody(
       })),
     );
   } else if (page.path === '/aulas') {
-    body += entries(
-      courses.map((item) => ({
-        path: `/aulas/${item.id}`,
-        title: `Aulas de ${item.title}`,
-        description: `${
-          courseLessons(item).length
-        } aulas gratuitas, com explicações, exercícios e prática.`,
-      })),
-    );
+    body +=
+      listLinks([
+        { path: '/aulas/o-que-estudar', title: 'O que preciso estudar?' },
+        ...percursos.map(({ id, title }) => ({ path: `/percurso/${id}`, title })),
+      ]) +
+      entries(
+        courses.map((item) => ({
+          path: `/aulas/${item.id}`,
+          title: `Aulas de ${item.title}`,
+          description: `${
+            courseLessons(item).length
+          } aulas gratuitas, com explicações, exercícios e prática.`,
+        })),
+      );
   } else if (page.path === '/blog') {
     body += entries(
       posts.map((item) => ({

@@ -97,7 +97,9 @@ Para ampliar o chat, use o botão ao lado da engrenagem ou arraste o canto super
 
 As variáveis `TUTOR_GEMINI_MODEL` e `TUTOR_GROQ_MODEL` permitem escolher outro modelo da sua conta. Para usar uma API compatível, como a NVIDIA, use `TUTOR_API_URL` com o endereço completo de Chat Completions, `TUTOR_MODEL` com o ID do modelo e `TUTOR_API_KEY` se houver autenticação. O endereço deve usar HTTPS ou HTTP para um servidor na própria máquina. [Exemplo de endpoint NVIDIA](https://build.nvidia.com/nvidia/nemotron-3-super-120b-a12b)
 
-O tutor é opcional e atende apenas o navegador da própria máquina em desenvolvimento. A conversa fica na memória da página. A cada envio, o provedor escolhido recebe a dúvida, um trecho da seção e o histórico recente da conversa. No plano gratuito do Gemini, o Google pode usar o conteúdo enviado para melhorar seus serviços. [Termos da API Gemini](https://aistudio.google.com/docs/terms#data-use-unpaid)
+O tutor é opcional. A conversa fica na memória da página. A cada envio, o provedor escolhido recebe a dúvida, um trecho da seção e o histórico recente da conversa. No plano gratuito do Gemini, o Google pode usar o conteúdo enviado para melhorar seus serviços. [Termos da API Gemini](https://aistudio.google.com/docs/terms#data-use-unpaid)
+
+Na Vercel, `/api/lesson-tutor` fica inativa por padrão. Para ativar o tutor no ambiente de prévia ou de produção, configure pelo menos um provedor no servidor, `TUTOR_ENABLE_HOSTED=true`, `TUTOR_TURNSTILE_SITE_KEY` e `TUTOR_TURNSTILE_SECRET_KEY`. Autorize o hostname no widget do Cloudflare. Use `TUTOR_ALLOWED_ORIGINS` para listar domínios e aliases HTTPS adicionais, separados por vírgula. A URL única do deploy, informada pela Vercel em `VERCEL_URL`, também é aceita. Cada pergunta usa uma nova verificação. [Verificação do Turnstile](https://developers.cloudflare.com/turnstile/get-started/server-side-validation/)
 
 Para executar o Vite com uma pasta alternativa de configuração, defina `TRILHA_ENV_DIR`. Uma pasta vazia permite validar o catálogo e o frontend sem carregar a configuração local.
 
@@ -130,6 +132,7 @@ Antes de enviar uma alteração, execute:
 ```sh
 yarn check
 yarn test:run
+npm run narration:check
 yarn build
 ```
 
@@ -175,7 +178,7 @@ O conteúdo editorial é mantido em `src/roadmaps/`. O build gera os formatos ab
 
 ### SEO, respostas e descoberta por IA
 
-O build gera HTML legível sem JavaScript para a página inicial, trilhas, guias, cursos de aulas, aulas e blog. As seções, exemplos e referências vêm das mesmas fontes editoriais usadas pelo aplicativo. `src/seo/` mantém títulos, descrições, URLs canônicas, prévias sociais e JSON-LD de organização, site, navegação e conteúdo educativo. O FAQ visível da página inicial e seus dados estruturados compartilham as mesmas perguntas e respostas.
+O build gera HTML legível sem JavaScript para a página inicial, trilhas, guias, cursos, aulas, blog, recomendador e etapas do Percurso Web. As seções, exemplos e referências vêm das mesmas fontes editoriais usadas pelo aplicativo. `src/seo/` mantém títulos, descrições, URLs canônicas, prévias sociais e JSON-LD de organização, site, navegação e conteúdo educativo. O FAQ visível da página inicial e seus dados estruturados compartilham as mesmas perguntas e respostas.
 
 O sitemap lista apenas páginas públicas canônicas, incluindo o blog. As variantes `/hroadmap/`, os parâmetros de filtros e de contexto das aulas e as versões `/read/` apontam para a página principal. Datas de revisão vêm dos metadados editoriais, sem usar a data do build como atualização de conteúdo.
 

@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import {
   downloadJSON,
   exportStudyContext,
@@ -124,6 +125,9 @@ export function StudyTools({
           <button ref={proposeRef} type="button" className="learning-primary" onClick={propose}>
             Montar meu plano
           </button>
+          <Link className="learning-button" to="/aulas/o-que-estudar">
+            Planejar a partir de um enunciado
+          </Link>
           <button
             type="button"
             onClick={() => {

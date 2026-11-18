@@ -1,11 +1,14 @@
 import type { IncomingMessage, ServerResponse } from 'http';
 import {
   tutorLimits,
+  tutorTurnstileAction,
   TutorMessage,
   TutorModel,
   TutorProvider,
   TutorRequest,
 } from '../src/tutor/types';
+
+type TutorHttpRequest = IncomingMessage & { body?: unknown };
 
 interface ConfiguredProvider extends TutorProvider {
   url: URL;
@@ -50,6 +53,35 @@ function localRequest(req: IncomingMessage) {
   } catch {
     return false;
   }
+}
+
+function hostedAccess(req: IncomingMessage, env: NodeJS.ProcessEnv) {
+  const siteKey = env.TUTOR_TURNSTILE_SITE_KEY?.trim();
+  const secret = env.TUTOR_TURNSTILE_SECRET_KEY?.trim();
+  if (env.TUTOR_ENABLE_HOSTED !== 'true' || !siteKey || !secret || !req.headers.host) return;
+  const allowed = (env.TUTOR_ALLOWED_ORIGINS || '').split(',').map((value) => value.trim());
+  if (env.VERCEL_URL) allowed.push(`https://${env.VERCEL_URL}`);
+  const origin = `https://${req.headers.host}`;
+  if (!allowed.includes(origin)) return;
+  if (req.headers.origin !== undefined && req.headers.origin !== origin) return;
+  if (req.method === 'POST' && req.headers.origin !== origin) return;
+  return { siteKey, secret, hostname: new URL(origin).hostname };
+}
+
+async function verifyTutorChallenge(token: string | undefined, secret: string, hostname: string) {
+  if (!token) return false;
+  const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+    method: 'POST',
+    body: new URLSearchParams({ secret, response: token }),
+    signal: AbortSignal.timeout(4000),
+  });
+  if (!response.ok) throw new Error('turnstile unavailable');
+  const result = await response.json();
+  return (
+    result?.success === true &&
+    result.hostname === hostname &&
+    result.action === tutorTurnstileAction
+  );
 }
 
 function customProvider(env: NodeJS.ProcessEnv): ConfiguredProvider | undefined {
@@ -142,13 +174,20 @@ function isMessage(value: unknown): value is TutorMessage {
   );
 }
 
-async function readRequest(req: IncomingMessage): Promise<TutorRequest | undefined> {
-  let body = '';
-  req.setEncoding('utf8');
-  for await (const chunk of req) {
-    body += chunk;
-    if (body.length > 80_000) return;
+async function readRequest(req: TutorHttpRequest): Promise<TutorRequest | undefined> {
+  const parsed = req.body;
+  let body: string;
+  if (parsed !== undefined) {
+    body = typeof parsed === 'string' ? parsed : JSON.stringify(parsed);
+  } else {
+    body = '';
+    req.setEncoding('utf8');
+    for await (const chunk of req) {
+      body += chunk;
+      if (body.length > 80_000) return;
+    }
   }
+  if (Buffer.byteLength(body, 'utf8') > 80_000) return;
 
   const value: Partial<TutorRequest> | null = JSON.parse(body);
   if (
@@ -160,6 +199,8 @@ async function readRequest(req: IncomingMessage): Promise<TutorRequest | undefin
       (typeof value.provider === 'string' && /^[a-z][a-z0-9-]{0,31}$/.test(value.provider))) &&
     (value.model === undefined ||
       (typeof value.model === 'string' && value.model.trim() && value.model.length <= 256)) &&
+    (value.turnstileToken === undefined ||
+      (typeof value.turnstileToken === 'string' && value.turnstileToken.length <= 2048)) &&
     Array.isArray(value.messages) &&
     value.messages.length <= tutorLimits.history + 1 &&
     value.messages.every(isMessage) &&
@@ -170,16 +211,24 @@ async function readRequest(req: IncomingMessage): Promise<TutorRequest | undefin
       messages: value.messages,
       provider: value.provider,
       model: value.model,
+      turnstileToken: value.turnstileToken,
     };
   }
 }
 
 export async function handleLessonTutor(
-  req: IncomingMessage,
+  req: TutorHttpRequest,
   res: ServerResponse,
   env: NodeJS.ProcessEnv = process.env,
+  mode: 'local' | 'hosted' = 'local',
 ) {
-  const providers = localRequest(req) ? configuredProviders(env) : [];
+  const hosted = mode === 'hosted' ? hostedAccess(req, env) : undefined;
+  const hasAccess = mode === 'hosted' ? Boolean(hosted) : localRequest(req);
+  const providers = hasAccess
+    ? configuredProviders(env).filter(
+        ({ url }) => mode === 'local' || (url.protocol === 'https:' && !isLoopback(url.hostname)),
+      )
+    : [];
   if (req.method === 'GET') {
     respond(res, 200, {
       enabled: providers.length > 0,
@@ -189,6 +238,7 @@ export async function handleLessonTutor(
         defaultModel,
         models,
       })),
+      ...(hosted && providers.length ? { turnstileSiteKey: hosted.siteKey } : {}),
     });
     return;
   }
@@ -198,7 +248,7 @@ export async function handleLessonTutor(
     return;
   }
   if (providers.length === 0) {
-    respond(res, 503, { error: 'O tutor precisa de um provedor configurado neste computador.' });
+    respond(res, 503, { error: 'O tutor está indisponível neste ambiente.' });
     return;
   }
   if (req.headers['content-type']?.split(';')[0].trim() !== 'application/json') {
@@ -213,7 +263,7 @@ export async function handleLessonTutor(
   }
   const config = input.provider ? providers.find(({ id }) => id === input.provider) : providers[0];
   if (!config) {
-    respond(res, 400, { error: 'Esse provedor não está configurado neste computador.' });
+    respond(res, 400, { error: 'Esse provedor não está configurado.' });
     return;
   }
   const model = input.model ?? config.defaultModel;
@@ -222,8 +272,22 @@ export async function handleLessonTutor(
     return;
   }
 
+  if (hosted) {
+    try {
+      if (!(await verifyTutorChallenge(input.turnstileToken, hosted.secret, hosted.hostname))) {
+        respond(res, 403, { error: 'Renove a verificação para enviar a pergunta.' });
+        return;
+      }
+    } catch {
+      respond(res, 503, { error: 'A verificação está indisponível. Tente mais tarde.' });
+      return;
+    }
+  }
+
   const { messages, context } = input;
   const question = messages[messages.length - 1].content;
+  const timeoutMs = hosted ? 24_000 : config.id === 'gemini' ? 120_000 : 30_000;
+  const signal = AbortSignal.timeout(timeoutMs);
   try {
     const headers = new Headers({ 'Content-Type': 'application/json' });
     if (config.key) headers.set('Authorization', `Bearer ${config.key}`);
@@ -231,7 +295,7 @@ export async function handleLessonTutor(
       method: 'POST',
       headers,
       redirect: 'error',
-      signal: AbortSignal.timeout(30_000),
+      signal,
       body: JSON.stringify({
         ...completionOptions(config.id, model),
         model,
@@ -260,9 +324,22 @@ export async function handleLessonTutor(
     if (!response.ok) throw new Error('provider rejected request');
     const result: { choices?: Array<{ message?: { content?: unknown } }> } = await response.json();
     const reply = result.choices?.[0]?.message?.content;
-    if (typeof reply !== 'string' || !reply.trim()) throw new Error('empty response');
+    if (typeof reply !== 'string' || !reply.trim()) {
+      respond(res, 502, {
+        error: `${config.label} concluiu a solicitação sem enviar texto para o chat. Tente reformular a pergunta.`,
+      });
+      return;
+    }
     respond(res, 200, { reply: reply.trim().slice(0, tutorLimits.reply) });
   } catch {
+    if (signal.aborted) {
+      respond(res, 504, {
+        error: `${config.label} não enviou a resposta em ${
+          timeoutMs / 1000
+        } segundos. Você pode tentar novamente ou trocar de modelo.`,
+      });
+      return;
+    }
     respond(res, 502, {
       error: 'O tutor não conseguiu responder. Verifique o provedor e tente novamente.',
     });

@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import type { LessonSection } from '../lessons/types';
 import { LessonTutor } from './LessonTutor';
@@ -50,7 +50,7 @@ describe('Tutor da aula', () => {
     vi.stubGlobal('fetch', fetchMock);
     const button = renderTutor();
 
-    await screen.findByText(/precisa de um provedor de IA/);
+    await screen.findByText(/indisponível neste ambiente/);
     expect(screen.queryByRole('textbox')).not.toBeInTheDocument();
     expect(fetchMock).toHaveBeenCalledTimes(1);
     fireEvent.keyDown(screen.getByRole('heading', { name: 'Tutor da aula' }), { key: 'Escape' });
@@ -175,5 +175,38 @@ describe('Tutor da aula', () => {
       provider: 'groq',
       model: 'openai/gpt-oss-20b',
     });
+  });
+
+  it('envia o token do tutor hospedado e renova a verificação após a resposta', async () => {
+    const renderWidget = vi.fn(() => 'widget');
+    vi.stubGlobal('turnstile', { render: renderWidget, remove: vi.fn() });
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(response({ enabled: true, turnstileSiteKey: 'publica' }))
+      .mockResolvedValueOnce(response({ reply: 'Compare as duas origens.' }));
+    vi.stubGlobal('fetch', fetchMock);
+    renderTutor();
+    const input = await screen.findByRole('textbox', { name: 'Sua dúvida' });
+    fireEvent.change(input, { target: { value: 'Como identifico a origem?' } });
+    const send = screen.getByRole('button', { name: 'Enviar' });
+    expect(send).toBeDisabled();
+    const script = document.querySelector('script[src*="challenges.cloudflare.com"]');
+    if (!script) throw new Error('Script de verificação ausente');
+    fireEvent.load(script);
+    await waitFor(() => expect(renderWidget).toHaveBeenCalled());
+    const options = renderWidget.mock.calls[0] as unknown as [
+      HTMLElement,
+      {
+        action: string;
+        callback: (token: string) => void;
+      },
+    ];
+    expect(options[1].action).toBe('lesson_tutor');
+    act(() => options[1].callback('token-hosted'));
+    fireEvent.click(send);
+    await screen.findByText('Compare as duas origens.');
+    expect(JSON.parse(fetchMock.mock.calls[1][1].body).turnstileToken).toBe('token-hosted');
+    expect(send).toBeDisabled();
+    expect(renderWidget).toHaveBeenCalledTimes(2);
   });
 });

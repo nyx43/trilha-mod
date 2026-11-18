@@ -1,4 +1,5 @@
 export const tutorPath = '/api/lesson-tutor';
+export const tutorTurnstileAction = 'lesson_tutor';
 export const tutorLimits = { question: 1500, reply: 8000, context: 6500, history: 8 };
 
 export interface TutorMessage {
@@ -11,6 +12,7 @@ export interface TutorRequest {
   messages: TutorMessage[];
   provider?: string;
   model?: string;
+  turnstileToken?: string;
 }
 
 export interface TutorModel {
@@ -28,4 +30,5 @@ export interface TutorProvider {
 export interface TutorStatus {
   enabled: boolean;
   providers: TutorProvider[];
+  turnstileSiteKey?: string;
 }
