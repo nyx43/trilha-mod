@@ -1600,23 +1600,50 @@
   white-space: nowrap;
 }
 .lesson-terminal-input {
-  display: flex;
-  align-items: center;
+  display: grid;
   gap: 8px;
+  padding: 10px 14px;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
 }
-.lesson-terminal-input input {
-  flex: 1;
+.lesson-terminal-editor {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  font-family: var(--guide-mono);
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.lesson-terminal-editor textarea {
+  flex: 1 1 10rem;
+  width: 100%;
   min-width: 0;
-  min-height: 32px;
-  border: 0;
+  padding: 4px 6px;
+  resize: vertical;
+  border: 1px solid rgb(255 255 255 / 0.22);
+  border-radius: 6px;
   background: transparent;
   color: #fff;
   font: inherit;
   caret-color: var(--site-accent);
 }
-.lesson-terminal-input input:focus-visible {
-  outline: 1px dashed rgb(255 255 255 / 0.25);
+.lesson-terminal-editor textarea:focus-visible,
+.lesson-terminal-run:focus-visible {
+  outline: 2px solid var(--site-accent);
   outline-offset: 2px;
+}
+.lesson-terminal-run {
+  display: inline-flex;
+  align-items: center;
+  justify-self: end;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 12px;
+  border-radius: 8px;
+  background: var(--site-accent);
+  color: #2a0717;
+  font-size: 0.875rem;
+  font-weight: 700;
 }
 .lesson-terminal-goal {
   display: grid;

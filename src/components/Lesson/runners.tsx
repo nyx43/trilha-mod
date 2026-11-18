@@ -1,4 +1,4 @@
-import { FormEvent, KeyboardEvent, useEffect, useId, useRef, useState } from 'react';
+import { KeyboardEvent, useEffect, useId, useRef, useState } from 'react';
 import {
   PiArrowCounterClockwise,
   PiCheckBold,
@@ -91,9 +91,13 @@ function usePassed(activityId: string, checks: unknown[], results: boolean[]) {
 
 function runOnShortcut(run: () => void) {
   return (event: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (event.key === 'Enter' && (event.ctrlKey || event.metaKey)) {
+    if (
+      event.key === 'Enter' &&
+      (event.ctrlKey || event.metaKey) &&
+      !event.nativeEvent.isComposing
+    ) {
       event.preventDefault();
-      run();
+      if (!event.repeat) run();
     }
   };
 }
@@ -124,13 +128,12 @@ export function Terminal({
   const [misses, setMisses] = useState(0);
   const [totalMisses, setTotalMisses] = useState(0);
   const screen = useRef<HTMLDivElement>(null);
-  const input = useRef<HTMLInputElement>(null);
+  const input = useRef<HTMLTextAreaElement>(null);
   const done = step >= block.steps.length;
   const current = block.steps[step];
-  const prompt =
-    [...block.steps.slice(0, step)].reverse().find((item) => item.prompt)?.prompt ||
-    block.prompt ||
-    'voce@computador:~$';
+  const prompt = block.steps
+    .slice(0, step)
+    .reduce((previous, item) => item.prompt || previous, block.prompt || 'voce@computador:~$');
   const accepted = current ? [current.command].flat() : [];
 
   useEffect(() => {
@@ -141,46 +144,55 @@ export function Terminal({
     if (done && block.steps.length) recordAnswer(lessonId, activityId, totalMisses === 0);
   }, [done, block.steps.length, lessonId, activityId, totalMisses]);
 
-  function submit(event: FormEvent) {
-    event.preventDefault();
-    const typed = normalize(value);
-    if (!typed || !current) return;
-    setValue('');
-    if (typed === 'clear') {
-      setLines([]);
-      return;
-    }
-    if (typed === 'ajuda' || typed === 'help') {
-      setLines((previous) => [
-        ...previous,
-        { kind: 'command', text: typed, prompt },
-        {
+  function execute() {
+    if (done || !value.trim()) return;
+    const commands = value.split('\n');
+    const output = [...lines];
+    let nextStep = step;
+    let nextPrompt = prompt;
+    let nextMisses = misses;
+    let index = 0;
+
+    for (; index < commands.length; index += 1) {
+      const typed = normalize(commands[index]);
+      if (!typed) continue;
+      const target = block.steps[nextStep];
+      if (!target) break;
+      if (typed === 'clear') {
+        output.length = 0;
+        continue;
+      }
+
+      output.push({ kind: 'command', text: typed, prompt: nextPrompt });
+      if (typed === 'ajuda' || typed === 'help') {
+        output.push({
           kind: 'info',
-          text: `Objetivo: ${current.goal}${current.hint ? `\nDica: ${current.hint}` : ''}`,
-        },
-      ]);
-      return;
-    }
-    if (accepted.some((command) => normalize(command) === typed)) {
-      setLines((previous) => [
-        ...previous,
-        { kind: 'command', text: typed, prompt },
-        ...(current.output ? [{ kind: 'output' as const, text: current.output }] : []),
-      ]);
-      setStep((previous) => previous + 1);
-      setMisses(0);
-      return;
-    }
-    setMisses((previous) => previous + 1);
-    setTotalMisses((previous) => previous + 1);
-    setLines((previous) => [
-      ...previous,
-      { kind: 'command', text: typed, prompt },
-      {
+          text: `Objetivo: ${target.goal}${target.hint ? `\nDica: ${target.hint}` : ''}`,
+        });
+        continue;
+      }
+      if ([target.command].flat().some((command) => normalize(command) === typed)) {
+        if (target.output) output.push({ kind: 'output', text: target.output });
+        nextStep += 1;
+        nextPrompt = target.prompt || nextPrompt;
+        nextMisses = 0;
+        continue;
+      }
+
+      output.push({
         kind: 'miss',
-        text: `Esse não é o comando deste passo.${current.hint ? ` Dica: ${current.hint}` : ''}`,
-      },
-    ]);
+        text: `Linha ${index + 1}: Esse não é o comando deste passo.${
+          target.hint ? ` Dica: ${target.hint}` : ''
+        }`,
+      });
+      nextMisses += 1;
+      setTotalMisses((previous) => previous + 1);
+      break;
+    }
+    setLines(output);
+    setStep(nextStep);
+    setMisses(nextMisses);
+    setValue(commands.slice(index).join('\n'));
   }
 
   return (
@@ -227,32 +239,52 @@ export function Terminal({
               {line.text}
             </p>
           ))}
-          {!done && (
-            <form className="lesson-terminal-input" onSubmit={submit}>
+        </div>
+        {(!done || value) && (
+          <form
+            className="lesson-terminal-input"
+            onSubmit={(event) => {
+              event.preventDefault();
+              execute();
+            }}
+          >
+            <div className="lesson-terminal-editor">
               <label htmlFor={`${id}-command`} className="lesson-terminal-prompt">
                 {prompt}
               </label>
-              <input
+              <textarea
                 ref={input}
                 id={`${id}-command`}
+                aria-label={done ? 'Linhas que sobraram' : 'Comandos do terminal'}
                 value={value}
+                rows={3}
+                readOnly={done}
                 onChange={(event) => setValue(event.target.value)}
+                onKeyDown={runOnShortcut(execute)}
                 autoCapitalize="off"
                 autoComplete="off"
                 autoCorrect="off"
                 spellCheck={false}
-                aria-describedby={`${id}-goal`}
+                aria-describedby={done ? `${id}-goal` : `${id}-goal ${id}-instructions`}
               />
-            </form>
-          )}
-        </div>
+            </div>
+            {!done && (
+              <button className="lesson-terminal-run" type="submit">
+                <PiPlayFill aria-hidden="true" /> Executar
+              </button>
+            )}
+          </form>
+        )}
       </div>
       <div className="lesson-terminal-goal" id={`${id}-goal`}>
         {done ? (
-          <p role="status">
-            <PiConfetti aria-hidden="true" /> Sessão concluída
-            {totalMisses === 0 ? ', sem nenhum tropeço.' : '. Errar e tentar de novo faz parte.'}
-          </p>
+          <>
+            <p role="status">
+              <PiConfetti aria-hidden="true" /> Sessão concluída
+              {totalMisses === 0 ? ', sem nenhum tropeço.' : '. Errar e tentar de novo faz parte.'}
+            </p>
+            {value && <p>As linhas que sobraram ficaram no editor para você copiar.</p>}
+          </>
         ) : (
           <>
             <p>
@@ -261,8 +293,10 @@ export function Terminal({
               </strong>{' '}
               <Inline text={current.goal} />
             </p>
-            <p className="lesson-editor-hint">
-              Digite o comando e aperte Enter. Escreva <code>ajuda</code> para rever o objetivo.
+            <p className="lesson-editor-hint" id={`${id}-instructions`}>
+              Enter cria uma linha. Use Ctrl+Enter, Cmd+Enter ou Executar para rodar os comandos de
+              cima para baixo. O terminal pula linhas vazias e para no primeiro erro. Execute{' '}
+              <code>ajuda</code> para rever o objetivo.
             </p>
           </>
         )}
@@ -271,7 +305,10 @@ export function Terminal({
             <button
               type="button"
               onClick={() => {
-                setValue(accepted[0]);
+                const pending = value.split('\n');
+                const index = pending.findIndex((line) => line.trim());
+                pending[Math.max(0, index)] = accepted[0];
+                setValue(pending.join('\n'));
                 input.current?.focus();
               }}
             >

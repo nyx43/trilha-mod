@@ -53,6 +53,52 @@ describe('Terminal guiado', () => {
     expect(screen.getByRole('status')).toHaveTextContent('Sessão concluída');
     expect(stored().lessons['aula-teste'].answers['secao:0']).toBe(false);
   });
+
+  it('só executa por atalho ou botão e conserva a primeira linha errada e as seguintes', () => {
+    render(
+      <LessonContext.Provider value={{ lessonId: 'aula-teste' }}>
+        <Terminal
+          activityId="secao:0"
+          block={{
+            type: 'terminal',
+            title: 'Passeio por um servidor',
+            steps: [
+              { goal: 'Mostre a pasta atual', command: 'pwd', output: '/home/ana' },
+              { goal: 'Abra os logs', command: 'cd /var/log', prompt: '/var/log$' },
+              { goal: 'Liste os arquivos', command: 'ls', output: 'nginx' },
+            ],
+          }}
+        />
+      </LessonContext.Provider>,
+    );
+    const input = screen.getByRole('textbox', { name: 'Comandos do terminal' });
+    fireEvent.change(input, { target: { value: 'pwd\ncd /tmp\nls' } });
+    expect(fireEvent.keyDown(input, { key: 'Enter' })).toBe(true);
+    expect(screen.getByText('0 de 3')).toBeInTheDocument();
+    expect(stored()).toEqual({});
+
+    fireEvent.keyDown(input, { key: 'Enter', ctrlKey: true });
+    expect(screen.getByText(/Linha 2: Esse não é o comando/)).toBeInTheDocument();
+    expect(screen.getByText('1 de 3')).toBeInTheDocument();
+    expect(input).toHaveValue('cd /tmp\nls');
+    expect(screen.getAllByText('/home/ana')).toHaveLength(1);
+    fireEvent.keyDown(input, { key: 'Enter', ctrlKey: true, repeat: true });
+    expect(screen.queryByText(/Linha 1: Esse não é o comando/)).toBeNull();
+
+    fireEvent.change(input, { target: { value: 'ajuda\n\ncd /var/log\nls\nclear' } });
+    fireEvent.click(screen.getByRole('button', { name: 'Executar' }));
+    expect(screen.getByText(/Objetivo: Abra os logs/)).toBeInTheDocument();
+    expect(screen.getByText('nginx')).toBeInTheDocument();
+    expect(screen.getByRole('textbox', { name: 'Linhas que sobraram' })).toHaveValue('clear');
+    expect(screen.getByRole('status')).toHaveTextContent('Sessão concluída');
+    expect(stored().lessons['aula-teste'].answers['secao:0']).toBe(false);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Recomeçar' }));
+    const restarted = screen.getByRole('textbox', { name: 'Comandos do terminal' });
+    fireEvent.change(restarted, { target: { value: 'pwd' } });
+    fireEvent.keyDown(restarted, { key: 'Enter', metaKey: true });
+    expect(screen.getByText('1 de 3')).toBeInTheDocument();
+  });
 });
 
 describe('SQL ao vivo', () => {
