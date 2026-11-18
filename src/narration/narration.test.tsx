@@ -4,6 +4,7 @@ import path from 'node:path';
 import { act, fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { GuideBlockView } from '../components/Guide/GuideBlock';
 import { lessons } from '../lessons';
 import { content as pilotContent } from '../lessons/content/integracaoFrontEApi';
 import { lessonStoreKey, reviewStoreKey } from '../lessons/progress';
@@ -172,6 +173,26 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     expect(wFetch).toBeDefined();
     expect(wJson).toBeDefined();
     expect(must(w201).endMs).toBeGreaterThan(must(w201).startMs);
+  });
+
+  it('iguala os campos visíveis ao roteiro quando há código dentro de negrito', () => {
+    render(
+      <GuideBlockView
+        guideId="teste"
+        narrationClipId="secao:0"
+        block={{
+          type: 'callout',
+          tone: 'note',
+          title: 'Use `fetch`',
+          text: 'O **resultado de `fetch`** chega depois.',
+        }}
+      />,
+    );
+    expect(document.querySelector('[data-narration-field="title"]')?.textContent).toBe('Use fetch');
+    expect(document.querySelector('[data-narration-field="text"]')?.textContent).toBe(
+      'O resultado de fetch chega depois.',
+    );
+    expect(screen.getAllByText('fetch', { selector: 'code' })).toHaveLength(2);
   });
 
   it('reproduz por parágrafo, destaca palavras via CSS.highlights e recua ao destaque por bloco quando indisponível', async () => {

@@ -48,7 +48,7 @@ cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' &&
 
 - Em Chromium, colagem real por Ctrl+V no terminal confirmou a edição de cinco linhas antes de executar. Na integração, conferi clipes reais de erro e acerto, retorno ao ponto de pausa, início na seção seguinte e saída do áudio ao ocultar uma resposta ou virar a página do cartão.
 - Comparei o roteiro com 7.557 campos visíveis de 67 aulas, incluindo as atividades montadas e as legendas. A primeira comparação encontrou crases literais no texto visível que deslocavam os índices das palavras. Ajustei a renderização de código dentro de negrito, títulos de observações e cabeçalhos e legendas de tabelas. A repetição encontrou zero divergências nos campos comparados. Diagramas com estado comparam o campo montado e cartões comparam a frente atual.
-- `npm run check`, `npm run test:run` (280 testes em 29 arquivos) e `npm run build` passaram. O build emitiu o aviso de dependência de navegadores desatualizada e de um pacote JavaScript acima de 500 KiB.
+- `npm run check`, `npm run test:run` (281 testes em 29 arquivos) e `npm run build` passaram. O build emitiu o aviso de dependência de navegadores desatualizada e de um pacote JavaScript acima de 500 KiB.
 
 ## Roteiro de cinco minutos
 
