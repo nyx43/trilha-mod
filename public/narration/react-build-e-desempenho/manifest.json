@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-17T01:46:52.573483+00:00",
+  "generatedAt": "2026-11-18T04:55:50.182614+00:00",
   "totalDurationMs": {
-    "santa": 786459,
-    "dora": 762155
+    "santa": 918455,
+    "dora": 889725
   },
   "totalBytes": {
-    "santa": 6328496,
-    "dora": 6133808
+    "santa": 7392276,
+    "dora": 7161876
   },
   "clips": [
     {
@@ -13564,6 +13564,650 @@
       "pauseAfter": true
     },
     {
+      "id": "variaveis-de-ambiente:4:feedback:correct",
+      "sectionId": "variaveis-de-ambiente",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "2f629b66702b31df676c44486ee39a9379674d6c94f9cc8aa83daee691b7358a",
+      "clipKey": "9481381cc95e7f3bb56a7549",
+      "audio": {
+        "santa": {
+          "src": "santa/variaveis-de-ambiente__4__feedback__correct.mp3",
+          "durationMs": 13485,
+          "bytes": 108524,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2445,
+              "endMs": 2495
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 10,
+              "startMs": 2545,
+              "endMs": 3045
+            },
+            {
+              "field": "text",
+              "from": 11,
+              "to": 12,
+              "startMs": 3095,
+              "endMs": 3120
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 16,
+              "startMs": 3170,
+              "endMs": 3220
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 19,
+              "startMs": 3245,
+              "endMs": 3320
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 28,
+              "startMs": 3345,
+              "endMs": 3695
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 35,
+              "startMs": 3745,
+              "endMs": 4120
+            },
+            {
+              "field": "text",
+              "from": 36,
+              "to": 37,
+              "startMs": 4145,
+              "endMs": 4170
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 43,
+              "startMs": 4220,
+              "endMs": 4820
+            },
+            {
+              "field": "text",
+              "from": 45,
+              "to": 48,
+              "startMs": 4895,
+              "endMs": 5045
+            },
+            {
+              "field": "text",
+              "from": 49,
+              "to": 57,
+              "startMs": 5095,
+              "endMs": 5520
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 64,
+              "startMs": 5570,
+              "endMs": 5970
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 68,
+              "startMs": 6020,
+              "endMs": 6145
+            },
+            {
+              "field": "text",
+              "from": 69,
+              "to": 77,
+              "startMs": 6170,
+              "endMs": 6795
+            },
+            {
+              "field": "text",
+              "from": 78,
+              "to": 80,
+              "startMs": 6870,
+              "endMs": 6945
+            },
+            {
+              "field": "text",
+              "from": 81,
+              "to": 85,
+              "startMs": 6995,
+              "endMs": 7245
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 88,
+              "startMs": 7270,
+              "endMs": 7470
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 92,
+              "startMs": 7520,
+              "endMs": 7695
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 97,
+              "startMs": 7745,
+              "endMs": 8145
+            },
+            {
+              "field": "text",
+              "from": 99,
+              "to": 101,
+              "startMs": 8700,
+              "endMs": 8800
+            },
+            {
+              "field": "text",
+              "from": 102,
+              "to": 105,
+              "startMs": 8900,
+              "endMs": 9100
+            },
+            {
+              "field": "text",
+              "from": 107,
+              "to": 108,
+              "startMs": 9150,
+              "endMs": 9200
+            },
+            {
+              "field": "text",
+              "from": 109,
+              "to": 116,
+              "startMs": 9250,
+              "endMs": 10025
+            },
+            {
+              "field": "text",
+              "from": 118,
+              "to": 119,
+              "startMs": 10125,
+              "endMs": 10150
+            },
+            {
+              "field": "text",
+              "from": 120,
+              "to": 121,
+              "startMs": 10175,
+              "endMs": 10200
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 129,
+              "startMs": 10250,
+              "endMs": 10750
+            },
+            {
+              "field": "text",
+              "from": 130,
+              "to": 135,
+              "startMs": 10800,
+              "endMs": 11750
+            },
+            {
+              "field": "text",
+              "from": 136,
+              "to": 137,
+              "startMs": 11775,
+              "endMs": 11800
+            },
+            {
+              "field": "text",
+              "from": 138,
+              "to": 146,
+              "startMs": 11850,
+              "endMs": 12275
+            },
+            {
+              "field": "text",
+              "from": 147,
+              "to": 154,
+              "startMs": 12350,
+              "endMs": 12750
+            },
+            {
+              "field": "text",
+              "from": 155,
+              "to": 157,
+              "startMs": 12800,
+              "endMs": 12900
+            },
+            {
+              "field": "text",
+              "from": 158,
+              "to": 162,
+              "startMs": 12950,
+              "endMs": 13300
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nA pergunta é se um estranho copiar o valor ele consegue gastar seu dinheiro ou agir em seu nome\nSe sim é segredo e o prefixo víti anderláine o tornaria público na hora"
+        },
+        "dora": {
+          "src": "dora/variaveis-de-ambiente__4__feedback__correct.mp3",
+          "durationMs": 12960,
+          "bytes": 104300,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2395,
+              "endMs": 2445
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 10,
+              "startMs": 2495,
+              "endMs": 2970
+            },
+            {
+              "field": "text",
+              "from": 11,
+              "to": 12,
+              "startMs": 3020,
+              "endMs": 3045
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 16,
+              "startMs": 3120,
+              "endMs": 3170
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 19,
+              "startMs": 3195,
+              "endMs": 3270
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 28,
+              "startMs": 3295,
+              "endMs": 3670
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 35,
+              "startMs": 3720,
+              "endMs": 4045
+            },
+            {
+              "field": "text",
+              "from": 36,
+              "to": 37,
+              "startMs": 4070,
+              "endMs": 4095
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 43,
+              "startMs": 4120,
+              "endMs": 4720
+            },
+            {
+              "field": "text",
+              "from": 45,
+              "to": 48,
+              "startMs": 4820,
+              "endMs": 4945
+            },
+            {
+              "field": "text",
+              "from": 49,
+              "to": 57,
+              "startMs": 4995,
+              "endMs": 5395
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 64,
+              "startMs": 5445,
+              "endMs": 5820
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 68,
+              "startMs": 5870,
+              "endMs": 5995
+            },
+            {
+              "field": "text",
+              "from": 69,
+              "to": 77,
+              "startMs": 6020,
+              "endMs": 6620
+            },
+            {
+              "field": "text",
+              "from": 78,
+              "to": 80,
+              "startMs": 6695,
+              "endMs": 6770
+            },
+            {
+              "field": "text",
+              "from": 81,
+              "to": 85,
+              "startMs": 6820,
+              "endMs": 7070
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 88,
+              "startMs": 7095,
+              "endMs": 7245
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 92,
+              "startMs": 7295,
+              "endMs": 7445
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 97,
+              "startMs": 7495,
+              "endMs": 7920
+            },
+            {
+              "field": "text",
+              "from": 99,
+              "to": 101,
+              "startMs": 8475,
+              "endMs": 8575
+            },
+            {
+              "field": "text",
+              "from": 102,
+              "to": 105,
+              "startMs": 8650,
+              "endMs": 8875
+            },
+            {
+              "field": "text",
+              "from": 107,
+              "to": 108,
+              "startMs": 8925,
+              "endMs": 8975
+            },
+            {
+              "field": "text",
+              "from": 109,
+              "to": 116,
+              "startMs": 9025,
+              "endMs": 9675
+            },
+            {
+              "field": "text",
+              "from": 118,
+              "to": 119,
+              "startMs": 9800,
+              "endMs": 9825
+            },
+            {
+              "field": "text",
+              "from": 120,
+              "to": 121,
+              "startMs": 9850,
+              "endMs": 9875
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 129,
+              "startMs": 9925,
+              "endMs": 10425
+            },
+            {
+              "field": "text",
+              "from": 130,
+              "to": 135,
+              "startMs": 10475,
+              "endMs": 11350
+            },
+            {
+              "field": "text",
+              "from": 136,
+              "to": 137,
+              "startMs": 11375,
+              "endMs": 11400
+            },
+            {
+              "field": "text",
+              "from": 138,
+              "to": 146,
+              "startMs": 11450,
+              "endMs": 11875
+            },
+            {
+              "field": "text",
+              "from": 147,
+              "to": 154,
+              "startMs": 11925,
+              "endMs": 12275
+            },
+            {
+              "field": "text",
+              "from": 155,
+              "to": 157,
+              "startMs": 12300,
+              "endMs": 12400
+            },
+            {
+              "field": "text",
+              "from": 158,
+              "to": 162,
+              "startMs": 12450,
+              "endMs": 12775
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nA pergunta é se um estranho copiar o valor ele consegue gastar seu dinheiro ou agir em seu nome\nSe sim é segredo e o prefixo víti anderláine o tornaria público na hora"
+        }
+      }
+    },
+    {
+      "id": "variaveis-de-ambiente:4:feedback:retry",
+      "sectionId": "variaveis-de-ambiente",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/variaveis-de-ambiente__4__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/variaveis-de-ambiente__4__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23084,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
+    },
+    {
       "id": "variaveis-de-ambiente:5",
       "sectionId": "variaveis-de-ambiente",
       "kind": "quiz",
@@ -15731,6 +16375,1602 @@
             }
           ],
           "normalizedScript": "Para o carregamento você já conhece o Lighthouse e as métricas da aula de desempenho e segurança\nPara lentidão depois que a página abriu como digitar e a tela engasgar a ferramenta é o Profiler do React Dev Tools uma extensão do navegador"
+        }
+      }
+    },
+    {
+      "id": "medir-antes:2",
+      "sectionId": "medir-antes",
+      "kind": "steps",
+      "label": "Passo a passo",
+      "textHash": "5af7f9b624c71e59cb32e1e28a90fa87ed3fc7f2c1fe8165bb647205ada206b1",
+      "clipKey": "1b28ac6e17d3c98f77b067ff",
+      "audio": {
+        "santa": {
+          "src": "santa/medir-antes__2.mp3",
+          "durationMs": 50635,
+          "bytes": 405740,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "item:0:title",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 835
+            },
+            {
+              "field": "item:0:title",
+              "from": 8,
+              "to": 9,
+              "startMs": 885,
+              "endMs": 935
+            },
+            {
+              "field": "item:0:title",
+              "from": 10,
+              "to": 15,
+              "startMs": 985,
+              "endMs": 1360
+            },
+            {
+              "field": "item:0:title",
+              "from": 16,
+              "to": 24,
+              "startMs": 1410,
+              "endMs": 2235
+            },
+            {
+              "field": "item:0:text",
+              "from": 0,
+              "to": 7,
+              "startMs": 2795,
+              "endMs": 3195
+            },
+            {
+              "field": "item:0:text",
+              "from": 9,
+              "to": 14,
+              "startMs": 3245,
+              "endMs": 3595
+            },
+            {
+              "field": "item:0:text",
+              "from": 15,
+              "to": 24,
+              "startMs": 3645,
+              "endMs": 4170
+            },
+            {
+              "field": "item:0:text",
+              "from": 25,
+              "to": 30,
+              "startMs": 4220,
+              "endMs": 4645
+            },
+            {
+              "field": "item:0:text",
+              "from": 32,
+              "to": 34,
+              "startMs": 4695,
+              "endMs": 4795
+            },
+            {
+              "field": "item:0:text",
+              "from": 35,
+              "to": 39,
+              "startMs": 4845,
+              "endMs": 5120
+            },
+            {
+              "field": "item:0:text",
+              "from": 40,
+              "to": 42,
+              "startMs": 5145,
+              "endMs": 5220
+            },
+            {
+              "field": "item:0:text",
+              "from": 43,
+              "to": 52,
+              "startMs": 5245,
+              "endMs": 5795
+            },
+            {
+              "field": "item:0:text",
+              "from": 53,
+              "to": 55,
+              "startMs": 5820,
+              "endMs": 5895
+            },
+            {
+              "field": "item:0:text",
+              "from": 56,
+              "to": 62,
+              "startMs": 5945,
+              "endMs": 6445
+            },
+            {
+              "field": "item:0:text",
+              "from": 64,
+              "to": 68,
+              "startMs": 6570,
+              "endMs": 6920
+            },
+            {
+              "field": "item:0:text",
+              "from": 69,
+              "to": 71,
+              "startMs": 6970,
+              "endMs": 7070
+            },
+            {
+              "field": "item:0:text",
+              "from": 72,
+              "to": 79,
+              "startMs": 7145,
+              "endMs": 7820
+            },
+            {
+              "field": "item:0:text",
+              "from": 81,
+              "to": 83,
+              "startMs": 8375,
+              "endMs": 8475
+            },
+            {
+              "field": "item:0:text",
+              "from": 84,
+              "to": 92,
+              "startMs": 8525,
+              "endMs": 9150
+            },
+            {
+              "field": "item:0:text",
+              "from": 94,
+              "to": 97,
+              "startMs": 9200,
+              "endMs": 9800
+            },
+            {
+              "field": "item:0:text",
+              "from": 99,
+              "to": 107,
+              "startMs": 9825,
+              "endMs": 10450
+            },
+            {
+              "field": "item:0:text",
+              "from": 108,
+              "to": 112,
+              "startMs": 10500,
+              "endMs": 10725
+            },
+            {
+              "field": "item:0:text",
+              "from": 113,
+              "to": 117,
+              "startMs": 10750,
+              "endMs": 11050
+            },
+            {
+              "field": "item:0:text",
+              "from": 118,
+              "to": 123,
+              "startMs": 11100,
+              "endMs": 11650
+            },
+            {
+              "field": "item:0:text",
+              "from": 125,
+              "to": 135,
+              "startMs": 11750,
+              "endMs": 12400
+            },
+            {
+              "field": "item:0:text",
+              "from": 136,
+              "to": 137,
+              "startMs": 12450,
+              "endMs": 12475
+            },
+            {
+              "field": "item:0:text",
+              "from": 138,
+              "to": 146,
+              "startMs": 12525,
+              "endMs": 13200
+            },
+            {
+              "field": "item:1:title",
+              "from": 0,
+              "to": 5,
+              "startMs": 13835,
+              "endMs": 14110
+            },
+            {
+              "field": "item:1:title",
+              "from": 6,
+              "to": 7,
+              "startMs": 14135,
+              "endMs": 14160
+            },
+            {
+              "field": "item:1:title",
+              "from": 8,
+              "to": 16,
+              "startMs": 14210,
+              "endMs": 14735
+            },
+            {
+              "field": "item:1:title",
+              "from": 17,
+              "to": 19,
+              "startMs": 14785,
+              "endMs": 14935
+            },
+            {
+              "field": "item:1:title",
+              "from": 20,
+              "to": 33,
+              "startMs": 15010,
+              "endMs": 16160
+            },
+            {
+              "field": "item:1:text",
+              "from": 0,
+              "to": 2,
+              "startMs": 16745,
+              "endMs": 16845
+            },
+            {
+              "field": "item:1:text",
+              "from": 3,
+              "to": 13,
+              "startMs": 16870,
+              "endMs": 17545
+            },
+            {
+              "field": "item:1:text",
+              "from": 14,
+              "to": 16,
+              "startMs": 17570,
+              "endMs": 17620
+            },
+            {
+              "field": "item:1:text",
+              "from": 17,
+              "to": 25,
+              "startMs": 17670,
+              "endMs": 18420
+            },
+            {
+              "field": "item:1:text",
+              "from": 27,
+              "to": 33,
+              "startMs": 18570,
+              "endMs": 18895
+            },
+            {
+              "field": "item:1:text",
+              "from": 35,
+              "to": 44,
+              "startMs": 18945,
+              "endMs": 19345
+            },
+            {
+              "field": "item:1:text",
+              "from": 45,
+              "to": 52,
+              "startMs": 19420,
+              "endMs": 19895
+            },
+            {
+              "field": "item:1:text",
+              "from": 53,
+              "to": 57,
+              "startMs": 19920,
+              "endMs": 20045
+            },
+            {
+              "field": "item:1:text",
+              "from": 58,
+              "to": 68,
+              "startMs": 20095,
+              "endMs": 20770
+            },
+            {
+              "field": "item:1:text",
+              "from": 69,
+              "to": 75,
+              "startMs": 20820,
+              "endMs": 21445
+            },
+            {
+              "field": "item:1:text",
+              "from": 78,
+              "to": 82,
+              "startMs": 22000,
+              "endMs": 22275
+            },
+            {
+              "field": "item:1:text",
+              "from": 83,
+              "to": 93,
+              "startMs": 22325,
+              "endMs": 23100
+            },
+            {
+              "field": "item:1:text",
+              "from": 94,
+              "to": 97,
+              "startMs": 23175,
+              "endMs": 23250
+            },
+            {
+              "field": "item:1:text",
+              "from": 98,
+              "to": 107,
+              "startMs": 23300,
+              "endMs": 23850
+            },
+            {
+              "field": "item:1:text",
+              "from": 108,
+              "to": 113,
+              "startMs": 23925,
+              "endMs": 24375
+            },
+            {
+              "field": "item:1:text",
+              "from": 114,
+              "to": 117,
+              "startMs": 24425,
+              "endMs": 24550
+            },
+            {
+              "field": "item:1:text",
+              "from": 118,
+              "to": 121,
+              "startMs": 24575,
+              "endMs": 24750
+            },
+            {
+              "field": "item:1:text",
+              "from": 122,
+              "to": 127,
+              "startMs": 24800,
+              "endMs": 25150
+            },
+            {
+              "field": "item:1:text",
+              "from": 128,
+              "to": 136,
+              "startMs": 25200,
+              "endMs": 25850
+            },
+            {
+              "field": "item:2:title",
+              "from": 0,
+              "to": 5,
+              "startMs": 26485,
+              "endMs": 26785
+            },
+            {
+              "field": "item:2:title",
+              "from": 6,
+              "to": 7,
+              "startMs": 26810,
+              "endMs": 26835
+            },
+            {
+              "field": "item:2:title",
+              "from": 8,
+              "to": 17,
+              "startMs": 26860,
+              "endMs": 27485
+            },
+            {
+              "field": "item:2:title",
+              "from": 18,
+              "to": 23,
+              "startMs": 27535,
+              "endMs": 28085
+            },
+            {
+              "field": "item:2:text",
+              "from": 0,
+              "to": 2,
+              "startMs": 28670,
+              "endMs": 28770
+            },
+            {
+              "field": "item:2:text",
+              "from": 3,
+              "to": 6,
+              "startMs": 28795,
+              "endMs": 28995
+            },
+            {
+              "field": "item:2:text",
+              "from": 7,
+              "to": 15,
+              "startMs": 29045,
+              "endMs": 29595
+            },
+            {
+              "field": "item:2:text",
+              "from": 17,
+              "to": 23,
+              "startMs": 29670,
+              "endMs": 29945
+            },
+            {
+              "field": "item:2:text",
+              "from": 24,
+              "to": 26,
+              "startMs": 29970,
+              "endMs": 30070
+            },
+            {
+              "field": "item:2:text",
+              "from": 27,
+              "to": 34,
+              "startMs": 30145,
+              "endMs": 30545
+            },
+            {
+              "field": "item:2:text",
+              "from": 35,
+              "to": 39,
+              "startMs": 30595,
+              "endMs": 30720
+            },
+            {
+              "field": "item:2:text",
+              "from": 40,
+              "to": 46,
+              "startMs": 30745,
+              "endMs": 31420
+            },
+            {
+              "field": "item:2:text",
+              "from": 48,
+              "to": 52,
+              "startMs": 31545,
+              "endMs": 31795
+            },
+            {
+              "field": "item:2:text",
+              "from": 53,
+              "to": 54,
+              "startMs": 31820,
+              "endMs": 31845
+            },
+            {
+              "field": "item:2:text",
+              "from": 55,
+              "to": 59,
+              "startMs": 31895,
+              "endMs": 32170
+            },
+            {
+              "field": "item:2:text",
+              "from": 60,
+              "to": 63,
+              "startMs": 32220,
+              "endMs": 32270
+            },
+            {
+              "field": "item:2:text",
+              "from": 64,
+              "to": 70,
+              "startMs": 32320,
+              "endMs": 32670
+            },
+            {
+              "field": "item:2:text",
+              "from": 71,
+              "to": 76,
+              "startMs": 32720,
+              "endMs": 32970
+            },
+            {
+              "field": "item:2:text",
+              "from": 78,
+              "to": 85,
+              "startMs": 32995,
+              "endMs": 33595
+            },
+            {
+              "field": "item:2:text",
+              "from": 87,
+              "to": 94,
+              "startMs": 33670,
+              "endMs": 34295
+            },
+            {
+              "field": "item:2:text",
+              "from": 96,
+              "to": 101,
+              "startMs": 34420,
+              "endMs": 34695
+            },
+            {
+              "field": "item:2:text",
+              "from": 102,
+              "to": 104,
+              "startMs": 34720,
+              "endMs": 34795
+            },
+            {
+              "field": "item:2:text",
+              "from": 105,
+              "to": 109,
+              "startMs": 34820,
+              "endMs": 35120
+            },
+            {
+              "field": "item:2:text",
+              "from": 111,
+              "to": 112,
+              "startMs": 35170,
+              "endMs": 35220
+            },
+            {
+              "field": "item:2:text",
+              "from": 113,
+              "to": 119,
+              "startMs": 35295,
+              "endMs": 35620
+            },
+            {
+              "field": "item:2:text",
+              "from": 120,
+              "to": 122,
+              "startMs": 35670,
+              "endMs": 35820
+            },
+            {
+              "field": "item:2:text",
+              "from": 123,
+              "to": 127,
+              "startMs": 35870,
+              "endMs": 36120
+            },
+            {
+              "field": "item:2:text",
+              "from": 128,
+              "to": 132,
+              "startMs": 36170,
+              "endMs": 36295
+            },
+            {
+              "field": "item:2:text",
+              "from": 133,
+              "to": 138,
+              "startMs": 36345,
+              "endMs": 36820
+            },
+            {
+              "field": "item:3:title",
+              "from": 0,
+              "to": 4,
+              "startMs": 37480,
+              "endMs": 37780
+            },
+            {
+              "field": "item:3:title",
+              "from": 5,
+              "to": 6,
+              "startMs": 37830,
+              "endMs": 37880
+            },
+            {
+              "field": "item:3:title",
+              "from": 7,
+              "to": 14,
+              "startMs": 37930,
+              "endMs": 38680
+            },
+            {
+              "field": "item:3:text",
+              "from": 0,
+              "to": 4,
+              "startMs": 39265,
+              "endMs": 39565
+            },
+            {
+              "field": "item:3:text",
+              "from": 5,
+              "to": 10,
+              "startMs": 39615,
+              "endMs": 39990
+            },
+            {
+              "field": "item:3:text",
+              "from": 11,
+              "to": 12,
+              "startMs": 40040,
+              "endMs": 40065
+            },
+            {
+              "field": "item:3:text",
+              "from": 13,
+              "to": 15,
+              "startMs": 40090,
+              "endMs": 40165
+            },
+            {
+              "field": "item:3:text",
+              "from": 16,
+              "to": 26,
+              "startMs": 40215,
+              "endMs": 41140
+            },
+            {
+              "field": "item:3:text",
+              "from": 28,
+              "to": 33,
+              "startMs": 41695,
+              "endMs": 41970
+            },
+            {
+              "field": "item:3:text",
+              "from": 34,
+              "to": 38,
+              "startMs": 42020,
+              "endMs": 42170
+            },
+            {
+              "field": "item:3:text",
+              "from": 39,
+              "to": 44,
+              "startMs": 42195,
+              "endMs": 42570
+            },
+            {
+              "field": "item:3:text",
+              "from": 45,
+              "to": 48,
+              "startMs": 42620,
+              "endMs": 42670
+            },
+            {
+              "field": "item:3:text",
+              "from": 49,
+              "to": 52,
+              "startMs": 42695,
+              "endMs": 42845
+            },
+            {
+              "field": "item:3:text",
+              "from": 53,
+              "to": 63,
+              "startMs": 42895,
+              "endMs": 43720
+            },
+            {
+              "field": "item:3:text",
+              "from": 65,
+              "to": 72,
+              "startMs": 43820,
+              "endMs": 44295
+            },
+            {
+              "field": "item:3:text",
+              "from": 73,
+              "to": 74,
+              "startMs": 44345,
+              "endMs": 44370
+            },
+            {
+              "field": "item:3:text",
+              "from": 75,
+              "to": 82,
+              "startMs": 44420,
+              "endMs": 44920
+            },
+            {
+              "field": "item:3:text",
+              "from": 84,
+              "to": 87,
+              "startMs": 44995,
+              "endMs": 45045
+            },
+            {
+              "field": "item:3:text",
+              "from": 88,
+              "to": 95,
+              "startMs": 45095,
+              "endMs": 45445
+            },
+            {
+              "field": "item:3:text",
+              "from": 96,
+              "to": 100,
+              "startMs": 45495,
+              "endMs": 45995
+            },
+            {
+              "field": "item:3:text",
+              "from": 102,
+              "to": 108,
+              "startMs": 46550,
+              "endMs": 46850
+            },
+            {
+              "field": "item:3:text",
+              "from": 109,
+              "to": 113,
+              "startMs": 46875,
+              "endMs": 47075
+            },
+            {
+              "field": "item:3:text",
+              "from": 114,
+              "to": 119,
+              "startMs": 47125,
+              "endMs": 47450
+            },
+            {
+              "field": "item:3:text",
+              "from": 120,
+              "to": 124,
+              "startMs": 47500,
+              "endMs": 47650
+            },
+            {
+              "field": "item:3:text",
+              "from": 125,
+              "to": 128,
+              "startMs": 47675,
+              "endMs": 47850
+            },
+            {
+              "field": "item:3:text",
+              "from": 129,
+              "to": 135,
+              "startMs": 47900,
+              "endMs": 48175
+            },
+            {
+              "field": "item:3:text",
+              "from": 136,
+              "to": 141,
+              "startMs": 48250,
+              "endMs": 48550
+            },
+            {
+              "field": "item:3:text",
+              "from": 142,
+              "to": 147,
+              "startMs": 48600,
+              "endMs": 49100
+            },
+            {
+              "field": "item:3:text",
+              "from": 148,
+              "to": 149,
+              "startMs": 49175,
+              "endMs": 49225
+            },
+            {
+              "field": "item:3:text",
+              "from": 150,
+              "to": 153,
+              "startMs": 49275,
+              "endMs": 49425
+            },
+            {
+              "field": "item:3:text",
+              "from": 154,
+              "to": 157,
+              "startMs": 49475,
+              "endMs": 49575
+            },
+            {
+              "field": "item:3:text",
+              "from": 158,
+              "to": 168,
+              "startMs": 49625,
+              "endMs": 50450
+            }
+          ],
+          "normalizedScript": "Instale o React Dev Tools\nProcure React Developer Tools na loja de extensões do Chrome Edge ou Firefox\nNo Dev Tools f 1 2 aparecem duas abas novas Components e Profiler\nLigue o destaque de renderizações\nNa engrenagem do Profiler marque Highlight updates when components render\nCada componente que renderiza pisca com uma borda colorida\nGrave a interação lenta\nNa aba Profiler clique no círculo para gravar faça a ação que parece lenta digitar filtrar abrir um menu e clique de novo para parar\nLeia o gráfico\nCada barra é um componente\nCinza quer dizer que não renderizou amarelo e laranja que demorou mais\nClique numa barra para ver quanto tempo levou e por que renderizou"
+        },
+        "dora": {
+          "src": "dora/medir-antes__2.mp3",
+          "durationMs": 48860,
+          "bytes": 391532,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "item:0:title",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 835
+            },
+            {
+              "field": "item:0:title",
+              "from": 8,
+              "to": 9,
+              "startMs": 885,
+              "endMs": 935
+            },
+            {
+              "field": "item:0:title",
+              "from": 10,
+              "to": 15,
+              "startMs": 985,
+              "endMs": 1360
+            },
+            {
+              "field": "item:0:title",
+              "from": 16,
+              "to": 24,
+              "startMs": 1410,
+              "endMs": 2185
+            },
+            {
+              "field": "item:0:text",
+              "from": 0,
+              "to": 7,
+              "startMs": 2720,
+              "endMs": 3120
+            },
+            {
+              "field": "item:0:text",
+              "from": 9,
+              "to": 14,
+              "startMs": 3170,
+              "endMs": 3520
+            },
+            {
+              "field": "item:0:text",
+              "from": 15,
+              "to": 24,
+              "startMs": 3570,
+              "endMs": 4095
+            },
+            {
+              "field": "item:0:text",
+              "from": 25,
+              "to": 30,
+              "startMs": 4145,
+              "endMs": 4520
+            },
+            {
+              "field": "item:0:text",
+              "from": 32,
+              "to": 34,
+              "startMs": 4570,
+              "endMs": 4670
+            },
+            {
+              "field": "item:0:text",
+              "from": 35,
+              "to": 39,
+              "startMs": 4720,
+              "endMs": 4970
+            },
+            {
+              "field": "item:0:text",
+              "from": 40,
+              "to": 42,
+              "startMs": 4995,
+              "endMs": 5070
+            },
+            {
+              "field": "item:0:text",
+              "from": 43,
+              "to": 52,
+              "startMs": 5095,
+              "endMs": 5620
+            },
+            {
+              "field": "item:0:text",
+              "from": 53,
+              "to": 55,
+              "startMs": 5645,
+              "endMs": 5720
+            },
+            {
+              "field": "item:0:text",
+              "from": 56,
+              "to": 62,
+              "startMs": 5770,
+              "endMs": 6295
+            },
+            {
+              "field": "item:0:text",
+              "from": 64,
+              "to": 68,
+              "startMs": 6420,
+              "endMs": 6720
+            },
+            {
+              "field": "item:0:text",
+              "from": 69,
+              "to": 71,
+              "startMs": 6770,
+              "endMs": 6845
+            },
+            {
+              "field": "item:0:text",
+              "from": 72,
+              "to": 79,
+              "startMs": 6895,
+              "endMs": 7570
+            },
+            {
+              "field": "item:0:text",
+              "from": 81,
+              "to": 83,
+              "startMs": 8125,
+              "endMs": 8225
+            },
+            {
+              "field": "item:0:text",
+              "from": 84,
+              "to": 92,
+              "startMs": 8275,
+              "endMs": 8900
+            },
+            {
+              "field": "item:0:text",
+              "from": 94,
+              "to": 97,
+              "startMs": 8950,
+              "endMs": 9550
+            },
+            {
+              "field": "item:0:text",
+              "from": 99,
+              "to": 107,
+              "startMs": 9575,
+              "endMs": 10125
+            },
+            {
+              "field": "item:0:text",
+              "from": 108,
+              "to": 112,
+              "startMs": 10175,
+              "endMs": 10375
+            },
+            {
+              "field": "item:0:text",
+              "from": 113,
+              "to": 117,
+              "startMs": 10400,
+              "endMs": 10650
+            },
+            {
+              "field": "item:0:text",
+              "from": 118,
+              "to": 123,
+              "startMs": 10700,
+              "endMs": 11225
+            },
+            {
+              "field": "item:0:text",
+              "from": 125,
+              "to": 135,
+              "startMs": 11325,
+              "endMs": 11975
+            },
+            {
+              "field": "item:0:text",
+              "from": 136,
+              "to": 137,
+              "startMs": 12000,
+              "endMs": 12025
+            },
+            {
+              "field": "item:0:text",
+              "from": 138,
+              "to": 146,
+              "startMs": 12075,
+              "endMs": 12750
+            },
+            {
+              "field": "item:1:title",
+              "from": 0,
+              "to": 5,
+              "startMs": 13385,
+              "endMs": 13660
+            },
+            {
+              "field": "item:1:title",
+              "from": 6,
+              "to": 7,
+              "startMs": 13685,
+              "endMs": 13710
+            },
+            {
+              "field": "item:1:title",
+              "from": 8,
+              "to": 16,
+              "startMs": 13760,
+              "endMs": 14285
+            },
+            {
+              "field": "item:1:title",
+              "from": 17,
+              "to": 19,
+              "startMs": 14335,
+              "endMs": 14485
+            },
+            {
+              "field": "item:1:title",
+              "from": 20,
+              "to": 33,
+              "startMs": 14535,
+              "endMs": 15660
+            },
+            {
+              "field": "item:1:text",
+              "from": 0,
+              "to": 2,
+              "startMs": 16220,
+              "endMs": 16320
+            },
+            {
+              "field": "item:1:text",
+              "from": 3,
+              "to": 13,
+              "startMs": 16345,
+              "endMs": 17020
+            },
+            {
+              "field": "item:1:text",
+              "from": 14,
+              "to": 16,
+              "startMs": 17045,
+              "endMs": 17095
+            },
+            {
+              "field": "item:1:text",
+              "from": 17,
+              "to": 25,
+              "startMs": 17145,
+              "endMs": 17895
+            },
+            {
+              "field": "item:1:text",
+              "from": 27,
+              "to": 33,
+              "startMs": 18045,
+              "endMs": 18370
+            },
+            {
+              "field": "item:1:text",
+              "from": 35,
+              "to": 44,
+              "startMs": 18420,
+              "endMs": 18820
+            },
+            {
+              "field": "item:1:text",
+              "from": 45,
+              "to": 52,
+              "startMs": 18895,
+              "endMs": 19345
+            },
+            {
+              "field": "item:1:text",
+              "from": 53,
+              "to": 57,
+              "startMs": 19370,
+              "endMs": 19470
+            },
+            {
+              "field": "item:1:text",
+              "from": 58,
+              "to": 68,
+              "startMs": 19520,
+              "endMs": 20020
+            },
+            {
+              "field": "item:1:text",
+              "from": 69,
+              "to": 75,
+              "startMs": 20070,
+              "endMs": 20645
+            },
+            {
+              "field": "item:1:text",
+              "from": 78,
+              "to": 82,
+              "startMs": 21200,
+              "endMs": 21475
+            },
+            {
+              "field": "item:1:text",
+              "from": 83,
+              "to": 93,
+              "startMs": 21525,
+              "endMs": 22300
+            },
+            {
+              "field": "item:1:text",
+              "from": 94,
+              "to": 97,
+              "startMs": 22375,
+              "endMs": 22450
+            },
+            {
+              "field": "item:1:text",
+              "from": 98,
+              "to": 107,
+              "startMs": 22500,
+              "endMs": 23050
+            },
+            {
+              "field": "item:1:text",
+              "from": 108,
+              "to": 113,
+              "startMs": 23125,
+              "endMs": 23550
+            },
+            {
+              "field": "item:1:text",
+              "from": 114,
+              "to": 117,
+              "startMs": 23600,
+              "endMs": 23700
+            },
+            {
+              "field": "item:1:text",
+              "from": 118,
+              "to": 121,
+              "startMs": 23725,
+              "endMs": 23875
+            },
+            {
+              "field": "item:1:text",
+              "from": 122,
+              "to": 127,
+              "startMs": 23925,
+              "endMs": 24225
+            },
+            {
+              "field": "item:1:text",
+              "from": 128,
+              "to": 136,
+              "startMs": 24275,
+              "endMs": 24900
+            },
+            {
+              "field": "item:2:title",
+              "from": 0,
+              "to": 5,
+              "startMs": 25535,
+              "endMs": 25860
+            },
+            {
+              "field": "item:2:title",
+              "from": 6,
+              "to": 7,
+              "startMs": 25885,
+              "endMs": 25910
+            },
+            {
+              "field": "item:2:title",
+              "from": 8,
+              "to": 17,
+              "startMs": 25935,
+              "endMs": 26460
+            },
+            {
+              "field": "item:2:title",
+              "from": 18,
+              "to": 23,
+              "startMs": 26510,
+              "endMs": 27085
+            },
+            {
+              "field": "item:2:text",
+              "from": 0,
+              "to": 2,
+              "startMs": 27670,
+              "endMs": 27770
+            },
+            {
+              "field": "item:2:text",
+              "from": 3,
+              "to": 6,
+              "startMs": 27795,
+              "endMs": 27970
+            },
+            {
+              "field": "item:2:text",
+              "from": 7,
+              "to": 15,
+              "startMs": 28020,
+              "endMs": 28545
+            },
+            {
+              "field": "item:2:text",
+              "from": 17,
+              "to": 23,
+              "startMs": 28620,
+              "endMs": 28895
+            },
+            {
+              "field": "item:2:text",
+              "from": 24,
+              "to": 26,
+              "startMs": 28920,
+              "endMs": 28995
+            },
+            {
+              "field": "item:2:text",
+              "from": 27,
+              "to": 34,
+              "startMs": 29070,
+              "endMs": 29470
+            },
+            {
+              "field": "item:2:text",
+              "from": 35,
+              "to": 39,
+              "startMs": 29495,
+              "endMs": 29620
+            },
+            {
+              "field": "item:2:text",
+              "from": 40,
+              "to": 46,
+              "startMs": 29645,
+              "endMs": 30345
+            },
+            {
+              "field": "item:2:text",
+              "from": 48,
+              "to": 52,
+              "startMs": 30495,
+              "endMs": 30770
+            },
+            {
+              "field": "item:2:text",
+              "from": 53,
+              "to": 54,
+              "startMs": 30795,
+              "endMs": 30820
+            },
+            {
+              "field": "item:2:text",
+              "from": 55,
+              "to": 59,
+              "startMs": 30870,
+              "endMs": 31145
+            },
+            {
+              "field": "item:2:text",
+              "from": 60,
+              "to": 63,
+              "startMs": 31170,
+              "endMs": 31220
+            },
+            {
+              "field": "item:2:text",
+              "from": 64,
+              "to": 70,
+              "startMs": 31270,
+              "endMs": 31620
+            },
+            {
+              "field": "item:2:text",
+              "from": 71,
+              "to": 76,
+              "startMs": 31670,
+              "endMs": 31920
+            },
+            {
+              "field": "item:2:text",
+              "from": 78,
+              "to": 85,
+              "startMs": 31945,
+              "endMs": 32495
+            },
+            {
+              "field": "item:2:text",
+              "from": 87,
+              "to": 94,
+              "startMs": 32570,
+              "endMs": 33195
+            },
+            {
+              "field": "item:2:text",
+              "from": 96,
+              "to": 101,
+              "startMs": 33345,
+              "endMs": 33620
+            },
+            {
+              "field": "item:2:text",
+              "from": 102,
+              "to": 104,
+              "startMs": 33645,
+              "endMs": 33720
+            },
+            {
+              "field": "item:2:text",
+              "from": 105,
+              "to": 109,
+              "startMs": 33745,
+              "endMs": 34045
+            },
+            {
+              "field": "item:2:text",
+              "from": 111,
+              "to": 112,
+              "startMs": 34095,
+              "endMs": 34145
+            },
+            {
+              "field": "item:2:text",
+              "from": 113,
+              "to": 119,
+              "startMs": 34220,
+              "endMs": 34520
+            },
+            {
+              "field": "item:2:text",
+              "from": 120,
+              "to": 122,
+              "startMs": 34545,
+              "endMs": 34645
+            },
+            {
+              "field": "item:2:text",
+              "from": 123,
+              "to": 127,
+              "startMs": 34695,
+              "endMs": 34920
+            },
+            {
+              "field": "item:2:text",
+              "from": 128,
+              "to": 132,
+              "startMs": 34945,
+              "endMs": 35070
+            },
+            {
+              "field": "item:2:text",
+              "from": 133,
+              "to": 138,
+              "startMs": 35120,
+              "endMs": 35595
+            },
+            {
+              "field": "item:3:title",
+              "from": 0,
+              "to": 4,
+              "startMs": 36255,
+              "endMs": 36530
+            },
+            {
+              "field": "item:3:title",
+              "from": 5,
+              "to": 6,
+              "startMs": 36555,
+              "endMs": 36580
+            },
+            {
+              "field": "item:3:title",
+              "from": 7,
+              "to": 14,
+              "startMs": 36630,
+              "endMs": 37305
+            },
+            {
+              "field": "item:3:text",
+              "from": 0,
+              "to": 4,
+              "startMs": 37890,
+              "endMs": 38165
+            },
+            {
+              "field": "item:3:text",
+              "from": 5,
+              "to": 10,
+              "startMs": 38215,
+              "endMs": 38615
+            },
+            {
+              "field": "item:3:text",
+              "from": 11,
+              "to": 12,
+              "startMs": 38690,
+              "endMs": 38740
+            },
+            {
+              "field": "item:3:text",
+              "from": 13,
+              "to": 15,
+              "startMs": 38765,
+              "endMs": 38840
+            },
+            {
+              "field": "item:3:text",
+              "from": 16,
+              "to": 26,
+              "startMs": 38890,
+              "endMs": 39740
+            },
+            {
+              "field": "item:3:text",
+              "from": 28,
+              "to": 33,
+              "startMs": 40295,
+              "endMs": 40570
+            },
+            {
+              "field": "item:3:text",
+              "from": 34,
+              "to": 38,
+              "startMs": 40620,
+              "endMs": 40770
+            },
+            {
+              "field": "item:3:text",
+              "from": 39,
+              "to": 44,
+              "startMs": 40795,
+              "endMs": 41170
+            },
+            {
+              "field": "item:3:text",
+              "from": 45,
+              "to": 48,
+              "startMs": 41220,
+              "endMs": 41270
+            },
+            {
+              "field": "item:3:text",
+              "from": 49,
+              "to": 52,
+              "startMs": 41295,
+              "endMs": 41445
+            },
+            {
+              "field": "item:3:text",
+              "from": 53,
+              "to": 63,
+              "startMs": 41470,
+              "endMs": 42220
+            },
+            {
+              "field": "item:3:text",
+              "from": 65,
+              "to": 72,
+              "startMs": 42345,
+              "endMs": 42795
+            },
+            {
+              "field": "item:3:text",
+              "from": 73,
+              "to": 74,
+              "startMs": 42820,
+              "endMs": 42845
+            },
+            {
+              "field": "item:3:text",
+              "from": 75,
+              "to": 82,
+              "startMs": 42895,
+              "endMs": 43370
+            },
+            {
+              "field": "item:3:text",
+              "from": 84,
+              "to": 87,
+              "startMs": 43445,
+              "endMs": 43495
+            },
+            {
+              "field": "item:3:text",
+              "from": 88,
+              "to": 95,
+              "startMs": 43545,
+              "endMs": 43895
+            },
+            {
+              "field": "item:3:text",
+              "from": 96,
+              "to": 100,
+              "startMs": 43945,
+              "endMs": 44445
+            },
+            {
+              "field": "item:3:text",
+              "from": 102,
+              "to": 108,
+              "startMs": 45000,
+              "endMs": 45300
+            },
+            {
+              "field": "item:3:text",
+              "from": 109,
+              "to": 113,
+              "startMs": 45325,
+              "endMs": 45525
+            },
+            {
+              "field": "item:3:text",
+              "from": 114,
+              "to": 119,
+              "startMs": 45575,
+              "endMs": 45900
+            },
+            {
+              "field": "item:3:text",
+              "from": 120,
+              "to": 124,
+              "startMs": 45950,
+              "endMs": 46100
+            },
+            {
+              "field": "item:3:text",
+              "from": 125,
+              "to": 128,
+              "startMs": 46125,
+              "endMs": 46300
+            },
+            {
+              "field": "item:3:text",
+              "from": 129,
+              "to": 135,
+              "startMs": 46350,
+              "endMs": 46625
+            },
+            {
+              "field": "item:3:text",
+              "from": 136,
+              "to": 141,
+              "startMs": 46675,
+              "endMs": 46925
+            },
+            {
+              "field": "item:3:text",
+              "from": 142,
+              "to": 147,
+              "startMs": 46975,
+              "endMs": 47450
+            },
+            {
+              "field": "item:3:text",
+              "from": 148,
+              "to": 149,
+              "startMs": 47525,
+              "endMs": 47550
+            },
+            {
+              "field": "item:3:text",
+              "from": 150,
+              "to": 153,
+              "startMs": 47600,
+              "endMs": 47725
+            },
+            {
+              "field": "item:3:text",
+              "from": 154,
+              "to": 157,
+              "startMs": 47775,
+              "endMs": 47875
+            },
+            {
+              "field": "item:3:text",
+              "from": 158,
+              "to": 168,
+              "startMs": 47925,
+              "endMs": 48675
+            }
+          ],
+          "normalizedScript": "Instale o React Dev Tools\nProcure React Developer Tools na loja de extensões do Chrome Edge ou Firefox\nNo Dev Tools f 1 2 aparecem duas abas novas Components e Profiler\nLigue o destaque de renderizações\nNa engrenagem do Profiler marque Highlight updates when components render\nCada componente que renderiza pisca com uma borda colorida\nGrave a interação lenta\nNa aba Profiler clique no círculo para gravar faça a ação que parece lenta digitar filtrar abrir um menu e clique de novo para parar\nLeia o gráfico\nCada barra é um componente\nCinza quer dizer que não renderizou amarelo e laranja que demorou mais\nClique numa barra para ver quanto tempo levou e por que renderizou"
         }
       }
     },
@@ -19362,6 +21602,678 @@
         }
       },
       "pauseAfter": true
+    },
+    {
+      "id": "memo:3:answer",
+      "sectionId": "memo",
+      "kind": "revealed-answer",
+      "label": "Resposta revelada",
+      "textHash": "e100aee7eae27d042c749ad87be31393878f37d2eefb65b9e8e9bc4460ca95a0",
+      "clipKey": "3a869a2e3c45799f58f5b8b9",
+      "audio": {
+        "santa": {
+          "src": "santa/memo__3__answer.mp3",
+          "durationMs": 20186,
+          "bytes": 162284,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 13,
+              "startMs": 310,
+              "endMs": 1310
+            },
+            {
+              "field": "answer",
+              "from": 14,
+              "to": 17,
+              "startMs": 1385,
+              "endMs": 1735
+            },
+            {
+              "field": "answer",
+              "from": 19,
+              "to": 24,
+              "startMs": 2290,
+              "endMs": 2540
+            },
+            {
+              "field": "answer",
+              "from": 25,
+              "to": 30,
+              "startMs": 2590,
+              "endMs": 2940
+            },
+            {
+              "field": "answer",
+              "from": 31,
+              "to": 38,
+              "startMs": 3015,
+              "endMs": 3415
+            },
+            {
+              "field": "answer",
+              "from": 39,
+              "to": 49,
+              "startMs": 3465,
+              "endMs": 4140
+            },
+            {
+              "field": "answer",
+              "from": 50,
+              "to": 52,
+              "startMs": 4165,
+              "endMs": 4265
+            },
+            {
+              "field": "answer",
+              "from": 53,
+              "to": 60,
+              "startMs": 4315,
+              "endMs": 4815
+            },
+            {
+              "field": "answer",
+              "from": 61,
+              "to": 63,
+              "startMs": 4840,
+              "endMs": 4915
+            },
+            {
+              "field": "answer",
+              "from": 64,
+              "to": 76,
+              "startMs": 4965,
+              "endMs": 5890
+            },
+            {
+              "field": "answer",
+              "from": 78,
+              "to": 85,
+              "startMs": 5990,
+              "endMs": 6465
+            },
+            {
+              "field": "answer",
+              "from": 86,
+              "to": 90,
+              "startMs": 6515,
+              "endMs": 6790
+            },
+            {
+              "field": "answer",
+              "from": 91,
+              "to": 92,
+              "startMs": 6815,
+              "endMs": 6840
+            },
+            {
+              "field": "answer",
+              "from": 93,
+              "to": 102,
+              "startMs": 6890,
+              "endMs": 7715
+            },
+            {
+              "field": "answer",
+              "from": 104,
+              "to": 105,
+              "startMs": 8270,
+              "endMs": 8320
+            },
+            {
+              "field": "answer",
+              "from": 106,
+              "to": 115,
+              "startMs": 8345,
+              "endMs": 9020
+            },
+            {
+              "field": "answer",
+              "from": 116,
+              "to": 122,
+              "startMs": 9095,
+              "endMs": 9470
+            },
+            {
+              "field": "answer",
+              "from": 123,
+              "to": 124,
+              "startMs": 9495,
+              "endMs": 9520
+            },
+            {
+              "field": "answer",
+              "from": 125,
+              "to": 134,
+              "startMs": 9570,
+              "endMs": 10345
+            },
+            {
+              "field": "answer",
+              "from": 136,
+              "to": 138,
+              "startMs": 10900,
+              "endMs": 11000
+            },
+            {
+              "field": "answer",
+              "from": 139,
+              "to": 143,
+              "startMs": 11050,
+              "endMs": 11275
+            },
+            {
+              "field": "answer",
+              "from": 144,
+              "to": 148,
+              "startMs": 11325,
+              "endMs": 11725
+            },
+            {
+              "field": "answer",
+              "from": 150,
+              "to": 154,
+              "startMs": 11800,
+              "endMs": 12025
+            },
+            {
+              "field": "answer",
+              "from": 155,
+              "to": 157,
+              "startMs": 12075,
+              "endMs": 12200
+            },
+            {
+              "field": "answer",
+              "from": 158,
+              "to": 164,
+              "startMs": 12225,
+              "endMs": 12625
+            },
+            {
+              "field": "answer",
+              "from": 165,
+              "to": 169,
+              "startMs": 12675,
+              "endMs": 12975
+            },
+            {
+              "field": "answer",
+              "from": 170,
+              "to": 176,
+              "startMs": 13025,
+              "endMs": 13225
+            },
+            {
+              "field": "answer",
+              "from": 177,
+              "to": 178,
+              "startMs": 13250,
+              "endMs": 13275
+            },
+            {
+              "field": "answer",
+              "from": 179,
+              "to": 187,
+              "startMs": 13300,
+              "endMs": 13775
+            },
+            {
+              "field": "answer",
+              "from": 188,
+              "to": 194,
+              "startMs": 13850,
+              "endMs": 14175
+            },
+            {
+              "field": "answer",
+              "from": 195,
+              "to": 197,
+              "startMs": 14200,
+              "endMs": 14275
+            },
+            {
+              "field": "answer",
+              "from": 198,
+              "to": 208,
+              "startMs": 14300,
+              "endMs": 14925
+            },
+            {
+              "field": "answer",
+              "from": 209,
+              "to": 213,
+              "startMs": 14975,
+              "endMs": 15250
+            },
+            {
+              "field": "answer",
+              "from": 214,
+              "to": 226,
+              "startMs": 15300,
+              "endMs": 15950
+            },
+            {
+              "field": "answer",
+              "from": 227,
+              "to": 228,
+              "startMs": 15975,
+              "endMs": 16050
+            },
+            {
+              "field": "answer",
+              "from": 229,
+              "to": 232,
+              "startMs": 16125,
+              "endMs": 16700
+            },
+            {
+              "field": "answer",
+              "from": 234,
+              "to": 238,
+              "startMs": 16800,
+              "endMs": 16950
+            },
+            {
+              "field": "answer",
+              "from": 239,
+              "to": 242,
+              "startMs": 16975,
+              "endMs": 17125
+            },
+            {
+              "field": "answer",
+              "from": 243,
+              "to": 249,
+              "startMs": 17175,
+              "endMs": 17600
+            },
+            {
+              "field": "answer",
+              "from": 250,
+              "to": 253,
+              "startMs": 17650,
+              "endMs": 17800
+            },
+            {
+              "field": "answer",
+              "from": 254,
+              "to": 262,
+              "startMs": 17850,
+              "endMs": 18375
+            },
+            {
+              "field": "answer",
+              "from": 263,
+              "to": 265,
+              "startMs": 18400,
+              "endMs": 18550
+            },
+            {
+              "field": "answer",
+              "from": 266,
+              "to": 272,
+              "startMs": 18600,
+              "endMs": 19125
+            },
+            {
+              "field": "answer",
+              "from": 273,
+              "to": 275,
+              "startMs": 19200,
+              "endMs": 19275
+            },
+            {
+              "field": "answer",
+              "from": 276,
+              "to": 278,
+              "startMs": 19300,
+              "endMs": 19375
+            },
+            {
+              "field": "answer",
+              "from": 279,
+              "to": 286,
+              "startMs": 19425,
+              "endMs": 20000
+            }
+          ],
+          "normalizedScript": "Provavelmente não\nCinco itens simples renderizam em frações de milissegundo ninguém nota a diferença\nO exercício mostra o mecanismo\nNa vida real você só aplica memo quando o Profiler mostra um componente caro renderizando à toa como uma tabela com centenas de linhas ou um gráfico"
+        },
+        "dora": {
+          "src": "dora/memo__3__answer.mp3",
+          "durationMs": 19435,
+          "bytes": 156140,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 13,
+              "startMs": 310,
+              "endMs": 1210
+            },
+            {
+              "field": "answer",
+              "from": 14,
+              "to": 17,
+              "startMs": 1260,
+              "endMs": 1585
+            },
+            {
+              "field": "answer",
+              "from": 19,
+              "to": 24,
+              "startMs": 2140,
+              "endMs": 2390
+            },
+            {
+              "field": "answer",
+              "from": 25,
+              "to": 30,
+              "startMs": 2440,
+              "endMs": 2790
+            },
+            {
+              "field": "answer",
+              "from": 31,
+              "to": 38,
+              "startMs": 2865,
+              "endMs": 3265
+            },
+            {
+              "field": "answer",
+              "from": 39,
+              "to": 49,
+              "startMs": 3315,
+              "endMs": 3940
+            },
+            {
+              "field": "answer",
+              "from": 50,
+              "to": 52,
+              "startMs": 3965,
+              "endMs": 4065
+            },
+            {
+              "field": "answer",
+              "from": 53,
+              "to": 60,
+              "startMs": 4115,
+              "endMs": 4590
+            },
+            {
+              "field": "answer",
+              "from": 61,
+              "to": 63,
+              "startMs": 4615,
+              "endMs": 4690
+            },
+            {
+              "field": "answer",
+              "from": 64,
+              "to": 76,
+              "startMs": 4740,
+              "endMs": 5690
+            },
+            {
+              "field": "answer",
+              "from": 78,
+              "to": 85,
+              "startMs": 5815,
+              "endMs": 6215
+            },
+            {
+              "field": "answer",
+              "from": 86,
+              "to": 90,
+              "startMs": 6265,
+              "endMs": 6540
+            },
+            {
+              "field": "answer",
+              "from": 91,
+              "to": 92,
+              "startMs": 6565,
+              "endMs": 6590
+            },
+            {
+              "field": "answer",
+              "from": 93,
+              "to": 102,
+              "startMs": 6615,
+              "endMs": 7440
+            },
+            {
+              "field": "answer",
+              "from": 104,
+              "to": 105,
+              "startMs": 7995,
+              "endMs": 8045
+            },
+            {
+              "field": "answer",
+              "from": 106,
+              "to": 115,
+              "startMs": 8070,
+              "endMs": 8745
+            },
+            {
+              "field": "answer",
+              "from": 116,
+              "to": 122,
+              "startMs": 8820,
+              "endMs": 9170
+            },
+            {
+              "field": "answer",
+              "from": 123,
+              "to": 124,
+              "startMs": 9195,
+              "endMs": 9220
+            },
+            {
+              "field": "answer",
+              "from": 125,
+              "to": 134,
+              "startMs": 9245,
+              "endMs": 9970
+            },
+            {
+              "field": "answer",
+              "from": 136,
+              "to": 138,
+              "startMs": 10525,
+              "endMs": 10625
+            },
+            {
+              "field": "answer",
+              "from": 139,
+              "to": 143,
+              "startMs": 10675,
+              "endMs": 10900
+            },
+            {
+              "field": "answer",
+              "from": 144,
+              "to": 148,
+              "startMs": 10950,
+              "endMs": 11350
+            },
+            {
+              "field": "answer",
+              "from": 150,
+              "to": 154,
+              "startMs": 11450,
+              "endMs": 11675
+            },
+            {
+              "field": "answer",
+              "from": 155,
+              "to": 157,
+              "startMs": 11725,
+              "endMs": 11800
+            },
+            {
+              "field": "answer",
+              "from": 158,
+              "to": 164,
+              "startMs": 11825,
+              "endMs": 12150
+            },
+            {
+              "field": "answer",
+              "from": 165,
+              "to": 169,
+              "startMs": 12200,
+              "endMs": 12500
+            },
+            {
+              "field": "answer",
+              "from": 170,
+              "to": 176,
+              "startMs": 12550,
+              "endMs": 12750
+            },
+            {
+              "field": "answer",
+              "from": 177,
+              "to": 178,
+              "startMs": 12775,
+              "endMs": 12800
+            },
+            {
+              "field": "answer",
+              "from": 179,
+              "to": 187,
+              "startMs": 12825,
+              "endMs": 13325
+            },
+            {
+              "field": "answer",
+              "from": 188,
+              "to": 194,
+              "startMs": 13400,
+              "endMs": 13725
+            },
+            {
+              "field": "answer",
+              "from": 195,
+              "to": 197,
+              "startMs": 13750,
+              "endMs": 13825
+            },
+            {
+              "field": "answer",
+              "from": 198,
+              "to": 208,
+              "startMs": 13850,
+              "endMs": 14400
+            },
+            {
+              "field": "answer",
+              "from": 209,
+              "to": 213,
+              "startMs": 14450,
+              "endMs": 14725
+            },
+            {
+              "field": "answer",
+              "from": 214,
+              "to": 226,
+              "startMs": 14775,
+              "endMs": 15400
+            },
+            {
+              "field": "answer",
+              "from": 227,
+              "to": 228,
+              "startMs": 15425,
+              "endMs": 15500
+            },
+            {
+              "field": "answer",
+              "from": 229,
+              "to": 232,
+              "startMs": 15550,
+              "endMs": 16150
+            },
+            {
+              "field": "answer",
+              "from": 234,
+              "to": 238,
+              "startMs": 16275,
+              "endMs": 16425
+            },
+            {
+              "field": "answer",
+              "from": 239,
+              "to": 242,
+              "startMs": 16450,
+              "endMs": 16600
+            },
+            {
+              "field": "answer",
+              "from": 243,
+              "to": 249,
+              "startMs": 16650,
+              "endMs": 17025
+            },
+            {
+              "field": "answer",
+              "from": 250,
+              "to": 253,
+              "startMs": 17075,
+              "endMs": 17200
+            },
+            {
+              "field": "answer",
+              "from": 254,
+              "to": 262,
+              "startMs": 17250,
+              "endMs": 17750
+            },
+            {
+              "field": "answer",
+              "from": 263,
+              "to": 265,
+              "startMs": 17775,
+              "endMs": 17875
+            },
+            {
+              "field": "answer",
+              "from": 266,
+              "to": 272,
+              "startMs": 17925,
+              "endMs": 18375
+            },
+            {
+              "field": "answer",
+              "from": 273,
+              "to": 275,
+              "startMs": 18450,
+              "endMs": 18525
+            },
+            {
+              "field": "answer",
+              "from": 276,
+              "to": 278,
+              "startMs": 18550,
+              "endMs": 18625
+            },
+            {
+              "field": "answer",
+              "from": 279,
+              "to": 286,
+              "startMs": 18650,
+              "endMs": 19250
+            }
+          ],
+          "normalizedScript": "Provavelmente não\nCinco itens simples renderizam em frações de milissegundo ninguém nota a diferença\nO exercício mostra o mecanismo\nNa vida real você só aplica memo quando o Profiler mostra um componente caro renderizando à toa como uma tabela com centenas de linhas ou um gráfico"
+        }
+      }
     },
     {
       "id": "memo:4",
@@ -25860,6 +28772,273 @@
           ],
           "normalizedScript": "O que é tree shaking"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:tree-shaking:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "fc36dea35f9c7cb1fb62696b212437973aea00136a79ed597cc0f47af8fa3f80",
+      "clipKey": "616e95f9d00d674207cf45ef",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__tree-shaking__back.mp3",
+          "durationMs": 6170,
+          "bytes": 50156,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 335
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 7,
+              "startMs": 360,
+              "endMs": 735
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 10,
+              "startMs": 760,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 16,
+              "startMs": 935,
+              "endMs": 1335
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 20,
+              "startMs": 1385,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 27,
+              "startMs": 1510,
+              "endMs": 1885
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 34,
+              "startMs": 1960,
+              "endMs": 2385
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 44,
+              "startMs": 2410,
+              "endMs": 3060
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 48,
+              "startMs": 3110,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 54,
+              "startMs": 3335,
+              "endMs": 3535
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 64,
+              "startMs": 3560,
+              "endMs": 4410
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 70,
+              "startMs": 4510,
+              "endMs": 4635
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 74,
+              "startMs": 4660,
+              "endMs": 4760
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 78,
+              "startMs": 4810,
+              "endMs": 4960
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 81,
+              "startMs": 5010,
+              "endMs": 5135
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 84,
+              "startMs": 5160,
+              "endMs": 5210
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 94,
+              "startMs": 5235,
+              "endMs": 5985
+            }
+          ],
+          "normalizedScript": "A etapa do build que remove código exportado mas nunca importado para ele não ir ao navegador"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__tree-shaking__back.mp3",
+          "durationMs": 6020,
+          "bytes": 48812,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 335
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 7,
+              "startMs": 360,
+              "endMs": 710
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 10,
+              "startMs": 735,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 16,
+              "startMs": 860,
+              "endMs": 1260
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 20,
+              "startMs": 1310,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 27,
+              "startMs": 1435,
+              "endMs": 1810
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 34,
+              "startMs": 1860,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 44,
+              "startMs": 2285,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 48,
+              "startMs": 2985,
+              "endMs": 3185
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 54,
+              "startMs": 3235,
+              "endMs": 3435
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 64,
+              "startMs": 3460,
+              "endMs": 4285
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 70,
+              "startMs": 4410,
+              "endMs": 4535
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 74,
+              "startMs": 4560,
+              "endMs": 4660
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 78,
+              "startMs": 4710,
+              "endMs": 4860
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 81,
+              "startMs": 4885,
+              "endMs": 5010
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 84,
+              "startMs": 5035,
+              "endMs": 5085
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 94,
+              "startMs": 5110,
+              "endMs": 5835
+            }
+          ],
+          "normalizedScript": "A etapa do build que remove código exportado mas nunca importado para ele não ir ao navegador"
+        }
       }
     },
     {
@@ -25971,6 +29150,259 @@
             }
           ],
           "normalizedScript": "Para que servem lazy e Suspense"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:lazy-suspense:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "8d2e1c14b7044128a561df191554d913ae3ba12ab81cac3ee2bdd8335a79428d",
+      "clipKey": "154faac4d8ab6eb4093dd16d",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__lazy-suspense__back.mp3",
+          "durationMs": 6720,
+          "bytes": 54380,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 685
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 12,
+              "startMs": 735,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 15,
+              "startMs": 1135,
+              "endMs": 1210
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 26,
+              "startMs": 1235,
+              "endMs": 1935
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 29,
+              "startMs": 2010,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 36,
+              "startMs": 2210,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 40,
+              "startMs": 2460,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 44,
+              "startMs": 2685,
+              "endMs": 2810
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 53,
+              "startMs": 2835,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 63,
+              "startMs": 3760,
+              "endMs": 4310
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 70,
+              "startMs": 4360,
+              "endMs": 4685
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 73,
+              "startMs": 4710,
+              "endMs": 4785
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 82,
+              "startMs": 4885,
+              "endMs": 5385
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 91,
+              "startMs": 5435,
+              "endMs": 5860
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 95,
+              "startMs": 5885,
+              "endMs": 6035
+            },
+            {
+              "field": "back",
+              "from": 96,
+              "to": 101,
+              "startMs": 6135,
+              "endMs": 6535
+            }
+          ],
+          "normalizedScript": "lazy carrega um componente só quando ele vai aparecer Suspense mostra um fallback enquanto ele chega"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__lazy-suspense__back.mp3",
+          "durationMs": 6470,
+          "bytes": 52460,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 12,
+              "startMs": 635,
+              "endMs": 985
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 15,
+              "startMs": 1010,
+              "endMs": 1085
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 26,
+              "startMs": 1110,
+              "endMs": 1810
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 29,
+              "startMs": 1885,
+              "endMs": 2035
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 36,
+              "startMs": 2085,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 40,
+              "startMs": 2310,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 44,
+              "startMs": 2485,
+              "endMs": 2610
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 53,
+              "startMs": 2635,
+              "endMs": 3510
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 63,
+              "startMs": 3660,
+              "endMs": 4210
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 70,
+              "startMs": 4260,
+              "endMs": 4585
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 73,
+              "startMs": 4610,
+              "endMs": 4685
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 82,
+              "startMs": 4785,
+              "endMs": 5235
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 91,
+              "startMs": 5260,
+              "endMs": 5635
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 95,
+              "startMs": 5660,
+              "endMs": 5785
+            },
+            {
+              "field": "back",
+              "from": 96,
+              "to": 101,
+              "startMs": 5860,
+              "endMs": 6285
+            }
+          ],
+          "normalizedScript": "lazy carrega um componente só quando ele vai aparecer Suspense mostra um fallback enquanto ele chega"
         }
       }
     },
@@ -26154,6 +29586,245 @@
           ],
           "normalizedScript": "Por que uma variável sem víti anderláine aparece como undefined no app"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:vite-prefixo:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "87d501718b2006e11a16b12977eb544981cc0d74de49efc0208f422ba06e7377",
+      "clipKey": "5340bb774533cdb80f87c995",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__vite-prefixo__back.mp3",
+          "durationMs": 6595,
+          "bytes": 53420,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 6,
+              "startMs": 435,
+              "endMs": 785
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 860,
+              "endMs": 985
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 15,
+              "startMs": 1035,
+              "endMs": 1435
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 18,
+              "startMs": 1460,
+              "endMs": 1560
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 25,
+              "startMs": 1635,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 28,
+              "startMs": 2110,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 38,
+              "startMs": 2185,
+              "endMs": 2735
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 41,
+              "startMs": 2760,
+              "endMs": 2835
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 51,
+              "startMs": 2885,
+              "endMs": 3485
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 55,
+              "startMs": 3535,
+              "endMs": 3660
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 63,
+              "startMs": 3710,
+              "endMs": 4210
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 69,
+              "startMs": 4260,
+              "endMs": 5310
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 73,
+              "startMs": 5410,
+              "endMs": 5535
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 83,
+              "startMs": 5585,
+              "endMs": 6410
+            }
+          ],
+          "normalizedScript": "O víti só expõe ao código do navegador as variáveis com prefixo víti anderláine de propósito"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__vite-prefixo__back.mp3",
+          "durationMs": 6470,
+          "bytes": 52460,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 6,
+              "startMs": 435,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 910,
+              "endMs": 1035
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 15,
+              "startMs": 1060,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 18,
+              "startMs": 1510,
+              "endMs": 1610
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 25,
+              "startMs": 1660,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 28,
+              "startMs": 2110,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 38,
+              "startMs": 2185,
+              "endMs": 2710
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 41,
+              "startMs": 2735,
+              "endMs": 2810
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 51,
+              "startMs": 2860,
+              "endMs": 3460
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 55,
+              "startMs": 3510,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 63,
+              "startMs": 3685,
+              "endMs": 4185
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 69,
+              "startMs": 4235,
+              "endMs": 5285
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 73,
+              "startMs": 5385,
+              "endMs": 5460
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 83,
+              "startMs": 5510,
+              "endMs": 6285
+            }
+          ],
+          "normalizedScript": "O víti só expõe ao código do navegador as variáveis com prefixo víti anderláine de propósito"
+        }
       }
     },
     {
@@ -26335,6 +30006,231 @@
             }
           ],
           "normalizedScript": "No relatório do vite build o que significa a coluna gzip"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:gzip-coluna:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "9d3b39422e43a6ff530a623aa66977193adadb3d1a03715e3a60b28d65b5b627",
+      "clipKey": "f58169bc1a9a3d285a0a402c",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__gzip-coluna__back.mp3",
+          "durationMs": 4720,
+          "bytes": 38444,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 9,
+              "startMs": 410,
+              "endMs": 785
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 20,
+              "startMs": 835,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 23,
+              "startMs": 1410,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 31,
+              "startMs": 1485,
+              "endMs": 2185
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 36,
+              "startMs": 2285,
+              "endMs": 2360
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 38,
+              "startMs": 2410,
+              "endMs": 2460
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 40,
+              "startMs": 2485,
+              "endMs": 2510
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 44,
+              "startMs": 2560,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 47,
+              "startMs": 2685,
+              "endMs": 2835
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 52,
+              "startMs": 2935,
+              "endMs": 3235
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 60,
+              "startMs": 3285,
+              "endMs": 3710
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 65,
+              "startMs": 3760,
+              "endMs": 3960
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 70,
+              "startMs": 4010,
+              "endMs": 4535
+            }
+          ],
+          "normalizedScript": "O tamanho comprimido do arquivo que é o que de fato trafega pela rede"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__gzip-coluna__back.mp3",
+          "durationMs": 4595,
+          "bytes": 37484,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 9,
+              "startMs": 410,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 20,
+              "startMs": 810,
+              "endMs": 1360
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 23,
+              "startMs": 1385,
+              "endMs": 1435
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 31,
+              "startMs": 1460,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 36,
+              "startMs": 2210,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 38,
+              "startMs": 2335,
+              "endMs": 2385
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 40,
+              "startMs": 2410,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 44,
+              "startMs": 2485,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 47,
+              "startMs": 2585,
+              "endMs": 2735
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 52,
+              "startMs": 2810,
+              "endMs": 3110
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 60,
+              "startMs": 3160,
+              "endMs": 3585
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 65,
+              "startMs": 3635,
+              "endMs": 3835
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 70,
+              "startMs": 3885,
+              "endMs": 4410
+            }
+          ],
+          "normalizedScript": "O tamanho comprimido do arquivo que é o que de fato trafega pela rede"
         }
       }
     },
@@ -26560,6 +30456,315 @@
           ],
           "normalizedScript": "Por que memo sozinho não impede a renderização quando o filho recebe uma função"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:memo-callback:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "e45287474c5236018045b02739245ef3abe1b8fd341fe1fce183ca8018f73ad6",
+      "clipKey": "83b098d87ca8df09cba038f9",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__memo-callback__back.mp3",
+          "durationMs": 8525,
+          "bytes": 68972,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 17,
+              "startMs": 635,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1435,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 24,
+              "startMs": 1585,
+              "endMs": 1835
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 29,
+              "startMs": 1910,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 33,
+              "startMs": 2135,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2335,
+              "endMs": 2685
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 45,
+              "startMs": 2735,
+              "endMs": 3310
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 48,
+              "startMs": 3435,
+              "endMs": 3460
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 50,
+              "startMs": 3510,
+              "endMs": 3535
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 55,
+              "startMs": 3585,
+              "endMs": 3860
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 58,
+              "startMs": 3910,
+              "endMs": 3985
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 62,
+              "startMs": 4010,
+              "endMs": 4160
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 67,
+              "startMs": 4235,
+              "endMs": 4535
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 77,
+              "startMs": 4585,
+              "endMs": 5435
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 90,
+              "startMs": 5990,
+              "endMs": 6615
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 97,
+              "startMs": 6665,
+              "endMs": 7140
+            },
+            {
+              "field": "back",
+              "from": 98,
+              "to": 99,
+              "startMs": 7190,
+              "endMs": 7240
+            },
+            {
+              "field": "back",
+              "from": 100,
+              "to": 105,
+              "startMs": 7290,
+              "endMs": 7665
+            },
+            {
+              "field": "back",
+              "from": 106,
+              "to": 112,
+              "startMs": 7715,
+              "endMs": 8340
+            }
+          ],
+          "normalizedScript": "Cada renderização do pai cria uma função nova e o memo vê uma prop diferente\nuse Callback mantém a mesma função"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__memo-callback__back.mp3",
+          "durationMs": 8300,
+          "bytes": 67052,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 17,
+              "startMs": 635,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1435,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 24,
+              "startMs": 1560,
+              "endMs": 1810
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 29,
+              "startMs": 1885,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 33,
+              "startMs": 2110,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2310,
+              "endMs": 2660
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 45,
+              "startMs": 2685,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 48,
+              "startMs": 3410,
+              "endMs": 3435
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 50,
+              "startMs": 3485,
+              "endMs": 3510
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 55,
+              "startMs": 3560,
+              "endMs": 3785
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 58,
+              "startMs": 3835,
+              "endMs": 3910
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 62,
+              "startMs": 3935,
+              "endMs": 4085
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 67,
+              "startMs": 4135,
+              "endMs": 4385
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 77,
+              "startMs": 4435,
+              "endMs": 5260
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 90,
+              "startMs": 5815,
+              "endMs": 6490
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 97,
+              "startMs": 6540,
+              "endMs": 7040
+            },
+            {
+              "field": "back",
+              "from": 98,
+              "to": 99,
+              "startMs": 7090,
+              "endMs": 7140
+            },
+            {
+              "field": "back",
+              "from": 100,
+              "to": 105,
+              "startMs": 7190,
+              "endMs": 7490
+            },
+            {
+              "field": "back",
+              "from": 106,
+              "to": 112,
+              "startMs": 7540,
+              "endMs": 8115
+            }
+          ],
+          "normalizedScript": "Cada renderização do pai cria uma função nova e o memo vê uma prop diferente\nuse Callback mantém a mesma função"
+        }
       }
     },
     {
@@ -26685,6 +30890,203 @@
             }
           ],
           "normalizedScript": "O que a virtualização de lista faz"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:virtualizacao:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "0c0f809a2a7230ca1215968546859abafbc06f218cb164544a33172307037b47",
+      "clipKey": "e8063451720f86031736df02",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__virtualizacao__back.mp3",
+          "durationMs": 5245,
+          "bytes": 42668,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 760,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 910,
+              "endMs": 1435
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 16,
+              "startMs": 1510,
+              "endMs": 1635
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 19,
+              "startMs": 1660,
+              "endMs": 1760
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 26,
+              "startMs": 1810,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 35,
+              "startMs": 2135,
+              "endMs": 2835
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 48,
+              "startMs": 2935,
+              "endMs": 3560
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 57,
+              "startMs": 3610,
+              "endMs": 4085
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 59,
+              "startMs": 4110,
+              "endMs": 4135
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 66,
+              "startMs": 4185,
+              "endMs": 4560
+            },
+            {
+              "field": "back",
+              "from": 67,
+              "to": 71,
+              "startMs": 4610,
+              "endMs": 5060
+            }
+          ],
+          "normalizedScript": "Mantém no d o m só as linhas visíveis trocando as conforme a pessoa rola"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__virtualizacao__back.mp3",
+          "durationMs": 4970,
+          "bytes": 40556,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 710
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 735,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 885,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 16,
+              "startMs": 1460,
+              "endMs": 1585
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 19,
+              "startMs": 1610,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 26,
+              "startMs": 1735,
+              "endMs": 2010
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 35,
+              "startMs": 2060,
+              "endMs": 2760
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 48,
+              "startMs": 2860,
+              "endMs": 3435
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 57,
+              "startMs": 3460,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 59,
+              "startMs": 3910,
+              "endMs": 3935
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 66,
+              "startMs": 3960,
+              "endMs": 4310
+            },
+            {
+              "field": "back",
+              "from": 67,
+              "to": 71,
+              "startMs": 4360,
+              "endMs": 4785
+            }
+          ],
+          "normalizedScript": "Mantém no d o m só as linhas visíveis trocando as conforme a pessoa rola"
         }
       }
     },
@@ -26825,6 +31227,273 @@
             }
           ],
           "normalizedScript": "Por que medir desempenho na versão de produção"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:medir-producao:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "3a813a45da3300f8c73c3423c4427379de2cace333a7613bfdb3fcc239887da7",
+      "clipKey": "b0c8db6c6b0db4bc3f3009c5",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__medir-producao__back.mp3",
+          "durationMs": 6870,
+          "bytes": 55724,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 6,
+              "startMs": 410,
+              "endMs": 710
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 760,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 25,
+              "startMs": 910,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 28,
+              "startMs": 1810,
+              "endMs": 1885
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 34,
+              "startMs": 1910,
+              "endMs": 2335
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 38,
+              "startMs": 2410,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 51,
+              "startMs": 2610,
+              "endMs": 3385
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 58,
+              "startMs": 3435,
+              "endMs": 3910
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 60,
+              "startMs": 3960,
+              "endMs": 3985
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 62,
+              "startMs": 4035,
+              "endMs": 4060
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 67,
+              "startMs": 4110,
+              "endMs": 4385
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 73,
+              "startMs": 4435,
+              "endMs": 5035
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 80,
+              "startMs": 5160,
+              "endMs": 5535
+            },
+            {
+              "field": "back",
+              "from": 81,
+              "to": 83,
+              "startMs": 5585,
+              "endMs": 5685
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 91,
+              "startMs": 5735,
+              "endMs": 6110
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 99,
+              "startMs": 6135,
+              "endMs": 6710
+            }
+          ],
+          "normalizedScript": "O modo de desenvolvimento do React faz verificações extras e é mais lento então os números enganam"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__medir-producao__back.mp3",
+          "durationMs": 6695,
+          "bytes": 54188,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 6,
+              "startMs": 410,
+              "endMs": 685
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 710,
+              "endMs": 785
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 25,
+              "startMs": 835,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 28,
+              "startMs": 1710,
+              "endMs": 1760
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 34,
+              "startMs": 1785,
+              "endMs": 2210
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 38,
+              "startMs": 2285,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 51,
+              "startMs": 2460,
+              "endMs": 3185
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 58,
+              "startMs": 3235,
+              "endMs": 3710
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 60,
+              "startMs": 3760,
+              "endMs": 3785
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 62,
+              "startMs": 3835,
+              "endMs": 3860
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 67,
+              "startMs": 3910,
+              "endMs": 4160
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 73,
+              "startMs": 4210,
+              "endMs": 4860
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 80,
+              "startMs": 5010,
+              "endMs": 5360
+            },
+            {
+              "field": "back",
+              "from": 81,
+              "to": 83,
+              "startMs": 5385,
+              "endMs": 5485
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 91,
+              "startMs": 5535,
+              "endMs": 5910
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 99,
+              "startMs": 5935,
+              "endMs": 6510
+            }
+          ],
+          "normalizedScript": "O modo de desenvolvimento do React faz verificações extras e é mais lento então os números enganam"
         }
       }
     },
@@ -27263,12 +31932,5 @@
       }
     }
   ],
-  "uncoveredBlocks": [
-    {
-      "sectionId": "medir-antes",
-      "blockIndex": 2,
-      "blockType": "steps",
-      "reason": "Tipo de bloco \"steps\" ainda não possui regra de narração definida."
-    }
-  ]
+  "uncoveredBlocks": []
 }

@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-17T01:23:54.229004+00:00",
+  "generatedAt": "2026-11-18T04:52:33.818635+00:00",
   "totalDurationMs": {
-    "santa": 711246,
-    "dora": 688823
+    "santa": 799886,
+    "dora": 775113
   },
   "totalBytes": {
-    "santa": 5721232,
-    "dora": 5542096
+    "santa": 6437064,
+    "dora": 6239496
   },
   "clips": [
     {
@@ -5802,6 +5802,860 @@
         }
       },
       "pauseAfter": true
+    },
+    {
+      "id": "o-que-e-efeito:4:feedback:correct",
+      "sectionId": "o-que-e-efeito",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "6541f610da87a80110bc255aa603a1dfaeb0a5b4753eba06dd7bda74fa7b7c2e",
+      "clipKey": "45be5834c8dc7b4e406caf34",
+      "audio": {
+        "santa": {
+          "src": "santa/o-que-e-efeito__4__feedback__correct.mp3",
+          "durationMs": 18095,
+          "bytes": 145388,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2445,
+              "endMs": 2495
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 16,
+              "startMs": 2545,
+              "endMs": 3545
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 18,
+              "startMs": 3595,
+              "endMs": 3620
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 23,
+              "startMs": 3695,
+              "endMs": 3820
+            },
+            {
+              "field": "text",
+              "from": 24,
+              "to": 27,
+              "startMs": 3870,
+              "endMs": 3920
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 32,
+              "startMs": 3945,
+              "endMs": 4145
+            },
+            {
+              "field": "text",
+              "from": 33,
+              "to": 39,
+              "startMs": 4195,
+              "endMs": 4620
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 44,
+              "startMs": 4670,
+              "endMs": 5120
+            },
+            {
+              "field": "text",
+              "from": 46,
+              "to": 48,
+              "startMs": 5675,
+              "endMs": 5750
+            },
+            {
+              "field": "text",
+              "from": 49,
+              "to": 50,
+              "startMs": 5800,
+              "endMs": 5850
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 57,
+              "startMs": 5900,
+              "endMs": 6150
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 59,
+              "startMs": 6175,
+              "endMs": 6200
+            },
+            {
+              "field": "text",
+              "from": 60,
+              "to": 66,
+              "startMs": 6250,
+              "endMs": 6625
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 70,
+              "startMs": 6700,
+              "endMs": 6925
+            },
+            {
+              "field": "text",
+              "from": 71,
+              "to": 75,
+              "startMs": 6975,
+              "endMs": 7325
+            },
+            {
+              "field": "text",
+              "from": 77,
+              "to": 80,
+              "startMs": 7400,
+              "endMs": 7550
+            },
+            {
+              "field": "text",
+              "from": 81,
+              "to": 83,
+              "startMs": 7575,
+              "endMs": 7650
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 90,
+              "startMs": 7675,
+              "endMs": 8275
+            },
+            {
+              "field": "text",
+              "from": 92,
+              "to": 94,
+              "startMs": 8830,
+              "endMs": 8905
+            },
+            {
+              "field": "text",
+              "from": 95,
+              "to": 96,
+              "startMs": 8930,
+              "endMs": 8980
+            },
+            {
+              "field": "text",
+              "from": 97,
+              "to": 99,
+              "startMs": 9030,
+              "endMs": 9130
+            },
+            {
+              "field": "text",
+              "from": 100,
+              "to": 103,
+              "startMs": 9155,
+              "endMs": 9305
+            },
+            {
+              "field": "text",
+              "from": 104,
+              "to": 109,
+              "startMs": 9355,
+              "endMs": 9680
+            },
+            {
+              "field": "text",
+              "from": 110,
+              "to": 113,
+              "startMs": 9730,
+              "endMs": 9855
+            },
+            {
+              "field": "text",
+              "from": 114,
+              "to": 116,
+              "startMs": 9880,
+              "endMs": 9980
+            },
+            {
+              "field": "text",
+              "from": 117,
+              "to": 122,
+              "startMs": 10030,
+              "endMs": 10580
+            },
+            {
+              "field": "text",
+              "from": 124,
+              "to": 127,
+              "startMs": 10680,
+              "endMs": 10830
+            },
+            {
+              "field": "text",
+              "from": 128,
+              "to": 130,
+              "startMs": 10855,
+              "endMs": 10955
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 143,
+              "startMs": 11005,
+              "endMs": 11980
+            },
+            {
+              "field": "text",
+              "from": 145,
+              "to": 147,
+              "startMs": 12510,
+              "endMs": 12585
+            },
+            {
+              "field": "text",
+              "from": 148,
+              "to": 149,
+              "startMs": 12610,
+              "endMs": 12635
+            },
+            {
+              "field": "text",
+              "from": 150,
+              "to": 156,
+              "startMs": 12685,
+              "endMs": 12935
+            },
+            {
+              "field": "text",
+              "from": 157,
+              "to": 158,
+              "startMs": 12960,
+              "endMs": 13010
+            },
+            {
+              "field": "text",
+              "from": 159,
+              "to": 163,
+              "startMs": 13060,
+              "endMs": 13310
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 168,
+              "startMs": 13335,
+              "endMs": 13510
+            },
+            {
+              "field": "text",
+              "from": 169,
+              "to": 179,
+              "startMs": 13535,
+              "endMs": 14235
+            },
+            {
+              "field": "text",
+              "from": 180,
+              "to": 181,
+              "startMs": 14285,
+              "endMs": 14335
+            },
+            {
+              "field": "text",
+              "from": 182,
+              "to": 186,
+              "startMs": 14385,
+              "endMs": 14660
+            },
+            {
+              "field": "text",
+              "from": 187,
+              "to": 189,
+              "startMs": 14685,
+              "endMs": 14810
+            },
+            {
+              "field": "text",
+              "from": 190,
+              "to": 194,
+              "startMs": 14885,
+              "endMs": 15160
+            },
+            {
+              "field": "text",
+              "from": 195,
+              "to": 202,
+              "startMs": 15210,
+              "endMs": 15635
+            },
+            {
+              "field": "text",
+              "from": 203,
+              "to": 213,
+              "startMs": 15660,
+              "endMs": 16510
+            },
+            {
+              "field": "text",
+              "from": 215,
+              "to": 217,
+              "startMs": 16660,
+              "endMs": 16810
+            },
+            {
+              "field": "text",
+              "from": 218,
+              "to": 221,
+              "startMs": 16910,
+              "endMs": 17110
+            },
+            {
+              "field": "text",
+              "from": 222,
+              "to": 223,
+              "startMs": 17160,
+              "endMs": 17185
+            },
+            {
+              "field": "text",
+              "from": 224,
+              "to": 226,
+              "startMs": 17210,
+              "endMs": 17285
+            },
+            {
+              "field": "text",
+              "from": 227,
+              "to": 233,
+              "startMs": 17310,
+              "endMs": 17910
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nA pergunta chave é por que esse código roda\nSe é porque a pessoa fez algo vai no evento\nSe é só uma conta com os dados vai na renderização\nSe é porque a tela está aparecendo e algo lá fora precisa acompanhar aí sim é um efeito"
+        },
+        "dora": {
+          "src": "dora/o-que-e-efeito__4__feedback__correct.mp3",
+          "durationMs": 17445,
+          "bytes": 140204,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2395,
+              "endMs": 2445
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 16,
+              "startMs": 2495,
+              "endMs": 3420
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 18,
+              "startMs": 3470,
+              "endMs": 3520
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 23,
+              "startMs": 3595,
+              "endMs": 3720
+            },
+            {
+              "field": "text",
+              "from": 24,
+              "to": 27,
+              "startMs": 3770,
+              "endMs": 3820
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 32,
+              "startMs": 3845,
+              "endMs": 4045
+            },
+            {
+              "field": "text",
+              "from": 33,
+              "to": 39,
+              "startMs": 4095,
+              "endMs": 4520
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 44,
+              "startMs": 4570,
+              "endMs": 5045
+            },
+            {
+              "field": "text",
+              "from": 46,
+              "to": 48,
+              "startMs": 5600,
+              "endMs": 5675
+            },
+            {
+              "field": "text",
+              "from": 49,
+              "to": 50,
+              "startMs": 5700,
+              "endMs": 5750
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 57,
+              "startMs": 5800,
+              "endMs": 6075
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 59,
+              "startMs": 6100,
+              "endMs": 6125
+            },
+            {
+              "field": "text",
+              "from": 60,
+              "to": 66,
+              "startMs": 6175,
+              "endMs": 6525
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 70,
+              "startMs": 6575,
+              "endMs": 6800
+            },
+            {
+              "field": "text",
+              "from": 71,
+              "to": 75,
+              "startMs": 6850,
+              "endMs": 7200
+            },
+            {
+              "field": "text",
+              "from": 77,
+              "to": 80,
+              "startMs": 7275,
+              "endMs": 7400
+            },
+            {
+              "field": "text",
+              "from": 81,
+              "to": 83,
+              "startMs": 7425,
+              "endMs": 7475
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 90,
+              "startMs": 7500,
+              "endMs": 8050
+            },
+            {
+              "field": "text",
+              "from": 92,
+              "to": 94,
+              "startMs": 8605,
+              "endMs": 8680
+            },
+            {
+              "field": "text",
+              "from": 95,
+              "to": 96,
+              "startMs": 8705,
+              "endMs": 8755
+            },
+            {
+              "field": "text",
+              "from": 97,
+              "to": 99,
+              "startMs": 8805,
+              "endMs": 8880
+            },
+            {
+              "field": "text",
+              "from": 100,
+              "to": 103,
+              "startMs": 8905,
+              "endMs": 9055
+            },
+            {
+              "field": "text",
+              "from": 104,
+              "to": 109,
+              "startMs": 9105,
+              "endMs": 9405
+            },
+            {
+              "field": "text",
+              "from": 110,
+              "to": 113,
+              "startMs": 9455,
+              "endMs": 9580
+            },
+            {
+              "field": "text",
+              "from": 114,
+              "to": 116,
+              "startMs": 9605,
+              "endMs": 9705
+            },
+            {
+              "field": "text",
+              "from": 117,
+              "to": 122,
+              "startMs": 9755,
+              "endMs": 10230
+            },
+            {
+              "field": "text",
+              "from": 124,
+              "to": 127,
+              "startMs": 10330,
+              "endMs": 10455
+            },
+            {
+              "field": "text",
+              "from": 128,
+              "to": 130,
+              "startMs": 10480,
+              "endMs": 10580
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 143,
+              "startMs": 10630,
+              "endMs": 11555
+            },
+            {
+              "field": "text",
+              "from": 145,
+              "to": 147,
+              "startMs": 12085,
+              "endMs": 12160
+            },
+            {
+              "field": "text",
+              "from": 148,
+              "to": 149,
+              "startMs": 12185,
+              "endMs": 12210
+            },
+            {
+              "field": "text",
+              "from": 150,
+              "to": 156,
+              "startMs": 12260,
+              "endMs": 12485
+            },
+            {
+              "field": "text",
+              "from": 157,
+              "to": 158,
+              "startMs": 12510,
+              "endMs": 12560
+            },
+            {
+              "field": "text",
+              "from": 159,
+              "to": 163,
+              "startMs": 12610,
+              "endMs": 12835
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 168,
+              "startMs": 12860,
+              "endMs": 13010
+            },
+            {
+              "field": "text",
+              "from": 169,
+              "to": 179,
+              "startMs": 13035,
+              "endMs": 13710
+            },
+            {
+              "field": "text",
+              "from": 180,
+              "to": 181,
+              "startMs": 13760,
+              "endMs": 13810
+            },
+            {
+              "field": "text",
+              "from": 182,
+              "to": 186,
+              "startMs": 13860,
+              "endMs": 14160
+            },
+            {
+              "field": "text",
+              "from": 187,
+              "to": 189,
+              "startMs": 14210,
+              "endMs": 14335
+            },
+            {
+              "field": "text",
+              "from": 190,
+              "to": 194,
+              "startMs": 14410,
+              "endMs": 14685
+            },
+            {
+              "field": "text",
+              "from": 195,
+              "to": 202,
+              "startMs": 14735,
+              "endMs": 15160
+            },
+            {
+              "field": "text",
+              "from": 203,
+              "to": 213,
+              "startMs": 15185,
+              "endMs": 16010
+            },
+            {
+              "field": "text",
+              "from": 215,
+              "to": 217,
+              "startMs": 16160,
+              "endMs": 16285
+            },
+            {
+              "field": "text",
+              "from": 218,
+              "to": 221,
+              "startMs": 16360,
+              "endMs": 16535
+            },
+            {
+              "field": "text",
+              "from": 222,
+              "to": 223,
+              "startMs": 16560,
+              "endMs": 16585
+            },
+            {
+              "field": "text",
+              "from": 224,
+              "to": 226,
+              "startMs": 16610,
+              "endMs": 16685
+            },
+            {
+              "field": "text",
+              "from": 227,
+              "to": 233,
+              "startMs": 16710,
+              "endMs": 17260
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nA pergunta chave é por que esse código roda\nSe é porque a pessoa fez algo vai no evento\nSe é só uma conta com os dados vai na renderização\nSe é porque a tela está aparecendo e algo lá fora precisa acompanhar aí sim é um efeito"
+        }
+      }
+    },
+    {
+      "id": "o-que-e-efeito:4:feedback:retry",
+      "sectionId": "o-que-e-efeito",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/o-que-e-efeito__4__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/o-que-e-efeito__4__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23084,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
     },
     {
       "id": "dependencias:heading",
@@ -16730,6 +17584,790 @@
       "pauseAfter": true
     },
     {
+      "id": "armadilhas:5:answer",
+      "sectionId": "armadilhas",
+      "kind": "revealed-answer",
+      "label": "Resposta revelada",
+      "textHash": "ff3af0dff3354db47aa8f329945e114287b69b368fe2b392733d4fca7cdc5bcc",
+      "clipKey": "70ac0666e8bf792c556828e0",
+      "audio": {
+        "santa": {
+          "src": "santa/armadilhas__5__answer.mp3",
+          "durationMs": 21305,
+          "bytes": 171116,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "answer",
+              "from": 2,
+              "to": 8,
+              "startMs": 385,
+              "endMs": 835
+            },
+            {
+              "field": "answer",
+              "from": 9,
+              "to": 14,
+              "startMs": 910,
+              "endMs": 1260
+            },
+            {
+              "field": "answer",
+              "from": 15,
+              "to": 16,
+              "startMs": 1310,
+              "endMs": 1335
+            },
+            {
+              "field": "answer",
+              "from": 17,
+              "to": 21,
+              "startMs": 1385,
+              "endMs": 1685
+            },
+            {
+              "field": "answer",
+              "from": 22,
+              "to": 24,
+              "startMs": 1710,
+              "endMs": 1785
+            },
+            {
+              "field": "answer",
+              "from": 25,
+              "to": 30,
+              "startMs": 1810,
+              "endMs": 2135
+            },
+            {
+              "field": "answer",
+              "from": 31,
+              "to": 40,
+              "startMs": 2185,
+              "endMs": 2910
+            },
+            {
+              "field": "answer",
+              "from": 41,
+              "to": 43,
+              "startMs": 2960,
+              "endMs": 3060
+            },
+            {
+              "field": "answer",
+              "from": 44,
+              "to": 52,
+              "startMs": 3110,
+              "endMs": 3585
+            },
+            {
+              "field": "answer",
+              "from": 53,
+              "to": 65,
+              "startMs": 3660,
+              "endMs": 4610
+            },
+            {
+              "field": "answer",
+              "from": 67,
+              "to": 69,
+              "startMs": 5140,
+              "endMs": 5215
+            },
+            {
+              "field": "answer",
+              "from": 70,
+              "to": 74,
+              "startMs": 5240,
+              "endMs": 5440
+            },
+            {
+              "field": "answer",
+              "from": 75,
+              "to": 80,
+              "startMs": 5465,
+              "endMs": 5740
+            },
+            {
+              "field": "answer",
+              "from": 81,
+              "to": 86,
+              "startMs": 5790,
+              "endMs": 6265
+            },
+            {
+              "field": "answer",
+              "from": 88,
+              "to": 89,
+              "startMs": 6365,
+              "endMs": 6415
+            },
+            {
+              "field": "answer",
+              "from": 90,
+              "to": 94,
+              "startMs": 6465,
+              "endMs": 6715
+            },
+            {
+              "field": "answer",
+              "from": 95,
+              "to": 99,
+              "startMs": 6790,
+              "endMs": 7090
+            },
+            {
+              "field": "answer",
+              "from": 100,
+              "to": 115,
+              "startMs": 7140,
+              "endMs": 8265
+            },
+            {
+              "field": "answer",
+              "from": 117,
+              "to": 121,
+              "startMs": 8365,
+              "endMs": 8515
+            },
+            {
+              "field": "answer",
+              "from": 122,
+              "to": 123,
+              "startMs": 8540,
+              "endMs": 8590
+            },
+            {
+              "field": "answer",
+              "from": 124,
+              "to": 130,
+              "startMs": 8665,
+              "endMs": 9140
+            },
+            {
+              "field": "answer",
+              "from": 131,
+              "to": 134,
+              "startMs": 9190,
+              "endMs": 9265
+            },
+            {
+              "field": "answer",
+              "from": 135,
+              "to": 138,
+              "startMs": 9315,
+              "endMs": 9465
+            },
+            {
+              "field": "answer",
+              "from": 139,
+              "to": 144,
+              "startMs": 9515,
+              "endMs": 9840
+            },
+            {
+              "field": "answer",
+              "from": 145,
+              "to": 147,
+              "startMs": 9865,
+              "endMs": 10015
+            },
+            {
+              "field": "answer",
+              "from": 148,
+              "to": 152,
+              "startMs": 10090,
+              "endMs": 10515
+            },
+            {
+              "field": "answer",
+              "from": 154,
+              "to": 166,
+              "startMs": 11070,
+              "endMs": 11895
+            },
+            {
+              "field": "answer",
+              "from": 167,
+              "to": 170,
+              "startMs": 11945,
+              "endMs": 12095
+            },
+            {
+              "field": "answer",
+              "from": 171,
+              "to": 174,
+              "startMs": 12145,
+              "endMs": 12295
+            },
+            {
+              "field": "answer",
+              "from": 175,
+              "to": 177,
+              "startMs": 12320,
+              "endMs": 12395
+            },
+            {
+              "field": "answer",
+              "from": 178,
+              "to": 183,
+              "startMs": 12420,
+              "endMs": 12745
+            },
+            {
+              "field": "answer",
+              "from": 184,
+              "to": 186,
+              "startMs": 12770,
+              "endMs": 12845
+            },
+            {
+              "field": "answer",
+              "from": 187,
+              "to": 197,
+              "startMs": 12895,
+              "endMs": 13870
+            },
+            {
+              "field": "answer",
+              "from": 199,
+              "to": 201,
+              "startMs": 14020,
+              "endMs": 14095
+            },
+            {
+              "field": "answer",
+              "from": 202,
+              "to": 203,
+              "startMs": 14120,
+              "endMs": 14145
+            },
+            {
+              "field": "answer",
+              "from": 204,
+              "to": 210,
+              "startMs": 14170,
+              "endMs": 14595
+            },
+            {
+              "field": "answer",
+              "from": 211,
+              "to": 215,
+              "startMs": 14645,
+              "endMs": 14870
+            },
+            {
+              "field": "answer",
+              "from": 216,
+              "to": 222,
+              "startMs": 14920,
+              "endMs": 15520
+            },
+            {
+              "field": "answer",
+              "from": 224,
+              "to": 225,
+              "startMs": 15595,
+              "endMs": 15645
+            },
+            {
+              "field": "answer",
+              "from": 226,
+              "to": 233,
+              "startMs": 15695,
+              "endMs": 16170
+            },
+            {
+              "field": "answer",
+              "from": 234,
+              "to": 235,
+              "startMs": 16220,
+              "endMs": 16245
+            },
+            {
+              "field": "answer",
+              "from": 236,
+              "to": 241,
+              "startMs": 16295,
+              "endMs": 16595
+            },
+            {
+              "field": "answer",
+              "from": 242,
+              "to": 243,
+              "startMs": 16620,
+              "endMs": 16670
+            },
+            {
+              "field": "answer",
+              "from": 244,
+              "to": 250,
+              "startMs": 16720,
+              "endMs": 17170
+            },
+            {
+              "field": "answer",
+              "from": 252,
+              "to": 258,
+              "startMs": 17220,
+              "endMs": 17645
+            },
+            {
+              "field": "answer",
+              "from": 259,
+              "to": 262,
+              "startMs": 17695,
+              "endMs": 17895
+            },
+            {
+              "field": "answer",
+              "from": 263,
+              "to": 270,
+              "startMs": 17945,
+              "endMs": 18370
+            },
+            {
+              "field": "answer",
+              "from": 271,
+              "to": 273,
+              "startMs": 18395,
+              "endMs": 18470
+            },
+            {
+              "field": "answer",
+              "from": 274,
+              "to": 280,
+              "startMs": 18495,
+              "endMs": 19170
+            },
+            {
+              "field": "answer",
+              "from": 283,
+              "to": 286,
+              "startMs": 19270,
+              "endMs": 19420
+            },
+            {
+              "field": "answer",
+              "from": 287,
+              "to": 295,
+              "startMs": 19445,
+              "endMs": 19945
+            },
+            {
+              "field": "answer",
+              "from": 296,
+              "to": 298,
+              "startMs": 19970,
+              "endMs": 20045
+            },
+            {
+              "field": "answer",
+              "from": 299,
+              "to": 311,
+              "startMs": 20095,
+              "endMs": 21120
+            }
+          ],
+          "normalizedScript": "O efeito passa a usar um valor congelado da primeira renderização\nSe esse valor mudar a tela fica dessincronizada como o título que não troca de sala\nDependências não são um botão de desempenho se o efeito roda demais a solução é rever o código talvez nem precise de efeito não esconder as dependências"
+        },
+        "dora": {
+          "src": "dora/armadilhas__5__answer.mp3",
+          "durationMs": 20580,
+          "bytes": 165356,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "answer",
+              "from": 2,
+              "to": 8,
+              "startMs": 385,
+              "endMs": 810
+            },
+            {
+              "field": "answer",
+              "from": 9,
+              "to": 14,
+              "startMs": 885,
+              "endMs": 1260
+            },
+            {
+              "field": "answer",
+              "from": 15,
+              "to": 16,
+              "startMs": 1335,
+              "endMs": 1360
+            },
+            {
+              "field": "answer",
+              "from": 17,
+              "to": 21,
+              "startMs": 1410,
+              "endMs": 1710
+            },
+            {
+              "field": "answer",
+              "from": 22,
+              "to": 24,
+              "startMs": 1735,
+              "endMs": 1810
+            },
+            {
+              "field": "answer",
+              "from": 25,
+              "to": 30,
+              "startMs": 1835,
+              "endMs": 2160
+            },
+            {
+              "field": "answer",
+              "from": 31,
+              "to": 40,
+              "startMs": 2210,
+              "endMs": 2885
+            },
+            {
+              "field": "answer",
+              "from": 41,
+              "to": 43,
+              "startMs": 2935,
+              "endMs": 3010
+            },
+            {
+              "field": "answer",
+              "from": 44,
+              "to": 52,
+              "startMs": 3060,
+              "endMs": 3510
+            },
+            {
+              "field": "answer",
+              "from": 53,
+              "to": 65,
+              "startMs": 3560,
+              "endMs": 4460
+            },
+            {
+              "field": "answer",
+              "from": 67,
+              "to": 69,
+              "startMs": 4990,
+              "endMs": 5065
+            },
+            {
+              "field": "answer",
+              "from": 70,
+              "to": 74,
+              "startMs": 5090,
+              "endMs": 5290
+            },
+            {
+              "field": "answer",
+              "from": 75,
+              "to": 80,
+              "startMs": 5315,
+              "endMs": 5590
+            },
+            {
+              "field": "answer",
+              "from": 81,
+              "to": 86,
+              "startMs": 5640,
+              "endMs": 6140
+            },
+            {
+              "field": "answer",
+              "from": 88,
+              "to": 89,
+              "startMs": 6265,
+              "endMs": 6315
+            },
+            {
+              "field": "answer",
+              "from": 90,
+              "to": 94,
+              "startMs": 6365,
+              "endMs": 6615
+            },
+            {
+              "field": "answer",
+              "from": 95,
+              "to": 99,
+              "startMs": 6690,
+              "endMs": 6965
+            },
+            {
+              "field": "answer",
+              "from": 100,
+              "to": 115,
+              "startMs": 7015,
+              "endMs": 8040
+            },
+            {
+              "field": "answer",
+              "from": 117,
+              "to": 121,
+              "startMs": 8140,
+              "endMs": 8290
+            },
+            {
+              "field": "answer",
+              "from": 122,
+              "to": 123,
+              "startMs": 8315,
+              "endMs": 8340
+            },
+            {
+              "field": "answer",
+              "from": 124,
+              "to": 130,
+              "startMs": 8390,
+              "endMs": 8840
+            },
+            {
+              "field": "answer",
+              "from": 131,
+              "to": 134,
+              "startMs": 8890,
+              "endMs": 8940
+            },
+            {
+              "field": "answer",
+              "from": 135,
+              "to": 138,
+              "startMs": 8965,
+              "endMs": 9115
+            },
+            {
+              "field": "answer",
+              "from": 139,
+              "to": 144,
+              "startMs": 9165,
+              "endMs": 9440
+            },
+            {
+              "field": "answer",
+              "from": 145,
+              "to": 147,
+              "startMs": 9465,
+              "endMs": 9590
+            },
+            {
+              "field": "answer",
+              "from": 148,
+              "to": 152,
+              "startMs": 9665,
+              "endMs": 10090
+            },
+            {
+              "field": "answer",
+              "from": 154,
+              "to": 166,
+              "startMs": 10645,
+              "endMs": 11395
+            },
+            {
+              "field": "answer",
+              "from": 167,
+              "to": 170,
+              "startMs": 11445,
+              "endMs": 11595
+            },
+            {
+              "field": "answer",
+              "from": 171,
+              "to": 174,
+              "startMs": 11620,
+              "endMs": 11745
+            },
+            {
+              "field": "answer",
+              "from": 175,
+              "to": 177,
+              "startMs": 11770,
+              "endMs": 11845
+            },
+            {
+              "field": "answer",
+              "from": 178,
+              "to": 183,
+              "startMs": 11870,
+              "endMs": 12195
+            },
+            {
+              "field": "answer",
+              "from": 184,
+              "to": 186,
+              "startMs": 12220,
+              "endMs": 12295
+            },
+            {
+              "field": "answer",
+              "from": 187,
+              "to": 197,
+              "startMs": 12345,
+              "endMs": 13320
+            },
+            {
+              "field": "answer",
+              "from": 199,
+              "to": 201,
+              "startMs": 13495,
+              "endMs": 13570
+            },
+            {
+              "field": "answer",
+              "from": 202,
+              "to": 203,
+              "startMs": 13595,
+              "endMs": 13620
+            },
+            {
+              "field": "answer",
+              "from": 204,
+              "to": 210,
+              "startMs": 13645,
+              "endMs": 14045
+            },
+            {
+              "field": "answer",
+              "from": 211,
+              "to": 215,
+              "startMs": 14095,
+              "endMs": 14295
+            },
+            {
+              "field": "answer",
+              "from": 216,
+              "to": 222,
+              "startMs": 14320,
+              "endMs": 14870
+            },
+            {
+              "field": "answer",
+              "from": 224,
+              "to": 225,
+              "startMs": 14945,
+              "endMs": 14995
+            },
+            {
+              "field": "answer",
+              "from": 226,
+              "to": 233,
+              "startMs": 15045,
+              "endMs": 15520
+            },
+            {
+              "field": "answer",
+              "from": 234,
+              "to": 235,
+              "startMs": 15570,
+              "endMs": 15595
+            },
+            {
+              "field": "answer",
+              "from": 236,
+              "to": 241,
+              "startMs": 15645,
+              "endMs": 15945
+            },
+            {
+              "field": "answer",
+              "from": 242,
+              "to": 243,
+              "startMs": 15970,
+              "endMs": 15995
+            },
+            {
+              "field": "answer",
+              "from": 244,
+              "to": 250,
+              "startMs": 16045,
+              "endMs": 16495
+            },
+            {
+              "field": "answer",
+              "from": 252,
+              "to": 258,
+              "startMs": 16545,
+              "endMs": 16945
+            },
+            {
+              "field": "answer",
+              "from": 259,
+              "to": 262,
+              "startMs": 16995,
+              "endMs": 17195
+            },
+            {
+              "field": "answer",
+              "from": 263,
+              "to": 270,
+              "startMs": 17245,
+              "endMs": 17645
+            },
+            {
+              "field": "answer",
+              "from": 271,
+              "to": 273,
+              "startMs": 17670,
+              "endMs": 17745
+            },
+            {
+              "field": "answer",
+              "from": 274,
+              "to": 280,
+              "startMs": 17770,
+              "endMs": 18495
+            },
+            {
+              "field": "answer",
+              "from": 283,
+              "to": 286,
+              "startMs": 18620,
+              "endMs": 18770
+            },
+            {
+              "field": "answer",
+              "from": 287,
+              "to": 295,
+              "startMs": 18795,
+              "endMs": 19270
+            },
+            {
+              "field": "answer",
+              "from": 296,
+              "to": 298,
+              "startMs": 19295,
+              "endMs": 19370
+            },
+            {
+              "field": "answer",
+              "from": 299,
+              "to": 311,
+              "startMs": 19395,
+              "endMs": 20395
+            }
+          ],
+          "normalizedScript": "O efeito passa a usar um valor congelado da primeira renderização\nSe esse valor mudar a tela fica dessincronizada como o título que não troca de sala\nDependências não são um botão de desempenho se o efeito roda demais a solução é rever o código talvez nem precise de efeito não esconder as dependências"
+        }
+      }
+    },
+    {
       "id": "refs:heading",
       "sectionId": "refs",
       "kind": "section-heading",
@@ -23044,6 +24682,301 @@
           ],
           "normalizedScript": "Para que serve o use Effect"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:efeito-o-que-e:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "b9fbe78986cee60ff72bc22582d174e869f2ae22cbd915953bbd350ee36c3812",
+      "clipKey": "b9e19f07e8f661df57055cf6",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__efeito-o-que-e__back.mp3",
+          "durationMs": 7895,
+          "bytes": 63788,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 16,
+              "startMs": 510,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 18,
+              "startMs": 1135,
+              "endMs": 1160
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 29,
+              "startMs": 1210,
+              "endMs": 1835
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 33,
+              "startMs": 1885,
+              "endMs": 2010
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 38,
+              "startMs": 2035,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 41,
+              "startMs": 2285,
+              "endMs": 2410
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 46,
+              "startMs": 2485,
+              "endMs": 2735
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 49,
+              "startMs": 2760,
+              "endMs": 2810
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 55,
+              "startMs": 2835,
+              "endMs": 3160
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 63,
+              "startMs": 3235,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 66,
+              "startMs": 3660,
+              "endMs": 3760
+            },
+            {
+              "field": "back",
+              "from": 67,
+              "to": 70,
+              "startMs": 3810,
+              "endMs": 4235
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 77,
+              "startMs": 4335,
+              "endMs": 4760
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 87,
+              "startMs": 4835,
+              "endMs": 5560
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 97,
+              "startMs": 5660,
+              "endMs": 6110
+            },
+            {
+              "field": "back",
+              "from": 99,
+              "to": 105,
+              "startMs": 6160,
+              "endMs": 6610
+            },
+            {
+              "field": "back",
+              "from": 106,
+              "to": 108,
+              "startMs": 6660,
+              "endMs": 6760
+            },
+            {
+              "field": "back",
+              "from": 109,
+              "to": 121,
+              "startMs": 6810,
+              "endMs": 7735
+            }
+          ],
+          "normalizedScript": "Para sincronizar o componente com algo de fora do React título da aba timer listener servidor depois da renderização"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__efeito-o-que-e__back.mp3",
+          "durationMs": 7970,
+          "bytes": 64556,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 16,
+              "startMs": 510,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 18,
+              "startMs": 1135,
+              "endMs": 1160
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 29,
+              "startMs": 1185,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 33,
+              "startMs": 1835,
+              "endMs": 1960
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 38,
+              "startMs": 2010,
+              "endMs": 2235
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 41,
+              "startMs": 2260,
+              "endMs": 2335
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 46,
+              "startMs": 2410,
+              "endMs": 2660
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 49,
+              "startMs": 2685,
+              "endMs": 2735
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 55,
+              "startMs": 2760,
+              "endMs": 3060
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 63,
+              "startMs": 3135,
+              "endMs": 3535
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 66,
+              "startMs": 3560,
+              "endMs": 3660
+            },
+            {
+              "field": "back",
+              "from": 67,
+              "to": 70,
+              "startMs": 3710,
+              "endMs": 4235
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 77,
+              "startMs": 4360,
+              "endMs": 4910
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 87,
+              "startMs": 5010,
+              "endMs": 5760
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 97,
+              "startMs": 5885,
+              "endMs": 6285
+            },
+            {
+              "field": "back",
+              "from": 99,
+              "to": 105,
+              "startMs": 6335,
+              "endMs": 6735
+            },
+            {
+              "field": "back",
+              "from": 106,
+              "to": 108,
+              "startMs": 6760,
+              "endMs": 6860
+            },
+            {
+              "field": "back",
+              "from": 109,
+              "to": 121,
+              "startMs": 6910,
+              "endMs": 7810
+            }
+          ],
+          "normalizedScript": "Para sincronizar o componente com algo de fora do React título da aba timer listener servidor depois da renderização"
+        }
       }
     },
     {
@@ -23155,6 +25088,231 @@
             }
           ],
           "normalizedScript": "Quando roda um efeito com dependências"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:deps-vazias:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "3c17b657fd4b7f40bde3ba04a88153d2c87ef1764a0061f7b85e20180b7272ef",
+      "clipKey": "5c13d9e065734708788652bc",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__deps-vazias__back.mp3",
+          "durationMs": 5420,
+          "bytes": 44012,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 510,
+              "endMs": 960
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 12,
+              "startMs": 985,
+              "endMs": 1085
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 21,
+              "startMs": 1135,
+              "endMs": 1585
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 34,
+              "startMs": 1635,
+              "endMs": 2510
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 37,
+              "startMs": 2560,
+              "endMs": 2585
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 39,
+              "startMs": 2610,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 47,
+              "startMs": 2660,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 54,
+              "startMs": 3435,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 56,
+              "startMs": 3660,
+              "endMs": 3685
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 67,
+              "startMs": 3735,
+              "endMs": 4385
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 71,
+              "startMs": 4460,
+              "endMs": 4660
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 74,
+              "startMs": 4685,
+              "endMs": 4785
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 79,
+              "startMs": 4835,
+              "endMs": 5235
+            }
+          ],
+          "normalizedScript": "Só depois da primeira renderização e a limpeza quando o componente sai da tela"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__deps-vazias__back.mp3",
+          "durationMs": 5320,
+          "bytes": 43244,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 510,
+              "endMs": 910
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 12,
+              "startMs": 935,
+              "endMs": 1035
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 21,
+              "startMs": 1085,
+              "endMs": 1535
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 34,
+              "startMs": 1585,
+              "endMs": 2510
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 37,
+              "startMs": 2585,
+              "endMs": 2610
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 39,
+              "startMs": 2635,
+              "endMs": 2660
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 47,
+              "startMs": 2685,
+              "endMs": 3335
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 54,
+              "startMs": 3410,
+              "endMs": 3610
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 56,
+              "startMs": 3635,
+              "endMs": 3660
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 67,
+              "startMs": 3685,
+              "endMs": 4310
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 71,
+              "startMs": 4360,
+              "endMs": 4535
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 74,
+              "startMs": 4560,
+              "endMs": 4660
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 79,
+              "startMs": 4710,
+              "endMs": 5135
+            }
+          ],
+          "normalizedScript": "Só depois da primeira renderização e a limpeza quando o componente sai da tela"
         }
       }
     },
@@ -23338,6 +25496,217 @@
           ],
           "normalizedScript": "Quando o React chama a função de limpeza de um efeito"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:limpeza:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "9e514412b59c97a00eb6b450542d732103f3e810cc0530d2a2035cec88e1f02c",
+      "clipKey": "4b1668526260c0f16db94c74",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__limpeza__back.mp3",
+          "durationMs": 4870,
+          "bytes": 39596,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 660
+            },
+            {
+              "field": "back",
+              "from": 6,
+              "to": 8,
+              "startMs": 685,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 14,
+              "startMs": 860,
+              "endMs": 1185
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 16,
+              "startMs": 1210,
+              "endMs": 1235
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 23,
+              "startMs": 1260,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 26,
+              "startMs": 1735,
+              "endMs": 1885
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 31,
+              "startMs": 1935,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 33,
+              "startMs": 2585,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2685,
+              "endMs": 2885
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 2910,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 53,
+              "startMs": 2985,
+              "endMs": 3710
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 55,
+              "startMs": 3760,
+              "endMs": 3810
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 66,
+              "startMs": 3860,
+              "endMs": 4685
+            }
+          ],
+          "normalizedScript": "Antes de rodar o efeito de novo e quando o componente é desmontado"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__limpeza__back.mp3",
+          "durationMs": 4620,
+          "bytes": 37676,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 635
+            },
+            {
+              "field": "back",
+              "from": 6,
+              "to": 8,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 14,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 16,
+              "startMs": 1185,
+              "endMs": 1210
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 23,
+              "startMs": 1235,
+              "endMs": 1635
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 26,
+              "startMs": 1660,
+              "endMs": 1810
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 31,
+              "startMs": 1860,
+              "endMs": 2360
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 33,
+              "startMs": 2460,
+              "endMs": 2510
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2560,
+              "endMs": 2760
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 2785,
+              "endMs": 2810
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 53,
+              "startMs": 2835,
+              "endMs": 3535
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 55,
+              "startMs": 3585,
+              "endMs": 3610
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 66,
+              "startMs": 3660,
+              "endMs": 4435
+            }
+          ],
+          "normalizedScript": "Antes de rodar o efeito de novo e quando o componente é desmontado"
+        }
       }
     },
     {
@@ -23492,6 +25861,287 @@
           ],
           "normalizedScript": "Por que meu efeito roda duas vezes em desenvolvimento"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:strict-mode:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "913940c970daa8c93a6998be550227e255a04b9323900035a9539d4e3b6d0658",
+      "clipKey": "ce558efadbc8a9e6eddec874",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__strict-mode__back.mp3",
+          "durationMs": 7750,
+          "bytes": 62636,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 12,
+              "startMs": 410,
+              "endMs": 985
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 18,
+              "startMs": 1060,
+              "endMs": 1635
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 28,
+              "startMs": 1735,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 30,
+              "startMs": 2285,
+              "endMs": 2310
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 36,
+              "startMs": 2360,
+              "endMs": 2660
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 39,
+              "startMs": 2685,
+              "endMs": 2835
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 44,
+              "startMs": 2885,
+              "endMs": 3210
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 49,
+              "startMs": 3260,
+              "endMs": 3385
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 57,
+              "startMs": 3410,
+              "endMs": 3760
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 65,
+              "startMs": 3785,
+              "endMs": 4260
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 69,
+              "startMs": 4310,
+              "endMs": 4510
+            },
+            {
+              "field": "back",
+              "from": 70,
+              "to": 77,
+              "startMs": 4535,
+              "endMs": 5185
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 81,
+              "startMs": 5740,
+              "endMs": 5940
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 90,
+              "startMs": 5990,
+              "endMs": 6565
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 95,
+              "startMs": 6640,
+              "endMs": 6890
+            },
+            {
+              "field": "back",
+              "from": 96,
+              "to": 99,
+              "startMs": 6915,
+              "endMs": 7065
+            },
+            {
+              "field": "back",
+              "from": 100,
+              "to": 103,
+              "startMs": 7115,
+              "endMs": 7565
+            }
+          ],
+          "normalizedScript": "O Strict Mode monta desmonta e monta de novo para revelar efeitos sem limpeza\nEm produção roda uma vez"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__strict-mode__back.mp3",
+          "durationMs": 7600,
+          "bytes": 61484,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 12,
+              "startMs": 410,
+              "endMs": 985
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 18,
+              "startMs": 1060,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 28,
+              "startMs": 1810,
+              "endMs": 2360
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 30,
+              "startMs": 2410,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 36,
+              "startMs": 2485,
+              "endMs": 2760
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 39,
+              "startMs": 2785,
+              "endMs": 2910
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 44,
+              "startMs": 2960,
+              "endMs": 3260
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 49,
+              "startMs": 3310,
+              "endMs": 3435
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 57,
+              "startMs": 3460,
+              "endMs": 3810
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 65,
+              "startMs": 3835,
+              "endMs": 4260
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 69,
+              "startMs": 4310,
+              "endMs": 4435
+            },
+            {
+              "field": "back",
+              "from": 70,
+              "to": 77,
+              "startMs": 4460,
+              "endMs": 5060
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 81,
+              "startMs": 5615,
+              "endMs": 5815
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 90,
+              "startMs": 5865,
+              "endMs": 6415
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 95,
+              "startMs": 6490,
+              "endMs": 6740
+            },
+            {
+              "field": "back",
+              "from": 96,
+              "to": 99,
+              "startMs": 6765,
+              "endMs": 6915
+            },
+            {
+              "field": "back",
+              "from": 100,
+              "to": 103,
+              "startMs": 6965,
+              "endMs": 7415
+            }
+          ],
+          "normalizedScript": "O Strict Mode monta desmonta e monta de novo para revelar efeitos sem limpeza\nEm produção roda uma vez"
+        }
       }
     },
     {
@@ -23632,6 +26282,273 @@
           ],
           "normalizedScript": "O que causa um laço infinito com use Effect"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:laco-infinito:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "b14e135a72ddda5a3dc480976847e6ae432fa292e27eb7853ee11659c95de34a",
+      "clipKey": "3287325e647c1bf6160725f3",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__laco-infinito__back.mp3",
+          "durationMs": 6695,
+          "bytes": 54188,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 285,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 385,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 910,
+              "endMs": 1135
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 26,
+              "startMs": 1185,
+              "endMs": 2335
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 30,
+              "startMs": 2435,
+              "endMs": 2535
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 34,
+              "startMs": 2585,
+              "endMs": 2710
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 46,
+              "startMs": 2735,
+              "endMs": 3485
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 50,
+              "startMs": 3535,
+              "endMs": 3610
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 55,
+              "startMs": 3660,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 62,
+              "startMs": 3960,
+              "endMs": 4360
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 67,
+              "startMs": 4410,
+              "endMs": 4460
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 74,
+              "startMs": 4485,
+              "endMs": 4885
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 76,
+              "startMs": 4910,
+              "endMs": 4935
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 83,
+              "startMs": 4960,
+              "endMs": 5410
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 85,
+              "startMs": 5460,
+              "endMs": 5510
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 90,
+              "startMs": 5560,
+              "endMs": 5810
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 99,
+              "startMs": 5835,
+              "endMs": 6535
+            }
+          ],
+          "normalizedScript": "Um efeito sem dependências ou com dependência que muda sempre que altera o estado a cada execução"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__laco-infinito__back.mp3",
+          "durationMs": 6520,
+          "bytes": 52844,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 410
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 435,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 935,
+              "endMs": 1160
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 26,
+              "startMs": 1210,
+              "endMs": 2385
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 30,
+              "startMs": 2485,
+              "endMs": 2610
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 34,
+              "startMs": 2660,
+              "endMs": 2785
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 46,
+              "startMs": 2810,
+              "endMs": 3560
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 50,
+              "startMs": 3610,
+              "endMs": 3685
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 55,
+              "startMs": 3735,
+              "endMs": 3960
+            },
+            {
+              "field": "back",
+              "from": 56,
+              "to": 62,
+              "startMs": 4035,
+              "endMs": 4410
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 67,
+              "startMs": 4460,
+              "endMs": 4510
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 74,
+              "startMs": 4535,
+              "endMs": 4910
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 76,
+              "startMs": 4935,
+              "endMs": 4960
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 83,
+              "startMs": 4985,
+              "endMs": 5360
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 85,
+              "startMs": 5385,
+              "endMs": 5410
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 90,
+              "startMs": 5460,
+              "endMs": 5660
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 99,
+              "startMs": 5685,
+              "endMs": 6360
+            }
+          ],
+          "normalizedScript": "Um efeito sem dependências ou com dependência que muda sempre que altera o estado a cada execução"
+        }
       }
     },
     {
@@ -23757,6 +26674,231 @@
             }
           ],
           "normalizedScript": "Qual a diferença entre use Ref e use State"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:ref-vs-estado:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "9063a3c43232895557a17bfe2ae2fc8491ced5bbedd72cd2882e1826873341a3",
+      "clipKey": "aba273057de9bda64279e22b",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__ref-vs-estado__back.mp3",
+          "durationMs": 6870,
+          "bytes": 55724,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 435
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 7,
+              "startMs": 485,
+              "endMs": 685
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 18,
+              "startMs": 735,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 21,
+              "startMs": 1460,
+              "endMs": 1585
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 35,
+              "startMs": 1635,
+              "endMs": 2710
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 40,
+              "startMs": 2810,
+              "endMs": 2960
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 46,
+              "startMs": 3010,
+              "endMs": 3310
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 58,
+              "startMs": 3360,
+              "endMs": 4085
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 62,
+              "startMs": 4135,
+              "endMs": 4285
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 75,
+              "startMs": 4310,
+              "endMs": 5335
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 82,
+              "startMs": 5435,
+              "endMs": 5760
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 84,
+              "startMs": 5785,
+              "endMs": 5810
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 91,
+              "startMs": 5835,
+              "endMs": 6260
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 95,
+              "startMs": 6360,
+              "endMs": 6685
+            }
+          ],
+          "normalizedScript": "Os dois sobrevivem às renderizações mas mudar ref current não re renderiza mudar o estado sim"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__ref-vs-estado__back.mp3",
+          "durationMs": 6670,
+          "bytes": 53996,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 435
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 7,
+              "startMs": 485,
+              "endMs": 685
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 18,
+              "startMs": 735,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 21,
+              "startMs": 1460,
+              "endMs": 1585
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 35,
+              "startMs": 1635,
+              "endMs": 2660
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 40,
+              "startMs": 2760,
+              "endMs": 2885
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 46,
+              "startMs": 2935,
+              "endMs": 3210
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 58,
+              "startMs": 3260,
+              "endMs": 3960
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 62,
+              "startMs": 3985,
+              "endMs": 4135
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 75,
+              "startMs": 4160,
+              "endMs": 5185
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 82,
+              "startMs": 5310,
+              "endMs": 5610
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 84,
+              "startMs": 5635,
+              "endMs": 5660
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 91,
+              "startMs": 5685,
+              "endMs": 6085
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 95,
+              "startMs": 6160,
+              "endMs": 6485
+            }
+          ],
+          "normalizedScript": "Os dois sobrevivem às renderizações mas mudar ref current não re renderiza mudar o estado sim"
         }
       }
     },
@@ -23897,6 +27039,217 @@
             }
           ],
           "normalizedScript": "Como acessar um elemento do d o m no React"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:ref-dom:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "ff1dbdb1ba2a00cedde1a50c81f37d0201af683474b7ebad9e24e09446430aa6",
+      "clipKey": "f5f445e16eb73234674387d3",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__ref-dom__back.mp3",
+          "durationMs": 6895,
+          "bytes": 55916,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 535
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 10,
+              "startMs": 585,
+              "endMs": 910
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 16,
+              "startMs": 960,
+              "endMs": 1185
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 30,
+              "startMs": 1235,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 38,
+              "startMs": 2210,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 42,
+              "startMs": 2485,
+              "endMs": 2610
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 53,
+              "startMs": 2660,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 56,
+              "startMs": 3335,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 60,
+              "startMs": 3385,
+              "endMs": 3585
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 74,
+              "startMs": 3635,
+              "endMs": 4610
+            },
+            {
+              "field": "back",
+              "from": 76,
+              "to": 79,
+              "startMs": 4710,
+              "endMs": 4835
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 87,
+              "startMs": 4860,
+              "endMs": 5285
+            },
+            {
+              "field": "back",
+              "from": 88,
+              "to": 109,
+              "startMs": 5335,
+              "endMs": 6710
+            }
+          ],
+          "normalizedScript": "Crie const campo use Ref(null ligue com ref {campo e use campo current por exemplo campo current focus()"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__ref-dom__back.mp3",
+          "durationMs": 6770,
+          "bytes": 54956,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 535
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 10,
+              "startMs": 585,
+              "endMs": 910
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 16,
+              "startMs": 960,
+              "endMs": 1185
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 30,
+              "startMs": 1235,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 38,
+              "startMs": 2310,
+              "endMs": 2535
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 42,
+              "startMs": 2585,
+              "endMs": 2710
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 53,
+              "startMs": 2760,
+              "endMs": 3335
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 56,
+              "startMs": 3385,
+              "endMs": 3410
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 60,
+              "startMs": 3435,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 74,
+              "startMs": 3685,
+              "endMs": 4585
+            },
+            {
+              "field": "back",
+              "from": 76,
+              "to": 79,
+              "startMs": 4685,
+              "endMs": 4810
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 87,
+              "startMs": 4835,
+              "endMs": 5260
+            },
+            {
+              "field": "back",
+              "from": 88,
+              "to": 109,
+              "startMs": 5310,
+              "endMs": 6585
+            }
+          ],
+          "normalizedScript": "Crie const campo use Ref(null ligue com ref {campo e use campo current por exemplo campo current focus()"
         }
       }
     },

@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-17T00:22:53.888499+00:00",
+  "generatedAt": "2026-11-18T04:44:01.083993+00:00",
   "totalDurationMs": {
-    "santa": 736622,
-    "dora": 715596
+    "santa": 830877,
+    "dora": 806801
   },
   "totalBytes": {
-    "santa": 5924944,
-    "dora": 5755600
+    "santa": 6686900,
+    "dora": 6492980
   },
   "clips": [
     {
@@ -8982,6 +8982,608 @@
       "pauseAfter": true
     },
     {
+      "id": "dns-tcp-firewall:4:answer",
+      "sectionId": "dns-tcp-firewall",
+      "kind": "revealed-answer",
+      "label": "Resposta revelada",
+      "textHash": "24452b1bed788e679068557eb2d4d4e626696c84e5aa6f199ca0c679a961d4e5",
+      "clipKey": "65275383f6ab1c36154aa9b0",
+      "audio": {
+        "santa": {
+          "src": "santa/dns-tcp-firewall__4__answer.mp3",
+          "durationMs": 17575,
+          "bytes": 141356,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 785
+            },
+            {
+              "field": "answer",
+              "from": 11,
+              "to": 18,
+              "startMs": 810,
+              "endMs": 1435
+            },
+            {
+              "field": "answer",
+              "from": 19,
+              "to": 20,
+              "startMs": 1510,
+              "endMs": 1535
+            },
+            {
+              "field": "answer",
+              "from": 21,
+              "to": 22,
+              "startMs": 1560,
+              "endMs": 1610
+            },
+            {
+              "field": "answer",
+              "from": 23,
+              "to": 29,
+              "startMs": 1660,
+              "endMs": 2010
+            },
+            {
+              "field": "answer",
+              "from": 30,
+              "to": 41,
+              "startMs": 2060,
+              "endMs": 2785
+            },
+            {
+              "field": "answer",
+              "from": 43,
+              "to": 46,
+              "startMs": 2835,
+              "endMs": 2985
+            },
+            {
+              "field": "answer",
+              "from": 47,
+              "to": 51,
+              "startMs": 3035,
+              "endMs": 3285
+            },
+            {
+              "field": "answer",
+              "from": 52,
+              "to": 59,
+              "startMs": 3335,
+              "endMs": 3760
+            },
+            {
+              "field": "answer",
+              "from": 60,
+              "to": 65,
+              "startMs": 3810,
+              "endMs": 4010
+            },
+            {
+              "field": "answer",
+              "from": 66,
+              "to": 77,
+              "startMs": 4035,
+              "endMs": 5035
+            },
+            {
+              "field": "answer",
+              "from": 80,
+              "to": 81,
+              "startMs": 5160,
+              "endMs": 5210
+            },
+            {
+              "field": "answer",
+              "from": 82,
+              "to": 89,
+              "startMs": 5260,
+              "endMs": 5660
+            },
+            {
+              "field": "answer",
+              "from": 90,
+              "to": 94,
+              "startMs": 5685,
+              "endMs": 5935
+            },
+            {
+              "field": "answer",
+              "from": 95,
+              "to": 97,
+              "startMs": 5985,
+              "endMs": 6335
+            },
+            {
+              "field": "answer",
+              "from": 99,
+              "to": 102,
+              "startMs": 6460,
+              "endMs": 6610
+            },
+            {
+              "field": "answer",
+              "from": 103,
+              "to": 109,
+              "startMs": 6635,
+              "endMs": 6910
+            },
+            {
+              "field": "answer",
+              "from": 110,
+              "to": 118,
+              "startMs": 6960,
+              "endMs": 7485
+            },
+            {
+              "field": "answer",
+              "from": 119,
+              "to": 123,
+              "startMs": 7535,
+              "endMs": 7810
+            },
+            {
+              "field": "answer",
+              "from": 124,
+              "to": 130,
+              "startMs": 7835,
+              "endMs": 8110
+            },
+            {
+              "field": "answer",
+              "from": 131,
+              "to": 136,
+              "startMs": 8185,
+              "endMs": 8660
+            },
+            {
+              "field": "answer",
+              "from": 138,
+              "to": 139,
+              "startMs": 9215,
+              "endMs": 9265
+            },
+            {
+              "field": "answer",
+              "from": 140,
+              "to": 147,
+              "startMs": 9315,
+              "endMs": 9890
+            },
+            {
+              "field": "answer",
+              "from": 148,
+              "to": 149,
+              "startMs": 9940,
+              "endMs": 9965
+            },
+            {
+              "field": "answer",
+              "from": 150,
+              "to": 151,
+              "startMs": 9990,
+              "endMs": 10015
+            },
+            {
+              "field": "answer",
+              "from": 152,
+              "to": 160,
+              "startMs": 10065,
+              "endMs": 10565
+            },
+            {
+              "field": "answer",
+              "from": 161,
+              "to": 164,
+              "startMs": 10615,
+              "endMs": 10690
+            },
+            {
+              "field": "answer",
+              "from": 165,
+              "to": 168,
+              "startMs": 10740,
+              "endMs": 10940
+            },
+            {
+              "field": "answer",
+              "from": 169,
+              "to": 177,
+              "startMs": 10990,
+              "endMs": 11940
+            },
+            {
+              "field": "answer",
+              "from": 179,
+              "to": 189,
+              "startMs": 12090,
+              "endMs": 12690
+            },
+            {
+              "field": "answer",
+              "from": 190,
+              "to": 192,
+              "startMs": 12715,
+              "endMs": 12790
+            },
+            {
+              "field": "answer",
+              "from": 193,
+              "to": 201,
+              "startMs": 12865,
+              "endMs": 13365
+            },
+            {
+              "field": "answer",
+              "from": 202,
+              "to": 213,
+              "startMs": 13415,
+              "endMs": 13965
+            },
+            {
+              "field": "answer",
+              "from": 214,
+              "to": 215,
+              "startMs": 13990,
+              "endMs": 14015
+            },
+            {
+              "field": "answer",
+              "from": 216,
+              "to": 222,
+              "startMs": 14065,
+              "endMs": 14515
+            },
+            {
+              "field": "answer",
+              "from": 223,
+              "to": 225,
+              "startMs": 14540,
+              "endMs": 14665
+            },
+            {
+              "field": "answer",
+              "from": 226,
+              "to": 234,
+              "startMs": 14715,
+              "endMs": 15465
+            },
+            {
+              "field": "answer",
+              "from": 236,
+              "to": 238,
+              "startMs": 15590,
+              "endMs": 15665
+            },
+            {
+              "field": "answer",
+              "from": 239,
+              "to": 242,
+              "startMs": 15690,
+              "endMs": 15865
+            },
+            {
+              "field": "answer",
+              "from": 243,
+              "to": 250,
+              "startMs": 15915,
+              "endMs": 16340
+            },
+            {
+              "field": "answer",
+              "from": 251,
+              "to": 263,
+              "startMs": 16365,
+              "endMs": 17390
+            }
+          ],
+          "normalizedScript": "Connection refused é o prédio respondendo não mora ninguém nesse apartamento a máquina está lá mas nenhum programa ouve aquela porta\nO timeout é o porteiro que nem responde geralmente um firewall descartando o pacote em silêncio ou uma máquina inalcançável"
+        },
+        "dora": {
+          "src": "dora/dns-tcp-firewall__4__answer.mp3",
+          "durationMs": 16875,
+          "bytes": 135788,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 10,
+              "startMs": 310,
+              "endMs": 810
+            },
+            {
+              "field": "answer",
+              "from": 11,
+              "to": 18,
+              "startMs": 835,
+              "endMs": 1435
+            },
+            {
+              "field": "answer",
+              "from": 19,
+              "to": 20,
+              "startMs": 1510,
+              "endMs": 1535
+            },
+            {
+              "field": "answer",
+              "from": 21,
+              "to": 22,
+              "startMs": 1560,
+              "endMs": 1585
+            },
+            {
+              "field": "answer",
+              "from": 23,
+              "to": 29,
+              "startMs": 1635,
+              "endMs": 1985
+            },
+            {
+              "field": "answer",
+              "from": 30,
+              "to": 41,
+              "startMs": 2010,
+              "endMs": 2710
+            },
+            {
+              "field": "answer",
+              "from": 43,
+              "to": 46,
+              "startMs": 2760,
+              "endMs": 2910
+            },
+            {
+              "field": "answer",
+              "from": 47,
+              "to": 51,
+              "startMs": 2935,
+              "endMs": 3185
+            },
+            {
+              "field": "answer",
+              "from": 52,
+              "to": 59,
+              "startMs": 3235,
+              "endMs": 3610
+            },
+            {
+              "field": "answer",
+              "from": 60,
+              "to": 65,
+              "startMs": 3635,
+              "endMs": 3835
+            },
+            {
+              "field": "answer",
+              "from": 66,
+              "to": 77,
+              "startMs": 3860,
+              "endMs": 4935
+            },
+            {
+              "field": "answer",
+              "from": 80,
+              "to": 81,
+              "startMs": 5085,
+              "endMs": 5135
+            },
+            {
+              "field": "answer",
+              "from": 82,
+              "to": 89,
+              "startMs": 5185,
+              "endMs": 5535
+            },
+            {
+              "field": "answer",
+              "from": 90,
+              "to": 94,
+              "startMs": 5560,
+              "endMs": 5760
+            },
+            {
+              "field": "answer",
+              "from": 95,
+              "to": 97,
+              "startMs": 5810,
+              "endMs": 6160
+            },
+            {
+              "field": "answer",
+              "from": 99,
+              "to": 102,
+              "startMs": 6285,
+              "endMs": 6435
+            },
+            {
+              "field": "answer",
+              "from": 103,
+              "to": 109,
+              "startMs": 6460,
+              "endMs": 6735
+            },
+            {
+              "field": "answer",
+              "from": 110,
+              "to": 118,
+              "startMs": 6785,
+              "endMs": 7260
+            },
+            {
+              "field": "answer",
+              "from": 119,
+              "to": 123,
+              "startMs": 7310,
+              "endMs": 7535
+            },
+            {
+              "field": "answer",
+              "from": 124,
+              "to": 130,
+              "startMs": 7560,
+              "endMs": 7835
+            },
+            {
+              "field": "answer",
+              "from": 131,
+              "to": 136,
+              "startMs": 7885,
+              "endMs": 8335
+            },
+            {
+              "field": "answer",
+              "from": 138,
+              "to": 139,
+              "startMs": 8890,
+              "endMs": 8940
+            },
+            {
+              "field": "answer",
+              "from": 140,
+              "to": 147,
+              "startMs": 8990,
+              "endMs": 9565
+            },
+            {
+              "field": "answer",
+              "from": 148,
+              "to": 149,
+              "startMs": 9615,
+              "endMs": 9640
+            },
+            {
+              "field": "answer",
+              "from": 150,
+              "to": 151,
+              "startMs": 9665,
+              "endMs": 9690
+            },
+            {
+              "field": "answer",
+              "from": 152,
+              "to": 160,
+              "startMs": 9740,
+              "endMs": 10215
+            },
+            {
+              "field": "answer",
+              "from": 161,
+              "to": 164,
+              "startMs": 10265,
+              "endMs": 10340
+            },
+            {
+              "field": "answer",
+              "from": 165,
+              "to": 168,
+              "startMs": 10390,
+              "endMs": 10590
+            },
+            {
+              "field": "answer",
+              "from": 169,
+              "to": 177,
+              "startMs": 10640,
+              "endMs": 11615
+            },
+            {
+              "field": "answer",
+              "from": 179,
+              "to": 189,
+              "startMs": 11790,
+              "endMs": 12290
+            },
+            {
+              "field": "answer",
+              "from": 190,
+              "to": 192,
+              "startMs": 12315,
+              "endMs": 12390
+            },
+            {
+              "field": "answer",
+              "from": 193,
+              "to": 201,
+              "startMs": 12465,
+              "endMs": 12965
+            },
+            {
+              "field": "answer",
+              "from": 202,
+              "to": 213,
+              "startMs": 13015,
+              "endMs": 13515
+            },
+            {
+              "field": "answer",
+              "from": 214,
+              "to": 215,
+              "startMs": 13540,
+              "endMs": 13565
+            },
+            {
+              "field": "answer",
+              "from": 216,
+              "to": 222,
+              "startMs": 13590,
+              "endMs": 14015
+            },
+            {
+              "field": "answer",
+              "from": 223,
+              "to": 225,
+              "startMs": 14040,
+              "endMs": 14140
+            },
+            {
+              "field": "answer",
+              "from": 226,
+              "to": 234,
+              "startMs": 14190,
+              "endMs": 14915
+            },
+            {
+              "field": "answer",
+              "from": 236,
+              "to": 238,
+              "startMs": 15040,
+              "endMs": 15115
+            },
+            {
+              "field": "answer",
+              "from": 239,
+              "to": 242,
+              "startMs": 15140,
+              "endMs": 15315
+            },
+            {
+              "field": "answer",
+              "from": 243,
+              "to": 250,
+              "startMs": 15365,
+              "endMs": 15740
+            },
+            {
+              "field": "answer",
+              "from": 251,
+              "to": 263,
+              "startMs": 15765,
+              "endMs": 16690
+            }
+          ],
+          "normalizedScript": "Connection refused é o prédio respondendo não mora ninguém nesse apartamento a máquina está lá mas nenhum programa ouve aquela porta\nO timeout é o porteiro que nem responde geralmente um firewall descartando o pacote em silêncio ou uma máquina inalcançável"
+        }
+      }
+    },
+    {
       "id": "dns-tcp-firewall:5",
       "sectionId": "dns-tcp-firewall",
       "kind": "classify",
@@ -9681,6 +10283,594 @@
         }
       },
       "pauseAfter": true
+    },
+    {
+      "id": "dns-tcp-firewall:5:feedback:correct",
+      "sectionId": "dns-tcp-firewall",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "54fbc3f2085118a31335b5d1010c076f769bb8e5a431b42f6b6c148003b5404b",
+      "clipKey": "5d4254dae47b20a8abaf0a59",
+      "audio": {
+        "santa": {
+          "src": "santa/dns-tcp-firewall__5__feedback__correct.mp3",
+          "durationMs": 14440,
+          "bytes": 116204,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2445,
+              "endMs": 2495
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 16,
+              "startMs": 2545,
+              "endMs": 3595
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 18,
+              "startMs": 3645,
+              "endMs": 3695
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 26,
+              "startMs": 3770,
+              "endMs": 4070
+            },
+            {
+              "field": "text",
+              "from": 27,
+              "to": 29,
+              "startMs": 4095,
+              "endMs": 4170
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 36,
+              "startMs": 4195,
+              "endMs": 4545
+            },
+            {
+              "field": "text",
+              "from": 37,
+              "to": 44,
+              "startMs": 4570,
+              "endMs": 5020
+            },
+            {
+              "field": "text",
+              "from": 45,
+              "to": 49,
+              "startMs": 5095,
+              "endMs": 5545
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 54,
+              "startMs": 6100,
+              "endMs": 6200
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 61,
+              "startMs": 6250,
+              "endMs": 6650
+            },
+            {
+              "field": "text",
+              "from": 62,
+              "to": 64,
+              "startMs": 6675,
+              "endMs": 6825
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 71,
+              "startMs": 6875,
+              "endMs": 7250
+            },
+            {
+              "field": "text",
+              "from": 73,
+              "to": 76,
+              "startMs": 7375,
+              "endMs": 7625
+            },
+            {
+              "field": "text",
+              "from": 78,
+              "to": 83,
+              "startMs": 7700,
+              "endMs": 8075
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 87,
+              "startMs": 8125,
+              "endMs": 8825
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 93,
+              "startMs": 9380,
+              "endMs": 9580
+            },
+            {
+              "field": "text",
+              "from": 94,
+              "to": 101,
+              "startMs": 9630,
+              "endMs": 10030
+            },
+            {
+              "field": "text",
+              "from": 102,
+              "to": 104,
+              "startMs": 10055,
+              "endMs": 10205
+            },
+            {
+              "field": "text",
+              "from": 105,
+              "to": 110,
+              "startMs": 10280,
+              "endMs": 10830
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 114,
+              "startMs": 10905,
+              "endMs": 10980
+            },
+            {
+              "field": "text",
+              "from": 115,
+              "to": 121,
+              "startMs": 11030,
+              "endMs": 11355
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 129,
+              "startMs": 11405,
+              "endMs": 11880
+            },
+            {
+              "field": "text",
+              "from": 130,
+              "to": 135,
+              "startMs": 11930,
+              "endMs": 12230
+            },
+            {
+              "field": "text",
+              "from": 136,
+              "to": 139,
+              "startMs": 12255,
+              "endMs": 12405
+            },
+            {
+              "field": "text",
+              "from": 140,
+              "to": 142,
+              "startMs": 12455,
+              "endMs": 12555
+            },
+            {
+              "field": "text",
+              "from": 143,
+              "to": 147,
+              "startMs": 12605,
+              "endMs": 13105
+            },
+            {
+              "field": "text",
+              "from": 149,
+              "to": 154,
+              "startMs": 13205,
+              "endMs": 13630
+            },
+            {
+              "field": "text",
+              "from": 155,
+              "to": 158,
+              "startMs": 13655,
+              "endMs": 14230
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nA pergunta chave é perder um pedaço estraga tudo\nNum pedido de compra sim então t c p\nNuma chamada de vídeo um quadro perdido quase não se nota então u d p"
+        },
+        "dora": {
+          "src": "dora/dns-tcp-firewall__5__feedback__correct.mp3",
+          "durationMs": 13940,
+          "bytes": 112172,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2395,
+              "endMs": 2445
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 16,
+              "startMs": 2495,
+              "endMs": 3445
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 18,
+              "startMs": 3495,
+              "endMs": 3545
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 26,
+              "startMs": 3620,
+              "endMs": 3920
+            },
+            {
+              "field": "text",
+              "from": 27,
+              "to": 29,
+              "startMs": 3945,
+              "endMs": 4020
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 36,
+              "startMs": 4045,
+              "endMs": 4395
+            },
+            {
+              "field": "text",
+              "from": 37,
+              "to": 44,
+              "startMs": 4420,
+              "endMs": 4820
+            },
+            {
+              "field": "text",
+              "from": 45,
+              "to": 49,
+              "startMs": 4870,
+              "endMs": 5295
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 54,
+              "startMs": 5850,
+              "endMs": 5950
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 61,
+              "startMs": 6000,
+              "endMs": 6425
+            },
+            {
+              "field": "text",
+              "from": 62,
+              "to": 64,
+              "startMs": 6450,
+              "endMs": 6575
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 71,
+              "startMs": 6625,
+              "endMs": 7025
+            },
+            {
+              "field": "text",
+              "from": 73,
+              "to": 76,
+              "startMs": 7150,
+              "endMs": 7425
+            },
+            {
+              "field": "text",
+              "from": 78,
+              "to": 83,
+              "startMs": 7525,
+              "endMs": 7875
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 87,
+              "startMs": 7925,
+              "endMs": 8575
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 93,
+              "startMs": 9155,
+              "endMs": 9355
+            },
+            {
+              "field": "text",
+              "from": 94,
+              "to": 101,
+              "startMs": 9405,
+              "endMs": 9755
+            },
+            {
+              "field": "text",
+              "from": 102,
+              "to": 104,
+              "startMs": 9780,
+              "endMs": 9905
+            },
+            {
+              "field": "text",
+              "from": 105,
+              "to": 110,
+              "startMs": 9955,
+              "endMs": 10530
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 114,
+              "startMs": 10630,
+              "endMs": 10705
+            },
+            {
+              "field": "text",
+              "from": 115,
+              "to": 121,
+              "startMs": 10755,
+              "endMs": 11080
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 129,
+              "startMs": 11130,
+              "endMs": 11580
+            },
+            {
+              "field": "text",
+              "from": 130,
+              "to": 135,
+              "startMs": 11630,
+              "endMs": 11905
+            },
+            {
+              "field": "text",
+              "from": 136,
+              "to": 139,
+              "startMs": 11930,
+              "endMs": 12080
+            },
+            {
+              "field": "text",
+              "from": 140,
+              "to": 142,
+              "startMs": 12130,
+              "endMs": 12205
+            },
+            {
+              "field": "text",
+              "from": 143,
+              "to": 147,
+              "startMs": 12255,
+              "endMs": 12705
+            },
+            {
+              "field": "text",
+              "from": 149,
+              "to": 154,
+              "startMs": 12805,
+              "endMs": 13180
+            },
+            {
+              "field": "text",
+              "from": 155,
+              "to": 158,
+              "startMs": 13205,
+              "endMs": 13730
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nA pergunta chave é perder um pedaço estraga tudo\nNum pedido de compra sim então t c p\nNuma chamada de vídeo um quadro perdido quase não se nota então u d p"
+        }
+      }
+    },
+    {
+      "id": "dns-tcp-firewall:5:feedback:retry",
+      "sectionId": "dns-tcp-firewall",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/dns-tcp-firewall__5__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/dns-tcp-firewall__5__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23084,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
     },
     {
       "id": "caminho-do-diagnostico:heading",
@@ -18972,6 +20162,692 @@
       "pauseAfter": true
     },
     {
+      "id": "sintoma-e-camada:1:feedback:correct",
+      "sectionId": "sintoma-e-camada",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "86bd2041da16ec6f7b04420825e45b3bb53aca80bd9eef648a01643ea70c23e0",
+      "clipKey": "623f37cb7955bda29bf45c7b",
+      "audio": {
+        "santa": {
+          "src": "santa/sintoma-e-camada__1__feedback__correct.mp3",
+          "durationMs": 16640,
+          "bytes": 133868,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 2,
+              "startMs": 2445,
+              "endMs": 2520
+            },
+            {
+              "field": "text",
+              "from": 3,
+              "to": 4,
+              "startMs": 2570,
+              "endMs": 2620
+            },
+            {
+              "field": "text",
+              "from": 5,
+              "to": 9,
+              "startMs": 2670,
+              "endMs": 2895
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 13,
+              "startMs": 2945,
+              "endMs": 3145
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 16,
+              "startMs": 3170,
+              "endMs": 3245
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 23,
+              "startMs": 3295,
+              "endMs": 3720
+            },
+            {
+              "field": "text",
+              "from": 24,
+              "to": 28,
+              "startMs": 3770,
+              "endMs": 4620
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 31,
+              "startMs": 4745,
+              "endMs": 4795
+            },
+            {
+              "field": "text",
+              "from": 32,
+              "to": 40,
+              "startMs": 4845,
+              "endMs": 5370
+            },
+            {
+              "field": "text",
+              "from": 41,
+              "to": 47,
+              "startMs": 5445,
+              "endMs": 5745
+            },
+            {
+              "field": "text",
+              "from": 48,
+              "to": 51,
+              "startMs": 5795,
+              "endMs": 5995
+            },
+            {
+              "field": "text",
+              "from": 52,
+              "to": 53,
+              "startMs": 6020,
+              "endMs": 6045
+            },
+            {
+              "field": "text",
+              "from": 54,
+              "to": 63,
+              "startMs": 6070,
+              "endMs": 6920
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 66,
+              "startMs": 7045,
+              "endMs": 7095
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 71,
+              "startMs": 7145,
+              "endMs": 7445
+            },
+            {
+              "field": "text",
+              "from": 72,
+              "to": 76,
+              "startMs": 7470,
+              "endMs": 7695
+            },
+            {
+              "field": "text",
+              "from": 77,
+              "to": 88,
+              "startMs": 7745,
+              "endMs": 8520
+            },
+            {
+              "field": "text",
+              "from": 90,
+              "to": 92,
+              "startMs": 9075,
+              "endMs": 9175
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 96,
+              "startMs": 9225,
+              "endMs": 9475
+            },
+            {
+              "field": "text",
+              "from": 97,
+              "to": 105,
+              "startMs": 9525,
+              "endMs": 10150
+            },
+            {
+              "field": "text",
+              "from": 107,
+              "to": 108,
+              "startMs": 10250,
+              "endMs": 10300
+            },
+            {
+              "field": "text",
+              "from": 109,
+              "to": 117,
+              "startMs": 10350,
+              "endMs": 10825
+            },
+            {
+              "field": "text",
+              "from": 118,
+              "to": 122,
+              "startMs": 10850,
+              "endMs": 11025
+            },
+            {
+              "field": "text",
+              "from": 123,
+              "to": 127,
+              "startMs": 11050,
+              "endMs": 11250
+            },
+            {
+              "field": "text",
+              "from": 128,
+              "to": 134,
+              "startMs": 11300,
+              "endMs": 11675
+            },
+            {
+              "field": "text",
+              "from": 135,
+              "to": 137,
+              "startMs": 11700,
+              "endMs": 11850
+            },
+            {
+              "field": "text",
+              "from": 138,
+              "to": 143,
+              "startMs": 11900,
+              "endMs": 12425
+            },
+            {
+              "field": "text",
+              "from": 145,
+              "to": 149,
+              "startMs": 12980,
+              "endMs": 13205
+            },
+            {
+              "field": "text",
+              "from": 150,
+              "to": 159,
+              "startMs": 13255,
+              "endMs": 13805
+            },
+            {
+              "field": "text",
+              "from": 160,
+              "to": 167,
+              "startMs": 13855,
+              "endMs": 14555
+            },
+            {
+              "field": "text",
+              "from": 168,
+              "to": 170,
+              "startMs": 14630,
+              "endMs": 14780
+            },
+            {
+              "field": "text",
+              "from": 171,
+              "to": 176,
+              "startMs": 14830,
+              "endMs": 15130
+            },
+            {
+              "field": "text",
+              "from": 177,
+              "to": 183,
+              "startMs": 15180,
+              "endMs": 15680
+            },
+            {
+              "field": "text",
+              "from": 184,
+              "to": 186,
+              "startMs": 15705,
+              "endMs": 15780
+            },
+            {
+              "field": "text",
+              "from": 187,
+              "to": 195,
+              "startMs": 15830,
+              "endMs": 16455
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nSe o erro tem um status agá tê tê pê a conversa chegou até a aplicação a rede está funcionando\nSe nem conectou o problema está numa camada de baixo\nEssa separação sozinha já corta metade do trabalho"
+        },
+        "dora": {
+          "src": "dora/sintoma-e-camada__1__feedback__correct.mp3",
+          "durationMs": 16040,
+          "bytes": 129068,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 2,
+              "startMs": 2395,
+              "endMs": 2470
+            },
+            {
+              "field": "text",
+              "from": 3,
+              "to": 4,
+              "startMs": 2520,
+              "endMs": 2570
+            },
+            {
+              "field": "text",
+              "from": 5,
+              "to": 9,
+              "startMs": 2620,
+              "endMs": 2845
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 13,
+              "startMs": 2895,
+              "endMs": 3095
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 16,
+              "startMs": 3120,
+              "endMs": 3195
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 23,
+              "startMs": 3245,
+              "endMs": 3645
+            },
+            {
+              "field": "text",
+              "from": 24,
+              "to": 28,
+              "startMs": 3695,
+              "endMs": 4495
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 31,
+              "startMs": 4620,
+              "endMs": 4645
+            },
+            {
+              "field": "text",
+              "from": 32,
+              "to": 40,
+              "startMs": 4695,
+              "endMs": 5170
+            },
+            {
+              "field": "text",
+              "from": 41,
+              "to": 47,
+              "startMs": 5245,
+              "endMs": 5545
+            },
+            {
+              "field": "text",
+              "from": 48,
+              "to": 51,
+              "startMs": 5595,
+              "endMs": 5795
+            },
+            {
+              "field": "text",
+              "from": 52,
+              "to": 53,
+              "startMs": 5820,
+              "endMs": 5845
+            },
+            {
+              "field": "text",
+              "from": 54,
+              "to": 63,
+              "startMs": 5870,
+              "endMs": 6795
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 66,
+              "startMs": 6945,
+              "endMs": 6995
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 71,
+              "startMs": 7045,
+              "endMs": 7295
+            },
+            {
+              "field": "text",
+              "from": 72,
+              "to": 76,
+              "startMs": 7320,
+              "endMs": 7495
+            },
+            {
+              "field": "text",
+              "from": 77,
+              "to": 88,
+              "startMs": 7545,
+              "endMs": 8245
+            },
+            {
+              "field": "text",
+              "from": 90,
+              "to": 92,
+              "startMs": 8800,
+              "endMs": 8900
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 96,
+              "startMs": 8950,
+              "endMs": 9200
+            },
+            {
+              "field": "text",
+              "from": 97,
+              "to": 105,
+              "startMs": 9250,
+              "endMs": 9875
+            },
+            {
+              "field": "text",
+              "from": 107,
+              "to": 108,
+              "startMs": 9975,
+              "endMs": 10025
+            },
+            {
+              "field": "text",
+              "from": 109,
+              "to": 117,
+              "startMs": 10075,
+              "endMs": 10500
+            },
+            {
+              "field": "text",
+              "from": 118,
+              "to": 122,
+              "startMs": 10525,
+              "endMs": 10700
+            },
+            {
+              "field": "text",
+              "from": 123,
+              "to": 127,
+              "startMs": 10725,
+              "endMs": 10900
+            },
+            {
+              "field": "text",
+              "from": 128,
+              "to": 134,
+              "startMs": 10950,
+              "endMs": 11275
+            },
+            {
+              "field": "text",
+              "from": 135,
+              "to": 137,
+              "startMs": 11300,
+              "endMs": 11400
+            },
+            {
+              "field": "text",
+              "from": 138,
+              "to": 143,
+              "startMs": 11450,
+              "endMs": 11975
+            },
+            {
+              "field": "text",
+              "from": 145,
+              "to": 149,
+              "startMs": 12530,
+              "endMs": 12780
+            },
+            {
+              "field": "text",
+              "from": 150,
+              "to": 159,
+              "startMs": 12830,
+              "endMs": 13380
+            },
+            {
+              "field": "text",
+              "from": 160,
+              "to": 167,
+              "startMs": 13430,
+              "endMs": 14080
+            },
+            {
+              "field": "text",
+              "from": 168,
+              "to": 170,
+              "startMs": 14180,
+              "endMs": 14330
+            },
+            {
+              "field": "text",
+              "from": 171,
+              "to": 176,
+              "startMs": 14380,
+              "endMs": 14655
+            },
+            {
+              "field": "text",
+              "from": 177,
+              "to": 183,
+              "startMs": 14680,
+              "endMs": 15105
+            },
+            {
+              "field": "text",
+              "from": 184,
+              "to": 186,
+              "startMs": 15130,
+              "endMs": 15180
+            },
+            {
+              "field": "text",
+              "from": 187,
+              "to": 195,
+              "startMs": 15230,
+              "endMs": 15855
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nSe o erro tem um status agá tê tê pê a conversa chegou até a aplicação a rede está funcionando\nSe nem conectou o problema está numa camada de baixo\nEssa separação sozinha já corta metade do trabalho"
+        }
+      }
+    },
+    {
+      "id": "sintoma-e-camada:1:feedback:retry",
+      "sectionId": "sintoma-e-camada",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/sintoma-e-camada__1__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/sintoma-e-camada__1__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23084,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
+    },
+    {
       "id": "sintoma-e-camada:2",
       "sectionId": "sintoma-e-camada",
       "kind": "callout",
@@ -21728,6 +23604,259 @@
           ],
           "normalizedScript": "Na analogia do prédio o que são o i p e a porta"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:ip-porta:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "e32e93ac143764332d03ae4fac0a75aeb58ef41b75877ad3f1647349a07ebaf2",
+      "clipKey": "7b6c6cedebaf1116fbad8563",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__ip-porta__back.mp3",
+          "durationMs": 5925,
+          "bytes": 48044,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 4,
+              "startMs": 410,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 6,
+              "startMs": 910,
+              "endMs": 960
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 8,
+              "startMs": 1010,
+              "endMs": 1060
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 17,
+              "startMs": 1085,
+              "endMs": 1660
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1685,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 27,
+              "startMs": 1835,
+              "endMs": 2210
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 30,
+              "startMs": 2235,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 38,
+              "startMs": 2310,
+              "endMs": 2860
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 3415,
+              "endMs": 3465
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 48,
+              "startMs": 3565,
+              "endMs": 4015
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 50,
+              "startMs": 4090,
+              "endMs": 4140
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 52,
+              "startMs": 4165,
+              "endMs": 4190
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 64,
+              "startMs": 4215,
+              "endMs": 4965
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 67,
+              "startMs": 4990,
+              "endMs": 5015
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 76,
+              "startMs": 5065,
+              "endMs": 5740
+            }
+          ],
+          "normalizedScript": "O i p é o endereço do prédio a máquina\nA porta é o apartamento o programa"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__ip-porta__back.mp3",
+          "durationMs": 5675,
+          "bytes": 46124,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 4,
+              "startMs": 410,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 6,
+              "startMs": 935,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 8,
+              "startMs": 1060,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 17,
+              "startMs": 1135,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1710,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 27,
+              "startMs": 1835,
+              "endMs": 2185
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 30,
+              "startMs": 2210,
+              "endMs": 2235
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 38,
+              "startMs": 2260,
+              "endMs": 2810
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 3365,
+              "endMs": 3415
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 48,
+              "startMs": 3490,
+              "endMs": 3940
+            },
+            {
+              "field": "back",
+              "from": 49,
+              "to": 50,
+              "startMs": 4015,
+              "endMs": 4065
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 52,
+              "startMs": 4090,
+              "endMs": 4115
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 64,
+              "startMs": 4140,
+              "endMs": 4815
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 67,
+              "startMs": 4840,
+              "endMs": 4865
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 76,
+              "startMs": 4890,
+              "endMs": 5490
+            }
+          ],
+          "normalizedScript": "O i p é o endereço do prédio a máquina\nA porta é o apartamento o programa"
+        }
       }
     },
     {
@@ -21811,6 +23940,203 @@
             }
           ],
           "normalizedScript": "Para onde aponta localhost"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:localhost:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "c8682aabbf4a87efcd0272f3a6c9f6cf42daf7e6f9b7ec5ed0693bd73775550f",
+      "clipKey": "3c129fee0cb053c2223ef030",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__localhost__back.mp3",
+          "durationMs": 6220,
+          "bytes": 50540,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 660
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 11,
+              "startMs": 710,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 13,
+              "startMs": 860,
+              "endMs": 885
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 21,
+              "startMs": 935,
+              "endMs": 1285
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 29,
+              "startMs": 1335,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 34,
+              "startMs": 1835,
+              "endMs": 2060
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 36,
+              "startMs": 2085,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 44,
+              "startMs": 2160,
+              "endMs": 2535
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 49,
+              "startMs": 2610,
+              "endMs": 3110
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 53,
+              "startMs": 3210,
+              "endMs": 3260
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 62,
+              "startMs": 3285,
+              "endMs": 3785
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 72,
+              "startMs": 3885,
+              "endMs": 6060
+            }
+          ],
+          "normalizedScript": "Sempre para a própria máquina onde o comando roda no endereço 127 0 0 1"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__localhost__back.mp3",
+          "durationMs": 5995,
+          "bytes": 48620,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 660
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 11,
+              "startMs": 710,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 13,
+              "startMs": 860,
+              "endMs": 885
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 21,
+              "startMs": 935,
+              "endMs": 1235
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 29,
+              "startMs": 1285,
+              "endMs": 1760
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 34,
+              "startMs": 1810,
+              "endMs": 2035
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 36,
+              "startMs": 2060,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 44,
+              "startMs": 2135,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 49,
+              "startMs": 2535,
+              "endMs": 3085
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 53,
+              "startMs": 3185,
+              "endMs": 3235
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 62,
+              "startMs": 3260,
+              "endMs": 3760
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 72,
+              "startMs": 3860,
+              "endMs": 5810
+            }
+          ],
+          "normalizedScript": "Sempre para a própria máquina onde o comando roda no endereço 127 0 0 1"
         }
       }
     },
@@ -21938,6 +24264,287 @@
           ],
           "normalizedScript": "Qual a diferença entre t c p e u d p"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:tcp-udp:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "7cb405f713e0221de9232fe3e19d0b1ad8378e501852b40663ecefa4435f8527",
+      "clipKey": "c49470ce6ea8c87994a968a1",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__tcp-udp__back.mp3",
+          "durationMs": 8475,
+          "bytes": 68588,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 3,
+              "startMs": 285,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 12,
+              "startMs": 810,
+              "endMs": 1285
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 14,
+              "startMs": 1310,
+              "endMs": 1335
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 22,
+              "startMs": 1360,
+              "endMs": 2060
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 24,
+              "startMs": 2110,
+              "endMs": 2135
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 31,
+              "startMs": 2185,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 33,
+              "startMs": 2685,
+              "endMs": 2735
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 39,
+              "startMs": 2785,
+              "endMs": 3335
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 44,
+              "startMs": 3865,
+              "endMs": 4265
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 50,
+              "startMs": 4290,
+              "endMs": 4640
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 54,
+              "startMs": 4690,
+              "endMs": 4915
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 64,
+              "startMs": 4965,
+              "endMs": 5565
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 70,
+              "startMs": 5640,
+              "endMs": 5915
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 77,
+              "startMs": 5965,
+              "endMs": 6490
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 82,
+              "startMs": 6590,
+              "endMs": 6765
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 87,
+              "startMs": 6815,
+              "endMs": 7090
+            },
+            {
+              "field": "back",
+              "from": 88,
+              "to": 94,
+              "startMs": 7140,
+              "endMs": 7490
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 102,
+              "startMs": 7540,
+              "endMs": 8290
+            }
+          ],
+          "normalizedScript": "t c p confirma a entrega e mantém a ordem\nu d p envia sem confirmar mais rápido mas pode perder pedaços"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__tcp-udp__back.mp3",
+          "durationMs": 8325,
+          "bytes": 67244,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 12,
+              "startMs": 885,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 14,
+              "startMs": 1435,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 22,
+              "startMs": 1485,
+              "endMs": 2135
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 24,
+              "startMs": 2210,
+              "endMs": 2235
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 31,
+              "startMs": 2285,
+              "endMs": 2685
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 33,
+              "startMs": 2735,
+              "endMs": 2760
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 39,
+              "startMs": 2810,
+              "endMs": 3335
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 44,
+              "startMs": 3840,
+              "endMs": 4240
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 50,
+              "startMs": 4265,
+              "endMs": 4615
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 54,
+              "startMs": 4665,
+              "endMs": 4865
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 64,
+              "startMs": 4890,
+              "endMs": 5515
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 70,
+              "startMs": 5590,
+              "endMs": 5840
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 77,
+              "startMs": 5890,
+              "endMs": 6440
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 82,
+              "startMs": 6540,
+              "endMs": 6715
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 87,
+              "startMs": 6765,
+              "endMs": 7015
+            },
+            {
+              "field": "back",
+              "from": 88,
+              "to": 94,
+              "startMs": 7065,
+              "endMs": 7390
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 102,
+              "startMs": 7440,
+              "endMs": 8140
+            }
+          ],
+          "normalizedScript": "t c p confirma a entrega e mantém a ordem\nu d p envia sem confirmar mais rápido mas pode perder pedaços"
+        }
       }
     },
     {
@@ -22049,6 +24656,147 @@
             }
           ],
           "normalizedScript": "O que significa n x d o m a i n no dig"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:nxdomain:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "313266ad220b1602f23a287273fdc47942378cef29011ed26cde1f031e29f9f1",
+      "clipKey": "c64f0a275be2e606e5977831",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__nxdomain__back.mp3",
+          "durationMs": 3470,
+          "bytes": 28460,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 385
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 5,
+              "startMs": 435,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 6,
+              "to": 10,
+              "startMs": 510,
+              "endMs": 735
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 21,
+              "startMs": 785,
+              "endMs": 1485
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 25,
+              "startMs": 1560,
+              "endMs": 1710
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 32,
+              "startMs": 1735,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 35,
+              "startMs": 2310,
+              "endMs": 2410
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 39,
+              "startMs": 2460,
+              "endMs": 3310
+            }
+          ],
+          "normalizedScript": "Que o nome consultado não existe no d n s"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__nxdomain__back.mp3",
+          "durationMs": 3395,
+          "bytes": 27884,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 385
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 5,
+              "startMs": 435,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 6,
+              "to": 10,
+              "startMs": 510,
+              "endMs": 735
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 21,
+              "startMs": 785,
+              "endMs": 1535
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 25,
+              "startMs": 1610,
+              "endMs": 1760
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 32,
+              "startMs": 1785,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 35,
+              "startMs": 2310,
+              "endMs": 2410
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 39,
+              "startMs": 2460,
+              "endMs": 3235
+            }
+          ],
+          "normalizedScript": "Que o nome consultado não existe no d n s"
         }
       }
     },
@@ -22176,6 +24924,245 @@
           ],
           "normalizedScript": "Connection refused ou timeout qual sugere firewall"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:refused-timeout:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "a957f58fbc15c6e6ac5484e311104b5505ee9676bd224d931531e9ef3869bdd9",
+      "clipKey": "da2a9a89f2e9d287adc1c9e3",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__refused-timeout__back.mp3",
+          "durationMs": 7000,
+          "bytes": 56684,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 385
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 9,
+              "startMs": 460,
+              "endMs": 1285
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 21,
+              "startMs": 1815,
+              "endMs": 2340
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 29,
+              "startMs": 2365,
+              "endMs": 2815
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 36,
+              "startMs": 2840,
+              "endMs": 3365
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 40,
+              "startMs": 3415,
+              "endMs": 3490
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 3515,
+              "endMs": 3540
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 50,
+              "startMs": 3590,
+              "endMs": 3990
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 60,
+              "startMs": 4040,
+              "endMs": 4840
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 65,
+              "startMs": 4940,
+              "endMs": 5090
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 72,
+              "startMs": 5115,
+              "endMs": 5390
+            },
+            {
+              "field": "back",
+              "from": 73,
+              "to": 81,
+              "startMs": 5440,
+              "endMs": 5965
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 86,
+              "startMs": 6015,
+              "endMs": 6215
+            },
+            {
+              "field": "back",
+              "from": 87,
+              "to": 88,
+              "startMs": 6240,
+              "endMs": 6265
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 94,
+              "startMs": 6340,
+              "endMs": 6815
+            }
+          ],
+          "normalizedScript": "O timeout\nConnection refused indica que a máquina respondeu mas nenhum programa ouve a porta"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__refused-timeout__back.mp3",
+          "durationMs": 6875,
+          "bytes": 55724,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 385
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 9,
+              "startMs": 460,
+              "endMs": 1260
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 21,
+              "startMs": 1815,
+              "endMs": 2315
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 29,
+              "startMs": 2340,
+              "endMs": 2790
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 36,
+              "startMs": 2815,
+              "endMs": 3340
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 40,
+              "startMs": 3390,
+              "endMs": 3465
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 3490,
+              "endMs": 3515
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 50,
+              "startMs": 3565,
+              "endMs": 3915
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 60,
+              "startMs": 3965,
+              "endMs": 4790
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 65,
+              "startMs": 4915,
+              "endMs": 5065
+            },
+            {
+              "field": "back",
+              "from": 66,
+              "to": 72,
+              "startMs": 5090,
+              "endMs": 5365
+            },
+            {
+              "field": "back",
+              "from": 73,
+              "to": 81,
+              "startMs": 5415,
+              "endMs": 5890
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 86,
+              "startMs": 5940,
+              "endMs": 6140
+            },
+            {
+              "field": "back",
+              "from": 87,
+              "to": 88,
+              "startMs": 6165,
+              "endMs": 6190
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 94,
+              "startMs": 6240,
+              "endMs": 6690
+            }
+          ],
+          "normalizedScript": "O timeout\nConnection refused indica que a máquina respondeu mas nenhum programa ouve a porta"
+        }
       }
     },
     {
@@ -22301,6 +25288,259 @@
             }
           ],
           "normalizedScript": "Para que serve ss  tlnp no servidor"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:ss-tlnp:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "e8c3c7044e3571af7e44b85221acda9100ad2b180a6dc7e5c306dfd9c7ea91de",
+      "clipKey": "33ef5cc39f1a6121bfae4692",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__ss-tlnp__back.mp3",
+          "durationMs": 8820,
+          "bytes": 71276,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 435
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 8,
+              "startMs": 460,
+              "endMs": 635
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 14,
+              "startMs": 685,
+              "endMs": 910
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 24,
+              "startMs": 960,
+              "endMs": 1485
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 30,
+              "startMs": 1535,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 36,
+              "startMs": 1910,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 43,
+              "startMs": 2210,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 44,
+              "to": 47,
+              "startMs": 2610,
+              "endMs": 3210
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 49,
+              "startMs": 3260,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 3310,
+              "endMs": 3510
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 57,
+              "startMs": 3560,
+              "endMs": 3710
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 66,
+              "startMs": 3735,
+              "endMs": 4610
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 72,
+              "startMs": 4710,
+              "endMs": 4910
+            },
+            {
+              "field": "back",
+              "from": 73,
+              "to": 82,
+              "startMs": 5010,
+              "endMs": 7110
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 85,
+              "startMs": 7160,
+              "endMs": 7260
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 93,
+              "startMs": 7310,
+              "endMs": 8635
+            }
+          ],
+          "normalizedScript": "Para ver quais programas ouvem quais portas t c p e em qual endereço como 127 0 0 1 ou 0 0 0 0"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__ss-tlnp__back.mp3",
+          "durationMs": 8495,
+          "bytes": 68588,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 435
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 8,
+              "startMs": 460,
+              "endMs": 610
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 14,
+              "startMs": 635,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 24,
+              "startMs": 910,
+              "endMs": 1435
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 30,
+              "startMs": 1485,
+              "endMs": 1810
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 36,
+              "startMs": 1860,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 43,
+              "startMs": 2160,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 44,
+              "to": 47,
+              "startMs": 2535,
+              "endMs": 3135
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 49,
+              "startMs": 3210,
+              "endMs": 3235
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 3260,
+              "endMs": 3435
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 57,
+              "startMs": 3485,
+              "endMs": 3610
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 66,
+              "startMs": 3635,
+              "endMs": 4535
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 72,
+              "startMs": 4660,
+              "endMs": 4860
+            },
+            {
+              "field": "back",
+              "from": 73,
+              "to": 82,
+              "startMs": 4935,
+              "endMs": 6860
+            },
+            {
+              "field": "back",
+              "from": 83,
+              "to": 85,
+              "startMs": 6910,
+              "endMs": 6985
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 93,
+              "startMs": 7035,
+              "endMs": 8310
+            }
+          ],
+          "normalizedScript": "Para ver quais programas ouvem quais portas t c p e em qual endereço como 127 0 0 1 ou 0 0 0 0"
         }
       }
     },

@@ -1,3 +1,3 @@
 # Próxima ordem
 
-Conclua a verificação do lote de Santa e Dora seguindo [o relatório de estabilização](docs/RELATORIO_ESTABILIZACAO.md).
+Envie os commits verificados para `nyx43/trilha-mod` na branch `feat/percurso-api-tailwind` quando houver autorização explícita para o push.

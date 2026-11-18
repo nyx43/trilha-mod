@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-17T02:38:15.294422+00:00",
+  "generatedAt": "2026-11-18T05:03:27.003227+00:00",
   "totalDurationMs": {
-    "santa": 827561,
-    "dora": 804282
+    "santa": 933878,
+    "dora": 907873
   },
   "totalBytes": {
-    "santa": 6656300,
-    "dora": 6468908
+    "santa": 7516264,
+    "dora": 7306984
   },
   "clips": [
     {
@@ -5171,6 +5171,566 @@
         }
       },
       "pauseAfter": true
+    },
+    {
+      "id": "dimensoes:3:feedback:correct",
+      "sectionId": "dimensoes",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "e9fd7dca68d6967d3bfd0c4b9d3cfdc2b218c6461d621d8993911d0a98ee7205",
+      "clipKey": "e3ec4e0e910a9249df24ee0b",
+      "audio": {
+        "santa": {
+          "src": "santa/dimensoes__3__feedback__correct.mp3",
+          "durationMs": 13106,
+          "bytes": 105644,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 3,
+              "startMs": 2445,
+              "endMs": 2620
+            },
+            {
+              "field": "text",
+              "from": 4,
+              "to": 8,
+              "startMs": 2670,
+              "endMs": 2945
+            },
+            {
+              "field": "text",
+              "from": 9,
+              "to": 11,
+              "startMs": 2970,
+              "endMs": 3020
+            },
+            {
+              "field": "text",
+              "from": 12,
+              "to": 20,
+              "startMs": 3070,
+              "endMs": 3545
+            },
+            {
+              "field": "text",
+              "from": 21,
+              "to": 26,
+              "startMs": 3570,
+              "endMs": 3870
+            },
+            {
+              "field": "text",
+              "from": 27,
+              "to": 28,
+              "startMs": 3895,
+              "endMs": 3920
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 37,
+              "startMs": 3945,
+              "endMs": 4395
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 39,
+              "startMs": 4420,
+              "endMs": 4470
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 48,
+              "startMs": 4520,
+              "endMs": 5370
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 60,
+              "startMs": 5470,
+              "endMs": 6145
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 63,
+              "startMs": 6195,
+              "endMs": 6295
+            },
+            {
+              "field": "text",
+              "from": 64,
+              "to": 68,
+              "startMs": 6345,
+              "endMs": 6620
+            },
+            {
+              "field": "text",
+              "from": 69,
+              "to": 77,
+              "startMs": 6670,
+              "endMs": 7320
+            },
+            {
+              "field": "text",
+              "from": 79,
+              "to": 88,
+              "startMs": 7395,
+              "endMs": 8020
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 98,
+              "startMs": 8045,
+              "endMs": 8820
+            },
+            {
+              "field": "text",
+              "from": 100,
+              "to": 108,
+              "startMs": 8920,
+              "endMs": 9445
+            },
+            {
+              "field": "text",
+              "from": 109,
+              "to": 112,
+              "startMs": 9495,
+              "endMs": 9645
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 119,
+              "startMs": 9695,
+              "endMs": 10145
+            },
+            {
+              "field": "text",
+              "from": 120,
+              "to": 121,
+              "startMs": 10195,
+              "endMs": 10220
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 132,
+              "startMs": 10245,
+              "endMs": 11045
+            },
+            {
+              "field": "text",
+              "from": 133,
+              "to": 140,
+              "startMs": 11095,
+              "endMs": 11445
+            },
+            {
+              "field": "text",
+              "from": 141,
+              "to": 142,
+              "startMs": 11470,
+              "endMs": 11495
+            },
+            {
+              "field": "text",
+              "from": 143,
+              "to": 150,
+              "startMs": 11520,
+              "endMs": 11870
+            },
+            {
+              "field": "text",
+              "from": 151,
+              "to": 153,
+              "startMs": 11895,
+              "endMs": 11995
+            },
+            {
+              "field": "text",
+              "from": 154,
+              "to": 160,
+              "startMs": 12045,
+              "endMs": 12445
+            },
+            {
+              "field": "text",
+              "from": 161,
+              "to": 166,
+              "startMs": 12495,
+              "endMs": 12920
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nDar nome ao problema ajuda a escolher a checagem completude se mede contando unicidade agrupando validade com regras e atualidade olhando o horário da última carga"
+        },
+        "dora": {
+          "src": "dora/dimensoes__3__feedback__correct.mp3",
+          "durationMs": 12905,
+          "bytes": 103916,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 3,
+              "startMs": 2395,
+              "endMs": 2570
+            },
+            {
+              "field": "text",
+              "from": 4,
+              "to": 8,
+              "startMs": 2620,
+              "endMs": 2870
+            },
+            {
+              "field": "text",
+              "from": 9,
+              "to": 11,
+              "startMs": 2895,
+              "endMs": 2945
+            },
+            {
+              "field": "text",
+              "from": 12,
+              "to": 20,
+              "startMs": 2970,
+              "endMs": 3420
+            },
+            {
+              "field": "text",
+              "from": 21,
+              "to": 26,
+              "startMs": 3445,
+              "endMs": 3745
+            },
+            {
+              "field": "text",
+              "from": 27,
+              "to": 28,
+              "startMs": 3770,
+              "endMs": 3795
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 37,
+              "startMs": 3820,
+              "endMs": 4195
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 39,
+              "startMs": 4220,
+              "endMs": 4245
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 48,
+              "startMs": 4295,
+              "endMs": 5220
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 60,
+              "startMs": 5345,
+              "endMs": 5970
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 63,
+              "startMs": 6020,
+              "endMs": 6095
+            },
+            {
+              "field": "text",
+              "from": 64,
+              "to": 68,
+              "startMs": 6145,
+              "endMs": 6420
+            },
+            {
+              "field": "text",
+              "from": 69,
+              "to": 77,
+              "startMs": 6470,
+              "endMs": 7145
+            },
+            {
+              "field": "text",
+              "from": 79,
+              "to": 88,
+              "startMs": 7245,
+              "endMs": 7845
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 98,
+              "startMs": 7870,
+              "endMs": 8645
+            },
+            {
+              "field": "text",
+              "from": 100,
+              "to": 108,
+              "startMs": 8770,
+              "endMs": 9295
+            },
+            {
+              "field": "text",
+              "from": 109,
+              "to": 112,
+              "startMs": 9345,
+              "endMs": 9495
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 119,
+              "startMs": 9545,
+              "endMs": 9995
+            },
+            {
+              "field": "text",
+              "from": 120,
+              "to": 121,
+              "startMs": 10045,
+              "endMs": 10070
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 132,
+              "startMs": 10095,
+              "endMs": 10870
+            },
+            {
+              "field": "text",
+              "from": 133,
+              "to": 140,
+              "startMs": 10920,
+              "endMs": 11245
+            },
+            {
+              "field": "text",
+              "from": 141,
+              "to": 142,
+              "startMs": 11270,
+              "endMs": 11295
+            },
+            {
+              "field": "text",
+              "from": 143,
+              "to": 150,
+              "startMs": 11320,
+              "endMs": 11620
+            },
+            {
+              "field": "text",
+              "from": 151,
+              "to": 153,
+              "startMs": 11645,
+              "endMs": 11745
+            },
+            {
+              "field": "text",
+              "from": 154,
+              "to": 160,
+              "startMs": 11795,
+              "endMs": 12195
+            },
+            {
+              "field": "text",
+              "from": 161,
+              "to": 166,
+              "startMs": 12245,
+              "endMs": 12720
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nDar nome ao problema ajuda a escolher a checagem completude se mede contando unicidade agrupando validade com regras e atualidade olhando o horário da última carga"
+        }
+      }
+    },
+    {
+      "id": "dimensoes:3:feedback:retry",
+      "sectionId": "dimensoes",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/dimensoes__3__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/dimensoes__3__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23084,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
     },
     {
       "id": "dimensoes:4",
@@ -16060,6 +16620,678 @@
       "pauseAfter": true
     },
     {
+      "id": "catalogo-e-linhagem:3:answer",
+      "sectionId": "catalogo-e-linhagem",
+      "kind": "revealed-answer",
+      "label": "Resposta revelada",
+      "textHash": "dcfdd6c92bb93b4f42f5ee27327a0644670e24b1a3b57b9db32bb2472f3ace2d",
+      "clipKey": "8a9d08ae03fc430bdb09ace5",
+      "audio": {
+        "santa": {
+          "src": "santa/catalogo-e-linhagem__3__answer.mp3",
+          "durationMs": 18915,
+          "bytes": 152108,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 560
+            },
+            {
+              "field": "answer",
+              "from": 5,
+              "to": 10,
+              "startMs": 610,
+              "endMs": 835
+            },
+            {
+              "field": "answer",
+              "from": 11,
+              "to": 13,
+              "startMs": 860,
+              "endMs": 935
+            },
+            {
+              "field": "answer",
+              "from": 14,
+              "to": 19,
+              "startMs": 985,
+              "endMs": 1285
+            },
+            {
+              "field": "answer",
+              "from": 20,
+              "to": 24,
+              "startMs": 1335,
+              "endMs": 1510
+            },
+            {
+              "field": "answer",
+              "from": 25,
+              "to": 29,
+              "startMs": 1560,
+              "endMs": 1885
+            },
+            {
+              "field": "answer",
+              "from": 31,
+              "to": 41,
+              "startMs": 1935,
+              "endMs": 2435
+            },
+            {
+              "field": "answer",
+              "from": 42,
+              "to": 46,
+              "startMs": 2485,
+              "endMs": 2685
+            },
+            {
+              "field": "answer",
+              "from": 47,
+              "to": 52,
+              "startMs": 2710,
+              "endMs": 3385
+            },
+            {
+              "field": "answer",
+              "from": 54,
+              "to": 55,
+              "startMs": 3485,
+              "endMs": 3535
+            },
+            {
+              "field": "answer",
+              "from": 56,
+              "to": 60,
+              "startMs": 3585,
+              "endMs": 3935
+            },
+            {
+              "field": "answer",
+              "from": 61,
+              "to": 64,
+              "startMs": 3985,
+              "endMs": 4160
+            },
+            {
+              "field": "answer",
+              "from": 65,
+              "to": 70,
+              "startMs": 4210,
+              "endMs": 4485
+            },
+            {
+              "field": "answer",
+              "from": 71,
+              "to": 77,
+              "startMs": 4535,
+              "endMs": 5085
+            },
+            {
+              "field": "answer",
+              "from": 79,
+              "to": 80,
+              "startMs": 5640,
+              "endMs": 5715
+            },
+            {
+              "field": "answer",
+              "from": 81,
+              "to": 88,
+              "startMs": 5790,
+              "endMs": 6565
+            },
+            {
+              "field": "answer",
+              "from": 90,
+              "to": 91,
+              "startMs": 7145,
+              "endMs": 7195
+            },
+            {
+              "field": "answer",
+              "from": 92,
+              "to": 98,
+              "startMs": 7245,
+              "endMs": 7695
+            },
+            {
+              "field": "answer",
+              "from": 99,
+              "to": 104,
+              "startMs": 7770,
+              "endMs": 8370
+            },
+            {
+              "field": "answer",
+              "from": 106,
+              "to": 108,
+              "startMs": 8925,
+              "endMs": 9000
+            },
+            {
+              "field": "answer",
+              "from": 109,
+              "to": 114,
+              "startMs": 9025,
+              "endMs": 9425
+            },
+            {
+              "field": "answer",
+              "from": 115,
+              "to": 117,
+              "startMs": 9475,
+              "endMs": 9675
+            },
+            {
+              "field": "answer",
+              "from": 118,
+              "to": 121,
+              "startMs": 9725,
+              "endMs": 9775
+            },
+            {
+              "field": "answer",
+              "from": 122,
+              "to": 123,
+              "startMs": 9800,
+              "endMs": 9825
+            },
+            {
+              "field": "answer",
+              "from": 124,
+              "to": 132,
+              "startMs": 9875,
+              "endMs": 10475
+            },
+            {
+              "field": "answer",
+              "from": 133,
+              "to": 136,
+              "startMs": 10550,
+              "endMs": 10775
+            },
+            {
+              "field": "answer",
+              "from": 137,
+              "to": 141,
+              "startMs": 10800,
+              "endMs": 10975
+            },
+            {
+              "field": "answer",
+              "from": 142,
+              "to": 143,
+              "startMs": 11000,
+              "endMs": 11025
+            },
+            {
+              "field": "answer",
+              "from": 144,
+              "to": 152,
+              "startMs": 11075,
+              "endMs": 11825
+            },
+            {
+              "field": "answer",
+              "from": 154,
+              "to": 157,
+              "startMs": 11925,
+              "endMs": 12050
+            },
+            {
+              "field": "answer",
+              "from": 158,
+              "to": 165,
+              "startMs": 12075,
+              "endMs": 12500
+            },
+            {
+              "field": "answer",
+              "from": 166,
+              "to": 169,
+              "startMs": 12525,
+              "endMs": 12675
+            },
+            {
+              "field": "answer",
+              "from": 170,
+              "to": 174,
+              "startMs": 12725,
+              "endMs": 13050
+            },
+            {
+              "field": "answer",
+              "from": 175,
+              "to": 179,
+              "startMs": 13100,
+              "endMs": 13350
+            },
+            {
+              "field": "answer",
+              "from": 180,
+              "to": 187,
+              "startMs": 13375,
+              "endMs": 13825
+            },
+            {
+              "field": "answer",
+              "from": 188,
+              "to": 191,
+              "startMs": 13875,
+              "endMs": 14025
+            },
+            {
+              "field": "answer",
+              "from": 192,
+              "to": 198,
+              "startMs": 14100,
+              "endMs": 14600
+            },
+            {
+              "field": "answer",
+              "from": 200,
+              "to": 203,
+              "startMs": 15155,
+              "endMs": 15380
+            },
+            {
+              "field": "answer",
+              "from": 204,
+              "to": 212,
+              "startMs": 15405,
+              "endMs": 16055
+            },
+            {
+              "field": "answer",
+              "from": 214,
+              "to": 218,
+              "startMs": 16130,
+              "endMs": 16380
+            },
+            {
+              "field": "answer",
+              "from": 219,
+              "to": 224,
+              "startMs": 16430,
+              "endMs": 16805
+            },
+            {
+              "field": "answer",
+              "from": 225,
+              "to": 228,
+              "startMs": 16855,
+              "endMs": 16905
+            },
+            {
+              "field": "answer",
+              "from": 229,
+              "to": 238,
+              "startMs": 16930,
+              "endMs": 17555
+            },
+            {
+              "field": "answer",
+              "from": 239,
+              "to": 242,
+              "startMs": 17605,
+              "endMs": 17730
+            },
+            {
+              "field": "answer",
+              "from": 243,
+              "to": 247,
+              "startMs": 17755,
+              "endMs": 18005
+            },
+            {
+              "field": "answer",
+              "from": 248,
+              "to": 255,
+              "startMs": 18055,
+              "endMs": 18755
+            }
+          ],
+          "normalizedScript": "Você segue as setas para trás conferindo cada etapa o mart tem menos linhas\nO staging\nA tabela bruta\nNa etapa em que a contagem cai está o problema por exemplo uma loja cujo arquivo não chegou\nSem linhagem você teria que adivinhar por onde começar"
+        },
+        "dora": {
+          "src": "dora/catalogo-e-linhagem__3__answer.mp3",
+          "durationMs": 18290,
+          "bytes": 147116,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "answer",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 560
+            },
+            {
+              "field": "answer",
+              "from": 5,
+              "to": 10,
+              "startMs": 610,
+              "endMs": 835
+            },
+            {
+              "field": "answer",
+              "from": 11,
+              "to": 13,
+              "startMs": 860,
+              "endMs": 935
+            },
+            {
+              "field": "answer",
+              "from": 14,
+              "to": 19,
+              "startMs": 985,
+              "endMs": 1285
+            },
+            {
+              "field": "answer",
+              "from": 20,
+              "to": 24,
+              "startMs": 1335,
+              "endMs": 1510
+            },
+            {
+              "field": "answer",
+              "from": 25,
+              "to": 29,
+              "startMs": 1560,
+              "endMs": 1885
+            },
+            {
+              "field": "answer",
+              "from": 31,
+              "to": 41,
+              "startMs": 1935,
+              "endMs": 2435
+            },
+            {
+              "field": "answer",
+              "from": 42,
+              "to": 46,
+              "startMs": 2485,
+              "endMs": 2685
+            },
+            {
+              "field": "answer",
+              "from": 47,
+              "to": 52,
+              "startMs": 2710,
+              "endMs": 3385
+            },
+            {
+              "field": "answer",
+              "from": 54,
+              "to": 55,
+              "startMs": 3535,
+              "endMs": 3585
+            },
+            {
+              "field": "answer",
+              "from": 56,
+              "to": 60,
+              "startMs": 3635,
+              "endMs": 3935
+            },
+            {
+              "field": "answer",
+              "from": 61,
+              "to": 64,
+              "startMs": 3985,
+              "endMs": 4160
+            },
+            {
+              "field": "answer",
+              "from": 65,
+              "to": 70,
+              "startMs": 4210,
+              "endMs": 4460
+            },
+            {
+              "field": "answer",
+              "from": 71,
+              "to": 77,
+              "startMs": 4510,
+              "endMs": 5085
+            },
+            {
+              "field": "answer",
+              "from": 79,
+              "to": 80,
+              "startMs": 5640,
+              "endMs": 5715
+            },
+            {
+              "field": "answer",
+              "from": 81,
+              "to": 88,
+              "startMs": 5790,
+              "endMs": 6440
+            },
+            {
+              "field": "answer",
+              "from": 90,
+              "to": 91,
+              "startMs": 6995,
+              "endMs": 7045
+            },
+            {
+              "field": "answer",
+              "from": 92,
+              "to": 98,
+              "startMs": 7095,
+              "endMs": 7470
+            },
+            {
+              "field": "answer",
+              "from": 99,
+              "to": 104,
+              "startMs": 7520,
+              "endMs": 8120
+            },
+            {
+              "field": "answer",
+              "from": 106,
+              "to": 108,
+              "startMs": 8675,
+              "endMs": 8750
+            },
+            {
+              "field": "answer",
+              "from": 109,
+              "to": 114,
+              "startMs": 8775,
+              "endMs": 9175
+            },
+            {
+              "field": "answer",
+              "from": 115,
+              "to": 117,
+              "startMs": 9225,
+              "endMs": 9425
+            },
+            {
+              "field": "answer",
+              "from": 118,
+              "to": 121,
+              "startMs": 9475,
+              "endMs": 9525
+            },
+            {
+              "field": "answer",
+              "from": 122,
+              "to": 123,
+              "startMs": 9550,
+              "endMs": 9575
+            },
+            {
+              "field": "answer",
+              "from": 124,
+              "to": 132,
+              "startMs": 9600,
+              "endMs": 10175
+            },
+            {
+              "field": "answer",
+              "from": 133,
+              "to": 136,
+              "startMs": 10250,
+              "endMs": 10475
+            },
+            {
+              "field": "answer",
+              "from": 137,
+              "to": 141,
+              "startMs": 10500,
+              "endMs": 10675
+            },
+            {
+              "field": "answer",
+              "from": 142,
+              "to": 143,
+              "startMs": 10700,
+              "endMs": 10725
+            },
+            {
+              "field": "answer",
+              "from": 144,
+              "to": 152,
+              "startMs": 10775,
+              "endMs": 11525
+            },
+            {
+              "field": "answer",
+              "from": 154,
+              "to": 157,
+              "startMs": 11625,
+              "endMs": 11750
+            },
+            {
+              "field": "answer",
+              "from": 158,
+              "to": 165,
+              "startMs": 11775,
+              "endMs": 12200
+            },
+            {
+              "field": "answer",
+              "from": 166,
+              "to": 169,
+              "startMs": 12225,
+              "endMs": 12375
+            },
+            {
+              "field": "answer",
+              "from": 170,
+              "to": 174,
+              "startMs": 12425,
+              "endMs": 12725
+            },
+            {
+              "field": "answer",
+              "from": 175,
+              "to": 179,
+              "startMs": 12775,
+              "endMs": 13000
+            },
+            {
+              "field": "answer",
+              "from": 180,
+              "to": 187,
+              "startMs": 13025,
+              "endMs": 13375
+            },
+            {
+              "field": "answer",
+              "from": 188,
+              "to": 191,
+              "startMs": 13400,
+              "endMs": 13550
+            },
+            {
+              "field": "answer",
+              "from": 192,
+              "to": 198,
+              "startMs": 13600,
+              "endMs": 14075
+            },
+            {
+              "field": "answer",
+              "from": 200,
+              "to": 203,
+              "startMs": 14630,
+              "endMs": 14855
+            },
+            {
+              "field": "answer",
+              "from": 204,
+              "to": 212,
+              "startMs": 14880,
+              "endMs": 15555
+            },
+            {
+              "field": "answer",
+              "from": 214,
+              "to": 218,
+              "startMs": 15655,
+              "endMs": 15955
+            },
+            {
+              "field": "answer",
+              "from": 219,
+              "to": 224,
+              "startMs": 16005,
+              "endMs": 16355
+            },
+            {
+              "field": "answer",
+              "from": 225,
+              "to": 228,
+              "startMs": 16405,
+              "endMs": 16455
+            },
+            {
+              "field": "answer",
+              "from": 229,
+              "to": 238,
+              "startMs": 16480,
+              "endMs": 17105
+            },
+            {
+              "field": "answer",
+              "from": 239,
+              "to": 242,
+              "startMs": 17155,
+              "endMs": 17280
+            },
+            {
+              "field": "answer",
+              "from": 243,
+              "to": 247,
+              "startMs": 17305,
+              "endMs": 17455
+            },
+            {
+              "field": "answer",
+              "from": 248,
+              "to": 255,
+              "startMs": 17505,
+              "endMs": 18130
+            }
+          ],
+          "normalizedScript": "Você segue as setas para trás conferindo cada etapa o mart tem menos linhas\nO staging\nA tabela bruta\nNa etapa em que a contagem cai está o problema por exemplo uma loja cujo arquivo não chegou\nSem linhagem você teria que adivinhar por onde começar"
+        }
+      }
+    },
+    {
       "id": "lgpd:heading",
       "sectionId": "lgpd",
       "kind": "section-heading",
@@ -18789,6 +20021,538 @@
         }
       },
       "pauseAfter": true
+    },
+    {
+      "id": "lgpd:2:feedback:correct",
+      "sectionId": "lgpd",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "19bb0f0655b7436e958f295e63c5d953c4c0f26750582428161729003e3676d7",
+      "clipKey": "8202a546a42c0de4b2e1fef7",
+      "audio": {
+        "santa": {
+          "src": "santa/lgpd__2__feedback__correct.mp3",
+          "durationMs": 13135,
+          "bytes": 105836,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 9,
+              "startMs": 2420,
+              "endMs": 2945
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 13,
+              "startMs": 3020,
+              "endMs": 3270
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 27,
+              "startMs": 3320,
+              "endMs": 4170
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 30,
+              "startMs": 4195,
+              "endMs": 4320
+            },
+            {
+              "field": "text",
+              "from": 31,
+              "to": 37,
+              "startMs": 4395,
+              "endMs": 4695
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 39,
+              "startMs": 4720,
+              "endMs": 4795
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 46,
+              "startMs": 4845,
+              "endMs": 5370
+            },
+            {
+              "field": "text",
+              "from": 47,
+              "to": 50,
+              "startMs": 5445,
+              "endMs": 5595
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 54,
+              "startMs": 5645,
+              "endMs": 5795
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 60,
+              "startMs": 5845,
+              "endMs": 6170
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 69,
+              "startMs": 6220,
+              "endMs": 6945
+            },
+            {
+              "field": "text",
+              "from": 71,
+              "to": 74,
+              "startMs": 7500,
+              "endMs": 7675
+            },
+            {
+              "field": "text",
+              "from": 75,
+              "to": 82,
+              "startMs": 7725,
+              "endMs": 8350
+            },
+            {
+              "field": "text",
+              "from": 85,
+              "to": 91,
+              "startMs": 8450,
+              "endMs": 8850
+            },
+            {
+              "field": "text",
+              "from": 92,
+              "to": 95,
+              "startMs": 8900,
+              "endMs": 9050
+            },
+            {
+              "field": "text",
+              "from": 96,
+              "to": 102,
+              "startMs": 9100,
+              "endMs": 9500
+            },
+            {
+              "field": "text",
+              "from": 103,
+              "to": 104,
+              "startMs": 9575,
+              "endMs": 9600
+            },
+            {
+              "field": "text",
+              "from": 105,
+              "to": 110,
+              "startMs": 9625,
+              "endMs": 10050
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 116,
+              "startMs": 10075,
+              "endMs": 10275
+            },
+            {
+              "field": "text",
+              "from": 117,
+              "to": 123,
+              "startMs": 10325,
+              "endMs": 10750
+            },
+            {
+              "field": "text",
+              "from": 124,
+              "to": 131,
+              "startMs": 10800,
+              "endMs": 11250
+            },
+            {
+              "field": "text",
+              "from": 132,
+              "to": 136,
+              "startMs": 11325,
+              "endMs": 11600
+            },
+            {
+              "field": "text",
+              "from": 137,
+              "to": 148,
+              "startMs": 11625,
+              "endMs": 12350
+            },
+            {
+              "field": "text",
+              "from": 149,
+              "to": 155,
+              "startMs": 12400,
+              "endMs": 12950
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nAgregados sem possibilidade de chegar à pessoa não são dados pessoais\nMas cuidado vendas por bairro e idade numa cidade pequena pode identificar alguém"
+        },
+        "dora": {
+          "src": "dora/lgpd__2__feedback__correct.mp3",
+          "durationMs": 12785,
+          "bytes": 102956,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 9,
+              "startMs": 2370,
+              "endMs": 2895
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 13,
+              "startMs": 2970,
+              "endMs": 3245
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 27,
+              "startMs": 3295,
+              "endMs": 4095
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 30,
+              "startMs": 4120,
+              "endMs": 4220
+            },
+            {
+              "field": "text",
+              "from": 31,
+              "to": 37,
+              "startMs": 4295,
+              "endMs": 4595
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 39,
+              "startMs": 4620,
+              "endMs": 4695
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 46,
+              "startMs": 4720,
+              "endMs": 5245
+            },
+            {
+              "field": "text",
+              "from": 47,
+              "to": 50,
+              "startMs": 5320,
+              "endMs": 5470
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 54,
+              "startMs": 5520,
+              "endMs": 5670
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 60,
+              "startMs": 5695,
+              "endMs": 5995
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 69,
+              "startMs": 6045,
+              "endMs": 6770
+            },
+            {
+              "field": "text",
+              "from": 71,
+              "to": 74,
+              "startMs": 7325,
+              "endMs": 7475
+            },
+            {
+              "field": "text",
+              "from": 75,
+              "to": 82,
+              "startMs": 7500,
+              "endMs": 8150
+            },
+            {
+              "field": "text",
+              "from": 85,
+              "to": 91,
+              "startMs": 8275,
+              "endMs": 8650
+            },
+            {
+              "field": "text",
+              "from": 92,
+              "to": 95,
+              "startMs": 8700,
+              "endMs": 8850
+            },
+            {
+              "field": "text",
+              "from": 96,
+              "to": 102,
+              "startMs": 8900,
+              "endMs": 9325
+            },
+            {
+              "field": "text",
+              "from": 103,
+              "to": 104,
+              "startMs": 9400,
+              "endMs": 9425
+            },
+            {
+              "field": "text",
+              "from": 105,
+              "to": 110,
+              "startMs": 9450,
+              "endMs": 9875
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 116,
+              "startMs": 9900,
+              "endMs": 10075
+            },
+            {
+              "field": "text",
+              "from": 117,
+              "to": 123,
+              "startMs": 10125,
+              "endMs": 10550
+            },
+            {
+              "field": "text",
+              "from": 124,
+              "to": 131,
+              "startMs": 10600,
+              "endMs": 11025
+            },
+            {
+              "field": "text",
+              "from": 132,
+              "to": 136,
+              "startMs": 11100,
+              "endMs": 11325
+            },
+            {
+              "field": "text",
+              "from": 137,
+              "to": 148,
+              "startMs": 11350,
+              "endMs": 12050
+            },
+            {
+              "field": "text",
+              "from": 149,
+              "to": 155,
+              "startMs": 12075,
+              "endMs": 12600
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nAgregados sem possibilidade de chegar à pessoa não são dados pessoais\nMas cuidado vendas por bairro e idade numa cidade pequena pode identificar alguém"
+        }
+      }
+    },
+    {
+      "id": "lgpd:2:feedback:retry",
+      "sectionId": "lgpd",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/lgpd__2__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/lgpd__2__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23084,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
     },
     {
       "id": "lgpd:3",
@@ -25748,6 +27512,119 @@
           ],
           "normalizedScript": "Quais são as dimensões de qualidade de dados mais usadas"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:dimensoes-qualidade:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "d87af9024264ca436598c76b1807fdae51725f4702621d35e7591bb51c0113f8",
+      "clipKey": "06dc0d8c08de1c257bc6a564",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__dimensoes-qualidade__back.mp3",
+          "durationMs": 4570,
+          "bytes": 37292,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 21,
+              "startMs": 1060,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 31,
+              "startMs": 1960,
+              "endMs": 2610
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 43,
+              "startMs": 2660,
+              "endMs": 3335
+            },
+            {
+              "field": "back",
+              "from": 44,
+              "to": 45,
+              "startMs": 3360,
+              "endMs": 3385
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 58,
+              "startMs": 3435,
+              "endMs": 4385
+            }
+          ],
+          "normalizedScript": "Completude unicidade validade atualidade e consistência"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__dimensoes-qualidade__back.mp3",
+          "durationMs": 4670,
+          "bytes": 38060,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 1060
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 21,
+              "startMs": 1110,
+              "endMs": 1985
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 31,
+              "startMs": 2085,
+              "endMs": 2785
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 43,
+              "startMs": 2835,
+              "endMs": 3510
+            },
+            {
+              "field": "back",
+              "from": 44,
+              "to": 45,
+              "startMs": 3535,
+              "endMs": 3560
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 58,
+              "startMs": 3585,
+              "endMs": 4485
+            }
+          ],
+          "normalizedScript": "Completude unicidade validade atualidade e consistência"
+        }
       }
     },
     {
@@ -25902,6 +27779,217 @@
           ],
           "normalizedScript": "Por que w h e r e valor n u l l não encontra valores vazios"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:null-sql:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "b1c77a8742eb3d95093808df33f97728c8220148b80f59c8fd125ac4a0958de9",
+      "clipKey": "b510f70af560a491d25b2868",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__null-sql__back.mp3",
+          "durationMs": 6375,
+          "bytes": 51692,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 285,
+              "endMs": 385
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 6,
+              "startMs": 410,
+              "endMs": 1085
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 12,
+              "startMs": 1185,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 14,
+              "startMs": 1435,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 20,
+              "startMs": 1510,
+              "endMs": 1885
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 22,
+              "startMs": 1935,
+              "endMs": 1960
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 27,
+              "startMs": 1985,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 30,
+              "startMs": 3490,
+              "endMs": 3540
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 41,
+              "startMs": 3590,
+              "endMs": 4165
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 47,
+              "startMs": 4240,
+              "endMs": 4640
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 49,
+              "startMs": 4715,
+              "endMs": 4740
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 4765,
+              "endMs": 5140
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 57,
+              "startMs": 5190,
+              "endMs": 6190
+            }
+          ],
+          "normalizedScript": "Em s q l nada é igual a n u l l\nA comparação certa é i s n u l l"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__null-sql__back.mp3",
+          "durationMs": 6250,
+          "bytes": 50732,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 285,
+              "endMs": 410
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 6,
+              "startMs": 435,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 12,
+              "startMs": 1210,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 14,
+              "startMs": 1510,
+              "endMs": 1535
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 20,
+              "startMs": 1585,
+              "endMs": 1960
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 22,
+              "startMs": 2010,
+              "endMs": 2035
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 27,
+              "startMs": 2060,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 30,
+              "startMs": 3490,
+              "endMs": 3540
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 41,
+              "startMs": 3590,
+              "endMs": 4140
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 47,
+              "startMs": 4215,
+              "endMs": 4640
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 49,
+              "startMs": 4715,
+              "endMs": 4740
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 4765,
+              "endMs": 5140
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 57,
+              "startMs": 5165,
+              "endMs": 6065
+            }
+          ],
+          "normalizedScript": "Em s q l nada é igual a n u l l\nA comparação certa é i s n u l l"
+        }
       }
     },
     {
@@ -26013,6 +28101,203 @@
             }
           ],
           "normalizedScript": "Como encontrar registros órfãos em s q l"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:orfao:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "146b2222633c85062722e450ece54fa738fe6adf156fa3b4f86f9e134f86a2bb",
+      "clipKey": "655f775bc9864b854953c26f",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__orfao__back.mp3",
+          "durationMs": 7445,
+          "bytes": 60332,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 985
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 9,
+              "startMs": 1035,
+              "endMs": 1985
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 2035,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 15,
+              "startMs": 2135,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 22,
+              "startMs": 2210,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 34,
+              "startMs": 2585,
+              "endMs": 3210
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 36,
+              "startMs": 3260,
+              "endMs": 3310
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 43,
+              "startMs": 3385,
+              "endMs": 3685
+            },
+            {
+              "field": "back",
+              "from": 44,
+              "to": 49,
+              "startMs": 3735,
+              "endMs": 4610
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 64,
+              "startMs": 4635,
+              "endMs": 5760
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 67,
+              "startMs": 5810,
+              "endMs": 6235
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 72,
+              "startMs": 6285,
+              "endMs": 7260
+            }
+          ],
+          "normalizedScript": "l e f t j o i n com a tabela relacionada e filtro w h e r e relacionada id i s n u l l"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__orfao__back.mp3",
+          "durationMs": 7346,
+          "bytes": 59564,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 985
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 9,
+              "startMs": 1035,
+              "endMs": 2010
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 2085,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 15,
+              "startMs": 2185,
+              "endMs": 2210
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 22,
+              "startMs": 2260,
+              "endMs": 2585
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 34,
+              "startMs": 2610,
+              "endMs": 3235
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 36,
+              "startMs": 3260,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 43,
+              "startMs": 3360,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 44,
+              "to": 49,
+              "startMs": 3685,
+              "endMs": 4635
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 64,
+              "startMs": 4660,
+              "endMs": 5760
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 67,
+              "startMs": 5810,
+              "endMs": 6210
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 72,
+              "startMs": 6260,
+              "endMs": 7160
+            }
+          ],
+          "normalizedScript": "l e f t j o i n com a tabela relacionada e filtro w h e r e relacionada id i s n u l l"
         }
       }
     },
@@ -26140,6 +28425,259 @@
           ],
           "normalizedScript": "O que um contrato de dados define"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:contrato-dados:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "eea2836940be12fef3dafe133a21ccb2f01ef8b114fc2dcf9478184df72d1e89",
+      "clipKey": "59c1d429755247d83f1ee25a",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__contrato-dados__back.mp3",
+          "durationMs": 7346,
+          "bytes": 59564,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 15,
+              "startMs": 885,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 22,
+              "startMs": 1460,
+              "endMs": 1760
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 25,
+              "startMs": 1785,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 33,
+              "startMs": 1885,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 39,
+              "startMs": 2610,
+              "endMs": 2885
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 41,
+              "startMs": 2935,
+              "endMs": 2960
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 53,
+              "startMs": 3010,
+              "endMs": 3760
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 56,
+              "startMs": 3785,
+              "endMs": 3860
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 60,
+              "startMs": 3885,
+              "endMs": 4035
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 67,
+              "startMs": 4085,
+              "endMs": 4785
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 79,
+              "startMs": 4885,
+              "endMs": 5435
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 85,
+              "startMs": 5460,
+              "endMs": 5685
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 94,
+              "startMs": 5735,
+              "endMs": 6235
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 96,
+              "startMs": 6285,
+              "endMs": 6310
+            },
+            {
+              "field": "back",
+              "from": 97,
+              "to": 107,
+              "startMs": 6360,
+              "endMs": 7160
+            }
+          ],
+          "normalizedScript": "Esquema regras prazo de entrega dono e privacidade de uma tabela combinados entre produtor e consumidor"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__contrato-dados__back.mp3",
+          "durationMs": 7195,
+          "bytes": 58220,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 785
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 15,
+              "startMs": 860,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 22,
+              "startMs": 1460,
+              "endMs": 1760
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 25,
+              "startMs": 1785,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 33,
+              "startMs": 1885,
+              "endMs": 2510
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 39,
+              "startMs": 2635,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 41,
+              "startMs": 2985,
+              "endMs": 3010
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 53,
+              "startMs": 3060,
+              "endMs": 3785
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 56,
+              "startMs": 3810,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 60,
+              "startMs": 3910,
+              "endMs": 4010
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 67,
+              "startMs": 4060,
+              "endMs": 4760
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 79,
+              "startMs": 4860,
+              "endMs": 5410
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 85,
+              "startMs": 5435,
+              "endMs": 5660
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 94,
+              "startMs": 5710,
+              "endMs": 6185
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 96,
+              "startMs": 6210,
+              "endMs": 6235
+            },
+            {
+              "field": "back",
+              "from": 97,
+              "to": 107,
+              "startMs": 6260,
+              "endMs": 7010
+            }
+          ],
+          "normalizedScript": "Esquema regras prazo de entrega dono e privacidade de uma tabela combinados entre produtor e consumidor"
+        }
       }
     },
     {
@@ -26265,6 +28803,301 @@
             }
           ],
           "normalizedScript": "Para que serve a linhagem de dados"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:linhagem:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "baa958d0ea4011b471e3792d48ceb4128c89a1fc2653b1d193ce7d3fc4f7e6f1",
+      "clipKey": "0aa675d3c4e57b5d4b1a6a39",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__linhagem__back.mp3",
+          "durationMs": 7020,
+          "bytes": 56876,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 7,
+              "startMs": 310,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 10,
+              "startMs": 785,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 15,
+              "startMs": 885,
+              "endMs": 1135
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 20,
+              "startMs": 1210,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 25,
+              "startMs": 1510,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1860,
+              "endMs": 2235
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 31,
+              "startMs": 2310,
+              "endMs": 2335
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 33,
+              "startMs": 2360,
+              "endMs": 2385
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 37,
+              "startMs": 2435,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 45,
+              "startMs": 2535,
+              "endMs": 3060
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 3110,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 62,
+              "startMs": 3735,
+              "endMs": 4385
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 68,
+              "startMs": 4435,
+              "endMs": 4810
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 70,
+              "startMs": 4860,
+              "endMs": 4885
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 79,
+              "startMs": 4910,
+              "endMs": 5385
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 81,
+              "startMs": 5410,
+              "endMs": 5435
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 89,
+              "startMs": 5460,
+              "endMs": 5935
+            },
+            {
+              "field": "back",
+              "from": 90,
+              "to": 92,
+              "startMs": 5960,
+              "endMs": 6060
+            },
+            {
+              "field": "back",
+              "from": 93,
+              "to": 101,
+              "startMs": 6110,
+              "endMs": 6835
+            }
+          ],
+          "normalizedScript": "Mostrar de onde cada dado vem e o que depende dele investigar erros e analisar o impacto de mudanças"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__linhagem__back.mp3",
+          "durationMs": 6770,
+          "bytes": 54956,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 7,
+              "startMs": 310,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 10,
+              "startMs": 785,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 15,
+              "startMs": 885,
+              "endMs": 1085
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 20,
+              "startMs": 1135,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 25,
+              "startMs": 1435,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1760,
+              "endMs": 2135
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 31,
+              "startMs": 2210,
+              "endMs": 2235
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 37,
+              "startMs": 2335,
+              "endMs": 2385
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 45,
+              "startMs": 2435,
+              "endMs": 2860
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 2910,
+              "endMs": 3485
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 62,
+              "startMs": 3610,
+              "endMs": 4260
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 68,
+              "startMs": 4310,
+              "endMs": 4660
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 70,
+              "startMs": 4710,
+              "endMs": 4735
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 79,
+              "startMs": 4760,
+              "endMs": 5235
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 81,
+              "startMs": 5260,
+              "endMs": 5285
+            },
+            {
+              "field": "back",
+              "from": 82,
+              "to": 89,
+              "startMs": 5310,
+              "endMs": 5735
+            },
+            {
+              "field": "back",
+              "from": 90,
+              "to": 92,
+              "startMs": 5760,
+              "endMs": 5835
+            },
+            {
+              "field": "back",
+              "from": 93,
+              "to": 101,
+              "startMs": 5860,
+              "endMs": 6585
+            }
+          ],
+          "normalizedScript": "Mostrar de onde cada dado vem e o que depende dele investigar erros e analisar o impacto de mudanças"
         }
       }
     },
@@ -26406,6 +29239,245 @@
           ],
           "normalizedScript": "Cite exemplos de dados pessoais sensíveis pela l g p d"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:dado-sensivel:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "b0694c3f8cab93d10b096db58062c0e0a37d6b2ba4dd1e8441cdb5d2e59359bd",
+      "clipKey": "c5b394a965704d16385a582e",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__dado-sensivel__back.mp3",
+          "durationMs": 7895,
+          "bytes": 63788,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 15,
+              "startMs": 810,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 23,
+              "startMs": 1485,
+              "endMs": 1810
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 30,
+              "startMs": 1860,
+              "endMs": 2335
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 33,
+              "startMs": 2385,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2535,
+              "endMs": 3035
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 49,
+              "startMs": 3085,
+              "endMs": 3485
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 58,
+              "startMs": 3535,
+              "endMs": 4135
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 68,
+              "startMs": 4210,
+              "endMs": 4685
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 77,
+              "startMs": 4735,
+              "endMs": 5360
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 83,
+              "startMs": 5435,
+              "endMs": 5635
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 90,
+              "startMs": 5685,
+              "endMs": 6210
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 100,
+              "startMs": 6285,
+              "endMs": 6835
+            },
+            {
+              "field": "back",
+              "from": 101,
+              "to": 102,
+              "startMs": 6885,
+              "endMs": 6910
+            },
+            {
+              "field": "back",
+              "from": 103,
+              "to": 112,
+              "startMs": 6960,
+              "endMs": 7710
+            }
+          ],
+          "normalizedScript": "Saúde religião origem racial ou étnica opinião política filiação sindical vida sexual genética e biometria"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__dado-sensivel__back.mp3",
+          "durationMs": 7670,
+          "bytes": 62060,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 15,
+              "startMs": 785,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 23,
+              "startMs": 1460,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 30,
+              "startMs": 1835,
+              "endMs": 2310
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 33,
+              "startMs": 2360,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2485,
+              "endMs": 2960
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 49,
+              "startMs": 3010,
+              "endMs": 3410
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 58,
+              "startMs": 3435,
+              "endMs": 4035
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 68,
+              "startMs": 4135,
+              "endMs": 4610
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 77,
+              "startMs": 4660,
+              "endMs": 5285
+            },
+            {
+              "field": "back",
+              "from": 79,
+              "to": 83,
+              "startMs": 5360,
+              "endMs": 5560
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 90,
+              "startMs": 5610,
+              "endMs": 6135
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 100,
+              "startMs": 6185,
+              "endMs": 6710
+            },
+            {
+              "field": "back",
+              "from": 101,
+              "to": 102,
+              "startMs": 6735,
+              "endMs": 6760
+            },
+            {
+              "field": "back",
+              "from": 103,
+              "to": 112,
+              "startMs": 6810,
+              "endMs": 7485
+            }
+          ],
+          "normalizedScript": "Saúde religião origem racial ou étnica opinião política filiação sindical vida sexual genética e biometria"
+        }
       }
     },
     {
@@ -26531,6 +29603,329 @@
             }
           ],
           "normalizedScript": "Qual a diferença entre anonimização e pseudonimização"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:pseudonimizacao:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "370f20642a2d6d0309547aec5b80bbbffba8ab5b249dea2d2451da3a402f90ff",
+      "clipKey": "bc4f75288da84741a2244d95",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__pseudonimizacao__back.mp3",
+          "durationMs": 8975,
+          "bytes": 72428,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 11,
+              "startMs": 285,
+              "endMs": 1035
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 15,
+              "startMs": 1110,
+              "endMs": 1260
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 21,
+              "startMs": 1310,
+              "endMs": 1535
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 23,
+              "startMs": 1560,
+              "endMs": 1635
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 30,
+              "startMs": 1685,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 32,
+              "startMs": 2210,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 38,
+              "startMs": 2310,
+              "endMs": 2785
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 41,
+              "startMs": 2835,
+              "endMs": 2985
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 45,
+              "startMs": 3035,
+              "endMs": 3185
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 3235,
+              "endMs": 3460
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 58,
+              "startMs": 3510,
+              "endMs": 4135
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 74,
+              "startMs": 4690,
+              "endMs": 5565
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 80,
+              "startMs": 5640,
+              "endMs": 5965
+            },
+            {
+              "field": "back",
+              "from": 81,
+              "to": 84,
+              "startMs": 6015,
+              "endMs": 6140
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 86,
+              "startMs": 6190,
+              "endMs": 6240
+            },
+            {
+              "field": "back",
+              "from": 87,
+              "to": 92,
+              "startMs": 6365,
+              "endMs": 6715
+            },
+            {
+              "field": "back",
+              "from": 93,
+              "to": 94,
+              "startMs": 6765,
+              "endMs": 6790
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 103,
+              "startMs": 6840,
+              "endMs": 7390
+            },
+            {
+              "field": "back",
+              "from": 104,
+              "to": 109,
+              "startMs": 7490,
+              "endMs": 7840
+            },
+            {
+              "field": "back",
+              "from": 110,
+              "to": 114,
+              "startMs": 7890,
+              "endMs": 8115
+            },
+            {
+              "field": "back",
+              "from": 115,
+              "to": 122,
+              "startMs": 8165,
+              "endMs": 8790
+            }
+          ],
+          "normalizedScript": "Anonimizado não volta à pessoa e deixa de ser dado pessoal\nPseudonimizado volta com a chave e continua sendo dado pessoal"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__pseudonimizacao__back.mp3",
+          "durationMs": 8650,
+          "bytes": 69932,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 11,
+              "startMs": 285,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 15,
+              "startMs": 1185,
+              "endMs": 1335
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 21,
+              "startMs": 1385,
+              "endMs": 1610
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 23,
+              "startMs": 1635,
+              "endMs": 1710
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 30,
+              "startMs": 1760,
+              "endMs": 2210
+            },
+            {
+              "field": "back",
+              "from": 31,
+              "to": 32,
+              "startMs": 2260,
+              "endMs": 2310
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 38,
+              "startMs": 2360,
+              "endMs": 2785
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 41,
+              "startMs": 2835,
+              "endMs": 2910
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 45,
+              "startMs": 2960,
+              "endMs": 3085
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 3110,
+              "endMs": 3310
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 58,
+              "startMs": 3360,
+              "endMs": 3935
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 74,
+              "startMs": 4490,
+              "endMs": 5365
+            },
+            {
+              "field": "back",
+              "from": 75,
+              "to": 80,
+              "startMs": 5440,
+              "endMs": 5790
+            },
+            {
+              "field": "back",
+              "from": 81,
+              "to": 84,
+              "startMs": 5840,
+              "endMs": 5965
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 86,
+              "startMs": 6015,
+              "endMs": 6065
+            },
+            {
+              "field": "back",
+              "from": 87,
+              "to": 92,
+              "startMs": 6190,
+              "endMs": 6515
+            },
+            {
+              "field": "back",
+              "from": 93,
+              "to": 94,
+              "startMs": 6565,
+              "endMs": 6590
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 103,
+              "startMs": 6640,
+              "endMs": 7190
+            },
+            {
+              "field": "back",
+              "from": 104,
+              "to": 109,
+              "startMs": 7265,
+              "endMs": 7565
+            },
+            {
+              "field": "back",
+              "from": 110,
+              "to": 114,
+              "startMs": 7615,
+              "endMs": 7815
+            },
+            {
+              "field": "back",
+              "from": 115,
+              "to": 122,
+              "startMs": 7865,
+              "endMs": 8465
+            }
+          ],
+          "normalizedScript": "Anonimizado não volta à pessoa e deixa de ser dado pessoal\nPseudonimizado volta com a chave e continua sendo dado pessoal"
         }
       }
     },
@@ -26671,6 +30066,273 @@
             }
           ],
           "normalizedScript": "O que é o princípio do menor privilégio"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:menor-privilegio:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "2491f5b0f8f646b7da5ffb3862e0238557e2bc1ea7e6124882fbaa4776f74bcd",
+      "clipKey": "31382ae3501565fbbdf08424",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__menor-privilegio__back.mp3",
+          "durationMs": 5845,
+          "bytes": 47468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 560
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 11,
+              "startMs": 610,
+              "endMs": 1060
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 14,
+              "startMs": 1110,
+              "endMs": 1210
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 22,
+              "startMs": 1260,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 29,
+              "startMs": 1710,
+              "endMs": 2260
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 32,
+              "startMs": 2360,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 34,
+              "startMs": 2510,
+              "endMs": 2535
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 38,
+              "startMs": 2585,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 46,
+              "startMs": 2685,
+              "endMs": 3185
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 51,
+              "startMs": 3235,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 53,
+              "startMs": 3385,
+              "endMs": 3410
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 57,
+              "startMs": 3460,
+              "endMs": 3610
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 66,
+              "startMs": 3660,
+              "endMs": 4260
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 71,
+              "startMs": 4360,
+              "endMs": 4510
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 76,
+              "startMs": 4560,
+              "endMs": 4785
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 79,
+              "startMs": 4810,
+              "endMs": 4910
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 86,
+              "startMs": 4960,
+              "endMs": 5660
+            }
+          ],
+          "normalizedScript": "Cada pessoa ou sistema acessa só o que precisa para o seu trabalho por meio de papéis"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__menor-privilegio__back.mp3",
+          "durationMs": 5470,
+          "bytes": 44396,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 560
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 11,
+              "startMs": 610,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 14,
+              "startMs": 1060,
+              "endMs": 1135
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 22,
+              "startMs": 1185,
+              "endMs": 1585
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 29,
+              "startMs": 1610,
+              "endMs": 2210
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 32,
+              "startMs": 2310,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 34,
+              "startMs": 2460,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 38,
+              "startMs": 2510,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 46,
+              "startMs": 2610,
+              "endMs": 3060
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 51,
+              "startMs": 3085,
+              "endMs": 3210
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 53,
+              "startMs": 3235,
+              "endMs": 3260
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 57,
+              "startMs": 3285,
+              "endMs": 3410
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 66,
+              "startMs": 3460,
+              "endMs": 4035
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 71,
+              "startMs": 4135,
+              "endMs": 4260
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 76,
+              "startMs": 4310,
+              "endMs": 4510
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 79,
+              "startMs": 4535,
+              "endMs": 4610
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 86,
+              "startMs": 4660,
+              "endMs": 5285
+            }
+          ],
+          "normalizedScript": "Cada pessoa ou sistema acessa só o que precisa para o seu trabalho por meio de papéis"
         }
       }
     },

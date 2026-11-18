@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-17T00:22:55.677413+00:00",
+  "generatedAt": "2026-11-18T04:43:13.860480+00:00",
   "totalDurationMs": {
-    "santa": 759482,
-    "dora": 736556
+    "santa": 799092,
+    "dora": 774891
   },
   "totalBytes": {
-    "santa": 6109160,
-    "dora": 5924840
+    "santa": 6430876,
+    "dora": 6236764
   },
   "clips": [
     {
@@ -24318,6 +24318,287 @@
           ],
           "normalizedScript": "Qual a diferença entre um caminho absoluto e um relativo"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:caminho-absoluto:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "f3c6598e98b84193550d968610da3719d6d20e9dab3048559335dbb65a359cf9",
+      "clipKey": "7b30c7f742fcc1b655ca6106",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__caminho-absoluto__back.mp3",
+          "durationMs": 8225,
+          "bytes": 66476,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 10,
+              "startMs": 385,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 17,
+              "startMs": 1060,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1535,
+              "endMs": 1635
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 25,
+              "startMs": 1685,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 37,
+              "startMs": 2135,
+              "endMs": 3085
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 40,
+              "startMs": 3135,
+              "endMs": 3160
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 49,
+              "startMs": 3210,
+              "endMs": 3735
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 3760,
+              "endMs": 3860
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 61,
+              "startMs": 3910,
+              "endMs": 4260
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 67,
+              "startMs": 4310,
+              "endMs": 4810
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 70,
+              "startMs": 5365,
+              "endMs": 5415
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 79,
+              "startMs": 5465,
+              "endMs": 6065
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 85,
+              "startMs": 6140,
+              "endMs": 6515
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 88,
+              "startMs": 6565,
+              "endMs": 6665
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 94,
+              "startMs": 6740,
+              "endMs": 7065
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 100,
+              "startMs": 7090,
+              "endMs": 7440
+            },
+            {
+              "field": "back",
+              "from": 102,
+              "to": 107,
+              "startMs": 7490,
+              "endMs": 8040
+            }
+          ],
+          "normalizedScript": "O absoluto começa na raiz etc nginx e funciona de qualquer lugar\nO relativo parte da pasta atual nginx"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__caminho-absoluto__back.mp3",
+          "durationMs": 7975,
+          "bytes": 64556,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 10,
+              "startMs": 385,
+              "endMs": 960
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 17,
+              "startMs": 1010,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1485,
+              "endMs": 1585
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 25,
+              "startMs": 1635,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 27,
+              "to": 37,
+              "startMs": 2135,
+              "endMs": 3060
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 40,
+              "startMs": 3110,
+              "endMs": 3135
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 49,
+              "startMs": 3185,
+              "endMs": 3685
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 3710,
+              "endMs": 3785
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 61,
+              "startMs": 3835,
+              "endMs": 4110
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 67,
+              "startMs": 4135,
+              "endMs": 4635
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 70,
+              "startMs": 5190,
+              "endMs": 5240
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 79,
+              "startMs": 5290,
+              "endMs": 5865
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 85,
+              "startMs": 5940,
+              "endMs": 6340
+            },
+            {
+              "field": "back",
+              "from": 86,
+              "to": 88,
+              "startMs": 6390,
+              "endMs": 6490
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 94,
+              "startMs": 6540,
+              "endMs": 6840
+            },
+            {
+              "field": "back",
+              "from": 95,
+              "to": 100,
+              "startMs": 6865,
+              "endMs": 7190
+            },
+            {
+              "field": "back",
+              "from": 102,
+              "to": 107,
+              "startMs": 7240,
+              "endMs": 7790
+            }
+          ],
+          "normalizedScript": "O absoluto começa na raiz etc nginx e funciona de qualquer lugar\nO relativo parte da pasta atual nginx"
+        }
       }
     },
     {
@@ -24485,6 +24766,133 @@
             }
           ],
           "normalizedScript": "Em que pasta ficam os logs do sistema no Linux"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:var-log:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "f08e2c4163f921e4e52cbaee2abe318fca29fe393bc582d979271b85cf9f8613",
+      "clipKey": "8c3913ace137ee2baf4a2dae",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__var-log__back.mp3",
+          "durationMs": 4400,
+          "bytes": 35948,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 535
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 11,
+              "startMs": 610,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 15,
+              "startMs": 1890,
+              "endMs": 1990
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 29,
+              "startMs": 2015,
+              "endMs": 2890
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 35,
+              "startMs": 2990,
+              "endMs": 3315
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 38,
+              "startMs": 3340,
+              "endMs": 3440
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 43,
+              "startMs": 3465,
+              "endMs": 4215
+            }
+          ],
+          "normalizedScript": "Em var log\nAs configurações ficam em etc"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__var-log__back.mp3",
+          "durationMs": 4275,
+          "bytes": 34988,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 510
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 11,
+              "startMs": 560,
+              "endMs": 1260
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 15,
+              "startMs": 1815,
+              "endMs": 1915
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 29,
+              "startMs": 1940,
+              "endMs": 2815
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 35,
+              "startMs": 2890,
+              "endMs": 3215
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 38,
+              "startMs": 3240,
+              "endMs": 3340
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 43,
+              "startMs": 3365,
+              "endMs": 4090
+            }
+          ],
+          "normalizedScript": "Em var log\nAs configurações ficam em etc"
         }
       }
     },
@@ -24682,6 +25090,245 @@
           ],
           "normalizedScript": "O que significam as letras r w e x em ls  la"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:rwx:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "63f6fd4831b72e9a9c3d274ffc07df3c44c7b2d035f837f07eb50b63a789fd68",
+      "clipKey": "53dad848b96b8d96612a35fb",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__rwx__back.mp3",
+          "durationMs": 5345,
+          "bytes": 43436,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 485
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 13,
+              "startMs": 535,
+              "endMs": 1035
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 15,
+              "startMs": 1060,
+              "endMs": 1085
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 24,
+              "startMs": 1110,
+              "endMs": 1710
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 35,
+              "startMs": 1785,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 40,
+              "startMs": 2335,
+              "endMs": 2610
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 46,
+              "startMs": 2660,
+              "endMs": 3160
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 52,
+              "startMs": 3235,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 54,
+              "startMs": 3385,
+              "endMs": 3410
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 59,
+              "startMs": 3460,
+              "endMs": 3760
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 62,
+              "startMs": 3810,
+              "endMs": 3860
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 68,
+              "startMs": 3935,
+              "endMs": 4285
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 70,
+              "startMs": 4335,
+              "endMs": 4360
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 73,
+              "startMs": 4410,
+              "endMs": 4535
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 80,
+              "startMs": 4585,
+              "endMs": 5160
+            }
+          ],
+          "normalizedScript": "Ler escrever e executar mostradas três vezes para o dono o grupo e os outros"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__rwx__back.mp3",
+          "durationMs": 5145,
+          "bytes": 41900,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 485
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 13,
+              "startMs": 535,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 15,
+              "startMs": 1035,
+              "endMs": 1060
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 24,
+              "startMs": 1085,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 35,
+              "startMs": 1760,
+              "endMs": 2235
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 40,
+              "startMs": 2285,
+              "endMs": 2535
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 46,
+              "startMs": 2585,
+              "endMs": 3085
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 52,
+              "startMs": 3185,
+              "endMs": 3310
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 54,
+              "startMs": 3335,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 59,
+              "startMs": 3410,
+              "endMs": 3710
+            },
+            {
+              "field": "back",
+              "from": 61,
+              "to": 62,
+              "startMs": 3760,
+              "endMs": 3810
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 68,
+              "startMs": 3860,
+              "endMs": 4160
+            },
+            {
+              "field": "back",
+              "from": 69,
+              "to": 70,
+              "startMs": 4210,
+              "endMs": 4235
+            },
+            {
+              "field": "back",
+              "from": 71,
+              "to": 73,
+              "startMs": 4285,
+              "endMs": 4385
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 80,
+              "startMs": 4435,
+              "endMs": 4960
+            }
+          ],
+          "normalizedScript": "Ler escrever e executar mostradas três vezes para o dono o grupo e os outros"
+        }
       }
     },
     {
@@ -24878,6 +25525,175 @@
           ],
           "normalizedScript": "Um script dá Permission denied\nQual o comando mais seguro para resolver"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:chmod-x:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "28c5468daa6d0702686e8757c33909c62543e14a196027919b738c199f371001",
+      "clipKey": "89fc332c1d092df6538a8e31",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__chmod-x__back.mp3",
+          "durationMs": 4870,
+          "bytes": 39596,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "back",
+              "from": 6,
+              "to": 8,
+              "startMs": 635,
+              "endMs": 1160
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 18,
+              "startMs": 1235,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 23,
+              "startMs": 2560,
+              "endMs": 2610
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 34,
+              "startMs": 2635,
+              "endMs": 3185
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 37,
+              "startMs": 3235,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 39,
+              "startMs": 3385,
+              "endMs": 3410
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 49,
+              "startMs": 3460,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 3910,
+              "endMs": 3985
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 61,
+              "startMs": 4010,
+              "endMs": 4710
+            }
+          ],
+          "normalizedScript": "chmod +x script sh que acrescenta só a permissão de execução"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__chmod-x__back.mp3",
+          "durationMs": 4670,
+          "bytes": 38060,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "back",
+              "from": 6,
+              "to": 8,
+              "startMs": 635,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 18,
+              "startMs": 1160,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 23,
+              "startMs": 2410,
+              "endMs": 2460
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 34,
+              "startMs": 2485,
+              "endMs": 3035
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 37,
+              "startMs": 3085,
+              "endMs": 3185
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 39,
+              "startMs": 3210,
+              "endMs": 3235
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 49,
+              "startMs": 3260,
+              "endMs": 3685
+            },
+            {
+              "field": "back",
+              "from": 50,
+              "to": 52,
+              "startMs": 3710,
+              "endMs": 3785
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 61,
+              "startMs": 3810,
+              "endMs": 4510
+            }
+          ],
+          "normalizedScript": "chmod +x script sh que acrescenta só a permissão de execução"
+        }
       }
     },
     {
@@ -24975,6 +25791,175 @@
             }
           ],
           "normalizedScript": "Qual a diferença entre e"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:maior-e-dois-maiores:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "4d9f88d6ed6056c9fa25d8b82cfa67d0bbb46911691d9328ceee60bb7ae7a855",
+      "clipKey": "f0d8d06d902cd65fc7590e2d",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__maior-e-dois-maiores__back.mp3",
+          "durationMs": 4950,
+          "bytes": 40364,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 2,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 635
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 710,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 19,
+              "startMs": 885,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 21,
+              "startMs": 1485,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 29,
+              "startMs": 1535,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 44,
+              "startMs": 2640,
+              "endMs": 3190
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 47,
+              "startMs": 3215,
+              "endMs": 3315
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 53,
+              "startMs": 3365,
+              "endMs": 3790
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 58,
+              "startMs": 3915,
+              "endMs": 4140
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 65,
+              "startMs": 4165,
+              "endMs": 4765
+            }
+          ],
+          "normalizedScript": "cria ou substitui o arquivo\nacrescenta no final sem apagar"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__maior-e-dois-maiores__back.mp3",
+          "durationMs": 4875,
+          "bytes": 39788,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 2,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 660
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 735,
+              "endMs": 860
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 19,
+              "startMs": 910,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 21,
+              "startMs": 1485,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 29,
+              "startMs": 1535,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 44,
+              "startMs": 2615,
+              "endMs": 3165
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 47,
+              "startMs": 3190,
+              "endMs": 3265
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 53,
+              "startMs": 3315,
+              "endMs": 3740
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 58,
+              "startMs": 3840,
+              "endMs": 4040
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 65,
+              "startMs": 4065,
+              "endMs": 4690
+            }
+          ],
+          "normalizedScript": "cria ou substitui o arquivo\nacrescenta no final sem apagar"
         }
       }
     },
@@ -25158,6 +26143,231 @@
           ],
           "normalizedScript": "O que faz o pipe em grep e r r o r app log wc  l"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:pipe:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "712d817157be3585d23d9408fc0c44e01d028afa6517b51d1b9cbc94d47b31b9",
+      "clipKey": "6fa58fdd9e6a53d392c76101",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__pipe__back.mp3",
+          "durationMs": 4720,
+          "bytes": 38444,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 15,
+              "startMs": 885,
+              "endMs": 1210
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 18,
+              "startMs": 1235,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 23,
+              "startMs": 1360,
+              "endMs": 1660
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 28,
+              "startMs": 1710,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 36,
+              "startMs": 1885,
+              "endMs": 2360
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 39,
+              "startMs": 2385,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 42,
+              "startMs": 2485,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 45,
+              "startMs": 2985,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 50,
+              "startMs": 3385,
+              "endMs": 3460
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 56,
+              "startMs": 3510,
+              "endMs": 3785
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 59,
+              "startMs": 3835,
+              "endMs": 3935
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 66,
+              "startMs": 3985,
+              "endMs": 4535
+            }
+          ],
+          "normalizedScript": "Entrega a saída do grep como entrada do wc  l que conta as linhas"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__pipe__back.mp3",
+          "durationMs": 4695,
+          "bytes": 38252,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 15,
+              "startMs": 860,
+              "endMs": 1185
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 18,
+              "startMs": 1210,
+              "endMs": 1285
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 23,
+              "startMs": 1335,
+              "endMs": 1660
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 28,
+              "startMs": 1710,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 36,
+              "startMs": 1885,
+              "endMs": 2335
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 39,
+              "startMs": 2360,
+              "endMs": 2410
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 42,
+              "startMs": 2460,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 45,
+              "startMs": 2985,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 50,
+              "startMs": 3385,
+              "endMs": 3460
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 56,
+              "startMs": 3510,
+              "endMs": 3760
+            },
+            {
+              "field": "back",
+              "from": 57,
+              "to": 59,
+              "startMs": 3785,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 66,
+              "startMs": 3935,
+              "endMs": 4510
+            }
+          ],
+          "normalizedScript": "Entrega a saída do grep como entrada do wc  l que conta as linhas"
+        }
       }
     },
     {
@@ -25297,6 +26507,273 @@
             }
           ],
           "normalizedScript": "Quando usar kill menos nove em vez de kill"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:kill-9:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "73b1d9c9183b3264dae931da719ad5ea530de1ec775be2b703d8ab929e63f1ad",
+      "clipKey": "9404f911a9b611c2e3a39dd3",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__kill-9__back.mp3",
+          "durationMs": 7100,
+          "bytes": 57452,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 510,
+              "endMs": 710
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 11,
+              "startMs": 735,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 20,
+              "startMs": 810,
+              "endMs": 1435
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 27,
+              "startMs": 1485,
+              "endMs": 1960
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 29,
+              "startMs": 1985,
+              "endMs": 2035
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 34,
+              "startMs": 2085,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 41,
+              "startMs": 2335,
+              "endMs": 2885
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 44,
+              "startMs": 3440,
+              "endMs": 3490
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 47,
+              "startMs": 3540,
+              "endMs": 4215
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 58,
+              "startMs": 4240,
+              "endMs": 4865
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 62,
+              "startMs": 4940,
+              "endMs": 5165
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 66,
+              "startMs": 5215,
+              "endMs": 5415
+            },
+            {
+              "field": "back",
+              "from": 67,
+              "to": 73,
+              "startMs": 5540,
+              "endMs": 5840
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 76,
+              "startMs": 5865,
+              "endMs": 5990
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 83,
+              "startMs": 6040,
+              "endMs": 6415
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 88,
+              "startMs": 6465,
+              "endMs": 6915
+            }
+          ],
+          "normalizedScript": "Só quando o processo ignora o kill normal\nO menos nove interrompe sem dar chance de salvar nada"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__kill-9__back.mp3",
+          "durationMs": 6700,
+          "bytes": 54380,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 510,
+              "endMs": 710
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 11,
+              "startMs": 735,
+              "endMs": 760
+            },
+            {
+              "field": "back",
+              "from": 12,
+              "to": 20,
+              "startMs": 785,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 27,
+              "startMs": 1435,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 29,
+              "startMs": 1885,
+              "endMs": 1910
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 34,
+              "startMs": 1960,
+              "endMs": 2135
+            },
+            {
+              "field": "back",
+              "from": 35,
+              "to": 41,
+              "startMs": 2160,
+              "endMs": 2685
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 44,
+              "startMs": 3240,
+              "endMs": 3290
+            },
+            {
+              "field": "back",
+              "from": 45,
+              "to": 47,
+              "startMs": 3340,
+              "endMs": 3965
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 58,
+              "startMs": 3990,
+              "endMs": 4615
+            },
+            {
+              "field": "back",
+              "from": 59,
+              "to": 62,
+              "startMs": 4715,
+              "endMs": 4940
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 66,
+              "startMs": 4990,
+              "endMs": 5190
+            },
+            {
+              "field": "back",
+              "from": 67,
+              "to": 73,
+              "startMs": 5290,
+              "endMs": 5565
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 76,
+              "startMs": 5590,
+              "endMs": 5665
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 83,
+              "startMs": 5715,
+              "endMs": 6040
+            },
+            {
+              "field": "back",
+              "from": 84,
+              "to": 88,
+              "startMs": 6090,
+              "endMs": 6515
+            }
+          ],
+          "normalizedScript": "Só quando o processo ignora o kill normal\nO menos nove interrompe sem dar chance de salvar nada"
         }
       }
     },

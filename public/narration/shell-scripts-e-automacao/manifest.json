@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-17T00:35:28.542611+00:00",
+  "generatedAt": "2026-11-18T04:44:31.939285+00:00",
   "totalDurationMs": {
-    "santa": 709158,
-    "dora": 686258
+    "santa": 764033,
+    "dora": 739633
   },
   "totalBytes": {
-    "santa": 5703524,
-    "dora": 5520356
+    "santa": 6148784,
+    "dora": 5953904
   },
   "clips": [
     {
@@ -12851,6 +12851,566 @@
       "pauseAfter": true
     },
     {
+      "id": "codigos-de-saida:5:feedback:correct",
+      "sectionId": "codigos-de-saida",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "5bdc690257a713e086dfd3454901bf4a337c8100081cbaa41786342002768359",
+      "clipKey": "ed5889c4fbb1a2a50192283a",
+      "audio": {
+        "santa": {
+          "src": "santa/codigos-de-saida__5__feedback__correct.mp3",
+          "durationMs": 11610,
+          "bytes": 93548,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2445,
+              "endMs": 2495
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 8,
+              "startMs": 2545,
+              "endMs": 2895
+            },
+            {
+              "field": "text",
+              "from": 9,
+              "to": 10,
+              "startMs": 2920,
+              "endMs": 2945
+            },
+            {
+              "field": "text",
+              "from": 12,
+              "to": 19,
+              "startMs": 2995,
+              "endMs": 3445
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 25,
+              "startMs": 3495,
+              "endMs": 3795
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 28,
+              "startMs": 3820,
+              "endMs": 3895
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 34,
+              "startMs": 3945,
+              "endMs": 4470
+            },
+            {
+              "field": "text",
+              "from": 36,
+              "to": 38,
+              "startMs": 4545,
+              "endMs": 4620
+            },
+            {
+              "field": "text",
+              "from": 39,
+              "to": 43,
+              "startMs": 4670,
+              "endMs": 4945
+            },
+            {
+              "field": "text",
+              "from": 44,
+              "to": 50,
+              "startMs": 4995,
+              "endMs": 5470
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 54,
+              "startMs": 5520,
+              "endMs": 5570
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 57,
+              "startMs": 5620,
+              "endMs": 5745
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 63,
+              "startMs": 5795,
+              "endMs": 6095
+            },
+            {
+              "field": "text",
+              "from": 64,
+              "to": 68,
+              "startMs": 6145,
+              "endMs": 6445
+            },
+            {
+              "field": "text",
+              "from": 70,
+              "to": 74,
+              "startMs": 6520,
+              "endMs": 6720
+            },
+            {
+              "field": "text",
+              "from": 75,
+              "to": 77,
+              "startMs": 6795,
+              "endMs": 7095
+            },
+            {
+              "field": "text",
+              "from": 79,
+              "to": 80,
+              "startMs": 7675,
+              "endMs": 7725
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 92,
+              "startMs": 7775,
+              "endMs": 8350
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 103,
+              "startMs": 8375,
+              "endMs": 9050
+            },
+            {
+              "field": "text",
+              "from": 104,
+              "to": 105,
+              "startMs": 9100,
+              "endMs": 9125
+            },
+            {
+              "field": "text",
+              "from": 106,
+              "to": 111,
+              "startMs": 9175,
+              "endMs": 9525
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 117,
+              "startMs": 9575,
+              "endMs": 9850
+            },
+            {
+              "field": "text",
+              "from": 118,
+              "to": 124,
+              "startMs": 9900,
+              "endMs": 10275
+            },
+            {
+              "field": "text",
+              "from": 125,
+              "to": 130,
+              "startMs": 10350,
+              "endMs": 10725
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 133,
+              "startMs": 10775,
+              "endMs": 10825
+            },
+            {
+              "field": "text",
+              "from": 134,
+              "to": 141,
+              "startMs": 10850,
+              "endMs": 11425
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nO padrão é confira antes de mudar ou usar opções que já fazem isso como  p\nO repetido acrescenta a mesma linha várias vezes no arquivo"
+        },
+        "dora": {
+          "src": "dora/codigos-de-saida__5__feedback__correct.mp3",
+          "durationMs": 11310,
+          "bytes": 91244,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2395,
+              "endMs": 2445
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 8,
+              "startMs": 2495,
+              "endMs": 2845
+            },
+            {
+              "field": "text",
+              "from": 9,
+              "to": 10,
+              "startMs": 2870,
+              "endMs": 2895
+            },
+            {
+              "field": "text",
+              "from": 12,
+              "to": 19,
+              "startMs": 2945,
+              "endMs": 3370
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 25,
+              "startMs": 3420,
+              "endMs": 3720
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 28,
+              "startMs": 3745,
+              "endMs": 3820
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 34,
+              "startMs": 3845,
+              "endMs": 4420
+            },
+            {
+              "field": "text",
+              "from": 36,
+              "to": 38,
+              "startMs": 4520,
+              "endMs": 4595
+            },
+            {
+              "field": "text",
+              "from": 39,
+              "to": 43,
+              "startMs": 4645,
+              "endMs": 4870
+            },
+            {
+              "field": "text",
+              "from": 44,
+              "to": 50,
+              "startMs": 4895,
+              "endMs": 5370
+            },
+            {
+              "field": "text",
+              "from": 51,
+              "to": 54,
+              "startMs": 5420,
+              "endMs": 5470
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 57,
+              "startMs": 5520,
+              "endMs": 5645
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 63,
+              "startMs": 5695,
+              "endMs": 5995
+            },
+            {
+              "field": "text",
+              "from": 64,
+              "to": 68,
+              "startMs": 6045,
+              "endMs": 6295
+            },
+            {
+              "field": "text",
+              "from": 70,
+              "to": 74,
+              "startMs": 6370,
+              "endMs": 6570
+            },
+            {
+              "field": "text",
+              "from": 75,
+              "to": 77,
+              "startMs": 6645,
+              "endMs": 6920
+            },
+            {
+              "field": "text",
+              "from": 79,
+              "to": 80,
+              "startMs": 7500,
+              "endMs": 7550
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 92,
+              "startMs": 7600,
+              "endMs": 8150
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 103,
+              "startMs": 8175,
+              "endMs": 8875
+            },
+            {
+              "field": "text",
+              "from": 104,
+              "to": 105,
+              "startMs": 8925,
+              "endMs": 8950
+            },
+            {
+              "field": "text",
+              "from": 106,
+              "to": 111,
+              "startMs": 9000,
+              "endMs": 9375
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 117,
+              "startMs": 9425,
+              "endMs": 9700
+            },
+            {
+              "field": "text",
+              "from": 118,
+              "to": 124,
+              "startMs": 9750,
+              "endMs": 10100
+            },
+            {
+              "field": "text",
+              "from": 125,
+              "to": 130,
+              "startMs": 10150,
+              "endMs": 10475
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 133,
+              "startMs": 10500,
+              "endMs": 10550
+            },
+            {
+              "field": "text",
+              "from": 134,
+              "to": 141,
+              "startMs": 10575,
+              "endMs": 11125
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nO padrão é confira antes de mudar ou usar opções que já fazem isso como  p\nO repetido acrescenta a mesma linha várias vezes no arquivo"
+        }
+      }
+    },
+    {
+      "id": "codigos-de-saida:5:feedback:retry",
+      "sectionId": "codigos-de-saida",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/codigos-de-saida__5__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23468,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/codigos-de-saida__5__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23084,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
+    },
+    {
       "id": "cron:heading",
       "sectionId": "cron",
       "kind": "section-heading",
@@ -22946,6 +23506,231 @@
           ],
           "normalizedScript": "Para que serve a primeira linha ! usr bin env bash"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:shebang:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "74538a2ebcc07134f7033e87f528dd3f8e3913809eba3b5ead3ba7a85367b559",
+      "clipKey": "30ae92e934a1747c5729e3a9",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__shebang__back.mp3",
+          "durationMs": 4795,
+          "bytes": 39020,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 3,
+              "startMs": 410,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 11,
+              "startMs": 535,
+              "endMs": 1035
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 16,
+              "startMs": 1135,
+              "endMs": 1360
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 19,
+              "startMs": 1385,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 27,
+              "startMs": 1510,
+              "endMs": 1935
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 32,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 41,
+              "startMs": 2210,
+              "endMs": 2685
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 46,
+              "startMs": 2735,
+              "endMs": 2960
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 50,
+              "startMs": 3010,
+              "endMs": 3285
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 52,
+              "startMs": 3335,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 61,
+              "startMs": 3385,
+              "endMs": 3960
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 63,
+              "startMs": 3985,
+              "endMs": 4010
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 71,
+              "startMs": 4035,
+              "endMs": 4610
+            }
+          ],
+          "normalizedScript": "É o shebang diz ao sistema qual programa deve ler e executar o arquivo"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__shebang__back.mp3",
+          "durationMs": 4645,
+          "bytes": 37868,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 3,
+              "startMs": 410,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 11,
+              "startMs": 535,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 16,
+              "startMs": 1135,
+              "endMs": 1360
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 19,
+              "startMs": 1385,
+              "endMs": 1460
+            },
+            {
+              "field": "back",
+              "from": 20,
+              "to": 27,
+              "startMs": 1510,
+              "endMs": 1910
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 32,
+              "startMs": 1960,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 41,
+              "startMs": 2160,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 42,
+              "to": 46,
+              "startMs": 2685,
+              "endMs": 2910
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 50,
+              "startMs": 2960,
+              "endMs": 3235
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 52,
+              "startMs": 3285,
+              "endMs": 3310
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 61,
+              "startMs": 3335,
+              "endMs": 3835
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 63,
+              "startMs": 3860,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 64,
+              "to": 71,
+              "startMs": 3910,
+              "endMs": 4460
+            }
+          ],
+          "normalizedScript": "É o shebang diz ao sistema qual programa deve ler e executar o arquivo"
+        }
       }
     },
     {
@@ -23085,6 +23870,189 @@
             }
           ],
           "normalizedScript": "O que é $1 dentro de um script"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:argumento-1:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "05347402269ea30488902d4dfd995a4bf168ec9aa770759bd3979f28b618c221",
+      "clipKey": "4837c5a0858d28b3e2e4649f",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__argumento-1__back.mp3",
+          "durationMs": 5220,
+          "bytes": 42476,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 10,
+              "startMs": 410,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 20,
+              "startMs": 835,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 28,
+              "startMs": 1360,
+              "endMs": 1785
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 31,
+              "startMs": 1810,
+              "endMs": 1910
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 39,
+              "startMs": 1960,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 45,
+              "startMs": 2735,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 3035,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 53,
+              "startMs": 3385,
+              "endMs": 3535
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 64,
+              "startMs": 3635,
+              "endMs": 4385
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 69,
+              "startMs": 4485,
+              "endMs": 5035
+            }
+          ],
+          "normalizedScript": "O primeiro argumento passado na chamada como site em checa sh site"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__argumento-1__back.mp3",
+          "durationMs": 5120,
+          "bytes": 41708,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 10,
+              "startMs": 410,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 20,
+              "startMs": 860,
+              "endMs": 1360
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 28,
+              "startMs": 1410,
+              "endMs": 1835
+            },
+            {
+              "field": "back",
+              "from": 29,
+              "to": 31,
+              "startMs": 1860,
+              "endMs": 1960
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 39,
+              "startMs": 2010,
+              "endMs": 2660
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 45,
+              "startMs": 2760,
+              "endMs": 2960
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 3035,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 53,
+              "startMs": 3385,
+              "endMs": 3535
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 64,
+              "startMs": 3635,
+              "endMs": 4335
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 69,
+              "startMs": 4410,
+              "endMs": 4935
+            }
+          ],
+          "normalizedScript": "O primeiro argumento passado na chamada como site em checa sh site"
         }
       }
     },
@@ -23254,6 +24222,203 @@
           ],
           "normalizedScript": "O que significam os códigos de saída zero e um"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:codigo-de-saida:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "6e8de92f82115f3d7aeeab0ee4721f2d6ff9758ee26ae04475be28f7ece46c43",
+      "clipKey": "b7199c3107c0c7dfb9c4864b",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__codigo-de-saida__back.mp3",
+          "durationMs": 5725,
+          "bytes": 46508,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 335,
+              "endMs": 610
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 3,
+              "startMs": 660,
+              "endMs": 710
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 11,
+              "startMs": 760,
+              "endMs": 1560
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 21,
+              "startMs": 2090,
+              "endMs": 2440
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 27,
+              "startMs": 2490,
+              "endMs": 2815
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 37,
+              "startMs": 2865,
+              "endMs": 3440
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 40,
+              "startMs": 3465,
+              "endMs": 3615
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 45,
+              "startMs": 3690,
+              "endMs": 4090
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 51,
+              "startMs": 4190,
+              "endMs": 4390
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 53,
+              "startMs": 4440,
+              "endMs": 4540
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 61,
+              "startMs": 4590,
+              "endMs": 5015
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 67,
+              "startMs": 5090,
+              "endMs": 5540
+            }
+          ],
+          "normalizedScript": "zero é sucesso\nQualquer valor diferente de zero como um indica falha"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__codigo-de-saida__back.mp3",
+          "durationMs": 5525,
+          "bytes": 44972,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 335,
+              "endMs": 610
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 3,
+              "startMs": 660,
+              "endMs": 710
+            },
+            {
+              "field": "back",
+              "from": 4,
+              "to": 11,
+              "startMs": 760,
+              "endMs": 1535
+            },
+            {
+              "field": "back",
+              "from": 13,
+              "to": 21,
+              "startMs": 2065,
+              "endMs": 2440
+            },
+            {
+              "field": "back",
+              "from": 22,
+              "to": 27,
+              "startMs": 2490,
+              "endMs": 2840
+            },
+            {
+              "field": "back",
+              "from": 28,
+              "to": 37,
+              "startMs": 2890,
+              "endMs": 3440
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 40,
+              "startMs": 3465,
+              "endMs": 3590
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 45,
+              "startMs": 3640,
+              "endMs": 3990
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 51,
+              "startMs": 4090,
+              "endMs": 4290
+            },
+            {
+              "field": "back",
+              "from": 52,
+              "to": 53,
+              "startMs": 4340,
+              "endMs": 4415
+            },
+            {
+              "field": "back",
+              "from": 55,
+              "to": 61,
+              "startMs": 4465,
+              "endMs": 4815
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 67,
+              "startMs": 4890,
+              "endMs": 5340
+            }
+          ],
+          "normalizedScript": "zero é sucesso\nQualquer valor diferente de zero como um indica falha"
+        }
       }
     },
     {
@@ -23366,6 +24531,301 @@
           ],
           "normalizedScript": "O que faz set  euo pipefail"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:set-euo-pipefail:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "5ace480d9131b76c9f00caa84d8b2082065b386bfbd6ae5f217ec7cd559ed819",
+      "clipKey": "b54d9b6ea19b12523b6f9334",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__set-euo-pipefail__back.mp3",
+          "durationMs": 7320,
+          "bytes": 59180,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 410
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 6,
+              "startMs": 435,
+              "endMs": 460
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 13,
+              "startMs": 510,
+              "endMs": 935
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 16,
+              "startMs": 985,
+              "endMs": 1035
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 25,
+              "startMs": 1085,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 30,
+              "startMs": 1560,
+              "endMs": 2060
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 37,
+              "startMs": 2185,
+              "endMs": 2485
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 46,
+              "startMs": 2535,
+              "endMs": 3010
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 57,
+              "startMs": 3035,
+              "endMs": 3660
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 62,
+              "startMs": 3710,
+              "endMs": 3910
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 67,
+              "startMs": 3985,
+              "endMs": 4235
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 69,
+              "startMs": 4285,
+              "endMs": 4310
+            },
+            {
+              "field": "back",
+              "from": 70,
+              "to": 73,
+              "startMs": 4360,
+              "endMs": 4585
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 79,
+              "startMs": 4635,
+              "endMs": 5035
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 88,
+              "startMs": 5110,
+              "endMs": 5635
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 91,
+              "startMs": 5685,
+              "endMs": 5760
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 100,
+              "startMs": 5810,
+              "endMs": 6160
+            },
+            {
+              "field": "back",
+              "from": 101,
+              "to": 106,
+              "startMs": 6235,
+              "endMs": 6560
+            },
+            {
+              "field": "back",
+              "from": 107,
+              "to": 113,
+              "startMs": 6610,
+              "endMs": 7160
+            }
+          ],
+          "normalizedScript": "Para o script no primeiro erro trata variável indefinida como erro e faz pipes falharem se qualquer parte falhar"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__set-euo-pipefail__back.mp3",
+          "durationMs": 6945,
+          "bytes": 56300,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 435
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 6,
+              "startMs": 460,
+              "endMs": 485
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 13,
+              "startMs": 535,
+              "endMs": 910
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 16,
+              "startMs": 960,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 17,
+              "to": 25,
+              "startMs": 1060,
+              "endMs": 1485
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 30,
+              "startMs": 1535,
+              "endMs": 2060
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 37,
+              "startMs": 2185,
+              "endMs": 2460
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 46,
+              "startMs": 2510,
+              "endMs": 2985
+            },
+            {
+              "field": "back",
+              "from": 47,
+              "to": 57,
+              "startMs": 3010,
+              "endMs": 3635
+            },
+            {
+              "field": "back",
+              "from": 58,
+              "to": 62,
+              "startMs": 3685,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 63,
+              "to": 67,
+              "startMs": 3960,
+              "endMs": 4210
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 69,
+              "startMs": 4260,
+              "endMs": 4285
+            },
+            {
+              "field": "back",
+              "from": 70,
+              "to": 73,
+              "startMs": 4335,
+              "endMs": 4535
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 79,
+              "startMs": 4585,
+              "endMs": 4935
+            },
+            {
+              "field": "back",
+              "from": 80,
+              "to": 88,
+              "startMs": 4985,
+              "endMs": 5485
+            },
+            {
+              "field": "back",
+              "from": 89,
+              "to": 91,
+              "startMs": 5535,
+              "endMs": 5610
+            },
+            {
+              "field": "back",
+              "from": 92,
+              "to": 100,
+              "startMs": 5660,
+              "endMs": 5935
+            },
+            {
+              "field": "back",
+              "from": 101,
+              "to": 106,
+              "startMs": 5985,
+              "endMs": 6210
+            },
+            {
+              "field": "back",
+              "from": 107,
+              "to": 113,
+              "startMs": 6260,
+              "endMs": 6760
+            }
+          ],
+          "normalizedScript": "Para o script no primeiro erro trata variável indefinida como erro e faz pipes falharem se qualquer parte falhar"
+        }
       }
     },
     {
@@ -23477,6 +24937,273 @@
             }
           ],
           "normalizedScript": "O que é um script idempotente"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:idempotente:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "bc44309273f0a028fe95a0d3c1ec4127ee8e59f3d9ce68861d262ccf7dbff86e",
+      "clipKey": "f9a36fdd0182ac1972768ab8",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__idempotente__back.mp3",
+          "durationMs": 6270,
+          "bytes": 50924,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 285,
+              "endMs": 385
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 435,
+              "endMs": 910
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 960,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 18,
+              "startMs": 1060,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 24,
+              "startMs": 1360,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 31,
+              "startMs": 1735,
+              "endMs": 2085
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 37,
+              "startMs": 2135,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 39,
+              "startMs": 2610,
+              "endMs": 2635
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 45,
+              "startMs": 2685,
+              "endMs": 2985
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 3060,
+              "endMs": 3310
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 53,
+              "startMs": 3335,
+              "endMs": 3385
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 59,
+              "startMs": 3435,
+              "endMs": 3660
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 66,
+              "startMs": 3685,
+              "endMs": 4360
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 71,
+              "startMs": 4510,
+              "endMs": 4760
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 76,
+              "startMs": 4810,
+              "endMs": 5035
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 80,
+              "startMs": 5085,
+              "endMs": 5285
+            },
+            {
+              "field": "back",
+              "from": 81,
+              "to": 91,
+              "startMs": 5335,
+              "endMs": 6110
+            }
+          ],
+          "normalizedScript": "Um script que pode rodar várias vezes e deixa tudo no mesmo estado sem erro nem duplicação"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__idempotente__back.mp3",
+          "durationMs": 6120,
+          "bytes": 49580,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 2,
+              "startMs": 310,
+              "endMs": 410
+            },
+            {
+              "field": "back",
+              "from": 3,
+              "to": 9,
+              "startMs": 460,
+              "endMs": 910
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 13,
+              "startMs": 960,
+              "endMs": 1010
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 18,
+              "startMs": 1060,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 19,
+              "to": 24,
+              "startMs": 1360,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 25,
+              "to": 31,
+              "startMs": 1735,
+              "endMs": 2060
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 37,
+              "startMs": 2110,
+              "endMs": 2510
+            },
+            {
+              "field": "back",
+              "from": 38,
+              "to": 39,
+              "startMs": 2560,
+              "endMs": 2585
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 45,
+              "startMs": 2635,
+              "endMs": 2885
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 50,
+              "startMs": 2960,
+              "endMs": 3160
+            },
+            {
+              "field": "back",
+              "from": 51,
+              "to": 53,
+              "startMs": 3185,
+              "endMs": 3235
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 59,
+              "startMs": 3285,
+              "endMs": 3510
+            },
+            {
+              "field": "back",
+              "from": 60,
+              "to": 66,
+              "startMs": 3535,
+              "endMs": 4285
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 71,
+              "startMs": 4460,
+              "endMs": 4685
+            },
+            {
+              "field": "back",
+              "from": 72,
+              "to": 76,
+              "startMs": 4735,
+              "endMs": 4960
+            },
+            {
+              "field": "back",
+              "from": 77,
+              "to": 80,
+              "startMs": 5010,
+              "endMs": 5185
+            },
+            {
+              "field": "back",
+              "from": 81,
+              "to": 91,
+              "startMs": 5210,
+              "endMs": 5960
+            }
+          ],
+          "normalizedScript": "Um script que pode rodar várias vezes e deixa tudo no mesmo estado sem erro nem duplicação"
         }
       }
     },
@@ -23660,6 +25387,175 @@
           ],
           "normalizedScript": "Quais são os cinco campos de horário do cron em ordem"
         }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:cron-campos:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "a0ab8da8238f6073067f70a1dead3410bc4f72978ad2b37ed75d8929cf901e5b",
+      "clipKey": "e10ea353e6a42b3757716a7c",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__cron-campos__back.mp3",
+          "durationMs": 3370,
+          "bytes": 27692,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 660
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 12,
+              "startMs": 735,
+              "endMs": 985
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 17,
+              "startMs": 1060,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1335,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 24,
+              "startMs": 1460,
+              "endMs": 1760
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1835,
+              "endMs": 2110
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 31,
+              "startMs": 2160,
+              "endMs": 2185
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 35,
+              "startMs": 2235,
+              "endMs": 2460
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 38,
+              "startMs": 2485,
+              "endMs": 2585
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 45,
+              "startMs": 2635,
+              "endMs": 3185
+            }
+          ],
+          "normalizedScript": "Minuto hora dia do mês mês e dia da semana"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__cron-campos__back.mp3",
+          "durationMs": 3420,
+          "bytes": 28076,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 12,
+              "startMs": 810,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 17,
+              "startMs": 1210,
+              "endMs": 1410
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 20,
+              "startMs": 1435,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 24,
+              "startMs": 1560,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1935,
+              "endMs": 2210
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 31,
+              "startMs": 2260,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 35,
+              "startMs": 2335,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 38,
+              "startMs": 2585,
+              "endMs": 2685
+            },
+            {
+              "field": "back",
+              "from": 39,
+              "to": 45,
+              "startMs": 2735,
+              "endMs": 3235
+            }
+          ],
+          "normalizedScript": "Minuto hora dia do mês mês e dia da semana"
+        }
       }
     },
     {
@@ -23799,6 +25695,315 @@
             }
           ],
           "normalizedScript": "Quando vale trocar um script Bash por Python"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:bash-ou-python:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "bb8ad7cf5c5ca0a94482702611e4c7020f1ec643ace453ce50b3f9d8908964b4",
+      "clipKey": "02d28609fb90eb425ca9fe30",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__bash-ou-python__back.mp3",
+          "durationMs": 7720,
+          "bytes": 62444,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 285,
+              "endMs": 485
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 510,
+              "endMs": 535
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 15,
+              "startMs": 560,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 22,
+              "startMs": 860,
+              "endMs": 1360
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 30,
+              "startMs": 1435,
+              "endMs": 1910
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 36,
+              "startMs": 1985,
+              "endMs": 2435
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 39,
+              "startMs": 2485,
+              "endMs": 2560
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 44,
+              "startMs": 2585,
+              "endMs": 3360
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 52,
+              "startMs": 3510,
+              "endMs": 3810
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 64,
+              "startMs": 3860,
+              "endMs": 4435
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 67,
+              "startMs": 4485,
+              "endMs": 4635
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 72,
+              "startMs": 4685,
+              "endMs": 4985
+            },
+            {
+              "field": "back",
+              "from": 73,
+              "to": 75,
+              "startMs": 5060,
+              "endMs": 5135
+            },
+            {
+              "field": "back",
+              "from": 76,
+              "to": 77,
+              "startMs": 5160,
+              "endMs": 5210
+            },
+            {
+              "field": "back",
+              "from": 78,
+              "to": 84,
+              "startMs": 5260,
+              "endMs": 5710
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 90,
+              "startMs": 5785,
+              "endMs": 6110
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 93,
+              "startMs": 6135,
+              "endMs": 6210
+            },
+            {
+              "field": "back",
+              "from": 94,
+              "to": 98,
+              "startMs": 6235,
+              "endMs": 6410
+            },
+            {
+              "field": "back",
+              "from": 99,
+              "to": 101,
+              "startMs": 6460,
+              "endMs": 6935
+            },
+            {
+              "field": "back",
+              "from": 102,
+              "to": 108,
+              "startMs": 6985,
+              "endMs": 7535
+            }
+          ],
+          "normalizedScript": "Quando há muita lógica contas Jason ou a pê ís vários tratamentos de erro ou o script passa de umas cinquenta linhas"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__bash-ou-python__back.mp3",
+          "durationMs": 7495,
+          "bytes": 60716,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 6,
+              "startMs": 285,
+              "endMs": 485
+            },
+            {
+              "field": "back",
+              "from": 7,
+              "to": 9,
+              "startMs": 510,
+              "endMs": 535
+            },
+            {
+              "field": "back",
+              "from": 10,
+              "to": 15,
+              "startMs": 560,
+              "endMs": 810
+            },
+            {
+              "field": "back",
+              "from": 16,
+              "to": 22,
+              "startMs": 860,
+              "endMs": 1385
+            },
+            {
+              "field": "back",
+              "from": 24,
+              "to": 30,
+              "startMs": 1485,
+              "endMs": 1935
+            },
+            {
+              "field": "back",
+              "from": 32,
+              "to": 36,
+              "startMs": 2010,
+              "endMs": 2460
+            },
+            {
+              "field": "back",
+              "from": 37,
+              "to": 39,
+              "startMs": 2510,
+              "endMs": 2585
+            },
+            {
+              "field": "back",
+              "from": 40,
+              "to": 44,
+              "startMs": 2610,
+              "endMs": 3410
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 52,
+              "startMs": 3585,
+              "endMs": 3885
+            },
+            {
+              "field": "back",
+              "from": 53,
+              "to": 64,
+              "startMs": 3910,
+              "endMs": 4485
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 67,
+              "startMs": 4510,
+              "endMs": 4660
+            },
+            {
+              "field": "back",
+              "from": 68,
+              "to": 72,
+              "startMs": 4710,
+              "endMs": 5010
+            },
+            {
+              "field": "back",
+              "from": 73,
+              "to": 75,
+              "startMs": 5110,
+              "endMs": 5185
+            },
+            {
+              "field": "back",
+              "from": 76,
+              "to": 77,
+              "startMs": 5210,
+              "endMs": 5235
+            },
+            {
+              "field": "back",
+              "from": 78,
+              "to": 84,
+              "startMs": 5285,
+              "endMs": 5685
+            },
+            {
+              "field": "back",
+              "from": 85,
+              "to": 90,
+              "startMs": 5760,
+              "endMs": 6010
+            },
+            {
+              "field": "back",
+              "from": 91,
+              "to": 93,
+              "startMs": 6035,
+              "endMs": 6110
+            },
+            {
+              "field": "back",
+              "from": 94,
+              "to": 98,
+              "startMs": 6135,
+              "endMs": 6285
+            },
+            {
+              "field": "back",
+              "from": 99,
+              "to": 101,
+              "startMs": 6310,
+              "endMs": 6710
+            },
+            {
+              "field": "back",
+              "from": 102,
+              "to": 108,
+              "startMs": 6760,
+              "endMs": 7310
+            }
+          ],
+          "normalizedScript": "Quando há muita lógica contas Jason ou a pê ís vários tratamentos de erro ou o script passa de umas cinquenta linhas"
         }
       }
     },
