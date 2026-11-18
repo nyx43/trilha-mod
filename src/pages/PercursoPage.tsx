@@ -25,6 +25,7 @@ import { NarrationBlockButton, NarrationPlayer } from '../narration/NarrationPla
 import { LessonTutor } from '../tutor/LessonTutor';
 import { cardKey, enrollCards, localDay, updateLesson, useLessonStore } from '../lessons/progress';
 import { LessonContent } from '../lessons/types';
+import { MissionReview } from '../percurso/MissionReview';
 import {
   diagnosticoWebSlug,
   findPercurso,
@@ -175,8 +176,8 @@ function PercursoOverview({ percurso }: { percurso: Percurso }) {
                       </span>
                       <span className="lessons-text">
                         <strong>Prática opcional: diagnóstico de frontend e API</strong>
-                        <span>Investigue uma rota 404 e um cadastro 400 no laboratório local.</span>
-                        <small>Opcional · sem IA · não altera o progresso</small>
+                        <span>Investigue cinco falhas de frontend e API no laboratório local.</span>
+                        <small>Opcional · sem IA · progresso separado</small>
                       </span>
                     </Link>
                   </li>
@@ -768,6 +769,12 @@ function PercursoMissionStageView({
             <p className="guide-text">
               Marque cada passo conforme concluir na sua máquina. O estado fica salvo localmente.
             </p>
+            <Link
+              className="lesson-trail-link"
+              to={`/percurso/${percurso.id}/${diagnosticoWebSlug}`}
+            >
+              Praticar diagnóstico antes de testar meu projeto
+            </Link>
             <Checklist
               guideId={`percurso-${percurso.id}`}
               listId="tarefas-entrega"
@@ -792,9 +799,11 @@ function PercursoMissionStageView({
           </div>
         </section>
 
+        <MissionReview key={percurso.id} storageId={percurso.id} />
+
         <section className="guide-section lesson-section" aria-labelledby="links-github-title">
           <h2 id="links-github-title">
-            <span aria-hidden="true">04</span>
+            <span aria-hidden="true">05</span>
             Checklist dos dois links pedidos pelo professor
           </h2>
           <div className="lesson-mission">

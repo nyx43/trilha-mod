@@ -190,6 +190,32 @@ describe('Percurso curto API Node, React e Tailwind', () => {
     expect(storedPercurso.completed['api-react-tailwind']).toContain('missao-final');
   });
 
+  it('salva o resultado e a evidência por critério sem concluir o percurso', () => {
+    const path = '/percurso/api-react-tailwind/missao-final';
+    const view = renderPercurso(path);
+    fireEvent.click(screen.getByText('Registrar resultados e evidências'));
+    const contract = within(screen.getByRole('group', { name: 'Contrato da API' }));
+    const save = screen.getByRole('button', { name: 'Salvar avaliação' });
+    fireEvent.change(contract.getByLabelText('Resultado'), { target: { value: 'tested' } });
+    fireEvent.click(save);
+    expect(screen.getByRole('alert')).toHaveTextContent('Contrato da API');
+    fireEvent.change(contract.getByLabelText('Evidência'), {
+      target: { value: 'GET retornou 200 e os POST retornaram 201 e 400.' },
+    });
+    fireEvent.click(save);
+    expect(screen.getByText('Avaliação salva neste navegador.')).toBeInTheDocument();
+    expect(localStorage.getItem(percursoStoreKey)).toBeNull();
+
+    view.unmount();
+    renderPercurso(path);
+    fireEvent.click(screen.getByText('Registrar resultados e evidências'));
+    const restored = within(screen.getByRole('group', { name: 'Contrato da API' }));
+    expect(restored.getByLabelText('Resultado')).toHaveValue('tested');
+    expect(restored.getByLabelText('Evidência')).toHaveValue(
+      'GET retornou 200 e os POST retornaram 201 e 400.',
+    );
+  });
+
   it('oferece diagnóstico opcional sem mudar o progresso salvo', () => {
     const saved = JSON.stringify({ schemaVersion: 1, completed: { 'api-react-tailwind': ['integracao-front-api', 'tailwind-na-pratica'] } });
     localStorage.setItem(percursoStoreKey, saved);
@@ -198,8 +224,11 @@ describe('Percurso curto API Node, React e Tailwind', () => {
     fireEvent.click(screen.getByRole('link', { name: /Prática opcional: diagnóstico/ }));
     expect(screen.getByRole('heading', { name: 'Rota errada (404)' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Cadastro rejeitado (400)' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'API inacessível' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'CORS após o cadastro' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: 'Lista desatualizada após o cadastro' })).toBeInTheDocument();
     const solutions = screen.getAllByText('Solução — abra depois de tentar');
-    expect(solutions).toHaveLength(2);
+    expect(solutions).toHaveLength(5);
     expect(solutions.every((summary) => !summary.closest('details')?.open)).toBe(true);
     fireEvent.click(screen.getAllByText('Dica 1')[0]);
     expect(localStorage.getItem(percursoStoreKey)).toBe(saved);

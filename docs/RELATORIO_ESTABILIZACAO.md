@@ -77,3 +77,11 @@ O push para `nyx43/trilha-mod`, branch `feat/percurso-api-tailwind`, foi bloquea
 - O tutor tem uma rota da Vercel com ativação explícita. Testei a rota e a interface com respostas simuladas, incluindo validação do Turnstile por pergunta e recusa de origem ou ação incorreta. O README registra as variáveis necessárias para ativar o provedor no ambiente hospedado.
 - O recomendador permite selecionar sugestões, salvar as práticas com critérios e retomar na seção indicada. No caso de API Node e frontend com Tailwind, React começa como opção e o plano inclui o checklist dos dois repositórios. Validei a retomada após recarga no Chromium a 360 px. O texto do enunciado fica fora da URL e do plano salvo.
 - `npm ci`, `npm run check`, `npm run test:run` (287 testes), `npm run narration:check` e `npm run build` passaram localmente. A prévia remota depende de vincular o repositório a um projeto da Vercel. Não havia integração de deploy registrada no GitHub nem uma sessão Vercel disponível.
+
+## Primeiro registro de evidências no Percurso Web — 18/11/2026
+
+- A Vercel confirmou a criação de `trilha-mod` a partir de `nyx43/trilha-mod`. A tela de importação aguardava o primeiro deploy e mostrava `main` como origem. Continua pendente validar a prévia de `feat/percurso-api-tailwind`.
+- A missão final ganhou cinco critérios com resultado e evidência. O aluno pode indicar observação própria, teste executado ou revisão de outra pessoa. A avaliação é salva no navegador e tem armazenamento independente do checklist e da conclusão do percurso.
+- A prática passou a cobrir as cinco falhas do laboratório. Os três cenários acrescentados são API inacessível, CORS na resposta do cadastro e lista desatualizada. Cada um tem roteiro, dicas, evidência esperada e solução recolhida. O ZIP existente já contém os cinco cenários.
+- No navegador, abri a avaliação pelo teclado, confirmei a exigência de evidência, salvei o resultado e recarreguei a página. Também segui o link da missão para o laboratório, naveguei até o cenário de CORS e abri sua solução pelo teclado. A checagem de tipos, 288 testes, a auditoria das 78 aulas nas duas vozes e o build passaram.
+- O próximo teste pedagógico é observar um iniciante executando a missão do início ao cadastro, usando a avaliação para registrar onde precisou de ajuda.

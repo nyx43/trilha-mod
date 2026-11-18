@@ -41,6 +41,54 @@ const desafios = [
     solucao:
       'O corpo envia nome em vez de cliente e omite retiradaEm. A API valida o contrato e responde 400 com detalhes. Em um projeto real, ajuste montarPayload() para enviar cliente e retiradaEm, mantendo a validação na API.',
   },
+  {
+    numero: 3,
+    titulo: 'API inacessível',
+    sintoma: 'A lista fica vazia e o navegador informa que a conexão foi recusada.',
+    acao: 'Ative o cenário, recarregue a página e mantenha os dois servidores ligados.',
+    rede: 'Abra a requisição com falha e compare a porta da URL com a porta exibida no terminal da API.',
+    dicas: [
+      'Uma conexão recusada não tem status HTTP. Nenhum servidor respondeu naquele endereço.',
+      'Abra http://localhost:3101/api/saude e compare o resultado.',
+      'Localize a escolha da porta na função baseApi() em public/nucleo.js.',
+    ],
+    evidencia:
+      'Registre a URL com a porta 4099, a falha de conexão e o resultado do GET /api/saude na porta 3101.',
+    solucao:
+      'O cenário aponta o frontend para a porta 4099. A API continua atendendo na porta 3101. Restaure o endereço correto e confira se a lista volta a carregar.',
+  },
+  {
+    numero: 4,
+    titulo: 'CORS após o cadastro',
+    sintoma: 'A lista carrega, mas o formulário mostra uma falha de rede ao registrar o pedido.',
+    acao: 'Cadastre um pedido válido e examine a requisição antes de reenviar o formulário.',
+    rede: 'Confira o status e os cabeçalhos da resposta POST. Compare com o GET e leia a mensagem no Console.',
+    dicas: [
+      'Compare o status do POST na aba Rede com a mensagem mostrada no formulário.',
+      'Confira se Access-Control-Allow-Origin aparece no POST e no GET.',
+      'Recarregue a página e confira se o pedido foi gravado.',
+    ],
+    evidencia:
+      'Registre o POST com status 201, a mensagem de CORS no Console e o pedido na lista após recarregar.',
+    solucao:
+      'O servidor grava o pedido e retorna 201. A resposta POST não inclui Access-Control-Allow-Origin, por isso o navegador impede que o JavaScript leia o resultado. Corrija o cabeçalho da resposta para a origem permitida.',
+  },
+  {
+    numero: 5,
+    titulo: 'Lista desatualizada após o cadastro',
+    sintoma: 'O cadastro informa sucesso, mas o pedido recém-criado não aparece na lista.',
+    acao: 'Cadastre um pedido, observe a lista e clique em Recarregar lista.',
+    rede: 'Compare as requisições feitas logo após o cadastro com as feitas ao clicar em Recarregar lista.',
+    dicas: [
+      'Confira se o POST devolveu o objeto criado com status 201.',
+      'Verifique se a interface faz um novo GET após receber a confirmação.',
+      'Em public/app.js, procure a chamada a deveRecarregarLista() no fluxo de sucesso.',
+    ],
+    evidencia:
+      'Registre o POST 201, a lista antes da atualização e o mesmo pedido aparecendo após recarregar a lista.',
+    solucao:
+      'O cenário pula a recarga da lista após o POST. Atualize a lista usando o objeto devolvido no cadastro ou faça um novo GET quando o servidor confirmar a criação.',
+  },
 ];
 
 export default function DiagnosticoPratica() {
@@ -64,7 +112,7 @@ export default function DiagnosticoPratica() {
         <p className="lesson-number">Prática opcional · Sem IA</p>
         <h1 id="diagnostico-title">Diagnóstico de frontend e API</h1>
         <p className="guide-summary">
-          Investigue duas falhas reais no painel Rede, registre suas evidências e confira a solução
+          Investigue cinco falhas no painel Rede, registre suas evidências e confira a solução
           depois de tentar.
         </p>
       </header>
@@ -88,9 +136,18 @@ export default function DiagnosticoPratica() {
           Abra <a href="http://localhost:5180">http://localhost:5180</a>. Em outro terminal, na
           mesma pasta, execute os comandos de ativação e restauração abaixo. Abra F12 →{' '}
           <strong>Rede</strong> (Network) e filtre <strong>Fetch/XHR</strong>. Ative um desafio por
-          vez; após mudar o estado, recarregue a página com F5. As portas indicadas são as padrão do
-          laboratório.
+          vez e recarregue a página com F5 depois de cada alteração. As portas indicadas são as
+          padrão do laboratório.
         </p>
+        <nav aria-label="Cenários do laboratório">
+          <ul className="guide-list">
+            {desafios.map(({ numero, titulo }) => (
+              <li key={numero}>
+                <a href={`#desafio-${numero}`}>{titulo}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
         {desafios.map((desafio) => (
           <section
             className="guide-section lesson-section"
@@ -116,7 +173,7 @@ export default function DiagnosticoPratica() {
               <h3>Dicas graduais</h3>
               <p className="guide-text">Abra uma dica por vez, apenas se precisar.</p>
               {desafio.dicas.map((dica, index) => (
-                <details className="lesson-reveal" key={dica}>
+                <details className="lesson-reveal lesson-reveal-simple" key={dica}>
                   <summary>Dica {index + 1}</summary>
                   <div>
                     <p>{dica}</p>
@@ -138,7 +195,7 @@ export default function DiagnosticoPratica() {
                 Recarregue com F5 e confira que a lista e o cadastro voltaram a funcionar. Para
                 desligar todos os cenários, use <code>npm run desafio -- restaurar</code>.
               </p>
-              <details className="lesson-reveal">
+              <details className="lesson-reveal lesson-reveal-simple">
                 <summary>Solução — abra depois de tentar</summary>
                 <div>
                   <p>{desafio.solucao}</p>

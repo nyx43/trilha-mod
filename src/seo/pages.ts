@@ -218,7 +218,7 @@ export function socialPages(catalogs: RoadmapCatalog[], posts: BlogPost[]): Soci
             studyPage(
               `${path}/${diagnosticoWebSlug}`,
               'Diagnóstico de frontend e API',
-              'Investigue uma rota que retorna 404 e um cadastro que retorna 400 em um laboratório local.',
+              'Investigue cinco falhas de frontend e API em um laboratório local, incluindo erros HTTP, CORS e lista desatualizada.',
               'Prática opcional',
               ['HTTP e DevTools'],
             ),
