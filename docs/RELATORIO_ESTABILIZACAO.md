@@ -80,8 +80,15 @@ O push para `nyx43/trilha-mod`, branch `feat/percurso-api-tailwind`, foi bloquea
 
 ## Primeiro registro de evidências no Percurso Web — 18/11/2026
 
-- A Vercel confirmou a criação de `trilha-mod` a partir de `nyx43/trilha-mod`. A tela de importação aguardava o primeiro deploy e mostrava `main` como origem. Continua pendente validar a prévia de `feat/percurso-api-tailwind`.
+- A Vercel confirmou a criação de `trilha-mod` a partir de `nyx43/trilha-mod`. Na primeira consulta, a tela de importação ainda aguardava o deploy e mostrava `main` como origem.
 - A missão final ganhou cinco critérios com resultado e evidência. O aluno pode indicar observação própria, teste executado ou revisão de outra pessoa. A avaliação é salva no navegador e tem armazenamento independente do checklist e da conclusão do percurso.
 - A prática passou a cobrir as cinco falhas do laboratório. Os três cenários acrescentados são API inacessível, CORS na resposta do cadastro e lista desatualizada. Cada um tem roteiro, dicas, evidência esperada e solução recolhida. O ZIP existente já contém os cinco cenários.
 - No navegador, abri a avaliação pelo teclado, confirmei a exigência de evidência, salvei o resultado e recarreguei a página. Também segui o link da missão para o laboratório, naveguei até o cenário de CORS e abri sua solução pelo teclado. A checagem de tipos, 288 testes, a auditoria das 78 aulas nas duas vozes e o build passaram.
 - O próximo teste pedagógico é observar um iniciante executando a missão do início ao cadastro, usando a avaliação para registrar onde precisou de ajuda.
+
+## Deploy validado na Vercel — 18/11/2026
+
+- O push de `5d5129d` na branch `feat/percurso-api-tailwind` acionou o deploy automaticamente. A Vercel registrou a branch e o commit como origem, o ambiente como Produção e o status como Ready. O domínio saiu em [trilha-mod.vercel.app](https://trilha-mod.vercel.app). [Detalhes do deploy](https://vercel.com/joaovitorgamer776-4898/trilha-mod/3GvDh4WTMQfWoKepbAgWkyqLeS8c).
+- Por acesso direto no domínio publicado, abriram o recomendador, o índice do Percurso Web, as cinco etapas e o diagnóstico. A etapa inexistente devolveu HTTP 404. A missão mostrou a avaliação e o diagnóstico mostrou os cinco cenários.
+- O ZIP devolveu HTTP 200 e a cópia extraída passou em 22 testes e 16 verificações de fumaça. Os pedidos parciais de MP3 de Santa e Dora devolveram HTTP 206 com `audio/mpeg`. No navegador, o player apresentou avanço do trecho de abertura. A revisão auditiva de pronúncia e sincronia segue no roteiro de cinco minutos.
+- O GitHub Actions concluiu a instalação pelo lockfile, a checagem de tipos, os 288 testes, a auditoria da narração e o build. [Execução no GitHub](https://github.com/nyx43/trilha-mod/actions/runs/44278758341).
