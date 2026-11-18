@@ -157,3 +157,5 @@ export function fillMatches(value: string, answers: string[]): boolean {
   const normalize = (text: string) => text.trim().replace(/\s+/g, ' ').replace(/;$/, '');
   return answers.some((answer) => normalize(answer) === normalize(value));
 }
+export const classifySuccess = 'Tudo no lugar certo.';
+export const classifyRetry = 'Revise os itens marcados com erro.';

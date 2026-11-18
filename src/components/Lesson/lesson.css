@@ -562,7 +562,7 @@
 .lesson-reveal[open] .lesson-reveal-action {
   opacity: 0;
 }
-.lesson-reveal > p {
+.lesson-reveal > div {
   padding: 0 16px 16px;
   line-height: 1.7;
   color: var(--guide-body);

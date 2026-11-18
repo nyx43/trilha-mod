@@ -62,6 +62,8 @@ export function Reveal({
   block: Block<'reveal'>;
   narrationClipId?: string;
 }) {
+  const [open, setOpen] = useState(false);
+  const answerId = narrationClipId ? `${narrationClipId}:answer` : undefined;
   return (
     <div className="narration-reveal-wrap" data-narration-clip={narrationClipId}>
       {narrationClipId && (
@@ -69,7 +71,7 @@ export function Reveal({
           <NarrationBlockButton clipId={narrationClipId} label="Ouvir pergunta" />
         </div>
       )}
-      <details className="lesson-reveal">
+      <details className="lesson-reveal" onToggle={(event) => setOpen(event.currentTarget.open)}>
         <summary>
           <span className="lesson-activity-kind">Pare e pense</span>
           <span data-narration-field={narrationClipId ? 'question' : undefined}>
@@ -79,9 +81,12 @@ export function Reveal({
             Ver resposta
           </span>
         </summary>
-        <p>
-          <Inline text={block.answer} />
-        </p>
+        <div data-narration-clip={open ? answerId : undefined}>
+          <p data-narration-field={open && answerId ? 'answer' : undefined}>
+            <Inline text={block.answer} />
+          </p>
+          {open && answerId && <NarrationBlockButton clipId={answerId} label="Ouvir resposta" />}
+        </div>
       </details>
     </div>
   );
@@ -358,8 +363,21 @@ export function Flow({
   );
 }
 
-export function Trace({ block }: { block: Block<'trace'> }) {
+export function Trace({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'trace'>;
+  narrationClipId?: string;
+}) {
   const stepper = useStepper(block.steps.length, 2200);
+  const narration = useNarrationOptional();
+  const activeField = narration?.activeClipId === narrationClipId ? narration?.activeField : null;
+  const { go } = stepper;
+  useEffect(() => {
+    const match = activeField?.match(/^step:(\d+):/);
+    if (match) go(Number(match[1]));
+  }, [activeField, go]);
   const lines = useMemo(() => block.code.split('\n'), [block.code]);
   const current = block.steps[stepper.step];
   const memory = useMemo(() => {
@@ -375,9 +393,12 @@ export function Trace({ block }: { block: Block<'trace'> }) {
     .filter((value): value is string => value !== undefined);
   const reduced = useReducedMotion();
   return (
-    <figure className="lesson-trace">
+    <figure className="lesson-trace" data-narration-clip={narrationClipId}>
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
+        <NarrationBlockButton clipId={narrationClipId} label="Ouvir passo a passo" />
       </figcaption>
       <div className="lesson-trace-grid">
         <pre className="lesson-trace-code" role="region" aria-label="Código" tabIndex={0}>
@@ -442,7 +463,12 @@ export function Trace({ block }: { block: Block<'trace'> }) {
         </div>
       </div>
       <p className="lesson-trace-note" aria-live="polite">
-        <span>Linha {current.line}</span> <Inline text={current.note} />
+        <span data-narration-field={narrationClipId ? `step:${stepper.step}:line` : undefined}>
+          Linha {current.line}
+        </span>{' '}
+        <span data-narration-field={narrationClipId ? `step:${stepper.step}:text` : undefined}>
+          <Inline text={current.note} />
+        </span>
       </p>
       <StepControls {...stepper} total={block.steps.length} label={block.caption} />
     </figure>
@@ -552,7 +578,13 @@ function countNodes(nodes: TreeNode[]): number {
   return nodes.reduce((total, node) => total + 1 + countNodes(node.children), 0);
 }
 
-export function DomTree({ block }: { block: Block<'domTree'> }) {
+export function DomTree({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'domTree'>;
+  narrationClipId?: string;
+}) {
   const tree = useMemo(() => buildTree(block.html), [block.html]);
   const total = useMemo(() => countNodes(tree), [tree]);
   const [visible, setVisible] = useState(total);
@@ -592,9 +624,12 @@ export function DomTree({ block }: { block: Block<'domTree'> }) {
   );
 
   return (
-    <figure className="lesson-tree">
+    <figure className="lesson-tree" data-narration-clip={narrationClipId}>
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
+        <NarrationBlockButton clipId={narrationClipId} label="Ouvir descrição da árvore" />
       </figcaption>
       <div className="lesson-tree-grid">
         <CodeBlock language="html" code={block.html} compact />
@@ -631,11 +666,18 @@ function canSpeak() {
   );
 }
 
-export function ScreenReader({ block }: { block: Block<'screenReader'> }) {
+export function ScreenReader({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'screenReader'>;
+  narrationClipId?: string;
+}) {
   const [playing, setPlaying] = useState<number | null>(null);
   const [heard, setHeard] = useState<Record<number, number>>({});
   const [voice, setVoice] = useState(false);
   const reduced = useReducedMotion();
+  const narration = useNarrationOptional();
 
   useEffect(() => {
     if (playing === null) return;
@@ -650,8 +692,13 @@ export function ScreenReader({ block }: { block: Block<'screenReader'> }) {
       utterance.lang = 'pt-BR';
       utterance.rate = 1.05;
       utterance.onend = () => setHeard((previous) => ({ ...previous, [playing]: count + 1 }));
+      utterance.onerror = () => setPlaying(null);
       window.speechSynthesis.speak(utterance);
-      return () => window.speechSynthesis.cancel();
+      return () => {
+        utterance.onend = null;
+        utterance.onerror = null;
+        window.speechSynthesis.cancel();
+      };
     }
     const timer = window.setTimeout(
       () => setHeard((previous) => ({ ...previous, [playing]: count + 1 })),
@@ -661,9 +708,12 @@ export function ScreenReader({ block }: { block: Block<'screenReader'> }) {
   }, [playing, heard, voice, block.variants, reduced]);
 
   return (
-    <figure className="lesson-reader">
+    <figure className="lesson-reader" data-narration-clip={narrationClipId}>
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
+        <NarrationBlockButton clipId={narrationClipId} label="Ouvir descrição da demonstração" />
       </figcaption>
       {canSpeak() && (
         <label className="lesson-reader-voice">
@@ -692,6 +742,7 @@ export function ScreenReader({ block }: { block: Block<'screenReader'> }) {
                 className="lesson-button-quiet"
                 disabled={playing !== null}
                 onClick={() => {
+                  if (voice && narration?.status === 'playing') narration.togglePlayPause();
                   setHeard((previous) => ({ ...previous, [index]: 0 }));
                   setPlaying(index);
                 }}

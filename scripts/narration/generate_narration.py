@@ -570,7 +570,8 @@ def main():
                 prev_by_id[c["id"]] = c
 
     options = ort.SessionOptions()
-    options.intra_op_num_threads = 1
+    options.intra_op_num_threads = max(1, int(os.environ.get("KOKORO_THREADS", "1")))
+    options.add_session_config_entry("session.intra_op.allow_spinning", "0")
     session = ort.InferenceSession(str(model_dir / "kokoro-v1.0.onnx"), options, providers=["CPUExecutionProvider"])
     kokoro = Kokoro.from_session(session, str(model_dir / "voices-v1.0.bin"))
     inp_name = kokoro.sess.get_inputs()[0].name
@@ -621,24 +622,24 @@ def main():
                 rel_src = f"{v}/{safe_file}.mp3"
                 mp3_path = out_dir / rel_src
                 v_key = compute_clip_key(clip["textHash"], normalized_script, v)
+                previous_audio = prev_clip.get("audio", {}).get(v) if prev_clip else None
+                intact = previous_audio and mp3_path.is_file() and mp3_path.stat().st_size == previous_audio.get("bytes")
 
                 can_reuse = (
                     not args.force
                     and (not args.only_clip or args.only_clip != clip_id)
-                    and prev_clip is not None
-                    and prev_clip.get("audio", {}).get(v) is not None
+                    and intact
                     and prev_clip.get("textHash") == clip["textHash"]
-                    and prev_clip["audio"][v].get("normalizedScript") == normalized_script
-                    and mp3_path.exists()
+                    and previous_audio.get("normalizedScript") == normalized_script
                 )
                 # Preserve untouched clips when --only-clip is filtering
-                if args.only_clip and args.only_clip != clip_id and prev_clip and prev_clip.get("audio", {}).get(v) and mp3_path.exists():
-                    clip_entry["audio"][v] = prev_clip["audio"][v]
+                if args.only_clip and args.only_clip != clip_id and intact:
+                    clip_entry["audio"][v] = previous_audio
                     reused_count += 1
                     continue
 
                 if can_reuse:
-                    clip_entry["audio"][v] = prev_clip["audio"][v]
+                    clip_entry["audio"][v] = previous_audio
                     reused_count += 1
                     continue
 

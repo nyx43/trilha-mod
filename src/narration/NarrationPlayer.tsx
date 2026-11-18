@@ -276,6 +276,7 @@ export function NarrationPlayer() {
             aria-label="Posição no trecho atual"
             min={0}
             max={Math.max(1, clipDurationMs)}
+            disabled={isPausedByActivity}
             value={Math.min(currentTimeMs, clipDurationMs)}
             onChange={(e) => narration.seekToMs(Number(e.target.value))}
           />
@@ -352,7 +353,8 @@ export function NarrationBlockButton({
 
   const isCurrent = narration.activeClipId === clipId;
   const isPlayingThis = isCurrent && narration.status === 'playing';
-  const isPausedThis = isCurrent && narration.status === 'paused';
+  const isPausedThis =
+    isCurrent && narration.status === 'paused' && narration.pauseReason === 'user';
 
   const text = isPlayingThis ? 'Pausar' : isPausedThis ? 'Continuar' : label;
 

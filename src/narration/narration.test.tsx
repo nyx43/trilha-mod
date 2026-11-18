@@ -118,7 +118,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     vi.unstubAllGlobals();
   });
 
-  it('calcula SHA-256 em sincronia com Python e extrai todos os 50 clipes sem vazar respostas ocultas', () => {
+  it('calcula SHA-256 e mantém respostas ocultas fora da leitura contínua', () => {
     expect(sha256Hex('trilha-mod')).toBe(
       crypto.createHash('sha256').update('trilha-mod', 'utf8').digest('hex'),
     );
@@ -128,11 +128,18 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     const spec = extractLessonNarrationSpec(pilotMeta, pilotContent);
 
     expect(spec.uncoveredBlocks).toHaveLength(0);
-    expect(spec.clips).toHaveLength(realManifest.clips.length);
-
-    const joinedAudioScript = spec.clips.map((c) => c.canonicalText).join('\n');
+    const joinedAudioScript = spec.clips
+      .filter((c) => !c.onDemand)
+      .map((c) => c.canonicalText)
+      .join('\n');
     expect(joinedAudioScript).not.toContain(pilotContent.cards[0].back);
     expect(joinedAudioScript).not.toContain('Duas origens.');
+    const classify = must(spec.clips.find((clip) => clip.id === 'caminho-da-requisicao:3'));
+    expect(classify.fields).toHaveLength(9);
+    expect(classify.pauseAfter).toBe(true);
+    expect(
+      spec.clips.find((clip) => clip.id === 'caminho-da-requisicao:3:feedback:correct')?.onDemand,
+    ).toBe(true);
     for (const mc of realManifest.clips) {
       const sc = must(
         spec.clips.find((c) => c.id === mc.id),
@@ -403,12 +410,95 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     expect(await screen.findByRole('button', { name: 'Ouvir aula inteira' })).toBeInTheDocument();
     expect(document.getElementById('fechamento')).toBeInTheDocument();
 
-    // Flashcard: verso nunca tem clipe ou botão de narração
+    // O verso só pode ter narração depois que a pessoa vira o cartão.
+    const card = must(document.querySelector('.lesson-card'));
+    const front = must(card.getAttribute('data-narration-clip'));
+    expect(
+      document.querySelector(`[data-narration-clip="${front.replace(/:front$/, ':back')}"]`),
+    ).toBeNull();
     expect(screen.getByRole('button', { name: 'Ouvir frente' })).toBeInTheDocument();
     fireEvent.click(
       screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
     );
     expect(screen.queryByRole('button', { name: 'Ouvir frente' })).not.toBeInTheDocument();
+    expect(
+      document.querySelector(`[data-narration-clip="${front.replace(/:front$/, ':back')}"]`),
+    ).toBeInTheDocument();
+  });
+
+  it('pausa na classificação ao fim das seções abertas e retoma depois da leitura do feedback', async () => {
+    const pilotMeta = must(lessons.find((l) => l.id === 'integracao-front-e-api'));
+    const feedbackId = 'caminho-da-requisicao:3:feedback:correct';
+    const feedback = must(
+      extractLessonNarrationSpec(pilotMeta, pilotContent).clips.find(
+        (clip) => clip.id === feedbackId,
+      ),
+    );
+    const fixture = {
+      ...realManifest,
+      clips: [
+        ...realManifest.clips.filter((clip) => clip.id !== feedbackId),
+        { ...feedback, clipKey: 'feedback', audio: must(realManifest.clips[0]).audio },
+      ],
+    };
+    fetchSpy.mockResolvedValue({ ok: true, json: async () => fixture } as Response);
+    render(
+      <MemoryRouter initialEntries={['/aula/integracao-front-e-api']}>
+        <Routes>
+          <Route path="/aula/:lesson" element={<LessonPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    await screen.findByRole('region', { name: 'Controles de narração da aula' });
+    expect(screen.queryByRole('button', { name: 'Ouvir feedback' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir seções abertas' }));
+    const audio = getActiveAudio();
+    for (let i = 0; i < 12 && !audio.src.includes('caminho-da-requisicao__3.mp3'); i += 1) {
+      act(() => audio.emit('ended'));
+    }
+    expect(audio.src).toContain('caminho-da-requisicao__3.mp3');
+    act(() => audio.emit('ended'));
+    expect(screen.getByRole('button', { name: 'Retomar leitura' })).toBeInTheDocument();
+
+    const block = must(pilotContent.sections[0].blocks.find((block) => block.type === 'classify'));
+    if (block.type !== 'classify') throw new Error('Atividade de classificação ausente');
+    for (const group of screen.getAllByRole('group')) {
+      const item = block.items.find((item) =>
+        group.textContent?.startsWith(item.text.replace(/`/g, '')),
+      );
+      if (item) fireEvent.click(within(group).getAllByRole('radio')[item.bucket]);
+    }
+    fireEvent.click(screen.getByRole('button', { name: 'Verificar' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir feedback' }));
+    expect(
+      document.querySelector(`[data-narration-clip="${feedbackId}"][data-narration-reading]`),
+    ).toBeInTheDocument();
+    act(() => audio.emit('ended'));
+    expect(screen.getByRole('button', { name: 'Retomar leitura' })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByLabelText('Mostrar a aula inteira'));
+    fireEvent.click(screen.getByRole('button', { name: 'Retomar leitura' }));
+    expect(audio.src).toContain('fetch-com-corpo__heading.mp3');
+  });
+
+  it('para a mídia quando a seção que contém o trecho é recolhida', async () => {
+    render(
+      <MemoryRouter initialEntries={['/aula/integracao-front-e-api']}>
+        <Routes>
+          <Route path="/aula/:lesson" element={<LessonPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+    await screen.findByRole('region', { name: 'Controles de narração da aula' });
+    const showAll = screen.getByLabelText('Mostrar a aula inteira');
+    fireEvent.click(showAll);
+    const heading = must(document.getElementById('fechamento'));
+    fireEvent.click(within(heading).getByRole('button', { name: 'Ouvir título' }));
+    const audio = getActiveAudio();
+    expect(audio.paused).toBe(false);
+    fireEvent.click(showAll);
+    await waitFor(() => expect(audio.paused).toBe(true));
+    expect(audio.src).toBe('');
   });
 
   it('desabilita o botão do parágrafo editado quando textHash diverge e mantém os demais ativos', async () => {

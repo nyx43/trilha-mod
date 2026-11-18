@@ -23,6 +23,10 @@ export type NarrationBlockKind =
   | 'terminal'
   | 'playground'
   | 'reveal'
+  | 'activity-feedback'
+  | 'revealed-answer'
+  | 'cards'
+  | 'visual'
   | 'fechamento-heading'
   | 'fechamento-recap'
   | 'fechamento-card'
@@ -47,7 +51,8 @@ export interface NarrationClipSpec {
   canonicalText: string;
   textHash: string;
   pauseAfter?: boolean;
-  interactiveKind?: 'flow' | 'anatomy';
+  onDemand?: boolean;
+  interactiveKind?: 'flow' | 'anatomy' | 'trace';
   label: string;
 }
 
@@ -96,7 +101,7 @@ export interface NarrationClipManifest {
   textHash: string;
   clipKey: string;
   pauseAfter?: boolean;
-  interactiveKind?: 'flow' | 'anatomy';
+  interactiveKind?: 'flow' | 'anatomy' | 'trace';
   audio: Partial<Record<NarrationVoiceId, NarrationVoiceAudio>>;
 }
 

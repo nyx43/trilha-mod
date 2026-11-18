@@ -1,17 +1,31 @@
 import { CSSProperties, useId, useState } from 'react';
 import { ComplexityId, GuideBlock, JoinKind, ScriptPhase } from '../../guides/types';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Inline } from './inline';
 import { CodeBlock } from './CodeBlock';
 
 type Block<T extends GuideBlock['type']> = Extract<GuideBlock, { type: T }>;
 
-export function SequenceDiagram({ block }: { block: Block<'sequence'> }) {
+export function SequenceDiagram({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'sequence'>;
+  narrationClipId?: string;
+}) {
   const { actors } = block;
   const n = actors.length;
   return (
-    <figure className="guide-seq" style={{ '--n': n } as CSSProperties}>
+    <figure
+      className="guide-seq"
+      style={{ '--n': n } as CSSProperties}
+      data-narration-clip={narrationClipId}
+    >
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
+        <NarrationBlockButton clipId={narrationClipId} label="Ouvir sequência" />
       </figcaption>
       <div className="guide-seq-body">
         <div className="guide-seq-actors" aria-hidden="true">
@@ -44,16 +58,23 @@ export function SequenceDiagram({ block }: { block: Block<'sequence'> }) {
                   <span className="guide-seq-index" aria-hidden="true">
                     {index + 1}
                   </span>
-                  <span className="guide-seq-route">
+                  <span
+                    className="guide-seq-route"
+                    data-narration-field={narrationClipId ? `item:${index}:route` : undefined}
+                  >
                     {self
                       ? actors[message.from]
+                      : narrationClipId
+                      ? `De ${actors[message.from]} para ${actors[message.to]}`
                       : `${actors[message.from]} → ${actors[message.to]}`}
                   </span>
-                  <strong>
+                  <strong
+                    data-narration-field={narrationClipId ? `item:${index}:title` : undefined}
+                  >
                     <Inline text={message.label} />
                   </strong>
                   {message.text && (
-                    <p>
+                    <p data-narration-field={narrationClipId ? `item:${index}:text` : undefined}>
                       <Inline text={message.text} />
                     </p>
                   )}
@@ -176,12 +197,19 @@ function curve(id: ComplexityId) {
   return { d: `M${points.join(' L')}`, label };
 }
 
-export function ComplexityChart({ block }: { block: Block<'complexity'> }) {
+export function ComplexityChart({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'complexity'>;
+  narrationClipId?: string;
+}) {
   const [active, setActive] = useState<ComplexityId | null>(null);
   const captionId = useId();
   const plotBottom = chart.height - chart.bottom;
   return (
-    <div className="guide-complexity">
+    <div className="guide-complexity" data-narration-clip={narrationClipId}>
+      <NarrationBlockButton clipId={narrationClipId} label="Ouvir comparação das curvas" />
       <figure className="guide-chart">
         <svg
           viewBox={`0 0 ${chart.width} ${chart.height}`}
@@ -235,7 +263,7 @@ export function ComplexityChart({ block }: { block: Block<'complexity'> }) {
         </figcaption>
       </figure>
       <ul className="guide-complexity-list">
-        {block.items.map((item) => (
+        {block.items.map((item, index) => (
           <li
             key={item.id}
             onMouseEnter={() => setActive(item.id)}
@@ -243,13 +271,19 @@ export function ComplexityChart({ block }: { block: Block<'complexity'> }) {
             style={{ '--c': curveColor[item.id] } as CSSProperties}
           >
             <h3>
-              O({item.id}) <span>{item.name}</span>
+              O({item.id}){' '}
+              <span data-narration-field={narrationClipId ? `item:${index}:title` : undefined}>
+                {item.name}
+              </span>
             </h3>
-            <p>
+            <p data-narration-field={narrationClipId ? `item:${index}:text` : undefined}>
               <Inline text={item.text} />
             </p>
             <p className="guide-complexity-example">
-              <span>Exemplo</span> <Inline text={item.example} />
+              <span>Exemplo</span>{' '}
+              <span data-narration-field={narrationClipId ? `item:${index}:example` : undefined}>
+                <Inline text={item.example} />
+              </span>
             </p>
             <CodeBlock language="javascript" code={item.code} compact />
           </li>
@@ -285,19 +319,34 @@ function Venn({ kind }: { kind: JoinKind }) {
   );
 }
 
-export function JoinDiagrams({ block }: { block: Block<'joins'> }) {
+export function JoinDiagrams({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'joins'>;
+  narrationClipId?: string;
+}) {
   return (
-    <div className="guide-joins">
-      <p className="guide-joins-key">
-        <span>A</span> {block.tables[0]} <span>B</span> {block.tables[1]}
-      </p>
+    <div className="guide-joins" data-narration-clip={narrationClipId}>
+      <NarrationBlockButton clipId={narrationClipId} label="Ouvir tipos de junção" />
+      {narrationClipId ? (
+        <p className="guide-joins-key" data-narration-field="caption">
+          Tabela A: {block.tables[0]}. Tabela B: {block.tables[1]}.
+        </p>
+      ) : (
+        <p className="guide-joins-key">
+          <span>A</span> {block.tables[0]} <span>B</span> {block.tables[1]}
+        </p>
+      )}
       <ul className="guide-join-list">
-        {block.items.map((item) => (
+        {block.items.map((item, index) => (
           <li key={item.kind} className="guide-panel guide-join">
             <div className="guide-join-text">
               <Venn kind={item.kind} />
-              <h3>{item.title}</h3>
-              <p>
+              <h3 data-narration-field={narrationClipId ? `item:${index}:title` : undefined}>
+                {item.title}
+              </h3>
+              <p data-narration-field={narrationClipId ? `item:${index}:text` : undefined}>
                 <Inline text={item.text} />
               </p>
             </div>
@@ -309,12 +358,21 @@ export function JoinDiagrams({ block }: { block: Block<'joins'> }) {
   );
 }
 
-export function Pyramid({ block }: { block: Block<'pyramid'> }) {
+export function Pyramid({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'pyramid'>;
+  narrationClipId?: string;
+}) {
   const last = Math.max(block.levels.length - 1, 1);
   return (
-    <figure className="guide-pyramid">
+    <figure className="guide-pyramid" data-narration-clip={narrationClipId}>
       <figcaption className="guide-figcaption">
-        <Inline text={block.caption} />
+        <span data-narration-field={narrationClipId ? 'caption' : undefined}>
+          <Inline text={block.caption} />
+        </span>
+        <NarrationBlockButton clipId={narrationClipId} label="Ouvir níveis da pirâmide" />
       </figcaption>
       <div className="guide-pyramid-body">
         <p className="guide-pyramid-axis" aria-hidden="true">
@@ -328,9 +386,11 @@ export function Pyramid({ block }: { block: Block<'pyramid'> }) {
               style={{ '--w': `${40 + (index / last) * 60}%` } as CSSProperties}
             >
               <span className="guide-pyramid-shape">
-                <strong>{level.title}</strong>
+                <strong data-narration-field={narrationClipId ? `item:${index}:title` : undefined}>
+                  {level.title}
+                </strong>
               </span>
-              <p>
+              <p data-narration-field={narrationClipId ? `item:${index}:text` : undefined}>
                 <Inline text={level.text} />
               </p>
             </li>

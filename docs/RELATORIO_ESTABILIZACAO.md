@@ -21,3 +21,27 @@ cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' &&
 - O editor agora aceita várias linhas. Enter insere uma quebra no cursor. Ctrl+Enter, Cmd+Enter e o botão “Executar” enviam um lote. Os comandos rodam de cima para baixo. O simulador ignora linhas vazias, indica a primeira linha incorreta e conserva a linha e as seguintes para edição. As linhas que sobram após o último passo continuam disponíveis para copiar.
 - Chromium, 360 px, perfil temporário: conferi a quebra no cursor, inserção de várias linhas, erro na segunda linha, preservação das pendentes, Ctrl+Enter, Cmd+Enter e o clique no alvo de 44 px. A edição deixou o progresso e o armazenamento local intactos.
 - `npm run test:run -- src/components/Lesson/runners.test.tsx`: 5 testes passaram.
+
+## Auditoria inicial da narração
+
+- Rodei `verify_narration.py` para as 65 aulas catalogadas antes das mudanças. Santa e Dora passaram em todas, com 2.960 trechos por voz, zero erros e zero alertas. Os JSON e logs estão em `.cache/narration/estabilizacao/verificacao-inicial/`.
+- Cruzamento em “Onde cada tarefa acontece?” (`/aula/integracao-front-e-api`): o áudio existente traz a pergunta, as duas opções e os seis itens que aparecem na tela. O feedback aparecia sem botão e a fila terminava sem indicar a pausa quando a atividade era o último trecho das seções abertas.
+- Em Chromium, ao iniciar o áudio do fechamento e desmarcar “Mostrar a aula inteira”, o trecho continuava tocando com o fechamento removido.
+- A auditoria inicial listou 92 blocos sem clipe em 48 aulas. Totais por tipo: `trace` 25, `steps` 23, `cards` 23, `screenReader` 4, `code` 3, `pyramid` 3, `domTree` 2, `layoutLab` 2, `joins` 2, `specificity` 1, `boxModel` 1, `contrast` 1, `sequence` 1 e `complexity` 1.
+
+## Recuperação e ampliação da narração
+
+- `onde-o-dado-mora` passou com um processo. O lote retornou `batch_exit=0`, com 38 clipes por voz, zero erros e zero alertas contra o roteiro anterior. A aula voltou ao catálogo. A revisão dos clipes novos dessa aula entra na atualização das catalogadas.
+- `integracao-front-e-api` passou com 63 clipes por voz e zero erros e alertas. Foram gerados 13 novos clipes em cada voz e reaproveitados os 50 existentes. O feedback correto lê a explicação. No incorreto, o botão lê a orientação de revisão e o total de acertos aparece no status da atividade.
+- A fila pausa em “Onde cada tarefa acontece?”, inclusive quando é o último trecho aberto. Ler o feedback preserva o ponto de pausa da fila. O botão de resposta em reflexão e no verso de cartão aparece após a revelação, e a narração contínua pula esses clipes.
+- O fluxo de geração agora registra o retorno do subprocesso e escreve o log sem buffer. O verificador exige as duas vozes e compara o tamanho de cada MP3 com o manifesto. A opção `--stale` seleciona aulas catalogadas que precisam de clipes novos ou reparo.
+- O extrator e a interface passaram a cobrir cartões de conteúdo, passos, traçados de execução, legendas de árvore DOM e do leitor de tela, pirâmides, sequências, junções, complexidade e três exemplos de código sem legenda. A auditoria do roteiro atual aponta cinco laboratórios sem clipe dedicado: os dois de layout em `css-flexbox-e-grid`, especificidade em `css-seletores-e-cascata`, modelo de caixa em `css-tudo-e-caixa` e contraste em `acessibilidade-para-todos`. As instruções próximas explicam quais controles usar e o que observar. As demonstrações de leitor de tela têm legenda narrável e reprodução separada pela voz do navegador, quando disponível.
+- Kokoro retorna a duração em quadros para cada fonema. O gerador acumula esses quadros, os deslocamentos de cada frase e as pausas até obter os tempos associados a cada palavra. Para os MP3 novos da aula de Integração, a checagem de correlação do início do PCM decodificado registrou 0,00 ms de desvio. Esse número mede a codificação. A pronúncia dos termos ainda depende de escuta humana.
+- A geração mantém o bloqueio `geracao.lock`. Depois da recuperação e de Integração, o lote usa um processo com três threads internas do Kokoro. Os logs de trabalho são `.cache/narration/estabilizacao/restantes.log` e `.cache/narration/estabilizacao/atualizacao.log`.
+
+## Jornada testada no Chromium
+
+- Perfil temporário, 360 px. Abri `/aulas`, depois `/aulas/fullstack` e `/aula/integracao-front-e-api?trilha=fullstack`. Resolvi a classificação, avancei para “Enviar dados com fetch”, recarreguei e usei “Retomar posição”. O trecho retomou a partir de 2,2 s e o progresso da resposta e da seção persistiu.
+- Em `/percurso/api-react-tailwind/integracao-front-api`, conferi que o mesmo MP3 toca e que a leitura sozinha não grava respostas nem avanço. O áudio parou na navegação de volta ao Percurso. Na aula avulsa, parou ao recolher o fechamento.
+- Santa e Dora, em 1× e 1,35×: o Chromium reproduziu o MP3 correspondente e usou o tempo da mídia para destacar palavras no início, meio e última frase da apresentação. Os destaques conferidos incluíram “Integração”, “fetch”, “JSON” e “otimista”. A amostragem valida reprodução e destaque perante o relógio da mídia. Falta uma escuta humana para validar a correspondência auditiva e a pronúncia.
+- A execução inicial da suíte revelou duas falhas: a asserção “Próxima aula” ainda apontava para a ordem anterior a “Onde o dado mora” e o teste local de Python ficava esperando o encerramento da entrada padrão no sandbox. Atualizei a asserção e passei o JSON pela linha de comando do processo de teste, com diagnóstico por exercício.

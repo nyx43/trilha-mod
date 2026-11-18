@@ -111,50 +111,72 @@ export function GuideBlockView({
       );
     case 'steps':
       return (
-        <ol className="guide-steps">
-          {block.items.map((item, index) => (
-            <li key={item.title}>
-              <span className="guide-step-number" aria-hidden="true">
-                {index + 1}
-              </span>
-              <div>
-                <h3>
-                  <Inline text={item.title} />
-                </h3>
-                <p>
-                  <Inline text={item.text} />
-                </p>
-                {item.code && <CodeBlock language="terminal" code={item.code} compact />}
-              </div>
-            </li>
-          ))}
-        </ol>
+        <div data-narration-clip={narrationClipId}>
+          {narrationClipId && (
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir passo a passo" />
+          )}
+          <ol className="guide-steps">
+            {block.items.map((item, index) => (
+              <li key={item.title}>
+                <span className="guide-step-number" aria-hidden="true">
+                  {index + 1}
+                </span>
+                <div>
+                  <h3 data-narration-field={narrationClipId ? `item:${index}:title` : undefined}>
+                    <Inline text={item.title} />
+                  </h3>
+                  <p data-narration-field={narrationClipId ? `item:${index}:text` : undefined}>
+                    <Inline text={item.text} />
+                  </p>
+                  {item.code && <CodeBlock language="terminal" code={item.code} compact />}
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
       );
     case 'cards':
       return (
-        <ul className="guide-panels" data-columns={block.columns || 2}>
-          {block.items.map((item) => (
-            <li key={item.title} className="guide-panel">
-              {item.label && <p className="guide-panel-label">{item.label}</p>}
-              <h3>
-                <Inline text={item.title} />
-              </h3>
-              <p>
-                <Inline text={item.text} />
-              </p>
-              {item.points && (
-                <ul>
-                  {item.points.map((point) => (
-                    <li key={point}>
-                      <Inline text={point} />
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {item.code && <CodeBlock language="exemplo" code={item.code} compact />}
-            </li>
-          ))}
-        </ul>
+        <div data-narration-clip={narrationClipId}>
+          {narrationClipId && (
+            <NarrationBlockButton clipId={narrationClipId} label="Ouvir cartões" />
+          )}
+          <ul className="guide-panels" data-columns={block.columns || 2}>
+            {block.items.map((item, index) => (
+              <li key={item.title} className="guide-panel">
+                {item.label && (
+                  <p
+                    className="guide-panel-label"
+                    data-narration-field={narrationClipId ? `item:${index}:label` : undefined}
+                  >
+                    <Inline text={item.label} />
+                  </p>
+                )}
+                <h3 data-narration-field={narrationClipId ? `item:${index}:title` : undefined}>
+                  <Inline text={item.title} />
+                </h3>
+                <p data-narration-field={narrationClipId ? `item:${index}:text` : undefined}>
+                  <Inline text={item.text} />
+                </p>
+                {item.points && (
+                  <ul>
+                    {item.points.map((point, i) => (
+                      <li
+                        key={point}
+                        data-narration-field={
+                          narrationClipId ? `item:${index}:point:${i}` : undefined
+                        }
+                      >
+                        <Inline text={point} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
+                {item.code && <CodeBlock language="exemplo" code={item.code} compact />}
+              </li>
+            ))}
+          </ul>
+        </div>
       );
     case 'table':
       return (
@@ -237,15 +259,15 @@ export function GuideBlockView({
         </div>
       );
     case 'sequence':
-      return <SequenceDiagram block={block} />;
+      return <SequenceDiagram block={block} narrationClipId={narrationClipId} />;
     case 'scripts':
       return <ScriptTimelines block={block} />;
     case 'complexity':
-      return <ComplexityChart block={block} />;
+      return <ComplexityChart block={block} narrationClipId={narrationClipId} />;
     case 'joins':
-      return <JoinDiagrams block={block} />;
+      return <JoinDiagrams block={block} narrationClipId={narrationClipId} />;
     case 'pyramid':
-      return <Pyramid block={block} />;
+      return <Pyramid block={block} narrationClipId={narrationClipId} />;
     case 'layout':
       return <LayoutDemo block={block} />;
     case 'checklist':

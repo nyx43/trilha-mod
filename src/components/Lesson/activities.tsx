@@ -1,7 +1,13 @@
 import { ReactNode, useId, useMemo, useState } from 'react';
 import { PiArrowDown, PiArrowUp, PiCheckBold, PiXBold } from 'react-icons/pi';
 import { recordAnswer } from '../../lessons/progress';
-import { fillMatches, parseFill, stableShuffle } from '../../lessons/tools';
+import {
+  classifyRetry,
+  classifySuccess,
+  fillMatches,
+  parseFill,
+  stableShuffle,
+} from '../../lessons/tools';
 import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { CodeBlock } from '../Guide/CodeBlock';
 import { Inline } from '../Guide/inline';
@@ -276,6 +282,11 @@ export function Classify({
   const [attempts, setAttempts] = useState(0);
   const complete = items.every((_, index) => answers[index] !== undefined);
   const right = items.filter((item, index) => answers[index] === item.bucket).length;
+  const solved = right === items.length;
+  const feedbackClip =
+    checked && narrationClipId
+      ? `${narrationClipId}:feedback:${solved ? 'correct' : 'retry'}`
+      : undefined;
 
   function check() {
     if (attempts === 0) recordAnswer(lessonId, activityId, right === items.length);
@@ -350,20 +361,20 @@ export function Classify({
           <span className="lesson-activity-note">Escolha uma opção para cada item.</span>
         )}
       </div>
-      <Feedback tone={!checked ? undefined : right === items.length ? 'right' : 'wrong'}>
+      <Feedback tone={!checked ? undefined : solved ? 'right' : 'wrong'}>
         {checked && (
-          <>
-            <p className="lesson-feedback-title">
-              {right === items.length
-                ? 'Tudo no lugar certo.'
-                : `${right} de ${items.length} corretos. Os marcados com ✗ merecem outra olhada.`}
+          <div data-narration-clip={feedbackClip}>
+            <p
+              className="lesson-feedback-title"
+              data-narration-field={feedbackClip && solved ? 'title' : undefined}
+            >
+              {solved ? classifySuccess : `${right} de ${items.length} corretos.`}
             </p>
-            {right === items.length && (
-              <p>
-                <Inline text={block.explanation} />
-              </p>
-            )}
-          </>
+            <p data-narration-field={feedbackClip ? 'text' : undefined}>
+              <Inline text={solved ? block.explanation : classifyRetry} />
+            </p>
+            {feedbackClip && <NarrationBlockButton clipId={feedbackClip} label="Ouvir feedback" />}
+          </div>
         )}
       </Feedback>
     </section>

@@ -47,13 +47,13 @@ export function LessonBlockView({
     case 'flow':
       return <Flow block={block} narrationClipId={clipId} />;
     case 'trace':
-      return <Trace block={block} />;
+      return <Trace block={block} narrationClipId={clipId} />;
     case 'codeTabs':
       return <CodeTabs block={block} narrationClipId={clipId} />;
     case 'domTree':
-      return <DomTree block={block} />;
+      return <DomTree block={block} narrationClipId={clipId} />;
     case 'screenReader':
-      return <ScreenReader block={block} />;
+      return <ScreenReader block={block} narrationClipId={clipId} />;
     case 'boxModel':
       return <BoxModel />;
     case 'layoutLab':

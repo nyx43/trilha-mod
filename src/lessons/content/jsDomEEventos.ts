@@ -18,7 +18,8 @@ export const content: LessonContent = {
         },
         {
           type: 'domTree',
-          caption: 'Um cartão de produto e a árvore que o navegador monta a partir dele.',
+          caption:
+            'O navegador monta a árvore a partir do article do cartão. O título, o parágrafo e o botão viram seus filhos. O span do preço fica dentro do parágrafo e pode ser encontrado pelo identificador preco.',
           html: '<article class="cartao">\n  <h2>Pastel de feira</h2>\n  <p>R$ <span id="preco">8,00</span></p>\n  <button type="button">Adicionar</button>\n</article>',
         },
         {

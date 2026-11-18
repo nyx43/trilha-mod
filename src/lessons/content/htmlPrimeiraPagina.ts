@@ -351,7 +351,8 @@ export const content: LessonContent = {
         },
         {
           type: 'domTree',
-          caption: 'Uma página pequena e a árvore que o navegador monta a partir dela',
+          caption:
+            'Ao montar a árvore da página da padaria, o navegador começa por html. Ele abre um ramo para head, com o título da aba, e outro para body, com o conteúdo que aparece na página.',
           html: '<html lang="pt-BR">\n  <head>\n    <title>Padaria</title>\n  </head>\n  <body>\n    <h1>Padaria Pão Quente</h1>\n    <p>Pão fresco <strong>toda manhã</strong></p>\n    <ul>\n      <li>Pão francês</li>\n      <li>Pão de queijo</li>\n    </ul>\n  </body>\n</html>',
         },
         {

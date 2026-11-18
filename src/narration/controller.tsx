@@ -96,6 +96,12 @@ export function useNarrationOptional(): NarrationContextValue | null {
   return useContext(NarrationContext);
 }
 
+interface ActivityCheckpoint {
+  clipId: string;
+  queue: string[];
+  index: number;
+}
+
 interface NarrationProviderProps {
   lesson: LessonMeta;
   content: LessonContent | null;
@@ -169,8 +175,13 @@ export function NarrationProvider({
 
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const rafRef = useRef<number | null>(null);
+  const playbackRequest = useRef(0);
+  const suspendedActivity = useRef<ActivityCheckpoint | null>(null);
+  const readingOnDemand = !!activeClipId && Boolean(specById.get(activeClipId)?.onDemand);
   const stateRef = useRef({
     status,
+    pauseReason,
+    readingOnDemand,
     playbackMode,
     activeClipId,
     queueClipIds,
@@ -181,6 +192,8 @@ export function NarrationProvider({
 
   stateRef.current = {
     status,
+    pauseReason,
+    readingOnDemand,
     playbackMode,
     activeClipId,
     queueClipIds,
@@ -213,6 +226,7 @@ export function NarrationProvider({
       const sc = specById.get(clipId);
       if (!sc) return 'unavailable';
       const mc = manifestById.get(clipId);
+      if (!mc && sc.onDemand) return 'unavailable';
       if (!mc || mc.textHash !== sc.textHash) return 'stale';
       if (!mc.audio[activeVoice]) return 'unavailable';
       return 'ready';
@@ -230,6 +244,7 @@ export function NarrationProvider({
   }, [enabled, manifestStatus, spec.clips, getClipAvailability]);
 
   const stopAudioHardware = useCallback(() => {
+    playbackRequest.current += 1;
     if (rafRef.current !== null && typeof cancelAnimationFrame === 'function') {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -305,16 +320,30 @@ export function NarrationProvider({
 
     return () => {
       ctrl.abort();
-      stopAudioHardware();
     };
   }, [lesson.id, scopeKey, enabled, initialManifest, stopAudioHardware]);
 
-  // Ensure hardware stops cleanly if route/lesson unmounts
+  // Preserve an offset if the student leaves while the clip is still playing.
   useEffect(() => {
+    function saveOffset() {
+      const { status, activeClipId, readingOnDemand } = stateRef.current;
+      const time = audioRef.current?.currentTime ?? 0;
+      if (status === 'playing' && activeClipId && time > 0.2 && !readingOnDemand) {
+        saveReadingPosition(scopeKey, {
+          clipId: activeClipId,
+          timeSec: Number(time.toFixed(2)),
+          updatedAt: new Date().toISOString(),
+        });
+      }
+    }
+    window.addEventListener('pagehide', saveOffset);
     return () => {
+      window.removeEventListener('pagehide', saveOffset);
+      saveOffset();
       stopAudioHardware();
+      suspendedActivity.current = null;
     };
-  }, [stopAudioHardware]);
+  }, [lesson.id, scopeKey, stopAudioHardware]);
 
   const paintAtMs = useCallback(
     (clipId: string | null, ms: number) => {
@@ -354,26 +383,48 @@ export function NarrationProvider({
     [enabled, scopeKey],
   );
 
-  const discoverVisibleReadyQueue = useCallback((): string[] => {
-    const root = containerRef.current;
-    if (!root) {
-      return spec.clips.filter((c) => getClipAvailability(c.id) === 'ready').map((c) => c.id);
-    }
+  const getMountedClips = useCallback(() => {
     const mounted = new Set<string>();
-    root.querySelectorAll('[data-narration-clip]').forEach((el) => {
+    const root = containerRef.current;
+    root?.querySelectorAll('[data-narration-clip]').forEach((el) => {
+      if (el.closest('[hidden], details:not([open])')) return;
       const id = el.getAttribute('data-narration-clip');
       if (id) mounted.add(id);
     });
+    return mounted;
+  }, [containerRef]);
+
+  const discoverVisibleReadyQueue = useCallback((): string[] => {
+    const mounted = getMountedClips();
     return spec.clips
-      .filter((c) => mounted.has(c.id) && getClipAvailability(c.id) === 'ready')
+      .filter((c) => !c.onDemand && mounted.has(c.id) && getClipAvailability(c.id) === 'ready')
       .map((c) => c.id);
-  }, [containerRef, spec.clips, getClipAvailability]);
+  }, [getMountedClips, spec.clips, getClipAvailability]);
+
+  const pauseAtActivity = useCallback(
+    ({ clipId, queue, index }: ActivityCheckpoint) => {
+      const duration = manifestById.get(clipId)?.audio[activeVoice]?.durationMs ?? 0;
+      setPlaybackMode('queue');
+      setQueueClipIds(queue);
+      setQueueIndex(index);
+      setActiveClipId(clipId);
+      setActiveField(null);
+      setClipDurationMs(duration);
+      setCurrentTimeMs(duration);
+      setStatus('paused');
+      setPauseReason('activity');
+      setStatusMessage(
+        'Pausado após a atividade. Resolva no seu ritmo e clique em Retomar leitura.',
+      );
+    },
+    [manifestById, activeVoice],
+  );
 
   const startClipInternal = useCallback(
     (clipId: string, startSec = 0) => {
       const mc = manifestById.get(clipId);
       const avail = getClipAvailability(clipId);
-      if (!mc || avail !== 'ready') {
+      if (!mc || avail !== 'ready' || !getMountedClips().has(clipId)) {
         setStatusMessage(
           avail === 'stale'
             ? 'Este trecho foi editado após a geração do áudio e está aguardando regeneração.'
@@ -407,7 +458,7 @@ export function NarrationProvider({
       setPauseReason(null);
       setStatus('playing');
       setStatusMessage(`Lendo: ${mc.label}`);
-      persistPosition(clipId, startSec);
+      if (!specById.get(clipId)?.onDemand) persistPosition(clipId, startSec);
 
       // Scroll block gently into view when starting
       const root = containerRef.current;
@@ -429,6 +480,7 @@ export function NarrationProvider({
       if (!audio) return;
 
       const rate = stateRef.current.preferences.speed;
+      const request = ++playbackRequest.current;
       audio.src = getNarrationAudioUrl(lesson.id, voiceAudio.src);
       audio.playbackRate = rate;
       audio.defaultPlaybackRate = rate;
@@ -441,6 +493,7 @@ export function NarrationProvider({
       const playResult = audio.play();
       if (playResult && typeof playResult.catch === 'function') {
         playResult.catch(() => {
+          if (request !== playbackRequest.current) return;
           // Browser autoplay block or offline error; reflect pause without crashing
           setStatus('paused');
           setPauseReason('user');
@@ -451,6 +504,8 @@ export function NarrationProvider({
     [
       manifestById,
       getClipAvailability,
+      getMountedClips,
+      specById,
       activeVoice,
       persistPosition,
       containerRef,
@@ -502,34 +557,34 @@ export function NarrationProvider({
 
       const s = stateRef.current;
       const finishedId = s.activeClipId;
-      const finishedSpec = finishedId ? specById.get(finishedId) : undefined;
+      if (!finishedId || s.status !== 'playing') return;
+      const finishedSpec = specById.get(finishedId);
       clearAllCustomHighlights();
       clearDOMReadingMarkers(containerRef.current);
 
-      if (
-        s.playbackMode === 'queue' &&
-        s.queueIndex >= 0 &&
-        s.queueIndex + 1 < s.queueClipIds.length
-      ) {
-        const nextIdx = s.queueIndex + 1;
-        const nextId = s.queueClipIds[nextIdx];
+      const suspended = suspendedActivity.current;
+      suspendedActivity.current = null;
+      if (suspended && getMountedClips().has(suspended.clipId)) {
+        stopAudioHardware();
+        pauseAtActivity(suspended);
+        return;
+      }
 
+      if (s.playbackMode === 'queue') {
+        const mounted = getMountedClips();
+        const nextIndex = s.queueClipIds.findIndex(
+          (id, i) => i > s.queueIndex && mounted.has(id) && getClipAvailability(id) === 'ready',
+        );
         if (s.preferences.pauseOnActivity && finishedSpec?.pauseAfter) {
-          setQueueIndex(nextIdx);
-          setActiveClipId(finishedId);
-          setCurrentTimeMs(clipDurationMs);
-          setStatus('paused');
-          setPauseReason('activity');
-          setStatusMessage(
-            'Pausado após a atividade. Resolva no seu ritmo e clique em Retomar leitura.',
-          );
-          persistPosition(nextId, 0);
+          pauseAtActivity({ clipId: finishedId, queue: s.queueClipIds, index: s.queueIndex });
+          if (nextIndex >= 0) persistPosition(s.queueClipIds[nextIndex], 0);
           return;
         }
-
-        setQueueIndex(nextIdx);
-        startClipInternal(nextId, 0);
-        return;
+        if (nextIndex >= 0) {
+          setQueueIndex(nextIndex);
+          startClipInternal(s.queueClipIds[nextIndex], 0);
+          return;
+        }
       }
 
       setStatus('ended');
@@ -544,11 +599,16 @@ export function NarrationProvider({
         saveReadingPosition(scopeKey, null);
         setSavedPosition(null);
       } else {
-        setStatusMessage('Trecho concluído.');
+        setStatusMessage(
+          finishedSpec?.pauseAfter
+            ? 'Trecho concluído. Responda à atividade no seu ritmo.'
+            : 'Trecho concluído.',
+        );
       }
     };
 
     const onError = () => {
+      if (!audio.src) return;
       setStatus('error');
       setStatusMessage('Não foi possível reproduzir o arquivo de áudio deste trecho.');
     };
@@ -570,7 +630,10 @@ export function NarrationProvider({
     containerRef,
     paintAtMs,
     startClipInternal,
-    clipDurationMs,
+    getMountedClips,
+    getClipAvailability,
+    pauseAtActivity,
+    stopAudioHardware,
     persistPosition,
     hasMoreHiddenSections,
     scopeKey,
@@ -578,16 +641,30 @@ export function NarrationProvider({
 
   const playClip = useCallback(
     (clipId: string, startSec = 0) => {
+      if (!getMountedClips().has(clipId)) return;
+      if (specById.get(clipId)?.onDemand) {
+        const s = stateRef.current;
+        if (s.playbackMode === 'queue' && s.pauseReason === 'activity' && s.activeClipId) {
+          suspendedActivity.current = {
+            clipId: s.activeClipId,
+            queue: s.queueClipIds,
+            index: s.queueIndex,
+          };
+        }
+      } else {
+        suspendedActivity.current = null;
+      }
       setPlaybackMode('single');
       setQueueClipIds([clipId]);
       setQueueIndex(0);
       startClipInternal(clipId, startSec);
     },
-    [startClipInternal],
+    [getMountedClips, specById, startClipInternal],
   );
 
   const playQueueFrom = useCallback(
     (startClipId?: string, startSec = 0) => {
+      suspendedActivity.current = null;
       const readyQueue = discoverVisibleReadyQueue();
       if (readyQueue.length === 0) {
         setStatusMessage(
@@ -622,14 +699,14 @@ export function NarrationProvider({
   }, [savedPosition, discoverVisibleReadyQueue, playQueueFrom]);
 
   const resumeAfterActivity = useCallback(() => {
-    if (queueIndex >= 0 && queueIndex < queueClipIds.length) {
-      const targetId =
-        pauseReason === 'activity'
-          ? queueClipIds[queueIndex]
-          : activeClipId ?? queueClipIds[queueIndex];
-      startClipInternal(targetId, 0);
+    const queue = discoverVisibleReadyQueue();
+    const index = activeClipId ? queue.indexOf(activeClipId) : -1;
+    if (index >= 0 && index + 1 < queue.length) {
+      playQueueFrom(queue[index + 1]);
+    } else {
+      setStatusMessage('Abra a próxima seção e clique em Retomar leitura para continuar.');
     }
-  }, [queueIndex, queueClipIds, pauseReason, activeClipId, startClipInternal]);
+  }, [activeClipId, discoverVisibleReadyQueue, playQueueFrom]);
 
   const togglePlayPause = useCallback(() => {
     if (status === 'playing') {
@@ -643,7 +720,9 @@ export function NarrationProvider({
       setStatus('paused');
       setPauseReason('user');
       setStatusMessage('Leitura pausada.');
-      persistPosition(activeClipId, curSec);
+      if (activeClipId && !specById.get(activeClipId)?.onDemand) {
+        persistPosition(activeClipId, curSec);
+      }
       return;
     }
 
@@ -654,6 +733,7 @@ export function NarrationProvider({
 
     if (status === 'paused' && activeClipId && audioRef.current) {
       const audio = audioRef.current;
+      const request = ++playbackRequest.current;
       audio.playbackRate = preferences.speed;
       audio.defaultPlaybackRate = preferences.speed;
       setStatus('playing');
@@ -661,7 +741,9 @@ export function NarrationProvider({
       setStatusMessage(`Lendo: ${manifestById.get(activeClipId)?.label ?? activeClipId}`);
       const p = audio.play();
       if (p && typeof p.catch === 'function') {
-        p.catch(() => setStatus('paused'));
+        p.catch(() => {
+          if (request === playbackRequest.current) setStatus('paused');
+        });
       }
       return;
     }
@@ -677,6 +759,7 @@ export function NarrationProvider({
     persistPosition,
     resumeAfterActivity,
     playQueueFrom,
+    specById,
   ]);
 
   const repeatCurrentClip = useCallback(() => {
@@ -688,21 +771,56 @@ export function NarrationProvider({
   }, [activeClipId, startClipInternal, playQueueFrom]);
 
   const stop = useCallback(() => {
-    const curSec = audioRef.current ? audioRef.current.currentTime || 0 : currentTimeMs / 1000;
-    if (activeClipId && curSec > 0.2) {
+    const curSec = audioRef.current?.currentTime ?? 0;
+    if (
+      activeClipId &&
+      curSec > 0.2 &&
+      pauseReason !== 'activity' &&
+      !specById.get(activeClipId)?.onDemand
+    ) {
       persistPosition(activeClipId, curSec);
     }
+    suspendedActivity.current = null;
     stopAudioHardware();
     setStatus('idle');
     setPauseReason(null);
+    setActiveClipId(null);
     setActiveField(null);
+    setQueueClipIds([]);
+    setQueueIndex(-1);
     setCurrentTimeMs(0);
     setStatusMessage('Leitura interrompida.');
-  }, [activeClipId, currentTimeMs, persistPosition, stopAudioHardware]);
+  }, [activeClipId, pauseReason, persistPosition, specById, stopAudioHardware]);
+
+  useEffect(() => {
+    const root = containerRef.current;
+    if (!root || !activeClipId) return;
+    const stopIfHidden = () => {
+      const mounted = getMountedClips();
+      if (mounted.has(activeClipId)) return;
+      const suspended = suspendedActivity.current;
+      if (suspended && mounted.has(suspended.clipId)) {
+        suspendedActivity.current = null;
+        stopAudioHardware();
+        pauseAtActivity(suspended);
+      } else {
+        stop();
+      }
+    };
+    stopIfHidden();
+    const observer = new MutationObserver(stopIfHidden);
+    observer.observe(root, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ['hidden', 'open', 'data-narration-clip'],
+    });
+    return () => observer.disconnect();
+  }, [activeClipId, containerRef, getMountedClips, pauseAtActivity, stop, stopAudioHardware]);
 
   const seekToMs = useCallback(
     (ms: number) => {
-      if (!activeClipId) return;
+      if (!activeClipId || pauseReason === 'activity') return;
       const bounded = Math.max(0, Math.min(ms, clipDurationMs));
       const sec = bounded / 1000;
       if (audioRef.current) {
@@ -714,9 +832,9 @@ export function NarrationProvider({
       }
       setCurrentTimeMs(bounded);
       paintAtMs(activeClipId, bounded);
-      persistPosition(activeClipId, sec);
+      if (!specById.get(activeClipId)?.onDemand) persistPosition(activeClipId, sec);
     },
-    [activeClipId, clipDurationMs, paintAtMs, persistPosition],
+    [activeClipId, clipDurationMs, paintAtMs, pauseReason, persistPosition, specById],
   );
 
   const updatePreferences = useCallback(
@@ -814,7 +932,7 @@ export function NarrationProvider({
       total += dur;
     });
     return {
-      queueElapsedMs: before + (pauseReason === 'activity' ? 0 : currentTimeMs),
+      queueElapsedMs: before + currentTimeMs,
       queueTotalMs: total,
     };
   }, [
@@ -823,7 +941,6 @@ export function NarrationProvider({
     queueClipIds,
     queueIndex,
     activeVoice,
-    pauseReason,
     currentTimeMs,
     clipDurationMs,
   ]);

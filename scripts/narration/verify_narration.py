@@ -82,8 +82,8 @@ def main():
         errors.append(f"Orphaned clips in manifest not present in script: {extra_clips}")
 
     voices = manifest.get("availableVoices", [])
-    if not voices:
-        errors.append("Manifest has no availableVoices")
+    if not {"santa", "dora"}.issubset(voices):
+        errors.append(f"Manifest must provide Santa and Dora, got {voices}")
 
     for cid, sc in script_clips.items():
         mc = manifest_clips.get(cid)
@@ -105,9 +105,12 @@ def main():
             if not mp3_file.exists():
                 errors.append(f"Missing audio file: {mp3_file}")
                 continue
-            if mp3_file.stat().st_size == 0:
+            size = mp3_file.stat().st_size
+            if not size:
                 errors.append(f"Empty audio file: {mp3_file}")
                 continue
+            if size != va.get("bytes"):
+                errors.append(f"Unexpected byte count for {mp3_file}: {size} vs {va.get('bytes')}")
 
             real_dur_ms = ffprobe_duration_ms(mp3_file)
             if abs(real_dur_ms - va["durationMs"]) > 80:

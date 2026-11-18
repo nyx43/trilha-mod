@@ -1,7 +1,7 @@
 import { plain } from '../components/Guide/inline';
 import { GuideBlock } from '../guides/types';
 import { LessonBlock, LessonContent, LessonMeta } from '../lessons/types';
-import { stableShuffle } from '../lessons/tools';
+import { classifyRetry, classifySuccess, stableShuffle } from '../lessons/tools';
 import { sha256Hex } from './hash';
 import {
   NarrationBlockKind,
@@ -32,7 +32,8 @@ function createClipSpec(params: {
   fields: Array<NarrationField | null>;
   label: string;
   pauseAfter?: boolean;
-  interactiveKind?: 'flow' | 'anatomy';
+  onDemand?: boolean;
+  interactiveKind?: NarrationClipSpec['interactiveKind'];
 }): NarrationClipSpec | null {
   const fields = params.fields.filter((f): f is NarrationField => f !== null);
   if (fields.length === 0) return null;
@@ -47,9 +48,58 @@ function createClipSpec(params: {
     canonicalText,
     textHash: computeClipTextHash(fields),
     pauseAfter: params.pauseAfter,
+    onDemand: params.onDemand,
     interactiveKind: params.interactiveKind,
     label: params.label,
   };
+}
+
+function diagramFields(
+  block: Extract<
+    LessonBlock,
+    { type: 'domTree' | 'screenReader' | 'pyramid' | 'sequence' | 'joins' | 'complexity' }
+  >,
+): Array<NarrationField | null> {
+  switch (block.type) {
+    case 'pyramid':
+      return [
+        makeField('caption', block.caption),
+        ...block.levels.flatMap((level, i) => [
+          makeField(`item:${i}:title`, level.title),
+          makeField(`item:${i}:text`, level.text),
+        ]),
+      ];
+    case 'sequence':
+      return [
+        makeField('caption', block.caption),
+        ...block.messages.flatMap((message, i) => [
+          makeField(
+            `item:${i}:route`,
+            message.from === message.to
+              ? block.actors[message.from]
+              : `De ${block.actors[message.from]} para ${block.actors[message.to]}`,
+          ),
+          makeField(`item:${i}:title`, message.label),
+          makeField(`item:${i}:text`, message.text),
+        ]),
+      ];
+    case 'joins':
+      return [
+        makeField('caption', `Tabela A: ${block.tables[0]}. Tabela B: ${block.tables[1]}.`),
+        ...block.items.flatMap((item, i) => [
+          makeField(`item:${i}:title`, item.title),
+          makeField(`item:${i}:text`, item.text),
+        ]),
+      ];
+    case 'complexity':
+      return block.items.flatMap((item, i) => [
+        makeField(`item:${i}:title`, item.name),
+        makeField(`item:${i}:text`, item.text),
+        makeField(`item:${i}:example`, item.example),
+      ]);
+    default:
+      return [makeField('caption', block.caption)];
+  }
 }
 
 function extractBlockSpec(
@@ -112,6 +162,28 @@ function extractBlockSpec(
           blockType: block.type,
           fields: block.items.map((item, i) => makeField(`item:${i}`, item)),
           label: 'Lista',
+        }),
+        uncovered: null,
+      };
+
+    case 'steps':
+    case 'cards':
+      return {
+        clip: createClipSpec({
+          id,
+          sectionId,
+          kind: block.type,
+          blockIndex,
+          blockType: block.type,
+          fields: block.items.flatMap((item, i) => [
+            makeField(`item:${i}:label`, 'label' in item ? item.label : undefined),
+            makeField(`item:${i}:title`, item.title),
+            makeField(`item:${i}:text`, item.text),
+            ...('points' in item ? item.points ?? [] : []).map((point, j) =>
+              makeField(`item:${i}:point:${j}`, point),
+            ),
+          ]),
+          label: block.type === 'steps' ? 'Passo a passo' : 'Cartões',
         }),
         uncovered: null,
       };
@@ -214,6 +286,47 @@ function extractBlockSpec(
             ]),
           ],
           label: block.caption ? `Diagrama: ${plain(block.caption)}` : 'Diagrama de fluxo',
+        }),
+        uncovered: null,
+      };
+
+    case 'trace':
+      return {
+        clip: createClipSpec({
+          id,
+          sectionId,
+          kind: 'visual',
+          blockIndex,
+          blockType: block.type,
+          interactiveKind: 'trace',
+          fields: [
+            makeField('caption', block.caption),
+            ...block.steps.flatMap((step, i) => [
+              makeField(`step:${i}:line`, `Linha ${step.line}`),
+              makeField(`step:${i}:text`, step.note),
+            ]),
+          ],
+          label: 'Execução passo a passo',
+        }),
+        uncovered: null,
+      };
+
+    case 'domTree':
+    case 'screenReader':
+    case 'pyramid':
+    case 'sequence':
+    case 'joins':
+    case 'complexity':
+      return {
+        clip: createClipSpec({
+          id,
+          sectionId,
+          kind: 'visual',
+          blockIndex,
+          blockType: block.type,
+          fields: diagramFields(block),
+          pauseAfter: block.type === 'screenReader' || undefined,
+          label: block.type === 'screenReader' ? 'Demonstração de leitor de tela' : 'Diagrama',
         }),
         uncovered: null,
       };
@@ -421,6 +534,45 @@ export function extractLessonNarrationSpec(
       const { clip, uncovered } = extractBlockSpec(section.id, blockIndex, block);
       pushClip(clip);
       if (uncovered) uncoveredBlocks.push(uncovered);
+
+      const extra = {
+        sectionId: section.id,
+        blockIndex,
+        blockType: block.type,
+        onDemand: true,
+      };
+      const blockId = `${section.id}:${blockIndex}`;
+      if (block.type === 'classify') {
+        pushClip(
+          createClipSpec({
+            ...extra,
+            id: `${blockId}:feedback:correct`,
+            kind: 'activity-feedback',
+            fields: [makeField('title', classifySuccess), makeField('text', block.explanation)],
+            label: 'Feedback da classificação',
+          }),
+        );
+        pushClip(
+          createClipSpec({
+            ...extra,
+            id: `${blockId}:feedback:retry`,
+            kind: 'activity-feedback',
+            fields: [makeField('text', classifyRetry)],
+            label: 'Feedback da classificação',
+          }),
+        );
+      }
+      if (block.type === 'reveal') {
+        pushClip(
+          createClipSpec({
+            ...extra,
+            id: `${blockId}:answer`,
+            kind: 'revealed-answer',
+            fields: [makeField('answer', block.answer)],
+            label: 'Resposta revelada',
+          }),
+        );
+      }
     });
   }
 
@@ -453,8 +605,20 @@ export function extractLessonNarrationSpec(
         sectionId: 'fechamento',
         kind: 'fechamento-card',
         blockIndex: -1,
+        pauseAfter: true,
         fields: [makeField('front', card.front)],
         label: 'Cartão de revisão (frente)',
+      }),
+    );
+    pushClip(
+      createClipSpec({
+        id: `fechamento:card:${card.id}:back`,
+        sectionId: 'fechamento',
+        kind: 'revealed-answer',
+        blockIndex: -1,
+        onDemand: true,
+        fields: [makeField('back', card.back)],
+        label: 'Cartão de revisão (resposta)',
       }),
     );
   }

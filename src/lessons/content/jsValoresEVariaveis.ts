@@ -178,6 +178,8 @@ export const content: LessonContent = {
         {
           type: 'code',
           language: 'javascript',
+          caption:
+            'O operador typeof mostra a diferença entre 42 como número e “42” entre aspas como texto. Os dois últimos exemplos conferem um booleano e um valor indefinido.',
           code: 'console.log(typeof "Ana");\nconsole.log(typeof 42);\nconsole.log(typeof "42");\nconsole.log(typeof true);\nconsole.log(typeof undefined);',
           output: 'string\nnumber\nstring\nboolean\nundefined',
         },
@@ -476,6 +478,8 @@ export const content: LessonContent = {
         {
           type: 'code',
           language: 'javascript',
+          caption:
+            'Os dois comandos imprimem a mesma mensagem para Bia. O primeiro junta pedaços com o sinal de mais. O segundo insere o nome e os pontos em um template literal.',
           code: 'const nome = "Bia";\nconst pontos = 30;\nconsole.log("Olá, " + nome + "! Você tem " + pontos + " pontos.");\nconsole.log(`Olá, ${nome}! Você tem ${pontos} pontos.`);',
           output: 'Olá, Bia! Você tem 30 pontos.\nOlá, Bia! Você tem 30 pontos.',
         },

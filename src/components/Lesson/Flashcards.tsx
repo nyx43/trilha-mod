@@ -52,6 +52,8 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
       </div>
     );
 
+  const clipId =
+    card.narrationId && (flipped ? card.narrationId.replace(/:front$/, ':back') : card.narrationId);
   return (
     <div className="lesson-deck">
       <p className="lesson-deck-count" aria-live="polite">
@@ -61,7 +63,7 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
         key={card.key + String(flipped)}
         className="lesson-card"
         data-flipped={flipped || undefined}
-        data-narration-clip={!flipped ? card.narrationId : undefined}
+        data-narration-clip={clipId}
         initial={reduced ? false : { rotateX: flipped ? -70 : 0, opacity: flipped ? 0.4 : 0 }}
         animate={{ rotateX: 0, opacity: 1 }}
         transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
@@ -69,7 +71,7 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
         {card.source && <p className="lesson-card-source">{card.source}</p>}
         <p className="lesson-card-side">{flipped ? 'Resposta' : 'Pergunta'}</p>
         <p className="lesson-card-text">
-          <span data-narration-field={!flipped && card.narrationId ? 'front' : undefined}>
+          <span data-narration-field={clipId ? (flipped ? 'back' : 'front') : undefined}>
             <Inline text={flipped ? card.back : card.front} />
           </span>
         </p>
@@ -86,6 +88,7 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
           </>
         ) : (
           <>
+            {clipId && <NarrationBlockButton clipId={clipId} label="Ouvir resposta" />}
             <button type="button" className="lesson-button-quiet" onClick={() => answer(false)}>
               Ainda não lembrei
             </button>

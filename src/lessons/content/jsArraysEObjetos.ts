@@ -472,6 +472,8 @@ export const content: LessonContent = {
         {
           type: 'code',
           language: 'javascript',
+          caption:
+            'JSON.parse transforma o texto recebido em um objeto, então o preço pode ser usado em uma conta. JSON.stringify transforma o objeto da caneta em texto para enviar ou guardar.',
           code: 'const recebido = \'{"nome": "Caderno", "preco": 15}\';\nconst produto = JSON.parse(recebido);\nconsole.log(produto.preco * 2);\n\nconst texto = JSON.stringify({ nome: "Caneta", preco: 3 });\nconsole.log(texto);',
           output: '30\n{"nome":"Caneta","preco":3}',
         },
