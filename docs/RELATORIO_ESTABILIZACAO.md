@@ -6,7 +6,7 @@
 - O bloqueio de geração estava disponível. O lote anterior registrava quatro falhas, incluindo `onde-o-dado-mora`. O log individual dessa aula tinha zero bytes.
 - Preservei os logs, o PID anterior e a auditoria em `.cache/narration/estabilizacao/anterior.6fWNmu/`. A tentativa de recuperação roda com uma aula e um processo e registra o status em `.cache/narration/estabilizacao/recuperacao.log`.
 - Base inicial: 78 aulas, 65 catalogadas, 65 manifestos com Santa e Dora e 2.960 MP3 de cada voz nessas 65 aulas. Incluindo aulas parciais, havia 3.030 MP3 de Santa e 3.028 de Dora.
-- As 13 pendentes no início eram `arrays-mapas-e-complexidade`, `codigo-depuracao-e-revisao`, `curriculo-vaga-e-apresentacao`, `desafio-tecnico-e-conversa`, `estrategia-de-cobertura-e-ci`, `exploratorio-e-relato-de-bugs`, `http-dados-e-seguranca-na-entrevista`, `onde-o-dado-mora`, `playwright-para-web`, `raciocinio-e-comunicacao`, `revise-a-carreira-escolhida`, `tecnicas-e-riscos` e `testes-de-api`.
+- As 13 pendentes no início eram `arrays-mapas-e-complexidade`, `codigo-depuracao-e-revisao`, `curriculo-vaga-e-apresentacao`, `desafio-tecnico-e-conversa`, `estrategia-de-cobertura-e-ci`, `http-dados-e-seguranca-na-entrevista`, `onde-o-dado-mora`, `playwright-para-web`, `raciocinio-e-comunicacao`, `revise-a-carreira-escolhida`, `tecnicas-e-riscos` e `testes-de-api`.
 
 ## Retomada da geração
 
@@ -48,7 +48,7 @@ cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' &&
 
 - Em Chromium, colagem real por Ctrl+V no terminal confirmou a edição de cinco linhas antes de executar. Na integração, conferi clipes reais de erro e acerto, retorno ao ponto de pausa, início na seção seguinte e saída do áudio ao ocultar uma resposta ou virar a página do cartão.
 - Comparei o roteiro com 7.557 campos visíveis de 67 aulas, incluindo as atividades montadas e as legendas. A primeira comparação encontrou crases literais no texto visível que deslocavam os índices das palavras. Ajustei a renderização de código dentro de negrito, títulos de observações e cabeçalhos e legendas de tabelas. A repetição encontrou zero divergências nos campos comparados. Diagramas com estado comparam o campo montado e cartões comparam a frente atual.
-- `npm run check`, `npm run test:run` (281 testes em 29 arquivos) e `npm run build` passaram. O build emitiu o aviso de dependência de navegadores desatualizada e de um pacote JavaScript acima de 500 KiB.
+- `npm run check`, `npm run test:run` (281 testes em 29 arquivos) e `npm run build` passaram. O build emitiu o aviso de dependência de navegadores desatualizada e de um pacote JavaScript acima de 500 KiB. Repeti os três comandos em uma cópia dos arquivos do commit, sem as edições locais de outras etapas, e passaram com 276 testes.
 
 ## Roteiro de cinco minutos
 
@@ -58,11 +58,11 @@ cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' &&
 
 ## Estado e retomada do lote
 
-As contagens abaixo são o ponto de controle às 23h43 de 17/11. O catálogo e os logs continuam sendo atualizados pelo lote.
+As contagens abaixo são o ponto de controle às 23h52 de 17/11. O catálogo e os logs continuam sendo atualizados pelo lote.
 
-- 67 de 78 aulas catalogadas, com Santa e Dora. O último sucesso de aula nova foi `tecnicas-e-riscos`. O último erro comprovável do lote anterior foi a falha de `onde-o-dado-mora` com log individual vazio, preservado em `.cache/narration/estabilizacao/anterior.6fWNmu/`. A recuperação registrada retornou 0.
-- Aulas que ainda não constavam do catálogo nesse ponto: `arrays-mapas-e-complexidade`, `codigo-depuracao-e-revisao`, `curriculo-vaga-e-apresentacao`, `desafio-tecnico-e-conversa`, `estrategia-de-cobertura-e-ci`, `exploratorio-e-relato-de-bugs`, `http-dados-e-seguranca-na-entrevista`, `playwright-para-web`, `raciocinio-e-comunicacao`, `revise-a-carreira-escolhida` e `testes-de-api`.
-- Um processo executa `--remaining` e outro aguarda o bloqueio para `--stale`. Confira `.cache/narration/estabilizacao/restantes.log` e `atualizacao.log`. Os logs individuais continuam em `.cache/narration/batch/`.
+- 68 de 78 aulas catalogadas, com 3.121 MP3 em cada voz. O último sucesso foi `exploratorio-e-relato-de-bugs`, após a recuperação de `tecnicas-e-riscos`. O último erro comprovável do lote anterior foi a falha de `onde-o-dado-mora` com log individual vazio, preservado em `.cache/narration/estabilizacao/anterior.6fWNmu/`. A recuperação registrada retornou 0.
+- Aulas que ainda não constavam do catálogo nesse ponto: `arrays-mapas-e-complexidade`, `codigo-depuracao-e-revisao`, `curriculo-vaga-e-apresentacao`, `desafio-tecnico-e-conversa`, `estrategia-de-cobertura-e-ci`, `http-dados-e-seguranca-na-entrevista`, `playwright-para-web`, `raciocinio-e-comunicacao`, `revise-a-carreira-escolhida` e `testes-de-api`.
+- Um processo executa `--remaining` e outro aguarda o bloqueio para `--stale`. Confira `.cache/narration/estabilizacao/restantes.log` e `atualizacao.log`. Os logs individuais continuam em `.cache/narration/batch/`. A auditoria final também aguarda o bloqueio e salvará os totais em `.cache/narration/estabilizacao/resumo-final.json` e os detalhes em `verificacao-final/`.
 - Se o lote parar, preserve o log individual antes de retomar. Em ordem, rode:
 
 ```bash
