@@ -58,11 +58,11 @@ cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' &&
 
 ## Estado e retomada do lote
 
-As contagens abaixo são o ponto de controle às 23h52 de 17/11. O catálogo e os logs continuam sendo atualizados pelo lote.
+As contagens abaixo são o ponto de controle às 00h58 de 18/11. O catálogo e os logs continuam sendo atualizados pelo lote.
 
-- 68 de 78 aulas catalogadas, com 3.121 MP3 em cada voz. O último sucesso foi `exploratorio-e-relato-de-bugs`, após a recuperação de `tecnicas-e-riscos`. O último erro comprovável do lote anterior foi a falha de `onde-o-dado-mora` com log individual vazio, preservado em `.cache/narration/estabilizacao/anterior.6fWNmu/`. A recuperação registrada retornou 0.
-- Aulas que ainda não constavam do catálogo nesse ponto: `arrays-mapas-e-complexidade`, `codigo-depuracao-e-revisao`, `curriculo-vaga-e-apresentacao`, `desafio-tecnico-e-conversa`, `estrategia-de-cobertura-e-ci`, `http-dados-e-seguranca-na-entrevista`, `playwright-para-web`, `raciocinio-e-comunicacao`, `revise-a-carreira-escolhida` e `testes-de-api`.
-- Um processo executa `--remaining` e outro aguarda o bloqueio para `--stale`. Confira `.cache/narration/estabilizacao/restantes.log` e `atualizacao.log`. Os logs individuais continuam em `.cache/narration/batch/`. A auditoria final também aguarda o bloqueio e salvará os totais em `.cache/narration/estabilizacao/resumo-final.json` e os detalhes em `verificacao-final/`.
+- 78 de 78 aulas catalogadas, com 3.745 MP3 em cada voz. As 12 aulas pendentes terminaram com `batch_exit=0`; a última foi `arrays-mapas-e-complexidade`. A falha de `onde-o-dado-mora` do lote anterior deixou o log por aula vazio, preservado em `.cache/narration/estabilizacao/anterior.6fWNmu/`. A recuperação retornou 0.
+- O lote `--stale` começou com 65 aulas já catalogadas. Quatro haviam sido verificadas no ponto de controle e a lista das 61 ainda em fila está em `.cache/narration/estabilizacao/resumo-andamento.json`.
+- Confira `.cache/narration/estabilizacao/restantes.log` e `atualizacao.log`. Os logs individuais estão em `.cache/narration/batch/`. A auditoria final está na fila pelo bloqueio e salvará os totais em `.cache/narration/estabilizacao/resumo-final.json` e os detalhes em `verificacao-final/`.
 - Se o lote parar, preserve o log individual antes de retomar. Em ordem, rode:
 
 ```bash
