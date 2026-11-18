@@ -1,5 +1,5 @@
 import { spawnSync } from 'child_process';
-import { mkdtempSync } from 'fs';
+import { mkdtempSync, rmSync } from 'fs';
 import { tmpdir } from 'os';
 import { join, resolve } from 'path';
 import { loadSql, runSql } from '../components/Lesson/sqlRunner';
@@ -27,7 +27,7 @@ beforeAll(async () => {
 
 const pythonHarness = `
 import builtins, contextlib, io, json, sys
-data = json.load(sys.stdin)
+data = json.loads(sys.argv[1])
 def no_input(*args):
     raise RuntimeError('input() não funciona aqui')
 builtins.input = no_input
@@ -52,15 +52,28 @@ print(json.dumps({'error': error, 'checks': checks}))
 
 const hasPython = spawnSync('python3', ['--version']).status === 0;
 
-function runPythonLocally(code: string, tests: string[]) {
-  const run = spawnSync('python3', ['-c', pythonHarness], {
-    input: JSON.stringify({ code, tests }),
-    cwd: mkdtempSync(join(tmpdir(), 'trilha-python-')),
-    timeout: 8000,
-    encoding: 'utf8',
-  });
-  const last = run.stdout.trim().split('\n').pop() || '{}';
-  return JSON.parse(last) as { error: string | null; checks: boolean[] };
+function runPythonLocally(code: string, tests: string[], where: string) {
+  const cwd = mkdtempSync(join(tmpdir(), 'trilha-python-'));
+  try {
+    const run = spawnSync('python3', ['-c', pythonHarness, JSON.stringify({ code, tests })], {
+      cwd,
+      stdio: ['ignore', 'pipe', 'pipe'],
+      timeout: 8000,
+      encoding: 'utf8',
+    });
+    if (run.error || run.status !== 0) {
+      throw new Error(
+        `${where}: execução do Python interrompida (${
+          run.error?.message ?? run.signal ?? run.status
+        }). ${run.stderr ?? ''}`,
+      );
+    }
+    const last = run.stdout.trim().split('\n').pop();
+    if (!last) throw new Error(`${where}: o teste do Python não produziu um resultado.`);
+    return JSON.parse(last) as { error: string | null; checks: boolean[] };
+  } finally {
+    rmSync(cwd, { recursive: true, force: true });
+  }
 }
 
 describe('Exercícios de SQL e Python', () => {
@@ -73,7 +86,7 @@ describe('Exercícios de SQL e Python', () => {
       const attempt = (code: string) =>
         block.type === 'sql'
           ? runSql(SQL, block.setup, code, tests)
-          : runPythonLocally(code, tests);
+          : runPythonLocally(code, tests, where);
       const solved = attempt(block.solution || '');
       if (solved.error) failures.push(`${where}: a solução dá erro (${solved.error})`);
       solved.checks.forEach((ok, index) => {

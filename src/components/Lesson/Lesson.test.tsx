@@ -77,9 +77,9 @@ describe('Aula', () => {
     fireEvent.click(screen.getByRole('button', { name: 'Concluir aula' }));
 
     expect(screen.getByText(/Aula concluída,|Aula concluída\./)).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: /Próxima aula: Seu kit de trabalho/ })).toHaveAttribute(
+    expect(screen.getByRole('link', { name: /Próxima aula: Onde o dado mora/ })).toHaveAttribute(
       'href',
-      '/aula/seu-kit-de-trabalho?trilha=frontend',
+      '/aula/onde-o-dado-mora?trilha=frontend',
     );
     expect(Object.keys(stored(reviewStoreKey).cards)).toContain('como-a-web-funciona:dns');
   });

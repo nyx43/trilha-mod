@@ -20,6 +20,21 @@ export const lessons: LessonMeta[] = [
     load: () => import('../content/comoAWebFunciona'),
   },
   {
+    id: 'onde-o-dado-mora',
+    title: 'Onde o dado mora',
+    summary: 'Compare a memória da página, localStorage, memória da API e SQLite; preveja e teste o que sobrevive à recarga e ao reinício.',
+    minutes: 28,
+    groupIds: ['curriculum.internet-e-http'],
+    objectives: [
+      'Distinguir os quatro lugares onde os dados podem morar',
+      'Testar a diferença entre dados temporários e persistentes',
+      'Explicar tabela, chave primária, SQL e SQLite',
+      'Prever o que sobrevive à recarga e ao reinício da API',
+    ],
+    updatedAt: '2026-11-16',
+    load: () => import('../content/ondeODadoMora'),
+  },
+  {
     id: 'seu-kit-de-trabalho',
     title: 'Seu kit de trabalho',
     summary:

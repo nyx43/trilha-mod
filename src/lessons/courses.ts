@@ -24,6 +24,7 @@ export const courses: Course[] = [
         "title": "Comece pela web",
         "lessonIds": [
           "como-a-web-funciona",
+          "onde-o-dado-mora",
           "seu-kit-de-trabalho",
           "git-do-zero",
           "ia-assistente-de-estudos"
@@ -107,6 +108,7 @@ export const courses: Course[] = [
     ],
     "groups": {
       "como-a-web-funciona": "curriculum.internet-e-http",
+      "onde-o-dado-mora": "curriculum.internet-e-http",
       "seu-kit-de-trabalho": "curriculum.internet-e-http",
       "git-do-zero": "curriculum.controle-de-versao",
       "ia-assistente-de-estudos": "aiLearning.seu-assistente-de-estudos",
@@ -250,6 +252,7 @@ export const courses: Course[] = [
         "lessonIds": [
           "git-do-zero",
           "como-a-web-funciona",
+          "onde-o-dado-mora",
           "seu-kit-de-trabalho",
           "ia-assistente-de-estudos"
         ]
@@ -321,6 +324,7 @@ export const courses: Course[] = [
     "groups": {
       "git-do-zero": "curriculum.controle-de-versao",
       "como-a-web-funciona": "curriculum.internet-e-http",
+      "onde-o-dado-mora": "curriculum.internet-e-http",
       "seu-kit-de-trabalho": "curriculum.internet-e-http",
       "ia-assistente-de-estudos": "aiLearning.seu-assistente-de-estudos",
       "python-do-zero": "backend.uma-linguagem-de-backend",
@@ -351,6 +355,7 @@ export const courses: Course[] = [
         "title": "Uma base para os dois lados",
         "lessonIds": [
           "como-a-web-funciona",
+          "onde-o-dado-mora",
           "seu-kit-de-trabalho",
           "git-do-zero",
           "ia-assistente-de-estudos"
@@ -437,6 +442,7 @@ export const courses: Course[] = [
     ],
     "groups": {
       "como-a-web-funciona": "curriculum.internet-e-http",
+      "onde-o-dado-mora": "curriculum.internet-e-http",
       "seu-kit-de-trabalho": "curriculum.internet-e-http",
       "git-do-zero": "curriculum.controle-de-versao",
       "ia-assistente-de-estudos": "aiLearning.seu-assistente-de-estudos",
@@ -484,6 +490,7 @@ export const courses: Course[] = [
         "lessonIds": [
           "git-do-zero",
           "como-a-web-funciona",
+          "onde-o-dado-mora",
           "seu-kit-de-trabalho",
           "ia-assistente-de-estudos"
         ]
@@ -559,6 +566,7 @@ export const courses: Course[] = [
     "groups": {
       "git-do-zero": "curriculum.controle-de-versao",
       "como-a-web-funciona": "curriculum.internet-e-http",
+      "onde-o-dado-mora": "curriculum.internet-e-http",
       "seu-kit-de-trabalho": "curriculum.internet-e-http",
       "ia-assistente-de-estudos": "aiLearning.seu-assistente-de-estudos",
       "linux-e-terminal": "devops.linux-e-terminal",
@@ -715,6 +723,7 @@ export const courses: Course[] = [
         "title": "Base técnica para testar",
         "lessonIds": [
           "como-a-web-funciona",
+          "onde-o-dado-mora",
           "seu-kit-de-trabalho",
           "git-do-zero",
           "sql-consultas",
@@ -772,6 +781,7 @@ export const courses: Course[] = [
       "ia-prompts-para-aprender": "aiLearning.prompts-para-aprender-e-construir",
       "ia-contexto-e-dados-protegidos": "aiLearning.contexto-util-e-dados-protegidos",
       "como-a-web-funciona": "curriculum.internet-e-http",
+      "onde-o-dado-mora": "curriculum.internet-e-http",
       "seu-kit-de-trabalho": "curriculum.internet-e-http",
       "git-do-zero": "curriculum.controle-de-versao",
       "sql-consultas": "test.api-e-sql-basicos",
