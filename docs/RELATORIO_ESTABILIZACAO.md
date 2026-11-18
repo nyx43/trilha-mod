@@ -45,3 +45,30 @@ cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo' &&
 - Em `/percurso/api-react-tailwind/integracao-front-api`, conferi que o mesmo MP3 toca e que a leitura sozinha não grava respostas nem avanço. O áudio parou na navegação de volta ao Percurso. Na aula avulsa, parou ao recolher o fechamento.
 - Santa e Dora, em 1× e 1,35×: o Chromium reproduziu o MP3 correspondente e usou o tempo da mídia para destacar palavras no início, meio e última frase da apresentação. Os destaques conferidos incluíram “Integração”, “fetch”, “JSON” e “otimista”. A amostragem valida reprodução e destaque perante o relógio da mídia. Falta uma escuta humana para validar a correspondência auditiva e a pronúncia.
 - A execução inicial da suíte revelou duas falhas: a asserção “Próxima aula” ainda apontava para a ordem anterior a “Onde o dado mora” e o teste local de Python ficava esperando o encerramento da entrada padrão no sandbox. Atualizei a asserção e passei o JSON pela linha de comando do processo de teste, com diagnóstico por exercício.
+
+- Em Chromium, colagem real por Ctrl+V no terminal confirmou a edição de cinco linhas antes de executar. Na integração, conferi clipes reais de erro e acerto, retorno ao ponto de pausa, início na seção seguinte e saída do áudio ao ocultar uma resposta ou virar a página do cartão.
+- Comparei o roteiro com 7.557 campos visíveis de 67 aulas, incluindo as atividades montadas e as legendas. A primeira comparação encontrou crases literais no texto visível que deslocavam os índices das palavras. Ajustei a renderização de código dentro de negrito, títulos de observações e cabeçalhos e legendas de tabelas. A repetição encontrou zero divergências nos campos comparados. Diagramas com estado comparam o campo montado e cartões comparam a frente atual.
+- `npm run check`, `npm run test:run` (280 testes em 29 arquivos) e `npm run build` passaram. O build emitiu o aviso de dependência de navegadores desatualizada e de um pacote JavaScript acima de 500 KiB.
+
+## Roteiro de cinco minutos
+
+1. Abra `/aula/linux-e-terminal` em uma janela de 360 px. Em “Passeio por um servidor”, escreva `pwd`, mova o cursor para antes do `w` e pressione Enter. Confira a quebra no cursor e o contador em zero. Cole `pwd`, `cd /tmp` e `ls` em três linhas. Use Ctrl+Enter ou Cmd+Enter e confira o erro na linha 2. Troque `cd /tmp` por `cd /var/log` e acione “Executar”.
+2. Abra `/aula/integracao-front-e-api`. Em “Onde cada tarefa acontece?”, use “Ouvir atividade”, responda os seis itens e confirme que “Ouvir feedback” aparece após “Verificar”. Experimente Santa em 1× e Dora em 1,35×. Compare “fetch”, “JSON”, “CORS” e a última frase do trecho com o destaque.
+3. Em Integração, abra a aula inteira, comece a ouvir o fechamento e recolha as demais seções. Confirme que o áudio para. Abra `/percurso/api-react-tailwind/integracao-front-api` e confira a leitura da mesma atividade. Ao sair da etapa, confirme que o áudio para.
+
+## Estado e retomada do lote
+
+As contagens abaixo são o ponto de controle às 23h43 de 17/11. O catálogo e os logs continuam sendo atualizados pelo lote.
+
+- 67 de 78 aulas catalogadas, com Santa e Dora. O último sucesso de aula nova foi `tecnicas-e-riscos`. O último erro comprovável do lote anterior foi a falha de `onde-o-dado-mora` com log individual vazio, preservado em `.cache/narration/estabilizacao/anterior.6fWNmu/`. A recuperação registrada retornou 0.
+- Aulas que ainda não constavam do catálogo nesse ponto: `arrays-mapas-e-complexidade`, `codigo-depuracao-e-revisao`, `curriculo-vaga-e-apresentacao`, `desafio-tecnico-e-conversa`, `estrategia-de-cobertura-e-ci`, `exploratorio-e-relato-de-bugs`, `http-dados-e-seguranca-na-entrevista`, `playwright-para-web`, `raciocinio-e-comunicacao`, `revise-a-carreira-escolhida` e `testes-de-api`.
+- Um processo executa `--remaining` e outro aguarda o bloqueio para `--stale`. Confira `.cache/narration/estabilizacao/restantes.log` e `atualizacao.log`. Os logs individuais continuam em `.cache/narration/batch/`.
+- Se o lote parar, preserve o log individual antes de retomar. Em ordem, rode:
+
+```bash
+cd '/home/joaovt/Área de trabalho/site estudo/trilhainfo'
+KOKORO_THREADS=3 flock -n .cache/narration/geracao.lock npm run narration:batch -- --remaining --jobs 1
+KOKORO_THREADS=3 flock -n .cache/narration/geracao.lock npm run narration:batch -- --stale --jobs 1
+```
+
+O push para `nyx43/trilha-mod`, branch `feat/percurso-api-tailwind`, foi bloqueado pela revisão automática, que solicitou autorização explícita do conteúdo e destino. Os commits locais podem ser revisados enquanto o lote continua. A configuração local espera `yarn` no hook, que estava indisponível. Rodei ESLint diretamente nos arquivos de comportamento alterados, além da suíte e do build.

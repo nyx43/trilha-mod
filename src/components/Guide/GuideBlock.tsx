@@ -85,7 +85,7 @@ export function GuideBlockView({
               className="guide-callout-title"
               data-narration-field={narrationClipId && block.title ? 'title' : undefined}
             >
-              {block.title || label}
+              <Inline text={block.title || label} />
             </p>
             <p data-narration-field={narrationClipId ? 'text' : undefined}>
               <Inline text={block.text} />
@@ -192,7 +192,7 @@ export function GuideBlockView({
           )}
           <table>
             <caption data-narration-field={narrationClipId ? 'caption' : undefined}>
-              {block.caption}
+              <Inline text={block.caption} />
             </caption>
             <thead>
               <tr>
@@ -202,7 +202,7 @@ export function GuideBlockView({
                     scope="col"
                     data-narration-field={narrationClipId ? `head:${index}` : undefined}
                   >
-                    {cell}
+                    <Inline text={cell} />
                   </th>
                 ))}
               </tr>

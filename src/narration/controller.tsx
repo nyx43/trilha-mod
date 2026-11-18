@@ -250,7 +250,7 @@ export function NarrationProvider({
       rafRef.current = null;
     }
     const audio = audioRef.current;
-    if (audio) {
+    if (audio?.src) {
       audio.pause();
       try {
         audio.removeAttribute('src');
