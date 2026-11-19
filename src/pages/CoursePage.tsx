@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import MainLayout from '../components/layouts/MainLayout';
 import { useCallback, useEffect, useState } from 'react';
-import { AdjacentLink, Level, Link } from '../entity/RoadmapModel';
+import { Level, Link } from '../entity/RoadmapModel';
 import useDocumentTitle from '../components/useDocumentTitle';
 import { roadmaps } from '../roadmaps/roadmaps';
 
@@ -15,17 +15,9 @@ import {
 } from '../components/CourseAccordion';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { RoadmapRead } from '../entity/RoadmapReadModel';
-import {
-  findRoadmapReadItem,
-  isRead,
-  reconcileRoadmapRead,
-  updateReadAttribute,
-} from '../support/roadmapUtils';
+import { isRead, reconcileRoadmapRead, updateReadAttribute } from '../support/roadmapUtils';
 
-type CourseLinkEntry = {
-  levelLabel: string;
-  itemLabel: string;
-  childLabel: string;
+type CourseLinkEntry = CourseLinkSelection & {
   link: Link;
 };
 
@@ -64,8 +56,6 @@ export default function CoursePage() {
   const [adjacentEntries, setAdjacentEntries] = useState<
     [CourseLinkEntry | undefined, CourseLinkEntry | undefined, CourseLinkEntry | undefined]
   >([undefined, undefined, undefined]);
-  const [adjacentLinks, setAdjacentLinks] = useState<AdjacentLink[]>();
-  const [activeLink, setActiveLink] = useState<Link>();
   const [activeItem, setActiveItem] = useState<string>();
   const [activeChild, setActiveChild] = useState<string>();
   const [activeLevel, setActiveLevel] = useState<string>();
@@ -74,19 +64,17 @@ export default function CoursePage() {
     (selectedLink?: Link, context?: CourseLinkSelection) => {
       const entries = extractCourseEntries(roadmaps[currentRoadmap].file);
       if (entries.length === 0) {
-        setActiveLink(undefined);
         setActiveLevel(undefined);
         setActiveItem(undefined);
         setActiveChild(undefined);
         setAdjacentEntries([undefined, undefined, undefined]);
-        setAdjacentLinks([undefined, undefined, undefined]);
         return;
       }
 
       let targetIndex = 0;
       if (selectedLink) {
         const matchedIndex = entries.findIndex((entry) => {
-          if (entry.link.label !== selectedLink.label) return false;
+          if (entry.link !== selectedLink) return false;
           if (!context) return true;
           return (
             entry.levelLabel === context.levelLabel &&
@@ -101,12 +89,10 @@ export default function CoursePage() {
       const currentEntry = entries[targetIndex];
       const nextEntry = entries[targetIndex + 1];
 
-      setActiveLink(currentEntry.link);
       setActiveLevel(currentEntry.levelLabel);
       setActiveItem(currentEntry.itemLabel);
       setActiveChild(currentEntry.childLabel);
       setAdjacentEntries([previousEntry, currentEntry, nextEntry]);
-      setAdjacentLinks([previousEntry?.link, currentEntry.link, nextEntry?.link]);
     },
     [currentRoadmap],
   );
@@ -149,14 +135,13 @@ export default function CoursePage() {
     return videoId;
   }
 
-  const activeLinkReadLabel =
-    activeItem && activeChild && activeLink
-      ? `${activeItem}-${activeChild}-${activeLink.label}`
-      : findRoadmapReadItem(activeLink?.label, selectedItems)?.label || '';
+  const [previousEntry, currentEntry, nextEntry] = adjacentEntries;
+  const activeLink = currentEntry?.link;
+  const activeLinkReadLabel = currentEntry
+    ? `${currentEntry.itemLabel}-${currentEntry.childLabel}-${currentEntry.link.label}`
+    : '';
 
   const activeLinkRead = isRead(activeLinkReadLabel, selectedItems);
-  const previousEntry = adjacentEntries[0];
-  const nextEntry = adjacentEntries[2];
 
   return (
     <MainLayout>
@@ -189,7 +174,7 @@ export default function CoursePage() {
                   activeLevel={activeLevel}
                   activeItem={activeItem}
                   activeChild={activeChild}
-                  adjacentLinks={adjacentLinks}
+                  currentEntry={currentEntry}
                   setSelectedItems={setSelectedItems}
                 />
               );

@@ -1,6 +1,7 @@
 import { Auth0Provider } from '@auth0/auth0-react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
+import BrowserHistoryRouter from './support/BrowserHistoryRouter';
 import App from './App';
 import ToastProvider from './contexts/ToastContext';
 import { initDevMode } from './devmode/state';
@@ -8,11 +9,12 @@ import './index.css';
 import './site.css';
 
 initDevMode();
+const history = createBrowserHistory();
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <ToastProvider>
-    <BrowserRouter>
+    <BrowserHistoryRouter history={history}>
       <Auth0Provider
         domain="trilha-info.us.auth0.com"
         clientId="ZPGRWe1CKiY84dCDtfTm6yy3ibSQbH4s"
@@ -21,6 +23,6 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       >
         <App />
       </Auth0Provider>
-    </BrowserRouter>
+    </BrowserHistoryRouter>
   </ToastProvider>,
 );

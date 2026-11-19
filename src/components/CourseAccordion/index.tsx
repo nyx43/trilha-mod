@@ -1,7 +1,7 @@
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import s from './CourseAccordion.module.css';
 import { BsChevronDown } from 'react-icons/bs';
-import { AdjacentLink, Level, Link } from '../../entity/RoadmapModel';
+import { Level, Link } from '../../entity/RoadmapModel';
 import { CourseCheckbox } from '../CourseCheckbox';
 import { RoadmapRead } from '../../entity/RoadmapReadModel';
 
@@ -20,7 +20,7 @@ type CourseAccordionProps = {
   section: Level;
   saveRead: (checked: boolean) => void;
   setActiveLink: (link: Link, context?: CourseLinkSelection) => void;
-  adjacentLinks?: AdjacentLink[];
+  currentEntry?: CourseLinkSelection & { link: Link };
   activeLevel?: string;
   setActiveLevel?: (level: string) => void;
   activeItem?: string;
@@ -41,7 +41,7 @@ type CourseAccordionProps = {
 export function CourseAccordion({
   section,
   setActiveLink,
-  adjacentLinks,
+  currentEntry,
   activeItem,
   activeChild,
   setActiveChild,
@@ -151,9 +151,10 @@ export function CourseAccordion({
                             {child.links?.map((link) => {
                               const linkReadLabel = `${item.label}-${child.label}-${link.label}`;
                               const isCurrentLink =
-                                adjacentLinks?.[1]?.url === link.url &&
-                                (!activeItem || activeItem === item.label) &&
-                                (!activeChild || activeChild === child.label);
+                                currentEntry?.link === link &&
+                                currentEntry.levelLabel === levelLabel &&
+                                currentEntry.itemLabel === item.label &&
+                                currentEntry.childLabel === child.label;
 
                               return (
                                 <div

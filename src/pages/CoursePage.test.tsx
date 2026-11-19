@@ -17,6 +17,18 @@ function renderCoursePage(initialEntry = '/course/frontend') {
 }
 
 describe('CoursePage', () => {
+  it('altera a conclusão do artigo exibido mesmo após expandir outro tópico', () => {
+    renderCoursePage();
+    fireEvent.click(screen.getByRole('button', { name: 'concluir conteúdo' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Controle de Versão' }));
+    expect(screen.getByRole('heading', { name: /MDN: como a web funciona/i })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'desmarcar conteúdo' }));
+    fireEvent.click(screen.getByRole('button', { name: 'concluir conteúdo' }));
+    const saved = JSON.parse(window.localStorage.getItem('selectedItems-frontend') || '[]');
+    expect(saved[0].children[0].children[0].children[0].read).toBe(true);
+    expect(saved[0].children[1].read).toBe(false);
+  });
+
   beforeEach(() => {
     window.localStorage.clear();
   });

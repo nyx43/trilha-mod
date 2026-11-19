@@ -1,5 +1,7 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { createBrowserHistory } from 'history';
 import { Link, MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import BrowserHistoryRouter from './BrowserHistoryRouter';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import usePrompt from './navigation';
 
@@ -19,6 +21,56 @@ function PromptedPage({ when }: { when: boolean }) {
 }
 
 describe('usePrompt compatível com React Router v6', () => {
+  it('preserva o rascunho ao recusar Voltar e Avançar e permite confirmar a saída', async () => {
+    window.history.replaceState({ idx: 0 }, '', '/antes');
+    window.history.pushState({ idx: 1 }, '', '/editor');
+    window.history.pushState({ idx: 2 }, '', '/depois');
+    const enteredEditor = new Promise((resolve) =>
+      window.addEventListener('popstate', resolve, { once: true }),
+    );
+    window.history.back();
+    await enteredEditor;
+    const confirm = vi.spyOn(window, 'confirm').mockReturnValue(false);
+    render(
+      <BrowserHistoryRouter history={createBrowserHistory()}>
+        <Routes>
+          <Route
+            path="/editor"
+            element={
+              <>
+                <PromptedPage when />
+                <input aria-label="Título" />
+                <Link to="?previa=1" replace>
+                  Mesma página
+                </Link>
+              </>
+            }
+          />
+          <Route path="*" element={<p>Fora do editor</p>} />
+        </Routes>
+      </BrowserHistoryRouter>,
+    );
+    fireEvent.change(screen.getByRole('textbox'), { target: { value: 'Rascunho' } });
+    for (const [attempt, delta] of [-1, 1].entries()) {
+      window.history.go(delta);
+      await waitFor(() => expect(confirm).toHaveBeenCalledTimes(attempt + 1));
+      expect(window.location.pathname).toBe('/editor');
+      expect(screen.getByRole('textbox')).toHaveValue('Rascunho');
+    }
+    confirm.mockReturnValue(true);
+    fireEvent.click(screen.getByRole('link', { name: 'Mesma página' }));
+    expect(window.location.search).toBe('?previa=1');
+    confirm.mockReturnValue(false);
+    window.history.forward();
+    await waitFor(() => expect(confirm).toHaveBeenCalledTimes(4));
+    expect(screen.getByRole('textbox')).toHaveValue('Rascunho');
+    confirm.mockReturnValue(true);
+    window.history.forward();
+    expect(await screen.findByText('Fora do editor')).toBeInTheDocument();
+    expect(window.location.pathname).toBe('/depois');
+    expect(confirm).toHaveBeenCalledTimes(5);
+  });
+
   afterEach(() => {
     vi.restoreAllMocks();
   });

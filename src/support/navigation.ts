@@ -1,6 +1,10 @@
 import { History, Transition } from 'history';
 import { useCallback, useContext, useEffect, useRef } from 'react';
-import { Navigator, UNSAFE_NavigationContext as NavigationContext } from 'react-router-dom';
+import {
+  Navigator,
+  UNSAFE_NavigationContext as NavigationContext,
+  useLocation,
+} from 'react-router-dom';
 
 export type NavigationTransition = {
   retry: () => void;
@@ -10,9 +14,12 @@ type LegacyBlockableNavigator = Navigator & Partial<Pick<History, 'block'>>;
 
 export function useBlocker(blocker: (tx: NavigationTransition) => void, when = true) {
   const { navigator } = useContext(NavigationContext);
+  const location = useLocation();
   const blockerRef = useRef(blocker);
   blockerRef.current = blocker;
 
+  // A confirmed transition releases the blocker for its retry. Re-arm it if
+  // the new location still renders the same dirty editor.
   useEffect(() => {
     if (!when || !navigator) return;
 
@@ -75,7 +82,7 @@ export function useBlocker(blocker: (tx: NavigationTransition) => void, when = t
     };
 
     return unblock;
-  }, [navigator, when]);
+  }, [navigator, when, location]);
 }
 
 export default function usePrompt(message: string, when = true) {

@@ -2,7 +2,17 @@
 
 Em 19 de novembro de 2026, a revisão da branch `feat/percurso-api-tailwind` confirmou as quatro correções solicitadas na rodada anterior. Também identificou três falhas reproduzíveis no Chromium. A de maior impacto permite perder um rascunho ao percorrer o histórico do navegador.
 
-## Falhas em aberto
+## Resultado após as correções
+
+As três falhas identificadas na revisão foram corrigidas.
+
+- **Histórico do editor.** O roteador e o editor passaram a usar a mesma instância de histórico. No Chromium, recusar **Voltar** e **Avançar** manteve o endereço do editor e o título digitado. Confirmar a saída levou ao destino solicitado.
+- **Conclusão no curso.** O botão de conclusão usa o recurso exibido. Expandir **Controle de Versão** permitiu desmarcar e marcar novamente o artigo da MDN, e a marcação persistiu após recarregar.
+- **Tópicos homônimos.** O link usa o ID do tópico quando ele é único. Quando título e ID não distinguem os tópicos, usa a posição na trilha. Nesse último caso, o link depende da ordem do conteúdo. Links antigos por título continuam abrindo a primeira ocorrência.
+
+Os quatro novos testes de regressão falharam antes das correções e passaram depois. Na cópia isolada que serviu de base para o commit, passaram os 336 testes do projeto, 23 testes independentes de revisões anteriores, o build e as verificações TypeScript. O ESLint passou nos arquivos de código alterados. Na árvore de trabalho com as demais alterações locais, passaram 340 testes. A verificação no Chromium usou o build da cópia isolada e respostas simuladas da API de trilhas.
+
+## Falhas reproduzidas na revisão inicial
 
 | Prioridade | Como reproduzir | Resultado observado | Correção sugerida |
 | --- | --- | --- | --- |

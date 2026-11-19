@@ -34,6 +34,37 @@ function CustomRoadmapHarness({
 }
 
 describe('CustomRoadmapPage', () => {
+  it.each([true, false])('reabre o tópico homônimo selecionado (com ID: %s)', async (withId) => {
+    const url = '/roadmap/view/trilha-a?origem=curso';
+    const levels = ['Primeiro', 'Segundo'].map((description) => ({
+      label: description,
+      items: [{ id: withId ? description + '/%' : undefined, label: 'Introdução', description }],
+    }));
+    vi.spyOn(axios, 'get').mockResolvedValue({ data: { id: 'trilha-a', levels } });
+    const openPage = () =>
+      render(
+        <BrowserRouter>
+          <Routes>
+            <Route path="/roadmap/view/:roadmapId" element={<CustomRoadmapPage />} />
+          </Routes>
+        </BrowserRouter>,
+      );
+    window.history.replaceState(null, '', url);
+    const page = openPage();
+    fireEvent.click((await screen.findAllByRole('button', { name: 'Introdução' }))[1]);
+    expect(await screen.findByRole('dialog')).toHaveTextContent('Segundo');
+    page.unmount();
+    if (withId) levels.reverse();
+    const reloaded = openPage();
+    expect(await screen.findByRole('dialog')).toHaveTextContent('Segundo');
+    fireEvent.click(screen.getByRole('button', { name: 'Fechar painel' }));
+    expect(window.location.pathname + window.location.search + window.location.hash).toBe(url);
+    reloaded.unmount();
+    window.history.replaceState(null, '', url + '#' + encodeURIComponent('Introdução'));
+    openPage();
+    expect(await screen.findByRole('dialog')).toHaveTextContent(levels[0].label);
+  });
+
   beforeEach(() => {
     window.localStorage.clear();
     document.title = 'Trilha Info';

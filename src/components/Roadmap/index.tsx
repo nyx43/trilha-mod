@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useLocalStorage } from 'react-use';
 import { Level, RoadmapItem } from '../../entity/RoadmapModel';
 import LevelItem from '../LevelItem';
@@ -29,6 +29,31 @@ type RoadmapViewProps = Props & {
   selectedItems: RoadmapRead[];
   setSelectedItems: (items: RoadmapRead[]) => void;
 };
+
+function topicHash(item: RoadmapItem, topics: RoadmapItem[]): string {
+  if (item.id && !topics.some((other) => other !== item && other.id === item.id)) {
+    return '#/id/' + encodeURIComponent(item.id);
+  }
+  if (item.label && !topics.some((other) => other !== item && other.label === item.label)) {
+    return '#' + encodeURIComponent(item.label);
+  }
+  return '#/item/' + topics.indexOf(item);
+}
+
+function topicFromHash(hash: string, topics: RoadmapItem[]): RoadmapItem | undefined {
+  if (!hash) return undefined;
+  if (hash.startsWith('#/id/')) {
+    const id = safeDecodeHash(hash.slice(5));
+    const item = topics.find((topic) => topic.id === id);
+    if (item) return item;
+  }
+  if (/^#\/item\/\d+$/.test(hash)) {
+    const item = topics[Number(hash.slice(7))];
+    if (item) return item;
+  }
+  const label = safeDecodeHash(hash);
+  return topics.find((topic) => topic.label === label);
+}
 
 export default function Roadmap(props: Props) {
   if (props.isPreview) {
@@ -79,6 +104,7 @@ function RoadmapView({
   const { pathname, search, hash } = useLocation();
   const navigate = useNavigate();
   const [activeItem, setActiveItem] = React.useState<RoadmapItem>();
+  const topics = useMemo(() => data.flatMap((level) => level.items || []), [data]);
 
   const handleOpenChange = useCallback(
     (isOpen: boolean) => {
@@ -106,18 +132,15 @@ function RoadmapView({
 
   useEffect(() => {
     if (isPreview) return;
-    const label = safeDecodeHash(hash);
-    const item = label
-      ? data.flatMap((level) => level.items || []).find((topic) => topic.label === label)
-      : undefined;
+    const item = topicFromHash(hash, topics);
     setActiveItem(item);
     setIsDrawerOpen(Boolean(item));
-  }, [isPreview, hash, data]);
+  }, [isPreview, hash, topics]);
 
   function selectTopic(item: RoadmapItem) {
     setActiveItem(item);
     if (!isPreview) {
-      navigate({ pathname, search, hash: '#' + encodeURIComponent(item.label) });
+      navigate({ pathname, search, hash: topicHash(item, topics) });
     }
   }
 
