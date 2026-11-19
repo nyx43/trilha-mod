@@ -12,17 +12,19 @@ type Props = {
   levelsQty: number;
   selectedItems: RoadmapRead[];
   setSelectedItems: (items: RoadmapRead[]) => void;
-  setActiveItem: (item: RoadmapItem) => void;
+  onSelectTopic: (item: RoadmapItem) => void;
   checkAllContent: (label: string, check: boolean) => void;
   updateLastSelectedElement: (element: HTMLElement | null) => void;
+  isPreview?: boolean;
 };
 
 export default function LevelItem(props: Props) {
   function select(item: RoadmapItem, trigger: HTMLElement) {
-    props.setActiveItem(item);
+    props.onSelectTopic(item);
     props.updateLastSelectedElement(trigger);
-    window.history.pushState(item.label, item.label, `#${encodeURIComponent(item.label)}`);
-    ReactGA.event({ category: 'item_open', action: 'open_' + item.label });
+    if (!props.isPreview) {
+      ReactGA.event({ category: 'item_open', action: 'open_' + item.label });
+    }
   }
 
   return (
@@ -41,8 +43,8 @@ export default function LevelItem(props: Props) {
           </>
         )}
         <div className="flex flex-wrap place-content-center gap-2">
-          {props.level.items.map((item, index) => {
-            const progressLabel = `${props.level.label || props.level.items[0].label}-${
+          {(props.level.items || []).map((item, index) => {
+            const progressLabel = `${props.level.label || props.level.items[0]?.label || ''}-${
               item.label
             }`;
             const checked = isRead(progressLabel, props.selectedItems);

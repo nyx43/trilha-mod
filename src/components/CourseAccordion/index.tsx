@@ -1,22 +1,25 @@
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import s from './CourseAccordion.module.css';
 import { BsChevronDown } from 'react-icons/bs';
-import { AdjacentLink, Level, Link, RoadmapItem, RoadmapModel } from '../../entity/RoadmapModel';
+import { AdjacentLink, Level, Link } from '../../entity/RoadmapModel';
 import { CourseCheckbox } from '../CourseCheckbox';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
 import { RoadmapRead } from '../../entity/RoadmapReadModel';
-import { useEffect, useState } from 'react';
-import { set } from 'react-ga';
 
 export const AccordionContainer = RadixAccordion.Root;
 export const AccordionItem = RadixAccordion.Item;
 export const AccordionHeader = RadixAccordion.Header;
 export const AccordionContent = RadixAccordion.Content;
 
+export type CourseLinkSelection = {
+  levelLabel: string;
+  itemLabel: string;
+  childLabel: string;
+};
+
 type CourseAccordionProps = {
   section: Level;
   saveRead: (checked: boolean) => void;
-  setActiveLink: (link: Link) => void;
+  setActiveLink: (link: Link, context?: CourseLinkSelection) => void;
   adjacentLinks?: AdjacentLink[];
   activeLevel?: string;
   setActiveLevel?: (level: string) => void;
@@ -48,36 +51,27 @@ export function CourseAccordion({
   selectedItems,
   setSelectedItems,
 }: CourseAccordionProps) {
-  const [rerender, setRerender] = useState(false);
-
-  useEffect(() => {
-    setRerender(!rerender);
-  }, [selectedItems, rerender]);
+  const levelLabel = section.label || section.items[0]?.label || '';
 
   return (
     <AccordionItem
-      value={section.label || section.items[0].label}
+      value={levelLabel}
       className={`${s.CourseItem} bg-[#342B30] text-xs font-normal`}
     >
       <AccordionHeader className={s.Header}>
         <CourseCheckbox
-          checked={isRead(section.label || section.items[0].label, selectedItems)}
+          checked={isRead(levelLabel, selectedItems)}
           toggleChecked={(checked: boolean) => {
-            updateReadAttribute(
-              section.label || section.items[0].label,
-              checked,
-              setSelectedItems,
-              selectedItems,
-            );
+            updateReadAttribute(levelLabel, checked, setSelectedItems, selectedItems);
           }}
         />
         <AccordionTrigger className={s.CourseTrigger}>
           <span
             className={`text-text-primary ${
-              isRead(section.label || section.items[0].label, selectedItems) ? 'line-through' : ''
+              isRead(levelLabel, selectedItems) ? 'line-through' : ''
             }`}
           >
-            {section.label || section.items[0].label}
+            {levelLabel}
           </span>
         </AccordionTrigger>
       </AccordionHeader>
@@ -89,119 +83,123 @@ export function CourseAccordion({
           value={activeItem}
           onValueChange={setActiveItem}
         >
-          {section.items.map((item) => (
-            <AccordionItem
-              key={item.label}
-              value={item.label || ''}
-              className={`${s.CourseItem} bg-[#2D2329] font-normal`}
-            >
-              <AccordionHeader className={s.Header}>
-                <CourseCheckbox
-                  checked={isRead(`${section.label || item.label}-${item.label}`, selectedItems)}
-                  toggleChecked={(checked: boolean) =>
-                    updateReadAttribute(
-                      `${section.label || item.label}-${item.label}`,
-                      checked,
-                      setSelectedItems,
-                      selectedItems,
-                    )
-                  }
-                />
-                <AccordionTrigger className={s.Trigger}>
-                  <span
-                    className={`ml-2 text-text-primary ${
-                      isRead(`${section.label || item.label}-${item.label}`, selectedItems)
-                        ? 'line-through'
-                        : ''
-                    }`}
-                  >
-                    {item.label}
-                  </span>
-                </AccordionTrigger>
-              </AccordionHeader>
-              <AccordionContent className={s.CourseContent}>
-                {item.children?.map((child) => (
-                  <AccordionContainer
-                    key={child.label}
-                    value={activeChild}
-                    onValueChange={setActiveChild}
-                    className="w-full"
-                    collapsible
-                    type="single"
-                  >
-                    <AccordionItem
-                      key={child.label}
-                      value={child.label || ''}
-                      className={`${s.CourseItem} bg-[#261C21] font-normal`}
+          {section.items.map((item) => {
+            const itemReadLabel = `${levelLabel}-${item.label}`;
+            return (
+              <AccordionItem
+                key={item.id || item.label}
+                value={item.label || ''}
+                className={`${s.CourseItem} bg-[#2D2329] font-normal`}
+              >
+                <AccordionHeader className={s.Header}>
+                  <CourseCheckbox
+                    checked={isRead(itemReadLabel, selectedItems)}
+                    toggleChecked={(checked: boolean) =>
+                      updateReadAttribute(itemReadLabel, checked, setSelectedItems, selectedItems)
+                    }
+                  />
+                  <AccordionTrigger className={s.Trigger}>
+                    <span
+                      className={`ml-2 text-text-primary ${
+                        isRead(itemReadLabel, selectedItems) ? 'line-through' : ''
+                      }`}
                     >
-                      <AccordionHeader className={s.Header}>
-                        <CourseCheckbox
-                          checked={isRead(`${item.label}-${child.label}`, selectedItems)}
-                          toggleChecked={(checked: boolean) =>
-                            updateReadAttribute(
-                              `${item.label}-${child.label}`,
-                              checked,
-                              setSelectedItems,
-                              selectedItems,
-                            )
-                          }
-                        />
-                        <AccordionTrigger className={s.Trigger}>
-                          <span
-                            className={`ml-3 text-text-primary ${
-                              isRead(`${item.label}-${child.label}`, selectedItems)
-                                ? 'line-through'
-                                : ''
-                            }`}
-                          >
-                            {child.label}
-                          </span>
-                        </AccordionTrigger>
-                      </AccordionHeader>
-                      <AccordionContent>
-                        {child.links?.map((link) => (
-                          <div
-                            key={link.label}
-                            className={`flex gap-2 px-4  py-4 text-left ${
-                              adjacentLinks?.[1]?.url === link.url
-                                ? 'border-r-4 border-r-primary bg-[#501F3A]'
-                                : ''
-                            }`}
-                          >
+                      {item.label}
+                    </span>
+                  </AccordionTrigger>
+                </AccordionHeader>
+                <AccordionContent className={s.CourseContent}>
+                  {item.children?.map((child) => {
+                    const childReadLabel = `${item.label}-${child.label}`;
+                    return (
+                      <AccordionContainer
+                        key={child.id || child.label}
+                        value={activeChild}
+                        onValueChange={setActiveChild}
+                        className="w-full"
+                        collapsible
+                        type="single"
+                      >
+                        <AccordionItem
+                          key={child.id || child.label}
+                          value={child.label || ''}
+                          className={`${s.CourseItem} bg-[#261C21] font-normal`}
+                        >
+                          <AccordionHeader className={s.Header}>
                             <CourseCheckbox
-                              checked={isRead(`${child.label}-${link.label}`, selectedItems)}
+                              checked={isRead(childReadLabel, selectedItems)}
                               toggleChecked={(checked: boolean) =>
                                 updateReadAttribute(
-                                  `${child.label}-${link.label}`,
+                                  childReadLabel,
                                   checked,
                                   setSelectedItems,
                                   selectedItems,
                                 )
                               }
                             />
-                            <button
-                              onClick={() => setActiveLink(link)}
-                              className={`my-auto ml-4 text-left text-text-primary hover:underline ${
-                                isRead(`${child.label}-${link.label}`, selectedItems)
-                                  ? 'line-through'
-                                  : ''
-                              }`}
-                              rel="noreferrer"
-                            >
-                              {link.label}
-                            </button>
-                          </div>
-                        ))}{' '}
-                      </AccordionContent>
-                    </AccordionItem>
-                  </AccordionContainer>
-                ))}
-                {/* : (
-                  <p className="text-red">Ainda não possuímos conteúdo.</p>
-                )} */}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
+                            <AccordionTrigger className={s.Trigger}>
+                              <span
+                                className={`ml-3 text-text-primary ${
+                                  isRead(childReadLabel, selectedItems) ? 'line-through' : ''
+                                }`}
+                              >
+                                {child.label}
+                              </span>
+                            </AccordionTrigger>
+                          </AccordionHeader>
+                          <AccordionContent>
+                            {child.links?.map((link) => {
+                              const linkReadLabel = `${item.label}-${child.label}-${link.label}`;
+                              const isCurrentLink =
+                                adjacentLinks?.[1]?.url === link.url &&
+                                (!activeItem || activeItem === item.label) &&
+                                (!activeChild || activeChild === child.label);
+
+                              return (
+                                <div
+                                  key={link.id || link.label}
+                                  className={`flex gap-2 px-4  py-4 text-left ${
+                                    isCurrentLink ? 'border-r-4 border-r-primary bg-[#501F3A]' : ''
+                                  }`}
+                                >
+                                  <CourseCheckbox
+                                    checked={isRead(linkReadLabel, selectedItems)}
+                                    toggleChecked={(checked: boolean) =>
+                                      updateReadAttribute(
+                                        linkReadLabel,
+                                        checked,
+                                        setSelectedItems,
+                                        selectedItems,
+                                      )
+                                    }
+                                  />
+                                  <button
+                                    type="button"
+                                    onClick={() =>
+                                      setActiveLink(link, {
+                                        levelLabel,
+                                        itemLabel: item.label,
+                                        childLabel: child.label,
+                                      })
+                                    }
+                                    className={`my-auto ml-4 text-left text-text-primary hover:underline ${
+                                      isRead(linkReadLabel, selectedItems) ? 'line-through' : ''
+                                    }`}
+                                  >
+                                    {link.label}
+                                  </button>
+                                </div>
+                              );
+                            })}{' '}
+                          </AccordionContent>
+                        </AccordionItem>
+                      </AccordionContainer>
+                    );
+                  })}
+                </AccordionContent>
+              </AccordionItem>
+            );
+          })}
         </AccordionContainer>
       </AccordionContent>
     </AccordionItem>

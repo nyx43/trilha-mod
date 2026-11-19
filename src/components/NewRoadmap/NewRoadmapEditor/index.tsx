@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { ChangeEvent } from 'react';
+import { ChangeEvent, Fragment } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import {
   Level,
@@ -216,7 +216,7 @@ export default function NewRoadmapEditor(props: Props) {
 
   return (
     <>
-      <h2 className="ml-2 mb-2 text-center font-title text-2xl text-light-orange">Editor</h2>
+      <h2 className="mb-2 ml-2 text-center font-title text-2xl text-light-orange">Editor</h2>
 
       {props.roadmap?.getLevels().map((level, levelIndex) => {
         return (
@@ -247,7 +247,7 @@ export default function NewRoadmapEditor(props: Props) {
               <input
                 type="text"
                 className="font-title font-black placeholder:text-dark-blue"
-                value={level.label}
+                value={level.label ?? ''}
                 onChange={(e) => handleLevelTitleChange(e, level, levelIndex)}
                 placeholder="Título"
               />
@@ -255,13 +255,13 @@ export default function NewRoadmapEditor(props: Props) {
             <div className="h-50 mx-auto mt-4 w-full text-center">
               <textarea
                 className="font-black placeholder:text-dark-blue"
-                value={level.description}
+                value={level.description ?? ''}
                 onChange={(e) => handleLevelDescriptionChange(e, level, levelIndex)}
                 placeholder="Descrição"
               />
             </div>
             {/* Items */}
-            <div className="mt-4 flex w-full flex-col space-y-3 space-x-1">
+            <div className="mt-4 flex w-full flex-col space-x-1 space-y-3">
               {level.items.map((item, itemIndex) => {
                 return (
                   <div
@@ -270,6 +270,7 @@ export default function NewRoadmapEditor(props: Props) {
                   >
                     <div className="flex flex-row-reverse">
                       <button
+                        type="button"
                         className="mb-2 flex w-fit cursor-pointer rounded-sm border-2 border-red bg-light-orange p-1 font-title text-sm"
                         onClick={() => handleRemoveItem(levelIndex, item)}
                       >
@@ -279,7 +280,7 @@ export default function NewRoadmapEditor(props: Props) {
                     <input
                       type="text"
                       className="font-black placeholder:text-dark-blue"
-                      value={item.label}
+                      value={item.label ?? ''}
                       onChange={(e) =>
                         handleItemChange(e, item, levelIndex, itemIndex, ItemField.LABEL)
                       }
@@ -288,7 +289,7 @@ export default function NewRoadmapEditor(props: Props) {
 
                     <textarea
                       className="font-black placeholder:text-dark-blue"
-                      value={item.description}
+                      value={item.description ?? ''}
                       onChange={(e) =>
                         handleItemChange(e, item, levelIndex, itemIndex, ItemField.DESCRIPTION)
                       }
@@ -300,7 +301,7 @@ export default function NewRoadmapEditor(props: Props) {
 
                     {item.children?.map((section, sectionIndex) => {
                       return (
-                        <div key={section.label}>
+                        <div key={`section-${sectionIndex}`}>
                           <div
                             className="m-auto my-2 flex w-fit cursor-pointer rounded-sm border-2 border-red bg-light-orange p-1 font-title text-sm"
                             onClick={() => handleRemoveSection(levelIndex, itemIndex, section)}
@@ -318,7 +319,7 @@ export default function NewRoadmapEditor(props: Props) {
                           <input
                             type="text"
                             className="font-black placeholder:text-dark-blue"
-                            value={section.label}
+                            value={section.label ?? ''}
                             onChange={(e) =>
                               handleSectionChange(
                                 e,
@@ -335,7 +336,7 @@ export default function NewRoadmapEditor(props: Props) {
                           {/* Links */}
                           {section.links?.map((link, linkIndex) => {
                             return (
-                              <>
+                              <Fragment key={`link-${linkIndex}`}>
                                 <div
                                   className="m-auto my-2 flex w-fit cursor-pointer rounded-sm border-2 border-red bg-light-orange p-1 font-title text-sm"
                                   onClick={() =>
@@ -357,7 +358,7 @@ export default function NewRoadmapEditor(props: Props) {
                                     <input
                                       type="text"
                                       className="font-black placeholder:text-dark-blue"
-                                      value={link.label}
+                                      value={link.label ?? ''}
                                       onChange={(e) =>
                                         handleLinkChange(
                                           e,
@@ -376,7 +377,7 @@ export default function NewRoadmapEditor(props: Props) {
                                     <input
                                       type="text"
                                       className="font-black placeholder:text-dark-blue"
-                                      value={link.url}
+                                      value={link.url ?? ''}
                                       onChange={(e) =>
                                         handleLinkChange(
                                           e,
@@ -417,12 +418,12 @@ export default function NewRoadmapEditor(props: Props) {
                                     </select>
                                   </div>
                                 </div>
-                              </>
+                              </Fragment>
                             );
                           })}
                           <div className="mt-4 flex w-full">
                             <button
-                              className="my-2 mx-auto rounded-sm border-2 border-yellow bg-light-yellow p-2 text-xs font-semibold"
+                              className="mx-auto my-2 rounded-sm border-2 border-yellow bg-light-yellow p-2 text-xs font-semibold"
                               onClick={() =>
                                 handleNewLink(level, levelIndex, itemIndex, sectionIndex)
                               }
@@ -437,7 +438,7 @@ export default function NewRoadmapEditor(props: Props) {
                     {/* Sections End */}
                     <div className="mt-8 flex w-full">
                       <button
-                        className="my-2 mx-auto rounded-sm border-2 border-dark-blue bg-blue p-2 text-xs font-semibold"
+                        className="mx-auto my-2 rounded-sm border-2 border-dark-blue bg-blue p-2 text-xs font-semibold"
                         onClick={() => handleNewSection(level, levelIndex, itemIndex)}
                       >
                         + Nova Seção
@@ -451,7 +452,7 @@ export default function NewRoadmapEditor(props: Props) {
             {/* Items End */}
             <div className="mt-4 flex w-full">
               <button
-                className="my-2 mx-auto rounded-sm border-2 border-red bg-light-brown p-2 text-xs font-semibold"
+                className="mx-auto my-2 rounded-sm border-2 border-red bg-light-brown p-2 text-xs font-semibold"
                 onClick={() => handleNewItem(level, levelIndex)}
               >
                 + Novo Item
@@ -461,7 +462,7 @@ export default function NewRoadmapEditor(props: Props) {
         );
       })}
 
-      <button className="my-4 mx-auto" onClick={handleNewLevel}>
+      <button className="mx-auto my-4" onClick={handleNewLevel}>
         + Novo Nível
       </button>
     </>

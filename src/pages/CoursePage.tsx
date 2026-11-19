@@ -1,61 +1,127 @@
 import { useParams } from 'react-router-dom';
 import MainLayout from '../components/layouts/MainLayout';
-import { useEffect, useState } from 'react';
-import { AdjacentLink, Level, Link, RoadmapItem } from '../entity/RoadmapModel';
+import { useCallback, useEffect, useState } from 'react';
+import { AdjacentLink, Level, Link } from '../entity/RoadmapModel';
 import useDocumentTitle from '../components/useDocumentTitle';
 import { roadmaps } from '../roadmaps/roadmaps';
 
 import { useLocalStorage } from '../hooks/useLocalStorage';
-import { emojisplosion } from 'emojisplosion';
 import { FaArrowLeft, FaArrowRight, FaCheck, FaExternalLinkAlt } from 'react-icons/fa';
 import { RiOrganizationChart } from 'react-icons/ri';
-import { AccordionContainer, CourseAccordion } from '../components/CourseAccordion';
+import {
+  AccordionContainer,
+  CourseAccordion,
+  CourseLinkSelection,
+} from '../components/CourseAccordion';
 import YoutubeEmbed from '../components/YoutubeEmbed';
 import { RoadmapRead } from '../entity/RoadmapReadModel';
 import {
-  convertToRoadmapRead,
   findRoadmapReadItem,
   isRead,
+  reconcileRoadmapRead,
   updateReadAttribute,
 } from '../support/roadmapUtils';
 
+type CourseLinkEntry = {
+  levelLabel: string;
+  itemLabel: string;
+  childLabel: string;
+  link: Link;
+};
+
+function extractCourseEntries(data: Level[]): CourseLinkEntry[] {
+  const entries: CourseLinkEntry[] = [];
+
+  for (const level of data) {
+    const levelLabel = level.label || level.items[0]?.label || '';
+    for (const item of level.items) {
+      for (const child of item.children || []) {
+        for (const link of child.links || []) {
+          entries.push({
+            levelLabel,
+            itemLabel: item.label,
+            childLabel: child.label,
+            link,
+          });
+        }
+      }
+    }
+  }
+
+  return entries;
+}
+
 export default function CoursePage() {
-  const { name } = useParams<string>();
-  const [roadmapName, setRoadmapName] = useState('');
-  const [mousePos, setMousePos] = useState<{ x: number; y: number }>();
-  const [selectedItems, setSelectedItems] = useLocalStorage(
-    `selectedItems-${name}`,
-    [] as RoadmapRead[],
+  const { name } = useParams<{ name: string }>();
+  const currentRoadmap = (name && name in roadmaps ? name : 'frontend') as keyof typeof roadmaps;
+
+  const [roadmapName, setRoadmapName] = useState(name || '');
+  const [selectedItems, setSelectedItems] = useLocalStorage<RoadmapRead[]>(
+    `selectedItems-${currentRoadmap}`,
+    [],
   );
 
-  const currentRoadmap = (
-    name ? (name in roadmaps ? name : 'frontend') : 'frontend'
-  ) as keyof typeof roadmaps;
-
+  const [adjacentEntries, setAdjacentEntries] = useState<
+    [CourseLinkEntry | undefined, CourseLinkEntry | undefined, CourseLinkEntry | undefined]
+  >([undefined, undefined, undefined]);
   const [adjacentLinks, setAdjacentLinks] = useState<AdjacentLink[]>();
   const [activeLink, setActiveLink] = useState<Link>();
   const [activeItem, setActiveItem] = useState<string>();
   const [activeChild, setActiveChild] = useState<string>();
   const [activeLevel, setActiveLevel] = useState<string>();
 
-  const [rerender, setRerender] = useState(false);
+  const findAdjacentLinks = useCallback(
+    (selectedLink?: Link, context?: CourseLinkSelection) => {
+      const entries = extractCourseEntries(roadmaps[currentRoadmap].file);
+      if (entries.length === 0) {
+        setActiveLink(undefined);
+        setActiveLevel(undefined);
+        setActiveItem(undefined);
+        setActiveChild(undefined);
+        setAdjacentEntries([undefined, undefined, undefined]);
+        setAdjacentLinks([undefined, undefined, undefined]);
+        return;
+      }
 
-  useEffect(() => {
-    setRerender(!rerender);
-  }, [selectedItems, rerender]);
+      let targetIndex = 0;
+      if (selectedLink) {
+        const matchedIndex = entries.findIndex((entry) => {
+          if (entry.link.label !== selectedLink.label) return false;
+          if (!context) return true;
+          return (
+            entry.levelLabel === context.levelLabel &&
+            entry.itemLabel === context.itemLabel &&
+            entry.childLabel === context.childLabel
+          );
+        });
+        targetIndex = matchedIndex >= 0 ? matchedIndex : 0;
+      }
+
+      const previousEntry = entries[targetIndex - 1];
+      const currentEntry = entries[targetIndex];
+      const nextEntry = entries[targetIndex + 1];
+
+      setActiveLink(currentEntry.link);
+      setActiveLevel(currentEntry.levelLabel);
+      setActiveItem(currentEntry.itemLabel);
+      setActiveChild(currentEntry.childLabel);
+      setAdjacentEntries([previousEntry, currentEntry, nextEntry]);
+      setAdjacentLinks([previousEntry?.link, currentEntry.link, nextEntry?.link]);
+    },
+    [currentRoadmap],
+  );
 
   useEffect(() => {
     setRoadmapName(name || '');
     findAdjacentLinks();
-    (async () => {
-      const roadmapRead = convertToRoadmapRead(roadmaps[currentRoadmap].file);
-      if (!selectedItems || selectedItems.length === 0) {
-        setSelectedItems(roadmapRead);
-      } else if (selectedItems.length !== roadmapRead.length) {
-        setSelectedItems(roadmapRead);
+    setSelectedItems((previous) => {
+      const reconciled = reconcileRoadmapRead(roadmaps[currentRoadmap].file, previous || []);
+      if (JSON.stringify(reconciled) === JSON.stringify(previous)) {
+        return previous;
       }
-    })();
-  }, [name, currentRoadmap]);
+      return reconciled;
+    });
+  }, [name, currentRoadmap, findAdjacentLinks, setSelectedItems]);
 
   useDocumentTitle(
     `Trilha Info ${name && name in roadmaps ? ` - ${roadmaps[currentRoadmap].title}` : ''}`,
@@ -83,68 +149,14 @@ export default function CoursePage() {
     return videoId;
   }
 
-  function findAdjacentLinks(selectedLink?: Link) {
-    let previousLink: Link | undefined;
-    let nextLink: Link | undefined;
+  const activeLinkReadLabel =
+    activeItem && activeChild && activeLink
+      ? `${activeItem}-${activeChild}-${activeLink.label}`
+      : findRoadmapReadItem(activeLink?.label, selectedItems)?.label || '';
 
-    const links = extractLinks(roadmaps[currentRoadmap].file);
-
-    if (!selectedLink) {
-      selectedLink = links[0];
-    }
-
-    setActiveLink(selectedLink);
-
-    links.forEach((link, index) => {
-      if (link.label === selectedLink?.label) {
-        previousLink = links[index - 1];
-        nextLink = links[index + 1];
-      }
-    });
-    const linkParents = findLinkParents(selectedLink);
-
-    setActiveLevel(linkParents.level?.label || linkParents.level?.items[0].label);
-    setActiveItem(linkParents.item?.label);
-    setActiveChild(linkParents.child?.label);
-
-    setAdjacentLinks([previousLink, selectedLink, nextLink]);
-  }
-
-  function extractLinks(data: Level[]): Link[] {
-    const extractedLinks: Link[] = [];
-
-    for (const item of data) {
-      if (item.items) {
-        for (const child of item.items) {
-          if (child.children) {
-            for (const subChild of child.children) {
-              if (subChild.links) {
-                extractedLinks.push(...subChild.links);
-              }
-            }
-          }
-        }
-      }
-    }
-
-    return extractedLinks;
-  }
-
-  function findLinkParents(link: Link) {
-    for (const level of roadmaps[currentRoadmap].file) {
-      for (const item of level.items) {
-        for (const child of item.children || []) {
-          for (const childLink of child.links || []) {
-            if (childLink.label === link.label) {
-              return { level, item, child };
-            }
-          }
-        }
-      }
-    }
-
-    return {};
-  }
+  const activeLinkRead = isRead(activeLinkReadLabel, selectedItems);
+  const previousEntry = adjacentEntries[0];
+  const nextEntry = adjacentEntries[2];
 
   return (
     <MainLayout>
@@ -158,27 +170,30 @@ export default function CoursePage() {
             collapsible
             type="single"
           >
-            {roadmaps[currentRoadmap].file.map((level) => (
-              <CourseAccordion
-                selectedItems={selectedItems}
-                key={level.label}
-                section={level}
-                updateReadAttribute={updateReadAttribute}
-                isRead={isRead}
-                saveRead={(checked: boolean) =>
-                  updateReadAttribute(level.label || '', checked, setSelectedItems, selectedItems)
-                }
-                setActiveLink={(link: Link) => findAdjacentLinks(link)}
-                setActiveLevel={setActiveLevel}
-                setActiveChild={setActiveChild}
-                setActiveItem={setActiveItem}
-                activeLevel={activeLevel}
-                activeItem={activeItem}
-                activeChild={activeChild}
-                adjacentLinks={adjacentLinks}
-                setSelectedItems={setSelectedItems}
-              />
-            ))}
+            {roadmaps[currentRoadmap].file.map((level) => {
+              const levelLabel = level.label || level.items[0]?.label || '';
+              return (
+                <CourseAccordion
+                  selectedItems={selectedItems}
+                  key={level.id || levelLabel}
+                  section={level}
+                  updateReadAttribute={updateReadAttribute}
+                  isRead={isRead}
+                  saveRead={(checked: boolean) =>
+                    updateReadAttribute(levelLabel, checked, setSelectedItems, selectedItems)
+                  }
+                  setActiveLink={findAdjacentLinks}
+                  setActiveLevel={setActiveLevel}
+                  setActiveChild={setActiveChild}
+                  setActiveItem={setActiveItem}
+                  activeLevel={activeLevel}
+                  activeItem={activeItem}
+                  activeChild={activeChild}
+                  adjacentLinks={adjacentLinks}
+                  setSelectedItems={setSelectedItems}
+                />
+              );
+            })}
           </AccordionContainer>
         </div>
         <div className="flex h-full w-full flex-col p-4">
@@ -217,15 +232,12 @@ export default function CoursePage() {
                 </div>
               )}
               <div className="mx-64 mt-8 flex gap-4">
-                {!isRead(
-                  findRoadmapReadItem(activeLink?.label, selectedItems)?.label || '',
-                  selectedItems,
-                ) && (
+                {!activeLinkRead && (
                   <button
                     type="button"
                     onClick={() =>
                       updateReadAttribute(
-                        findRoadmapReadItem(activeLink?.label, selectedItems)?.label || '',
+                        activeLinkReadLabel,
                         true,
                         setSelectedItems,
                         selectedItems,
@@ -236,15 +248,12 @@ export default function CoursePage() {
                     <FaCheck className="my-auto" /> {'concluir conteúdo'}
                   </button>
                 )}
-                {isRead(
-                  findRoadmapReadItem(activeLink?.label, selectedItems)?.label || '',
-                  selectedItems,
-                ) && (
+                {activeLinkRead && (
                   <button
                     type="button"
                     onClick={() =>
                       updateReadAttribute(
-                        findRoadmapReadItem(activeLink?.label, selectedItems)?.label || '',
+                        activeLinkReadLabel,
                         false,
                         setSelectedItems,
                         selectedItems,
@@ -256,18 +265,32 @@ export default function CoursePage() {
                   </button>
                 )}
                 <div className="grow"></div>
-                {adjacentLinks?.[0] && (
+                {previousEntry && (
                   <button
-                    onClick={() => findAdjacentLinks(adjacentLinks?.[0])}
+                    type="button"
+                    onClick={() =>
+                      findAdjacentLinks(previousEntry.link, {
+                        levelLabel: previousEntry.levelLabel,
+                        itemLabel: previousEntry.itemLabel,
+                        childLabel: previousEntry.childLabel,
+                      })
+                    }
                     className="flex gap-2 text-primary underline"
                   >
                     <FaArrowLeft className="my-auto" />
                     <span className="my-auto">anterior</span>
                   </button>
                 )}
-                {adjacentLinks?.[2] && (
+                {nextEntry && (
                   <button
-                    onClick={() => findAdjacentLinks(adjacentLinks?.[2])}
+                    type="button"
+                    onClick={() =>
+                      findAdjacentLinks(nextEntry.link, {
+                        levelLabel: nextEntry.levelLabel,
+                        itemLabel: nextEntry.itemLabel,
+                        childLabel: nextEntry.childLabel,
+                      })
+                    }
                     className="flex gap-2 text-primary underline"
                   >
                     <span className="my-auto">próximo</span>

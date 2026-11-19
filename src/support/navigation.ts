@@ -1,34 +1,107 @@
 import { History, Transition } from 'history';
-import { useCallback, useContext, useEffect } from "react";
-import { UNSAFE_NavigationContext as NavigationContext } from "react-router-dom";
+import { useCallback, useContext, useEffect, useRef } from 'react';
+import { Navigator, UNSAFE_NavigationContext as NavigationContext } from 'react-router-dom';
 
-type ExtendNavigator = Navigator & Pick<History, "block">;
-export function useBlocker(blocker: (tx: Transition) => void, when = true) {
-    const { navigator } = useContext(NavigationContext);
+export type NavigationTransition = {
+  retry: () => void;
+};
 
-    useEffect(() => {
-        if (!when) return;
+type LegacyBlockableNavigator = Navigator & Partial<Pick<History, 'block'>>;
 
-        const unblock = (navigator as any as ExtendNavigator).block((tx) => {
-            const autoUnblockingTx = {
-                ...tx,
-                retry() {
-                    unblock();
-                    tx.retry();
-                },
-            };
+export function useBlocker(blocker: (tx: NavigationTransition) => void, when = true) {
+  const { navigator } = useContext(NavigationContext);
+  const blockerRef = useRef(blocker);
+  blockerRef.current = blocker;
 
-            blocker(autoUnblockingTx);
+  useEffect(() => {
+    if (!when || !navigator) return;
+
+    const legacyBlock = (navigator as LegacyBlockableNavigator).block;
+    if (typeof legacyBlock === 'function') {
+      const unblock = legacyBlock.call(navigator, (tx: Transition) => {
+        blockerRef.current({
+          retry: () => {
+            unblock();
+            tx.retry();
+          },
         });
+      });
+      return unblock;
+    }
 
-        return unblock;
-    }, [navigator, blocker, when]);
+    const mutableNavigator = navigator as Navigator;
+    const originalPush = mutableNavigator.push;
+    const originalReplace = mutableNavigator.replace;
+    const originalGo = mutableNavigator.go;
+    let active = true;
+
+    const unblock = () => {
+      if (!active) return;
+      active = false;
+      mutableNavigator.push = originalPush;
+      mutableNavigator.replace = originalReplace;
+      mutableNavigator.go = originalGo;
+    };
+
+    mutableNavigator.push = (...args: Parameters<Navigator['push']>) => {
+      blockerRef.current({
+        retry: () => {
+          unblock();
+          originalPush.apply(mutableNavigator, args);
+        },
+      });
+    };
+
+    mutableNavigator.replace = (...args: Parameters<Navigator['replace']>) => {
+      blockerRef.current({
+        retry: () => {
+          unblock();
+          originalReplace.apply(mutableNavigator, args);
+        },
+      });
+    };
+
+    mutableNavigator.go = (...args: Parameters<Navigator['go']>) => {
+      if (args[0] === 0) {
+        originalGo.apply(mutableNavigator, args);
+        return;
+      }
+      blockerRef.current({
+        retry: () => {
+          unblock();
+          originalGo.apply(mutableNavigator, args);
+        },
+      });
+    };
+
+    return unblock;
+  }, [navigator, when]);
 }
 
 export default function usePrompt(message: string, when = true) {
-    const blocker = useCallback((tx: Transition) => {
-        if (window.confirm(message)) tx.retry();
-    }, [message]);
+  const blocker = useCallback(
+    (tx: NavigationTransition) => {
+      if (window.confirm(message)) {
+        tx.retry();
+      }
+    },
+    [message],
+  );
 
-    useBlocker(blocker, when);
+  useBlocker(blocker, when);
+
+  useEffect(() => {
+    if (!when) return;
+
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      event.preventDefault();
+      event.returnValue = message;
+      return message;
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [message, when]);
 }

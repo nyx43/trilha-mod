@@ -2,15 +2,20 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useLocalStorage } from 'react-use';
 import { Level, RoadmapItem } from '../../entity/RoadmapModel';
 import LevelItem from '../LevelItem';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { safeDecodeHash } from '../../support/hash';
 import { emojisplosion } from 'emojisplosion';
 import RoadmapButtons from '../RoadmapButtons';
 import { useAuth0 } from '@auth0/auth0-react';
 import { AccordionContainer, RoadmapAccordion } from '../Accordion';
 import { DrawerRoot, Drawer, DrawerTitle, DrawerDescription } from '../Drawer';
 import { RoadmapRead } from '../../entity/RoadmapReadModel';
-import { isRead, reconcileRoadmapRead, updateReadAttribute } from '../../support/roadmapUtils';
-import { set } from 'react-ga';
+import {
+  convertToRoadmapRead,
+  isRead,
+  reconcileRoadmapRead,
+  updateReadAttribute,
+} from '../../support/roadmapUtils';
 
 type Props = {
   data: Level[];
@@ -20,35 +25,77 @@ type Props = {
   isPreview: boolean;
 };
 
-export default function Roadmap({ data, title, roadmapPath, name, isPreview }: Props) {
+type RoadmapViewProps = Props & {
+  selectedItems: RoadmapRead[];
+  setSelectedItems: (items: RoadmapRead[]) => void;
+};
+
+export default function Roadmap(props: Props) {
+  if (props.isPreview) {
+    return <PreviewRoadmap {...props} />;
+  }
+  return <PersistedRoadmap {...props} />;
+}
+
+function PreviewRoadmap(props: Props) {
+  const [selectedItems, setSelectedItems] = useState<RoadmapRead[]>(() =>
+    convertToRoadmapRead(props.data),
+  );
+
+  return (
+    <RoadmapView {...props} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+  );
+}
+
+function PersistedRoadmap(props: Props) {
+  const [selectedItems, setSelectedItems] = useLocalStorage(
+    `selectedItems-${props.name}`,
+    [] as RoadmapRead[],
+  );
+
+  return (
+    <RoadmapView
+      {...props}
+      selectedItems={selectedItems || []}
+      setSelectedItems={setSelectedItems}
+    />
+  );
+}
+
+function RoadmapView({
+  data,
+  title,
+  roadmapPath,
+  name,
+  isPreview,
+  selectedItems,
+  setSelectedItems,
+}: RoadmapViewProps) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [lastSelectedElement, setLastSelectedElement] = useState<HTMLElement | null>(null);
   const { isAuthenticated } = useAuth0();
 
   const roadmapRef = useRef(null);
-  const { pathname, hash, key } = useLocation();
+  const { pathname, search, hash } = useLocation();
+  const navigate = useNavigate();
   const [activeItem, setActiveItem] = React.useState<RoadmapItem>();
-
-  const [selectedItems, setSelectedItems] = useLocalStorage(
-    `selectedItems-${name}`,
-    [] as RoadmapRead[],
-  );
 
   const handleOpenChange = useCallback(
     (isOpen: boolean) => {
-      if (!isOpen) {
-        window.history.pushState(name, name, `/roadmap/${name}`);
-        setIsDrawerOpen(isOpen);
+      if (!isOpen && !isPreview && hash) {
+        navigate({ pathname, search });
       }
 
       setIsDrawerOpen(isOpen);
     },
-    [name],
+    [isPreview, hash, navigate, pathname, search],
   );
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
+    if (!isPreview) {
+      window.scrollTo(0, 0);
+    }
+  }, [isPreview]);
 
   useEffect(() => {
     const updated = reconcileRoadmapRead(data, selectedItems || []);
@@ -58,20 +105,21 @@ export default function Roadmap({ data, title, roadmapPath, name, isPreview }: P
   }, [data, selectedItems, setSelectedItems, name]);
 
   useEffect(() => {
-    if (hash) {
-      const anchorItem = hash.replaceAll('#', '');
-      if (anchorItem) {
-        data.forEach((level) => {
-          level.items.forEach((item) => {
-            if (item.label === decodeURI(anchorItem)) {
-              setActiveItem(item);
-              handleOpenChange(true);
-            }
-          });
-        });
-      }
+    if (isPreview) return;
+    const label = safeDecodeHash(hash);
+    const item = label
+      ? data.flatMap((level) => level.items || []).find((topic) => topic.label === label)
+      : undefined;
+    setActiveItem(item);
+    setIsDrawerOpen(Boolean(item));
+  }, [isPreview, hash, data]);
+
+  function selectTopic(item: RoadmapItem) {
+    setActiveItem(item);
+    if (!isPreview) {
+      navigate({ pathname, search, hash: '#' + encodeURIComponent(item.label) });
     }
-  }, [pathname, hash, key, handleOpenChange, data]);
+  }
 
   function checkAllContent(label: string, check: boolean) {
     data.forEach((level) => {
@@ -134,17 +182,18 @@ export default function Roadmap({ data, title, roadmapPath, name, isPreview }: P
         </div>
 
         <div>
-          {data.map((level, index, data) => {
+          {data.map((level, index, levels) => {
             return (
               <LevelItem
+                isPreview={isPreview}
                 setSelectedItems={setSelectedItems}
                 selectedItems={selectedItems || []}
                 key={index}
                 level={level}
                 index={index}
                 checkAllContent={checkAllContent}
-                levelsQty={data.length}
-                setActiveItem={setActiveItem}
+                levelsQty={levels.length}
+                onSelectTopic={selectTopic}
                 updateLastSelectedElement={setLastSelectedElement}
               />
             );
@@ -156,7 +205,6 @@ export default function Roadmap({ data, title, roadmapPath, name, isPreview }: P
         activeItem={activeItem}
         isRead={isRead}
         saveRead={updateReadAttribute}
-        isPreview={isPreview}
         selectedItems={selectedItems || []}
         setSelectedItems={setSelectedItems}
         lastSelectedElement={lastSelectedElement}
@@ -174,7 +222,6 @@ type RoadmapDrawerProps = {
     setSelectedItems: (items: RoadmapRead[]) => void,
     selectedItems: RoadmapRead[],
   ) => void;
-  isPreview?: boolean;
   lastSelectedElement?: HTMLElement | null;
   setSelectedItems: (items: RoadmapRead[]) => void;
   selectedItems: RoadmapRead[];
@@ -182,7 +229,6 @@ type RoadmapDrawerProps = {
 
 const RoadmapDrawer = ({
   activeItem,
-  isPreview,
   isRead,
   saveRead,
   lastSelectedElement,
@@ -200,7 +246,7 @@ const RoadmapDrawer = ({
 
       <div>
         <AccordionContainer
-          defaultValue={activeItem?.children?.[0].label}
+          defaultValue={activeItem?.children?.[0]?.label}
           className="w-full"
           collapsible
           type="single"
