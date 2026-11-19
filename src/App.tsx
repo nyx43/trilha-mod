@@ -7,6 +7,7 @@ import ReactGA from 'react-ga4';
 import { RouteMetadata } from './seo/RouteMetadata';
 import E404Page from './pages/E404Page';
 import MainLayout from './components/layouts/MainLayout';
+import { reservationsPracticeUrl } from './lessons/persistencePilot';
 
 const RoadmapPage = lazy(() => import('./pages/RoadmapPage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
@@ -15,6 +16,7 @@ const CustomRoadmapPage = lazy(() => import('./pages/CustomRoadmapPage'));
 const GuidePage = lazy(() => import('./pages/GuidePage'));
 const GuidesPage = lazy(() => import('./pages/GuidesPage'));
 const LessonPage = lazy(() => import('./pages/LessonPage'));
+const ReservationsPracticePage = lazy(() => import('./pages/ReservationsPracticePage'));
 const LessonsPage = lazy(() => import('./pages/LessonsPage'));
 const LessonCoursePage = lazy(() => import('./pages/LessonCoursePage'));
 const StudyRecommenderPage = lazy(() => import('./pages/StudyRecommenderPage'));
@@ -60,6 +62,7 @@ function App() {
           <Route path="/aulas/o-que-estudar" element={<StudyRecommenderPage />} />
           <Route path="/aulas/:trilha" element={<LessonCoursePage />} />
           <Route path="/aula/:lesson" element={<LessonPage />} />
+          <Route path={reservationsPracticeUrl} element={<ReservationsPracticePage />} />
           <Route path="/percurso/:id" element={<PercursoPage />} />
           <Route path="/percurso/:id/:etapa" element={<PercursoPage />} />
           <Route path="/blog/:title" element={<BlogPostPage />} />

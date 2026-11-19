@@ -1,4 +1,5 @@
 import http from 'node:http';
+import { randomUUID } from 'node:crypto';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
@@ -11,6 +12,11 @@ const HOST = process.env.HOST || '127.0.0.1';
 const DB_PATH = process.env.DB_PATH || path.join(__dirname, 'biblioteca-pratica.sqlite');
 
 const startedAt = new Date().toISOString();
+const mode = process.argv[2];
+if (mode && mode !== 'livros' && mode !== 'reservas') {
+  console.error('Uso: node servidor.mjs [livros|reservas]');
+  process.exit(1);
+}
 
 // 3) Memória do processo da API: começa sempre do estado inicial quando o processo sobe.
 const livrosEmMemoria = [
@@ -19,8 +25,8 @@ const livrosEmMemoria = [
 let proximoIdMemoria = 2;
 
 // 4) Banco SQLite em arquivo: sobrevive entre reinícios do processo Node.
-const db = new DatabaseSync(DB_PATH);
-db.exec(`
+const db = mode ? undefined : new DatabaseSync(DB_PATH);
+db?.exec(`
   CREATE TABLE IF NOT EXISTS livros (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     titulo TEXT NOT NULL,
@@ -28,8 +34,8 @@ db.exec(`
   );
 `);
 
-const contagemInicial = db.prepare('SELECT COUNT(*) AS total FROM livros').get();
-if (Number(contagemInicial.total) === 0) {
+const contagemInicial = db?.prepare('SELECT COUNT(*) AS total FROM livros').get();
+if (contagemInicial && Number(contagemInicial.total) === 0) {
   const inserirInicial = db.prepare('INSERT INTO livros (titulo, autor) VALUES (?, ?)');
   inserirInicial.run('Dom Casmurro', 'Machado de Assis');
 }
@@ -76,12 +82,7 @@ function validateLivro(payload) {
   return { titulo, autor };
 }
 
-const htmlPage = `<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Prática: Onde o dado mora — Recarga e Reinício</title>
+const styles = `
   <style>
     :root {
       color-scheme: light;
@@ -201,7 +202,15 @@ const htmlPage = `<!doctype html>
       background: #f1f5f9;
       margin-top: 10px;
     }
-  </style>
+  </style>`;
+
+const htmlPage = `<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Prática: Onde o dado mora — Recarga e Reinício</title>
+  ${styles}
 </head>
 <body>
   <main>
@@ -392,8 +401,148 @@ const htmlPage = `<!doctype html>
 </html>
 `;
 
+const reservations = mode === 'reservas';
+const records = [];
+const reservationsDb = reservations
+  ? new DatabaseSync(process.env.DB_PATH || path.join(__dirname, 'reservas-pratica.sqlite'))
+  : undefined;
+reservationsDb?.exec(`
+  CREATE TABLE IF NOT EXISTS reservas (
+    id TEXT PRIMARY KEY,
+    referencia TEXT NOT NULL
+  );
+`);
+const endpoint = reservations ? '/api/reservas' : '/api/livros';
+const challengeTitle = reservations ? 'Serviço de reservas' : 'Catálogo de livros';
+const challengePage = `<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>${challengeTitle}</title>
+  ${styles}
+  <style>pre { overflow-wrap: anywhere; white-space: pre-wrap; }</style>
+</head>
+<body>
+  <main>
+    <h1>${challengeTitle}</h1>
+    <section class="box">
+      <form id="cadastro">
+        <label for="referencia">${reservations ? 'Referência da reserva' : 'Título do livro'}</label>
+        <input id="referencia" type="text" maxlength="160" required />
+        <div class="actions">
+          <button type="submit" class="btn-primary">Cadastrar (POST)</button>
+          <button type="button" id="consultar" class="btn-secondary">Consultar registros (GET)</button>
+        </div>
+      </form>
+      <p class="meta">Processo da API nesta abertura da página: PID ${process.pid} · ${startedAt}</p>
+    </section>
+    <section class="box" aria-labelledby="respostas">
+      <h2 id="respostas">Respostas da API</h2>
+      <div aria-live="polite" id="saida">Execute uma ação para ver a resposta.</div>
+    </section>
+  </main>
+  <script>
+    const saida = document.getElementById('saida');
+    const botoes = document.querySelectorAll('button');
+
+    async function executar(method, body) {
+      for (const botao of botoes) botao.disabled = true;
+      try {
+        const response = await fetch('${endpoint}', {
+          method,
+          cache: 'no-store',
+          ...(body && {
+            body: JSON.stringify(body),
+            headers: { 'Content-Type': 'application/json' },
+          }),
+        });
+        const data = await response.json();
+        mostrar(method + ' ${endpoint} · ' + response.status + '\\n' +
+          'PID ' + response.headers.get('X-Pratica-Pid') + ' · ' +
+          response.headers.get('X-Pratica-Inicio') + '\\n' + JSON.stringify(data, null, 2));
+      } catch {
+        mostrar('A API não respondeu. Confira se o serviço está rodando e tente novamente.');
+      } finally {
+        for (const botao of botoes) botao.disabled = false;
+      }
+    }
+
+    function mostrar(texto) {
+      const resposta = document.createElement('pre');
+      resposta.textContent = texto;
+      if (!saida.querySelector('pre')) saida.replaceChildren();
+      saida.prepend(resposta);
+    }
+
+    document.getElementById('cadastro').addEventListener('submit', (event) => {
+      event.preventDefault();
+      executar('POST', { referencia: document.getElementById('referencia').value });
+    });
+    document.getElementById('consultar').addEventListener('click', () => executar('GET'));
+  </script>
+</body>
+</html>`;
+
+async function serveChallenge(req, res, pathname) {
+  if (req.method === 'GET' && pathname === '/') {
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Cache-Control': 'no-store',
+    });
+    res.end(challengePage);
+    return;
+  }
+  if (pathname !== endpoint) {
+    sendJson(res, 404, { message: 'Rota não encontrada' });
+    return;
+  }
+  res.setHeader('X-Pratica-Pid', process.pid);
+  res.setHeader('X-Pratica-Inicio', startedAt);
+  if (req.method === 'GET') {
+    sendJson(res, 200, reservationsDb
+      ? reservationsDb.prepare('SELECT id, referencia FROM reservas ORDER BY rowid').all()
+      : records);
+    return;
+  }
+  if (req.method === 'POST') {
+    let body;
+    try {
+      body = await readJsonBody(req);
+    } catch {
+      sendJson(res, 400, { message: 'Envie um corpo JSON válido.' });
+      return;
+    }
+    const referencia = typeof body?.referencia === 'string' ? body.referencia.trim() : '';
+    if (!referencia || referencia.length > 160) {
+      sendJson(res, 400, { message: 'Informe uma referência de 1 a 160 caracteres.' });
+      return;
+    }
+    const record = { id: randomUUID(), referencia };
+    try {
+      if (reservationsDb) {
+        reservationsDb.prepare('INSERT INTO reservas (id, referencia) VALUES (?, ?)')
+          .run(record.id, record.referencia);
+      } else {
+        records.push(record);
+      }
+    } catch {
+      sendJson(res, 500, { message: 'O serviço não conseguiu guardar o registro.' });
+      return;
+    }
+    sendJson(res, 201, record);
+    return;
+  }
+  res.setHeader('Allow', 'GET, POST');
+  sendJson(res, 405, { message: 'Método não permitido' });
+}
+
 const server = http.createServer(async (req, res) => {
   const url = new URL(req.url || '/', `http://${req.headers.host || 'localhost'}`);
+  if (mode) {
+    await serveChallenge(req, res, url.pathname);
+    return;
+  }
 
   if (req.method === 'GET' && url.pathname === '/') {
     res.writeHead(200, {
@@ -468,7 +617,7 @@ const server = http.createServer(async (req, res) => {
 });
 
 server.listen(PORT, HOST, () => {
-  console.log(`Prática "Onde o dado mora" rodando em http://${HOST}:${PORT}`);
+  console.log(`${mode ? challengeTitle : 'Prática "Onde o dado mora"'} rodando em http://${HOST}:${PORT}`);
   console.log(`PID do processo Node: ${process.pid}`);
-  console.log(`Banco SQLite em arquivo: ${DB_PATH}`);
+  if (!mode) console.log(`Banco SQLite em arquivo: ${DB_PATH}`);
 });

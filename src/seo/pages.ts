@@ -1,5 +1,6 @@
 import { categoryOf, guideCategories, guides } from '../guides';
 import { courseLessons, courses, lessonPlace, lessons } from '../lessons';
+import { reservationsPracticeUrl } from '../lessons/persistencePilot';
 import type { RoadmapCatalog } from '../learning/types';
 import { diagnosticoWebSlug, percursos } from '../percurso/apiReactTailwind';
 
@@ -243,6 +244,13 @@ export function socialPages(catalogs: RoadmapCatalog[], posts: BlogPost[]): Soci
     guidesIndex,
     ...guidePages,
     lessonsIndex,
+    studyPage(
+      reservationsPracticeUrl,
+      'Caso das reservas',
+      'Escolha e execute um teste para descobrir se uma reserva pode ser recuperada depois de reabrir o serviço.',
+      'Onde o dado mora',
+      ['Prática de persistência'],
+    ),
     studyPage(
       '/aulas/o-que-estudar',
       'O que preciso estudar?',

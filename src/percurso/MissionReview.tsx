@@ -1,4 +1,10 @@
 import { FormEvent, useState } from 'react';
+import { Link } from 'react-router-dom';
+import {
+  persistenceLessonId,
+  persistencePracticeSection,
+  reservationsPracticeUrl,
+} from '../lessons/persistencePilot';
 
 const criteria = [
   {
@@ -10,6 +16,11 @@ const criteria = [
     id: 'lista',
     title: 'Lista atualizada e persistência',
     hint: 'Registre como conferiu a lista vazia, o item após o cadastro e sua presença depois de recarregar.',
+  },
+  {
+    id: 'reinicio',
+    title: 'Persistência após reiniciar a API (piloto opcional)',
+    hint: 'Registre sua previsão, o ID testado, o que fez, as consultas antes e depois, sua conclusão e a ajuda usada.',
   },
   {
     id: 'falhas',
@@ -144,6 +155,22 @@ export function MissionReview({ storageId }: { storageId: string }) {
                       onChange={(event) => update(id, { evidence: event.target.value })}
                     />
                   </label>
+                  {id === 'reinicio' && (
+                    <p className="guide-text">
+                      Registre aqui o teste no seu projeto. Para praticar, abra o{' '}
+                      <Link
+                        className="lesson-trail-link"
+                        to={`/aula/${persistenceLessonId}#${persistencePracticeSection}`}
+                      >
+                        desafio do catálogo
+                      </Link>{' '}
+                      ou guarde o{' '}
+                      <Link className="lesson-trail-link" to={reservationsPracticeUrl}>
+                        caso das reservas
+                      </Link>{' '}
+                      para outro dia.
+                    </p>
+                  )}
                 </fieldset>
               );
             })}

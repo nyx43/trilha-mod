@@ -96,6 +96,55 @@ describe('Aula', () => {
       screen.getByRole('heading', { name: 'Esta aula não existe, ou mudou de nome' }),
     ).toBeInTheDocument();
   });
+
+  it('guarda o plano do piloto antes da dica sem alterar o histórico publicado', async () => {
+    const lessonId = 'onde-o-dado-mora';
+    const saved = {
+      schemaVersion: 1,
+      lessons: {
+        [lessonId]: {
+          reached: 3,
+          answers: { 'quatro-lugares:5': false, 'provar-persistencia:1': true },
+        },
+      },
+      credited: [],
+    };
+    const review = {
+      schemaVersion: 1,
+      cards: { [`${lessonId}:prova-de-persistencia`]: { box: 4, due: '2026-11-28' } },
+    };
+    localStorage.setItem(lessonStoreKey, JSON.stringify(saved));
+    localStorage.setItem(reviewStoreKey, JSON.stringify(review));
+    const view = renderLesson(lessonId);
+    const box = within(await screen.findByRole('region', { name: 'Desafio do catálogo' }));
+    expect(box.queryByRole('button', { name: /dica de estratégia|solução comentada/ })).toBeNull();
+    expect(screen.getByText('60% da aula · 1 de 2 atividades certas de primeira')).toBeVisible();
+    fireEvent.change(box.getByLabelText('Qual é sua previsão e por quê?'), {
+      target: { value: 'O resultado pode mudar quando trocar o processo.' },
+    });
+    fireEvent.change(
+      box.getByLabelText('Que teste você escolheu? O que o resultado permitiria distinguir?'),
+      {
+        target: { value: 'Vou comparar duas consultas ao mesmo registro.' },
+      },
+    );
+    fireEvent.click(box.getByRole('button', { name: 'Salvar previsão e teste' }));
+    const hint = box.getByRole('button', { name: 'Ver dica de estratégia' });
+    expect(hint).toHaveAttribute('aria-expanded', 'false');
+    fireEvent.click(hint);
+    expect(box.getByText(/Um 201 confirma/)).toBeVisible();
+    expect(box.queryByRole('button', { name: /solução comentada/ })).toBeNull();
+
+    view.unmount();
+    renderLesson(lessonId);
+    const resumed = within(await screen.findByRole('region', { name: 'Desafio do catálogo' }));
+    expect(
+      resumed.getByRole('button', { name: /dica de estratégia \(já consultado\)/ }),
+    ).toHaveAttribute('aria-expanded', 'false');
+    expect(resumed.getByRole('group', { name: 'Registrar o resultado' })).toBeVisible();
+    expect(stored(lessonStoreKey)).toEqual(saved);
+    expect(stored(reviewStoreKey)).toEqual(review);
+  });
 });
 
 describe('Documento do playground', () => {

@@ -18,6 +18,7 @@ import {
   useLessonRecord,
 } from '../../lessons/progress';
 import { LessonContent, LessonMeta } from '../../lessons/types';
+import { persistenceLessonId, persistencePracticeSection } from '../../lessons/persistencePilot';
 import { Checklist } from '../Guide/Checklist';
 import { Inline } from '../Guide/inline';
 import { NarrationProvider } from '../../narration/controller';
@@ -26,6 +27,7 @@ import { LessonTutor } from '../../tutor/LessonTutor';
 import { LessonContext } from './context';
 import { Flashcards } from './Flashcards';
 import { LessonBlockView } from './LessonBlock';
+import { PersistencePilot } from './PersistencePilot';
 import '../Guide/guide.css';
 import './lesson.css';
 
@@ -41,6 +43,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
   const { hash } = useLocation();
   const { course, previous, next } = place;
   const trailGroup = course.groups[lesson.id] || lesson.groupIds[0];
+  const hasPersistencePilot = lesson.id === persistenceLessonId;
 
   useEffect(() => {
     let current = true;
@@ -274,6 +277,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
               ) : (
                 <>
                   <NarrationPlayer />
+                  {hasPersistencePilot && <PersistencePilot id="diagnostico" />}
                   <p className="lesson-hook" data-narration-clip="hook">
                     <span data-narration-field="text">
                       <Inline text={content.hook} />
@@ -301,6 +305,9 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                           label="Ouvir título"
                         />
                       </div>
+                      {hasPersistencePilot && section.id === persistencePracticeSection && (
+                        <PersistencePilot id="guiado" />
+                      )}
                       {section.blocks.map((block, blockIndex) => (
                         <LessonBlockView
                           key={blockIndex}
@@ -309,6 +316,9 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                           activityId={activityKey(section.id, blockIndex)}
                         />
                       ))}
+                      {hasPersistencePilot && section.id === persistencePracticeSection && (
+                        <PersistencePilot id="livros" />
+                      )}
                       {index === visible - 1 && (
                         <div className="lesson-continue">
                           <button
