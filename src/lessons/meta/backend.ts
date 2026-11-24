@@ -13,6 +13,7 @@ export const lessons: LessonMeta[] = [
       'backend.api-rest-e-contratos',
       'test.api-e-sql-basicos',
       'fullstack.integracao-http',
+      'es262.web-rest-e-dados',
     ],
     objectives: [
       'Escolher o método e o status HTTP certos para cada operação de uma API REST',
@@ -30,7 +31,7 @@ export const lessons: LessonMeta[] = [
     summary:
       'Ligar a API ao banco com segurança: consultas parametrizadas, repositórios, ORM, transações e migrações versionadas.',
     minutes: 16,
-    groupIds: ['backend.acesso-a-dados-e-migracoes'],
+    groupIds: ['backend.acesso-a-dados-e-migracoes', 'es262.bd-acesso-e-migracoes'],
     objectives: [
       'Descrever o caminho de uma requisição da API até o banco e de volta',
       'Demonstrar um SQL injection e evitá-lo com consultas parametrizadas',

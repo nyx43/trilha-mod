@@ -9,7 +9,7 @@ export const lessons: LessonMeta[] = [
     summary:
       'Ande pelo sistema de arquivos de um servidor, leia permissões, investigue logs com pipes e controle processos pelo terminal.',
     minutes: 16,
-    groupIds: ['devops.linux-e-terminal'],
+    groupIds: ['devops.linux-e-terminal', 'es262.so-linux-e-terminal'],
     objectives: [
       'Navegar pelo sistema de arquivos com caminhos absolutos e relativos, reconhecendo /etc, /home e /var/log',
       'Ler as permissões de ls -la e corrigi-las com chmod, usando sudo só quando necessário',

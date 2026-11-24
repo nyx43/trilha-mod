@@ -652,4 +652,34 @@ export const resources = {
     'https://www.youtube.com/c/FullCycle',
     'resource.youtubeFullCycleKafka',
   ),
+  tailwind: read(
+    'Tailwind CSS: documentação oficial (inglês)',
+    'https://tailwindcss.com/docs',
+    'resource.tailwind',
+  ),
+  django: read(
+    'Django: tutorial oficial (português)',
+    'https://docs.djangoproject.com/pt-br/stable/intro/tutorial01/',
+    'resource.django',
+  ),
+  rabbitmq: read(
+    'RabbitMQ: tutoriais oficiais de mensageria (inglês)',
+    'https://www.rabbitmq.com/tutorials',
+    'resource.rabbitmq',
+  ),
+  mongodb: read(
+    'MongoDB: manual de documentos e consultas (inglês)',
+    'https://www.mongodb.com/docs/manual/crud/',
+    'resource.mongodb',
+  ),
+  ostep: read(
+    'Operating Systems: Three Easy Pieces — livro gratuito (inglês)',
+    'https://pages.cs.wisc.edu/~remzi/OSTEP/',
+    'resource.ostep',
+  ),
+  umlUseCases: read(
+    'OMG UML: especificação aberta de diagramas e casos de uso (inglês)',
+    'https://www.omg.org/spec/UML/',
+    'resource.umlUseCases',
+  ),
 };

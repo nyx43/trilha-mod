@@ -22,9 +22,10 @@ export const lessons: LessonMeta[] = [
   {
     id: 'onde-o-dado-mora',
     title: 'Onde o dado mora',
-    summary: 'Compare a memória da página, localStorage, memória da API e SQLite; preveja e teste o que sobrevive à recarga e ao reinício.',
+    summary:
+      'Compare a memória da página, localStorage, memória da API e SQLite; preveja e teste o que sobrevive à recarga e ao reinício.',
     minutes: 28,
-    groupIds: ['curriculum.internet-e-http'],
+    groupIds: ['curriculum.internet-e-http', 'es262.web-rest-e-dados'],
     objectives: [
       'Distinguir os quatro lugares onde os dados podem morar',
       'Testar a diferença entre dados temporários e persistentes',
@@ -166,7 +167,7 @@ export const lessons: LessonMeta[] = [
     summary:
       'Estilize componentes React com classes utilitárias, foco acessível por teclado, layout mobile-first e integração no Vite.',
     minutes: 16,
-    groupIds: ['curriculum.css'],
+    groupIds: ['curriculum.css', 'es262.web-react-e-tailwind'],
     objectives: [
       'Compor espaçamento, cores e layout com classes utilitárias sem perder organização em componentes',
       'Aplicar foco visível por teclado com focus-visible e área de toque confortável nos botões',

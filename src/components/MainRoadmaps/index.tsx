@@ -8,6 +8,7 @@ import {
   PiChatsCircle,
   PiDatabase,
   PiFlowArrow,
+  PiGraduationCap,
   PiInfinity,
   PiLayout,
   PiStack,
@@ -26,6 +27,7 @@ const icons: Record<string, IconType> = {
   'data-engineer': PiFlowArrow,
   react: PiAtom,
   entrevistas: PiChatsCircle,
+  'es-26-2': PiGraduationCap,
 };
 
 function RouteGlyph({ seed }: { seed: number }) {

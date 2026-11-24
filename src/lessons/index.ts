@@ -16,6 +16,7 @@ import { lessons as testesBase } from './meta/testesBase';
 import { lessons as testesAutomacao } from './meta/testesAutomacao';
 import { lessons as entrevistasCarreira } from './meta/entrevistasCarreira';
 import { lessons as entrevistasTecnica } from './meta/entrevistasTecnica';
+import { lessons as es262 } from './meta/es262';
 export type { LessonMeta, LessonContent, LessonBlock, LessonSection } from './types';
 export type { Course, CourseModule } from './courses';
 export { courses } from './courses';
@@ -38,6 +39,7 @@ export const lessons: LessonMeta[] = [
   ...testesAutomacao,
   ...entrevistasCarreira,
   ...entrevistasTecnica,
+  ...es262,
 ];
 
 const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));

@@ -15,6 +15,7 @@ const loaders: Record<string, () => Promise<{ data: Level[] }>> = {
   'data-engineer': async () => ({
     data: (await import('../roadmaps/dataEngineering')).dataEngineeringData,
   }),
+  'es-26-2': () => import('../roadmaps/es262'),
 };
 
 export { roadmapTitles } from '../roadmaps/titles';

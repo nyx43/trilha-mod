@@ -69,4 +69,13 @@ export const roadmapGuides: Partial<Record<keyof RoadmapFileModel, RoadmapGuide>
     outcome:
       'Uma apresentação de projeto, uma simulação com feedback e um plano para corrigir lacunas.',
   },
+  'es-26-2': {
+    kind: 'Faculdade · 26.2',
+    audience:
+      'Para estudantes de Engenharia de Software cursando o período 26.2 que querem dominar a teoria e a prática além dos slides.',
+    start:
+      'Comece por Estruturas de Dados e Complexidade ou siga direto para a disciplina da sua semana: Web, Requisitos, Banco de Dados ou Sistemas Operacionais.',
+    outcome:
+      'Domínio prático das cinco disciplinas do semestre com laboratórios executáveis, casos reais de produção e exercícios progressivos.',
+  },
 };

@@ -79,6 +79,15 @@ const practices: Record<Specialty, AIPractice> = {
       'o feedback aponta lacunas verificáveis; as regras de uso de IA do processo seletivo são respeitadas',
     challenge: 'Repita uma pergunta sem sugestões e explique a decisão com suas próprias palavras.',
   },
+  'es-26-2': {
+    task: 'revisar requisitos, estruturas de dados, arquitetura web, persistência ou decisões de sistema operacional e propor contraexemplos de borda',
+    context:
+      'especificação, código de laboratório, métricas observadas e restrições reais do problema da disciplina',
+    verification:
+      'cada afirmação é confirmada por execução, teste de caso de borda ou critério mensurável, sem aceitar respostas genéricas',
+    challenge:
+      'Introduza um caso-limite que a IA não previu e prove o comportamento com um teste executável.',
+  },
 };
 
 const studyPrompt = `Estou aprendendo [conceito] na trilha [nome].

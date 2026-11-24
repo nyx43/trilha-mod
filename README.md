@@ -4,7 +4,7 @@
 
 A **Trilha Info** é uma plataforma open source para aprender tecnologia com conteúdo gratuito, em português e organizado em percursos práticos. Criada em junho de 2022, reúne trilhas de carreira, aulas próprias e interativas, guias rápidos e projetos para o portfólio.
 
-O catálogo atual tem **8 trilhas, 8 cursos, 78 aulas e 34 guias**. Você pode começar sem cadastro e continuar de onde parou, com o progresso salvo no navegador.
+O catálogo atual tem **9 trilhas, 9 cursos, 89 aulas e 34 guias**. Você pode começar sem cadastro e continuar de onde parou, com o progresso salvo no navegador.
 
 ![Página inicial da Trilha Info, com a interface atual e as trilhas de aprendizado](public/preview.png)
 

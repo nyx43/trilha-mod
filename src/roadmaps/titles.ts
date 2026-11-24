@@ -8,4 +8,5 @@ export const roadmapTitles: Record<string, string> = {
   test: 'Testes / QA',
   entrevistas: 'Entrevistas',
   'data-engineer': 'Engenharia de Dados',
+  'es-26-2': 'Engenharia de Software 26.2',
 };

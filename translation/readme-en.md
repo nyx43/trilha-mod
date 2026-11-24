@@ -4,7 +4,7 @@
 
 **Trilha Info** is an open source platform for learning technology through free content in Portuguese, organized into practical learning paths. Created in June 2022, it brings together career roadmaps, original interactive lessons, quick guides, and portfolio projects.
 
-The current catalog includes **8 roadmaps, 8 courses, 78 lessons, and 34 guides**. You can start without an account and pick up where you left off, with progress saved in your browser.
+The current catalog includes **9 roadmaps, 9 courses, 89 lessons, and 34 guides**. You can start without an account and pick up where you left off, with progress saved in your browser.
 
 ![Trilha Info homepage, showing the current interface and learning paths](../public/preview.png)
 

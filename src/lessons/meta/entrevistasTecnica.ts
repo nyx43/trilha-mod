@@ -43,7 +43,7 @@ export const lessons: LessonMeta[] = [
     summary:
       'Entenda Big O pela intuição, escolha entre lista, set e dicionário e resolva os padrões mais cobrados em entrevistas explicando o custo.',
     minutes: 16,
-    groupIds: ['entrevistas.arrays-mapas-e-complexidade'],
+    groupIds: ['entrevistas.arrays-mapas-e-complexidade', 'es262.arrays-mapas-complexidade'],
     objectives: [
       'Classificar trechos de código em O(1), O(log n), O(n) e O(n²)',
       'Escolher set ou dicionário em vez de lista para buscas e explicar a troca entre tempo e espaço',

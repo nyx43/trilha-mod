@@ -9,7 +9,11 @@ export const lessons: LessonMeta[] = [
     summary:
       'Escreva seus primeiros componentes React: as regras do JSX, props, children, listas com key e renderização condicional.',
     minutes: 16,
-    groupIds: ['react.jsx-componentes-e-props', 'fullstack.react-e-node-js'],
+    groupIds: [
+      'react.jsx-componentes-e-props',
+      'fullstack.react-e-node-js',
+      'es262.web-react-e-tailwind',
+    ],
     objectives: [
       'Explicar por que o React descreve a tela a partir dos dados em vez de editar o DOM',
       'Escrever JSX válido, com uma raiz, `className`, tags fechadas e expressões entre chaves',
@@ -26,7 +30,7 @@ export const lessons: LessonMeta[] = [
     summary:
       'Faça a tela reagir a cliques e digitação com useState, atualizações imutáveis, formulários controlados e estado derivado.',
     minutes: 16,
-    groupIds: ['react.estado-e-eventos', 'fullstack.react-e-node-js'],
+    groupIds: ['react.estado-e-eventos', 'fullstack.react-e-node-js', 'es262.web-react-e-tailwind'],
     objectives: [
       'Criar estado com `useState` e atualizá-lo em eventos como `onClick` e `onChange`',
       'Usar a atualização funcional quando o novo valor depende do anterior',
