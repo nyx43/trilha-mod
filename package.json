@@ -16,7 +16,7 @@
     "format": "prettier --write",
     "format:all": "prettier --write .",
     "lint": "eslint src api server scripts",
-    "check": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "check": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit && tsc -p api/tsconfig.json --noEmit",
     "icons": "node scripts/generate-icons.mjs",
     "aula": "node scripts/editorial/lessons.mjs",
     "narration:export": "node scripts/narration/export-lessons.mjs",

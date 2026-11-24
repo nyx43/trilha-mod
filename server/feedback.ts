@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from 'http';
-import { DEFAULT_FORK_REPOSITORY, normalizeRepositorySlug } from '../src/config/site';
+import { DEFAULT_FORK_REPOSITORY, normalizeRepositorySlug } from '../src/config/siteDefaults';
 import { installationClient, resolveGitHubConfig } from './github';
 
 interface IncomingFeedback {

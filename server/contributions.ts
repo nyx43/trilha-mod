@@ -14,7 +14,7 @@ import {
   resourceKindLabels,
 } from '../src/contributions/types';
 import type { RoadmapCatalog } from '../src/learning/types';
-import { normalizeSiteUrl, resolveSiteUrl } from '../src/config/site';
+import { normalizeSiteUrl, resolveConfiguredSiteUrl } from '../src/config/siteDefaults';
 import { GitHubError, installationClient, resolveGitHubConfig } from './github';
 
 type Request = IncomingMessage & { body?: unknown };
@@ -62,7 +62,7 @@ function allowedOrigin(req: Request, env: NodeJS.ProcessEnv, hosted: boolean): b
   const origin = req.headers.origin;
   if (!origin) return false;
   if (hosted) {
-    const trusted = [new URL(resolveSiteUrl(env)).origin];
+    const trusted = [new URL(resolveConfiguredSiteUrl(env)).origin];
     for (const host of [env.VERCEL_URL, env.VERCEL_PROJECT_PRODUCTION_URL]) {
       if (host) trusted.push(`https://${host}`);
     }

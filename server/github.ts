@@ -1,5 +1,5 @@
 import { createSign } from 'crypto';
-import { normalizeRepositorySlug } from '../src/config/site';
+import { normalizeRepositorySlug } from '../src/config/siteDefaults';
 
 export interface GitHubConfig {
   appId: string;
