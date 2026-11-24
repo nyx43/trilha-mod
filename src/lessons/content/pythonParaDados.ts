@@ -47,6 +47,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'ler-csv:3',
           title: 'Seu primeiro leitor de CSV',
           task: "Rode o código e veja o primeiro dicionário: as colunas não foram separadas. Corrija o leitor para usar o separador certo (`delimiter=';'`) e imprima `Total de linhas: 4`.",
           code: `import csv
@@ -160,6 +161,7 @@ print('Total de linhas:', len(linhas))
         },
         {
           type: 'quiz',
+          activityId: 'limpeza-e-tipos:4',
           question:
             'No CSV de pacientes de uma UBS, a coluna `peso` está vazia em algumas linhas. Como o seu programa deve guardar esse valor?',
           options: [
@@ -188,6 +190,7 @@ print('Total de linhas:', len(linhas))
         },
         {
           type: 'python',
+          activityId: 'limpeza-e-tipos:5',
           title: 'Funções de limpeza reutilizáveis',
           task: 'Complete `para_numero` (tira espaços, devolve `None` se ficar vazio, senão converte com vírgula trocada por ponto) e `para_data` (converte `dd/mm/aaaa` em data).',
           code: `from datetime import datetime
@@ -264,6 +267,7 @@ print(para_data('03/10/2026'))
         },
         {
           type: 'order',
+          activityId: 'validar-e-rejeitar:3',
           prompt: 'Coloque em ordem o que o programa faz com cada linha do arquivo.',
           items: [
             'Ler a linha como dicionário com o `DictReader`',
@@ -277,6 +281,7 @@ print(para_data('03/10/2026'))
         },
         {
           type: 'python',
+          activityId: 'validar-e-rejeitar:4',
           title: 'Triagem de vendas',
           task: "O código aceita tudo. Faça a validação: valor vazio vira motivo `valor faltando`, valor que não converte vira `valor inválido`, data que não converte vira `data inválida`. Rejeitadas vão para `rejeitados` como `{'linha': numero, 'motivo': ...}`; válidas guardam `valor` como `float` e a cidade sem espaços.",
           code: `import csv
@@ -398,6 +403,7 @@ for r in rejeitados:
         },
         {
           type: 'python',
+          activityId: 'agregar:3',
           title: 'Vendas por cidade e forma de pagamento',
           task: 'Rode e veja o `KeyError`. Corrija `total_por_cidade` usando `defaultdict(float)`, conte as formas de pagamento com `Counter` e imprima `Mais usado: pix` usando `most_common`.',
           code: `from collections import Counter, defaultdict
@@ -455,6 +461,7 @@ print('Mais usado:', pagamentos.most_common(1)[0][0])
         },
         {
           type: 'fill',
+          activityId: 'agregar:4',
           prompt:
             'Complete o código que agrupa os produtos vendidos por cidade e conta os produtos.',
           language: 'python',
@@ -491,6 +498,7 @@ print('Mais usado:', pagamentos.most_common(1)[0][0])
         },
         {
           type: 'python',
+          activityId: 'escrever-saida:2',
           title: 'Resumo em CSV e relatório de rejeições em JSON',
           task: 'Escreva uma linha por cidade no CSV com `escritor.writerow`. Depois gere `relatorio` com `json.dumps` contendo `total_rejeitados` e a lista `rejeitados`, usando `ensure_ascii=False` para manter os acentos.',
           code: `import csv
@@ -615,6 +623,7 @@ print(relatorio)
         },
         {
           type: 'quiz',
+          activityId: 'e-o-pandas:4',
           question:
             'Você precisa validar um CSV de 40 GB num servidor com 8 GB de memória. Qual abordagem tem mais chance de funcionar sem travar?',
           options: [

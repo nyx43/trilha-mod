@@ -1,3 +1,5 @@
+import { siteUrl } from '../config/site';
+
 const identity = { type: 'string', pattern: '^[a-zA-Z0-9][a-zA-Z0-9._-]*$' };
 const ids = { type: 'array', items: identity, uniqueItems: true };
 const text = { type: 'string' };
@@ -20,7 +22,7 @@ const credit = object({ id: text, author: text, github: text }, ['id']);
 
 export const roadmapSchema = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://trilha.info/schemas/roadmap.v1.schema.json',
+  $id: `${siteUrl}/schemas/roadmap.v1.schema.json`,
   title: 'Trilha Info: catálogo público v1',
   ...object(
     {
@@ -121,7 +123,7 @@ const knowledgeMap = map({ enum: ['unknown', 'familiar', 'demonstrated'] });
 
 export const studyContextSchema = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://trilha.info/schemas/study-context.v1.schema.json',
+  $id: `${siteUrl}/schemas/study-context.v1.schema.json`,
   ...object({
     schemaVersion: { const: 1 },
     roadmapId: identity,
@@ -140,7 +142,7 @@ export const studyContextSchema = {
 
 export const studyPlanSchema = {
   $schema: 'https://json-schema.org/draft/2020-12/schema',
-  $id: 'https://trilha.info/schemas/study-plan.v1.schema.json',
+  $id: `${siteUrl}/schemas/study-plan.v1.schema.json`,
   description:
     'Durações são estimativas de planejamento. A aplicação também valida referências, versão, orçamento semanal e ordem dos pré-requisitos.',
   ...object({

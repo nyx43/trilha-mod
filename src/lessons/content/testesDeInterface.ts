@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'por-que-testar:3',
           question: 'Qual é o principal ganho de ter testes automatizados num projeto?',
           options: [
             {
@@ -98,6 +99,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'anatomia-do-teste:2',
           prompt: 'Complete o teste para conferir que `formatarPreco(5)` devolve `R$ 5,00`.',
           language: 'ts',
           template: `[[it|test]]('formata valor inteiro', () => {
@@ -109,6 +111,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'anatomia-do-teste:3',
           prompt: 'Coloque em ordem o jeito de escrever um bom teste.',
           items: [
             'Escolher um comportamento que a pessoa usuária espera',
@@ -177,6 +180,7 @@ describe('formatarPreco', () => {
         },
         {
           type: 'playground',
+          activityId: 'primeiro-teste:3',
           title: 'Faça os testes passarem',
           task: 'Rode e leia o console: cada `✗` diz o que era esperado e o que veio. Conserte **só** a função `formatarPreco` até todos os testes mostrarem `✓`. Dica: `toFixed(2)` fixa duas casas e `replace` troca o ponto pela vírgula.',
           js: `// Mini executor de testes (não precisa mexer aqui)
@@ -346,6 +350,7 @@ it('mostra só os produtos que combinam com a busca', async () => {
         },
         {
           type: 'classify',
+          activityId: 'teste-como-quem-usa:4',
           prompt:
             'Quais buscas encontram o elemento como uma pessoa faria e quais dependem de detalhes internos?',
           buckets: ['Como a pessoa usuária', 'Detalhe interno'],
@@ -428,6 +433,7 @@ test('pessoa busca e favorita um produto', async ({ page }) => {
         },
         {
           type: 'classify',
+          activityId: 'tipos-de-teste:3',
           prompt: 'Qual tipo de teste combina melhor com cada caso?',
           buckets: ['Unidade', 'Componente', 'Ponta a ponta'],
           items: [
@@ -449,6 +455,7 @@ test('pessoa busca e favorita um produto', async ({ page }) => {
         },
         {
           type: 'quiz',
+          activityId: 'tipos-de-teste:5',
           question:
             'Um teste passa no seu computador e falha de vez em quando na CI. Ele clica em “Buscar”, espera 2 segundos fixos e confere a lista. O que está acontecendo?',
           options: [
@@ -472,6 +479,7 @@ test('pessoa busca e favorita um produto', async ({ page }) => {
         },
         {
           type: 'quiz',
+          activityId: 'tipos-de-teste:6',
           question:
             'Você trocou a classe `.card` por `.cartao-produto`. A tela ficou idêntica, mas 12 testes quebraram. O que isso indica?',
           options: [
@@ -541,6 +549,7 @@ jobs:
         },
         {
           type: 'quiz',
+          activityId: 'testes-na-ci:2',
           question:
             'A CI ficou vermelha no seu pull request, mas no seu computador tudo passa. Qual o primeiro passo?',
           options: [

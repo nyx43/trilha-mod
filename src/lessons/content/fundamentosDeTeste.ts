@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'por-que-testar:3',
           question:
             'A gerente pergunta: “Se a equipe de QA testou tudo, então o sistema está livre de bugs, certo?”. Qual a melhor resposta?',
           options: [
@@ -77,6 +78,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'erro-defeito-falha:3',
           prompt: 'Na história de um aplicativo de delivery, classifique cada situação.',
           buckets: ['Erro (engano)', 'Defeito', 'Falha'],
           items: [
@@ -105,6 +107,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'erro-defeito-falha:5',
           title: 'Da falha ao defeito',
           task: 'Olhe a página: some de cabeça os valores de cada linha e compare com o total mostrado. Eles batem? Depois encontre, na função `calcularTotal`, a linha que esquece a quantidade de cada item e corrija. Dica: o valor de uma linha é `item.preco * item.quantidade`.',
           html: `<main>
@@ -246,6 +249,7 @@ document.getElementById('total').textContent = reais(calcularTotal(itens));`,
         },
         {
           type: 'quiz',
+          activityId: 'sete-principios:2',
           question:
             'O time roda a mesma lista de 40 testes manuais toda semana há um ano. Nenhum encontra bugs, mas os clientes continuam reclamando de problemas novos. Que princípio explica isso?',
           options: [
@@ -269,6 +273,7 @@ document.getElementById('total').textContent = reais(calcularTotal(itens));`,
         },
         {
           type: 'quiz',
+          activityId: 'sete-principios:3',
           question:
             'Numa semana, você achou 9 bugs no módulo de pagamento e 1 no resto do sistema. Onde faz mais sentido investir o próximo dia de testes?',
           options: [
@@ -349,6 +354,7 @@ document.getElementById('total').textContent = reais(calcularTotal(itens));`,
         },
         {
           type: 'classify',
+          activityId: 'niveis-e-tipos:4',
           prompt: 'Que tipo de teste é cada situação?',
           buckets: ['Funcional', 'Não funcional', 'Regressão', 'Smoke'],
           items: [
@@ -383,6 +389,7 @@ document.getElementById('total').textContent = reais(calcularTotal(itens));`,
         },
         {
           type: 'quiz',
+          activityId: 'qa-no-time:1',
           question:
             'O app de agendamento do posto de saúde segue exatamente a especificação, mas as pessoas idosas não conseguem marcar consulta porque os botões são minúsculos. Isso é um problema de quê?',
           options: [
@@ -414,6 +421,7 @@ document.getElementById('total').textContent = reais(calcularTotal(itens));`,
         },
         {
           type: 'classify',
+          activityId: 'qa-no-time:4',
           prompt: 'Quais critérios de aceite são verificáveis e quais são vagos?',
           buckets: ['Verificável', 'Vago'],
           items: [
@@ -484,6 +492,7 @@ document.getElementById('total').textContent = reais(calcularTotal(itens));`,
         },
         {
           type: 'fill',
+          activityId: 'caso-de-teste:2',
           prompt: 'Complete os nomes das partes que faltam neste caso de teste.',
           language: 'text',
           template: `CT-021: Login recusado com senha errada
@@ -501,6 +510,7 @@ Resultado [[esperado|Esperado]]: aparece "E-mail ou senha incorretos" e a pessoa
         },
         {
           type: 'order',
+          activityId: 'caso-de-teste:3',
           prompt: 'Coloque em ordem o jeito de executar um caso de teste.',
           items: [
             'Ler o caso e preparar a pré-condição',

@@ -4,7 +4,18 @@ import { roadmapGuides } from '../src/roadmaps/guides';
 import { readContributions } from './contributions';
 import { createCatalog } from '../src/learning/catalog';
 import { roadmapSchema, studyContextSchema, studyPlanSchema } from '../src/learning/schema';
+import { siteUrl } from '../src/config/site';
 import { enrichAppHTML, roadmapMarkdown, staticCatalogHTML } from './roadmapArtifacts';
+import type { RoadmapCatalog } from '../src/learning/types';
+
+export function llmsTXT(all: RoadmapCatalog[], origin = siteUrl): string {
+  const base = origin.replace(/\/+$/, '');
+  return `# Trilha Info\n\n> Trilhas abertas de tecnologia, com referências gratuitas e práticas verificáveis.\n\n## Trilhas completas\n${all
+    .map((c) => `- [${c.title}](${base}/data/${c.id}.md): versão ${c.version}`)
+    .join(
+      '\n',
+    )}\n\n## Aulas e guias\n- [Aulas interativas](${base}/aulas): cursos e aulas gratuitas em português.\n- [Guias rápidos](${base}/guias): explicações, exemplos e fontes para consultar.\n- [Blog](${base}/blog): publicações sobre tecnologia e carreira.\n- [Mapa do site](${base}/sitemap.xml): todas as páginas públicas canônicas.\n\n## Dados estruturados\n- [Índice JSON](${base}/data/index.json)\n- [Contrato do catálogo](${base}/schemas/roadmap.v1.schema.json)\n- [Contrato do contexto de estudo](${base}/schemas/study-context.v1.schema.json)\n- [Contrato de plano](${base}/schemas/study-plan.v1.schema.json)\n\nO progresso pessoal é exportado pelo estudante; não está nestes arquivos públicos. Durações desconhecidas são null. A licença MIT refere-se ao catálogo, não aos materiais externos.\n`;
+}
 
 export function roadmapCatalogs() {
   const contributions = readContributions();
@@ -56,11 +67,7 @@ export function catalogPlugin(): Plugin {
     });
     files.set('llms.txt', {
       type: 'text/plain; charset=utf-8',
-      body: `# Trilha Info\n\n> Trilhas abertas de tecnologia, com referências gratuitas e práticas verificáveis.\n\n## Trilhas completas\n${all
-        .map((c) => `- [${c.title}](https://trilha.info/data/${c.id}.md): versão ${c.version}`)
-        .join(
-          '\n',
-        )}\n\n## Aulas e guias\n- [Aulas interativas](https://trilha.info/aulas): cursos e aulas gratuitas em português.\n- [Guias rápidos](https://trilha.info/guias): explicações, exemplos e fontes para consultar.\n- [Blog](https://trilha.info/blog): publicações sobre tecnologia e carreira.\n- [Mapa do site](https://trilha.info/sitemap.xml): todas as páginas públicas canônicas.\n\n## Dados estruturados\n- [Índice JSON](https://trilha.info/data/index.json)\n- [Contrato do catálogo](https://trilha.info/schemas/roadmap.v1.schema.json)\n- [Contrato do contexto de estudo](https://trilha.info/schemas/study-context.v1.schema.json)\n- [Contrato de plano](https://trilha.info/schemas/study-plan.v1.schema.json)\n\nO progresso pessoal é exportado pelo estudante; não está nestes arquivos públicos. Durações desconhecidas são null. A licença MIT refere-se ao catálogo, não aos materiais externos.\n`,
+      body: llmsTXT(all),
     });
     return { all, files };
   }

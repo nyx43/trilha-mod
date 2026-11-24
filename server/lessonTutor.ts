@@ -59,7 +59,10 @@ function hostedAccess(req: IncomingMessage, env: NodeJS.ProcessEnv) {
   const siteKey = env.TUTOR_TURNSTILE_SITE_KEY?.trim();
   const secret = env.TUTOR_TURNSTILE_SECRET_KEY?.trim();
   if (env.TUTOR_ENABLE_HOSTED !== 'true' || !siteKey || !secret || !req.headers.host) return;
-  const allowed = (env.TUTOR_ALLOWED_ORIGINS || '').split(',').map((value) => value.trim());
+  const allowed = (env.TUTOR_ALLOWED_ORIGINS || '')
+    .split(',')
+    .map((value) => value.trim().replace(/\/+$/, ''))
+    .filter(Boolean);
   if (env.VERCEL_URL) allowed.push(`https://${env.VERCEL_URL}`);
   const origin = `https://${req.headers.host}`;
   if (!allowed.includes(origin)) return;
@@ -102,7 +105,7 @@ function customProvider(env: NodeJS.ProcessEnv): ConfiguredProvider | undefined 
       key: TUTOR_API_KEY?.trim(),
     };
   } catch {
-    return;
+    /* Invalid custom provider URL */
   }
 }
 

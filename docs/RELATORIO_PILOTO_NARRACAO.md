@@ -86,3 +86,20 @@ npm run narration:audit
 
 > [!NOTE]
 > Se o texto de um bloco mudar no TypeScript sem rodar `narration:generate`, o `textHash` calculado no cliente diverge do `manifest.json` e o botão daquele trecho é exibido desabilitado (`Áudio desatualizado`) até a regeneração.
+
+## Comparação com Opus em uma aula completa
+
+O piloto converteu os 63 clipes de cada voz de “Integração entre front e API” a partir dos MP3s existentes, em Opus mono a 24 kbps. Os arquivos e o manifesto do piloto estão numa cópia temporária do site.
+
+| Voz | Clipes | MP3 | Opus | Redução |
+| --- | ---: | ---: | ---: | ---: |
+| Santa | 63 | 8.277.972 B | 2.985.360 B | 63,9% |
+| Dora | 63 | 8.033.940 B | 2.868.494 B | 64,3% |
+| Total | 126 | 16.311.912 B | 5.853.854 B | 64,1% |
+
+- O FFmpeg decodificou os 126 arquivos até o fim. Todos coincidiram com a duração em milissegundos do manifesto atual e acomodaram a última marca de palavra.
+- Na comparação das formas de onda decodificadas, as 375 janelas com correlação de pelo menos 0,8 coincidiram no tempo na resolução de 0,25 ms. Outras três janelas ficaram abaixo desse limiar.
+- No Chromium, testei a aula avulsa a 1× com Santa em 1280 px e a etapa do Percurso Web a 1,35× com Dora em 360 px. Em ambas verifiquei destaque ativo, pausa, retomada, carregamento de áudio após acionar o player e parada após sair da aula.
+- João ouviu a prévia e relatou que não percebeu diferença no áudio. A compatibilidade foi verificada em Chromium. O resultado sustenta o uso de 24 kbps para o piloto e deixa a conversão do catálogo para uma entrega própria.
+
+Com a prévia local ativa, a [página de comparação](http://127.0.0.1:5187/comparar-audio.html) oferece dois trechos em MP3 e Opus nas duas vozes. A [aula piloto](http://127.0.0.1:5187/aula/integracao-front-e-api) usa os clipes convertidos.

@@ -15,7 +15,8 @@ describe('recommendStudyPlan', () => {
     for (const rule of webTopicRules) {
       const lesson = findLesson(rule.lessonId);
       expect(lesson, `Aula ausente: ${rule.lessonId}`).toBeDefined();
-      const loaded = await lesson!.load();
+      if (!lesson) throw new Error(`Aula ausente: ${rule.lessonId}`);
+      const loaded = await lesson.load();
       const byId = new Map(loaded.content.sections.map((section) => [section.id, section.title]));
 
       if (rule.section) {
@@ -200,8 +201,10 @@ describe('páginas de Aulas, Recomendador e abertura na seção certa', () => {
 
   it('abre a seção indicada pela URL sem alterar o progresso salvo do usuário', async () => {
     localStorage.clear();
-    const lesson = findLesson('integracao-front-e-api')!;
-    const place = lessonPlace(lesson.id, 'fullstack')!;
+    const lesson = findLesson('integracao-front-e-api');
+    if (!lesson) throw new Error('Aula integracao-front-e-api ausente');
+    const place = lessonPlace(lesson.id, 'fullstack');
+    if (!place) throw new Error('Local da aula integracao-front-e-api ausente');
 
     render(
       <MemoryRouter initialEntries={['/aula/integracao-front-e-api?trilha=fullstack#cors']}>
@@ -268,5 +271,29 @@ describe('páginas de Aulas, Recomendador e abertura na seção certa', () => {
     render(route());
     expect(screen.getByRole('link', { name: 'Retomar plano' })).toHaveAttribute('href', target);
     expect(localStorage.getItem(lessonStoreKey)).toBeNull();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Remover plano' }));
+    expect(localStorage.getItem(lessonPlanStorageKey)).toBeNull();
+    expect(screen.getByText('Plano de aulas removido deste navegador.')).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Desfazer remoção' }));
+    expect(screen.getByRole('link', { name: 'Retomar plano' })).toHaveAttribute('href', target);
+    expect(localStorage.getItem(lessonPlanStorageKey)).toContain('tailwind-na-pratica');
+  });
+
+  it('filtra aulas na busca instantânea da página de Aulas e limpa o filtro', () => {
+    render(
+      <MemoryRouter initialEntries={['/aulas']}>
+        <LessonsPage />
+      </MemoryRouter>,
+    );
+
+    const search = screen.getByRole('searchbox', { name: 'Buscar aula' });
+    fireEvent.change(search, { target: { value: 'CORS' } });
+    expect(screen.getByRole('heading', { name: 'Aulas encontradas' })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /Integração entre front e API/i })).toBeInTheDocument();
+
+    fireEvent.click(screen.getByRole('button', { name: 'Limpar busca' }));
+    expect(screen.getByRole('heading', { name: 'Escolha um curso' })).toBeInTheDocument();
   });
 });

@@ -38,6 +38,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'listas:3',
           question: 'O que este código mostra?',
           code: 'linhas = ["101", "202", "303", "404"]\nprint(linhas[1])',
           language: 'python',
@@ -62,6 +63,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'listas:4',
           title: 'Temperaturas da semana',
           task: 'Acrescente a temperatura `27` no fim da lista, calcule a `media` com `sum` e `len`, e mostre a maior temperatura no formato `Maior: 33`.',
           code: 'temperaturas = [28, 31, 25, 33, 30]\n\n# 1. acrescente 27 no fim\n\n# 2. calcule a média\nmedia = 0\n\n# 3. mostre a maior temperatura\n\nprint(f"Média: {media}")\n',
@@ -133,6 +135,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'dicionarios:3',
           title: 'Programa de pontos',
           task: 'A Ana fez uma compra e ganhou 30 pontos. Some os pontos no dicionário, acrescente a chave `"email"` com qualquer endereço e mostre a frase `Ana tem 150 pontos` usando os valores do dicionário.',
           code: 'cliente = {"nome": "Ana", "cidade": "Recife", "pontos": 120}\n\n# some 30 pontos\n\n# acrescente o e-mail\n\n# mostre a frase\n',
@@ -146,6 +149,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'dicionarios:4',
           prompt: 'Para cada situação, é melhor usar uma lista ou um dicionário?',
           buckets: ['Lista', 'Dicionário'],
           items: [
@@ -263,6 +267,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'lista-de-dicionarios:4',
           title: 'Relatório de pedidos do dia',
           task: 'Crie `entregues` só com os pedidos de status `"entregue"`, some o `faturamento` deles e monte `por_cliente`, um dicionário com o total entregue de cada cliente (por exemplo, `{"Ana": 75.0, ...}`).',
           code: 'pedidos = [\n    {"id": 1, "cliente": "Ana", "valor": 45.0, "status": "entregue"},\n    {"id": 2, "cliente": "Bruno", "valor": 120.0, "status": "cancelado"},\n    {"id": 3, "cliente": "Ana", "valor": 30.0, "status": "entregue"},\n    {"id": 4, "cliente": "Carla", "valor": 80.0, "status": "entregue"},\n    {"id": 5, "cliente": "Bruno", "valor": 25.0, "status": "a caminho"},\n]\n\nentregues = []\nfaturamento = 0\npor_cliente = {}\n\n# dica para por_cliente: por_cliente.get(nome, 0) devolve 0 se a chave ainda não existe\n\nprint("Entregues:", len(entregues))\nprint("Faturamento:", faturamento)\nprint("Por cliente:", por_cliente)\n',
@@ -329,6 +334,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'arquivos:4',
           title: 'A nota da padaria em CSV',
           task: 'O programa escreve um CSV e depois lê de volta (aqui no navegador o arquivo existe só enquanto o programa roda). Dentro do laço, some `quantidade * preco` de cada linha em `total`, convertendo os textos para números.',
           code: 'import csv\n\nconteudo = "produto,quantidade,preco\\nPão francês,10,0.75\\nCafé,2,18.90\\nLeite,3,5.49\\n"\nwith open("compras.csv", "w", encoding="utf-8") as arquivo:\n    arquivo.write(conteudo)\n\ntotal = 0\nwith open("compras.csv", encoding="utf-8") as arquivo:\n    leitor = csv.DictReader(arquivo)\n    for linha in leitor:\n        print(linha)\n        # some quantidade * preco em total\n\nprint(f"Total: R$ {total:.2f}")\n',
@@ -345,6 +351,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'arquivos:6',
           title: 'Faltou algum campo na resposta?',
           task: 'Uma API devolveu este texto JSON. Converta para dicionário com `json.loads`, monte a lista `faltando` com os campos obrigatórios que não vieram e mostre `Faltando: telefone`. É o que um teste automatizado de API faz.',
           code: 'import json\n\nresposta = \'{"id": 7, "nome": "Ana", "email": "ana@exemplo.com", "ativo": true}\'\nobrigatorios = ["id", "nome", "email", "telefone"]\n\ndados = resposta  # cuidado: isto ainda é texto\nfaltando = []\n\nprint("Faltando:", ", ".join(faltando))\n',
@@ -358,6 +365,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'arquivos:7',
           question:
             'Você abriu um arquivo com `open("log.txt", "w")` para registrar um evento novo, e o histórico antigo sumiu. O que aconteceu?',
           options: [
@@ -398,6 +406,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'erros-e-modulos:2',
           prompt: 'Qual exceção cada linha provoca?',
           buckets: ['ValueError', 'KeyError', 'FileNotFoundError', 'IndexError'],
           items: [
@@ -412,6 +421,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'erros-e-modulos:3',
           title: 'Validar linhas e separar as rejeitadas',
           task: 'Rode primeiro e veja o programa quebrar em `"Bruno,vinte"`. Depois, envolva a conversão com `try`/`except ValueError`: linhas boas vão para `validos`, linhas ruins vão inteiras para `rejeitados`. No fim, mostre `2 válidos, 2 rejeitados`.',
           code: 'linhas = ["Ana,32", "Bruno,vinte", "Carla,", "Davi,45"]\nvalidos = []\nrejeitados = []\n\nfor linha in linhas:\n    nome, idade_texto = linha.split(",")\n    idade = int(idade_texto)\n    validos.append({"nome": nome, "idade": idade})\n\nprint(f"{len(validos)} válidos, {len(rejeitados)} rejeitados")\n',
@@ -457,6 +467,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'erros-e-modulos:7',
           prompt: 'Complete o leitor de JSON que não quebra se o arquivo faltar.',
           language: 'python',
           template:

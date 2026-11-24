@@ -114,6 +114,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'por-que-testar:3',
           question: 'Qual é o principal ganho de ter testes automatizados no backend?',
           options: [
             {
@@ -179,6 +180,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'organizar-agir-verificar:3',
           title: 'Escreva um teste que pegue o bug',
           task: 'Existem duas versões de `dividir_conta`, que racha uma conta entre pessoas (valores em centavos). Uma está certa; a outra perde centavos. O teste atual usa 4 pessoas e R$ 100,00, que divide certinho, então as duas passam. Acrescente em `testar` o caso de **3 pessoas**: verifique que a soma das partes é igual ao total e que nenhuma parte difere da outra em mais de 1 centavo.',
           code: dividirInicial,
@@ -272,6 +274,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'tipos-de-teste:5',
           prompt: 'Que tipo de teste é cada um?',
           buckets: ['Unidade', 'Integração', 'Contrato', 'Ponta a ponta'],
           items: [
@@ -329,6 +332,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'dubles:3',
           title: 'Construa um fake e um espião',
           task: 'Complete os dublês. `RepositorioFalso.salvar` deve guardar a despesa em `self.itens` e devolver o id, que é a posição dela começando em 1. `avisar_falso` deve, em vez de mandar um e-mail, anotar a mensagem na lista `avisos`. O teste no fim do código já usa os dois.',
           code: dublesInicial,
@@ -350,6 +354,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'dubles:4',
           question:
             'Um time trocou o banco por dublês em **todos** os testes, inclusive nos de rota. A suíte passa, mas uma consulta com erro de SQL chegou à produção. Por quê?',
           options: [
@@ -408,6 +413,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'design-simples:3',
           question:
             'A regra nova diz que compras com mais de 30 dias não têm reembolso. Onde vale mais a pena testar os casos de 29, 30 e 31 dias?',
           options: [
@@ -447,6 +453,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'rodar-a-suite:1',
           title: 'Encontrando e corrigindo uma falha',
           task: 'O projeto da API de despesas tem testes em `tests/`. Rode a suíte, leia a falha, rode só o teste que falhou e confirme a correção.',
           prompt: '~/api-despesas$',
@@ -508,6 +515,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'rodar-a-suite:4',
           prompt:
             'Você vai mudar uma regra de negócio. Coloque em ordem um fluxo de trabalho seguro.',
           items: [

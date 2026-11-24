@@ -4,43 +4,73 @@ import { findLesson, lessonPlace, lessonUrl } from '../lessons';
 import { githubDeliveryChecklist } from '../percurso/apiReactTailwind';
 import type { LessonPlanStep, SavedLessonPlan } from './savedLessonPlan';
 
-function stepUrl({ lessonId, sectionId }: LessonPlanStep) {
+export function lessonPlanStepUrl({ lessonId, sectionId }: LessonPlanStep) {
   const target = lessonUrl(lessonId, lessonPlace(lessonId)?.course.id);
   return sectionId ? `${target}#${encodeURIComponent(sectionId)}` : target;
+}
+
+export function nextPendingPlanStep(plan: SavedLessonPlan): LessonPlanStep | undefined {
+  return (
+    plan.steps.find((step) => step.lessonId === plan.lastOpened && !step.done) ??
+    plan.steps.find((step) => !step.done)
+  );
 }
 
 export function LessonPlanPanel({
   plan,
   update,
+  onClear,
 }: {
   plan: SavedLessonPlan;
   update: (next: SavedLessonPlan) => void;
+  onClear?: () => void;
 }) {
-  const next =
-    plan.steps.find((step) => step.lessonId === plan.lastOpened && !step.done) ??
-    plan.steps.find((step) => !step.done);
+  const doneCount = plan.steps.filter((step) => step.done).length;
+  const totalCount = plan.steps.length;
+  const percent = totalCount ? Math.round((doneCount / totalCount) * 100) : 0;
+  const next = nextPendingPlanStep(plan);
   const openStep = (step: LessonPlanStep) => update({ ...plan, lastOpened: step.lessonId });
 
   return (
     <section className="rec-results" id="meu-plano" aria-labelledby="rec-saved-plan-title">
       <div className="rec-results-header">
-        <h2 id="rec-saved-plan-title" className="lessons-modules-title" tabIndex={-1}>
-          Meu plano de aulas
-        </h2>
-        {next ? (
-          <Link className="lesson-button" to={stepUrl(next)} onClick={() => openStep(next)}>
-            Retomar plano
-          </Link>
-        ) : (
-          <p role="status">Você concluiu as práticas do plano.</p>
-        )}
+        <div>
+          <h2 id="rec-saved-plan-title" className="lessons-modules-title" tabIndex={-1}>
+            Meu plano de aulas
+          </h2>
+          <p className="guide-text">
+            {doneCount} de {totalCount}{' '}
+            {totalCount === 1 ? 'prática concluída' : 'práticas concluídas'} ({percent}%)
+          </p>
+        </div>
+        <div className="rec-actions">
+          {next ? (
+            <Link
+              className="lesson-button"
+              to={lessonPlanStepUrl(next)}
+              onClick={() => openStep(next)}
+            >
+              Retomar plano
+            </Link>
+          ) : (
+            <p role="status">Você concluiu as práticas do plano.</p>
+          )}
+          {onClear && (
+            <button type="button" className="lesson-button-quiet" onClick={onClear}>
+              Remover plano
+            </button>
+          )}
+        </div>
+      </div>
+      <div className="lesson-progress-bar" aria-hidden="true">
+        <span style={{ width: `${percent}%` }} />
       </div>
       <ol className="rec-list">
         {plan.steps.map((step) => {
           const lesson = findLesson(step.lessonId);
           const title = lesson?.title ?? step.lessonId;
           return (
-            <li className="rec-card" key={step.lessonId}>
+            <li className="rec-card" key={step.lessonId} data-done={step.done || undefined}>
               <h3>{title}</h3>
               {step.sectionTitle && <p className="rec-section">{step.sectionTitle}</p>}
               <p className="rec-practice">
@@ -52,7 +82,7 @@ export function LessonPlanPanel({
               <div className="rec-actions">
                 <Link
                   className="lesson-button-quiet"
-                  to={stepUrl(step)}
+                  to={lessonPlanStepUrl(step)}
                   onClick={() => openStep(step)}
                 >
                   Estudar {title}

@@ -8,9 +8,14 @@ import { useCatalogMetadata } from '../learning/useCatalogMetadata';
 import E404Page from './E404Page';
 import { useAuth0 } from '@auth0/auth0-react';
 import { downloadBlob } from '../learning/downloads';
+import { getApiAuthHeader } from '../auth/apiSession';
+import { isOfflineApp } from '../runtime/mode';
+import { exportLocalNotesMarkdown } from '../offline/localStore';
+import { exportTextFile } from '../offline/backup';
 
 export default function RoadmapPage() {
-  const { isAuthenticated } = useAuth0();
+  const offline = isOfflineApp();
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const { name } = useParams<{ name: string }>();
   const [state, setState] = useState<{ name?: string; catalog?: RoadmapCatalog; error?: string }>(
     {},
@@ -21,14 +26,17 @@ export default function RoadmapPage() {
   useCatalogMetadata(catalog);
 
   async function exportNotes() {
+    if (offline) {
+      await exportTextFile('notes.md', exportLocalNotesMarkdown(), 'text/markdown;charset=utf-8');
+      return;
+    }
     const base = import.meta.env.VITE_API_URL;
     if (!base) throw new Error('API não configurada');
-    const [{ default: axios }, { default: Cookies }] = await Promise.all([
-      import('axios'),
-      import('universal-cookie'),
-    ]);
+    const authorization = await getApiAuthHeader(isAuthenticated, getAccessTokenSilently);
+    if (!authorization) throw new Error('Sessão necessária para exportar anotações');
+    const { default: axios } = await import('axios');
     const response = await axios.get<string>(`${base}/note/export`, {
-      headers: { Authorization: new Cookies().get('api_token') },
+      headers: { Authorization: authorization },
     });
     if (typeof response.data !== 'string') throw new Error('Resposta inesperada');
     downloadBlob('notes.md', new Blob([response.data], { type: 'text/markdown;charset=utf-8' }));
@@ -58,7 +66,7 @@ export default function RoadmapPage() {
         <LearningWorkspace
           key={catalog.id}
           catalog={catalog}
-          onExportNotes={isAuthenticated ? exportNotes : undefined}
+          onExportNotes={offline || isAuthenticated ? exportNotes : undefined}
         />
       ) : state.name === name && state.error ? (
         <section className="roadmap-loading">

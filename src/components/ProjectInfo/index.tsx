@@ -11,15 +11,17 @@ import {
 import { Link } from 'react-router-dom';
 import { DevFlip } from '../../devmode/DevFlip';
 import { findGuide, GuideMeta, guides } from '../../guides';
+import { LESSON_COUNT } from '../../lessons/counts';
 import { roadmapTitles } from '../../roadmaps/titles';
 import { GuideCard } from '../Guide/GuideCard';
 import { useGithubStars } from './useGithubStars';
+import { forkIssuesUrl, forkRepositoryUrl, UPSTREAM_REPOSITORY_URL } from '../../config/site';
 
 const featured = ['urlToPage', 'httpApis', 'sqlJoins', 'testTypes', 'gitDaily', 'aiStudy']
   .map(findGuide)
   .filter((guide): guide is GuideMeta => Boolean(guide));
 
-const repository = 'https://github.com/flaviojmendes/trilhainfo';
+const repository = UPSTREAM_REPOSITORY_URL;
 const trails = Object.keys(roadmapTitles).length;
 
 const ways: Array<{
@@ -37,15 +39,15 @@ const ways: Array<{
   },
   {
     title: 'Relate um problema',
-    text: 'Link quebrado, erro ou ideia de melhoria: abra uma issue.',
-    href: `${repository}/issues/new`,
+    text: 'Link quebrado, erro ou ideia de melhoria: abra uma issue no repositório do Trilha Mod.',
+    href: forkIssuesUrl,
     icon: <PiBug />,
     external: true,
   },
   {
     title: 'Contribua com código',
     text: 'Veja como rodar o projeto e enviar seu primeiro pull request.',
-    href: `${repository}/blob/main/CONTRIBUTING.md`,
+    href: `${forkRepositoryUrl}/blob/main/CONTRIBUTING.md`,
     icon: <PiGitPullRequest />,
     external: true,
   },
@@ -96,6 +98,10 @@ export default function ProjectInfo() {
                   <dd>{trails}</dd>
                 </div>
                 <div>
+                  <dt>Aulas</dt>
+                  <dd>{LESSON_COUNT}</dd>
+                </div>
+                <div>
                   <dt>Guias</dt>
                   <dd>{guides.length}</dd>
                 </div>
@@ -132,12 +138,9 @@ export default function ProjectInfo() {
             <div className="open-ways">
               <h3>Como participar</h3>
               <ul>
-                {ways.map((way) => (
-                  <li key={way.title}>
-                    <a
-                      href={way.href}
-                      {...(way.external ? { target: '_blank', rel: 'noreferrer' } : {})}
-                    >
+                {ways.map((way) => {
+                  const content = (
+                    <>
                       <span className="open-way-icon" aria-hidden="true">
                         {way.icon}
                       </span>
@@ -151,9 +154,20 @@ export default function ProjectInfo() {
                         <PiArrowRight className="open-way-arrow" aria-hidden="true" />
                       )}
                       {way.external && <span className="sr-only"> (abre em nova aba)</span>}
-                    </a>
-                  </li>
-                ))}
+                    </>
+                  );
+                  return (
+                    <li key={way.title}>
+                      {way.external ? (
+                        <a href={way.href} target="_blank" rel="noreferrer">
+                          {content}
+                        </a>
+                      ) : (
+                        <Link to={way.href}>{content}</Link>
+                      )}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           </div>

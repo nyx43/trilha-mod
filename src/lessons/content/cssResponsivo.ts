@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'muitas-telas:3',
           question: 'O que significa uma página ser responsiva?',
           options: [
             {
@@ -92,6 +93,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'viewport:3',
           prompt: 'Complete a meta tag viewport.',
           language: 'html',
           template:
@@ -163,6 +165,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'mobile-first:4',
           question:
             'Numa tela de 800px de largura, com a fonte padrão de 16px, quantas colunas os cards terão?',
           code: '.cards {\n  display: grid;\n  grid-template-columns: 1fr;\n}\n\n@media (min-width: 40rem) {\n  .cards {\n    grid-template-columns: 1fr 1fr;\n  }\n}\n\n@media (min-width: 64rem) {\n  .cards {\n    grid-template-columns: repeat(3, 1fr);\n  }\n}',
@@ -188,6 +191,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'mobile-first:5',
           prompt: 'Complete para a galeria ganhar duas colunas a partir de 48rem.',
           language: 'css',
           template:
@@ -223,6 +227,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'fluido:3',
           prompt: 'Cada trecho causa rolagem horizontal num celular de 320px ou ajuda a evitá-la?',
           buckets: ['Pode causar rolagem horizontal', 'Ajuda a evitar'],
           items: [
@@ -249,6 +254,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'fluido:6',
           question: 'O que `clamp(1.75rem, 1rem + 4vw, 3rem)` garante para o tamanho do título?',
           options: [
             {
@@ -281,6 +287,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'mao-na-massa:1',
           title: 'Vitrine da confeitaria',
           task: 'Deixe as imagens fluidas e, a partir de `40rem`, mostre os produtos em duas ou mais colunas com `grid-template-columns` dentro de uma media query `min-width`. Arraste a largura da prévia entre 320px e 1024px para conferir.',
           html: '<main class="vitrine">\n  <article class="item">\n    <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22360%22%3E%3Crect width=%22600%22 height=%22360%22 fill=%22%23e8cfa8%22/%3E%3C/svg%3E" alt="Bolo de fubá inteiro numa travessa">\n    <h2>Bolo de fubá</h2>\n    <p>Receita da vó, com erva-doce.</p>\n  </article>\n  <article class="item">\n    <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22360%22%3E%3Crect width=%22600%22 height=%22360%22 fill=%22%23d9a066%22/%3E%3C/svg%3E" alt="Fatias de pão de mel com cobertura de chocolate">\n    <h2>Pão de mel</h2>\n    <p>Recheado com doce de leite.</p>\n  </article>\n  <article class="item">\n    <img src="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22600%22 height=%22360%22%3E%3Crect width=%22600%22 height=%22360%22 fill=%22%23f2d27a%22/%3E%3C/svg%3E" alt="Bandeja com quindins dourados">\n    <h2>Quindim</h2>\n    <p>Feito com coco fresco.</p>\n  </article>\n</main>',
@@ -363,6 +370,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'testar:3',
           question:
             'A página está ótima no seu celular, mas uma pessoa com um aparelho de 320px relata que precisa arrastar a tela para os lados. Qual o melhor primeiro passo?',
           options: [
@@ -386,6 +394,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'testar:4',
           prompt: 'Coloque em ordem uma rotina de teste responsivo.',
           items: [
             'Confirmar que a meta tag viewport está no `<head>`',

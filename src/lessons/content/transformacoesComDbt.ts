@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'por-que-dbt:3',
           question: 'Qual destas tarefas o dbt faz?',
           options: [
             {
@@ -104,6 +105,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'modelo-e-ref:4',
           prompt:
             'Complete o modelo que junta pedidos e clientes. O modelo de clientes se chama `stg_clientes`.',
           language: 'sql',
@@ -145,6 +147,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'camadas:2',
           prompt: 'Em que camada cada transformação deve ficar?',
           buckets: ['Staging', 'Intermediate', 'Marts'],
           items: [
@@ -161,6 +164,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'camadas:3',
           title: 'Escreva o modelo de staging',
           task: 'A tabela bruta `raw_pedidos` veio com nomes em maiúsculas, tudo como texto e um pedido de teste. Escreva o `SELECT` do staging com as colunas `pedido_id` e `cliente_id` (inteiros), `valor` (em reais), `status` (minúsculo e sem espaços) e `data_pedido` (só a data), sem o pedido de status `teste`. Este banco é SQLite: use `CAST`, `LOWER`, `TRIM` e `DATE`.',
           setup: `CREATE TABLE raw_pedidos (
@@ -264,6 +268,7 @@ WHERE LOWER(TRIM(STATUS)) <> 'teste';`,
         },
         {
           type: 'quiz',
+          activityId: 'materializacoes:4',
           question:
             'O modelo `fct_cliques` tem 2 bilhões de linhas e recebe 5 milhões por dia. Como `table`, cada execução leva 3 horas. O que você faria?',
           options: [
@@ -328,6 +333,7 @@ WHERE LOWER(TRIM(STATUS)) <> 'teste';`,
         },
         {
           type: 'classify',
+          activityId: 'testes:2',
           prompt: 'Que teste pegaria cada problema?',
           buckets: ['unique', 'not_null', 'relationships', 'accepted_values'],
           items: [
@@ -359,6 +365,7 @@ WHERE LOWER(TRIM(STATUS)) <> 'teste';`,
         },
         {
           type: 'terminal',
+          activityId: 'rodar-e-linhagem:1',
           title: 'Um dia de trabalho com dbt',
           task: 'Construa o projeto, encontre o teste que falha e reconstrua só o que precisa.',
           steps: [
@@ -461,6 +468,7 @@ WHERE LOWER(TRIM(STATUS)) <> 'teste';`,
         },
         {
           type: 'order',
+          activityId: 'rodar-e-linhagem:4',
           prompt: 'Em que ordem o `dbt build` executa este projeto?',
           items: [
             'Lê a fonte `loja.pedidos` (declarada em `_sources.yml`)',

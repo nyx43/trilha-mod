@@ -9,6 +9,7 @@ interface Props {
   voices: SpeechSynthesisVoice[];
   voiceUri?: string;
   speechSupported: boolean;
+  hosted?: boolean;
   onProvider: (id: string) => void;
   onModel: (id: string) => void;
   onVoice: (uri: string) => void;
@@ -23,6 +24,7 @@ export function TutorSettings({
   voices,
   voiceUri,
   speechSupported,
+  hosted = false,
   onProvider,
   onModel,
   onVoice,
@@ -64,7 +66,7 @@ export function TutorSettings({
           <p>Trocar de provedor ou modelo inicia uma nova conversa.</p>
         </>
       )}
-      {!providers.some(({ id }) => id === 'gemini') && (
+      {!hosted && !providers.some(({ id }) => id === 'gemini') && (
         <p>
           Para liberar o Gemini 4 Hydrogen, configure <code>TUTOR_GEMINI_API_KEY</code> no{' '}
           <code>.env.local</code>.{' '}

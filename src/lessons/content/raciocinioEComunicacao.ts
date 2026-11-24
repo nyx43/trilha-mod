@@ -18,6 +18,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'pensar-em-voz-alta:2',
           prompt: 'Que falas ajudam quem entrevista a acompanhar você, e quais atrapalham?',
           buckets: ['Ajuda', 'Atrapalha'],
           items: [
@@ -39,6 +40,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'pensar-em-voz-alta:3',
           question:
             'No meio de um exercício ao vivo você trava e não sabe como continuar. Qual a melhor atitude?',
           options: [
@@ -78,6 +80,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'perguntas-de-esclarecimento:2',
           prompt: 'Quais perguntas ajudam a entender esse problema antes de começar?',
           buckets: ['Ajuda a entender o problema', 'Não ajuda agora'],
           items: [
@@ -191,6 +194,7 @@ print(primeiro_repetido([7, 2, 7]))`,
         },
         {
           type: 'python',
+          activityId: 'exemplo-e-testes:2',
           title: 'Remova os duplicados e prove com testes',
           task: 'A função abaixo usa `set` e perde a ordem de chegada. Corrija para manter a ordem da primeira aparição (a ideia de `vistos` do exemplo ajuda) e escreva pelo menos quatro casos em `casos`, incluindo a lista vazia, uma lista sem repetidos e uma com todos iguais.',
           code: `def remover_duplicados(pedidos):
@@ -291,6 +295,7 @@ for entrada, esperado in casos:
         },
         {
           type: 'order',
+          activityId: 'metodo-star:3',
           prompt:
             'Organize esta história, de alguém que ainda não trabalhou com tecnologia, na ordem do STAR, terminando pelo aprendizado.',
           items: [
@@ -305,6 +310,7 @@ for entrada, esperado in casos:
         },
         {
           type: 'fill',
+          activityId: 'metodo-star:4',
           prompt:
             'Complete o roteiro que você pode usar para preparar suas histórias. Escreva o nome de cada parte do STAR.',
           language: 'text',
@@ -350,6 +356,7 @@ for entrada, esperado in casos:
         },
         {
           type: 'quiz',
+          activityId: 'nao-sei-e-estrutura:2',
           question:
             'Numa entrevista de backend perguntam: “o que acontece se duas pessoas atualizarem o mesmo registro ao mesmo tempo?”. Você nunca estudou isso. Qual resposta mostra mais?',
           options: [
@@ -377,6 +384,7 @@ for entrada, esperado in casos:
         },
         {
           type: 'quiz',
+          activityId: 'nao-sei-e-estrutura:4',
           question:
             'Pergunta: “qual a diferença entre um teste unitário e um teste end-to-end?”. Qual resposta segue a estrutura de três tempos?',
           options: [
@@ -400,6 +408,7 @@ for entrada, esperado in casos:
         },
         {
           type: 'order',
+          activityId: 'nao-sei-e-estrutura:5',
           prompt: 'Coloque em ordem um bom roteiro para um exercício técnico ao vivo.',
           items: [
             'Repetir o problema com suas palavras',

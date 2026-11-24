@@ -4,7 +4,7 @@
 
 **Trilha Info** is an open source platform for learning technology through free content in Portuguese, organized into practical learning paths. Created in June 2022, it brings together career roadmaps, original interactive lessons, quick guides, and portfolio projects.
 
-The current catalog includes **8 roadmaps, 8 courses, 76 lessons, and 34 guides**. You can start without an account and pick up where you left off, with progress saved in your browser.
+The current catalog includes **8 roadmaps, 8 courses, 78 lessons, and 34 guides**. You can start without an account and pick up where you left off, with progress saved in your browser.
 
 ![Trilha Info homepage, showing the current interface and learning paths](../public/preview.png)
 
@@ -74,11 +74,11 @@ Content suggestions use the `/api/contributions` and `/api/link-info` endpoints,
 | `TURNSTILE_SECRET_KEY`                    | Server-side challenge validation.                                          |
 | `GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY` | Credentials for the GitHub App that opens pull requests; server-side only. |
 | `GITHUB_APP_INSTALLATION_ID`              | App installation; can be discovered automatically when omitted.            |
-| `CONTRIBUTIONS_REPOSITORY`                | Target repository; defaults to `flaviojmendes/trilhainfo`.                 |
-| `CONTRIBUTIONS_BASE_BRANCH`               | Target branch; defaults to `main`.                                         |
-| `SITE_URL`                                | Public origin used by the server to fetch the catalog.                     |
+| `CONTRIBUTIONS_REPOSITORY`                | Required for real submissions. Use `nyx43/trilha-mod` for this fork.                 |
+| `CONTRIBUTIONS_BASE_BRANCH`               | Required for real submissions. Set the branch that will receive PRs.                                         |
+| `SITE_URL`                                | Public origin for the catalog and page metadata. Set it in the build environment too.                     |
 
-Without a GitHub App, local development returns a simulation and the suggestion JSON without opening a pull request. In production on Vercel, submissions require GitHub App and Turnstile configuration. See the [suggestion format](../src/contributions/entries/README.md).
+Without a GitHub App, local development returns a simulation and the suggestion JSON without opening a pull request. In Vercel previews and production, submissions require GitHub App and Turnstile configuration. See the [suggestion format](../src/contributions/entries/README.md).
 
 To run Vite with an alternative configuration directory, set `TRILHA_ENV_DIR`. An empty directory lets you validate the catalog and frontend without loading the local configuration.
 

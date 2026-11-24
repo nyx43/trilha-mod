@@ -3,10 +3,11 @@ import { resolve } from 'path';
 import type { ReactNode } from 'react';
 import satori from 'satori';
 import { Resvg } from '@resvg/resvg-js';
+import { cardSize, PreviewCard } from '../src/seo/pages';
+import { siteHost } from '../src/config/site';
 
 export { applySocialMeta, pageForPath, siteUrl, socialPages } from '../src/seo/pages';
 export type { BlogPost, SocialPage } from '../src/seo/pages';
-import { cardSize, PreviewCard } from '../src/seo/pages';
 
 function clip(text: string, max: number): string {
   const clean = text.replace(/\s+/g, ' ').trim();
@@ -117,7 +118,7 @@ function cardContent(card: PreviewCard, logo: string): Node[] {
   return [
     el('div', { display: 'flex', alignItems: 'center', justifyContent: 'space-between' }, [
       el('img', { width: 282, height: 47 }, undefined, { src: logo, width: 282, height: 47 }),
-      el('div', { fontSize: 26, fontWeight: 600, color: '#a6b0c3' }, 'trilha.info'),
+      el('div', { fontSize: 26, fontWeight: 600, color: '#a6b0c3' }, siteHost),
     ]),
     el('div', { display: 'flex', flexDirection: 'column' }, [
       el(

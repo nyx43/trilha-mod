@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { CodeBlock } from '../components/Guide/CodeBlock';
 import { GuideBlockView } from '../components/Guide/GuideBlock';
 import { diagnosticoWebDownload } from '../percurso/apiReactTailwind';
+import { isOfflineApp } from '../runtime/mode';
 import '../components/Guide/guide.css';
 import '../components/Lesson/lesson.css';
 
@@ -117,6 +118,14 @@ export default function DiagnosticoPratica() {
         </p>
       </header>
       <div className="guide-body lesson-body" style={{ maxWidth: 820 }}>
+        {isOfflineApp() && (
+          <div className="lesson-note" role="note" style={{ marginBottom: 16 }}>
+            <strong>Modo avião / celular:</strong> executar os dois servidores Node/Vite (
+            <code>localhost:3101</code> e <code>localhost:5180</code>) é opcional e requer um
+            computador. Todos os cinco cenários, dicas de inspeção e soluções comentadas abaixo
+            estão disponíveis offline aqui no aplicativo.
+          </div>
+        )}
         <div className="lessons-actions">
           <a href={diagnosticoWebDownload} download className="lesson-button">
             Baixar laboratório Web (.zip)
@@ -128,7 +137,7 @@ export default function DiagnosticoPratica() {
             type: 'callout',
             tone: 'tip',
             title: 'Prepare o laboratório separado',
-            text: 'Extraia o ZIP e abra um terminal na pasta laboratório-web-diagnostico. Use Node.js 18.17 ou superior para iniciar os servidores. Depois de baixar o ZIP, você pode praticar offline.',
+            text: 'Extraia o ZIP e abra um terminal na pasta laboratorio-web-diagnostico. Use Node.js 18.17 ou superior para iniciar os servidores. Depois de baixar o ZIP, você pode praticar offline.',
           }}
         />
         <CodeBlock language="bash" caption="No terminal" code="npm run dev" />

@@ -66,6 +66,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'projeto-que-se-explica:3',
           question:
             'Seu catálogo não tem login e os favoritos somem quando a pessoa limpa o navegador. Você menciona isso no README?',
           options: [
@@ -99,6 +100,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'o-que-observam:1',
           prompt: 'Quais sinais fortalecem uma candidatura e quais quase não dizem nada?',
           buckets: ['Sinal forte', 'Sinal fraco'],
           items: [
@@ -149,6 +151,7 @@ Diferenciais:
         },
         {
           type: 'classify',
+          activityId: 'lendo-vagas:2',
           prompt: 'Separe o que é base da vaga, o que é diferencial e o que é lista de desejos.',
           buckets: ['Obrigatório de verdade', 'Desejável', 'Lista de desejos'],
           items: [
@@ -166,6 +169,7 @@ Diferenciais:
         },
         {
           type: 'quiz',
+          activityId: 'lendo-vagas:3',
           question:
             'Você tem a base da vaga e um dos diferenciais, mas não tem os três anos de experiência. O que fazer?',
           options: [
@@ -232,6 +236,7 @@ Diferenciais:
         },
         {
           type: 'classify',
+          activityId: 'ia-no-fluxo:2',
           prompt: 'Quais usos de IA ajudam a aprender e trabalhar, e quais são riscos?',
           buckets: ['Bom uso', 'Risco'],
           items: [
@@ -249,6 +254,7 @@ Diferenciais:
         },
         {
           type: 'quiz',
+          activityId: 'ia-no-fluxo:3',
           question:
             'Qual pedido tende a gerar uma resposta que ensina e que você consegue verificar?',
           options: [
@@ -302,6 +308,7 @@ const unicas = tags.unique();`,
         },
         {
           type: 'order',
+          activityId: 'ciclo-de-verificacao:3',
           prompt: 'Coloque em ordem o ciclo para usar uma resposta de IA com segurança.',
           items: [
             'Perguntar com contexto, dizendo o que você já tentou',
@@ -346,6 +353,7 @@ const unicas = tags.unique();`,
         },
         {
           type: 'quiz',
+          activityId: 'entrevistas-e-rotina:2',
           question:
             'Na entrevista, perguntam sobre uma parte do código que a IA sugeriu e você não entende bem. Qual a melhor resposta?',
           options: [

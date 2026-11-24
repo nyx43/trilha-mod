@@ -52,6 +52,7 @@ function adicionar(produto) {
         },
         {
           type: 'quiz',
+          activityId: 'estado-baguncado:4',
           question:
             'Qual destes componentes é o melhor candidato para trocar vários `useState` por uma lógica centralizada?',
           options: [
@@ -195,6 +196,7 @@ console.log(fila.senha, fila.guiche);`,
         },
         {
           type: 'playground',
+          activityId: 'use-reducer:3',
           title: 'Placar do jogo da várzea',
           framework: 'react',
           task: 'Os botões já enviam as ações. Falta o reducer saber tratá-las: crie os casos `ponto_visitante` (soma 1 no visitante) e `zerar` (volta os dois para 0). Clique nos botões e veja o placar mudar.',
@@ -320,6 +322,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Placar />);`,
         },
         {
           type: 'classify',
+          activityId: 'reducer-puro:2',
           prompt: 'Cada linha abaixo está dentro de um reducer. Pode ficar lá ou deveria sair?',
           buckets: ['Pode ficar no reducer', 'Deve sair do reducer'],
           items: [
@@ -339,6 +342,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Placar />);`,
         },
         {
           type: 'terminal',
+          activityId: 'reducer-puro:4',
           title: 'Um teste pegando uma mutação',
           task: 'O carrinho às vezes mostra itens “fantasmas”. Rode os testes do reducer e leia a falha.',
           prompt: '~/padaria$',
@@ -483,6 +487,7 @@ function BotaoMenu() {
         },
         {
           type: 'fill',
+          activityId: 'context:4',
           prompt: 'Complete para que `Avatar` leia a pessoa logada sem receber props.',
           language: 'jsx',
           template: `const UsuarioContext = [[createContext|React.createContext]](null);
@@ -505,6 +510,7 @@ function Avatar() {
         },
         {
           type: 'quiz',
+          activityId: 'context:5',
           question:
             'O `BotaoMenu` usa `useContext(TemaContext)`, mas está fora de qualquer `TemaContext.Provider`. O que ele recebe?',
           options: [
@@ -547,6 +553,7 @@ function Avatar() {
         },
         {
           type: 'classify',
+          activityId: 'quando-nao-usar:2',
           prompt: 'Onde cada estado deveria morar?',
           buckets: ['Estado local', 'Context', 'Dados do servidor'],
           items: [
@@ -562,6 +569,7 @@ function Avatar() {
         },
         {
           type: 'quiz',
+          activityId: 'quando-nao-usar:3',
           question:
             'Uma colega colocou tudo do app num único `AppContext`: tema, usuário, carrinho e o texto da busca. O que tende a acontecer?',
           options: [
@@ -628,6 +636,7 @@ function Avatar() {
         },
         {
           type: 'playground',
+          activityId: 'carrinho:2',
           title: 'O carrinho da padaria',
           framework: 'react',
           task: 'A vitrine já adiciona produtos, mas o cabeçalho mostra números fixos. No `Cabecalho`, leia `itens` e `dispatch` com `useContext`, mostre a quantidade em `#contador` e a soma dos preços em `#total`. Depois crie a ação `esvaziar` no reducer e ligue o botão **Esvaziar**.',
@@ -815,6 +824,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);`,
         },
         {
           type: 'order',
+          activityId: 'carrinho:4',
           prompt: 'Coloque em ordem o caminho de uma ação até a tela.',
           items: [
             'A pessoa clica em um botão',

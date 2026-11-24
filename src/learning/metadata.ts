@@ -1,7 +1,8 @@
+import { siteUrl } from '../config/site';
 import { RoadmapCatalog } from './types';
 
 export function learningMetadata(catalog: RoadmapCatalog) {
-  const canonical = `https://trilha.info/roadmap/${catalog.id}`;
+  const canonical = `${siteUrl}/roadmap/${catalog.id}`;
   return {
     '@context': 'https://schema.org',
     '@type': 'LearningResource',

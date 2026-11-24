@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-18T04:07:58.536359+00:00",
+  "generatedAt": "2026-11-23T17:14:00.843411+00:00",
   "totalDurationMs": {
-    "santa": 720962,
-    "dora": 700237
+    "santa": 751897,
+    "dora": 730622
   },
   "totalBytes": {
-    "santa": 5805960,
-    "dora": 5639496
+    "santa": 6054792,
+    "dora": 5883912
   },
   "clips": [
     {
@@ -8310,6 +8310,539 @@
       }
     },
     {
+      "id": "eixos-do-flexbox:4",
+      "sectionId": "eixos-do-flexbox",
+      "kind": "playground",
+      "label": "Laboratório: Flexbox",
+      "textHash": "e8b7a9aacd3608cde9152b2aa3cbc01784c5e1f15ead66e8b8fc806a417e8fbb",
+      "clipKey": "c0d896ed0d2b3866464efeef",
+      "audio": {
+        "santa": {
+          "src": "santa/eixos-do-flexbox__4.mp3",
+          "durationMs": 15205,
+          "bytes": 122304,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "task",
+              "from": 0,
+              "to": 11,
+              "startMs": 310,
+              "endMs": 1110
+            },
+            {
+              "field": "task",
+              "from": 12,
+              "to": 14,
+              "startMs": 1160,
+              "endMs": 1310
+            },
+            {
+              "field": "task",
+              "from": 15,
+              "to": 22,
+              "startMs": 1385,
+              "endMs": 2110
+            },
+            {
+              "field": "task",
+              "from": 24,
+              "to": 30,
+              "startMs": 2640,
+              "endMs": 3040
+            },
+            {
+              "field": "task",
+              "from": 31,
+              "to": 32,
+              "startMs": 3065,
+              "endMs": 3090
+            },
+            {
+              "field": "task",
+              "from": 33,
+              "to": 40,
+              "startMs": 3115,
+              "endMs": 3590
+            },
+            {
+              "field": "task",
+              "from": 41,
+              "to": 43,
+              "startMs": 3615,
+              "endMs": 3665
+            },
+            {
+              "field": "task",
+              "from": 44,
+              "to": 48,
+              "startMs": 3690,
+              "endMs": 3965
+            },
+            {
+              "field": "task",
+              "from": 49,
+              "to": 58,
+              "startMs": 4015,
+              "endMs": 4840
+            },
+            {
+              "field": "task",
+              "from": 60,
+              "to": 61,
+              "startMs": 4940,
+              "endMs": 4965
+            },
+            {
+              "field": "task",
+              "from": 62,
+              "to": 73,
+              "startMs": 4990,
+              "endMs": 5740
+            },
+            {
+              "field": "task",
+              "from": 75,
+              "to": 76,
+              "startMs": 5815,
+              "endMs": 5865
+            },
+            {
+              "field": "task",
+              "from": 77,
+              "to": 83,
+              "startMs": 5915,
+              "endMs": 6190
+            },
+            {
+              "field": "task",
+              "from": 84,
+              "to": 86,
+              "startMs": 6215,
+              "endMs": 6365
+            },
+            {
+              "field": "task",
+              "from": 87,
+              "to": 92,
+              "startMs": 6415,
+              "endMs": 6940
+            },
+            {
+              "field": "task",
+              "from": 94,
+              "to": 95,
+              "startMs": 7040,
+              "endMs": 7065
+            },
+            {
+              "field": "task",
+              "from": 96,
+              "to": 107,
+              "startMs": 7090,
+              "endMs": 7940
+            },
+            {
+              "field": "task",
+              "from": 108,
+              "to": 109,
+              "startMs": 7990,
+              "endMs": 8015
+            },
+            {
+              "field": "task",
+              "from": 110,
+              "to": 111,
+              "startMs": 8040,
+              "endMs": 8065
+            },
+            {
+              "field": "task",
+              "from": 112,
+              "to": 122,
+              "startMs": 8090,
+              "endMs": 8690
+            },
+            {
+              "field": "task",
+              "from": 123,
+              "to": 125,
+              "startMs": 8715,
+              "endMs": 8865
+            },
+            {
+              "field": "task",
+              "from": 126,
+              "to": 131,
+              "startMs": 8915,
+              "endMs": 9340
+            },
+            {
+              "field": "task",
+              "from": 132,
+              "to": 136,
+              "startMs": 9390,
+              "endMs": 9515
+            },
+            {
+              "field": "task",
+              "from": 137,
+              "to": 145,
+              "startMs": 9540,
+              "endMs": 10090
+            },
+            {
+              "field": "task",
+              "from": 146,
+              "to": 150,
+              "startMs": 10140,
+              "endMs": 10290
+            },
+            {
+              "field": "task",
+              "from": 151,
+              "to": 152,
+              "startMs": 10315,
+              "endMs": 10340
+            },
+            {
+              "field": "task",
+              "from": 153,
+              "to": 162,
+              "startMs": 10390,
+              "endMs": 10915
+            },
+            {
+              "field": "task",
+              "from": 163,
+              "to": 171,
+              "startMs": 10940,
+              "endMs": 11465
+            },
+            {
+              "field": "task",
+              "from": 172,
+              "to": 174,
+              "startMs": 11490,
+              "endMs": 11590
+            },
+            {
+              "field": "task",
+              "from": 175,
+              "to": 181,
+              "startMs": 11640,
+              "endMs": 12240
+            },
+            {
+              "field": "task",
+              "from": 183,
+              "to": 186,
+              "startMs": 12795,
+              "endMs": 12970
+            },
+            {
+              "field": "task",
+              "from": 187,
+              "to": 193,
+              "startMs": 13020,
+              "endMs": 13445
+            },
+            {
+              "field": "task",
+              "from": 194,
+              "to": 199,
+              "startMs": 13470,
+              "endMs": 13870
+            },
+            {
+              "field": "task",
+              "from": 200,
+              "to": 204,
+              "startMs": 13920,
+              "endMs": 14070
+            },
+            {
+              "field": "task",
+              "from": 205,
+              "to": 209,
+              "startMs": 14095,
+              "endMs": 14370
+            },
+            {
+              "field": "task",
+              "from": 210,
+              "to": 216,
+              "startMs": 14420,
+              "endMs": 15045
+            }
+          ],
+          "normalizedScript": "Laboratório de Flexbox\nAltere a direção do eixo principal o alinhamento a quebra de linha o espaçamento e a quantidade de itens para observar como o container organiza os blocos\nVou pausar agora para você testar"
+        },
+        "dora": {
+          "src": "dora/eixos-do-flexbox__4.mp3",
+          "durationMs": 14980,
+          "bytes": 120576,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "task",
+              "from": 0,
+              "to": 11,
+              "startMs": 310,
+              "endMs": 1085
+            },
+            {
+              "field": "task",
+              "from": 12,
+              "to": 14,
+              "startMs": 1110,
+              "endMs": 1260
+            },
+            {
+              "field": "task",
+              "from": 15,
+              "to": 22,
+              "startMs": 1310,
+              "endMs": 2010
+            },
+            {
+              "field": "task",
+              "from": 24,
+              "to": 30,
+              "startMs": 2540,
+              "endMs": 2915
+            },
+            {
+              "field": "task",
+              "from": 31,
+              "to": 32,
+              "startMs": 2940,
+              "endMs": 2965
+            },
+            {
+              "field": "task",
+              "from": 33,
+              "to": 40,
+              "startMs": 2990,
+              "endMs": 3440
+            },
+            {
+              "field": "task",
+              "from": 41,
+              "to": 43,
+              "startMs": 3465,
+              "endMs": 3515
+            },
+            {
+              "field": "task",
+              "from": 44,
+              "to": 48,
+              "startMs": 3540,
+              "endMs": 3765
+            },
+            {
+              "field": "task",
+              "from": 49,
+              "to": 58,
+              "startMs": 3815,
+              "endMs": 4665
+            },
+            {
+              "field": "task",
+              "from": 60,
+              "to": 61,
+              "startMs": 4790,
+              "endMs": 4815
+            },
+            {
+              "field": "task",
+              "from": 62,
+              "to": 73,
+              "startMs": 4840,
+              "endMs": 5665
+            },
+            {
+              "field": "task",
+              "from": 75,
+              "to": 76,
+              "startMs": 5765,
+              "endMs": 5815
+            },
+            {
+              "field": "task",
+              "from": 77,
+              "to": 83,
+              "startMs": 5865,
+              "endMs": 6140
+            },
+            {
+              "field": "task",
+              "from": 84,
+              "to": 86,
+              "startMs": 6165,
+              "endMs": 6315
+            },
+            {
+              "field": "task",
+              "from": 87,
+              "to": 92,
+              "startMs": 6365,
+              "endMs": 6915
+            },
+            {
+              "field": "task",
+              "from": 94,
+              "to": 95,
+              "startMs": 7015,
+              "endMs": 7040
+            },
+            {
+              "field": "task",
+              "from": 96,
+              "to": 107,
+              "startMs": 7065,
+              "endMs": 7965
+            },
+            {
+              "field": "task",
+              "from": 108,
+              "to": 109,
+              "startMs": 8040,
+              "endMs": 8065
+            },
+            {
+              "field": "task",
+              "from": 110,
+              "to": 111,
+              "startMs": 8090,
+              "endMs": 8115
+            },
+            {
+              "field": "task",
+              "from": 112,
+              "to": 122,
+              "startMs": 8140,
+              "endMs": 8740
+            },
+            {
+              "field": "task",
+              "from": 123,
+              "to": 125,
+              "startMs": 8765,
+              "endMs": 8890
+            },
+            {
+              "field": "task",
+              "from": 126,
+              "to": 131,
+              "startMs": 8940,
+              "endMs": 9340
+            },
+            {
+              "field": "task",
+              "from": 132,
+              "to": 136,
+              "startMs": 9390,
+              "endMs": 9515
+            },
+            {
+              "field": "task",
+              "from": 137,
+              "to": 145,
+              "startMs": 9540,
+              "endMs": 10090
+            },
+            {
+              "field": "task",
+              "from": 146,
+              "to": 150,
+              "startMs": 10140,
+              "endMs": 10290
+            },
+            {
+              "field": "task",
+              "from": 151,
+              "to": 152,
+              "startMs": 10315,
+              "endMs": 10340
+            },
+            {
+              "field": "task",
+              "from": 153,
+              "to": 162,
+              "startMs": 10365,
+              "endMs": 10865
+            },
+            {
+              "field": "task",
+              "from": 163,
+              "to": 171,
+              "startMs": 10890,
+              "endMs": 11315
+            },
+            {
+              "field": "task",
+              "from": 172,
+              "to": 174,
+              "startMs": 11340,
+              "endMs": 11415
+            },
+            {
+              "field": "task",
+              "from": 175,
+              "to": 181,
+              "startMs": 11465,
+              "endMs": 12065
+            },
+            {
+              "field": "task",
+              "from": 183,
+              "to": 186,
+              "startMs": 12620,
+              "endMs": 12795
+            },
+            {
+              "field": "task",
+              "from": 187,
+              "to": 193,
+              "startMs": 12845,
+              "endMs": 13295
+            },
+            {
+              "field": "task",
+              "from": 194,
+              "to": 199,
+              "startMs": 13320,
+              "endMs": 13695
+            },
+            {
+              "field": "task",
+              "from": 200,
+              "to": 204,
+              "startMs": 13745,
+              "endMs": 13895
+            },
+            {
+              "field": "task",
+              "from": 205,
+              "to": 209,
+              "startMs": 13920,
+              "endMs": 14195
+            },
+            {
+              "field": "task",
+              "from": 210,
+              "to": 216,
+              "startMs": 14245,
+              "endMs": 14820
+            }
+          ],
+          "normalizedScript": "Laboratório de Flexbox\nAltere a direção do eixo principal o alinhamento a quebra de linha o espaçamento e a quantidade de itens para observar como o container organiza os blocos\nVou pausar agora para você testar"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
       "id": "eixos-do-flexbox:5",
       "sectionId": "eixos-do-flexbox",
       "kind": "quiz",
@@ -15245,6 +15778,539 @@
           "normalizedScript": "Experimente as opções de grid template columns no laboratório\nNa última aumente o número de itens e veja as linhas se formarem\nDepois faça o item um ocupar duas colunas"
         }
       }
+    },
+    {
+      "id": "grid:5",
+      "sectionId": "grid",
+      "kind": "playground",
+      "label": "Laboratório: CSS Grid",
+      "textHash": "54e6f0d8c5e02a1d52e5f590a1cfb92b2f50f26c5642b0cf244a0cc09109f25c",
+      "clipKey": "d0db83c3c3de20f535d18c3a",
+      "audio": {
+        "santa": {
+          "src": "santa/grid__5.mp3",
+          "durationMs": 15730,
+          "bytes": 126528,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "task",
+              "from": 0,
+              "to": 11,
+              "startMs": 310,
+              "endMs": 960
+            },
+            {
+              "field": "task",
+              "from": 12,
+              "to": 14,
+              "startMs": 985,
+              "endMs": 1135
+            },
+            {
+              "field": "task",
+              "from": 15,
+              "to": 18,
+              "startMs": 1235,
+              "endMs": 2060
+            },
+            {
+              "field": "task",
+              "from": 19,
+              "to": 23,
+              "startMs": 2110,
+              "endMs": 2535
+            },
+            {
+              "field": "task",
+              "from": 25,
+              "to": 31,
+              "startMs": 3115,
+              "endMs": 3440
+            },
+            {
+              "field": "task",
+              "from": 32,
+              "to": 33,
+              "startMs": 3465,
+              "endMs": 3490
+            },
+            {
+              "field": "task",
+              "from": 34,
+              "to": 40,
+              "startMs": 3515,
+              "endMs": 3890
+            },
+            {
+              "field": "task",
+              "from": 41,
+              "to": 43,
+              "startMs": 3915,
+              "endMs": 4015
+            },
+            {
+              "field": "task",
+              "from": 44,
+              "to": 51,
+              "startMs": 4065,
+              "endMs": 4815
+            },
+            {
+              "field": "task",
+              "from": 53,
+              "to": 57,
+              "startMs": 4915,
+              "endMs": 5165
+            },
+            {
+              "field": "task",
+              "from": 58,
+              "to": 59,
+              "startMs": 5190,
+              "endMs": 5215
+            },
+            {
+              "field": "task",
+              "from": 60,
+              "to": 68,
+              "startMs": 5265,
+              "endMs": 5715
+            },
+            {
+              "field": "task",
+              "from": 69,
+              "to": 73,
+              "startMs": 5765,
+              "endMs": 6090
+            },
+            {
+              "field": "task",
+              "from": 74,
+              "to": 80,
+              "startMs": 6115,
+              "endMs": 6540
+            },
+            {
+              "field": "task",
+              "from": 81,
+              "to": 85,
+              "startMs": 6590,
+              "endMs": 6815
+            },
+            {
+              "field": "task",
+              "from": 86,
+              "to": 93,
+              "startMs": 6865,
+              "endMs": 7415
+            },
+            {
+              "field": "task",
+              "from": 94,
+              "to": 95,
+              "startMs": 7465,
+              "endMs": 7490
+            },
+            {
+              "field": "task",
+              "from": 96,
+              "to": 102,
+              "startMs": 7515,
+              "endMs": 8015
+            },
+            {
+              "field": "task",
+              "from": 103,
+              "to": 104,
+              "startMs": 8040,
+              "endMs": 8065
+            },
+            {
+              "field": "task",
+              "from": 105,
+              "to": 116,
+              "startMs": 8090,
+              "endMs": 9115
+            },
+            {
+              "field": "task",
+              "from": 117,
+              "to": 118,
+              "startMs": 9190,
+              "endMs": 9215
+            },
+            {
+              "field": "task",
+              "from": 119,
+              "to": 120,
+              "startMs": 9240,
+              "endMs": 9265
+            },
+            {
+              "field": "task",
+              "from": 121,
+              "to": 131,
+              "startMs": 9315,
+              "endMs": 9915
+            },
+            {
+              "field": "task",
+              "from": 132,
+              "to": 134,
+              "startMs": 9940,
+              "endMs": 10090
+            },
+            {
+              "field": "task",
+              "from": 135,
+              "to": 140,
+              "startMs": 10140,
+              "endMs": 10565
+            },
+            {
+              "field": "task",
+              "from": 141,
+              "to": 145,
+              "startMs": 10615,
+              "endMs": 10740
+            },
+            {
+              "field": "task",
+              "from": 146,
+              "to": 154,
+              "startMs": 10765,
+              "endMs": 11290
+            },
+            {
+              "field": "task",
+              "from": 155,
+              "to": 156,
+              "startMs": 11315,
+              "endMs": 11340
+            },
+            {
+              "field": "task",
+              "from": 157,
+              "to": 162,
+              "startMs": 11390,
+              "endMs": 11740
+            },
+            {
+              "field": "task",
+              "from": 163,
+              "to": 169,
+              "startMs": 11790,
+              "endMs": 12390
+            },
+            {
+              "field": "task",
+              "from": 171,
+              "to": 174,
+              "startMs": 12945,
+              "endMs": 13120
+            },
+            {
+              "field": "task",
+              "from": 175,
+              "to": 181,
+              "startMs": 13170,
+              "endMs": 13570
+            },
+            {
+              "field": "task",
+              "from": 182,
+              "to": 187,
+              "startMs": 13595,
+              "endMs": 14020
+            },
+            {
+              "field": "task",
+              "from": 188,
+              "to": 192,
+              "startMs": 14070,
+              "endMs": 14220
+            },
+            {
+              "field": "task",
+              "from": 193,
+              "to": 197,
+              "startMs": 14245,
+              "endMs": 14520
+            },
+            {
+              "field": "task",
+              "from": 198,
+              "to": 210,
+              "startMs": 14545,
+              "endMs": 15570
+            }
+          ],
+          "normalizedScript": "Laboratório de c s s Grid\nTroque o modelo de colunas faça o primeiro item ocupar mais colunas e ajuste o espaçamento e a quantidade de itens para observar a grade reagir\nVou pausar agora para você experimentar"
+        },
+        "dora": {
+          "src": "dora/grid__5.mp3",
+          "durationMs": 15405,
+          "bytes": 123840,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "task",
+              "from": 0,
+              "to": 11,
+              "startMs": 310,
+              "endMs": 960
+            },
+            {
+              "field": "task",
+              "from": 12,
+              "to": 14,
+              "startMs": 985,
+              "endMs": 1135
+            },
+            {
+              "field": "task",
+              "from": 15,
+              "to": 18,
+              "startMs": 1235,
+              "endMs": 2010
+            },
+            {
+              "field": "task",
+              "from": 19,
+              "to": 23,
+              "startMs": 2060,
+              "endMs": 2510
+            },
+            {
+              "field": "task",
+              "from": 25,
+              "to": 31,
+              "startMs": 3090,
+              "endMs": 3415
+            },
+            {
+              "field": "task",
+              "from": 32,
+              "to": 33,
+              "startMs": 3440,
+              "endMs": 3465
+            },
+            {
+              "field": "task",
+              "from": 34,
+              "to": 40,
+              "startMs": 3490,
+              "endMs": 3815
+            },
+            {
+              "field": "task",
+              "from": 41,
+              "to": 43,
+              "startMs": 3840,
+              "endMs": 3915
+            },
+            {
+              "field": "task",
+              "from": 44,
+              "to": 51,
+              "startMs": 3965,
+              "endMs": 4740
+            },
+            {
+              "field": "task",
+              "from": 53,
+              "to": 57,
+              "startMs": 4890,
+              "endMs": 5140
+            },
+            {
+              "field": "task",
+              "from": 58,
+              "to": 59,
+              "startMs": 5165,
+              "endMs": 5190
+            },
+            {
+              "field": "task",
+              "from": 60,
+              "to": 68,
+              "startMs": 5240,
+              "endMs": 5690
+            },
+            {
+              "field": "task",
+              "from": 69,
+              "to": 73,
+              "startMs": 5740,
+              "endMs": 6040
+            },
+            {
+              "field": "task",
+              "from": 74,
+              "to": 80,
+              "startMs": 6065,
+              "endMs": 6490
+            },
+            {
+              "field": "task",
+              "from": 81,
+              "to": 85,
+              "startMs": 6540,
+              "endMs": 6790
+            },
+            {
+              "field": "task",
+              "from": 86,
+              "to": 93,
+              "startMs": 6840,
+              "endMs": 7390
+            },
+            {
+              "field": "task",
+              "from": 94,
+              "to": 95,
+              "startMs": 7440,
+              "endMs": 7465
+            },
+            {
+              "field": "task",
+              "from": 96,
+              "to": 102,
+              "startMs": 7490,
+              "endMs": 7940
+            },
+            {
+              "field": "task",
+              "from": 103,
+              "to": 104,
+              "startMs": 7965,
+              "endMs": 7990
+            },
+            {
+              "field": "task",
+              "from": 105,
+              "to": 116,
+              "startMs": 8015,
+              "endMs": 9090
+            },
+            {
+              "field": "task",
+              "from": 117,
+              "to": 118,
+              "startMs": 9190,
+              "endMs": 9215
+            },
+            {
+              "field": "task",
+              "from": 119,
+              "to": 120,
+              "startMs": 9240,
+              "endMs": 9265
+            },
+            {
+              "field": "task",
+              "from": 121,
+              "to": 131,
+              "startMs": 9290,
+              "endMs": 9890
+            },
+            {
+              "field": "task",
+              "from": 132,
+              "to": 134,
+              "startMs": 9915,
+              "endMs": 10015
+            },
+            {
+              "field": "task",
+              "from": 135,
+              "to": 140,
+              "startMs": 10065,
+              "endMs": 10465
+            },
+            {
+              "field": "task",
+              "from": 141,
+              "to": 145,
+              "startMs": 10515,
+              "endMs": 10640
+            },
+            {
+              "field": "task",
+              "from": 146,
+              "to": 154,
+              "startMs": 10665,
+              "endMs": 11165
+            },
+            {
+              "field": "task",
+              "from": 155,
+              "to": 156,
+              "startMs": 11190,
+              "endMs": 11215
+            },
+            {
+              "field": "task",
+              "from": 157,
+              "to": 162,
+              "startMs": 11240,
+              "endMs": 11565
+            },
+            {
+              "field": "task",
+              "from": 163,
+              "to": 169,
+              "startMs": 11615,
+              "endMs": 12190
+            },
+            {
+              "field": "task",
+              "from": 171,
+              "to": 174,
+              "startMs": 12745,
+              "endMs": 12920
+            },
+            {
+              "field": "task",
+              "from": 175,
+              "to": 181,
+              "startMs": 12970,
+              "endMs": 13370
+            },
+            {
+              "field": "task",
+              "from": 182,
+              "to": 187,
+              "startMs": 13395,
+              "endMs": 13820
+            },
+            {
+              "field": "task",
+              "from": 188,
+              "to": 192,
+              "startMs": 13870,
+              "endMs": 14020
+            },
+            {
+              "field": "task",
+              "from": 193,
+              "to": 197,
+              "startMs": 14045,
+              "endMs": 14295
+            },
+            {
+              "field": "task",
+              "from": 198,
+              "to": 210,
+              "startMs": 14320,
+              "endMs": 15245
+            }
+          ],
+          "normalizedScript": "Laboratório de c s s Grid\nTroque o modelo de colunas faça o primeiro item ocupar mais colunas e ajuste o espaçamento e a quantidade de itens para observar a grade reagir\nVou pausar agora para você experimentar"
+        }
+      },
+      "pauseAfter": true
     },
     {
       "id": "grid:6",
@@ -24554,18 +25620,5 @@
       }
     }
   ],
-  "uncoveredBlocks": [
-    {
-      "sectionId": "eixos-do-flexbox",
-      "blockIndex": 4,
-      "blockType": "layoutLab",
-      "reason": "Tipo de bloco \"layoutLab\" ainda não possui regra de narração definida."
-    },
-    {
-      "sectionId": "grid",
-      "blockIndex": 5,
-      "blockType": "layoutLab",
-      "reason": "Tipo de bloco \"layoutLab\" ainda não possui regra de narração definida."
-    }
-  ]
+  "uncoveredBlocks": []
 }

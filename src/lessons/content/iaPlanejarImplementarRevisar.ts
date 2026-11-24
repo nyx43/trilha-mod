@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'fatias-pequenas:3',
           question:
             'Você está construindo a lojinha da trilha e quer frete grátis para pedidos grandes. Qual pedido para a IA é uma boa fatia?',
           options: [
@@ -112,6 +113,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'o-ciclo:2',
           prompt: 'Coloque em ordem o ciclo de uma fatia feita em parceria com um agente.',
           items: [
             'Descrever a fatia, o resultado esperado e os limites',
@@ -160,6 +162,7 @@ e informe os comandos executados e seus resultados.`,
         },
         {
           type: 'classify',
+          activityId: 'plano-primeiro:4',
           prompt:
             'Enquanto você aprende, o que é melhor fazer você e o que pode delegar à IA para depois revisar?',
           buckets: ['Faça você', 'Pode delegar e revisar'],
@@ -232,6 +235,7 @@ e informe os comandos executados e seus resultados.`,
         },
         {
           type: 'quiz',
+          activityId: 'lendo-o-diff:3',
           question:
             'O agente avisa: “Pronto, todos os testes passam.” Revisando o diff, você encontra este trecho. O que fazer?',
           code: `--- a/tests/frete.test.js
@@ -274,6 +278,7 @@ e informe os comandos executados e seus resultados.`,
         },
         {
           type: 'fill',
+          activityId: 'lendo-o-diff:5',
           prompt:
             'Complete os comandos que fecham uma fatia: ver o que mudou, testar, preparar e guardar.',
           language: 'bash',
@@ -296,6 +301,7 @@ git [[commit]] -m "Frete grátis a partir de R$ 100"`,
         },
         {
           type: 'playground',
+          activityId: 'revise-a-funcao:1',
           title: 'Revise a função de frete',
           task: 'Rode os exemplos e compare com o requisito. Acrescente um `console.log` para o caso de exatamente R$ 100, encontre o erro e corrija a função.',
           js: `// Pedido: "Frete grátis para pedidos a partir de R$ 100.

@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'parece-certo:3',
           question:
             'O agente escreve: “Implementei a divisão da conta e criei 5 testes. Todos passam.” O que essa frase prova?',
           options: [
@@ -68,6 +69,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'pacotes-inventados:3',
           title: 'Conferindo as sugestões antes de instalar',
           task: 'A IA sugeriu um pacote para validar CEP e uma função nova do React. Confira tudo no terminal antes de instalar qualquer coisa.',
           prompt: '~/lojinha$',
@@ -131,6 +133,7 @@ published 3 days ago by dev8812 <dev8812@proton.me>`,
         },
         {
           type: 'quiz',
+          activityId: 'pacotes-inventados:5',
           question: 'O que fazer com o pacote `formata-cep-br`?',
           options: [
             {
@@ -172,6 +175,7 @@ published 3 days ago by dev8812 <dev8812@proton.me>`,
         },
         {
           type: 'playground',
+          activityId: 'verificacao-independente:2',
           title: 'Exponha o erro da divisão de conta',
           task: 'Escreva pelo menos duas verificações suas com `verificar`, incluindo contas que não dividem exato. Veja quais falham, corrija `dividirConta` e rode até todas passarem.',
           js: `// Pedido: "Divida a conta do restaurante entre as pessoas, em centavos.
@@ -314,6 +318,7 @@ verificar('R$ 1 entre 7 soma R$ 1', soma(dividirConta(100, 7)) === 100);
         },
         {
           type: 'classify',
+          activityId: 'alem-dos-testes:3',
           prompt:
             'Você está revisando o trabalho de um agente. Quais achados pedem uma parada para investigar?',
           buckets: ['Pare e investigue', 'Bom sinal'],
@@ -355,6 +360,7 @@ verificar('R$ 1 entre 7 soma R$ 1', soma(dividirConta(100, 7)) === 100);
         },
         {
           type: 'order',
+          activityId: 'explicar-e-registrar:2',
           prompt: 'Coloque em ordem uma validação completa do trabalho de um agente.',
           items: [
             'Reler o requisito e anotar os casos-limite e negativos',
@@ -368,6 +374,7 @@ verificar('R$ 1 entre 7 soma R$ 1', soma(dividirConta(100, 7)) === 100);
         },
         {
           type: 'fill',
+          activityId: 'explicar-e-registrar:3',
           prompt:
             'Complete a seção de evidências do pull request da divisão de conta. O projeto testa com `npm test`, o caso novo é R$ 100 entre 3 pessoas e nenhum pacote foi adicionado.',
           language: 'markdown',

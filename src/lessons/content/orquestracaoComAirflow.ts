@@ -28,6 +28,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'por-que-orquestrar:4',
           prompt: 'O cron dá conta, ou você precisa de um orquestrador?',
           buckets: ['O cron resolve', 'Precisa de orquestrador'],
           items: [
@@ -70,6 +71,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'dag:2',
           prompt:
             'Um DAG de vendas tem estas tarefas. Coloque numa ordem em que as dependências sejam respeitadas.',
           items: [
@@ -89,6 +91,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'dag:4',
           title: 'Quem pode rodar agora?',
           task: 'Complete a lista `prontas`: uma tarefa está pronta quando ainda não está em `feitas` e todas as tarefas de que ela depende já estão. Dica: `all(a in feitas for a in antes)`. Rode e veja as rodadas.',
           code: `dependencias = {
@@ -268,6 +271,7 @@ except ValueError:
         },
         {
           type: 'fill',
+          activityId: 'arquivo-de-dag:2',
           prompt:
             'Complete o DAG: ele não deve criar execuções para dias passados, cada tarefa deve tentar até 3 vezes de novo, e `baixar` é uma tarefa.',
           language: 'python',
@@ -298,6 +302,7 @@ except ValueError:
         },
         {
           type: 'terminal',
+          activityId: 'execucoes-e-backfill:3',
           title: 'Operando o Airflow pela linha de comando',
           task: 'Liste os DAGs, teste uma tarefa isolada, recupere uma falha e faça um backfill.',
           prompt: 'airflow@servidor:/opt/airflow$',
@@ -341,6 +346,7 @@ except ValueError:
         },
         {
           type: 'quiz',
+          activityId: 'execucoes-e-backfill:4',
           question:
             'A tarefa `carregar` decide o período com `datetime.now() - timedelta(days=1)`. O que acontece no backfill de setembro?',
           options: [
@@ -388,6 +394,7 @@ except ValueError:
         },
         {
           type: 'classify',
+          activityId: 'sensores-e-xcom:4',
           prompt: 'O que pode passar entre tarefas por XCom?',
           buckets: ['Pode: pequeno', 'Não pode: grande demais'],
           items: [
@@ -409,6 +416,7 @@ except ValueError:
         },
         {
           type: 'quiz',
+          activityId: 'sensores-e-xcom:6',
           question:
             'Hoje é 14 de outubro. Você liga um DAG diário com `start_date` em 1º de janeiro e esqueceu de definir `catchup=False`, numa versão em que o padrão é `True`. O que acontece?',
           options: [

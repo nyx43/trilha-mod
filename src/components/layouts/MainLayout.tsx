@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { DevFlip } from '../../devmode/DevFlip';
 import { DevModeToggle } from '../../devmode/DevModeControls';
+import { getContentVersion, isOfflineApp } from '../../runtime/mode';
 import Header from '../Header';
 
 type Props = {
@@ -30,10 +31,19 @@ export default function MainLayout({ children }: Props) {
             <nav aria-label="Rodapé">
               <ul>
                 <li>
-                  <a href="/#trilhas">Trilhas</a>
+                  <Link to="/#trilhas">Trilhas</Link>
                 </li>
                 <li>
                   <Link to="/aulas">Aulas</Link>
+                </li>
+                <li>
+                  <Link to="/estudando">Estudando</Link>
+                </li>
+                <li>
+                  <Link to="/aulas/o-que-estudar">O que estudar</Link>
+                </li>
+                <li>
+                  <Link to="/percurso/api-react-tailwind">Percurso Web</Link>
                 </li>
                 <li>
                   <Link to="/guias">Guias</Link>
@@ -58,7 +68,10 @@ export default function MainLayout({ children }: Props) {
             <a target="_blank" rel="noreferrer" href="https://youtube.com/flaviojmendes">
               flaviojmendes
             </a>
-            .
+            .{' '}
+            <span className="site-content-version" data-content-version={getContentVersion()}>
+              {isOfflineApp() ? 'App offline' : 'Web'} · conteúdo {getContentVersion()}
+            </span>
             <DevModeToggle />
           </p>
         </footer>

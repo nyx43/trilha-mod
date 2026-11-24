@@ -1,14 +1,12 @@
 import { useAuth0 } from '@auth0/auth0-react';
-import Cookies from 'universal-cookie';
-
 import { ChangeEvent, useCallback, useEffect, useState } from 'react';
-
 import axios from 'axios';
 import { Bars, ThreeDots } from 'react-loader-spinner';
 import { RiCloseCircleFill } from 'react-icons/ri';
 import { NoteModel } from '../../entity/NoteModel';
-
-const cookies = new Cookies();
+import { getApiAuthHeader } from '../../auth/apiSession';
+import { isOfflineApp } from '../../runtime/mode';
+import { addLocalNote, deleteLocalNote, listLocalNotes } from '../../offline/localStore';
 
 type Props = {
   id: string;
@@ -16,23 +14,35 @@ type Props = {
 };
 
 export default function Note(props: Props) {
+  const offline = isOfflineApp();
   const { getAccessTokenSilently, user, isAuthenticated, loginWithPopup } = useAuth0();
+  const canUseNotes = offline || isAuthenticated;
   const [noteText, setNoteText] = useState('');
-  const [notes, setNotes] = useState<NoteModel[]>([]);
+  const [notes, setNotes] = useState<NoteModel[]>(() => (offline ? listLocalNotes(props.id) : []));
   const [isSavingNote, setSavingNote] = useState(false);
   const [isLoadingNotes, setLoadingNotes] = useState(false);
   const [isDeletingNote, setDeletingNote] = useState(false);
 
   const getNotes = useCallback(async () => {
+    if (offline) {
+      setNotes(listLocalNotes(props.id));
+      setLoadingNotes(false);
+      return;
+    }
     setLoadingNotes(true);
     try {
+      const authorization = await getApiAuthHeader(isAuthenticated, getAccessTokenSilently);
+      if (!authorization) {
+        setNotes([]);
+        return;
+      }
       const response = await axios.post(
         import.meta.env.VITE_API_URL + `/notes/find` || '',
         { contentId: props.id },
         {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: cookies.get('api_token'),
+            Authorization: authorization,
           },
         },
       );
@@ -40,26 +50,36 @@ export default function Note(props: Props) {
       setNotes(response.data);
     } catch (e) {}
     setLoadingNotes(false);
-  }, [props.id]);
+  }, [getAccessTokenSilently, isAuthenticated, offline, props.id]);
 
   useEffect(() => {
-    if (user) {
+    if (offline || (isAuthenticated && user)) {
       getNotes();
     }
-  }, [user, props.id, getNotes]);
+  }, [offline, isAuthenticated, user, props.id, getNotes]);
 
   async function handleDeleteComment(commentId: string) {
     const answer = window.confirm('Tem certeza que quer deletar?');
     if (answer) {
+      if (offline) {
+        deleteLocalNote(commentId);
+        setNotes(listLocalNotes(props.id));
+        return;
+      }
       setDeletingNote(true);
-      await axios.delete(import.meta.env.VITE_API_URL + `/notes/${commentId}` || '', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: cookies.get('api_token'),
-        },
-      });
-      getNotes();
-      setDeletingNote(false);
+      try {
+        const authorization = await getApiAuthHeader(isAuthenticated, getAccessTokenSilently);
+        if (!authorization) return;
+        await axios.delete(import.meta.env.VITE_API_URL + `/notes/${commentId}` || '', {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: authorization,
+          },
+        });
+        getNotes();
+      } finally {
+        setDeletingNote(false);
+      }
     }
   }
 
@@ -69,29 +89,41 @@ export default function Note(props: Props) {
   };
 
   const saveCommentText = async () => {
+    if (!noteText.trim()) return;
+    if (offline) {
+      addLocalNote(props.id, noteText);
+      setNoteText('');
+      setNotes(listLocalNotes(props.id));
+      return;
+    }
     setSavingNote(true);
-    const comment: NoteModel = {
-      text: noteText,
-      author: user?.nickname,
-      createdAt: new Date(),
-      contentId: props.id,
-    };
+    try {
+      const authorization = await getApiAuthHeader(isAuthenticated, getAccessTokenSilently);
+      if (!authorization) return;
+      const comment: NoteModel = {
+        text: noteText,
+        author: user?.nickname,
+        createdAt: new Date(),
+        contentId: props.id,
+      };
 
-    await axios.post(import.meta.env.VITE_API_URL + `/note` || '', comment, {
-      withCredentials: true,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: cookies.get('api_token'),
-      },
-    });
-    setNoteText('');
-    getNotes();
-    setSavingNote(false);
+      await axios.post(import.meta.env.VITE_API_URL + `/note` || '', comment, {
+        withCredentials: true,
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: authorization,
+        },
+      });
+      setNoteText('');
+      getNotes();
+    } finally {
+      setSavingNote(false);
+    }
   };
 
   return (
     <div className="my-8 rounded-lg bg-light-yellow p-4">
-      {isAuthenticated && (
+      {canUseNotes && (
         <>
           <h2 className="text-center font-title text-xl font-semibold text-dark-brown">
             Minhas Anotações
@@ -111,37 +143,27 @@ export default function Note(props: Props) {
               />
             </div>
           )}
-          {notes.map((note) => {
+          {notes.map((note, index) => {
             return (
-              <>
-                <div className="mb-4 ">
-                  <div className="flex rounded-sm hover:bg-dark-brown hover:bg-opacity-5">
-                    <div className="grow flex-col align-middle">
-                      <p className="mx-2 mt-2 font-title text-dark-brown">{note.text}</p>
-                      <span className="my-auto ml-2 mb-2 inline-block h-fit align-middle font-title text-xs text-red">
-                        {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
-                        {new Date(note.createdAt!).toLocaleString()}
-                      </span>
-                    </div>
-                    <button
-                      aria-label="Deletar Comentário"
-                      onClick={() => handleDeleteComment(note.id || '')}
-                      disabled={isDeletingNote}
-                      className="rounded-sm bg-red p-1"
-                    >
-                      <RiCloseCircleFill className="w-3 text-dark-brown " />
-                    </button>
+              <div key={note.id || `${index}-${note.text}`} className="mb-4 ">
+                <div className="flex rounded-sm hover:bg-dark-brown hover:bg-opacity-5">
+                  <div className="grow flex-col align-middle">
+                    <p className="mx-2 mt-2 font-title text-dark-brown">{note.text}</p>
+                    <span className="my-auto mb-2 ml-2 inline-block h-fit align-middle font-title text-xs text-red">
+                      {/* eslint-disable-next-line @typescript-eslint/no-non-null-assertion */}
+                      {new Date(note.createdAt!).toLocaleString()}
+                    </span>
                   </div>
+                  <button
+                    aria-label="Deletar Comentário"
+                    onClick={() => handleDeleteComment(note.id || '')}
+                    disabled={isDeletingNote}
+                    className="rounded-sm bg-red p-1"
+                  >
+                    <RiCloseCircleFill className="w-3 text-dark-brown " />
+                  </button>
                 </div>
-                {/* <button
-                  aria-label="Deletar Comentário"
-                  onClick={() => handleDeleteComment(note.id || "")}
-                  disabled={isDeletingNote}
-                  className="p-1 rounded-sm bg-red"
-                >
-                  <RiCloseCircleFill className="w-3 text-dark-brown " />
-                </button> */}
-              </>
+              </div>
             );
           })}
 
@@ -172,12 +194,12 @@ export default function Note(props: Props) {
                   <>Salvar Anotação </>
                 )}
               </button>
-              <div className="absolute top-1 left-1 -right-1 -bottom-1 z-10 rounded-sm bg-red group-hover:bg-yellow"></div>
+              <div className="absolute -bottom-1 -right-1 left-1 top-1 z-10 rounded-sm bg-red group-hover:bg-yellow"></div>
             </div>
           </div>
         </>
       )}
-      {!isAuthenticated && (
+      {!canUseNotes && (
         <p className="text-center font-title">
           Adicione anotações de seus estudos 📝. Para isso basta{' '}
           <button
@@ -196,16 +218,14 @@ export default function Note(props: Props) {
     (async () => {
       await loginWithPopup();
 
-      const token = await getAccessTokenSilently({
-        audience: 'TrilhaInfoApi',
-      });
-      cookies.set('api_token', `Bearer ${token}`);
+      const authorization = await getApiAuthHeader(true, getAccessTokenSilently);
+      if (!authorization) return;
 
       try {
         await axios.get(import.meta.env.VITE_API_URL + '/user/' + user?.nickname, {
           headers: {
             'Content-Type': 'application/json',
-            Authorization: cookies.get('api_token'),
+            Authorization: authorization,
           },
         });
       } catch (e) {
@@ -217,7 +237,7 @@ export default function Note(props: Props) {
           {
             headers: {
               'Content-Type': 'application/json',
-              Authorization: cookies.get('api_token'),
+              Authorization: authorization,
             },
           },
         );

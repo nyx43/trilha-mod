@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
-import { FaCheckSquare, FaRegCircle, FaRegSquare } from 'react-icons/fa';
+import { FaCheckSquare, FaRegSquare } from 'react-icons/fa';
 import { Level, RoadmapItem } from '../../../entity/RoadmapModel';
-import { CheckIcon } from '../../CheckIcon';
 import { useLevelRoadmapActions, useSelectedItem } from '../LevelProvider';
 
 type HorizontalLevelItemsProps = {

@@ -1,10 +1,41 @@
-export const pyodideBase = 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/';
+export function resolvePyodideBase(): string {
+  const origin =
+    typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null'
+      ? window.location.origin
+      : '';
+  return `${origin}/vendor/pyodide/`;
+}
+
+export const pyodideBase = '/vendor/pyodide/';
 const timeLimit = 8000;
 
-const workerSource = `
-importScripts(${JSON.stringify(`${pyodideBase}pyodide.js`)});
-const ready = loadPyodide({ indexURL: ${JSON.stringify(pyodideBase)} }).then((py) => {
+export function buildPythonWorkerSource(baseUrl: string = resolvePyodideBase()): string {
+  return `
+importScripts(${JSON.stringify(`${baseUrl}pyodide.js`)});
+const ready = loadPyodide({ indexURL: ${JSON.stringify(baseUrl)} }).then((py) => {
   py.setStdin({ stdin: () => { throw new Error('input() não funciona aqui: escreva o valor direto no código.'); } });
+  // Isolate user Python code from network/host APIs after runtime boot
+  try {
+    Object.defineProperty(self, 'fetch', {
+      value: () => Promise.reject(new Error('Acesso de rede bloqueado no laboratório offline.')),
+      writable: false,
+      configurable: false,
+    });
+  } catch (e) {}
+  try {
+    Object.defineProperty(self, 'XMLHttpRequest', {
+      value: function () { throw new Error('Acesso de rede bloqueado no laboratório offline.'); },
+      writable: false,
+      configurable: false,
+    });
+  } catch (e) {}
+  try {
+    Object.defineProperty(self, 'importScripts', {
+      value: function () { throw new Error('Importação de scripts bloqueada no laboratório offline.'); },
+      writable: false,
+      configurable: false,
+    });
+  } catch (e) {}
   return py;
 });
 ready.then(() => self.postMessage({ type: 'ready' }), (error) => self.postMessage({ type: 'failed', error: String(error) }));
@@ -37,6 +68,7 @@ self.onmessage = async (event) => {
   self.postMessage({ type: 'done', id, output, error, checks });
 };
 `;
+}
 
 export interface PythonRun {
   output: string;
@@ -48,17 +80,24 @@ type Listener = (message: { type: string; id?: number; [key: string]: unknown })
 
 let worker: Worker | undefined;
 let ready: Promise<void> | undefined;
+let isReady = false;
 let sequence = 0;
 const listeners = new Set<Listener>();
 
 function boot(): Promise<void> {
   if (ready && worker) return ready;
-  const url = URL.createObjectURL(new Blob([workerSource], { type: 'text/javascript' }));
+  const url = URL.createObjectURL(
+    new Blob([buildPythonWorkerSource()], { type: 'text/javascript' }),
+  );
   worker = new Worker(url);
+  URL.revokeObjectURL(url);
   worker.onmessage = (event) => listeners.forEach((listener) => listener(event.data));
   ready = new Promise((resolve, reject) => {
     const listener: Listener = (message) => {
-      if (message.type === 'ready') resolve();
+      if (message.type === 'ready') {
+        isReady = true;
+        resolve();
+      }
       if (message.type === 'failed') reject(new Error(String(message.error)));
       if (message.type === 'ready' || message.type === 'failed') listeners.delete(listener);
     };
@@ -73,9 +112,10 @@ function reset() {
   worker?.terminate();
   worker = undefined;
   ready = undefined;
+  isReady = false;
 }
 
-export const pythonLoaded = () => !!worker;
+export const pythonLoaded = () => isReady;
 
 export async function runPython(
   code: string,

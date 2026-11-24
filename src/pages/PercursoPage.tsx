@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import DiagnosticoPratica from './DiagnosticoPratica';
 import {
   PiArrowLeft,
@@ -22,9 +22,11 @@ import { LessonContext } from '../components/Lesson/context';
 import { activityKey, findLesson } from '../lessons';
 import { NarrationProvider } from '../narration/controller';
 import { NarrationBlockButton, NarrationPlayer } from '../narration/NarrationPlayer';
-import { LessonTutor } from '../tutor/LessonTutor';
+import { isTutorEnabled, OFFLINE_APP_BUILD } from '../runtime/mode';
 import { cardKey, enrollCards, localDay, updateLesson, useLessonStore } from '../lessons/progress';
 import { LessonContent } from '../lessons/types';
+import { resolveSectionPosition } from '../lessons/sectionPosition';
+import { publishedStageOrder } from '../percurso/publishedSectionOrder';
 import { MissionReview } from '../percurso/MissionReview';
 import {
   diagnosticoWebSlug,
@@ -43,10 +45,14 @@ import {
   toggleStageDone,
   usePercursoStore,
 } from '../percurso/progress';
+import { safeDecodeHash } from '../support/hash';
 import '../components/Guide/guide.css';
 import '../components/Lesson/lesson.css';
 
 const closingId = 'fechamento';
+const LazyLessonTutor = OFFLINE_APP_BUILD
+  ? null
+  : lazy(() => import('../tutor/LessonTutor').then((m) => ({ default: m.LessonTutor })));
 
 function PercursoOverview({ percurso }: { percurso: Percurso }) {
   const percursoStore = usePercursoStore();
@@ -262,13 +268,18 @@ function PercursoLessonStageView({
   }, [content, stage.cardIds]);
 
   const total = sections.length + 1;
+  const ids = useMemo(() => [...sections.map((section) => section.id), closingId], [sections]);
   const savedReached = percursoStore.reached[percurso.id]?.[stage.slug];
-  const reached = Number.isInteger(savedReached)
-    ? Math.max(0, Math.min(savedReached, total - 1))
-    : 0;
+  const reached = resolveSectionPosition(
+    ids,
+    percursoStore.positions?.[percurso.id]?.[stage.slug],
+    savedReached,
+    publishedStageOrder[percurso.id]?.[stage.slug],
+  );
   const visible = showAll || done ? total : Math.min(reached + 1, total);
+  const visibleRef = useRef(visible);
+  visibleRef.current = visible;
   const percent = done ? 100 : Math.round((Math.min(reached, total - 1) / total) * 100);
-  const ids = [...sections.map((section) => section.id), closingId];
 
   const previous = index > 0 ? percurso.stages[index - 1] : undefined;
   const next = index + 1 < percurso.stages.length ? percurso.stages[index + 1] : undefined;
@@ -292,38 +303,47 @@ function PercursoLessonStageView({
 
   useEffect(() => {
     if (!content || !hash) return;
-    const targetId = decodeURIComponent(hash.slice(1));
+    const targetId = safeDecodeHash(hash);
     const targetIndex = ids.indexOf(targetId);
     if (targetIndex < 0) return;
-    focusTarget.current = targetId;
-    if (targetIndex >= visible) {
+    if (targetIndex >= visibleRef.current) {
+      focusTarget.current = targetId;
       setShowAll(true);
       return;
     }
+    focusTarget.current = undefined;
     const frame = requestAnimationFrame(() => {
       const heading = document.getElementById(`${targetId}-title`);
       heading?.focus({ preventScroll: true });
       heading?.scrollIntoView?.({ block: 'start' });
     });
-    focusTarget.current = undefined;
     return () => cancelAnimationFrame(frame);
-  }, [content, hash]);
+  }, [content, hash, ids]);
 
   function advance(nextIndex: number) {
     if (nextIndex !== reached + 1 || nextIndex >= total) return;
     focusTarget.current = ids[nextIndex];
-    advanceStage(percurso.id, stage.slug, nextIndex);
+    advanceStage(percurso.id, stage.slug, nextIndex, ids);
   }
 
   function completeStage() {
     if (!content) return;
-    markStageDone(percurso.id, stage.slug);
+    markStageDone(percurso.id, stage.slug, content.revision ?? 1);
     if (stage.slug !== 'requisicoes-react') {
-      updateLesson(stage.lessonId, (prev) => ({
-        ...prev,
-        reached: Math.max(prev.reached, content.sections.length),
-        done: prev.done || localDay(),
-      }));
+      updateLesson(stage.lessonId, (prev) =>
+        prev.done
+          ? prev
+          : {
+              ...prev,
+              reached: content.sections.length,
+              position: {
+                sectionId: closingId,
+                previousSectionIds: content.sections.map(({ id }) => id),
+              },
+              done: localDay(),
+              doneRevision: content.revision ?? 1,
+            },
+      );
     }
     enrollCards(stageCards.map((card) => cardKey(stage.lessonId, card.id)));
   }
@@ -337,7 +357,7 @@ function PercursoLessonStageView({
       scopeSectionIds={stage.sectionIds}
       hasMoreHiddenSections={Boolean(content && !showAll && visible < total)}
     >
-      <LessonContext.Provider value={{ lessonId: stage.lessonId }}>
+      <LessonContext.Provider value={{ lessonId: stage.lessonId, revision: content?.revision }}>
         <article
           ref={stageContainerRef}
           className="guide-page lesson-page"
@@ -505,7 +525,7 @@ function PercursoLessonStageView({
                       </div>
                       {section.blocks.map((block, blockIndex) => (
                         <LessonBlockView
-                          key={blockIndex}
+                          key={block.activityId ?? blockIndex}
                           block={block}
                           lessonId={stage.lessonId}
                           activityId={activityKey(section.id, blockIndex)}
@@ -666,18 +686,20 @@ function PercursoLessonStageView({
             </nav>
           </footer>
         </article>
-        {content && (
-          <LessonTutor
-            key={stage.slug}
-            title={stage.title}
-            summary={stage.summary}
-            hook={content.hook}
-            sections={sections.slice(0, visible)}
-            suggestedSection={
-              sections.slice(0, visible).find(({ id }) => hash === `#${id}`)?.id ??
-              sections[reached]?.id
-            }
-          />
+        {content && LazyLessonTutor && isTutorEnabled() && (
+          <Suspense fallback={null}>
+            <LazyLessonTutor
+              key={stage.slug}
+              title={stage.title}
+              summary={stage.summary}
+              hook={content.hook}
+              sections={sections.slice(0, visible)}
+              suggestedSection={
+                sections.slice(0, visible).find(({ id }) => hash === `#${id}`)?.id ??
+                sections[reached]?.id
+              }
+            />
+          </Suspense>
         )}
       </LessonContext.Provider>
     </NarrationProvider>

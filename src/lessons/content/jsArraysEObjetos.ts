@@ -107,6 +107,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'arrays:5',
           question: 'O que aparece no console?',
           code: 'const compras = ["pão", "leite", "café"];\nconsole.log(compras[3]);',
           language: 'javascript',
@@ -162,6 +163,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'objetos:4',
           question: 'O que aparece no console?',
           code: 'const pessoa = { nome: "Joana", idade: 34 };\nconsole.log(pessoa.Idade);',
           language: 'javascript',
@@ -186,6 +188,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'objetos:5',
           prompt:
             'Complete o objeto: crie a chave `ano` com o valor 1960, mostre a autora no console e marque o livro como emprestado (verdadeiro).',
           language: 'javascript',
@@ -214,6 +217,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'catalogo:2',
           question: 'Com o catálogo acima, o que mostra `console.log(produtos[1].preco)`?',
           options: [
             {
@@ -325,6 +329,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'catalogo:6',
           prompt: 'Qual método resolve cada tarefa do catálogo?',
           buckets: ['map', 'filter', 'find'],
           items: [
@@ -340,6 +345,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'catalogo:7',
           question: 'Nenhum produto custa mais de R$ 500. O que aparece no console?',
           code: 'const caro = produtos.find((p) => p.preco > 500);\nconst caros = produtos.filter((p) => p.preco > 500);\nconsole.log(caro);\nconsole.log(caros);',
           language: 'javascript',
@@ -375,6 +381,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'referencias:1',
           question: 'O que aparece no console?',
           code: 'const original = ["arroz", "feijão"];\nconst outra = original;\noutra.push("farofa");\nconsole.log(original);',
           language: 'javascript',
@@ -479,6 +486,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'json:4',
           question: 'O que aparece no console?',
           code: 'const texto = JSON.stringify({ nome: "Ana" });\nconsole.log(typeof texto);',
           language: 'javascript',
@@ -503,6 +511,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'json:5',
           prompt: 'Quais destes textos são JSON válido?',
           buckets: ['JSON válido', 'JSON inválido'],
           items: [
@@ -552,6 +561,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'mao-na-massa:1',
           title: 'Filtrar, transformar e encontrar',
           task: 'Use o array `produtos` para criar três coisas: `baratos`, só com os produtos de preço até R$ 20 (use `filter`); `nomes`, só com os nomes de todos os produtos (use `map`); e a função `buscarPorId(id)`, que devolve o produto com aquele id (use `find`).',
           js: 'const produtos = [\n  { id: 1, nome: "Caderno", preco: 15, emEstoque: true },\n  { id: 2, nome: "Mochila", preco: 120, emEstoque: false },\n  { id: 3, nome: "Caneta", preco: 3, emEstoque: true },\n  { id: 4, nome: "Estojo", preco: 25, emEstoque: true },\n];\n\n// 1. Produtos com preço até 20\nconst baratos = [];\n\n// 2. Os nomes de todos os produtos\nconst nomes = [];\n\n// 3. O produto com o id recebido\nfunction buscarPorId(id) {\n}\n\nconsole.log(baratos);\nconsole.log(nomes);\nconsole.log(buscarPorId(3));\n',

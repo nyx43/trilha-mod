@@ -1,3 +1,4 @@
+import { siteUrl } from '../config/site';
 import { projectBranch } from './catalog';
 import { downloadBlob } from './downloads';
 import { RoadmapCatalog, StudyContext, StudyPlan, StudyPreferences } from './types';
@@ -26,7 +27,7 @@ Use o contexto de estudos exportado, que inclui o catálogo completo e meu progr
 Considere os pré-requisitos, meu conhecimento declarado e os modos de profundidade.
 Use somente os IDs de nós e referências presentes no catálogo. Não invente links.
 Faça perguntas e proponha exercícios antes de dar a solução. Não trate leitura como domínio.
-Para importar um plano no Trilha Info, devolva JSON conforme https://trilha.info/schemas/study-plan.v1.schema.json.
+Para importar um plano no Trilha Info, devolva JSON conforme ${siteUrl}/schemas/study-plan.v1.schema.json.
 schemaVersion: 1; roadmapId: ${catalog.id}; roadmapVersion: ${catalog.version}.
 Cada semana contém title e steps; cada passo contém nodeId, resourceIds, estimatedMinutes e successCriteria.
 Respeite o orçamento semanal, a ordem dos pré-requisitos e os critérios dos projetos.

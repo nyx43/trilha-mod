@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import axios from 'axios';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { RoadmapRead } from '../entity/RoadmapReadModel';
@@ -143,5 +144,111 @@ describe('CoursePage', () => {
 
     expect(screen.getByRole('button', { name: /concluir conteúdo/i })).toBeInTheDocument();
     expect(screen.queryByRole('button', { name: /desmarcar conteúdo/i })).not.toBeInTheDocument();
+  });
+
+  it('isola o progresso de trilhas personalizadas e mostra indisponibilidade sem tocar em Frontend (Item 6)', async () => {
+    // 1. Prepara progresso conhecido em Frontend
+    const frontendMount = renderCoursePage('/course/frontend');
+    fireEvent.click(screen.getByRole('button', { name: /concluir conteúdo/i }));
+    const frontendSnapshot = window.localStorage.getItem('selectedItems-frontend');
+    expect(frontendSnapshot).toBeTruthy();
+    frontendMount.unmount();
+
+    // 2. Abre uma trilha personalizada válida, marca um item e recarrega
+    const customPayload = {
+      id: 'custom-99',
+      slug: 'minha-trilha-custom',
+      title: 'Trilha Customizada',
+      levels: [
+        {
+          id: 'lvl-1',
+          label: 'Módulo Custom',
+          items: [
+            {
+              id: 'item-1',
+              label: 'Tópico Custom',
+              children: [
+                {
+                  id: 'child-1',
+                  label: 'Subtópico Custom',
+                  links: [
+                    {
+                      id: 'link-1',
+                      label: 'Artigo Custom 1',
+                      url: 'https://exemplo.com/artigo-1',
+                    },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    };
+
+    vi.spyOn(axios, 'get').mockImplementation((url: string) => {
+      if (url.includes('/roadmap/minha-trilha-custom')) {
+        return Promise.resolve({ data: customPayload });
+      }
+      return Promise.reject(new Error('404 Not Found'));
+    });
+
+    const customFirst = renderCoursePage('/course/minha-trilha-custom');
+    expect(await screen.findByRole('heading', { name: 'Artigo Custom 1' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: /concluir conteúdo/i }));
+    expect(screen.getByRole('button', { name: /desmarcar conteúdo/i })).toBeInTheDocument();
+    expect(window.localStorage.getItem('selectedItems-custom-99')).toBeTruthy();
+    expect(window.localStorage.getItem('selectedItems-frontend')).toBe(frontendSnapshot);
+    customFirst.unmount();
+
+    // Recarrega a trilha personalizada -> mantém conclusão isolada
+    const customReload = renderCoursePage('/course/minha-trilha-custom');
+    expect(await screen.findByRole('button', { name: /desmarcar conteúdo/i })).toBeInTheDocument();
+    expect(window.localStorage.getItem('selectedItems-frontend')).toBe(frontendSnapshot);
+    customReload.unmount();
+
+    // 3. Abre identificador inexistente -> estado explícito com retorno e Frontend preservado
+    const missingView = renderCoursePage('/course/trilha-inexistente-xyz');
+    expect(await screen.findByRole('alert')).toHaveTextContent(
+      /Não foi possível carregar este curso/i,
+    );
+    expect(screen.getByRole('link', { name: /Voltar para a trilha/i })).toHaveAttribute(
+      'href',
+      '/roadmap/view/trilha-inexistente-xyz',
+    );
+    expect(window.localStorage.getItem('selectedItems-frontend')).toBe(frontendSnapshot);
+    missingView.unmount();
+
+    // Confirma que Frontend continua exatamente com seu histórico original
+    renderCoursePage('/course/frontend');
+    expect(screen.getByRole('button', { name: /desmarcar conteúdo/i })).toBeInTheDocument();
+  });
+
+  it('associa cada checkbox de CourseAccordion ao título do conteúdo em todos os níveis com IDs únicos (Item 8)', async () => {
+    renderCoursePage('/course/frontend');
+
+    const levelCheckbox = screen.getByRole('checkbox', { name: 'Comece pela web' });
+    const itemCheckbox = screen.getByRole('checkbox', { name: 'Internet e HTTP' });
+    const childCheckbox = screen.getByRole('checkbox', { name: 'O básico' });
+    const linkCheckbox = screen.getByRole('checkbox', { name: /MDN: como a web funciona/i });
+
+    expect(levelCheckbox).toHaveAttribute('aria-checked', 'false');
+    expect(itemCheckbox).toHaveAttribute('aria-checked', 'false');
+    expect(childCheckbox).toHaveAttribute('aria-checked', 'false');
+    expect(linkCheckbox).toHaveAttribute('aria-checked', 'false');
+
+    // Todos os aria-labelledby apontam para IDs únicos no documento
+    const checkboxes = screen.getAllByRole('checkbox');
+    const labelledIds = checkboxes
+      .map((cb) => cb.getAttribute('aria-labelledby'))
+      .filter((id): id is string => Boolean(id));
+    expect(labelledIds.length).toBe(checkboxes.length);
+    expect(new Set(labelledIds).size).toBe(labelledIds.length);
+
+    // Alterna estado e verifica atualização na árvore de acessibilidade
+    fireEvent.click(linkCheckbox);
+    await waitFor(() => expect(linkCheckbox).toHaveAttribute('aria-checked', 'true'));
+    fireEvent.click(linkCheckbox);
+    await waitFor(() => expect(linkCheckbox).toHaveAttribute('aria-checked', 'false'));
   });
 });

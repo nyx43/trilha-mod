@@ -9,8 +9,15 @@ lerna-debug.log*
 
 node_modules
 dist
+dist-android
 dist-ssr
+releases
 *.local
+*.keystore
+*.jks
+signing.properties
+android/local.properties
+android/app/src/main/assets/public
 
 # Editor directories and files
 .vscode/*

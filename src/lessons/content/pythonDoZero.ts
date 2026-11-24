@@ -29,6 +29,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'primeiro-programa:4',
           title: 'Escreva suas primeiras linhas',
           task: 'Complete o programa para mostrar três linhas: a saudação que já está lá, a frase `Estou aprendendo Python` e o resultado da conta `7 * 8` (o `*` é a multiplicação).',
           code: 'print("Olá, Trilha Info")\n# escreva as outras duas linhas abaixo\n',
@@ -43,6 +44,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'primeiro-programa:5',
           question: 'O que este programa mostra?',
           code: 'print("10 + 5")\nprint(10 + 5)',
           language: 'python',
@@ -145,6 +147,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'variaveis-e-tipos:5',
           prompt: 'Qual é o tipo de cada valor?',
           buckets: ['str', 'int', 'float', 'bool'],
           items: [
@@ -173,6 +176,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'variaveis-e-tipos:8',
           title: 'A conta da lanchonete',
           task: 'Crie a variável `total` com o preço vezes a quantidade e mostre exatamente a frase `3 x Coxinha = R$ 19.50`, usando uma f-string com as variáveis (não escreva os números à mão).',
           code: 'produto = "Coxinha"\npreco = 6.5\nquantidade = 3\n\n# crie a variável total\n\n# mostre: 3 x Coxinha = R$ 19.50\n',
@@ -188,6 +192,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'variaveis-e-tipos:9',
           question: 'Qual o resultado de `print("2" + "3")`?',
           options: [
             {
@@ -264,6 +269,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'decisoes:3',
           title: 'Calcule o frete',
           task: 'Escreva o `if`/`elif`/`else` com as regras da loja (acima de 200: grátis; de 100 a 200: R$ 10; abaixo de 100: R$ 25) e mostre `Frete: R$ 10` para a compra de 150. Depois, troque `valor_compra` para 250 e 40 e confira se o resultado muda.',
           code: 'valor_compra = 150\nfrete = 0\n\n# escreva as regras aqui\n\nprint(f"Frete: R$ {frete}")\n',
@@ -280,6 +286,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'decisoes:4',
           question: 'Qual linha este programa mostra?',
           code: 'nota = 7\nif nota >= 5:\n    print("Recuperação")\nelif nota >= 7:\n    print("Aprovado")\nelse:\n    print("Reprovado")',
           language: 'python',
@@ -382,6 +389,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'repeticoes:3',
           title: 'A tabuada que parou cedo',
           task: 'Este programa deveria mostrar a tabuada do 7 de `7 x 1` até `7 x 10`, mas tem um erro clássico. Rode, descubra o que falta e corrija.',
           code: 'for i in range(1, 10):\n    print(f"7 x {i} = {7 * i}")\n',
@@ -398,6 +406,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'repeticoes:5',
           title: 'Quantos meses para juntar mil reais?',
           task: 'Você guarda R$ 150 por mês e quer chegar a R$ 1000. O laço já soma o dinheiro, mas esquece de contar os meses. Faça `meses` aumentar 1 a cada volta e rode: a resposta deve ser `7 meses`.',
           code: 'meta = 1000\nguardado = 0\nmeses = 0\n\nwhile guardado < meta:\n    guardado = guardado + 150\n\nprint(f"Você chega lá em {meses} meses, com R$ {guardado}")\n',
@@ -416,6 +425,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'repeticoes:7',
           question: 'Quantas vezes a palavra `oi` aparece?',
           code: 'for i in range(2, 6):\n    print("oi")',
           language: 'python',
@@ -493,6 +503,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'funcoes:3',
           title: 'Boletim automático',
           task: 'Corrija `calcular_media` para **devolver** a média em vez de mostrar. Depois, complete `situacao(media)`: devolve `"Aprovado"` se a média for 7 ou mais, `"Recuperação"` se for 5 ou mais, e `"Reprovado"` nos outros casos.',
           code: 'def calcular_media(n1, n2, n3):\n    media = (n1 + n2 + n3) / 3\n    print(media)\n\n\ndef situacao(media):\n    return ""\n\n\nm = calcular_media(7, 8, 9)\nprint("Média:", m)\nprint("Situação:", situacao(m))\n',
@@ -507,6 +518,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'funcoes:4',
           prompt: 'Complete a função que calcula o troco de uma compra.',
           language: 'python',
           template:
@@ -516,6 +528,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'funcoes:5',
           prompt:
             'Você quer um programa que diga se cada produto de uma lista de preços está em promoção. Em que ordem faz sentido construir?',
           items: [

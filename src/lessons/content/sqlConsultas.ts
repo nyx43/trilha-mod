@@ -68,6 +68,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'tabelas-sao-planilhas:3',
           title: 'Sua primeira consulta',
           task: 'Rode a consulta como está e observe a tabela `pedidos`. Depois, troque o `*` para mostrar **só** as colunas `cliente` e `valor`, separadas por vírgula.',
           setup,
@@ -108,6 +109,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'filtrando-com-where:2',
           title: 'Pedidos grandes de Recife',
           task: 'Mostre `id`, `cliente` e `valor` dos pedidos da cidade de Recife com valor **acima de 30**. A consulta inicial ainda traz todas as cidades.',
           setup,
@@ -143,6 +145,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'filtrando-com-where:5',
           title: 'Pizzas e açaís sem cupom',
           task: 'A consulta deveria listar os pedidos de **pizza ou açaí** que **não usaram cupom**, mas volta vazia. Corrija a condição do cupom e use `IN` para as categorias.',
           setup,
@@ -154,6 +157,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'filtrando-com-where:6',
           prompt: 'Complete para achar os pedidos de clientes cujo nome começa com “Ana”.',
           language: 'sql',
           template: "SELECT id, cliente FROM pedidos\nWHERE cliente [[LIKE|like]] '[[Ana%]]';",
@@ -162,6 +166,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'filtrando-com-where:7',
           question:
             "O que esta consulta devolve? `SELECT id FROM pedidos WHERE cidade = 'Recife' OR cidade = 'Salvador' AND valor > 100;`",
           options: [
@@ -201,6 +206,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'ordenar-e-limitar:2',
           title: 'Ranking dos maiores pedidos',
           task: 'Mostre `id`, `cliente` e `valor` dos **3 maiores pedidos**, do maior para o menor.',
           setup,
@@ -252,6 +258,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'contar-e-somar:2',
           title: 'O mês em São Paulo',
           task: 'Numa única linha de resultado, mostre a **quantidade** de pedidos e o **faturamento total** (soma dos valores) da cidade de São Paulo.',
           setup,
@@ -275,6 +282,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'contar-e-somar:3',
           question:
             'Na tabela de pedidos, 12 linhas no total, 4 usaram cupom. O que `SELECT COUNT(cupom) FROM pedidos;` devolve?',
           options: [
@@ -321,6 +329,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'agrupar:3',
           prompt: 'Cada filtro vai no WHERE ou no HAVING?',
           buckets: ['WHERE', 'HAVING'],
           items: [
@@ -336,6 +345,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'agrupar:4',
           title: 'Faturamento por cidade',
           task: 'Mostre cada `cidade` com o total faturado, do maior para o menor, mas **só as cidades com mais de um pedido**.',
           setup,
@@ -355,6 +365,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'agrupar:5',
           prompt: 'Coloque as partes de uma consulta na ordem em que elas precisam ser escritas.',
           items: ['SELECT', 'FROM', 'WHERE', 'GROUP BY', 'HAVING', 'ORDER BY', 'LIMIT'],
           explanation:

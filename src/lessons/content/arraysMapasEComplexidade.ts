@@ -67,6 +67,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'como-o-custo-cresce:5',
           prompt:
             'Classifique cada trecho pela forma como o trabalho cresce com o tamanho da lista.',
           buckets: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'],
@@ -143,6 +144,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'lista-set-e-dicionario:3',
           question: 'Qual é a complexidade de tempo desta função, para uma lista com `n` itens?',
           code: 'def remover_repetidos(itens):\n    resultado = []\n    for item in itens:\n        if item not in resultado:\n            resultado.append(item)\n    return resultado',
           language: 'python',
@@ -172,6 +174,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'lista-set-e-dicionario:4',
           title: 'Deduplicar a lista do mutirão',
           task: 'A planilha de inscrições do mutirão tem e-mails repetidos. Escreva `remover_repetidos(itens)` que mantém a **primeira aparição** de cada item, na ordem original, guardando o que já viu num `set` (crie com `set()`). O atalho `list(set(itens))` perde a ordem.',
           code: 'def remover_repetidos(itens):\n    return list(set(itens))\n\n\nprint(remover_repetidos([3, 1, 3, 2, 1]))  # esperado: [3, 1, 2]',
@@ -267,6 +270,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'contagem-de-frequencia:2',
           prompt:
             'Complete a linha que conta cada item, usando o valor padrão para chaves que ainda não existem.',
           language: 'python',
@@ -293,6 +297,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'contagem-de-frequencia:4',
           title: 'A apuração do sabor de pizza',
           task: 'A turma votou no sabor da pizza da confraternização. Corrija `contar(votos)` para devolver quantos votos cada sabor teve e `mais_votado(votos)` para devolver o vencedor. Em empate, vence o que apareceu primeiro; se ninguém votou, devolva `None`.',
           code: 'def contar(votos):\n    contagem = {}\n    for voto in votos:\n        contagem[voto] = 1\n    return contagem\n\n\ndef mais_votado(votos):\n    contagem = contar(votos)\n    return max(contagem, key=contagem.get)\n\n\nprint(contar(["calabresa", "mussarela", "calabresa"]))',
@@ -414,6 +419,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'dois-somam-o-alvo:3',
           question:
             'Depois que você explica a versão com dicionário, a pessoa entrevistadora pergunta: “e quanto ela gasta de memória?”. Qual é a melhor resposta?',
           options: [
@@ -442,6 +448,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'dois-somam-o-alvo:4',
           title: 'Conserte o vale-presente',
           task: 'Esta versão às vezes usa o **mesmo produto duas vezes**: com o preço 50 e alvo 100, ela responde `(0, 0)`. Descubra a causa comparando com o rastreamento acima e corrija. A função devolve as duas posições, a menor primeiro, ou `None` se não houver par.',
           code: 'def dois_somam(precos, alvo):\n    vistos = {}\n    for i, preco in enumerate(precos):\n        vistos[preco] = i\n        falta = alvo - preco\n        if falta in vistos:\n            return (vistos[falta], i)\n    return None\n\n\nprint(dois_somam([30, 50, 70], 100))  # esperado: (0, 2)',
@@ -504,6 +511,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'ponteiros-e-janela:2',
           question:
             'Você quer achar dois preços que somam 100 usando dois ponteiros: um no início, outro no fim, andando para o meio conforme a soma fica maior ou menor que o alvo. O que a lista precisa ter para isso funcionar?',
           options: [
@@ -614,6 +622,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'ponteiros-e-janela:5',
           title: 'A melhor sequência de vendas',
           task: 'Complete `maior_soma_janela(vendas, k)` deslizando a janela dentro do laço. Trate os limites: se `k` for menor ou igual a zero, ou maior que a quantidade de dias (inclusive lista vazia), devolva `None`. Não some a janela inteira de novo a cada volta.',
           code: 'def maior_soma_janela(vendas, k):\n    soma = sum(vendas[:k])\n    melhor = soma\n    for i in range(k, len(vendas)):\n        # entra vendas[i], sai vendas[i - k]\n        pass\n    return melhor\n\n\nprint(maior_soma_janela([100, 200, 300, 50], 2))  # esperado: 500',
@@ -651,6 +660,7 @@ export const content: LessonContent = {
       blocks: [
         {
           type: 'classify',
+          activityId: 'escolher-o-padrao:0',
           prompt: 'Qual padrão resolve cada problema de forma eficiente?',
           buckets: [
             'Contagem com dicionário',
@@ -679,6 +689,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'escolher-o-padrao:1',
           prompt: 'Coloque em ordem uma boa explicação de complexidade durante a entrevista.',
           items: [
             'Apresentar a solução direta e dizer o custo dela',

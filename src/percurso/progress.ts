@@ -1,9 +1,17 @@
 import { useSyncExternalStore } from 'react';
+import {
+  resolveSectionPosition,
+  sectionPosition,
+  SectionPosition,
+} from '../lessons/sectionPosition';
+import { publishedStageOrder } from './publishedSectionOrder';
 
 export interface PercursoStore {
   schemaVersion: 1;
   completed: Record<string, string[]>;
   reached: Record<string, Record<string, number>>;
+  positions?: Record<string, Record<string, SectionPosition>>;
+  completedRevisions?: Record<string, Record<string, number>>;
 }
 
 export const percursoStoreKey = 'trilha-percurso:v1';
@@ -34,6 +42,8 @@ export function readPercursoStore(): PercursoStore {
       value = {
         schemaVersion: 1,
         completed: parsed.completed,
+        positions: parsed.positions,
+        completedRevisions: parsed.completedRevisions,
         reached:
           parsed.reached && typeof parsed.reached === 'object' && !Array.isArray(parsed.reached)
             ? parsed.reached
@@ -71,13 +81,28 @@ export function usePercursoStore(): PercursoStore {
   return useSyncExternalStore(subscribe, readPercursoStore, () => emptyStore);
 }
 
-export function advanceStage(percursoId: string, stageSlug: string, reached: number) {
+export function advanceStage(
+  percursoId: string,
+  stageSlug: string,
+  reached: number,
+  sectionIds: readonly string[],
+) {
   const store = readPercursoStore();
   const stages = store.reached[percursoId] || {};
-  const previous = stages[stageSlug];
-  if (Number.isInteger(previous) && previous >= reached) return;
+  const positions = store.positions?.[percursoId] || {};
+  const previous = resolveSectionPosition(
+    sectionIds,
+    positions[stageSlug],
+    stages[stageSlug],
+    publishedStageOrder[percursoId]?.[stageSlug],
+  );
+  if (previous >= reached || reached >= sectionIds.length) return;
   writePercursoStore({
     ...store,
+    positions: {
+      ...store.positions,
+      [percursoId]: { ...positions, [stageSlug]: sectionPosition(sectionIds, reached) },
+    },
     reached: {
       ...store.reached,
       [percursoId]: { ...stages, [stageSlug]: reached },
@@ -85,12 +110,20 @@ export function advanceStage(percursoId: string, stageSlug: string, reached: num
   });
 }
 
-export function markStageDone(percursoId: string, stageSlug: string) {
+export function markStageDone(percursoId: string, stageSlug: string, revision?: number) {
   const store = readPercursoStore();
   const list = store.completed[percursoId] || [];
   if (list.includes(stageSlug)) return;
   writePercursoStore({
     ...store,
+    ...(revision === undefined
+      ? {}
+      : {
+          completedRevisions: {
+            ...store.completedRevisions,
+            [percursoId]: { ...store.completedRevisions?.[percursoId], [stageSlug]: revision },
+          },
+        }),
     completed: {
       ...store.completed,
       [percursoId]: [...list, stageSlug],
@@ -104,8 +137,15 @@ export function toggleStageDone(percursoId: string, stageSlug: string) {
   const next = list.includes(stageSlug)
     ? list.filter((item) => item !== stageSlug)
     : [...list, stageSlug];
+  const revisions = { ...store.completedRevisions?.[percursoId] };
+  delete revisions[stageSlug];
   writePercursoStore({
     ...store,
+    ...(store.completedRevisions
+      ? {
+          completedRevisions: { ...store.completedRevisions, [percursoId]: revisions },
+        }
+      : {}),
     completed: {
       ...store.completed,
       [percursoId]: next,

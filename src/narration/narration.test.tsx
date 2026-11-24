@@ -42,6 +42,7 @@ class FakeAudioElement {
   playbackRate = 1;
   defaultPlaybackRate = 1;
   currentTime = 0;
+  duration = 30;
   paused = true;
   private listeners: Record<string, Array<() => void>> = {};
 
@@ -213,7 +214,9 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     fireEvent.click(hookBtn);
 
     const audio = getActiveAudio();
-    expect(audio.src).toContain('/narration/integracao-front-e-api/santa/hook.mp3');
+    await waitFor(() =>
+      expect(audio.src).toContain('/narration/integracao-front-e-api/santa/hook.mp3'),
+    );
     expect(
       document
         .querySelector('[data-narration-clip="hook"]')
@@ -248,6 +251,9 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
 
     fireEvent.click(screen.getByRole('button', { name: 'Ouvir apresentação' }));
     const headerAudio = getActiveAudio();
+    await waitFor(() =>
+      expect(headerAudio.src).toContain('/narration/integracao-front-e-api/santa/header.mp3'),
+    );
     const headerSanta = must(must(realManifest.clips.find((c) => c.id === 'header')).audio.santa);
     const fetchWord = must(headerSanta.words.find((w) => w.field === 'summary'));
     const lastHeaderWord = must(headerSanta.words[headerSanta.words.length - 1]);
@@ -288,6 +294,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     await screen.findByRole('region', { name: 'Controles de narração da aula' });
     fireEvent.click(screen.getByRole('button', { name: 'Ouvir abertura' }));
     const audio = getActiveAudio();
+    await waitFor(() => expect(audio.paused).toBe(false));
 
     fireEvent.click(screen.getByRole('button', { name: '0,75×' }));
     expect(audio.playbackRate).toBe(0.75);
@@ -352,6 +359,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     expect(flowClipTrigger).toBeInTheDocument();
     fireEvent.click(flowClipTrigger);
     const flowAudio = getActiveAudio();
+    await waitFor(() => expect(flowAudio.src).toContain('caminho-da-requisicao__2.mp3'));
 
     const step3Word = must(
       must(
@@ -474,6 +482,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     expect(screen.queryByRole('button', { name: 'Ouvir feedback' })).toBeNull();
     fireEvent.click(screen.getByRole('button', { name: 'Ouvir seções abertas' }));
     const audio = getActiveAudio();
+    await waitFor(() => expect(audio.paused).toBe(false));
     for (let i = 0; i < 12 && !audio.src.includes('caminho-da-requisicao__3.mp3'); i += 1) {
       act(() => audio.emit('ended'));
     }
@@ -516,7 +525,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     const heading = must(document.getElementById('fechamento'));
     fireEvent.click(within(heading).getByRole('button', { name: 'Ouvir título' }));
     const audio = getActiveAudio();
-    expect(audio.paused).toBe(false);
+    await waitFor(() => expect(audio.paused).toBe(false));
     fireEvent.click(showAll);
     await waitFor(() => expect(audio.paused).toBe(true));
     expect(audio.src).toBe('');
@@ -581,15 +590,23 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     );
 
     await screen.findByRole('region', { name: 'Controles de narração da aula' });
+    // Leitura silenciosa não baixa o manifesto até o pedido de reprodução (Item 14)
+    expect(
+      fetchSpy.mock.calls.some(([u]) =>
+        String(u).includes('/narration/integracao-front-e-api/manifest.json'),
+      ),
+    ).toBe(false);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir seções abertas' }));
+    const audio = getActiveAudio();
+    await waitFor(() =>
+      expect(audio.src).toContain('/narration/integracao-front-e-api/santa/hook.mp3'),
+    );
     expect(
       fetchSpy.mock.calls.some(([u]) =>
         String(u).includes('/narration/integracao-front-e-api/manifest.json'),
       ),
     ).toBe(true);
-
-    fireEvent.click(screen.getByRole('button', { name: 'Ouvir seções abertas' }));
-    const audio = getActiveAudio();
-    expect(audio.src).toContain('/narration/integracao-front-e-api/santa/hook.mp3');
 
     // Posição salva em chave própria de narração; chaves de aula, revisão e percurso permanecem intocadas
     expect(JSON.parse(localStorage.getItem(NARRATION_POS_KEY) || '{}')).toBeTruthy();
@@ -662,6 +679,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     await screen.findByRole('region', { name: 'Controles de narração da aula' });
     fireEvent.click(screen.getByRole('button', { name: 'Ouvir abertura' }));
     const audio = getActiveAudio();
+    await waitFor(() => expect(audio.paused).toBe(false));
     expect(audio.paused).toBe(false);
 
     const callsBeforeSwitch = fetchSpy.mock.calls.length;
@@ -695,14 +713,96 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
         .map((option) => option.textContent),
     ).toEqual(['Santa (masculina)', 'Dora (feminina)']);
     const play = screen.getByRole('button', { name: 'Ouvir abertura' });
+    expect(fetchSpy).not.toHaveBeenCalled();
     fireEvent.click(play);
     const santa = getActiveAudio();
-    expect(santa.src).toContain('/santa/hook.mp3');
+    await waitFor(() => expect(santa.src).toContain('/santa/hook.mp3'));
+    const manifestCallsAfterFirstPlay = fetchSpy.mock.calls.length;
 
     fireEvent.change(selector, { target: { value: 'dora' } });
     expect(santa.paused).toBe(true);
     fireEvent.click(play);
     const dora = must(must(realManifest.clips.find((clip) => clip.id === 'hook')).audio.dora);
-    expect(getActiveAudio().src).toContain(`/narration/integracao-front-e-api/${dora.src}`);
+    await waitFor(() =>
+      expect(getActiveAudio().src).toContain(`/narration/integracao-front-e-api/${dora.src}`),
+    );
+    expect(fetchSpy.mock.calls.length).toBe(manifestCallsAfterFirstPlay);
+  });
+
+  it('reaplica o deslocamento salvo em loadedmetadata quando o navegador zera currentTime ao carregar', async () => {
+    localStorage.setItem(
+      NARRATION_POS_KEY,
+      JSON.stringify({
+        'integracao-front-e-api': {
+          clipId: 'hook',
+          timeSec: 4.5,
+          updatedAt: '2026-11-18T12:00:00.000Z',
+        },
+      }),
+    );
+
+    render(
+      <MemoryRouter initialEntries={['/aula/integracao-front-e-api']}>
+        <Routes>
+          <Route path="/aula/:lesson" element={<LessonPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    const resumeBtn = await screen.findByRole('button', { name: 'Retomar posição' });
+    fireEvent.click(resumeBtn);
+
+    const audio = getActiveAudio();
+    await waitFor(() => expect(audio.currentTime).toBe(4.5));
+
+    audio.currentTime = 0;
+    act(() => {
+      audio.emit('loadedmetadata');
+    });
+
+    expect(audio.currentTime).toBe(4.5);
+  });
+
+  it('cobre os cinco laboratórios interativos sem blocos descobertos e com pausa nas duas vozes (Item 12)', async () => {
+    const targets: Array<{ lessonId: string; expectedBlocks: string[] }> = [
+      { lessonId: 'css-tudo-e-caixa', expectedBlocks: ['boxModel'] },
+      { lessonId: 'css-flexbox-e-grid', expectedBlocks: ['layoutLab', 'layoutLab'] },
+      { lessonId: 'css-seletores-e-cascata', expectedBlocks: ['specificity'] },
+      { lessonId: 'acessibilidade-para-todos', expectedBlocks: ['contrast'] },
+    ];
+
+    for (const target of targets) {
+      const meta = must(
+        lessons.find((l) => l.id === target.lessonId),
+        target.lessonId,
+      );
+      const { content } = await meta.load();
+      const spec = extractLessonNarrationSpec(meta, content);
+      expect(spec.uncoveredBlocks).toEqual([]);
+
+      const labClips = spec.clips.filter(
+        (clip) => clip.blockType && target.expectedBlocks.includes(clip.blockType),
+      );
+      expect(labClips).toHaveLength(target.expectedBlocks.length);
+
+      const manifestPath = path.resolve(
+        __dirname,
+        `../../public/narration/${target.lessonId}/manifest.json`,
+      );
+      const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8')) as NarrationLessonManifest;
+      expect(manifest.uncoveredBlocks).toEqual([]);
+
+      for (const clip of labClips) {
+        expect(clip.pauseAfter).toBe(true);
+        const mc = must(
+          manifest.clips.find((c) => c.id === clip.id),
+          `${target.lessonId}:${clip.id}`,
+        );
+        expect(mc.pauseAfter).toBe(true);
+        expect(mc.textHash).toBe(clip.textHash);
+        expect(mc.audio.santa?.bytes).toBeGreaterThan(0);
+        expect(mc.audio.dora?.bytes).toBeGreaterThan(0);
+      }
+    }
   });
 });

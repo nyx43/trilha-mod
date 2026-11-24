@@ -42,6 +42,7 @@ Onde a comparação falha: a caixa não "lembra" o valor antigo.`,
         },
         {
           type: 'order',
+          activityId: 'explicar-para-aprender:4',
           prompt: 'Coloque em ordem a técnica Feynman com ajuda da IA.',
           items: [
             'Escolher um conceito pequeno, como “o que faz um `JOIN`”',
@@ -124,6 +125,7 @@ Onde a comparação falha: a caixa não "lembra" o valor antigo.`,
         },
         {
           type: 'fill',
+          activityId: 'ia-faz-perguntas:1',
           prompt: 'Complete o pedido de questionário com as palavras que faltam.',
           language: 'text',
           template: `Estudei [assunto] hoje. Me faça perguntas para revisar.
@@ -137,6 +139,7 @@ No final, liste os pontos que eu errei para eu [[revisar|estudar]] depois.`,
         },
         {
           type: 'quiz',
+          activityId: 'ia-faz-perguntas:2',
           question:
             'Você pediu um questionário, mas a IA mandou dez perguntas de uma vez, já com as respostas embaixo. O que fazer?',
           options: [
@@ -175,6 +178,7 @@ No final, liste os pontos que eu errei para eu [[revisar|estudar]] depois.`,
         },
         {
           type: 'classify',
+          activityId: 'pratica-espacada:2',
           prompt:
             'Quais hábitos fixam o aprendizado, e quais só dão a sensação de que você aprendeu?',
           buckets: ['Fixa o aprendizado', 'Só parece que fixa'],
@@ -245,6 +249,7 @@ No final, liste os pontos que eu errei para eu [[revisar|estudar]] depois.`,
         },
         {
           type: 'quiz',
+          activityId: 'ia-entrevistadora:2',
           question:
             'Na simulação, a IA critica sua resposta: “você deveria ter usado índices no banco, por isso a consulta é lenta”. Você não tinha medido nada. O que fazer?',
           options: [
@@ -268,6 +273,7 @@ No final, liste os pontos que eu errei para eu [[revisar|estudar]] depois.`,
         },
         {
           type: 'quiz',
+          activityId: 'ia-entrevistadora:3',
           question:
             'Você vai fazer um teste técnico on-line de um processo seletivo. Pode usar a IA durante o teste?',
           options: [

@@ -9,12 +9,9 @@ import {
   DrawerDescription,
   DrawerClose,
 } from '../Drawer';
-
-const links = [
-  { label: 'Trilhas', href: '/#trilhas' },
-  { label: 'Aulas', to: '/aulas' },
-  { label: 'Guias', to: '/guias' },
-];
+import { siteLinks } from '../Header';
+import { logoutSession } from '../../auth/apiSession';
+import { isOfflineApp } from '../../runtime/mode';
 
 export default function MobileMenu() {
   return (
@@ -29,7 +26,8 @@ export default function MobileMenu() {
 }
 
 const HeaderDrawer = () => {
-  const { isAuthenticated, user } = useAuth0();
+  const offline = isOfflineApp();
+  const { isAuthenticated, user, logout } = useAuth0();
 
   return (
     <Drawer position="left">
@@ -39,22 +37,39 @@ const HeaderDrawer = () => {
       </DrawerDescription>
       <div className="mobile-menu">
         <img className="mobile-menu-logo" src="/logo.png" alt="Trilha Info" />
-        {isAuthenticated && (
+        {offline ? (
           <div className="mobile-menu-user">
-            <img src={user?.picture} alt="" />
-            <span>{user?.name}</span>
+            <DrawerClose asChild>
+              <Link to="/profile" className="site-user-button">
+                <span>Meu espaço e backup</span>
+              </Link>
+            </DrawerClose>
           </div>
+        ) : (
+          isAuthenticated && (
+            <div className="mobile-menu-user">
+              <DrawerClose asChild>
+                <Link to="/profile" className="site-user-button">
+                  {user?.picture && <img src={user.picture} alt="" />}
+                  <span>{user?.name}</span>
+                </Link>
+              </DrawerClose>
+              <button
+                type="button"
+                className="site-ghost-button"
+                onClick={() => logoutSession(logout)}
+              >
+                Sair
+              </button>
+            </div>
+          )
         )}
         <nav aria-label="Menu principal">
           <ul className="mobile-menu-links">
-            {links.map((link) => (
+            {siteLinks.map((link) => (
               <li key={link.label}>
                 <DrawerClose asChild>
-                  {link.to ? (
-                    <Link to={link.to}>{link.label}</Link>
-                  ) : (
-                    <a href={link.href}>{link.label}</a>
-                  )}
+                  <Link to={link.to}>{link.label}</Link>
                 </DrawerClose>
               </li>
             ))}

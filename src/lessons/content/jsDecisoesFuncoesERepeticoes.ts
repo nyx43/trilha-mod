@@ -81,6 +81,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'decisoes-com-if:3',
           question: 'Agora a temperatura mudou. O que aparece primeiro no console?',
           code: 'const temperatura = 28;\nif (temperatura > 28) {\n  console.log("Leve água e protetor solar");\n} else {\n  console.log("Leve um casaco");\n}',
           language: 'javascript',
@@ -131,6 +132,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'combinando-condicoes:3',
           prompt:
             'Com `const idade = 17;` e `const temIngresso = true;`, cada expressão vale `true` ou `false`?',
           buckets: ['true', 'false'],
@@ -158,6 +160,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'combinando-condicoes:6',
           question: 'Se a nota fosse `9.5`, o que apareceria no console?',
           code: 'const nota = 9.5;\n\nif (nota >= 9) {\n  console.log("Excelente");\n} else if (nota >= 7) {\n  console.log("Aprovado");\n} else if (nota >= 5) {\n  console.log("Recuperação");\n} else {\n  console.log("Reprovado");\n}',
           language: 'javascript',
@@ -299,6 +302,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'funcoes:6',
           question: 'O que aparece no console, em ordem?',
           code: 'function dobro(numero) {\n  console.log(numero * 2);\n}\n\nconst resultado = dobro(5);\nconsole.log(resultado);',
           language: 'javascript',
@@ -348,6 +352,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'funcoes:9',
           prompt: 'Complete a função para devolver a soma e depois chame-a com 4 e 6.',
           language: 'javascript',
           template:
@@ -379,6 +384,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'repeticoes:3',
           prompt: 'Em que ordem o `for` faz o trabalho dele?',
           items: [
             'Cria o contador com `let i = 1`, uma vez só',
@@ -462,6 +468,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'repeticoes:5',
           question: 'O que aparece no console?',
           code: 'for (let i = 0; i < 3; i++) {\n  console.log(i);\n}',
           language: 'javascript',
@@ -543,6 +550,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'juntando-tudo:3',
           title: 'Classificar idades',
           task: 'Complete a função `classificarIdade(idade)` para devolver `"criança"` para menos de 12 anos, `"adolescente"` de 12 a 17 e `"adulto"` a partir de 18. Depois use `for...of` para mostrar no console a classificação de cada idade da lista.',
           js: 'function classificarIdade(idade) {\n  // Use if, else if e else, e devolva o texto com return\n}\n\nconst idades = [5, 15, 30];\n\n// Use for...of para mostrar cada idade e sua classificação\n',

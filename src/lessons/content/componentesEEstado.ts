@@ -62,6 +62,7 @@ function desfavoritar(id) {
         },
         {
           type: 'quiz',
+          activityId: 'interface-segue-estado:6',
           question:
             'O time decide mostrar um selo “Favorito” no cartão de cada produto favoritado. Usando a ideia de interface = função(estado), o que você precisa mudar?',
           options: [
@@ -116,6 +117,7 @@ function desfavoritar(id) {
         },
         {
           type: 'classify',
+          activityId: 'pecas-de-lego:4',
           prompt: 'Em qual componente cada pedaço da tela do catálogo deve ficar?',
           buckets: ['Cabecalho', 'BarraDeBusca', 'ListaDeProdutos', 'CartaoProduto'],
           items: [
@@ -200,6 +202,7 @@ function desfavoritar(id) {
         },
         {
           type: 'fill',
+          activityId: 'props-e-eventos:5',
           prompt: 'Complete o componente para mostrar o nome recebido e avisar o pai no clique.',
           language: 'jsx',
           template: `function BotaoFavorito({ nome, onAlternar }) {
@@ -214,6 +217,7 @@ function desfavoritar(id) {
         },
         {
           type: 'quiz',
+          activityId: 'props-e-eventos:6',
           question:
             'Dentro de `CartaoProduto`, alguém escreve `preco = preco * 0.9` para mostrar um desconto. Qual o problema?',
           options: [
@@ -251,6 +255,7 @@ function desfavoritar(id) {
         },
         {
           type: 'quiz',
+          activityId: 'onde-mora-o-estado:2',
           question:
             'A tela tem `BarraDeBusca` (onde se digita) e `ListaDeProdutos` (que filtra pelo texto). As duas são filhas de `PaginaCatalogo`. Onde deve ficar o texto da busca?',
           options: [
@@ -330,6 +335,7 @@ function desfavoritar(id) {
         },
         {
           type: 'classify',
+          activityId: 'onde-mora-o-estado:5',
           prompt: 'O que precisa ser estado e o que deve ser calculado a partir dele?',
           buckets: ['Guarde como estado', 'Calcule na renderização'],
           items: [
@@ -362,6 +368,7 @@ function desfavoritar(id) {
         },
         {
           type: 'playground',
+          activityId: 'padrao-sem-framework:1',
           title: 'Favoritos guiados pelo estado',
           task: 'Complete os quatro `TODO`. Em `alternarFavorito`, mude só o estado e chame `render()`. Em `render`, desenhe o contador e a lista de favoritos a partir de `estado.favoritos`. Não altere o DOM fora de `render`.',
           html: `<header>
@@ -594,6 +601,7 @@ export class BotaoFavoritoComponent {
         },
         {
           type: 'quiz',
+          activityId: 'tres-frameworks:3',
           question: 'O que `useState` no React, `ref` no Vue e `signal` no Angular têm em comum?',
           options: [
             {

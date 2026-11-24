@@ -37,7 +37,8 @@ export const content: LessonContent = {
         },
         {
           type: 'anatomy',
-          caption: 'Um cartão do Painel de Oficinas da Semana escrito com classes utilitárias. Explore cada trecho.',
+          caption:
+            'Um cartão do Painel de Oficinas da Semana escrito com classes utilitárias. Explore cada trecho.',
           language: 'jsx',
           parts: [
             { text: '<article className="' },
@@ -67,6 +68,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'classes-utilitarias:4',
           question:
             'Você quer separar três botões de filtro numa barra que quebra linha no celular. Por que `flex flex-wrap gap-2` é melhor do que colocar `mr-2` em cada botão?',
           options: [
@@ -90,6 +92,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'classes-utilitarias:5',
           prompt: 'Agrupe cada classe utilitária pelo que ela controla no elemento.',
           buckets: ['Espaçamento e tamanho', 'Layout (Flex / Grid)', 'Cor, borda e texto'],
           items: [
@@ -122,7 +125,8 @@ export const content: LessonContent = {
         {
           type: 'code',
           language: 'jsx',
-          caption: 'Botão de inscrição acessível com área de toque confortável, foco visível e estado desabilitado',
+          caption:
+            'Botão de inscrição acessível com área de toque confortável, foco visível e estado desabilitado',
           code: `<button
   type="button"
   disabled={enviando}
@@ -133,6 +137,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'foco-e-estados:3',
           question:
             'Num formulário de inscrição de oficinas, um colega colocou `className="border p-2 outline-none"` no `<input>` para ficar mais limpo. O que acontece para quem navega com a tecla `Tab`?',
           options: [
@@ -156,6 +161,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'foco-e-estados:4',
           prompt:
             'Complete as classes do botão para reagir ao mouse, mostrar anel de foco pelo teclado e ficar opaco quando `disabled`.',
           language: 'jsx',
@@ -223,6 +229,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'layout-responsivo:3',
           question:
             'Alguém escreveu `className="grid gap-4 grid-cols-3 md:grid-cols-1"` achando que `md:` significa celular. O que vai aparecer numa tela de `360px`?',
           options: [
@@ -246,6 +253,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'layout-responsivo:4',
           prompt: 'Coloque em ordem um fluxo seguro para montar uma tela responsiva com Tailwind.',
           items: [
             'Escrever o HTML semântico (`main`, `header`, `h1`, `button`, `label`)',
@@ -271,6 +279,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'pratica-no-playground-e-vite:1',
           title: 'Conserte o Painel de Oficinas para celular e teclado',
           framework: 'react',
           resizable: true,
@@ -346,7 +355,8 @@ function PainelOficinas() {
 ReactDOM.createRoot(document.getElementById('root')).render(<PainelOficinas />);`,
           checks: [
             {
-              label: 'A lista usa layout mobile-first (`u-cols-1` + `sm-cols-2`) e os cards ficam em 2 colunas em telas >= 640px',
+              label:
+                'A lista usa layout mobile-first (`u-cols-1` + `sm-cols-2`) e os cards ficam em 2 colunas em telas >= 640px',
               test: verificar(`const grade = document.querySelector('section[aria-label="Lista de oficinas"]');
 const cards = [...document.querySelectorAll('.card')];
 if (!grade || cards.length < 2) return false;
@@ -360,7 +370,8 @@ return temClasses && mesmaLinha;`),
 return root.scrollWidth <= root.clientWidth + 1;`),
             },
             {
-              label: 'Os botões têm foco visível (`u-foco`), altura mínima de toque (44px) e alternam para **Inscrito** ao clicar',
+              label:
+                'Os botões têm foco visível (`u-foco`), altura mínima de toque (44px) e alternam para **Inscrito** ao clicar',
               test: verificar(`const botoes = [...document.querySelectorAll('button')];
 if (!botoes.length) return false;
 const acessiveis = botoes.every((b) => b.classList.contains('u-foco') && b.classList.contains('u-alvo') && b.getBoundingClientRect().height >= 44);
@@ -417,6 +428,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<PainelOficinas />);
         },
         {
           type: 'terminal',
+          activityId: 'pratica-no-playground-e-vite:2',
           title: 'Prática real: ligando o Tailwind CSS num projeto React + Vite',
           task: 'Execute estes comandos no computador para criar um projeto React com Vite e instalar o plugin oficial do Tailwind.',
           prompt: '~$',
@@ -445,7 +457,10 @@ Done. Now run:
             },
             {
               goal: 'Instale o Tailwind CSS e o plugin do Vite.',
-              command: ['npm install tailwindcss @tailwindcss/vite', 'npm i tailwindcss @tailwindcss/vite'],
+              command: [
+                'npm install tailwindcss @tailwindcss/vite',
+                'npm i tailwindcss @tailwindcss/vite',
+              ],
               output: 'added 12 packages in 2s',
               hint: 'Use `npm install tailwindcss @tailwindcss/vite`.',
             },

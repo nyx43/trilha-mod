@@ -9,14 +9,14 @@
     "santa",
     "dora"
   ],
-  "generatedAt": "2026-11-18T04:06:01.767417+00:00",
+  "generatedAt": "2026-11-23T17:13:26.037543+00:00",
   "totalDurationMs": {
-    "santa": 895483,
-    "dora": 870457
+    "santa": 915198,
+    "dora": 889572
   },
   "totalBytes": {
-    "santa": 7209964,
-    "dora": 7010476
+    "santa": 7368364,
+    "dora": 7164076
   },
   "clips": [
     {
@@ -15566,6 +15566,693 @@
       }
     },
     {
+      "id": "cascata:4",
+      "sectionId": "cascata",
+      "kind": "playground",
+      "label": "Laboratório: especificidade",
+      "textHash": "67c2536995f98023851617a44d3d7f48b0ebcd978440a249ee058eee6e534022",
+      "clipKey": "32b454773da50805f4e5b828",
+      "audio": {
+        "santa": {
+          "src": "santa/cascata__4.mp3",
+          "durationMs": 19715,
+          "bytes": 158400,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "caption",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 735
+            },
+            {
+              "field": "caption",
+              "from": 8,
+              "to": 12,
+              "startMs": 785,
+              "endMs": 985
+            },
+            {
+              "field": "caption",
+              "from": 13,
+              "to": 22,
+              "startMs": 1035,
+              "endMs": 1610
+            },
+            {
+              "field": "caption",
+              "from": 23,
+              "to": 27,
+              "startMs": 1660,
+              "endMs": 1785
+            },
+            {
+              "field": "caption",
+              "from": 28,
+              "to": 29,
+              "startMs": 1810,
+              "endMs": 1835
+            },
+            {
+              "field": "caption",
+              "from": 30,
+              "to": 35,
+              "startMs": 1885,
+              "endMs": 2185
+            },
+            {
+              "field": "caption",
+              "from": 36,
+              "to": 44,
+              "startMs": 2210,
+              "endMs": 2810
+            },
+            {
+              "field": "caption",
+              "from": 45,
+              "to": 46,
+              "startMs": 2860,
+              "endMs": 2910
+            },
+            {
+              "field": "caption",
+              "from": 47,
+              "to": 51,
+              "startMs": 2960,
+              "endMs": 3260
+            },
+            {
+              "field": "caption",
+              "from": 52,
+              "to": 56,
+              "startMs": 3310,
+              "endMs": 3535
+            },
+            {
+              "field": "caption",
+              "from": 57,
+              "to": 62,
+              "startMs": 3585,
+              "endMs": 4135
+            },
+            {
+              "field": "caption",
+              "from": 64,
+              "to": 65,
+              "startMs": 4690,
+              "endMs": 4740
+            },
+            {
+              "field": "caption",
+              "from": 66,
+              "to": 75,
+              "startMs": 4790,
+              "endMs": 5440
+            },
+            {
+              "field": "caption",
+              "from": 76,
+              "to": 77,
+              "startMs": 5465,
+              "endMs": 5490
+            },
+            {
+              "field": "caption",
+              "from": 78,
+              "to": 87,
+              "startMs": 5540,
+              "endMs": 6090
+            },
+            {
+              "field": "caption",
+              "from": 88,
+              "to": 90,
+              "startMs": 6115,
+              "endMs": 6165
+            },
+            {
+              "field": "caption",
+              "from": 91,
+              "to": 99,
+              "startMs": 6190,
+              "endMs": 6665
+            },
+            {
+              "field": "caption",
+              "from": 100,
+              "to": 104,
+              "startMs": 6715,
+              "endMs": 6840
+            },
+            {
+              "field": "caption",
+              "from": 105,
+              "to": 106,
+              "startMs": 6865,
+              "endMs": 6890
+            },
+            {
+              "field": "caption",
+              "from": 107,
+              "to": 114,
+              "startMs": 6915,
+              "endMs": 7715
+            },
+            {
+              "field": "caption",
+              "from": 116,
+              "to": 119,
+              "startMs": 7815,
+              "endMs": 7990
+            },
+            {
+              "field": "caption",
+              "from": 120,
+              "to": 126,
+              "startMs": 8040,
+              "endMs": 8415
+            },
+            {
+              "field": "caption",
+              "from": 127,
+              "to": 129,
+              "startMs": 8465,
+              "endMs": 8565
+            },
+            {
+              "field": "caption",
+              "from": 130,
+              "to": 137,
+              "startMs": 8590,
+              "endMs": 9140
+            },
+            {
+              "field": "caption",
+              "from": 138,
+              "to": 144,
+              "startMs": 9190,
+              "endMs": 9390
+            },
+            {
+              "field": "caption",
+              "from": 145,
+              "to": 147,
+              "startMs": 9415,
+              "endMs": 9490
+            },
+            {
+              "field": "caption",
+              "from": 148,
+              "to": 158,
+              "startMs": 9515,
+              "endMs": 10115
+            },
+            {
+              "field": "caption",
+              "from": 159,
+              "to": 166,
+              "startMs": 10140,
+              "endMs": 10790
+            },
+            {
+              "field": "task",
+              "from": 0,
+              "to": 5,
+              "startMs": 11400,
+              "endMs": 11725
+            },
+            {
+              "field": "task",
+              "from": 6,
+              "to": 8,
+              "startMs": 11750,
+              "endMs": 11850
+            },
+            {
+              "field": "task",
+              "from": 9,
+              "to": 14,
+              "startMs": 11900,
+              "endMs": 12200
+            },
+            {
+              "field": "task",
+              "from": 15,
+              "to": 17,
+              "startMs": 12225,
+              "endMs": 12300
+            },
+            {
+              "field": "task",
+              "from": 18,
+              "to": 25,
+              "startMs": 12325,
+              "endMs": 13050
+            },
+            {
+              "field": "task",
+              "from": 26,
+              "to": 28,
+              "startMs": 13150,
+              "endMs": 13250
+            },
+            {
+              "field": "task",
+              "from": 29,
+              "to": 35,
+              "startMs": 13300,
+              "endMs": 13750
+            },
+            {
+              "field": "task",
+              "from": 36,
+              "to": 45,
+              "startMs": 13800,
+              "endMs": 14375
+            },
+            {
+              "field": "task",
+              "from": 46,
+              "to": 54,
+              "startMs": 14450,
+              "endMs": 14925
+            },
+            {
+              "field": "task",
+              "from": 55,
+              "to": 59,
+              "startMs": 14975,
+              "endMs": 15100
+            },
+            {
+              "field": "task",
+              "from": 60,
+              "to": 68,
+              "startMs": 15125,
+              "endMs": 15625
+            },
+            {
+              "field": "task",
+              "from": 69,
+              "to": 70,
+              "startMs": 15650,
+              "endMs": 15675
+            },
+            {
+              "field": "task",
+              "from": 71,
+              "to": 80,
+              "startMs": 15725,
+              "endMs": 16400
+            },
+            {
+              "field": "task",
+              "from": 82,
+              "to": 85,
+              "startMs": 16930,
+              "endMs": 17105
+            },
+            {
+              "field": "task",
+              "from": 86,
+              "to": 92,
+              "startMs": 17155,
+              "endMs": 17555
+            },
+            {
+              "field": "task",
+              "from": 93,
+              "to": 98,
+              "startMs": 17580,
+              "endMs": 18005
+            },
+            {
+              "field": "task",
+              "from": 99,
+              "to": 103,
+              "startMs": 18055,
+              "endMs": 18205
+            },
+            {
+              "field": "task",
+              "from": 104,
+              "to": 108,
+              "startMs": 18230,
+              "endMs": 18505
+            },
+            {
+              "field": "task",
+              "from": 109,
+              "to": 121,
+              "startMs": 18530,
+              "endMs": 19555
+            }
+          ],
+          "normalizedScript": "Escreva dois seletores para o mesmo elemento e veja qual vence\nA pontuação é comparada da esquerda para a direita uma coluna só importa quando as anteriores empatam\nTeste os pares de exemplo ou digite seletores próprios para comparar a pontuação\nVou pausar agora para você experimentar"
+        },
+        "dora": {
+          "src": "dora/cascata__4.mp3",
+          "durationMs": 19115,
+          "bytes": 153600,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "caption",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 735
+            },
+            {
+              "field": "caption",
+              "from": 8,
+              "to": 12,
+              "startMs": 785,
+              "endMs": 985
+            },
+            {
+              "field": "caption",
+              "from": 13,
+              "to": 22,
+              "startMs": 1035,
+              "endMs": 1610
+            },
+            {
+              "field": "caption",
+              "from": 23,
+              "to": 27,
+              "startMs": 1660,
+              "endMs": 1785
+            },
+            {
+              "field": "caption",
+              "from": 28,
+              "to": 29,
+              "startMs": 1810,
+              "endMs": 1835
+            },
+            {
+              "field": "caption",
+              "from": 30,
+              "to": 35,
+              "startMs": 1885,
+              "endMs": 2160
+            },
+            {
+              "field": "caption",
+              "from": 36,
+              "to": 44,
+              "startMs": 2185,
+              "endMs": 2760
+            },
+            {
+              "field": "caption",
+              "from": 45,
+              "to": 46,
+              "startMs": 2810,
+              "endMs": 2835
+            },
+            {
+              "field": "caption",
+              "from": 47,
+              "to": 51,
+              "startMs": 2885,
+              "endMs": 3160
+            },
+            {
+              "field": "caption",
+              "from": 52,
+              "to": 56,
+              "startMs": 3210,
+              "endMs": 3360
+            },
+            {
+              "field": "caption",
+              "from": 57,
+              "to": 62,
+              "startMs": 3410,
+              "endMs": 3935
+            },
+            {
+              "field": "caption",
+              "from": 64,
+              "to": 65,
+              "startMs": 4490,
+              "endMs": 4540
+            },
+            {
+              "field": "caption",
+              "from": 66,
+              "to": 75,
+              "startMs": 4590,
+              "endMs": 5215
+            },
+            {
+              "field": "caption",
+              "from": 76,
+              "to": 77,
+              "startMs": 5240,
+              "endMs": 5265
+            },
+            {
+              "field": "caption",
+              "from": 78,
+              "to": 87,
+              "startMs": 5315,
+              "endMs": 5865
+            },
+            {
+              "field": "caption",
+              "from": 88,
+              "to": 90,
+              "startMs": 5890,
+              "endMs": 5940
+            },
+            {
+              "field": "caption",
+              "from": 91,
+              "to": 99,
+              "startMs": 5965,
+              "endMs": 6415
+            },
+            {
+              "field": "caption",
+              "from": 100,
+              "to": 104,
+              "startMs": 6465,
+              "endMs": 6590
+            },
+            {
+              "field": "caption",
+              "from": 105,
+              "to": 106,
+              "startMs": 6615,
+              "endMs": 6640
+            },
+            {
+              "field": "caption",
+              "from": 107,
+              "to": 114,
+              "startMs": 6665,
+              "endMs": 7490
+            },
+            {
+              "field": "caption",
+              "from": 116,
+              "to": 119,
+              "startMs": 7615,
+              "endMs": 7790
+            },
+            {
+              "field": "caption",
+              "from": 120,
+              "to": 126,
+              "startMs": 7840,
+              "endMs": 8215
+            },
+            {
+              "field": "caption",
+              "from": 127,
+              "to": 129,
+              "startMs": 8265,
+              "endMs": 8340
+            },
+            {
+              "field": "caption",
+              "from": 130,
+              "to": 137,
+              "startMs": 8365,
+              "endMs": 8915
+            },
+            {
+              "field": "caption",
+              "from": 138,
+              "to": 144,
+              "startMs": 8965,
+              "endMs": 9165
+            },
+            {
+              "field": "caption",
+              "from": 145,
+              "to": 147,
+              "startMs": 9190,
+              "endMs": 9240
+            },
+            {
+              "field": "caption",
+              "from": 148,
+              "to": 158,
+              "startMs": 9265,
+              "endMs": 9815
+            },
+            {
+              "field": "caption",
+              "from": 159,
+              "to": 166,
+              "startMs": 9840,
+              "endMs": 10490
+            },
+            {
+              "field": "task",
+              "from": 0,
+              "to": 5,
+              "startMs": 11125,
+              "endMs": 11450
+            },
+            {
+              "field": "task",
+              "from": 6,
+              "to": 8,
+              "startMs": 11475,
+              "endMs": 11575
+            },
+            {
+              "field": "task",
+              "from": 9,
+              "to": 14,
+              "startMs": 11625,
+              "endMs": 11925
+            },
+            {
+              "field": "task",
+              "from": 15,
+              "to": 17,
+              "startMs": 11950,
+              "endMs": 12025
+            },
+            {
+              "field": "task",
+              "from": 18,
+              "to": 25,
+              "startMs": 12050,
+              "endMs": 12750
+            },
+            {
+              "field": "task",
+              "from": 26,
+              "to": 28,
+              "startMs": 12850,
+              "endMs": 12925
+            },
+            {
+              "field": "task",
+              "from": 29,
+              "to": 35,
+              "startMs": 12975,
+              "endMs": 13425
+            },
+            {
+              "field": "task",
+              "from": 36,
+              "to": 45,
+              "startMs": 13475,
+              "endMs": 14000
+            },
+            {
+              "field": "task",
+              "from": 46,
+              "to": 54,
+              "startMs": 14075,
+              "endMs": 14525
+            },
+            {
+              "field": "task",
+              "from": 55,
+              "to": 59,
+              "startMs": 14575,
+              "endMs": 14700
+            },
+            {
+              "field": "task",
+              "from": 60,
+              "to": 68,
+              "startMs": 14725,
+              "endMs": 15150
+            },
+            {
+              "field": "task",
+              "from": 69,
+              "to": 70,
+              "startMs": 15175,
+              "endMs": 15200
+            },
+            {
+              "field": "task",
+              "from": 71,
+              "to": 80,
+              "startMs": 15225,
+              "endMs": 15925
+            },
+            {
+              "field": "task",
+              "from": 82,
+              "to": 85,
+              "startMs": 16455,
+              "endMs": 16630
+            },
+            {
+              "field": "task",
+              "from": 86,
+              "to": 92,
+              "startMs": 16680,
+              "endMs": 17080
+            },
+            {
+              "field": "task",
+              "from": 93,
+              "to": 98,
+              "startMs": 17105,
+              "endMs": 17530
+            },
+            {
+              "field": "task",
+              "from": 99,
+              "to": 103,
+              "startMs": 17580,
+              "endMs": 17730
+            },
+            {
+              "field": "task",
+              "from": 104,
+              "to": 108,
+              "startMs": 17755,
+              "endMs": 18005
+            },
+            {
+              "field": "task",
+              "from": 109,
+              "to": 121,
+              "startMs": 18030,
+              "endMs": 18955
+            }
+          ],
+          "normalizedScript": "Escreva dois seletores para o mesmo elemento e veja qual vence\nA pontuação é comparada da esquerda para a direita uma coluna só importa quando as anteriores empatam\nTeste os pares de exemplo ou digite seletores próprios para comparar a pontuação\nVou pausar agora para você experimentar"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
       "id": "cascata:5",
       "sectionId": "cascata",
       "kind": "reveal",
@@ -30267,12 +30954,5 @@
       }
     }
   ],
-  "uncoveredBlocks": [
-    {
-      "sectionId": "cascata",
-      "blockIndex": 4,
-      "blockType": "specificity",
-      "reason": "Tipo de bloco \"specificity\" ainda não possui regra de narração definida."
-    }
-  ]
+  "uncoveredBlocks": []
 }

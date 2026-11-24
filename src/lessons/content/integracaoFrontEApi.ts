@@ -57,6 +57,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'caminho-da-requisicao:3',
           prompt: 'Onde cada tarefa acontece?',
           buckets: ['No front (navegador)', 'Na API (servidor)'],
           items: [
@@ -124,6 +125,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'fetch-com-corpo:2',
           question:
             "Alguém escreveu `body: { descricao: 'Mercado', valor: 230 }`, sem `JSON.stringify`. A API responde 400 dizendo “Informe a descrição”. O que aconteceu?",
           options: [
@@ -147,6 +149,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'fetch-com-corpo:3',
           prompt: 'Complete a função que atualiza parte de uma despesa com PATCH.',
           language: 'js',
           template: `async function atualizarDespesa(id, mudancas) {
@@ -263,6 +266,7 @@ app.use(express.json());`,
         },
         {
           type: 'quiz',
+          activityId: 'cors:5',
           question:
             'O `curl` cadastra despesas sem problema, mas o app React recebe o erro de CORS acima. Qual é a correção certa?',
           options: [
@@ -354,6 +358,7 @@ export async function listarDespesas() {
         },
         {
           type: 'terminal',
+          activityId: 'proxy-e-ambientes:3',
           title: 'Confira o proxy funcionando',
           task: 'A API está rodando na porta 3000 em outro terminal. Na pasta do front, confira a configuração, suba o Vite e chame a API passando por ele.',
           prompt: '~/despesas-web$',
@@ -399,6 +404,7 @@ dist/assets/index-Dk3pL9aZ.js   146.80 kB │ gzip: 47.21 kB
         },
         {
           type: 'quiz',
+          activityId: 'proxy-e-ambientes:4',
           question:
             'Para chamar um serviço de pagamento, alguém criou `VITE_CHAVE_SECRETA=sk_live_...` no `.env.production` do front. Qual o problema?',
           options: [
@@ -470,6 +476,7 @@ dist/assets/index-Dk3pL9aZ.js   146.80 kB │ gzip: 47.21 kB
         },
         {
           type: 'classify',
+          activityId: 'estados-e-falhas:3',
           prompt: 'Que tipo de falha é cada situação?',
           buckets: ['Rede ou tempo', 'Recusa da API', 'Resposta fora do contrato'],
           items: [
@@ -485,6 +492,7 @@ dist/assets/index-Dk3pL9aZ.js   146.80 kB │ gzip: 47.21 kB
         },
         {
           type: 'quiz',
+          activityId: 'estados-e-falhas:4',
           question:
             'A pessoa preencheu um formulário longo e a API respondeu 400 por causa de um único campo. O que a tela deve fazer?',
           options: [
@@ -534,6 +542,7 @@ dist/assets/index-Dk3pL9aZ.js   146.80 kB │ gzip: 47.21 kB
         },
         {
           type: 'order',
+          activityId: 'atualizacao-otimista:2',
           prompt: 'Coloque em ordem os passos de um cadastro otimista.',
           items: [
             'Criar um item provisório com um id temporário e marcá-lo como pendente',
@@ -548,6 +557,7 @@ dist/assets/index-Dk3pL9aZ.js   146.80 kB │ gzip: 47.21 kB
         },
         {
           type: 'playground',
+          activityId: 'atualizacao-otimista:3',
           title: 'Um cadastro que não perde nada',
           framework: 'react',
           height: 320,

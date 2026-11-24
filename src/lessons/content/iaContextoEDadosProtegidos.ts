@@ -26,6 +26,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'mesa-de-trabalho:3',
           question:
             'No começo de uma conversa longa você pediu “use apenas laços for”. Cinquenta mensagens depois, a IA começa a usar `map`. Qual é a explicação mais provável?',
           options: [
@@ -83,6 +84,7 @@ Esperado: importar a função e imprimir o total.`,
         },
         {
           type: 'classify',
+          activityId: 'contexto-util:2',
           prompt: 'Para pedir ajuda com um erro, o que é contexto útil e o que só enche a mesa?',
           buckets: ['Contexto útil', 'Ruído'],
           items: [
@@ -155,6 +157,7 @@ Esperado: importar a função e imprimir o total.`,
         },
         {
           type: 'quiz',
+          activityId: 'conversar-ou-editar:2',
           question:
             'Você está começando e vai usar um agente de IA pela primeira vez num projeto. Qual configuração é mais segura?',
           options: [
@@ -205,6 +208,7 @@ Esperado: importar a função e imprimir o total.`,
         },
         {
           type: 'classify',
+          activityId: 'nunca-cole:2',
           prompt: 'Você pode colar isto numa ferramenta de IA externa?',
           buckets: ['Pode, com tranquilidade', 'Não cole'],
           items: [
@@ -277,6 +281,7 @@ Esperado: importar a função e imprimir o total.`,
         },
         {
           type: 'order',
+          activityId: 'anonimizar:2',
           prompt: 'Coloque em ordem o preparo de um trecho antes de pedir ajuda.',
           items: [
             'Recortar só a parte do código ou do log ligada ao problema',
@@ -290,6 +295,7 @@ Esperado: importar a função e imprimir o total.`,
         },
         {
           type: 'quiz',
+          activityId: 'anonimizar:3',
           question:
             'Você estagia em uma clínica e um relatório com dados de pacientes sai com as datas trocadas. Como pedir ajuda à IA?',
           options: [
@@ -313,6 +319,7 @@ Esperado: importar a função e imprimir o total.`,
         },
         {
           type: 'quiz',
+          activityId: 'anonimizar:4',
           question:
             'Seu projeto pessoal dá erro ao conectar no banco de dados. A mensagem inclui a URL de conexão com usuário e senha. O que fazer?',
           code: 'Error: connect ECONNREFUSED\n  at postgres://admin:S3nh4Forte@db.meuprojeto.com:5432/loja',

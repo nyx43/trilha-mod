@@ -39,6 +39,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'por-que-git:3',
           question:
             'Uma colega diz: “Não consigo usar Git porque estou sem internet hoje”. Ela tem razão?',
           options: [
@@ -145,6 +146,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'tres-areas:3',
           question:
             'Você editou `index.html`, salvou e rodou `git commit -m "Muda título"`, sem usar `git add`. O que acontece?',
           options: [
@@ -232,6 +234,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'primeiros-comandos:4',
           prompt:
             'Complete a sequência: criar o repositório, conferir o estado, preparar todos os arquivos, fazer o commit e ver o histórico.',
           language: 'bash',
@@ -256,6 +259,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'bons-commits:2',
           prompt: 'Quais mensagens de commit ajudam quem lê o histórico depois?',
           buckets: ['Mensagem útil', 'Mensagem ruim'],
           items: [
@@ -362,6 +366,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'branches-e-conflitos:6',
           question:
             'Você resolveu o conflito escolhendo o título “Padaria Pão Quente: desde 1998”. Como o trecho deve ficar antes do commit?',
           options: [
@@ -423,6 +428,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'github-e-pull-request:3',
           prompt: 'Coloque em ordem o caminho de uma mudança até a main, usando pull request.',
           items: [
             'Criar uma branch com `git switch -c`',
@@ -463,6 +469,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'github-e-pull-request:5',
           question:
             'Num pull request, alguém comenta: “Essa função ficou difícil de ler, que tal dividir em duas?”. Qual a melhor reação?',
           options: [

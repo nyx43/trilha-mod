@@ -121,6 +121,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'criando-tabelas:4',
           title: 'A tabela de produtos',
           task: 'Complete o `CREATE TABLE`: `nome` e `preco` devem ser obrigatórios, e `codigo` não pode se repetir entre produtos.',
           setup: '-- banco vazio: a tabela é você que cria',
@@ -171,6 +172,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'inserir-alterar-apagar:2',
           title: 'Produto novo na vitrine',
           task: 'Cadastre o produto `Pão de queijo`, com preço `1.5` e estoque `80`. A consulta inicial esquece o estoque: veja o que o banco grava quando falta um valor.',
           setup: padaria,
@@ -197,6 +199,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'inserir-alterar-apagar:4',
           title: 'O reajuste que saiu do controle',
           task: 'O café subiu para `21.9` e o bolo de milho saiu do cardápio. A consulta inicial tem o erro mais perigoso do SQL: rode, veja o estrago, e corrija para mudar **só** o café. Depois, apague o `Bolo de milho`.',
           setup: padaria,
@@ -220,6 +223,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'inserir-alterar-apagar:5',
           question:
             'Uma pessoa precisa desativar o cliente de id 42 e roda `UPDATE clientes SET ativo = 0;`. O banco responde “15.320 linhas alteradas”. O que aconteceu?',
           options: [
@@ -274,6 +278,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'chaves-estrangeiras:3',
           title: 'Pedidos que apontam para clientes',
           task: 'A tabela `clientes` já existe. Crie `pedidos` de forma que `cliente_id` seja obrigatório e uma chave estrangeira para `clientes (id)`, usando `REFERENCES`.',
           setup: clientes,
@@ -300,6 +305,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'chaves-estrangeiras:4',
           prompt:
             'Num sistema de delivery, cada informação deve ficar na tabela de clientes ou na tabela de pedidos?',
           buckets: ['clientes', 'pedidos'],
@@ -388,6 +394,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'juntando-tabelas:3',
           title: 'Quem fez cada pedido?',
           task: 'A consulta mostra só o número do cliente. Junte com `clientes` para mostrar o `id` do pedido, o **nome** do cliente e o `valor`. Dica: `c.nome` quer dizer “a coluna nome da tabela apelidada de c”.',
           setup: loja,
@@ -407,6 +414,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'juntando-tabelas:4',
           title: 'Pedidos por cliente, inclusive zero',
           task: 'O time de marketing quer **todos** os clientes com a quantidade de pedidos de cada um, para mandar um cupom a quem nunca comprou. A consulta inicial esquece a Carla. Troque o tipo de JOIN e confira se a Carla aparece com 0.',
           setup: loja,
@@ -452,6 +460,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'indices-e-transacoes:2',
           title: 'Do scan ao índice',
           task: 'Rode e leia a coluna `detail`: `SCAN pedidos` quer dizer que o banco leu tudo. Antes do `EXPLAIN`, crie um índice na coluna `cliente_id` com `CREATE INDEX nome_do_indice ON pedidos (cliente_id);` e rode de novo.',
           setup: loja,
@@ -502,6 +511,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'indices-e-transacoes:5',
           title: 'Um Pix que não some no caminho',
           task: 'A consulta inicial só tira o dinheiro da Ana. Faça a transferência completa de 50 da Ana para o Bruno, dentro de uma transação com `BEGIN;` e `COMMIT;`.',
           setup: contas,
@@ -533,6 +543,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'indices-e-transacoes:7',
           question:
             'Uma consulta que busca pedidos por `cliente_id` ficou lenta depois que a tabela passou de 5 milhões de linhas. O que você investiga primeiro?',
           options: [

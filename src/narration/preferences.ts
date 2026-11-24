@@ -93,9 +93,18 @@ export function loadReadingPosition(scopeKey: string): SavedReadingPosition | nu
     if (typeof localStorage === 'undefined') return null;
     const raw = localStorage.getItem(NARRATION_POS_KEY);
     if (!raw) return null;
-    const map = JSON.parse(raw) as Record<string, SavedReadingPosition>;
-    const entry = map[scopeKey];
-    if (!entry || typeof entry.clipId !== 'string' || typeof entry.timeSec !== 'number') {
+    const parsed = JSON.parse(raw) as unknown;
+    if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
+      return null;
+    }
+    const entry = (parsed as Record<string, SavedReadingPosition>)[scopeKey];
+    if (
+      !entry ||
+      typeof entry.clipId !== 'string' ||
+      typeof entry.timeSec !== 'number' ||
+      !Number.isFinite(entry.timeSec) ||
+      entry.timeSec < 0
+    ) {
       return null;
     }
     return entry;
@@ -108,7 +117,11 @@ export function saveReadingPosition(scopeKey: string, pos: SavedReadingPosition 
   try {
     if (typeof localStorage === 'undefined') return;
     const raw = localStorage.getItem(NARRATION_POS_KEY);
-    const map: Record<string, SavedReadingPosition> = raw ? JSON.parse(raw) : {};
+    const parsed = raw ? (JSON.parse(raw) as unknown) : {};
+    const map: Record<string, SavedReadingPosition> =
+      parsed && typeof parsed === 'object' && !Array.isArray(parsed)
+        ? (parsed as Record<string, SavedReadingPosition>)
+        : {};
     if (!pos) {
       delete map[scopeKey];
     } else {

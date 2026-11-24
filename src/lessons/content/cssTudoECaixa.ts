@@ -30,6 +30,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'raio-x:4',
           question:
             'Você aplicou o truque numa página com um parágrafo que tem um link no meio. O que espera ver?',
           options: [
@@ -90,6 +91,7 @@ export const content: LessonContent = {
         { type: 'boxModel' },
         {
           type: 'quiz',
+          activityId: 'quatro-camadas:4',
           question:
             'Com o `box-sizing` padrão, qual a largura visível desta caixa, da borda esquerda à direita?',
           code: '.caixa {\n  width: 200px;\n  padding: 20px;\n  border: 2px solid black;\n  margin: 20px;\n}',
@@ -140,6 +142,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'border-box:3',
           question: 'Com `border-box`, quanto sobra para o **conteúdo** desta caixa?',
           code: '.caixa {\n  box-sizing: border-box;\n  width: 300px;\n  padding: 24px;\n  border: 1px solid gray;\n}',
           language: 'css',
@@ -173,6 +176,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'border-box:5',
           prompt: 'Qual propriedade resolve cada situação?',
           buckets: ['padding (por dentro)', 'margin (por fora)'],
           items: [
@@ -226,6 +230,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'block-e-inline:2',
           prompt: 'Qual é o `display` padrão de cada elemento, antes de qualquer CSS seu?',
           buckets: ['block', 'inline', 'inline-block'],
           items: [
@@ -243,6 +248,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'block-e-inline:3',
           question: 'Você escreveu `span.etiqueta { width: 120px; }` e nada mudou. Por quê?',
           options: [
             {
@@ -270,6 +276,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'block-e-inline:4',
           title: 'Etiquetas do mesmo tamanho',
           task: 'As etiquetas da loja deveriam ter todas pelo menos 120px de largura, mas o `width` não pega. Mude o `display` delas.',
           html: '<p>\n  Bolo de fubá\n  <span class="etiqueta">Novo</span>\n  <span class="etiqueta">Promoção</span>\n  <span class="etiqueta">Frete grátis</span>\n</p>',
@@ -334,6 +341,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'unidades:3',
           question: 'Com a fonte padrão do navegador em 16px, quanto vale `1.5rem`?',
           options: [
             {
@@ -356,6 +364,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'unidades:4',
           prompt: 'Qual unidade combina melhor com cada caso?',
           buckets: ['rem', '%', 'vh', 'px'],
           items: [
@@ -392,6 +401,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'mao-na-massa:1',
           title: 'Card de inscrição',
           task: 'Siga os comentários no CSS. Dica: `margin: 0 auto` centraliza um bloco que tem largura menor que o pai.',
           html: '<article class="card">\n  <h2>Curso gratuito de informática</h2>\n  <p>Aulas aos sábados na biblioteca do bairro. Traga só a vontade de aprender.</p>\n  <a class="botao" href="#inscricao">Quero me inscrever</a>\n</article>',

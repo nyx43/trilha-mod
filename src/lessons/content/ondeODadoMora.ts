@@ -110,14 +110,9 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
-          prompt:
-            'Classifique cada situação de acordo com o lugar onde o dado está morando.',
-          buckets: [
-            'Memória da página',
-            'localStorage',
-            'Memória da API',
-            'Arquivo (SQLite)',
-          ],
+          activityId: 'quatro-lugares:5',
+          prompt: 'Classifique cada situação de acordo com o lugar onde o dado está morando.',
+          buckets: ['Memória da página', 'localStorage', 'Memória da API', 'Arquivo (SQLite)'],
           items: [
             {
               text: 'Uma variável `let filtroAtual = "romance"` criada pelo JavaScript da página; some ao apertar `F5`.',
@@ -267,7 +262,8 @@ export const content: LessonContent = {
         },
         {
           type: 'anatomy',
-          caption: 'O localStorage só guarda texto (strings): para guardar uma lista de livros, convertemos antes e depois.',
+          caption:
+            'O localStorage só guarda texto (strings): para guardar uma lista de livros, convertemos antes e depois.',
           language: 'js',
           parts: [
             { text: 'localStorage.' },
@@ -293,6 +289,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'navegador-memoria-vs-localstorage:5',
           question:
             'Você gravou `localStorage.setItem("curso-web:cor", "verde")` na aba `http://localhost:5173`. Depois abriu `http://127.0.0.1:5173` no mesmo navegador e executou `localStorage.getItem("curso-web:cor")`. O que aparece e por quê?',
           options: [
@@ -316,6 +313,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'navegador-memoria-vs-localstorage:6',
           prompt:
             'Complete os comandos para gravar `"verde"` em `"curso-web:cor"`, ler o valor após recarregar e remover apenas essa chave no final.',
           language: 'js',
@@ -326,6 +324,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'navegador-memoria-vs-localstorage:7',
           title: 'Pratique no sandbox: memória da página, JSON e proteção contra SecurityError',
           task: 'A prévia abaixo roda em um `iframe` isolado (`sandbox="allow-scripts allow-forms"`), por isso chamar `localStorage` direto lança `SecurityError`. Complete `adicionarNaPagina`, `salvarSeguro` e `lerSeguro` para: (1) guardar livros na memória da página (`window.livrosDaPagina`); (2) tentar gravar em `localStorage` com `JSON.stringify` e cair em `window.fallbackMemoria` se houver `SecurityError`; (3) ler com `JSON.parse` devolvendo `[]` quando a chave não existir.',
           html: '<div class="caixa">\n  <h3>Catálogo na página</h3>\n  <button id="btn-add" type="button">Adicionar Dom Casmurro</button>\n  <p id="status">Nenhum livro adicionado ainda.</p>\n  <ul id="lista"></ul>\n</div>',
@@ -340,7 +339,8 @@ export const content: LessonContent = {
               test: 'const antes = window.livrosDaPagina.length; adicionarNaPagina("Quarto de Despejo", "Carolina Maria de Jesus"); return window.livrosDaPagina.length === antes + 1 && window.livrosDaPagina[antes].titulo === "Quarto de Despejo";',
             },
             {
-              label: '`salvarSeguro` grava em texto JSON sem quebrar mesmo se `localStorage` for bloqueado',
+              label:
+                '`salvarSeguro` grava em texto JSON sem quebrar mesmo se `localStorage` for bloqueado',
               test: 'const dados = [{ titulo: "Teste", autor: "Autora" }]; const res = salvarSeguro("teste:livros", dados); const esperado = JSON.stringify(dados); let salvo = null; try { salvo = localStorage.getItem("teste:livros"); } catch { salvo = window.fallbackMemoria["teste:livros"]; } return !!res && (res.destino === "localStorage" || res.destino === "fallback-sandbox") && salvo === esperado;',
             },
             {
@@ -352,6 +352,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'navegador-memoria-vs-localstorage:8',
           question:
             'Se o `localStorage` sobrevive ao `F5` e a fechar a aba, por que ele **não** substitui o banco de dados do servidor em um catálogo usado por várias pessoas?',
           options: [
@@ -385,7 +386,8 @@ export const content: LessonContent = {
         },
         {
           type: 'flow',
-          caption: 'O que acontece na recarga da página e no reinício da API com lista em memória versus SQLite',
+          caption:
+            'O que acontece na recarga da página e no reinício da API com lista em memória versus SQLite',
           actors: [
             'Navegador (5173)',
             'API Node (3000)',
@@ -498,8 +500,9 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'servidor-memoria-vs-arquivo:5',
           title: 'Veja por dentro do SQLite: tabela, linha, coluna e chave primária',
-          task: 'A tabela `livros` já começa com 2 registros (`id` 1 e 2). Insira um terceiro livro com `INSERT INTO livros (titulo, autor) VALUES (\'Memórias Póstumas de Brás Cubas\', \'Machado de Assis\');` (sem passar `id` manualmente — o banco gera `id = 3`) e depois execute `SELECT id, titulo, autor FROM livros ORDER BY id;` para ver as 3 linhas.',
+          task: "A tabela `livros` já começa com 2 registros (`id` 1 e 2). Insira um terceiro livro com `INSERT INTO livros (titulo, autor) VALUES ('Memórias Póstumas de Brás Cubas', 'Machado de Assis');` (sem passar `id` manualmente — o banco gera `id = 3`) e depois execute `SELECT id, titulo, autor FROM livros ORDER BY id;` para ver as 3 linhas.",
           setup:
             "CREATE TABLE livros (\n  id INTEGER PRIMARY KEY AUTOINCREMENT,\n  titulo TEXT NOT NULL,\n  autor TEXT NOT NULL\n);\nINSERT INTO livros (titulo, autor) VALUES\n  ('Dom Casmurro', 'Machado de Assis'),\n  ('Quarto de Despejo', 'Carolina Maria de Jesus');",
           query:
@@ -523,6 +526,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'servidor-memoria-vs-arquivo:6',
           question:
             'Uma API recebeu `POST /livros`, respondeu `201 Created` com `{"id": 3, "titulo": "Vidas Secas"}`, e o usuário recarregou a página (`F5`) e continuou vendo o livro. Mas, depois que o servidor Node reiniciou, `GET /livros` respondeu `200 OK` com `[]`. O que explica esse comportamento?',
           options: [
@@ -559,6 +563,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'provar-persistencia:1',
           prompt:
             'Coloque em ordem os passos do teste que prova persistência após o reinício da API.',
           items: [
@@ -613,6 +618,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'provar-persistencia:4',
           question:
             'Um catálogo roda com frontend em `http://localhost:5173`, API em `http://localhost:3000` e banco `biblioteca.sqlite`. Se você **apagar o arquivo `biblioteca.sqlite`** com a API parada e depois iniciar a API novamente (com `sequelize.sync()` na inicialização), o que acontece?',
           options: [
@@ -646,17 +652,20 @@ export const content: LessonContent = {
   cards: [
     {
       id: 'quatro-lugares',
-      front: 'Quais são os quatro lugares onde um dado pode morar e o que sobrevive ao `F5` e ao reinício da API?',
+      front:
+        'Quais são os quatro lugares onde um dado pode morar e o que sobrevive ao `F5` e ao reinício da API?',
       back: 'Memória da página (perde no `F5`); `localStorage` (mantém no `F5` e ao fechar, por origem); Memória da API (mantém no `F5`, perde ao reiniciar a API); Arquivo SQLite (mantém no `F5` e ao reiniciar a API).',
     },
     {
       id: 'localstorage-origem',
-      front: 'Se você salvar uma chave no `localStorage` em `http://localhost:5173`, ela aparece em `http://127.0.0.1:5173`?',
+      front:
+        'Se você salvar uma chave no `localStorage` em `http://localhost:5173`, ela aparece em `http://127.0.0.1:5173`?',
       back: 'Não. O `localStorage` é isolado por origem (`scheme + host + porta`). Mudar o host (`localhost` vs `127.0.0.1`) ou a porta muda o espaço de armazenamento; a leitura devolve `null`.',
     },
     {
       id: 'localstorage-texto',
-      front: 'Por que precisamos de `JSON.stringify` e `JSON.parse` ao guardar arrays ou objetos no `localStorage`?',
+      front:
+        'Por que precisamos de `JSON.stringify` e `JSON.parse` ao guardar arrays ou objetos no `localStorage`?',
       back: 'Porque o `localStorage` guarda apenas strings (texto). `JSON.stringify` transforma o objeto/array em texto para gravar; `JSON.parse` reconstrói o dado ao ler.',
     },
     {

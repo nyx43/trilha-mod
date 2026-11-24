@@ -1,3 +1,4 @@
+import { useId } from 'react';
 import * as RadixAccordion from '@radix-ui/react-accordion';
 import s from './CourseAccordion.module.css';
 import { BsChevronDown } from 'react-icons/bs';
@@ -51,7 +52,9 @@ export function CourseAccordion({
   selectedItems,
   setSelectedItems,
 }: CourseAccordionProps) {
+  const baseId = useId();
   const levelLabel = section.label || section.items[0]?.label || '';
+  const levelTitleId = `${baseId}-level`;
 
   return (
     <AccordionItem
@@ -60,6 +63,7 @@ export function CourseAccordion({
     >
       <AccordionHeader className={s.Header}>
         <CourseCheckbox
+          ariaLabelledBy={levelTitleId}
           checked={isRead(levelLabel, selectedItems)}
           toggleChecked={(checked: boolean) => {
             updateReadAttribute(levelLabel, checked, setSelectedItems, selectedItems);
@@ -67,6 +71,7 @@ export function CourseAccordion({
         />
         <AccordionTrigger className={s.CourseTrigger}>
           <span
+            id={levelTitleId}
             className={`text-text-primary ${
               isRead(levelLabel, selectedItems) ? 'line-through' : ''
             }`}
@@ -83,16 +88,18 @@ export function CourseAccordion({
           value={activeItem}
           onValueChange={setActiveItem}
         >
-          {section.items.map((item) => {
+          {section.items.map((item, itemIndex) => {
             const itemReadLabel = `${levelLabel}-${item.label}`;
+            const itemTitleId = `${baseId}-item-${itemIndex}`;
             return (
               <AccordionItem
-                key={item.id || item.label}
+                key={item.id || `${item.label}-${itemIndex}`}
                 value={item.label || ''}
                 className={`${s.CourseItem} bg-[#2D2329] font-normal`}
               >
                 <AccordionHeader className={s.Header}>
                   <CourseCheckbox
+                    ariaLabelledBy={itemTitleId}
                     checked={isRead(itemReadLabel, selectedItems)}
                     toggleChecked={(checked: boolean) =>
                       updateReadAttribute(itemReadLabel, checked, setSelectedItems, selectedItems)
@@ -100,6 +107,7 @@ export function CourseAccordion({
                   />
                   <AccordionTrigger className={s.Trigger}>
                     <span
+                      id={itemTitleId}
                       className={`ml-2 text-text-primary ${
                         isRead(itemReadLabel, selectedItems) ? 'line-through' : ''
                       }`}
@@ -109,11 +117,12 @@ export function CourseAccordion({
                   </AccordionTrigger>
                 </AccordionHeader>
                 <AccordionContent className={s.CourseContent}>
-                  {item.children?.map((child) => {
+                  {item.children?.map((child, childIndex) => {
                     const childReadLabel = `${item.label}-${child.label}`;
+                    const childTitleId = `${baseId}-child-${itemIndex}-${childIndex}`;
                     return (
                       <AccordionContainer
-                        key={child.id || child.label}
+                        key={child.id || `${child.label}-${childIndex}`}
                         value={activeChild}
                         onValueChange={setActiveChild}
                         className="w-full"
@@ -121,12 +130,12 @@ export function CourseAccordion({
                         type="single"
                       >
                         <AccordionItem
-                          key={child.id || child.label}
                           value={child.label || ''}
                           className={`${s.CourseItem} bg-[#261C21] font-normal`}
                         >
                           <AccordionHeader className={s.Header}>
                             <CourseCheckbox
+                              ariaLabelledBy={childTitleId}
                               checked={isRead(childReadLabel, selectedItems)}
                               toggleChecked={(checked: boolean) =>
                                 updateReadAttribute(
@@ -139,6 +148,7 @@ export function CourseAccordion({
                             />
                             <AccordionTrigger className={s.Trigger}>
                               <span
+                                id={childTitleId}
                                 className={`ml-3 text-text-primary ${
                                   isRead(childReadLabel, selectedItems) ? 'line-through' : ''
                                 }`}
@@ -148,8 +158,9 @@ export function CourseAccordion({
                             </AccordionTrigger>
                           </AccordionHeader>
                           <AccordionContent>
-                            {child.links?.map((link) => {
+                            {child.links?.map((link, linkIndex) => {
                               const linkReadLabel = `${item.label}-${child.label}-${link.label}`;
+                              const linkTitleId = `${baseId}-link-${itemIndex}-${childIndex}-${linkIndex}`;
                               const isCurrentLink =
                                 currentEntry?.link === link &&
                                 currentEntry.levelLabel === levelLabel &&
@@ -158,12 +169,13 @@ export function CourseAccordion({
 
                               return (
                                 <div
-                                  key={link.id || link.label}
-                                  className={`flex gap-2 px-4  py-4 text-left ${
+                                  key={link.id || `${link.label}-${linkIndex}`}
+                                  className={`flex items-start gap-2 px-4 py-4 text-left ${
                                     isCurrentLink ? 'border-r-4 border-r-primary bg-[#501F3A]' : ''
                                   }`}
                                 >
                                   <CourseCheckbox
+                                    ariaLabelledBy={linkTitleId}
                                     checked={isRead(linkReadLabel, selectedItems)}
                                     toggleChecked={(checked: boolean) =>
                                       updateReadAttribute(
@@ -183,15 +195,15 @@ export function CourseAccordion({
                                         childLabel: child.label,
                                       })
                                     }
-                                    className={`my-auto ml-4 text-left text-text-primary hover:underline ${
+                                    className={`my-auto ml-2 min-w-0 break-words text-left text-text-primary hover:underline ${
                                       isRead(linkReadLabel, selectedItems) ? 'line-through' : ''
                                     }`}
                                   >
-                                    {link.label}
+                                    <span id={linkTitleId}>{link.label}</span>
                                   </button>
                                 </div>
                               );
-                            })}{' '}
+                            })}
                           </AccordionContent>
                         </AccordionItem>
                       </AccordionContainer>
@@ -220,7 +232,7 @@ export function AccordionTrigger({
   return (
     <RadixAccordion.Trigger {...triggerProps}>
       {children}
-      <BsChevronDown aria-hidden className={`${s.Icon} ${arrowDownClassName}`} />
+      <BsChevronDown aria-hidden className={`${s.Icon} ${arrowDownClassName || ''}`} />
     </RadixAccordion.Trigger>
   );
 }

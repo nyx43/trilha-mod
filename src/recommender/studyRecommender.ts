@@ -402,7 +402,8 @@ export function recommendStudyPlan(rawInput: string): StudyRecommendation {
           best.score >= 5 &&
           !multipleSimilar)
       ) {
-        if (!grouped.has(best.lesson.id)) {
+        const existingGroup = grouped.get(best.lesson.id);
+        if (!existingGroup) {
           const fallbackRule: TopicRule = ruleByLessonId.get(best.lesson.id) || {
             id: `catalog-${best.lesson.id}`,
             lessonId: best.lesson.id,
@@ -416,7 +417,7 @@ export function recommendStudyPlan(rawInput: string): StudyRecommendation {
             snippets: [piece],
           });
         } else {
-          grouped.get(best.lesson.id)!.snippets.push(piece);
+          existingGroup.snippets.push(piece);
         }
       } else {
         weakMatches.push({

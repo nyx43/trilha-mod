@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'cliente-servidor:3',
           question:
             'Você abre o aplicativo do banco no navegador do celular. Quem é o cliente nessa conversa?',
           options: [
@@ -94,6 +95,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'url:2',
           prompt:
             'Em `https://busca.exemplo.org/resultados?q=gatos#imagens`, que parte é cada pedaço?',
           buckets: ['Domínio', 'Caminho', 'Parâmetro', 'Fragmento'],
@@ -253,6 +255,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'http:7',
           question:
             'Você envia um formulário de login com a senha errada. Qual status faz mais sentido o servidor devolver?',
           options: [
@@ -281,6 +284,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'http:8',
           question:
             'Uma página carrega, mas a foto do produto não aparece. Qual destas é a explicação mais provável?',
           options: [
@@ -335,6 +339,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'devtools:2',
           prompt: 'Você digita um endereço e aperta Enter. Coloque em ordem o que acontece.',
           items: [
             'O navegador descobre o IP do domínio no DNS',

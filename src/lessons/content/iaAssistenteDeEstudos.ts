@@ -33,6 +33,7 @@ Próxima palavra provável:
         },
         {
           type: 'quiz',
+          activityId: 'autocompletar-turbinado:4',
           question:
             'Você pergunta a um assistente de IA como criar uma lista em Python. O que ele está fazendo, de fato?',
           options: [
@@ -97,6 +98,7 @@ Próxima palavra provável:
         },
         {
           type: 'classify',
+          activityId: 'bom-e-fraco:2',
           prompt:
             'Em qual destas tarefas um assistente de IA costuma acertar, e em qual você deve conferir com muito cuidado?',
           buckets: ['Costuma ir bem', 'Confira com cuidado'],
@@ -165,6 +167,7 @@ Próxima palavra provável:
         },
         {
           type: 'quiz',
+          activityId: 'alucinacao:2',
           question:
             'A IA responde sua dúvida com um exemplo de código e uma explicação muito segura. Qual é o sinal mais confiável de que a resposta está certa?',
           options: [
@@ -235,6 +238,7 @@ Próxima palavra provável:
         },
         {
           type: 'classify',
+          activityId: 'tutor-nao-muleta:3',
           prompt:
             'Quais destes usos fazem você aprender, e quais só fazem parecer que você aprendeu?',
           buckets: ['Faz aprender', 'Ilusão de aprendizado'],
@@ -314,6 +318,7 @@ Próxima palavra provável:
         },
         {
           type: 'order',
+          activityId: 'pedido-de-estudo:2',
           prompt: 'Coloque em ordem uma sessão de estudo com IA bem feita.',
           items: [
             'Tentar o exercício sozinho e anotar onde travou',
@@ -333,6 +338,7 @@ Próxima palavra provável:
         },
         {
           type: 'quiz',
+          activityId: 'pedido-de-estudo:4',
           question: 'Qual destes pedidos segue melhor a ideia de usar a IA como tutor?',
           options: [
             {

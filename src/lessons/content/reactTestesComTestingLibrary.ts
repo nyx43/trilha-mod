@@ -55,6 +55,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'comportamento-visivel:4',
           question:
             'O time trocou a classe `.botao-azul` por `.botao-primario` e moveu o aviso de um `span` para um `p`. A tela ficou idêntica. O que acontece com os dois testes acima?',
           options: [
@@ -148,6 +149,7 @@ import '@testing-library/jest-dom/vitest';`,
         },
         {
           type: 'terminal',
+          activityId: 'preparar-o-projeto:3',
           title: 'Instale e rode a primeira vez',
           task: 'Você está na pasta do catálogo React. Instale as ferramentas de teste e rode a suíte uma vez.',
           prompt: '~/catalogo$',
@@ -197,6 +199,7 @@ found 0 vulnerabilities`,
         },
         {
           type: 'quiz',
+          activityId: 'preparar-o-projeto:4',
           question: "Por que a configuração usa `environment: 'jsdom'`?",
           options: [
             {
@@ -293,6 +296,7 @@ found 0 vulnerabilities`,
         },
         {
           type: 'classify',
+          activityId: 'consultas-por-prioridade:3',
           prompt: 'Classifique cada busca de um teste de React.',
           buckets: ['Prefira', 'Use com cuidado', 'Evite'],
           items: [
@@ -403,6 +407,7 @@ it('mostra o endereço depois de buscar', async () => {
         },
         {
           type: 'order',
+          activityId: 'agir-como-gente:4',
           prompt: 'Coloque em ordem os passos do teste de erro e recuperação.',
           items: [
             'Configurar o mock: a primeira chamada falha, a segunda devolve um endereço',
@@ -417,6 +422,7 @@ it('mostra o endereço depois de buscar', async () => {
         },
         {
           type: 'fill',
+          activityId: 'agir-como-gente:5',
           prompt:
             'Complete o teste que confere o aviso de e-mail inválido. Ele digita, clica e verifica.',
           language: 'tsx',
@@ -434,6 +440,7 @@ it('mostra o endereço depois de buscar', async () => {
         },
         {
           type: 'quiz',
+          activityId: 'agir-como-gente:6',
           question:
             "Depois de clicar em Buscar, o teste faz `expect(screen.getByText('Avenida Paulista, São Paulo'))` e falha com “Unable to find an element”. No navegador, o endereço aparece. Qual a correção?",
           options: [
@@ -472,6 +479,7 @@ it('mostra o endereço depois de buscar', async () => {
         },
         {
           type: 'terminal',
+          activityId: 'ler-falhas:1',
           title: 'Leia a falha e corrija',
           task: 'Alguém trocou o botão de inscrição por uma `div` estilizada. Rode o teste do componente, leia a mensagem e confirme a correção.',
           prompt: '~/catalogo$',
@@ -551,6 +559,7 @@ Here are the accessible roles:
         },
         {
           type: 'quiz',
+          activityId: 'ler-falhas:2',
           question: 'Na falha acima, que parte da mensagem mais ajudou a descobrir o problema?',
           options: [
             {
@@ -589,6 +598,7 @@ Here are the accessible roles:
         },
         {
           type: 'playground',
+          activityId: 'teste-sua-tela:1',
           title: 'Uma inscrição testável',
           task: 'Ajuste o componente sem mudar o que ele faz: ligue o campo a um `label` com o texto **E-mail**, troque a `div` por um `<button>`, mostre o erro num elemento com `role="alert"` e a confirmação num elemento com `role="status"`.',
           framework: 'react',
@@ -724,6 +734,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Newsletter />);`,
         },
         {
           type: 'quiz',
+          activityId: 'teste-sua-tela:4',
           question:
             'Qual destes comportamentos vale mais a pena cobrir com um teste de componente do formulário de cadastro?',
           options: [

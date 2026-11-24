@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'da-ci-ao-cd:3',
           question:
             'Na empresa de Júlia, todo merge no `main` roda os testes e gera uma versão pronta. Para ir à produção, alguém do time clica em “aprovar”. Isso é:',
           options: [
@@ -121,6 +122,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'estagios:3',
           prompt: 'Coloque as etapas do pipeline na ordem em que acontecem.',
           items: [
             'Build: compilar e empacotar',
@@ -149,6 +151,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'artefatos-e-ambientes:2',
           prompt: 'O que fica dentro do artefato e o que muda por ambiente?',
           buckets: ['Igual em todos (no artefato)', 'Muda por ambiente (configuração)'],
           items: [
@@ -168,6 +171,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'artefatos-e-ambientes:4',
           title: 'Gerando e registrando uma versão',
           task: 'Você vai empacotar a loja como imagem Docker com versão, enviá-la a um registro e marcar o commit no Git.',
           prompt: 'voce@computador:~/loja$',
@@ -285,6 +289,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'estrategias:3',
           question:
             'Um banco digital vai mudar a tela de Pix. O time quer que, se der problema, o menor número possível de clientes seja afetado e que dê para comparar erros entre versões. Qual estratégia combina mais?',
           options: [
@@ -318,6 +323,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'rollback-e-flags:1',
           title: 'Voltando para a versão anterior',
           task: 'A versão `v1.4.0` quebrou o pagamento. Use a CLI do GitHub para disparar o workflow de deploy com a versão anterior.',
           prompt: 'voce@computador:~/loja$',
@@ -381,6 +387,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'rollback-e-flags:6',
           question:
             'O time quer lançar um novo cardápio no app só para clientes de Recife primeiro, sem fazer um deploy separado. O que resolve?',
           options: [

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { OFFLINE_APP_BUILD } from '../../runtime/mode';
 
 declare global {
   interface Window {
@@ -12,6 +13,9 @@ declare global {
 let script: Promise<void> | undefined;
 
 function loadScript(): Promise<void> {
+  if (OFFLINE_APP_BUILD) {
+    return Promise.reject(new Error('turnstile-disabled-offline'));
+  }
   script ||= new Promise((resolve, reject) => {
     const element = document.createElement('script');
     element.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';

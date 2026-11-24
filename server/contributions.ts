@@ -9,11 +9,13 @@ import {
 import {
   Contribution,
   ContributionDraft,
+  contributionTurnstileAction,
   languageLabels,
   resourceKindLabels,
 } from '../src/contributions/types';
 import type { RoadmapCatalog } from '../src/learning/types';
-import { GitHubError, githubConfig, installationClient } from './github';
+import { normalizeSiteUrl, resolveSiteUrl } from '../src/config/site';
+import { GitHubError, installationClient, resolveGitHubConfig } from './github';
 
 type Request = IncomingMessage & { body?: unknown };
 
@@ -30,13 +32,21 @@ function send(res: ServerResponse, status: number, body: unknown) {
 }
 
 async function readBody(req: Request): Promise<unknown> {
-  if (req.body !== undefined) return typeof req.body === 'string' ? JSON.parse(req.body) : req.body;
-  let raw = '';
-  for await (const chunk of req) {
-    raw += chunk;
-    if (raw.length > 16_000) throw new Error('too large');
+  const limit = 16_000;
+  if (req.body !== undefined) {
+    const raw = typeof req.body === 'string' ? req.body : JSON.stringify(req.body);
+    if (Buffer.byteLength(raw) > limit) throw new Error('too large');
+    return JSON.parse(raw);
   }
-  return JSON.parse(raw || '{}');
+  const chunks: Buffer[] = [];
+  let bytes = 0;
+  for await (const chunk of req) {
+    const buffer = Buffer.from(chunk);
+    bytes += buffer.length;
+    if (bytes > limit) throw new Error('too large');
+    chunks.push(buffer);
+  }
+  return JSON.parse(Buffer.concat(chunks).toString('utf8'));
 }
 
 function clientIP(req: Request): string {
@@ -48,44 +58,62 @@ function clientIP(req: Request): string {
   );
 }
 
-function siteOrigin(req: Request, env: NodeJS.ProcessEnv): string {
-  if (env.SITE_URL) return env.SITE_URL.replace(/\/$/, '');
-  if (env.VERCEL_ENV === 'production') return 'https://trilha.info';
-  if (env.VERCEL_URL) return `https://${env.VERCEL_URL}`;
-  return `http://${req.headers.host || 'localhost:5173'}`;
-}
-
-function allowedOrigin(req: Request, env: NodeJS.ProcessEnv): boolean {
+function allowedOrigin(req: Request, env: NodeJS.ProcessEnv, hosted: boolean): boolean {
   const origin = req.headers.origin;
-  if (!origin) return true;
-  try {
-    const { hostname } = new URL(origin);
-    return (
-      hostname === 'trilha.info' ||
-      hostname.endsWith('.trilha.info') ||
-      hostname === env.VERCEL_URL ||
-      hostname.endsWith('.vercel.app') ||
-      (env.VERCEL_ENV !== 'production' && (hostname === 'localhost' || hostname === '127.0.0.1'))
-    );
-  } catch {
-    return false;
+  if (!origin) return false;
+  if (hosted) {
+    const trusted = [new URL(resolveSiteUrl(env)).origin];
+    for (const host of [env.VERCEL_URL, env.VERCEL_PROJECT_PRODUCTION_URL]) {
+      if (host) trusted.push(`https://${host}`);
+    }
+    return trusted.includes(origin) && new URL(origin).host === req.headers.host;
   }
+  const host = req.headers.host || '';
+  return (
+    /^(localhost|127\.0\.0\.1|\[::1\])(:\d+)?$/.test(host) &&
+    origin === `http://${host}` &&
+    ['127.0.0.1', '::1', '::ffff:127.0.0.1'].includes(req.socket.remoteAddress || '')
+  );
 }
 
 function limited(ip: string): boolean {
   const now = Date.now();
+  if (recent.size > 500) {
+    for (const [key, times] of recent.entries()) {
+      const fresh = times.filter((time) => now - time < 3_600_000);
+      if (fresh.length) recent.set(key, fresh);
+      else recent.delete(key);
+    }
+  }
   const hits = (recent.get(ip) || []).filter((time) => now - time < 3_600_000);
+  if (hits.length >= perHour) return true;
   recent.set(ip, [...hits, now]);
-  return hits.length >= perHour;
+  return false;
 }
 
-async function verifyTurnstile(token: unknown, ip: string, secret: string): Promise<boolean> {
+async function verifyTurnstile(
+  token: unknown,
+  ip: string,
+  secret: string,
+  hostname: string,
+): Promise<boolean> {
   if (typeof token !== 'string' || !token) return false;
-  const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
-    method: 'POST',
-    body: new URLSearchParams({ secret, response: token, remoteip: ip }),
-  });
-  return Boolean(((await response.json()) as { success?: boolean }).success);
+  try {
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: new URLSearchParams({ secret, response: token, remoteip: ip }),
+      signal: AbortSignal.timeout(8000),
+    });
+    if (!response.ok) return false;
+    const result = await response.json();
+    return (
+      result.success === true &&
+      result.hostname === hostname &&
+      result.action === contributionTurnstileAction
+    );
+  } catch {
+    return false;
+  }
 }
 
 function checkAgainstCatalog(draft: ContributionDraft, catalog: RoadmapCatalog): FieldErrors {
@@ -162,13 +190,22 @@ function pullBody(
   ].join('\n');
 }
 
-export async function handleContribution(req: Request, res: ServerResponse, env = process.env) {
+export async function handleContribution(
+  req: Request,
+  res: ServerResponse,
+  env = process.env,
+  hosted = env.VERCEL === '1' || env.VERCEL_ENV === 'production' || env.VERCEL_ENV === 'preview',
+) {
   if (req.method !== 'POST') return send(res, 405, { error: 'Use POST.' });
-  if (!allowedOrigin(req, env)) return send(res, 403, { error: 'Origem não permitida.' });
+  const requestOrigin = req.headers.origin;
+  if (!requestOrigin || !allowedOrigin(req, env, hosted))
+    return send(res, 403, { error: 'Origem não permitida.' });
 
   let input: Record<string, unknown>;
   try {
-    input = (await readBody(req)) as Record<string, unknown>;
+    const body = await readBody(req);
+    if (!body || typeof body !== 'object' || Array.isArray(body)) throw new Error('invalid body');
+    input = body as Record<string, unknown>;
   } catch {
     return send(res, 400, { error: 'Não foi possível ler a sugestão.' });
   }
@@ -185,17 +222,30 @@ export async function handleContribution(req: Request, res: ServerResponse, env 
       error: 'Você já enviou várias sugestões nesta hora. Tente de novo mais tarde.',
     });
 
-  const production = env.VERCEL_ENV === 'production';
   if (env.TURNSTILE_SECRET_KEY) {
-    if (!(await verifyTurnstile(input.turnstileToken, ip, env.TURNSTILE_SECRET_KEY)))
+    if (
+      !(await verifyTurnstile(
+        input.turnstileToken,
+        ip,
+        env.TURNSTILE_SECRET_KEY,
+        new URL(requestOrigin).hostname,
+      ))
+    )
       return send(res, 403, {
         error: 'Não conseguimos confirmar que você não é um robô. Tente de novo.',
       });
-  } else if (production)
+  } else if (hosted)
     return send(res, 503, { error: 'O envio de sugestões ainda não está configurado.' });
 
-  const origin = siteOrigin(req, env);
-  const catalogResponse = await fetch(`${origin}/data/${encodeURIComponent(draft.roadmapId)}.json`);
+  const origin = normalizeSiteUrl(env.SITE_URL) || requestOrigin;
+  let catalogResponse: globalThis.Response;
+  try {
+    catalogResponse = await fetch(`${origin}/data/${encodeURIComponent(draft.roadmapId)}.json`);
+  } catch {
+    return send(res, 502, {
+      error: 'Não foi possível carregar os dados da trilha agora. Tente novamente.',
+    });
+  }
   if (!catalogResponse.ok)
     return send(res, 422, {
       error: 'Trilha não encontrada.',
@@ -209,12 +259,21 @@ export async function handleContribution(req: Request, res: ServerResponse, env 
   const contribution = contributionFile(draft);
   const path = `src/contributions/entries/${contribution.id}.json`;
   const content = `${JSON.stringify(contribution, null, 2)}\n`;
-  const config = githubConfig(env);
-  if (!config) {
-    if (production)
+  const destination = resolveGitHubConfig(env);
+  if (destination.status === 'invalid') {
+    return send(res, 503, { error: destination.error });
+  }
+  if (destination.status === 'unconfigured') {
+    if (hosted)
       return send(res, 503, { error: 'O envio de sugestões ainda não está configurado.' });
     return send(res, 200, { dryRun: true, path, file: contribution });
   }
+  if (hosted && !normalizeSiteUrl(env.SITE_URL)) {
+    return send(res, 503, {
+      error: 'Origem pública não configurada: defina SITE_URL antes de publicar contribuições.',
+    });
+  }
+  const config = destination.config;
 
   try {
     const client = await installationClient(config);
@@ -255,7 +314,7 @@ export async function handleContribution(req: Request, res: ServerResponse, env 
       title: `${
         draft.kind === 'resource' ? 'Conteúdo' : 'Novo passo'
       } em ${groupTitle}: ${subject}`.slice(0, 200),
-      body: pullBody(contribution, catalog, env.SITE_URL || 'https://trilha.info', login),
+      body: pullBody(contribution, catalog, normalizeSiteUrl(env.SITE_URL) || origin, login),
       labels: [label],
     });
     return send(res, 201, { pull: { number: pull.number, url: pull.html_url } });
@@ -271,13 +330,22 @@ export async function handleLinkInfo(req: Request, res: ServerResponse) {
   const url = new URL(req.url || '/', 'http://localhost').searchParams.get('url') || '';
   const id = youtubeId(url);
   if (!id) return send(res, 404, { error: 'Sem informações para esse link.' });
-  const response = await fetch(
-    `https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(
-      `https://www.youtube.com/watch?v=${id}`,
-    )}`,
-  );
-  if (!response.ok) return send(res, 404, { error: 'Vídeo não encontrado.' });
-  const data = (await response.json()) as { title?: string; author_name?: string };
-  res.setHeader('Cache-Control', 'public, max-age=86400');
-  return send(res, 200, { kind: 'video', title: data.title || '', author: data.author_name || '' });
+  try {
+    const response = await fetch(
+      `https://www.youtube.com/oembed?format=json&url=${encodeURIComponent(
+        `https://www.youtube.com/watch?v=${id}`,
+      )}`,
+      { signal: AbortSignal.timeout(8000) },
+    );
+    if (!response.ok) return send(res, 404, { error: 'Vídeo não encontrado.' });
+    const data = (await response.json()) as { title?: string; author_name?: string };
+    res.setHeader('Cache-Control', 'public, max-age=86400');
+    return send(res, 200, {
+      kind: 'video',
+      title: data.title || '',
+      author: data.author_name || '',
+    });
+  } catch {
+    return send(res, 502, { error: 'Não foi possível consultar o vídeo agora.' });
+  }
 }

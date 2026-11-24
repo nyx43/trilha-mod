@@ -22,8 +22,8 @@ const labDownload = '/praticas/onde-o-dado-mora/servidor.mjs';
 
 function readAttempt(key: string): Attempt {
   try {
-    const saved = JSON.parse(localStorage.getItem(key) || '{}');
-    return saved && typeof saved === 'object' ? saved : {};
+    const saved = JSON.parse(localStorage.getItem(key) || '{}') as unknown;
+    return saved && typeof saved === 'object' && !Array.isArray(saved) ? (saved as Attempt) : {};
   } catch {
     return {};
   }
@@ -178,7 +178,10 @@ export function PersistencePilot({ id }: { id: PilotId }) {
 
   const lastSaved = phases[done ? phases.length - 1 : active - 1];
   const evidenceDay = attempt.phases?.evidencia?.day;
-  const reviewDay = evidenceDay && addDays(evidenceDay, 7).split('-').reverse().join('/');
+  const reviewDay =
+    typeof evidenceDay === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(evidenceDay)
+      ? addDays(evidenceDay, 7).split('-').reverse().join('/')
+      : undefined;
 
   return (
     <section className="lesson-mission lesson-pilot" aria-labelledby={titleId}>
@@ -206,13 +209,14 @@ export function PersistencePilot({ id }: { id: PilotId }) {
         <details>
           <summary>Ver respostas registradas</summary>
           {phases
-            .filter((phase) => attempt.phases?.[phase.id])
+            .filter((phase) => Array.isArray(attempt.phases?.[phase.id]?.answers))
             .map((phase) => (
               <div key={phase.id} className="lesson-pilot-record">
                 <h4>{phase.title}</h4>
                 <dl>
                   {phase.fields.map((field, index) => {
-                    const answer = attempt.phases?.[phase.id]?.answers[index];
+                    const savedAnswers = attempt.phases?.[phase.id]?.answers;
+                    const answer = Array.isArray(savedAnswers) ? savedAnswers[index] : undefined;
                     return (
                       answer && (
                         <div key={field.label}>

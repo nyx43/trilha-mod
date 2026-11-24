@@ -65,6 +65,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'por-que-react:5',
           question: 'O que é, de fato, o resultado de `<h1>Olá</h1>` dentro de um arquivo React?',
           options: [
             {
@@ -141,6 +142,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'regras-do-jsx:2',
           prompt: 'Qual destes trechos de JSX funciona e qual quebra?',
           buckets: ['Funciona', 'Quebra ou não faz o esperado'],
           items: [
@@ -158,6 +160,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'regras-do-jsx:3',
           prompt:
             'Complete o JSX para que ele funcione: atributo de classe, valor do nome e fechamento da imagem.',
           language: 'jsx',
@@ -212,6 +215,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'componentes-e-props:3',
           question:
             'Alguém escreve `<Saudacao nome={Ana} />` e a tela fica em branco, com um erro no console. Qual é o problema?',
           options: [
@@ -235,6 +239,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'componentes-e-props:4',
           title: 'Seu primeiro componente',
           framework: 'react',
           task: 'Crie o componente `Saudacao`. Ele recebe a prop `nome` e devolve `<p className="saudacao">Olá, {nome}!</p>`. Depois use `<Saudacao />` duas vezes dentro de `App`: uma para Ana e outra para Bruno.',
@@ -343,6 +348,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);`,
         },
         {
           type: 'quiz',
+          activityId: 'children-e-composicao:4',
           question:
             'Você tem `<Modal>` usado com um formulário de login numa tela e com uma foto ampliada em outra. Qual desenho de componente é mais fácil de manter?',
           code: `// Opção A
@@ -470,6 +476,7 @@ root.render(<App />);`,
         },
         {
           type: 'quiz',
+          activityId: 'listas-e-keys:6',
           question: 'Qual destas é a melhor key para uma lista de pedidos vinda da API?',
           options: [
             {
@@ -527,6 +534,7 @@ root.render(<App />);`,
         },
         {
           type: 'quiz',
+          activityId: 'renderizacao-condicional:3',
           question:
             'O carrinho está vazio (`itens.length` é `0`). O que aparece na tela com o código abaixo?',
           code: '<p>{itens.length && `Você tem ${itens.length} itens`}</p>',
@@ -552,6 +560,7 @@ root.render(<App />);`,
         },
         {
           type: 'playground',
+          activityId: 'renderizacao-condicional:4',
           title: 'Cardápio da padaria',
           framework: 'react',
           task: 'Complete `Cardapio`. Use `map` para criar um `<li>` por produto, com `key={produto.id}`, o nome e o preço. Quando o estoque for zero, mostre dentro do `<li>` um `<span className="esgotado">Esgotado</span>`. Se a lista vier vazia, o componente deve mostrar `<p>Nada no cardápio hoje.</p>`.',
@@ -660,6 +669,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);`,
         },
         {
           type: 'order',
+          activityId: 'renderizacao-condicional:5',
           prompt:
             'Você vai transformar uma tela de catálogo em componentes React. Coloque os passos na ordem que mais ajuda.',
           items: [

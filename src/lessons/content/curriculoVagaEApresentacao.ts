@@ -39,6 +39,7 @@ Diferenciais:
         },
         {
           type: 'classify',
+          activityId: 'lendo-a-vaga:3',
           prompt: 'Nessa vaga, o que é obrigatório e o que é desejável?',
           buckets: ['Obrigatório', 'Desejável'],
           items: [
@@ -79,6 +80,7 @@ Diferenciais:
         },
         {
           type: 'quiz',
+          activityId: 'lendo-a-vaga:5',
           question:
             'Você recebe duas propostas: uma CLT de R$ 3.200 com vale-refeição e outra PJ de R$ 4.000. O que é mais importante considerar antes de comparar?',
           options: [
@@ -160,6 +162,7 @@ Diferenciais:
         },
         {
           type: 'classify',
+          activityId: 'curriculo-de-uma-pagina:2',
           prompt: 'O que vale colocar num currículo de entrada e o que é melhor deixar de fora?',
           buckets: ['Vale incluir', 'Deixe de fora'],
           items: [
@@ -241,6 +244,7 @@ Diferenciais:
         },
         {
           type: 'fill',
+          activityId: 'bullets-com-impacto:3',
           prompt:
             'Monte um bullet com estes fatos de um projeto de backend: você **criou** um cache, o objeto foi a **consulta de CEP**, a ferramenta foi **Redis** e o tempo de resposta caiu de 800 ms para 90 ms.',
           language: 'text',
@@ -272,6 +276,7 @@ Diferenciais:
         },
         {
           type: 'python',
+          activityId: 'palavras-chave-e-ats:2',
           title: 'Compare a vaga com o currículo',
           task: 'Complete o laço para separar as palavras da vaga em `encontradas` e `faltando`, sem diferenciar maiúsculas de minúsculas (use `.lower()` dos dois lados). Depois, ajuste a última frase do `curriculo`: a pessoa de fato apresentou os resultados para a dona da padaria, então pode escrever a palavra `comunicação` com verdade.',
           code: `vaga = """
@@ -343,6 +348,7 @@ print('Faltando:', faltando)`,
         },
         {
           type: 'quiz',
+          activityId: 'palavras-chave-e-ats:4',
           question:
             'Uma pessoa sugere colar todas as palavras da vaga em letras brancas no rodapé do currículo, para enganar o sistema. O que acontece?',
           options: [
@@ -404,6 +410,7 @@ print('Faltando:', faltando)`,
         },
         {
           type: 'quiz',
+          activityId: 'linkedin-e-github:2',
           question:
             'Qual título de LinkedIn ajuda mais uma pessoa iniciante em QA a ser encontrada?',
           options: [
@@ -461,6 +468,7 @@ eu faço no projeto, e quero aprender com uma equipe que trabalha com dados de v
         },
         {
           type: 'order',
+          activityId: 'fale-sobre-voce:3',
           prompt: 'Coloque em ordem as partes de um bom “fale sobre você”.',
           items: [
             'O que você faz hoje e o projeto que melhor mostra isso',
@@ -473,6 +481,7 @@ eu faço no projeto, e quero aprender com uma equipe que trabalha com dados de v
         },
         {
           type: 'quiz',
+          activityId: 'fale-sobre-voce:4',
           question:
             'Na entrevista para uma vaga de frontend, a pessoa começa: “Nasci em Natal, estudei na escola X, depois fiz o ensino médio na escola Y…”. Qual o problema?',
           options: [

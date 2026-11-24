@@ -18,6 +18,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'como-responder:2',
           question: 'A pergunta é: “O que é um cookie?”. Qual resposta segue melhor esse roteiro?',
           options: [
             {
@@ -119,6 +120,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'digitar-uma-url:2',
           prompt: 'Organize a resposta para “o que acontece quando digito uma URL?”.',
           items: [
             'O navegador resolve o domínio no DNS e recebe o IP',
@@ -179,6 +181,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'http-rest-e-login:2',
           question:
             'Uma pessoa logada como cliente tenta abrir `/admin/relatorios`. Qual status a API deve devolver?',
           options: [
@@ -233,6 +236,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'http-rest-e-login:4',
           prompt: 'Cada situação é um problema de autenticação ou de autorização?',
           buckets: ['Autenticação (quem é você)', 'Autorização (o que você pode)'],
           items: [
@@ -286,6 +290,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'sql-e-joins:2',
           title: 'Total gasto por cliente, sem esquecer ninguém',
           task: 'O time de marketing quer **todos** os clientes com o total que cada um gastou, inclusive quem nunca comprou (com 0). A consulta abaixo esquece alguém. Corrija usando `LEFT JOIN` e `COALESCE(valor, 0)`, que troca `NULL` por zero.',
           setup:
@@ -315,6 +320,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'sql-e-joins:4',
           title: 'Encontre a dupla contagem',
           task: 'O relatório diz que o frete total foi R$ 65, mas o financeiro jura que foi R$ 25. A consulta junta pedidos com itens e soma o frete, que se repete em cada item. Mantenha as colunas `frete_total` e `valor_itens`, mas calcule cada soma na sua própria tabela (dica: duas subconsultas, `SELECT (SELECT ...) AS frete_total, (SELECT ...) AS valor_itens`).',
           setup:
@@ -357,6 +363,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'indices-e-transacoes:2',
           prompt:
             'Complete o comando que cria um índice na coluna usada para buscar os pedidos de um cliente.',
           language: 'sql',
@@ -366,6 +373,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'indices-e-transacoes:3',
           question: 'Em qual destas situações um índice novo ajuda **menos**?',
           options: [
             {
@@ -392,6 +400,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'indices-e-transacoes:5',
           title: 'Um Pix em uma transação',
           task: 'Transfira R$ 50 da Ana para o Bruno. Hoje o comando só tira o dinheiro da Ana. Complete com o crédito para o Bruno e coloque os dois comandos dentro de `BEGIN;` e `COMMIT;`.',
           setup:
@@ -469,6 +478,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'owasp-essencial:3',
           prompt: 'Classifique cada cenário pelo tipo de ataque.',
           buckets: ['SQL injection', 'XSS', 'CSRF', 'Acesso indevido'],
           items: [
@@ -495,6 +505,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'owasp-essencial:4',
           question:
             'Na entrevista, perguntam: “Como você impediria que um cliente visse o pedido de outro trocando o ID na URL?”. Qual é a melhor resposta?',
           options: [

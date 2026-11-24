@@ -43,6 +43,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'roteiro-live-coding:3',
           prompt: 'Coloque em ordem o roteiro de um bom live coding.',
           items: [
             'Repetir o problema com suas palavras e tirar dúvidas',
@@ -57,6 +58,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'roteiro-live-coding:4',
           question:
             'A pessoa entrevistadora diz: “Escreva uma função que remove os itens repetidos de uma lista.” Qual é o melhor primeiro movimento?',
           options: [
@@ -139,6 +141,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'ler-o-erro:3',
           question: 'Olhando o traceback acima, qual é a hipótese mais provável?',
           options: [
             {
@@ -170,6 +173,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'ler-o-erro:5',
           title: 'Conserte a contagem de aprovações',
           task: 'A regra da escola: aprova quem tira **7 ou mais**. A função abaixo roda sem erro, mas conta errado. Use `print` dentro do laço para ver cada nota visitada, encontre os dois bugs e corrija. Depois apague os prints de investigação.',
           code: 'def contar_aprovados(notas, minimo=7):\n    aprovados = 0\n    for i in range(1, len(notas)):\n        if notas[i] > minimo:\n            aprovados += 1\n    return aprovados\n\n\nprint(contar_aprovados([7, 5, 9]))  # esperado: 2',
@@ -236,6 +240,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'reproduzir-e-isolar:2',
           prompt:
             'Você está numa entrevista e o teste falhou. Quais atitudes ajudam a isolar a causa e quais atrasam a investigação?',
           buckets: ['Ajuda a isolar', 'Atrasa a investigação'],
@@ -254,6 +259,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'reproduzir-e-isolar:3',
           title: 'Corrija a reprodução mínima',
           task: 'Conserte `tem_negativo` para que ela olhe a lista inteira antes de concluir que não há negativos.',
           code: 'def tem_negativo(valores):\n    for v in valores:\n        if v < 0:\n            return True\n        else:\n            return False\n    return False\n\n\nprint(tem_negativo([3, -1]))  # esperado: True',
@@ -334,6 +340,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'entrevista-de-revisao:3',
           prompt: 'Classifique cada problema encontrado em revisões de código.',
           buckets: ['Bug', 'Legibilidade', 'Segurança', 'Desempenho'],
           items: [
@@ -351,6 +358,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'entrevista-de-revisao:4',
           question: 'Você tem tempo para um único comentário sobre a função acima. Qual deve ser?',
           options: [
             {
@@ -398,6 +406,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'consertar-e-provar:2',
           title: 'Conserte a divisão da conta e escreva a regressão',
           task: 'A função divide a conta do restaurante entre as pessoas. Hoje ela perde os centavos e aceita zero ou menos pessoas. Faça ela devolver o valor com 2 casas (use `round`) e levantar `ValueError` quando `pessoas` for menor ou igual a zero. No fim, escreva pelo menos dois `assert` e imprima `testes ok`.',
           code: 'def dividir_conta(total, pessoas):\n    return total // pessoas\n\n\ndef levanta_valueerror(funcao, *args):\n    try:\n        funcao(*args)\n    except ValueError:\n        return True\n    except Exception:\n        return False\n    return False\n\n\n# Escreva aqui seus testes com assert\n# e, no fim, print("testes ok")',
@@ -438,6 +447,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'consertar-e-provar:4',
           prompt: 'Complete a explicação que você daria ao final, em voz alta, sobre a correção.',
           language: 'text',
           template:

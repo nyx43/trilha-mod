@@ -1,3 +1,3 @@
 # Próxima ordem
 
-Valide a missão final do [Percurso Web publicado](https://trilha-mod.vercel.app/percurso/api-react-tailwind/missao-final) com um iniciante. Acompanhe o caminho do primeiro arquivo até cadastrar um item, atualizar a lista e confirmar a persistência após recarregar a página. Use a avaliação da entrega para registrar evidências e anote no [relatório](docs/RELATORIO_ESTABILIZACAO.md) os passos em que a pessoa precisou de ajuda.
+Adicione backup e restauração dos dados de estudo locais conforme a [ordem de execução](docs/PLANO_EVOLUCAO_DAS_AULAS.md#ordem-de-execução-sem-depender-de-joão). Exporte progresso, cartões e planos salvos como arquivo versionado e teste a restauração em outro perfil. Valide o arquivo por inteiro antes de gravar e preserve os dados do perfil ao rejeitar um arquivo inválido.

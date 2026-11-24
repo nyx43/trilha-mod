@@ -27,7 +27,12 @@ import {
   saveNarrationPreferences,
   saveReadingPosition,
 } from './preferences';
-import { getNarrationAudioUrl, getNarrationManifestUrl, hasLessonNarration } from './registry';
+import {
+  VOICE_OPTIONS,
+  getNarrationAudioUrl,
+  getNarrationManifestUrl,
+  hasLessonNarration,
+} from './registry';
 import {
   NarrationClipManifest,
   NarrationClipSpec,
@@ -157,7 +162,7 @@ export function NarrationProvider({
   const [manifest, setManifest] = useState<NarrationLessonManifest | null>(initialManifest ?? null);
   const [manifestStatus, setManifestStatus] = useState<
     'idle' | 'loading' | 'ready' | 'missing' | 'error'
-  >(initialManifest ? 'ready' : enabled ? 'loading' : 'idle');
+  >(initialManifest ? 'ready' : 'idle');
 
   const [status, setStatus] = useState<NarrationStatus>(enabled ? 'idle' : 'unavailable');
   const [pauseReason, setPauseReason] = useState<NarrationPauseReason>(null);
@@ -176,7 +181,11 @@ export function NarrationProvider({
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const playbackRequest = useRef(0);
+  const pendingSeekRef = useRef<{ request: number; timeSec: number } | null>(null);
   const suspendedActivity = useRef<ActivityCheckpoint | null>(null);
+  const manifestPromiseRef = useRef<Promise<NarrationLessonManifest | null> | null>(null);
+  const manifestAbortRef = useRef<AbortController | null>(null);
+  const manifestLoadSeqRef = useRef(0);
   const readingOnDemand = !!activeClipId && Boolean(specById.get(activeClipId)?.onDemand);
   const stateRef = useRef({
     status,
@@ -211,20 +220,57 @@ export function NarrationProvider({
   }, [manifest]);
 
   const availableVoices = useMemo<NarrationVoiceId[]>(() => {
-    if (!manifest) return [];
-    return manifest.availableVoices;
-  }, [manifest]);
+    if (manifest) return manifest.availableVoices;
+    if (enabled) return VOICE_OPTIONS.map((option) => option.id);
+    return [];
+  }, [enabled, manifest]);
 
   const activeVoice: NarrationVoiceId = useMemo(() => {
     if (availableVoices.length === 0) return preferences.voice;
     return availableVoices.includes(preferences.voice) ? preferences.voice : availableVoices[0];
   }, [availableVoices, preferences.voice]);
 
-  const getClipAvailability = useCallback(
-    (clipId: string): ClipAvailability => {
-      if (!enabled || manifestStatus !== 'ready' || !manifest) return 'unavailable';
+  const resolveVoiceForManifest = useCallback(
+    (targetManifest: NarrationLessonManifest): NarrationVoiceId => {
+      const preferred = stateRef.current.preferences.voice;
+      if (targetManifest.availableVoices.length === 0) return preferred;
+      return targetManifest.availableVoices.includes(preferred)
+        ? preferred
+        : targetManifest.availableVoices[0];
+    },
+    [],
+  );
+
+  const checkClipAvailability = useCallback(
+    (
+      clipId: string,
+      targetManifest: NarrationLessonManifest | null,
+      voice: NarrationVoiceId,
+    ): ClipAvailability => {
+      if (!enabled) return 'unavailable';
       const sc = specById.get(clipId);
       if (!sc) return 'unavailable';
+      if (!targetManifest) {
+        return manifestStatus === 'idle' || manifestStatus === 'loading' ? 'ready' : 'unavailable';
+      }
+      const mc = targetManifest.clips.find((c) => c.id === clipId);
+      if (!mc && sc.onDemand) return 'unavailable';
+      if (!mc || mc.textHash !== sc.textHash) return 'stale';
+      if (!mc.audio[voice]) return 'unavailable';
+      return 'ready';
+    },
+    [enabled, manifestStatus, specById],
+  );
+
+  const getClipAvailability = useCallback(
+    (clipId: string): ClipAvailability => {
+      if (!enabled) return 'unavailable';
+      const sc = specById.get(clipId);
+      if (!sc) return 'unavailable';
+      if (!manifest) {
+        return manifestStatus === 'idle' || manifestStatus === 'loading' ? 'ready' : 'unavailable';
+      }
+      if (manifestStatus !== 'ready') return 'unavailable';
       const mc = manifestById.get(clipId);
       if (!mc && sc.onDemand) return 'unavailable';
       if (!mc || mc.textHash !== sc.textHash) return 'stale';
@@ -245,6 +291,7 @@ export function NarrationProvider({
 
   const stopAudioHardware = useCallback(() => {
     playbackRequest.current += 1;
+    pendingSeekRef.current = null;
     if (rafRef.current !== null && typeof cancelAnimationFrame === 'function') {
       cancelAnimationFrame(rafRef.current);
       rafRef.current = null;
@@ -263,34 +310,66 @@ export function NarrationProvider({
     clearDOMReadingMarkers(containerRef.current);
   }, [containerRef]);
 
-  // Load manifest when lesson is narrated
+  // Reset narration state when lesson changes; defer fetching manifest.json until playback is requested
   useEffect(() => {
+    manifestLoadSeqRef.current += 1;
+    manifestAbortRef.current?.abort();
+    manifestAbortRef.current = null;
+    manifestPromiseRef.current = null;
+
     if (initialManifest && initialManifest.lessonId === lesson.id) {
       setManifest(initialManifest);
       setManifestStatus('ready');
       setStatus('idle');
-      return;
-    }
-    if (!enabled) {
-      setManifest(null);
-      setManifestStatus('idle');
-      setStatus('unavailable');
-      stopAudioHardware();
-      setActiveClipId(null);
-      setActiveField(null);
-      setQueueClipIds([]);
-      setQueueIndex(-1);
-      setPauseReason(null);
-      setStatusMessage('');
+      setSavedPosition(loadReadingPosition(scopeKey));
       return;
     }
 
-    const ctrl = new AbortController();
-    setManifestStatus('loading');
+    setManifest(null);
+    stopAudioHardware();
+    setActiveClipId(null);
+    setActiveField(null);
+    setQueueClipIds([]);
+    setQueueIndex(-1);
+    setPauseReason(null);
+    setStatusMessage('');
+
+    if (!enabled) {
+      setManifestStatus('idle');
+      setStatus('unavailable');
+      setSavedPosition(null);
+      return;
+    }
+
+    setManifestStatus('idle');
     setStatus('idle');
     setSavedPosition(loadReadingPosition(scopeKey));
 
-    fetch(getNarrationManifestUrl(lesson.id), { signal: ctrl.signal })
+    return () => {
+      manifestLoadSeqRef.current += 1;
+      manifestAbortRef.current?.abort();
+      manifestAbortRef.current = null;
+      manifestPromiseRef.current = null;
+    };
+  }, [lesson.id, scopeKey, enabled, initialManifest, stopAudioHardware]);
+
+  const ensureManifestLoaded = useCallback(async (): Promise<NarrationLessonManifest | null> => {
+    if (!enabled) return null;
+    const existing = stateRef.current.manifest;
+    if (existing && existing.lessonId === lesson.id) {
+      return existing;
+    }
+    if (manifestPromiseRef.current) {
+      return manifestPromiseRef.current;
+    }
+
+    const ctrl = new AbortController();
+    manifestAbortRef.current = ctrl;
+    setManifestStatus('loading');
+    setStatus('loading');
+    setStatusMessage('Carregando narração sincronizada…');
+
+    const promise = fetch(getNarrationManifestUrl(lesson.id), { signal: ctrl.signal })
       .then((res) => {
         if (!res.ok) {
           if (res.status === 404) {
@@ -303,12 +382,14 @@ export function NarrationProvider({
         return res.json() as Promise<NarrationLessonManifest>;
       })
       .then((data) => {
-        if (!data || ctrl.signal.aborted) return;
+        if (!data || ctrl.signal.aborted) return null;
+        stateRef.current.manifest = data;
         setManifest(data);
         setManifestStatus('ready');
+        return data;
       })
       .catch((err) => {
-        if (ctrl.signal.aborted) return;
+        if (ctrl.signal.aborted) return null;
         setManifestStatus('error');
         setStatus('error');
         setStatusMessage(
@@ -316,12 +397,17 @@ export function NarrationProvider({
             err instanceof Error ? err.message : 'erro'
           }).`,
         );
+        return null;
+      })
+      .finally(() => {
+        if (manifestPromiseRef.current === promise) {
+          manifestPromiseRef.current = null;
+        }
       });
 
-    return () => {
-      ctrl.abort();
-    };
-  }, [lesson.id, scopeKey, enabled, initialManifest, stopAudioHardware]);
+    manifestPromiseRef.current = promise;
+    return promise;
+  }, [enabled, lesson.id]);
 
   // Preserve an offset if the student leaves while the clip is still playing.
   useEffect(() => {
@@ -394,12 +480,33 @@ export function NarrationProvider({
     return mounted;
   }, [containerRef]);
 
-  const discoverVisibleReadyQueue = useCallback((): string[] => {
-    const mounted = getMountedClips();
-    return spec.clips
-      .filter((c) => !c.onDemand && mounted.has(c.id) && getClipAvailability(c.id) === 'ready')
-      .map((c) => c.id);
-  }, [getMountedClips, spec.clips, getClipAvailability]);
+  const discoverVisibleReadyQueue = useCallback(
+    (targetManifest?: NarrationLessonManifest | null): string[] => {
+      const mounted = getMountedClips();
+      const loaded = targetManifest ?? stateRef.current.manifest;
+      if (loaded) {
+        const voice = resolveVoiceForManifest(loaded);
+        return spec.clips
+          .filter(
+            (c) =>
+              !c.onDemand &&
+              mounted.has(c.id) &&
+              checkClipAvailability(c.id, loaded, voice) === 'ready',
+          )
+          .map((c) => c.id);
+      }
+      return spec.clips
+        .filter((c) => !c.onDemand && mounted.has(c.id) && getClipAvailability(c.id) === 'ready')
+        .map((c) => c.id);
+    },
+    [
+      checkClipAvailability,
+      getClipAvailability,
+      getMountedClips,
+      resolveVoiceForManifest,
+      spec.clips,
+    ],
+  );
 
   const pauseAtActivity = useCallback(
     ({ clipId, queue, index }: ActivityCheckpoint) => {
@@ -421,10 +528,16 @@ export function NarrationProvider({
   );
 
   const startClipInternal = useCallback(
-    (clipId: string, startSec = 0) => {
-      const mc = manifestById.get(clipId);
-      const avail = getClipAvailability(clipId);
+    (clipId: string, startSec = 0, targetManifest?: NarrationLessonManifest) => {
+      const loaded = targetManifest ?? stateRef.current.manifest;
+      if (!loaded) return;
+      const voice = resolveVoiceForManifest(loaded);
+      const mc = targetManifest
+        ? loaded.clips.find((c) => c.id === clipId)
+        : manifestById.get(clipId) ?? loaded.clips.find((c) => c.id === clipId);
+      const avail = checkClipAvailability(clipId, loaded, voice);
       if (!mc || avail !== 'ready' || !getMountedClips().has(clipId)) {
+        setStatus('idle');
         setStatusMessage(
           avail === 'stale'
             ? 'Este trecho foi editado após a geração do áudio e está aguardando regeneração.'
@@ -433,7 +546,7 @@ export function NarrationProvider({
         return;
       }
 
-      const voiceAudio = mc.audio[activeVoice];
+      const voiceAudio = mc.audio[voice];
       if (!voiceAudio) return;
 
       // Cancel any Web Speech API utterance (e.g., from ScreenReader block) before starting narration
@@ -481,6 +594,7 @@ export function NarrationProvider({
 
       const rate = stateRef.current.preferences.speed;
       const request = ++playbackRequest.current;
+      pendingSeekRef.current = startSec > 0 ? { request, timeSec: startSec } : null;
       audio.src = getNarrationAudioUrl(lesson.id, voiceAudio.src);
       audio.playbackRate = rate;
       audio.defaultPlaybackRate = rate;
@@ -502,11 +616,11 @@ export function NarrationProvider({
       }
     },
     [
+      checkClipAvailability,
       manifestById,
-      getClipAvailability,
       getMountedClips,
+      resolveVoiceForManifest,
       specById,
-      activeVoice,
       persistPosition,
       containerRef,
       paintAtMs,
@@ -538,6 +652,31 @@ export function NarrationProvider({
     const onPlay = () => {
       if (rafRef.current === null && typeof requestAnimationFrame === 'function') {
         rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    const onLoadedMetadata = () => {
+      const pending = pendingSeekRef.current;
+      if (!pending || pending.request !== playbackRequest.current) return;
+      pendingSeekRef.current = null;
+      const targetSec =
+        Number.isFinite(audio.duration) && audio.duration > 0
+          ? Math.min(pending.timeSec, Math.max(0, audio.duration - 0.05))
+          : pending.timeSec;
+      if (Math.abs((audio.currentTime || 0) - targetSec) > 0.01) {
+        try {
+          audio.currentTime = targetSec;
+        } catch {
+          // Ignore seek errors on unloaded media
+        }
+      }
+      const rate = stateRef.current.preferences.speed;
+      audio.playbackRate = rate;
+      audio.defaultPlaybackRate = rate;
+      const ms = Math.round(targetSec * 1000);
+      setCurrentTimeMs(ms);
+      if (stateRef.current.activeClipId) {
+        paintAtMs(stateRef.current.activeClipId, ms);
       }
     };
 
@@ -614,12 +753,14 @@ export function NarrationProvider({
     };
 
     audio.addEventListener('play', onPlay);
+    audio.addEventListener('loadedmetadata', onLoadedMetadata);
     audio.addEventListener('timeupdate', onTimeUpdate);
     audio.addEventListener('ended', onEnded);
     audio.addEventListener('error', onError);
 
     return () => {
       audio.removeEventListener('play', onPlay);
+      audio.removeEventListener('loadedmetadata', onLoadedMetadata);
       audio.removeEventListener('timeupdate', onTimeUpdate);
       audio.removeEventListener('ended', onEnded);
       audio.removeEventListener('error', onError);
@@ -654,35 +795,78 @@ export function NarrationProvider({
       } else {
         suspendedActivity.current = null;
       }
-      setPlaybackMode('single');
-      setQueueClipIds([clipId]);
-      setQueueIndex(0);
-      startClipInternal(clipId, startSec);
+
+      const existing = stateRef.current.manifest;
+      if (existing && existing.lessonId === lesson.id) {
+        setPlaybackMode('single');
+        setQueueClipIds([clipId]);
+        setQueueIndex(0);
+        startClipInternal(clipId, startSec, existing);
+        return;
+      }
+
+      const seq = ++manifestLoadSeqRef.current;
+      ensureManifestLoaded().then((loaded) => {
+        if (!loaded || seq !== manifestLoadSeqRef.current) return;
+        if (!getMountedClips().has(clipId)) return;
+        setPlaybackMode('single');
+        setQueueClipIds([clipId]);
+        setQueueIndex(0);
+        startClipInternal(clipId, startSec, loaded);
+      });
     },
-    [getMountedClips, specById, startClipInternal],
+    [ensureManifestLoaded, getMountedClips, lesson.id, specById, startClipInternal],
   );
 
   const playQueueFrom = useCallback(
     (startClipId?: string, startSec = 0) => {
       suspendedActivity.current = null;
-      const readyQueue = discoverVisibleReadyQueue();
-      if (readyQueue.length === 0) {
-        setStatusMessage(
-          staleClipCount > 0
-            ? 'Há trechos alterados sem áudio atualizado no momento.'
-            : 'Nenhum trecho narrável disponível nas seções visíveis.',
-        );
+
+      const runWithManifest = (loaded: NarrationLessonManifest) => {
+        const readyQueue = discoverVisibleReadyQueue(loaded);
+        if (readyQueue.length === 0) {
+          const voice = resolveVoiceForManifest(loaded);
+          const hasStale = spec.clips.some(
+            (c) => checkClipAvailability(c.id, loaded, voice) === 'stale',
+          );
+          setStatus('idle');
+          setStatusMessage(
+            hasStale
+              ? 'Há trechos alterados sem áudio atualizado no momento.'
+              : 'Nenhum trecho narrável disponível nas seções visíveis.',
+          );
+          return;
+        }
+        let startIdx = startClipId ? readyQueue.indexOf(startClipId) : 0;
+        if (startIdx < 0) startIdx = 0;
+
+        setPlaybackMode('queue');
+        setQueueClipIds(readyQueue);
+        setQueueIndex(startIdx);
+        startClipInternal(readyQueue[startIdx], startSec, loaded);
+      };
+
+      const existing = stateRef.current.manifest;
+      if (existing && existing.lessonId === lesson.id) {
+        runWithManifest(existing);
         return;
       }
-      let startIdx = startClipId ? readyQueue.indexOf(startClipId) : 0;
-      if (startIdx < 0) startIdx = 0;
 
-      setPlaybackMode('queue');
-      setQueueClipIds(readyQueue);
-      setQueueIndex(startIdx);
-      startClipInternal(readyQueue[startIdx], startSec);
+      const seq = ++manifestLoadSeqRef.current;
+      ensureManifestLoaded().then((loaded) => {
+        if (!loaded || seq !== manifestLoadSeqRef.current) return;
+        runWithManifest(loaded);
+      });
     },
-    [discoverVisibleReadyQueue, staleClipCount, startClipInternal],
+    [
+      checkClipAvailability,
+      discoverVisibleReadyQueue,
+      ensureManifestLoaded,
+      lesson.id,
+      resolveVoiceForManifest,
+      spec.clips,
+      startClipInternal,
+    ],
   );
 
   const resumeSavedPosition = useCallback(() => {
@@ -690,13 +874,27 @@ export function NarrationProvider({
       playQueueFrom();
       return;
     }
-    const readyQueue = discoverVisibleReadyQueue();
-    if (readyQueue.includes(savedPosition.clipId)) {
-      playQueueFrom(savedPosition.clipId, savedPosition.timeSec);
-    } else {
-      playQueueFrom();
+    const existing = stateRef.current.manifest;
+    if (existing && existing.lessonId === lesson.id) {
+      const readyQueue = discoverVisibleReadyQueue(existing);
+      if (readyQueue.includes(savedPosition.clipId)) {
+        playQueueFrom(savedPosition.clipId, savedPosition.timeSec);
+      } else {
+        playQueueFrom();
+      }
+      return;
     }
-  }, [savedPosition, discoverVisibleReadyQueue, playQueueFrom]);
+    const seq = ++manifestLoadSeqRef.current;
+    ensureManifestLoaded().then((loaded) => {
+      if (!loaded || seq !== manifestLoadSeqRef.current) return;
+      const readyQueue = discoverVisibleReadyQueue(loaded);
+      if (readyQueue.includes(savedPosition.clipId)) {
+        playQueueFrom(savedPosition.clipId, savedPosition.timeSec);
+      } else {
+        playQueueFrom();
+      }
+    });
+  }, [discoverVisibleReadyQueue, ensureManifestLoaded, lesson.id, playQueueFrom, savedPosition]);
 
   const resumeAfterActivity = useCallback(() => {
     const queue = discoverVisibleReadyQueue();
@@ -771,6 +969,7 @@ export function NarrationProvider({
   }, [activeClipId, startClipInternal, playQueueFrom]);
 
   const stop = useCallback(() => {
+    manifestLoadSeqRef.current += 1;
     const curSec = audioRef.current?.currentTime ?? 0;
     if (
       activeClipId &&
@@ -821,6 +1020,7 @@ export function NarrationProvider({
   const seekToMs = useCallback(
     (ms: number) => {
       if (!activeClipId || pauseReason === 'activity') return;
+      pendingSeekRef.current = null;
       const bounded = Math.max(0, Math.min(ms, clipDurationMs));
       const sec = bounded / 1000;
       if (audioRef.current) {

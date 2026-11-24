@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { isOfflineApp } from '../../runtime/mode';
 
 const repository = 'flaviojmendes/trilhainfo';
 const cacheKey = 'trilha:github-stars';
@@ -16,10 +17,10 @@ function cached(): number | undefined {
 }
 
 export function useGithubStars(): number | undefined {
-  const [stars, setStars] = useState(cached);
+  const [stars, setStars] = useState(() => (isOfflineApp() ? undefined : cached()));
 
   useEffect(() => {
-    if (stars !== undefined) return;
+    if (isOfflineApp() || stars !== undefined) return;
     const controller = new AbortController();
     fetch(`https://api.github.com/repos/${repository}`, { signal: controller.signal })
       .then((response) => (response.ok ? response.json() : undefined))

@@ -73,6 +73,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'api-e-banco:5',
           question: 'Onde deve ficar a senha do banco de dados de produção?',
           options: [
             {
@@ -116,6 +117,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'sql-injection:3',
           title: 'Veja o ataque acontecer e neutralize-o',
           task: "A consulta abaixo é o que o código acima montou para a Ana (`usuario_id = 1`). Rode e veja que aparecem despesas de outras pessoas. Depois corrija tratando o texto digitado como **dado**: dentro de um texto SQL, cada aspa simples precisa ser escrita duas vezes. A busca deve ficar `descricao = ''' OR ''1''=''1'`. Uma descrição com esse texto estranho não existe, então a resposta certa é não mostrar nada.",
           setup:
@@ -166,6 +168,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'sql-injection:6',
           title: 'Troque a concatenação por parâmetros',
           task: 'A função `montar_busca` devolve o SQL e os parâmetros que seriam entregues ao driver (aqui, um driver que usa `?` como marcador, como o do SQLite). Reescreva para que o SQL tenha um `?` no lugar de cada valor e a tupla `parametros` leve `usuario_id` e `texto`, nessa ordem.',
           code: "def montar_busca(usuario_id, texto):\n    sql = f\"SELECT id, descricao, valor FROM despesas WHERE usuario_id = {usuario_id} AND descricao = '{texto}'\"\n    parametros = ()\n    return sql, parametros\n\n\nsql, parametros = montar_busca(1, \"' OR '1'='1\")\nprint(sql)\nprint(parametros)",
@@ -227,6 +230,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'repositorio-e-orm:4',
           question:
             'Uma rota lista 50 despesas e, para cada uma, o ORM busca a categoria separadamente. Quantas consultas chegam ao banco?',
           options: [
@@ -250,6 +254,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'repositorio-e-orm:5',
           title: 'Troque N+1 consultas por uma só',
           task: 'Hoje o código busca as despesas e depois faz uma consulta por categoria. Escreva **uma única consulta** com `JOIN` que traga, para cada despesa, a descrição, o valor e o **nome** da categoria.',
           setup:
@@ -296,6 +301,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'transacoes:3',
           title: 'Teste um rollback',
           task: 'Comece uma transação com `BEGIN`, faça as duas atualizações da transferência de R$ 50 da Ana para o Bruno e mostre os saldos com um `SELECT`. Agora imagine que o servidor detectou um problema antes de confirmar: desfaça tudo com `ROLLBACK` e termine com outro `SELECT nome, saldo FROM contas;` para provar que nada mudou.',
           setup:
@@ -325,6 +331,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'transacoes:4',
           question:
             'A API faz as duas atualizações da transferência **sem** transação, e o servidor reinicia logo depois da primeira. Como fica o banco?',
           options: [
@@ -409,6 +416,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'migracoes:4',
           title: 'Aplicando migrações num banco vazio',
           task: 'O projeto da API já tem duas migrações: uma cria a tabela `despesas`, a outra acrescenta a coluna `pago`. O banco local acabou de ser criado e está vazio. Use o Alembic para inspecionar, aplicar e desfazer.',
           prompt: '~/api-despesas$',
@@ -458,6 +466,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'migracoes:5',
           prompt: 'Você precisa acrescentar uma coluna. Coloque em ordem o caminho seguro.',
           items: [
             'Gerar um arquivo de migração novo',

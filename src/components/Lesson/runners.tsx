@@ -7,10 +7,10 @@ import {
   PiEye,
   PiPlayFill,
 } from 'react-icons/pi';
-import { recordAnswer } from '../../lessons/progress';
+import { recordExerciseOutcome } from '../../lessons/progress';
 import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Inline } from '../Guide/inline';
-import { Block, useLessonId } from './context';
+import { Block, useLessonIdentity } from './context';
 import { pythonLoaded, PythonRun, runPython } from './pythonRunner';
 import { loadSql, runSql, SqlRun } from './sqlRunner';
 
@@ -48,9 +48,11 @@ function RunnerHead({
 export function CheckList({
   checks,
   results,
+  demonstrated = false,
 }: {
   checks: Array<{ label: string }>;
   results: boolean[];
+  demonstrated?: boolean;
 }) {
   if (!checks.length) return null;
   const passed = results.length === checks.length && results.every(Boolean);
@@ -58,9 +60,15 @@ export function CheckList({
     <div className="lesson-checks">
       <p className="lesson-checks-title">
         {passed ? (
-          <>
-            <PiConfetti aria-hidden="true" /> Missão cumprida!
-          </>
+          demonstrated ? (
+            <>
+              <PiEye aria-hidden="true" /> Solução de exemplo
+            </>
+          ) : (
+            <>
+              <PiConfetti aria-hidden="true" /> Missão cumprida!
+            </>
+          )
         ) : (
           'Objetivos'
         )}
@@ -78,15 +86,6 @@ export function CheckList({
       </ul>
     </div>
   );
-}
-
-function usePassed(activityId: string, checks: unknown[], results: boolean[]) {
-  const lessonId = useLessonId();
-  const passed = checks.length > 0 && results.length === checks.length && results.every(Boolean);
-  useEffect(() => {
-    if (passed) recordAnswer(lessonId, activityId, true);
-  }, [passed, lessonId, activityId]);
-  return passed;
 }
 
 function runOnShortcut(run: () => void) {
@@ -119,7 +118,7 @@ export function Terminal({
   activityId: string;
   narrationClipId?: string;
 }) {
-  const lessonId = useLessonId();
+  const { lessonId, revision } = useLessonIdentity();
   const id = useId();
   const start = (): TerminalLine[] => (block.intro ? [{ kind: 'intro', text: block.intro }] : []);
   const [lines, setLines] = useState<TerminalLine[]>(start);
@@ -141,8 +140,12 @@ export function Terminal({
   }, [lines]);
 
   useEffect(() => {
-    if (done && block.steps.length) recordAnswer(lessonId, activityId, totalMisses === 0);
-  }, [done, block.steps.length, lessonId, activityId, totalMisses]);
+    if (!done || !block.steps.length) return;
+    if (totalMisses > 0) {
+      recordExerciseOutcome(lessonId, activityId, 'fail', revision);
+    }
+    recordExerciseOutcome(lessonId, activityId, 'pass', revision);
+  }, [done, block.steps.length, lessonId, activityId, totalMisses, revision]);
 
   function execute() {
     if (done || !value.trim()) return;
@@ -187,6 +190,7 @@ export function Terminal({
       });
       nextMisses += 1;
       setTotalMisses((previous) => previous + 1);
+      recordExerciseOutcome(lessonId, activityId, 'fail', revision);
       break;
     }
     setLines(output);
@@ -321,6 +325,7 @@ export function Terminal({
               setLines(start());
               setStep(0);
               setMisses(0);
+              setTotalMisses(0);
               setValue('');
             }}
           >
@@ -347,33 +352,66 @@ export function SqlLab({
   activityId: string;
   narrationClipId?: string;
 }) {
+  const { lessonId, revision } = useLessonIdentity();
   const id = useId();
   const [query, setQuery] = useState(block.query);
+  const [solutionRevealed, setSolutionRevealed] = useState(false);
   const [run, setRun] = useState<SqlRun | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'failed'>('idle');
+  const [lastRunKind, setLastRunKind] = useState<'preview' | 'attempt' | 'solution'>('preview');
   const checks = block.checks || [];
-  const passed = usePassed(activityId, checks, run?.checks || []);
+  const allChecksPassed =
+    checks.length > 0 &&
+    (run?.checks?.length || 0) === checks.length &&
+    Boolean(run?.checks.every(Boolean));
+  const passed = allChecksPassed && lastRunKind === 'attempt';
+  const runSeq = useRef(0);
+  const mountedRef = useRef(true);
 
-  async function execute(text = query) {
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  async function execute(
+    text = query,
+    kind: 'preview' | 'attempt' | 'solution' = solutionRevealed &&
+    text.trim() === block.solution?.trim()
+      ? 'solution'
+      : 'attempt',
+  ) {
+    const seq = ++runSeq.current;
     setStatus('loading');
     try {
       const SQL = await loadSql();
-      setRun(
-        runSql(
-          SQL,
-          block.setup,
-          text,
-          checks.map((check) => check.test),
-        ),
+      if (!mountedRef.current || seq !== runSeq.current) return;
+      const nextRun = runSql(
+        SQL,
+        block.setup,
+        text,
+        checks.map((check) => check.test),
       );
+      setRun(nextRun);
+      setLastRunKind(kind);
       setStatus('idle');
+      if (checks.length > 0) {
+        if (kind === 'solution') {
+          recordExerciseOutcome(lessonId, activityId, 'solution', revision);
+        } else if (kind === 'attempt') {
+          const didPass = nextRun.checks.length === checks.length && nextRun.checks.every(Boolean);
+          recordExerciseOutcome(lessonId, activityId, didPass ? 'pass' : 'fail', revision);
+        }
+      }
     } catch {
+      if (!mountedRef.current || seq !== runSeq.current) return;
       setStatus('failed');
     }
   }
 
   useEffect(() => {
-    if (!run) execute(block.query);
+    if (!run) execute(block.query, 'preview');
     // Show the tables and the starter result once, without waiting for a click.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -418,8 +456,9 @@ export function SqlLab({
             <button
               type="button"
               onClick={() => {
+                setSolutionRevealed(false);
                 setQuery(block.query);
-                execute(block.query);
+                execute(block.query, 'preview');
               }}
             >
               <PiArrowCounterClockwise aria-hidden="true" /> Recomeçar
@@ -428,8 +467,13 @@ export function SqlLab({
               <button
                 type="button"
                 onClick={() => {
-                  setQuery(block.solution as string);
-                  execute(block.solution);
+                  const solution = block.solution as string;
+                  setSolutionRevealed(true);
+                  setQuery(solution);
+                  if (checks.length > 0) {
+                    recordExerciseOutcome(lessonId, activityId, 'solution', revision);
+                  }
+                  execute(solution, 'solution');
                 }}
               >
                 <PiEye aria-hidden="true" /> Ver uma solução
@@ -503,7 +547,11 @@ export function SqlLab({
           </p>
         ) : null}
       </div>
-      <CheckList checks={checks} results={run?.checks || []} />
+      <CheckList
+        checks={checks}
+        results={run?.checks || []}
+        demonstrated={lastRunKind === 'solution'}
+      />
     </section>
   );
 }
@@ -517,16 +565,29 @@ export function PythonLab({
   activityId: string;
   narrationClipId?: string;
 }) {
+  const { lessonId, revision } = useLessonIdentity();
   const id = useId();
   const [code, setCode] = useState(block.code);
   const [output, setOutput] = useState('');
   const [result, setResult] = useState<PythonRun | null>(null);
   const [status, setStatus] = useState<'idle' | 'loading' | 'running' | 'failed'>('idle');
+  const [solutionLoaded, setSolutionLoaded] = useState(false);
+  const [lastRunKind, setLastRunKind] = useState<'idle' | 'attempt' | 'solution'>('idle');
   const checks = block.checks || [];
-  const passed = usePassed(activityId, checks, result?.checks || []);
+  const allChecksPassed =
+    checks.length > 0 &&
+    (result?.checks?.length || 0) === checks.length &&
+    Boolean(result?.checks.every(Boolean));
+  const passed = allChecksPassed && lastRunKind === 'attempt';
   const escaped = useRef(false);
 
-  async function execute(text = code) {
+  const busy = status === 'loading' || status === 'running';
+
+  async function execute(
+    text = code,
+    kind: 'attempt' | 'solution' = solutionLoaded ? 'solution' : 'attempt',
+  ) {
+    if (busy) return;
     setStatus(pythonLoaded() ? 'running' : 'loading');
     setOutput('');
     try {
@@ -540,14 +601,22 @@ export function PythonLab({
       );
       setOutput(run.output);
       setResult(run);
+      setLastRunKind(kind);
       setStatus('idle');
+      if (checks.length > 0) {
+        if (kind === 'solution') {
+          recordExerciseOutcome(lessonId, activityId, 'solution', revision);
+        } else {
+          const didPass = run.checks.length === checks.length && run.checks.every(Boolean);
+          recordExerciseOutcome(lessonId, activityId, didPass ? 'pass' : 'fail', revision);
+        }
+      }
     } catch {
       setStatus('failed');
     }
   }
 
   const lines = Math.max(6, Math.min(20, code.split('\n').length + 1));
-  const busy = status === 'loading' || status === 'running';
 
   return (
     <section
@@ -576,12 +645,23 @@ export function PythonLab({
                 setCode(block.code);
                 setResult(null);
                 setOutput('');
+                setSolutionLoaded(false);
+                setLastRunKind('idle');
               }}
             >
               <PiArrowCounterClockwise aria-hidden="true" /> Recomeçar
             </button>
             {block.solution && (
-              <button type="button" onClick={() => setCode(block.solution as string)}>
+              <button
+                type="button"
+                onClick={() => {
+                  setCode(block.solution as string);
+                  setSolutionLoaded(true);
+                  if (checks.length > 0) {
+                    recordExerciseOutcome(lessonId, activityId, 'solution', revision);
+                  }
+                }}
+              >
                 <PiEye aria-hidden="true" /> Ver uma solução
               </button>
             )}
@@ -599,7 +679,10 @@ export function PythonLab({
           autoCapitalize="off"
           autoComplete="off"
           autoCorrect="off"
-          onChange={(event) => setCode(event.target.value)}
+          onChange={(event) => {
+            setCode(event.target.value);
+            setSolutionLoaded(false);
+          }}
           onKeyDown={(event) => {
             if (event.key === 'Escape') {
               escaped.current = true;
@@ -656,7 +739,11 @@ export function PythonLab({
           )}
         </div>
       </div>
-      <CheckList checks={checks} results={result?.checks || []} />
+      <CheckList
+        checks={checks}
+        results={result?.checks || []}
+        demonstrated={lastRunKind === 'solution'}
+      />
     </section>
   );
 }

@@ -45,6 +45,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'formatos-de-desafio:3',
           question:
             'O enunciado diz “prazo de 7 dias, estimamos de 4 a 6 horas de trabalho”. Qual a melhor estratégia?',
           options: [
@@ -96,6 +97,7 @@ Prazo: 5 dias. Estimativa: 4 a 6 horas.`,
         },
         {
           type: 'classify',
+          activityId: 'ler-o-enunciado:1',
           prompt: 'Como você priorizaria cada item desse desafio?',
           buckets: ['Fazer primeiro', 'Se sobrar tempo', 'Perguntar antes'],
           items: [
@@ -153,6 +155,7 @@ Joana`,
         },
         {
           type: 'quiz',
+          activityId: 'ler-o-enunciado:4',
           question: 'O que torna esse pedido de prazo um bom pedido?',
           options: [
             {
@@ -221,6 +224,7 @@ Joana`,
         },
         {
           type: 'quiz',
+          activityId: 'entrega-que-se-explica:2',
           question:
             'Qual histórico de commits ajuda mais a pessoa avaliadora a entender o seu trabalho?',
           options: [
@@ -244,6 +248,7 @@ Joana`,
         },
         {
           type: 'terminal',
+          activityId: 'entrega-que-se-explica:3',
           title: 'Prepare a entrega',
           task: 'Faltam duas horas para o prazo. Você terminou o README e um arquivo de testes. Confira tudo e envie.',
           prompt: '~/desafio-cep$',
@@ -355,6 +360,7 @@ aparelho. Se a pessoa precisasse disso, eu salvaria num banco, junto do login.`,
         },
         {
           type: 'quiz',
+          activityId: 'decisoes-e-trade-offs:3',
           question:
             'Na conversa, perguntam: “por que você não usou uma biblioteca de gerenciamento de estado?”. Qual resposta mostra mais maturidade?',
           options: [
@@ -378,6 +384,7 @@ aparelho. Se a pessoa precisasse disso, eu salvaria num banco, junto do login.`,
         },
         {
           type: 'order',
+          activityId: 'decisoes-e-trade-offs:4',
           prompt: 'Coloque em ordem uma apresentação de cinco minutos do seu desafio.',
           items: [
             'O problema, em uma frase',
@@ -411,6 +418,7 @@ aparelho. Se a pessoa precisasse disso, eu salvaria num banco, junto do login.`,
         },
         {
           type: 'classify',
+          activityId: 'conversa-com-a-equipe:2',
           prompt: 'Que respostas da empresa são bons sinais e quais são sinais de alerta?',
           buckets: ['Bom sinal', 'Sinal de alerta'],
           items: [
@@ -437,6 +445,7 @@ aparelho. Se a pessoa precisasse disso, eu salvaria num banco, junto do login.`,
         },
         {
           type: 'quiz',
+          activityId: 'conversa-com-a-equipe:3',
           question:
             'Uma semana depois, chega o e-mail: você não seguiu no processo. Qual a melhor próxima ação?',
           options: [

@@ -11,7 +11,7 @@ import {
 import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { CodeBlock } from '../Guide/CodeBlock';
 import { Inline } from '../Guide/inline';
-import { Block, useLessonId } from './context';
+import { Block, useLessonIdentity } from './context';
 
 function ActivityHeader({
   kind,
@@ -65,7 +65,7 @@ export function Quiz({
   activityId: string;
   narrationClipId?: string;
 }) {
-  const lessonId = useLessonId();
+  const { lessonId, revision } = useLessonIdentity();
   const labelId = useId();
   const [tried, setTried] = useState<number[]>([]);
   const correct = block.options.findIndex((option) => option.correct);
@@ -74,7 +74,7 @@ export function Quiz({
 
   function choose(index: number) {
     if (solved || tried.includes(index)) return;
-    if (tried.length === 0) recordAnswer(lessonId, activityId, index === correct);
+    if (tried.length === 0) recordAnswer(lessonId, activityId, index === correct, revision);
     setTried((previous) => [...previous, index]);
   }
 
@@ -155,7 +155,7 @@ export function Order({
   activityId: string;
   narrationClipId?: string;
 }) {
-  const lessonId = useLessonId();
+  const { lessonId, revision } = useLessonIdentity();
   const labelId = useId();
   const [order, setOrder] = useState(() =>
     stableShuffle(
@@ -179,7 +179,7 @@ export function Order({
   }
 
   function check() {
-    if (attempts === 0) recordAnswer(lessonId, activityId, allRight);
+    if (attempts === 0) recordAnswer(lessonId, activityId, allRight, revision);
     setAttempts((value) => value + 1);
     setChecked(true);
   }
@@ -271,7 +271,7 @@ export function Classify({
   activityId: string;
   narrationClipId?: string;
 }) {
-  const lessonId = useLessonId();
+  const { lessonId, revision } = useLessonIdentity();
   const labelId = useId();
   const items = useMemo(
     () => stableShuffle(block.items, activityId + block.prompt),
@@ -289,7 +289,7 @@ export function Classify({
       : undefined;
 
   function check() {
-    if (attempts === 0) recordAnswer(lessonId, activityId, right === items.length);
+    if (attempts === 0) recordAnswer(lessonId, activityId, right === items.length, revision);
     setAttempts((value) => value + 1);
     setChecked(true);
   }
@@ -390,7 +390,7 @@ export function Fill({
   activityId: string;
   narrationClipId?: string;
 }) {
-  const lessonId = useLessonId();
+  const { lessonId, revision } = useLessonIdentity();
   const labelId = useId();
   const parts = useMemo(() => parseFill(block.template), [block.template]);
   const blanks = parts.filter((part) => part.kind === 'blank') as Array<{
@@ -404,7 +404,7 @@ export function Fill({
   const allRight = results.every(Boolean);
 
   function check() {
-    if (attempts === 0) recordAnswer(lessonId, activityId, allRight);
+    if (attempts === 0) recordAnswer(lessonId, activityId, allRight, revision);
     setAttempts((value) => value + 1);
     setChecked(true);
   }

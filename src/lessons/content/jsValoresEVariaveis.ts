@@ -43,6 +43,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'o-que-e-programar:4',
           prompt: 'Qual camada cuida de cada parte da página?',
           buckets: ['HTML', 'CSS', 'JavaScript'],
           items: [
@@ -79,6 +80,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'console:3',
           question: 'O que aparece no console?',
           code: 'console.log("2 + 3");',
           language: 'javascript',
@@ -102,6 +104,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'console:4',
           title: 'Suas primeiras linhas de código',
           task: 'Este exercício só tem JavaScript: o que importa é o console. Escreva mais duas linhas com `console.log`: uma com o seu nome entre aspas e outra com a conta `7 * 8` (o `*` é a multiplicação), sem aspas.',
           js: 'console.log("Olá, Trilha Info");\n\n// Escreva suas linhas aqui embaixo\n',
@@ -156,6 +159,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'tipos-de-valor:2',
           prompt: 'Qual é o tipo de cada valor?',
           buckets: ['string', 'number', 'boolean', 'null ou undefined'],
           items: [
@@ -292,6 +296,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'variaveis:4',
           question: 'O que acontece quando este código roda?',
           code: 'const preco = 10;\npreco = 12;\nconsole.log(preco);',
           language: 'javascript',
@@ -320,6 +325,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'variaveis:6',
           prompt: 'Quais destes nomes de variável o JavaScript aceita?',
           buckets: ['Nome válido', 'Nome inválido'],
           items: [
@@ -364,6 +370,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'operacoes:3',
           question: 'Qual valor aparece no console?',
           code: 'console.log(2 + 3 * 4);',
           language: 'javascript',
@@ -449,6 +456,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'operacoes:6',
           question: 'O que aparece no console?',
           code: 'const quantidade = "2";\nconsole.log(quantidade + 2);',
           language: 'javascript',
@@ -485,6 +493,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'operacoes:9',
           prompt:
             'Complete o template literal para mostrar `O café custa R$ 18`, usando as variáveis.',
           language: 'javascript',
@@ -524,6 +533,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'comparacoes:3',
           question: 'O que aparece no console?',
           code: 'const idadeDigitada = "18";\nconsole.log(idadeDigitada === 18);',
           language: 'javascript',
@@ -548,6 +558,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'comparacoes:4',
           title: 'O total com desconto',
           task: 'Uma papelaria vende 4 cadernos de R$ 15 com 10% de desconto. Crie as variáveis `subtotal` (preço vezes quantidade), `desconto` (`subtotal * percentualDesconto / 100`) e `total` (subtotal menos desconto). Depois mostre no console uma frase com o total, por exemplo `Total: R$ 54`.',
           js: 'const precoCaderno = 15;\nconst quantidade = 4;\nconst percentualDesconto = 10;\n\n// 1. Crie a variável subtotal\n\n// 2. Crie a variável desconto\n\n// 3. Crie a variável total\n\n// 4. Mostre o total no console\n',

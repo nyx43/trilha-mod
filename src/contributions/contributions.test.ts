@@ -1,4 +1,5 @@
 // @vitest-environment node
+import { generateKeyPairSync } from 'crypto';
 import { readdirSync, readFileSync } from 'fs';
 import { join } from 'path';
 import type { ServerResponse } from 'http';
@@ -195,9 +196,14 @@ describe('endpoint de sugestões', () => {
     ip += 1;
     const req = {
       method: 'POST',
-      headers: { host: 'localhost:5199', origin: 'http://localhost:5199', ...headers },
+      headers: {
+        'x-forwarded-for': `192.0.2.${ip}`,
+        host: 'localhost:5199',
+        origin: 'http://localhost:5199',
+        ...headers,
+      },
       body,
-      socket: { remoteAddress: `10.0.0.${ip}` },
+      socket: { remoteAddress: '127.0.0.1' },
     };
     const headers_: Record<string, string> = {};
     let body_: ResponseBody = {};
@@ -249,9 +255,192 @@ describe('endpoint de sugestões', () => {
   it('não envia nada em produção sem captcha configurado', async () => {
     const response = await post(
       resourceDraft,
-      { origin: 'https://trilha.info' },
+      { host: 'trilha-mod.vercel.app', origin: 'https://trilha-mod.vercel.app' },
       { VERCEL_ENV: 'production' },
     );
     expect(response.status).toBe(503);
+  });
+
+  it('exige captcha em preview e valida a origem, o domínio e a ação antes de consultar a trilha', async () => {
+    const host = 'preview-exemplo.vercel.app';
+    const headers = { host, origin: `https://${host}` };
+    const env = { VERCEL_ENV: 'preview', VERCEL_URL: host };
+    const fetch = vi.fn();
+    vi.stubGlobal('fetch', fetch);
+    expect((await post(resourceDraft, headers, env)).status).toBe(503);
+    for (const origin of ['', 'https://outro.vercel.app', `http://${host}`]) {
+      expect((await post(resourceDraft, { ...headers, origin }, env)).status).toBe(403);
+    }
+    expect(fetch).not.toHaveBeenCalled();
+    for (const [hostname, action] of [
+      [host, 'lesson_tutor'],
+      ['outro.vercel.app', 'contribution'],
+    ]) {
+      fetch.mockResolvedValueOnce(
+        new Response(JSON.stringify({ success: true, hostname, action })),
+      );
+      expect(
+        (
+          await post({ ...resourceDraft, turnstileToken: 'teste' }, headers, {
+            ...env,
+            TURNSTILE_SECRET_KEY: 'teste',
+          })
+        ).status,
+      ).toBe(403);
+    }
+    expect(fetch).toHaveBeenCalledTimes(2);
+    fetch.mockResolvedValueOnce(
+      new Response(JSON.stringify({ success: true, hostname: host, action: 'contribution' })),
+    );
+    fetch.mockResolvedValueOnce(new Response(null, { status: 404 }));
+    expect(
+      (
+        await post({ ...resourceDraft, turnstileToken: 'teste' }, headers, {
+          ...env,
+          TURNSTILE_SECRET_KEY: 'teste',
+        })
+      ).status,
+    ).toBe(422);
+    expect(fetch).toHaveBeenLastCalledWith(`https://${host}/data/${roadmapId}.json`);
+  });
+
+  it('recusa corpos inválidos ou grandes antes de processar sugestões', async () => {
+    for (const body of [null, [], { reason: 'á'.repeat(9000) }]) {
+      expect((await post(body)).status).toBe(400);
+    }
+  });
+
+  it('usa origem, repositório e branch do fork para tópico exclusivo e bloqueia escrita sem destino confiável (Item 11)', async () => {
+    const { privateKey } = generateKeyPairSync('rsa', { modulusLength: 2048 });
+    const pem = privateKey.export({ type: 'pkcs1', format: 'pem' }).toString();
+
+    const forkCatalog = {
+      ...base,
+      groups: {
+        ...base.groups,
+        'fork.percurso-web': {
+          ...group,
+          id: 'fork.percurso-web',
+          title: 'Percurso exclusivo do fork',
+          variants: {
+            simple: { summary: 'Resumo', stepIds: ['fork.step-1'] },
+            standard: { summary: 'Resumo', stepIds: ['fork.step-1'] },
+            deep: { summary: 'Resumo', stepIds: ['fork.step-1'] },
+          },
+        },
+      },
+      nodes: {
+        ...base.nodes,
+        'fork.step-1': {
+          ...base.nodes[nodeId],
+          id: 'fork.step-1',
+          groupId: 'fork.percurso-web',
+          title: 'Etapa exclusiva do fork',
+        },
+      },
+    };
+
+    const forkDraft = {
+      ...resourceDraft,
+      groupId: 'fork.percurso-web',
+      nodeId: 'fork.step-1',
+      author: { name: 'Ana' },
+    };
+
+    // 1. Sem CONTRIBUTIONS_REPOSITORY ou CONTRIBUTIONS_BASE_BRANCH -> recusa com 503 e 0 chamadas ao GitHub
+    const incompleteCalls: string[] = [];
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (input: string | URL) => {
+        const url = String(input);
+        incompleteCalls.push(url);
+        if (url === `https://trilha-mod.vercel.app/data/${roadmapId}.json`) {
+          return new Response(JSON.stringify(forkCatalog));
+        }
+        throw new Error(`Chamada inesperada: ${url}`);
+      }),
+    );
+
+    const missingRepoRes = await post(
+      forkDraft,
+      {},
+      {
+        SITE_URL: 'https://trilha-mod.vercel.app',
+        GITHUB_APP_ID: '12345',
+        GITHUB_APP_PRIVATE_KEY: pem,
+      },
+    );
+    expect(missingRepoRes.status).toBe(503);
+    expect((missingRepoRes.body as { error?: string }).error).toMatch(/CONTRIBUTIONS_REPOSITORY/);
+    expect(incompleteCalls.some((url) => url.includes('api.github.com'))).toBe(false);
+    expect(incompleteCalls.some((url) => url.includes('flaviojmendes/trilhainfo'))).toBe(false);
+
+    // 2. Com configuração completa do fork -> consulta catálogo na origem do fork e abre PR no repositório/branch configurados
+    const githubCalls: Array<{ url: string; method: string; body?: string }> = [];
+    vi.stubGlobal(
+      'fetch',
+      vi.fn(async (input: string | URL, init?: RequestInit) => {
+        const url = String(input);
+        const method = init?.method || 'GET';
+        const body = typeof init?.body === 'string' ? init.body : undefined;
+        githubCalls.push({ url, method, body });
+
+        if (url === `https://trilha-mod.vercel.app/data/${roadmapId}.json`) {
+          return new Response(JSON.stringify(forkCatalog));
+        }
+        if (url === 'https://api.github.com/repos/nyx43/trilha-mod/installation') {
+          return new Response(JSON.stringify({ id: 99 }));
+        }
+        if (url === 'https://api.github.com/app/installations/99/access_tokens') {
+          return new Response(JSON.stringify({ token: 'ghs_test_token' }));
+        }
+        if (url.startsWith('https://api.github.com/search/issues?')) {
+          return new Response(JSON.stringify({ total_count: 0, items: [] }));
+        }
+        if (
+          url ===
+          'https://api.github.com/repos/nyx43/trilha-mod/git/ref/heads/feat%2Fpercurso-api-tailwind'
+        ) {
+          return new Response(JSON.stringify({ object: { sha: 'abc123' } }));
+        }
+        if (url === 'https://api.github.com/repos/nyx43/trilha-mod/git/refs') {
+          return new Response(JSON.stringify({}), { status: 201 });
+        }
+        if (url.startsWith('https://api.github.com/repos/nyx43/trilha-mod/contents/')) {
+          return new Response(JSON.stringify({}), { status: 201 });
+        }
+        if (url === 'https://api.github.com/repos/nyx43/trilha-mod/pulls') {
+          return new Response(
+            JSON.stringify({ number: 7, html_url: 'https://github.com/nyx43/trilha-mod/pull/7' }),
+            { status: 201 },
+          );
+        }
+        if (url === 'https://api.github.com/repos/nyx43/trilha-mod/issues/7/labels') {
+          return new Response(JSON.stringify([]), { status: 200 });
+        }
+        throw new Error(`URL inesperada: ${url}`);
+      }),
+    );
+
+    const okRes = await post(
+      forkDraft,
+      {},
+      {
+        SITE_URL: 'https://trilha-mod.vercel.app',
+        GITHUB_APP_ID: '12345',
+        GITHUB_APP_PRIVATE_KEY: pem,
+        CONTRIBUTIONS_REPOSITORY: 'nyx43/trilha-mod',
+        CONTRIBUTIONS_BASE_BRANCH: 'feat/percurso-api-tailwind',
+      },
+    );
+
+    expect(okRes.status).toBe(201);
+    const prCall = githubCalls.find((call) => call.url.endsWith('/repos/nyx43/trilha-mod/pulls'));
+    expect(prCall).toBeDefined();
+    const prBody = JSON.parse(prCall?.body || '{}') as { base?: string; body?: string };
+    expect(prBody.base).toBe('feat/percurso-api-tailwind');
+    expect(prBody.body).toContain(`https://trilha-mod.vercel.app/roadmap/${roadmapId}`);
+    expect(JSON.stringify(githubCalls)).not.toContain('flaviojmendes/trilhainfo');
+    expect(JSON.stringify(githubCalls)).not.toContain('https://trilha.info');
   });
 });

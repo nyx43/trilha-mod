@@ -1,5 +1,6 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { vi } from 'vitest';
 import { findGuide, guides, guidesInCategory } from '../../guides';
 import GuidePage from '../../pages/GuidePage';
 import GuidesPage from '../../pages/GuidesPage';
@@ -78,6 +79,50 @@ describe('Página de guia', () => {
       'href',
       '/guias',
     );
+  });
+
+  it('lida com âncora válida, vazia e malformada (#100%) sem quebrar o guia (Item 13)', async () => {
+    const guide = findGuide('basicAuth');
+    if (!guide) throw new Error('Guia basicAuth ausente');
+
+    const scrollSpy = vi.fn();
+    Element.prototype.scrollIntoView = scrollSpy;
+
+    // 1. Âncora válida -> rola até a seção
+    const validView = render(
+      <MemoryRouter initialEntries={['/guide/basicAuth#fluxo']}>
+        <GuideView guide={guide} />
+      </MemoryRouter>,
+    );
+    await screen.findByRole('heading', { name: /O fluxo no navegador/ });
+    expect(scrollSpy).toHaveBeenCalled();
+    validView.unmount();
+
+    // 2. Âncora vazia -> abre normalmente pelo início
+    scrollSpy.mockClear();
+    document.documentElement.scrollTop = 120;
+    const emptyView = render(
+      <MemoryRouter initialEntries={['/guide/basicAuth#']}>
+        <GuideView guide={guide} />
+      </MemoryRouter>,
+    );
+    await screen.findByRole('heading', { name: /O fluxo no navegador/ });
+    expect(scrollSpy).not.toHaveBeenCalled();
+    expect(document.documentElement.scrollTop).toBe(0);
+    emptyView.unmount();
+
+    // 3. Âncora malformada (#100%) -> não lança URIError e mostra o guia desde o início
+    scrollSpy.mockClear();
+    document.documentElement.scrollTop = 120;
+    const malformedView = render(
+      <MemoryRouter initialEntries={['/guide/basicAuth#100%']}>
+        <GuideView guide={guide} />
+      </MemoryRouter>,
+    );
+    await screen.findByRole('heading', { name: /O fluxo no navegador/ });
+    expect(scrollSpy).not.toHaveBeenCalled();
+    expect(document.documentElement.scrollTop).toBe(0);
+    malformedView.unmount();
   });
 });
 

@@ -181,12 +181,16 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
     else showLatestReply();
   }, [messages, pendingQuestion, open]);
 
-  function changeModel(providerId: string, modelId?: string) {
-    setPreferences((previous) => ({ ...previous, providerId, modelId }));
+  function resetConversation() {
+    speech.stop();
     setConversation(undefined);
     setError('');
     setUnseenReply(false);
-    speech.stop();
+  }
+
+  function changeModel(providerId: string, modelId?: string) {
+    setPreferences((previous) => ({ ...previous, providerId, modelId }));
+    resetConversation();
   }
 
   function resize(width: number, height: number) {
@@ -374,6 +378,7 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
               voices={speech.voices}
               voiceUri={preferences.voiceUri}
               speechSupported={speech.supported}
+              hosted={Boolean(status?.turnstileSiteKey)}
               onProvider={changeModel}
               onModel={(modelId) => provider && changeModel(provider.id, modelId)}
               onVoice={(voiceUri) => {
@@ -512,6 +517,20 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
                     value={draft}
                     readOnly={!!pendingQuestion}
                     onChange={(event) => setDraft(event.target.value)}
+                    onKeyDown={(event) => {
+                      if (
+                        (event.ctrlKey || event.metaKey) &&
+                        event.key === 'Enter' &&
+                        !event.nativeEvent.isComposing &&
+                        !event.repeat &&
+                        !pendingQuestion &&
+                        !waitingForVerification &&
+                        draft.trim()
+                      ) {
+                        event.preventDefault();
+                        send(draft, true);
+                      }
+                    }}
                     aria-describedby={`${id}-privacy`}
                   />
                   <div className="lesson-tutor-actions">
@@ -527,6 +546,11 @@ export function LessonTutor({ title, summary, hook, sections, suggestedSection }
                     >
                       Pedir exercício
                     </button>
+                    {messages.length > 0 && !pendingQuestion && (
+                      <button type="button" onClick={resetConversation}>
+                        Nova conversa
+                      </button>
+                    )}
                     <button
                       className="lesson-tutor-send"
                       type="submit"

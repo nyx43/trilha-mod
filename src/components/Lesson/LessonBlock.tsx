@@ -9,7 +9,7 @@ import { Analogy, Anatomy, CodeTabs, DomTree, Flow, Reveal, ScreenReader, Trace 
 
 export function LessonBlockView({
   block,
-  activityId,
+  activityId: positionalKey,
   lessonId,
   narrationClipId,
 }: {
@@ -19,7 +19,8 @@ export function LessonBlockView({
   narrationClipId?: string;
 }) {
   const narration = useNarrationOptional();
-  const clipId = narrationClipId ?? (narration?.enabled ? activityId : undefined);
+  const activityId = block.activityId ?? positionalKey;
+  const clipId = narrationClipId ?? (narration?.enabled ? positionalKey : undefined);
 
   switch (block.type) {
     case 'quiz':
@@ -55,13 +56,13 @@ export function LessonBlockView({
     case 'screenReader':
       return <ScreenReader block={block} narrationClipId={clipId} />;
     case 'boxModel':
-      return <BoxModel />;
+      return <BoxModel narrationClipId={clipId} />;
     case 'layoutLab':
-      return <LayoutLab block={block} />;
+      return <LayoutLab block={block} narrationClipId={clipId} />;
     case 'specificity':
-      return <SpecificityLab block={block} />;
+      return <SpecificityLab block={block} narrationClipId={clipId} />;
     case 'contrast':
-      return <ContrastLab block={block} />;
+      return <ContrastLab block={block} narrationClipId={clipId} />;
     default:
       return <GuideBlockView block={block} guideId={`aula-${lessonId}`} narrationClipId={clipId} />;
   }

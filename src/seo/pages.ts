@@ -3,8 +3,9 @@ import { courseLessons, courses, lessonPlace, lessons } from '../lessons';
 import { reservationsPracticeUrl } from '../lessons/persistencePilot';
 import type { RoadmapCatalog } from '../learning/types';
 import { diagnosticoWebSlug, percursos } from '../percurso/apiReactTailwind';
+import { siteUrl } from '../config/site';
 
-export const siteUrl = 'https://trilha.info';
+export { siteUrl };
 export const cardSize = { width: 1200, height: 630 };
 
 export interface PreviewCard {

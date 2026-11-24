@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'o-problema:3',
           question:
             'Você escreveu três `<div class="card">` seguidas, sem nenhum CSS de layout. Como elas aparecem?',
           options: [
@@ -133,6 +134,7 @@ export const content: LessonContent = {
         { type: 'layoutLab', mode: 'flex' },
         {
           type: 'quiz',
+          activityId: 'eixos-do-flexbox:5',
           question:
             'Num container com `display: flex` e a direção padrão, você quer os itens **centralizados na horizontal**. Qual propriedade usa?',
           options: [
@@ -156,6 +158,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'eixos-do-flexbox:6',
           question:
             'O container agora tem `flex-direction: column`. O que `justify-content: center` faz?',
           options: [
@@ -189,6 +192,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'navbar:1',
           prompt:
             'Num campo de busca, o botão fica do tamanho do texto e o campo ocupa todo o resto. Complete.',
           language: 'css',
@@ -203,6 +207,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'navbar:3',
           title: 'O menu da padaria',
           task: 'Deixe o menu em linha, com os itens alinhados pelo meio, espaço entre eles e o botão **Fazer pedido** empurrado para a direita. Os outros links devem continuar perto do logo.',
           html: '<nav class="menu">\n  <a class="logo" href="#inicio">Pão Quente</a>\n  <a href="#cardapio">Cardápio</a>\n  <a href="#horarios">Horários</a>\n  <a class="pedido" href="#pedido">Fazer pedido</a>\n</nav>',
@@ -252,6 +257,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'grid:2',
           question:
             'Um container de 800px, sem gap, tem `grid-template-columns: 200px 1fr 1fr`. Qual a largura de cada coluna `1fr`?',
           options: [
@@ -316,6 +322,7 @@ export const content: LessonContent = {
         { type: 'layoutLab', mode: 'grid' },
         {
           type: 'playground',
+          activityId: 'grid:6',
           title: 'A vitrine de produtos',
           task: 'Transforme a lista numa grade com `display: grid`, colunas de pelo menos 180px usando `repeat(auto-fill, minmax(…))` e espaço entre os cards.',
           html: '<ul class="produtos">\n  <li class="produto">Pão francês</li>\n  <li class="produto">Pão de queijo</li>\n  <li class="produto">Bolo de fubá</li>\n  <li class="produto">Sonho</li>\n  <li class="produto">Broa de milho</li>\n  <li class="produto">Rosca doce</li>\n</ul>',
@@ -361,6 +368,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'qual-escolher:1',
           prompt: 'Qual ferramenta resolve cada caso de forma mais simples?',
           buckets: ['Flexbox', 'Grid'],
           items: [
@@ -376,6 +384,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'qual-escolher:2',
           question: 'Este CSS não centraliza os itens. Por quê?',
           code: '.lista {\n  display: flex;\n}\n\n.lista li {\n  justify-content: center;\n}',
           language: 'css',
@@ -410,6 +419,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'qual-escolher:4',
           prompt:
             'Você vai montar um menu com Flexbox. Coloque os passos na ordem em que faz sentido escrever.',
           items: [

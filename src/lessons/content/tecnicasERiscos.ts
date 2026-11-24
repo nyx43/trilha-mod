@@ -18,6 +18,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'escolher-bem:2',
           question:
             'O campo “quantidade” de uma loja aceita de 1 a 99 unidades. Qual destas estratégias é a mais inteligente para testá-lo?',
           options: [
@@ -66,6 +67,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'particao-de-equivalencia:3',
           prompt:
             'Uma lanchonete dá desconto conforme o valor do pedido: até R$ 29,99 sem desconto, de R$ 30 a R$ 99,99 com 5%, a partir de R$ 100 com 10%. Em que partição cai cada valor?',
           buckets: ['Sem desconto', '5% de desconto', '10% de desconto', 'Inválido'],
@@ -122,6 +124,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'valor-limite:4',
           title: 'Caçando o defeito na borda',
           task: 'A regra é: aceita de 18 a 65 anos, incluindo 18 e 65. Escreva uma linha `testar(...)` para cada valor-limite (17, 18, 65 e 66) e clique em executar. Leia o console: qual idade teve o resultado errado? Escreva essa idade no lugar de `null` em `idadeComDefeito`.',
           js: `// O sistema sob teste (não precisa mexer aqui)
@@ -214,6 +217,7 @@ let idadeComDefeito = 18;`,
         },
         {
           type: 'quiz',
+          activityId: 'tabela-de-decisao:3',
           question:
             'Você testou: assinante com compra de R$ 150 (grátis) e não assinante com compra de R$ 40 (cobrado). Tudo passou. Qual teste da tabela mais faz falta?',
           options: [
@@ -282,6 +286,7 @@ let idadeComDefeito = 18;`,
         },
         {
           type: 'classify',
+          activityId: 'transicao-de-estados:2',
           prompt:
             'Regras do pedido: só pode ser cancelado enquanto estiver recebido ou em preparo, e nunca volta a um estado anterior. Classifique cada transição.',
           buckets: ['Permitida', 'Proibida'],
@@ -322,6 +327,7 @@ let idadeComDefeito = 18;`,
         },
         {
           type: 'classify',
+          activityId: 'prioridade-por-risco:3',
           prompt:
             'Você testa o checkout novo de uma farmácia on-line na véspera do lançamento. Qual a prioridade de cada risco?',
           buckets: ['Prioridade alta', 'Prioridade média', 'Prioridade baixa'],
@@ -355,6 +361,7 @@ let idadeComDefeito = 18;`,
         },
         {
           type: 'quiz',
+          activityId: 'prioridade-por-risco:5',
           question:
             'Faltam duas horas para o lançamento e você tem casos para seis. A gerente pergunta o que vai ficar de fora. Qual a melhor resposta?',
           options: [

@@ -1,3 +1,5 @@
+export const contributionTurnstileAction = 'contribution';
+
 export type ContributionResourceKind = 'video' | 'read' | 'practice' | 'listen';
 export type ContributionLanguage = 'pt-BR' | 'en' | 'es';
 

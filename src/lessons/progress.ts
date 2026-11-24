@@ -1,11 +1,17 @@
 import { useCallback, useSyncExternalStore } from 'react';
+import type { SectionPosition } from './sectionPosition';
 
 export interface LessonRecord {
   /** Index of the furthest section opened by the learner. */
   reached: number;
+  position?: SectionPosition;
   /** Activity key → answered correctly on the first attempt. */
   answers: Record<string, boolean>;
+  answerRevisions?: Record<string, number>;
+  /** Activity key → eventually solved by the learner (independent of first-attempt score). */
+  completed?: Record<string, boolean>;
   done?: string;
+  doneRevision?: number;
 }
 
 export interface LessonStore {
@@ -18,6 +24,7 @@ export interface LessonStore {
 export interface CardState {
   box: number;
   due: string;
+  reviewedAt?: string;
 }
 
 export interface ReviewStore {
@@ -42,15 +49,37 @@ function readStore<T extends { schemaVersion: 1 }>(key: string, fallback: T): T 
   try {
     raw = localStorage.getItem(key);
   } catch {
-    return fallback;
+    return (cache.get(key)?.value as T) ?? fallback;
   }
   const cached = cache.get(key);
   if (cached && cached.raw === raw) return cached.value as T;
   let value: T = fallback;
   try {
-    const parsed = raw ? JSON.parse(raw) : undefined;
-    if (parsed && typeof parsed === 'object' && parsed.schemaVersion === 1)
-      value = { ...fallback, ...parsed };
+    const parsed = raw ? (JSON.parse(raw) as unknown) : undefined;
+    if (
+      parsed &&
+      typeof parsed === 'object' &&
+      !Array.isArray(parsed) &&
+      (parsed as { schemaVersion?: unknown }).schemaVersion === 1
+    ) {
+      const obj = parsed as Record<string, unknown>;
+      if ('lessons' in fallback) {
+        const lessons =
+          obj.lessons && typeof obj.lessons === 'object' && !Array.isArray(obj.lessons)
+            ? obj.lessons
+            : {};
+        const credited = Array.isArray(obj.credited)
+          ? obj.credited.filter((item): item is string => typeof item === 'string')
+          : [];
+        value = { ...fallback, lessons, credited } as T;
+      } else if ('cards' in fallback) {
+        const cards =
+          obj.cards && typeof obj.cards === 'object' && !Array.isArray(obj.cards) ? obj.cards : {};
+        value = { ...fallback, cards } as T;
+      } else {
+        value = { ...fallback, ...(obj as Partial<T>) };
+      }
+    }
   } catch {
     /* An unreadable record is ignored, never overwritten until the learner acts. */
   }
@@ -59,10 +88,19 @@ function readStore<T extends { schemaVersion: 1 }>(key: string, fallback: T): T 
 }
 
 function writeStore(key: string, value: unknown) {
+  let currentRaw: string | null = null;
   try {
-    localStorage.setItem(key, JSON.stringify(value));
+    currentRaw = localStorage.getItem(key);
   } catch {
-    /* Storage can be unavailable in private mode; the session keeps working. */
+    currentRaw = null;
+  }
+  try {
+    const serialized = JSON.stringify(value);
+    localStorage.setItem(key, serialized);
+    cache.set(key, { raw: serialized, value });
+  } catch {
+    /* Storage can be unavailable in private mode; keep the session working in memory. */
+    cache.set(key, { raw: currentRaw, value });
   }
   window.dispatchEvent(new Event(changeEvent));
 }
@@ -109,10 +147,52 @@ export function useLessonRecord(id: string) {
 }
 
 /** Keeps only the first attempt, so the score reflects what the learner knew. */
-export function recordAnswer(lessonId: string, key: string, correct: boolean) {
+export function recordAnswer(lessonId: string, key: string, correct: boolean, revision = 1) {
   updateLesson(lessonId, (record) =>
-    key in record.answers ? record : { ...record, answers: { ...record.answers, [key]: correct } },
+    Object.prototype.hasOwnProperty.call(record.answers, key)
+      ? record
+      : {
+          ...record,
+          answers: { ...record.answers, [key]: correct },
+          answerRevisions: { ...record.answerRevisions, [key]: revision },
+        },
   );
+}
+
+export type ExerciseOutcome = 'pass' | 'fail' | 'solution';
+
+/**
+ * Records the first evaluated attempt (including failure or revealing a solution before solving)
+ * while tracking subsequent learner-authored completion separately.
+ * Existing recorded answers are preserved untouched.
+ */
+export function recordExerciseOutcome(
+  lessonId: string,
+  key: string,
+  outcome: ExerciseOutcome,
+  revision = 1,
+) {
+  updateLesson(lessonId, (record) => {
+    const hasFirstAttempt = Object.prototype.hasOwnProperty.call(record.answers, key);
+    const nextAnswers = hasFirstAttempt
+      ? record.answers
+      : { ...record.answers, [key]: outcome === 'pass' };
+    const nextAnswerRevisions = hasFirstAttempt
+      ? record.answerRevisions
+      : { ...record.answerRevisions, [key]: revision };
+    const shouldMarkCompleted = outcome === 'pass' && !record.completed?.[key];
+    const nextCompleted = shouldMarkCompleted
+      ? { ...record.completed, [key]: true }
+      : record.completed;
+
+    if (hasFirstAttempt && !shouldMarkCompleted) return record;
+    return {
+      ...record,
+      answers: nextAnswers,
+      answerRevisions: nextAnswerRevisions,
+      ...(nextCompleted ? { completed: nextCompleted } : {}),
+    };
+  });
 }
 
 export function localDay(date = new Date()): string {
@@ -130,18 +210,22 @@ export function nextCardState(
   remembered: boolean,
   today = localDay(),
 ): CardState {
-  if (!remembered) return { box: 1, due: today };
+  if (current?.reviewedAt === today) return current;
+  if (!remembered) return { box: 1, due: addDays(today, 1), reviewedAt: today };
   const box = Math.min((current?.box || 0) + 1, reviewIntervals.length - 1);
-  return { box, due: addDays(today, reviewIntervals[box]) };
+  return { box, due: addDays(today, reviewIntervals[box]), reviewedAt: today };
 }
 
 export const cardKey = (lessonId: string, cardId: string) => `${lessonId}:${cardId}`;
 
-export function rateCard(key: string, remembered: boolean) {
+export function rateCard(key: string, remembered: boolean, today = localDay()) {
   const store = readReview();
+  const current = store.cards[key];
+  const next = nextCardState(current, remembered, today);
+  if (current === next) return;
   writeStore(reviewStoreKey, {
     ...store,
-    cards: { ...store.cards, [key]: nextCardState(store.cards[key], remembered) },
+    cards: { ...store.cards, [key]: next },
   });
 }
 
@@ -162,8 +246,10 @@ export function dueCardKeys(store: ReviewStore, today = localDay()): string[] {
     .map(([key]) => key);
 }
 
-export function lessonScore(record: LessonRecord | undefined) {
-  const values = Object.values(record?.answers || {});
+export function lessonScore(record: LessonRecord | undefined, activityIds?: ReadonlySet<string>) {
+  const values = Object.entries(record?.answers || {})
+    .filter(([key]) => !activityIds || activityIds.has(key))
+    .map(([, correct]) => correct);
   return { correct: values.filter(Boolean).length, total: values.length };
 }
 

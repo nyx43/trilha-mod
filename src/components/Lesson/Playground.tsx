@@ -1,9 +1,9 @@
 import { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { PiArrowCounterClockwise, PiCheckBold, PiCircle, PiConfetti, PiEye } from 'react-icons/pi';
-import { recordAnswer } from '../../lessons/progress';
+import { recordExerciseOutcome } from '../../lessons/progress';
 import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { Inline } from '../Guide/inline';
-import { Block, useLessonId } from './context';
+import { Block, useLessonIdentity } from './context';
 
 type Language = 'html' | 'css' | 'js';
 type Code = Record<Language, string>;
@@ -36,10 +36,30 @@ document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&
 }
 
 export const reactScripts = [
-  'https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.development.js',
-  'https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.development.js',
-  'https://cdn.jsdelivr.net/npm/@babel/standalone@7.26.4/babel.min.js',
+  '/vendor/playground/react.development.js',
+  '/vendor/playground/react-dom.development.js',
+  '/vendor/playground/babel.min.js',
 ];
+
+function resolvePlaygroundScriptUrl(path: string): string {
+  if (
+    typeof window !== 'undefined' &&
+    window.location?.origin &&
+    window.location.origin !== 'null'
+  ) {
+    return `${window.location.origin}${path}`;
+  }
+  return path;
+}
+
+function playgroundCspMeta(): string {
+  const origin =
+    typeof window !== 'undefined' && window.location?.origin && window.location.origin !== 'null'
+      ? window.location.origin
+      : "'self'";
+  const policy = `default-src 'none'; script-src 'unsafe-inline' 'unsafe-eval' ${origin}/vendor/playground/; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; connect-src 'none';`;
+  return `<meta http-equiv="Content-Security-Policy" content="${policy}">`;
+}
 
 function checker(tests: string[], delay: number) {
   return `window.addEventListener('load',function(){setTimeout(function(){var tests=${toScript(
@@ -57,11 +77,13 @@ export function buildDocument(
 ) {
   const libraries =
     framework === 'react'
-      ? reactScripts.map((src) => `<script src="${src}"></script>`).join('')
+      ? reactScripts
+          .map((src) => `<script src="${resolvePlaygroundScriptUrl(src)}"></script>`)
+          .join('')
       : '';
   const script =
     framework === 'react' ? '<script type="text/babel" data-presets="react">' : '<script>';
-  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><script>${bridge(
+  return `<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">${playgroundCspMeta()}<script>${bridge(
     token,
     mode,
   )}</script>${libraries}<style>${escapeTag(code.css, 'style')}</style></head><body>${
@@ -84,7 +106,7 @@ export function Playground({
   activityId: string;
   narrationClipId?: string;
 }) {
-  const lessonId = useLessonId();
+  const { lessonId, revision } = useLessonIdentity();
   const id = useId();
   const token = useMemo(() => `${id}-${Math.random().toString(36).slice(2)}`, [id]);
   const languages = (['html', 'css', 'js'] as Language[]).filter(
@@ -96,10 +118,14 @@ export function Playground({
   const [logs, setLogs] = useState<LogLine[]>([]);
   const [results, setResults] = useState<boolean[]>([]);
   const [width, setWidth] = useState(1024);
+  const [demonstrated, setDemonstrated] = useState(false);
+  const evalOriginRef = useRef<'preview' | 'attempt' | 'solution'>('preview');
   const preview = useRef<HTMLIFrameElement>(null);
   const check = useRef<HTMLIFrameElement>(null);
   const checks = useMemo(() => block.checks || [], [block.checks]);
-  const passed = checks.length > 0 && results.length === checks.length && results.every(Boolean);
+  const allChecksPassed =
+    checks.length > 0 && results.length === checks.length && results.every(Boolean);
+  const passed = allChecksPassed && !demonstrated;
   const onlyScript = languages.length === 1 && languages[0] === 'js';
 
   useEffect(() => {
@@ -124,16 +150,20 @@ export function Playground({
         data.type === 'checks' &&
         event.source === check.current?.contentWindow &&
         Array.isArray(data.results)
-      )
-        setResults(data.results.map(Boolean));
+      ) {
+        const nextResults = data.results.map(Boolean);
+        setResults(nextResults);
+        if (checks.length > 0 && evalOriginRef.current === 'attempt') {
+          const didPass = nextResults.length === checks.length && nextResults.every(Boolean);
+          if (didPass) {
+            recordExerciseOutcome(lessonId, activityId, 'pass', revision);
+          }
+        }
+      }
     }
     window.addEventListener('message', onMessage);
     return () => window.removeEventListener('message', onMessage);
-  }, [token]);
-
-  useEffect(() => {
-    if (passed) recordAnswer(lessonId, activityId, true);
-  }, [passed, lessonId, activityId]);
+  }, [activityId, checks.length, lessonId, revision, token]);
 
   const previewDoc = useMemo(
     () => buildDocument(rendered, token, 'preview', [], block.framework),
@@ -196,6 +226,8 @@ export function Playground({
               <button
                 type="button"
                 onClick={() => {
+                  evalOriginRef.current = 'preview';
+                  setDemonstrated(false);
                   setCode(initialCode(block));
                   setResults([]);
                 }}
@@ -205,7 +237,14 @@ export function Playground({
               {block.solution && (
                 <button
                   type="button"
-                  onClick={() => setCode((previous) => ({ ...previous, ...block.solution }))}
+                  onClick={() => {
+                    evalOriginRef.current = 'solution';
+                    setDemonstrated(true);
+                    if (checks.length > 0) {
+                      recordExerciseOutcome(lessonId, activityId, 'solution', revision);
+                    }
+                    setCode((previous) => ({ ...previous, ...block.solution }));
+                  }}
                 >
                   <PiEye aria-hidden="true" /> Ver uma solução
                 </button>
@@ -226,6 +265,8 @@ export function Playground({
             autoCorrect="off"
             onChange={(event) => {
               const value = event.target.value;
+              evalOriginRef.current = 'attempt';
+              setDemonstrated(false);
               setCode((previous) => ({ ...previous, [active]: value }));
             }}
           />
@@ -303,10 +344,16 @@ export function Playground({
       {checks.length > 0 && (
         <div className="lesson-checks">
           <p className="lesson-checks-title">
-            {passed ? (
-              <>
-                <PiConfetti aria-hidden="true" /> Missão cumprida!
-              </>
+            {allChecksPassed ? (
+              demonstrated ? (
+                <>
+                  <PiEye aria-hidden="true" /> Solução de exemplo
+                </>
+              ) : (
+                <>
+                  <PiConfetti aria-hidden="true" /> Missão cumprida!
+                </>
+              )
             ) : (
               'Objetivos'
             )}

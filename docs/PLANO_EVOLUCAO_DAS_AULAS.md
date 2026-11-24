@@ -20,6 +20,13 @@ Para as próximas publicações, atribuir uma revisão à aula e registrá-la qu
 
 **Aceite.** Testar a conversão com respostas certas, erradas e ausentes, exercício movido ou removido, registro ambíguo e aula concluída. Preparar um navegador com progresso da versão anterior. Inserir um exemplo antes de uma questão e mudar a ordem das seções. Após duas recargas, conferir a resposta original, a seção retomada, a pontuação, a conclusão e a revisão dos cartões. Repetir pela aula avulsa e pelo Percurso Web antes de publicar conteúdo reorganizado.
 
+### Implementação e ensaio
+
+- As 78 aulas trazem um `activityId` explícito nos blocos que registram tentativas. Os IDs iniciais são as chaves que já estavam gravadas. O histórico Git disponível confirmou a correspondência das questões e a ordem das seções nas versões encontradas. Uma chave antiga sem exercício correspondente fica no histórico e fica fora da pontuação exibida na aula.
+- A aula e o percurso retomam pela identidade da seção. Para registros antigos, a posição numérica é lida com a ordem anterior, arquivada separadamente para as aulas e para as etapas. Se a seção saiu, a retomada procura a última seção anterior que ainda existe. A partir do próximo avanço, fica salvo o ID da seção e a sequência de predecessoras. A leitura da versão antiga conserva os dados originais.
+- Use um novo ID como `atividade-prova-de-persistencia` ao criar um exercício ou trocar o que ele avalia. Preserve o ID ao mover ou esclarecer a questão. Incremente `revision` ao publicar uma revisão. Novas primeiras tentativas e conclusões registram a revisão da aula. Os registros antigos conservam a origem sem revisão conhecida. A narração usa as chaves e os hashes existentes e a revisão do conteúdo deve conferir os clipes afetados.
+- No Chromium, uma cópia de “Integração entre front e API” com CORS movida e um exemplo inserido antes da questão retomou na seção certa em duas recargas na aula avulsa e na etapa Web. O ensaio também preservou a primeira resposta errada e os cartões. Um teste de integração cobre a conclusão, a nova tentativa com revisão registrada, uma resposta antiga sem correspondência e a posição persistida após avançar. A checagem de tipos, os 343 testes, a conferência da narração das 78 aulas e o build de produção passaram.
+
 ## 3. Simplificar a criação, a prévia e a publicação
 
 - Usar *Onde o dado mora* como referência para um modelo curto de autoria. O autor define em que ponto da trilha a aula entra, o que o aluno já precisa saber, o que deverá conseguir fazer, um exemplo resolvido, uma prática com feedback e como conferir o resultado. Reaproveitar os blocos de aula, a missão e os cartões já disponíveis.
@@ -53,6 +60,28 @@ Quem revisa reúne os relatos por seção, escolhe uma dificuldade e registra a 
 
 Fazer um ensaio completo com a aula piloto. Publicá-la em uma prévia, começar a estudar, responder a uma atividade e registrar uma dificuldade. Revisar a explicação, acrescentar um exemplo antes da atividade e publicar a revisão na mesma prévia. Voltar com o mesmo navegador e conferir catálogo, próxima aula, resposta salva, ponto de retomada e áudio do trecho alterado. Se o ciclo exigir trabalho em uma tela do site, registrar e resolver esse ponto antes de ampliar a produção de aulas.
 
+### Comandos de autoria e prévia
+
+Execute os comandos a partir da raiz do Trilha.
+
+```bash
+npm run aula -- nova verificando-previsoes \
+  --titulo "Verificando previsões" \
+  --trilha frontend --grupo curriculum.internet-e-http
+
+# Ou comece uma revisão de uma aula existente
+npm run aula -- revisar como-a-web-funciona --trilha frontend
+
+npm run aula -- verificar verificando-previsoes
+npm run aula -- previa verificando-previsoes
+```
+
+Edite o arquivo TypeScript indicado em `.cache/editorial/drafts/`. Na revisão, o comando copia o conteúdo e conserva os IDs já publicados. O relatório aponta a posição na trilha, a aula anterior e a próxima, exercícios e seções adicionados ou retirados e os clipes novos, desatualizados ou removidos. A prévia usa o mesmo leitor em uma cópia temporária na porta 5188, com dados de estudo próprios dessa origem. Encerre e reabra após editar. Use `--porta` para abrir outra prévia simultaneamente.
+
+Para preparar uma publicação, revise o relatório, transfira o conteúdo e os metadados aprovados para o catálogo e regenere a ordem dos cursos pelo teste correspondente. Rode `npm run check`, `npm run test:run` e `npm run build`. Se houver mudanças na narração, rode `npm run narration:batch -- --lesson <id>` e confirme com `npm run narration:check`. A alteração do texto em um clipe reaproveitado pede uma nova gravação quando o hash divergir.
+
+**Ensaio local.** O rascunho `exemplo-autoria` apareceu em quarto lugar no curso Frontend, entre “Seu kit de trabalho” e “Git do zero”, com 10 clipes novos no relatório. No Chromium a 360 px, o exercício deu feedback, a aula concluiu e o progresso sobreviveu à recarga. Também foi testada uma revisão de “Integração entre front e API” com a abertura alterada. A revisão identificou um clipe desatualizado e 62 reaproveitáveis. No navegador, o clipe alterado ficou indisponível e a narração válida tocou com destaque. O rascunho foi bloqueado pelo servidor de desenvolvimento normal e a aula existente abriu pela rota normal. A checagem de tipos e os 343 testes passaram.
+
 ## Depois da base editorial
 
 **Laboratório de prática.** Começar pelo Percurso Web e reaproveitar a prática de diagnóstico existente. Para a habilidade de conferir persistência, oferecer uma sequência curta em que o aluno prevê o resultado, diagnostica por que um cadastro sumiu e verifica a correção. Cada exercício indica a habilidade, a aula de apoio e o resultado esperado. Reutilizar os IDs e registrar a origem da tentativa e as dicas usadas. O primeiro piloto está pronto quando um aluno consegue escolher um exercício fora da aula, resolver, consultar o feedback e retomar depois. Usar as dificuldades observadas para escolher os próximos exercícios.
@@ -60,3 +89,16 @@ Fazer um ensaio completo com a aula piloto. Publicá-la em uma prévia, começar
 **Simulação de freelancer.** Adaptar por curadoria manual uma demanda real autorizada para uso ou criar um enunciado inspirado em um problema recorrente. Usar cliente fictício. O caso de reservas já sugerido no projeto serve como primeiro candidato. O cliente pede para evitar conflitos de horário. O aluno pergunta quais reservas entram em conflito, combina critérios de aceite, recebe uma alteração de requisito e entrega uma solução com evidências. O diálogo inicial pode usar respostas preparadas. Aproveitar a avaliação por critérios da missão Web e registrar cada entrega, seu feedback e a reentrega. Identificar quais critérios foram conferidos por testes e quais receberam avaliação da IA ou de uma pessoa. O piloto está pronto quando o aluno consegue corrigir um problema apontado na primeira entrega e demonstrar a correção na segunda.
 
 **Participação de professores.** Hoje a autoria se concentra em João e nas IAs. Se um professor demonstrar interesse, convidá-lo primeiro a revisar uma entrega pela mesma rubrica. A experiência permitirá decidir se ele precisa de acesso às entregas, de ferramentas de correção ou também de autoria e publicação.
+
+## Ordem de execução sem depender de João
+
+A observação de um iniciante na missão final do [Percurso Web](https://trilha-mod.vercel.app/percurso/api-react-tailwind/missao-final) continua planejada na etapa 1. As tarefas técnicas abaixo podem avançar com dados de teste enquanto essa observação aguarda uma pessoa. O terminal multilinha, a auditoria das 78 aulas, o plano do recomendador e a avaliação da missão final já têm entregas registradas no [relatório de estabilização](RELATORIO_ESTABILIZACAO.md).
+
+| Ordem | Trabalho | Entrega verificável |
+| --- | --- | --- |
+| 1 | Executar o [piloto Opus](../ideias%20futuras.md#piloto-de-narração-mais-leve-com-opus) em “Integração entre front e API”, com arquivos em uma pasta temporária e prévia local. | Comparar o tamanho por voz, verificar que todos os clipes tocam até o fim e testar o destaque, a pausa, a retomada e o carregamento sob demanda. Registrar o que foi possível ouvir e medir. A decisão sobre converter o catálogo vem após a revisão do piloto. |
+| 2 | Tornar seguro mover exercícios e seções de uma aula já estudada. Começar pela etapa 2 deste plano e por um caso que use a aula avulsa e o percurso. | Demonstrar com registros da versão anterior que a primeira tentativa, a conclusão, os cartões e a retomada sobrevivem a duas recargas após inserir um bloco ou reordenar seções. |
+| 3 | Preparar o fluxo local de autoria com o piloto e as verificações da etapa 3. | Criar uma aula de exemplo, abrir o rascunho numa prévia, verificar a posição na trilha e emitir a lista dos clipes afetados pela revisão. |
+| 4 | Fazer backup e restauração dos dados locais de estudo em uma rodada própria. | Exportar um arquivo versionado e restaurá-lo em outro perfil de teste. Conferir progresso, cartões e plano salvo. Validar o arquivo antes de gravar e preservar os dados atuais diante de arquivo inválido. Exportar apenas os dados de estudo e as preferências previstas para o backup. |
+
+Antes de cada etapa, confira o Git e reaproveite alterações equivalentes que já existam. Como há edições locais em andamento, faça o piloto em cópia isolada quando houver sobreposição. Registre os comandos, resultados e pendências junto da entrega. Rode as verificações pertinentes e deixe as alterações prontas para revisão local. Em cada rodada, mantenha uma única tarefa ativa na próxima ordem.

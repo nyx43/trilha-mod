@@ -42,6 +42,7 @@ e explique o conceito por trás em poucas linhas.`,
         },
         {
           type: 'quiz',
+          activityId: 'pedido-vago:3',
           question: 'No pedido forte, qual informação mais ajuda a IA a achar o erro rapidamente?',
           options: [
             {
@@ -145,6 +146,7 @@ e explique o conceito por trás em poucas linhas.`,
         },
         {
           type: 'classify',
+          activityId: 'seis-pecas:3',
           prompt: 'Cada trecho de pedido abaixo é principalmente qual peça?',
           buckets: ['Contexto', 'Tarefa', 'Formato', 'Restrições'],
           items: [
@@ -176,6 +178,7 @@ e explique o conceito por trás em poucas linhas.`,
         },
         {
           type: 'fill',
+          activityId: 'tentativa-e-criterios:2',
           prompt:
             'Complete o modelo de pedido de estudo com as palavras que faltam: o que você já fez, o que viu acontecer e o que a IA deve esperar antes do feedback.',
           language: 'text',
@@ -190,6 +193,7 @@ Depois proponha uma variação do exercício. Aguarde minha [[tentativa|resposta
         },
         {
           type: 'quiz',
+          activityId: 'tentativa-e-criterios:3',
           question:
             'Você pede ajuda com uma função que filtra pedidos acima de R$ 50, mas não diz nada sobre como conferir. A IA devolve uma função diferente da sua. O que faltou no pedido?',
           options: [
@@ -269,6 +273,7 @@ Depois proponha uma variação do exercício. Aguarde minha [[tentativa|resposta
         },
         {
           type: 'quiz',
+          activityId: 'perguntas-de-volta:3',
           question:
             'Em que situação faz mais sentido pedir que a IA faça perguntas antes de responder?',
           options: [
@@ -303,6 +308,7 @@ Depois proponha uma variação do exercício. Aguarde minha [[tentativa|resposta
         },
         {
           type: 'order',
+          activityId: 'iterar:1',
           prompt: 'Coloque em ordem o ciclo de melhorar um pedido.',
           items: [
             'Escrever o pedido com objetivo, contexto e critério de verificação',
@@ -317,6 +323,7 @@ Depois proponha uma variação do exercício. Aguarde minha [[tentativa|resposta
         },
         {
           type: 'quiz',
+          activityId: 'iterar:2',
           question:
             'A resposta da IA usou `map`, `filter` e `reduce`, e você só estudou laços `for`. Qual é o melhor ajuste?',
           options: [

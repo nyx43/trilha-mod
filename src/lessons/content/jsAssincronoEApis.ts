@@ -31,6 +31,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'por-que-esperar:3',
           prompt:
             'Quais destas operações demoram um tempo imprevisível e por isso são assíncronas?',
           buckets: ['Síncrona: acontece na hora', 'Assíncrona: termina depois'],
@@ -94,6 +95,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'set-timeout:3',
           title: 'Teste a ordem você mesmo',
           task: 'Antes de olhar o console, escreva num papel a ordem em que as quatro mensagens vão aparecer. Depois mude os tempos e veja o que acontece.',
           js: `console.log('1. Peguei a senha');
@@ -117,6 +119,7 @@ console.log('4. Sentei para esperar');
         },
         {
           type: 'quiz',
+          activityId: 'set-timeout:5',
           question: 'Em que ordem as mensagens aparecem no console?',
           code: "setTimeout(() => console.log('A'), 500);\nconsole.log('B');\nsetTimeout(() => console.log('C'), 0);\nconsole.log('D');",
           language: 'js',
@@ -250,6 +253,7 @@ console.log('4. Sentei para esperar');
         },
         {
           type: 'quiz',
+          activityId: 'promises:5',
           question: 'O que aparece no console?',
           code: 'async function buscar() {\n  const pratos = buscarCardapio(); // faltou algo aqui\n  console.log(pratos);\n}\n\nbuscar();',
           language: 'js',
@@ -279,6 +283,7 @@ console.log('4. Sentei para esperar');
         },
         {
           type: 'fill',
+          activityId: 'promises:6',
           prompt: 'Complete a função para esperar o CEP, mostrar a cidade e avisar se der errado.',
           language: 'js',
           template:
@@ -387,6 +392,7 @@ console.log('4. Sentei para esperar');
         },
         {
           type: 'quiz',
+          activityId: 'fetch:4',
           question: 'A API respondeu `404 Not Found`. O que acontece com a Promise do `fetch`?',
           options: [
             {
@@ -409,6 +415,7 @@ console.log('4. Sentei para esperar');
         },
         {
           type: 'order',
+          activityId: 'fetch:5',
           prompt: 'Coloque em ordem o que uma função de busca faz.',
           items: [
             'Mostrar a mensagem de carregando',
@@ -464,6 +471,7 @@ console.log('4. Sentei para esperar');
         },
         {
           type: 'playground',
+          activityId: 'quatro-estados:2',
           title: 'Cardápio com os quatro estados',
           task: 'A função `buscarProdutos` é uma API de mentira: espera 800 ms e responde. Complete `carregar` para mostrar “Carregando...”, depois os produtos, uma mensagem com “Nenhum produto” se a lista vier vazia, e “Não foi possível carregar. Tente de novo.” se falhar. Troque `falhar` e `vazio` para `true` para ver cada estado na prévia.',
           html: `<h2>Cardápio do dia</h2>
@@ -615,6 +623,7 @@ carregar();
         },
         {
           type: 'classify',
+          activityId: 'quatro-estados:4',
           prompt: 'Qual estado da tela cada situação representa?',
           buckets: ['Carregando', 'Sucesso', 'Vazio', 'Erro'],
           items: [
@@ -649,6 +658,7 @@ carregar();
         },
         {
           type: 'quiz',
+          activityId: 'investigar:2',
           question:
             'A lista aparece com “undefined: R$ NaN” em cada item. O Network mostra status 200. O que investigar primeiro?',
           options: [

@@ -81,6 +81,7 @@ function Preco({ valor }) {
         },
         {
           type: 'terminal',
+          activityId: 'o-que-o-build-faz:4',
           title: 'Lendo o relatório do build',
           task: 'Este é o catálogo de uma loja, com uma página de relatórios que usa uma biblioteca de gráficos. Gere a versão de produção e leia o que o Vite conta.',
           prompt: '~/catalogo$',
@@ -146,6 +147,7 @@ dist/assets/index-Ha7mQ2xT.js        294.03 kB │ gzip: 92.40 kB
         },
         {
           type: 'quiz',
+          activityId: 'o-que-o-build-faz:5',
           question:
             'Você importou só a função `format` de uma biblioteca de datas que tem mais de 200 funções. Com tree-shaking, o que vai para o build?',
           options: [
@@ -248,6 +250,7 @@ function App() {
         },
         {
           type: 'playground',
+          activityId: 'code-splitting:4',
           title: 'Relatório sob demanda',
           framework: 'react',
           task: 'Aqui o `import()` é simulado com uma espera de 0,8 segundo. Clique em **Abrir relatório** e veja o erro no console: um componente lazy precisa de um `Suspense` acima dele. Envolva o `<Relatorio />` num `Suspense` com um fallback que diga “Carregando relatório...”.',
@@ -337,6 +340,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);`,
         },
         {
           type: 'quiz',
+          activityId: 'code-splitting:5',
           question: 'Qual destas partes de um app de delivery é a melhor candidata a `lazy`?',
           options: [
             {
@@ -408,6 +412,7 @@ export function buscarProdutos() {
         },
         {
           type: 'classify',
+          activityId: 'variaveis-de-ambiente:4',
           prompt: 'Este valor pode ir para uma variável `VITE_` ou precisa ficar no servidor?',
           buckets: ['Pode ser VITE_ (público)', 'Só no servidor (segredo)'],
           items: [
@@ -423,6 +428,7 @@ export function buscarProdutos() {
         },
         {
           type: 'quiz',
+          activityId: 'variaveis-de-ambiente:5',
           question:
             'No `.env` está `API_URL=https://api.loja.com.br`, mas `' +
             ['import', 'meta'].join('.') +
@@ -490,6 +496,7 @@ export function buscarProdutos() {
         },
         {
           type: 'order',
+          activityId: 'medir-antes:4',
           prompt: 'Coloque em ordem um ciclo honesto de otimização.',
           items: [
             'Reproduzir a lentidão e medir, anotando o número',
@@ -530,6 +537,7 @@ export function buscarProdutos() {
         },
         {
           type: 'playground',
+          activityId: 'memo:2',
           title: 'Contando renderizações',
           framework: 'react',
           task: 'Digite na anotação e veja no console: cada letra renderiza os cinco itens de novo, embora nada neles tenha mudado. Envolva `Item` em `memo`. Repare que ainda renderiza: a função `favoritar` nasce nova a cada vez. Estabilize-a com `useCallback`.',
@@ -665,6 +673,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Lista />);`,
         },
         {
           type: 'quiz',
+          activityId: 'memo:5',
           question: 'Em qual situação `useMemo` provavelmente faz diferença de verdade?',
           options: [
             {
@@ -713,6 +722,7 @@ const visiveis = pedidos.slice(primeira, primeira + quantas);
         },
         {
           type: 'fill',
+          activityId: 'listas-gigantes:3',
           prompt:
             'Cada linha tem 50px e a pessoa rolou 1000px. Complete o cálculo da primeira linha visível e do pedaço da lista que vai para a tela.',
           language: 'js',
@@ -729,6 +739,7 @@ const visiveis = pedidos.[[slice]](primeira, primeira + 13);`,
         },
         {
           type: 'quiz',
+          activityId: 'listas-gigantes:5',
           question:
             'Uma tela de extrato com 8 mil transações do Pix trava ao abrir. O Profiler mostra que o tempo vai todo para criar as linhas na primeira renderização. Qual o melhor primeiro passo?',
           options: [

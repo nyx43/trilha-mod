@@ -79,6 +79,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'o-que-conferir:4',
           question:
             'Ao finalizar uma compra, a API responde `200 OK` com o corpo `{"erro": "Estoque insuficiente"}`. O teste confere só o status. O que está acontecendo?',
           options: [
@@ -123,6 +124,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'api-pelo-terminal:2',
           title: 'Explore a API da loja com curl',
           task: 'A API está rodando no seu computador, na porta 3000. Leia cada resposta antes de seguir: o status da primeira linha diz muito.',
           intro: 'API da loja rodando em http://localhost:3000',
@@ -190,6 +192,7 @@ Content-Length: 34
         },
         {
           type: 'quiz',
+          activityId: 'api-pelo-terminal:3',
           question:
             'No terceiro passo, o pedido `999` voltou `404 Not Found`. Você deveria abrir um relato de bug?',
           options: [
@@ -272,6 +275,7 @@ def test_devolve_o_pedido_da_pessoa_logada():
         },
         {
           type: 'python',
+          activityId: 'assercoes-em-codigo:3',
           title: 'Escreva um teste que pegue APIs quebradas',
           task: 'A API falsa devolve dicionários parecidos com respostas HTTP. Complete `testar(api)` com `assert` até ele **passar** com a API correta e **falhar** com cada uma das quatro versões com defeito. Confira também o pedido `999`, que deve voltar `404`. Rode e leia o placar no final.',
           code: `# Uma API falsa: devolve um dicionário no formato de uma resposta HTTP
@@ -440,6 +444,7 @@ for defeito in [api_sem_total, api_total_texto, api_html, api_erro_disfarcado]:
         },
         {
           type: 'classify',
+          activityId: 'erros-e-acesso:2',
           prompt: 'Qual status a API deveria devolver em cada situação?',
           buckets: ['401 sem login', '403 sem permissão', '404 não existe', '422 dado inválido'],
           items: [
@@ -456,6 +461,7 @@ for defeito in [api_sem_total, api_total_texto, api_html, api_erro_disfarcado]:
         },
         {
           type: 'python',
+          activityId: 'erros-e-acesso:3',
           title: 'Teste quem pode ver o pedido',
           task: 'Complete `testar_acesso(api)`: sem token a resposta deve ser `401`; com o token do Bruno, o pedido da Ana deve voltar `403` **e sem nenhum dado do pedido** no corpo. O teste precisa passar com a API correta e pegar as três versões com defeito.',
           code: `CONTAS = {'token-ana': 'Ana', 'token-bruno': 'Bruno'}
@@ -646,6 +652,7 @@ for defeito in [api_sem_login, api_vaza_pedido, api_403_com_dados]:
         },
         {
           type: 'quiz',
+          activityId: 'contrato:4',
           question:
             'A equipe da API renomeou `total` para `valor_total`, atualizou os próprios testes e publicou. Tudo verde. No dia seguinte, o carrinho do aplicativo mostra `R$ NaN`. Qual teste teria evitado isso?',
           options: [
@@ -702,6 +709,7 @@ for defeito in [api_sem_login, api_vaza_pedido, api_403_com_dados]:
         },
         {
           type: 'order',
+          activityId: 'dados-e-isolamento:3',
           prompt: 'Coloque em ordem o ciclo de um teste de API isolado.',
           items: [
             'Criar os dados próprios do teste, com um nome único',
@@ -715,6 +723,7 @@ for defeito in [api_sem_login, api_vaza_pedido, api_403_com_dados]:
         },
         {
           type: 'classify',
+          activityId: 'dados-e-isolamento:4',
           prompt: 'Quais práticas deixam a suíte confiável e quais criam problemas?',
           buckets: ['Deixa confiável', 'Cria problemas'],
           items: [
@@ -735,6 +744,7 @@ for defeito in [api_sem_login, api_vaza_pedido, api_403_com_dados]:
         },
         {
           type: 'quiz',
+          activityId: 'dados-e-isolamento:6',
           question:
             'A internet falha no meio de um Pix e o aplicativo reenvia o mesmo pagamento automaticamente. Que teste de API protege a pessoa de pagar duas vezes?',
           options: [

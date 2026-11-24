@@ -472,6 +472,94 @@ function extractBlockSpec(
         uncovered: null,
       };
 
+    case 'boxModel':
+      return {
+        clip: createClipSpec({
+          id,
+          sectionId,
+          kind: 'playground',
+          blockIndex,
+          blockType: block.type,
+          pauseAfter: true,
+          fields: [
+            makeField(
+              'task',
+              'Laboratório do modelo de caixa. Ajuste largura, preenchimento interno, borda e margem e alterne entre content-box e border-box para observar como o tamanho final muda. Vou pausar agora para você experimentar.',
+            ),
+          ],
+          label: 'Laboratório: modelo de caixa',
+        }),
+        uncovered: null,
+      };
+
+    case 'layoutLab': {
+      const isFlex = block.mode === 'flex';
+      return {
+        clip: createClipSpec({
+          id,
+          sectionId,
+          kind: 'playground',
+          blockIndex,
+          blockType: block.type,
+          pauseAfter: true,
+          fields: [
+            makeField(
+              'task',
+              isFlex
+                ? 'Laboratório de Flexbox. Altere a direção do eixo principal, o alinhamento, a quebra de linha, o espaçamento e a quantidade de itens para observar como o container organiza os blocos. Vou pausar agora para você testar.'
+                : 'Laboratório de CSS Grid. Troque o modelo de colunas, faça o primeiro item ocupar mais colunas e ajuste o espaçamento e a quantidade de itens para observar a grade reagir. Vou pausar agora para você experimentar.',
+            ),
+          ],
+          label: isFlex ? 'Laboratório: Flexbox' : 'Laboratório: CSS Grid',
+        }),
+        uncovered: null,
+      };
+    }
+
+    case 'specificity':
+      return {
+        clip: createClipSpec({
+          id,
+          sectionId,
+          kind: 'playground',
+          blockIndex,
+          blockType: block.type,
+          pauseAfter: true,
+          fields: [
+            makeField(
+              'caption',
+              'Escreva dois seletores para o mesmo elemento e veja qual vence. A pontuação é comparada da esquerda para a direita: uma coluna só importa quando as anteriores empatam.',
+            ),
+            makeField(
+              'task',
+              'Teste os pares de exemplo ou digite seletores próprios para comparar a pontuação. Vou pausar agora para você experimentar.',
+            ),
+          ],
+          label: 'Laboratório: especificidade',
+        }),
+        uncovered: null,
+      };
+
+    case 'contrast':
+      return {
+        clip: createClipSpec({
+          id,
+          sectionId,
+          kind: 'playground',
+          blockIndex,
+          blockType: block.type,
+          pauseAfter: true,
+          fields: [
+            makeField(
+              'task',
+              'Laboratório de contraste de cores. Ajuste a cor do texto e a cor do fundo para acompanhar a razão de contraste e conferir se a leitura passa nos níveis AA e AAA. Vou pausar agora para você experimentar.',
+            ),
+          ],
+          label: 'Laboratório: contraste de cores',
+        }),
+        uncovered: null,
+      };
+
     default:
       return {
         clip: null,

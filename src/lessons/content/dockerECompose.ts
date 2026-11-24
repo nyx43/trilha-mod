@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'na-minha-maquina:3',
           question:
             "A API funciona no seu notebook e falha no servidor com `ModuleNotFoundError: No module named 'fastapi'`. Como um container ajudaria?",
           options: [
@@ -73,6 +74,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'imagem-e-container:2',
           title: 'Seu primeiro container',
           task: 'Rode um servidor web nginx num container, sem instalar o nginx no computador.',
           prompt: 'ana@notebook:~$',
@@ -127,6 +129,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'imagem-e-container:4',
           prompt: 'Cada frase descreve a imagem ou o container?',
           buckets: ['Imagem (a receita)', 'Container (o bolo)'],
           items: [
@@ -216,6 +219,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'dockerfile:3',
           title: 'Construindo a imagem e vendo o cache',
           task: 'Construa a imagem da API, altere uma linha do código e construa de novo.',
           prompt: 'ana@notebook:~/api-pedidos$',
@@ -248,6 +252,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'dockerfile:5',
           prompt: 'Coloque as instruções de um Dockerfile na ordem que aproveita melhor o cache.',
           items: [
             '`FROM python:3.12-slim`',
@@ -293,6 +298,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'rodar-e-investigar:2',
           title: 'A API que liga e cai',
           task: 'Rode a imagem da API e descubra por que ela não fica de pé.',
           prompt: 'ana@notebook:~/api-pedidos$',
@@ -361,6 +367,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'rodar-e-investigar:5',
           question:
             'Você roda `docker run -d -p 3000:8000 api-pedidos:1.1`. Qual endereço abre a API no navegador do seu computador?',
           options: [
@@ -462,6 +469,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'compose:3',
           title: 'Subindo, investigando e recriando',
           task: 'Suba a aplicação, confira os serviços, leia os logs e prove que os dados sobrevivem à recriação.',
           prompt: 'ana@notebook:~/api-pedidos$',
@@ -521,6 +529,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'compose:4',
           question:
             'Dentro do container da API, a configuração do banco está como `localhost:5432` e a conexão falha. O banco está de pé no serviço `db`. O que corrigir?',
           options: [
@@ -577,6 +586,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'erros-comuns:2',
           prompt: 'Boa prática ou risco?',
           buckets: ['Boa prática', 'Risco'],
           items: [

@@ -5,8 +5,8 @@ import { JSDOM } from 'jsdom';
 import { guides } from '../src/guides';
 import { lessons } from '../src/lessons';
 import { homeQuestions } from '../src/seo/faq';
-import { applySocialMeta, pageForPath, socialPages } from '../src/seo/pages';
-import { roadmapCatalogs } from './catalogPlugin';
+import { applySocialMeta, pageForPath, siteUrl, socialPages } from '../src/seo/pages';
+import { llmsTXT, roadmapCatalogs } from './catalogPlugin';
 import {
   applyStaticContent,
   noindexHTML,
@@ -40,7 +40,7 @@ describe('Conteúdo acessível a buscadores e assistentes', () => {
       const page = getPage(path);
       const body = await staticPageBody(page, catalogs, posts, root);
       expect(body).toContain('<h1>');
-      expect(sitemapXML(pages)).toContain(`https://trilha.info${path}</loc>`);
+      expect(sitemapXML(pages)).toContain(`${siteUrl}${path}</loc>`);
     }
     expect(await staticPageBody(getPage(routes[3]), catalogs, posts, root)).toContain(
       'href="/praticas/diagnostico-web.zip"',
@@ -67,7 +67,7 @@ describe('Conteúdo acessível a buscadores e assistentes', () => {
     const document = new JSDOM(twice).window.document;
     expect(document.querySelectorAll('link[rel="canonical"]')).toHaveLength(1);
     expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(
-      'https://trilha.info/guide/cors',
+      `${siteUrl}/guide/cors`,
     );
     expect(document.querySelectorAll('script[data-seo-schema]')).toHaveLength(1);
     expect(document.querySelectorAll('style[data-static-reading]')).toHaveLength(1);
@@ -110,12 +110,20 @@ describe('Conteúdo acessível a buscadores e assistentes', () => {
     const xml = sitemapXML(pages);
     const urls = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)].map((match) => match[1]);
     expect(new Set(urls).size).toBe(pages.length);
-    expect(urls).toContain('https://trilha.info/blog');
-    expect(urls).toContain('https://trilha.info/blog/trilha-001');
-    expect(urls).toContain('https://trilha.info/aula/html-primeira-pagina');
+    expect(urls).toContain(`${siteUrl}/blog`);
+    expect(urls).toContain(`${siteUrl}/blog/trilha-001`);
+    expect(urls).toContain(`${siteUrl}/aula/html-primeira-pagina`);
     expect(xml).not.toMatch(/profile|login|hroadmap|\?trilha|\/read\//);
-    expect(robotsTXT).toContain('Sitemap: https://trilha.info/sitemap.xml');
+    expect(robotsTXT).toContain(`Sitemap: ${siteUrl}/sitemap.xml`);
     expect(robotsTXT).not.toContain('Disallow: /assets');
+
+    const llms = llmsTXT(catalogs);
+    expect(llms).toContain(`${siteUrl}/data/frontend.md`);
+    expect(llms).toContain(`${siteUrl}/aulas`);
+    expect(llms).toContain(`${siteUrl}/sitemap.xml`);
+    expect(llms).toContain(`${siteUrl}/data/index.json`);
+    expect(llms).toContain(`${siteUrl}/schemas/roadmap.v1.schema.json`);
+    expect(llms).not.toContain('https://trilha.info/');
   });
 
   it('remove a identidade da home ao servir um erro ou uma página pessoal', async () => {

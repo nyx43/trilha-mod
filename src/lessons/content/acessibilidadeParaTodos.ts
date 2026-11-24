@@ -68,6 +68,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'quem-usa-a-web:4',
           prompt:
             'Cada situação abaixo dificulta usar uma página. Ela é permanente, temporária ou situacional?',
           buckets: ['Permanente', 'Temporária', 'Situacional'],
@@ -116,6 +117,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'quatro-principios:2',
           prompt: 'Qual dos quatro princípios cada problema quebra?',
           buckets: ['Perceptível', 'Operável', 'Compreensível', 'Robusto'],
           items: [
@@ -177,6 +179,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'teclado-e-foco:5',
           title: 'Acenda a lanterna',
           task: 'Clique na prévia e aperte `Tab` algumas vezes: você não sabe onde está. Apague a regra com `outline: none` e crie um estilo para `a:focus-visible` e `button:focus-visible` com um `outline` bem visível, por exemplo `outline: 3px solid #1d4ed8;`. Depois teste de novo com `Tab`.',
           html: '<nav>\n  <a href="#inicio">Início</a>\n  <a href="#cardapio">Cardápio</a>\n  <a href="#contato">Contato</a>\n</nav>\n<p>Pão de queijo quentinho saindo agora.</p>\n<button type="button">Fazer pedido</button>\n<button type="button">Ver promoções</button>',
@@ -201,6 +204,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'teclado-e-foco:6',
           question:
             'Alguém fez o botão “Comprar” com `<div onclick="comprar()">Comprar</div>`. O que acontece com quem usa só o teclado?',
           options: [
@@ -256,6 +260,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'contraste-e-cor:6',
           question:
             'Num formulário de cadastro, os campos com erro ficam só com a borda vermelha. Qual é o problema?',
           options: [
@@ -360,6 +365,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'leitor-de-tela:7',
           question:
             'O logotipo da Padaria Pão Quente fica no topo e é um link para a página inicial. Qual o melhor `alt` para essa imagem?',
           options: [
@@ -398,6 +404,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'como-testar:1',
           question:
             'Qual destes problemas uma ferramenta automática **não** consegue confirmar sozinha?',
           options: [
@@ -447,6 +454,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'como-testar:3',
           prompt: 'Coloque a rotina de teste desta aula na ordem.',
           items: [
             'Usar a página só com o teclado, observando o foco',

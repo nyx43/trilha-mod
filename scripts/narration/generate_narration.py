@@ -476,18 +476,24 @@ def encode_mp3_and_verify(pcm: np.ndarray, out_mp3: Path, tmp_dir: Path) -> tupl
     wav_dec = tmp_dir / "dec.wav"
     sf.write(wav_in, pcm, SAMPLE_RATE)
 
-    subprocess.run(
-        [
-            "ffmpeg", "-y", "-loglevel", "error",
-            "-i", str(wav_in),
-            "-codec:a", "libmp3lame",
-            "-b:a", "64k",
-            "-ar", str(SAMPLE_RATE),
-            "-ac", "1",
-            str(out_mp3),
-        ],
-        check=True,
-    )
+    if shutil.which("lame"):
+        subprocess.run(
+            ["lame", "--quiet", "--cbr", "-b", "64", str(wav_in), str(out_mp3)],
+            check=True,
+        )
+    else:
+        subprocess.run(
+            [
+                "ffmpeg", "-y", "-loglevel", "error",
+                "-i", str(wav_in),
+                "-codec:a", "libmp3lame",
+                "-b:a", "64k",
+                "-ar", str(SAMPLE_RATE),
+                "-ac", "1",
+                str(out_mp3),
+            ],
+            check=True,
+        )
 
     # Verify decoded PCM correlation drift <= 2 ms against original
     subprocess.run(

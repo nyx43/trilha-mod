@@ -1,10 +1,20 @@
-import { PiArrowRight, PiCheckBold, PiClock } from 'react-icons/pi';
+import {
+  PiArrowRight,
+  PiBookmarkSimple,
+  PiBookmarkSimpleFill,
+  PiCheckBold,
+  PiClock,
+  PiStar,
+  PiStarFill,
+} from 'react-icons/pi';
 import { Link, useParams } from 'react-router-dom';
 import MainLayout from '../components/layouts/MainLayout';
+import { FeedbackDialog } from '../components/Feedback/FeedbackDialog';
 import { Review } from '../components/Lesson/Review';
 import { mainRoadmapsData } from '../components/MainRoadmaps/mainRoadmapsData';
 import { courseLessons, findCourse, findLesson, lessonUrl } from '../lessons';
 import { lessonScore, useLessonStore } from '../lessons/progress';
+import { toggleFavoriteCourse, toggleSavedLesson, useBookmarks } from '../offline/bookmarks';
 import '../components/Guide/guide.css';
 import '../components/Lesson/lesson.css';
 
@@ -12,6 +22,7 @@ export default function LessonCoursePage() {
   const { trilha } = useParams();
   const course = findCourse(trilha);
   const store = useLessonStore();
+  const bookmarks = useBookmarks();
 
   if (!course) {
     return (
@@ -74,9 +85,32 @@ export default function LessonCoursePage() {
               {started ? `Continuar: ${resume.title}` : 'Começar pela primeira aula'}
               <PiArrowRight aria-hidden="true" />
             </Link>
+            <button
+              type="button"
+              className={
+                bookmarks.favoriteCourses[course.id] ? 'lesson-button' : 'lesson-button-quiet'
+              }
+              aria-pressed={Boolean(bookmarks.favoriteCourses[course.id])}
+              onClick={() => toggleFavoriteCourse(course.id)}
+            >
+              {bookmarks.favoriteCourses[course.id] ? (
+                <PiStarFill aria-hidden="true" />
+              ) : (
+                <PiStar aria-hidden="true" />
+              )}
+              <span>
+                {bookmarks.favoriteCourses[course.id] ? 'Matéria favorita' : 'Favoritar matéria'}
+              </span>
+            </button>
             <Link className="lesson-button-quiet" to={`/roadmap/${course.id}`}>
               Ver a trilha {course.title}
             </Link>
+            <FeedbackDialog
+              triggerLabel="Avaliar / relatar"
+              triggerClassName="lesson-button-quiet"
+              courseId={course.id}
+              courseTitle={course.title}
+            />
           </div>
         </header>
 
@@ -100,8 +134,13 @@ export default function LessonCoursePage() {
                     number++;
                     const record = store.lessons[lesson.id];
                     const score = lessonScore(record);
+                    const saved = Boolean(bookmarks.savedLessons[lesson.id]);
                     return (
-                      <li key={lesson.id} data-done={record?.done ? true : undefined}>
+                      <li
+                        key={lesson.id}
+                        className="study-item-row"
+                        data-done={record?.done ? true : undefined}
+                      >
                         <Link to={lessonUrl(lesson.id, course.id)}>
                           <span className="lessons-number" aria-hidden="true">
                             {record?.done ? <PiCheckBold /> : String(number).padStart(2, '0')}
@@ -124,6 +163,24 @@ export default function LessonCoursePage() {
                           </span>
                           {record?.done && <span className="sr-only">, concluída</span>}
                         </Link>
+                        <button
+                          type="button"
+                          className="study-icon-action"
+                          aria-pressed={saved}
+                          aria-label={
+                            saved
+                              ? `Remover ${lesson.title} das aulas salvas`
+                              : `Salvar aula ${lesson.title}`
+                          }
+                          onClick={() => toggleSavedLesson(lesson.id, course.id)}
+                        >
+                          {saved ? (
+                            <PiBookmarkSimpleFill aria-hidden="true" />
+                          ) : (
+                            <PiBookmarkSimple aria-hidden="true" />
+                          )}
+                          <span>{saved ? 'Salva' : 'Salvar'}</span>
+                        </button>
                       </li>
                     );
                   })}

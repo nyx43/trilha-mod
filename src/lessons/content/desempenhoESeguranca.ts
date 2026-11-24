@@ -25,6 +25,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'cada-megabyte-custa:3',
           question:
             'Qual mudança ajuda mais quem abre seu catálogo num celular intermediário com pacote de dados pequeno?',
           options: [
@@ -92,6 +93,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'core-web-vitals:3',
           prompt: 'Qual métrica cada problema prejudica?',
           buckets: ['LCP', 'INP', 'CLS'],
           items: [
@@ -149,6 +151,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'imagens-e-javascript:2',
           question:
             'O CSS já tem `img { width: 100%; height: auto; }`. Por que ainda escrever `width` e `height` no HTML da imagem?',
           options: [
@@ -213,6 +216,7 @@ botaoMapa.addEventListener('click', async () => {
         },
         {
           type: 'quiz',
+          activityId: 'imagens-e-javascript:6',
           question: 'Numa lista com 40 produtos, qual imagem deve ficar **sem** `loading="lazy"`?',
           options: [
             {
@@ -276,6 +280,7 @@ botaoMapa.addEventListener('click', async () => {
         },
         {
           type: 'order',
+          activityId: 'medir-antes-e-depois:3',
           prompt:
             'Coloque em ordem o ciclo de uma otimização que você consegue defender numa entrevista.',
           items: [
@@ -382,6 +387,7 @@ Angular: <p>{{ comentario }}</p>        seguro
         },
         {
           type: 'playground',
+          activityId: 'xss:4',
           title: 'Proteja o mural de comentários',
           task: 'Este mural mostra os comentários com `innerHTML`. Primeiro, ataque: publique `<img src=x onerror="console.log(1)">` e veja o console. Depois, reescreva `mostrarComentarios` usando `createElement` e `textContent`, para que qualquer comentário apareça como texto.',
           html: `<form id="form-comentario">
@@ -482,6 +488,7 @@ mostrarComentarios();`,
         },
         {
           type: 'quiz',
+          activityId: 'xss:5',
           question:
             'O servidor da sua equipe já remove `<script>` dos comentários antes de salvar. Então pode usar `innerHTML` no frontend?',
           options: [
@@ -515,6 +522,7 @@ mostrarComentarios();`,
         },
         {
           type: 'classify',
+          activityId: 'segredos-e-dependencias:1',
           prompt: 'O que pode aparecer no código do frontend e o que nunca pode?',
           buckets: ['Pode ir para o frontend', 'Nunca no frontend'],
           items: [
@@ -545,6 +553,7 @@ npm audit fix      # aplica as correções que não quebram compatibilidade`,
         },
         {
           type: 'quiz',
+          activityId: 'segredos-e-dependencias:4',
           question:
             '`npm audit` aponta uma vulnerabilidade alta num pacote. Qual a atitude mais segura?',
           options: [

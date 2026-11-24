@@ -24,6 +24,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'primeiro-script:3',
           title: 'Rodando o primeiro script',
           task: 'O arquivo `bom-dia.sh` já está na pasta `scripts`. Torne-o executável e rode.',
           prompt: 'ana@servidor:~/scripts$',
@@ -51,6 +52,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'primeiro-script:4',
           question: 'Qual é a maior vantagem de transformar a conferência da manhã num script?',
           options: [
             {
@@ -145,6 +147,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'anatomia:3',
           prompt:
             'Complete o script que conta erros em cada arquivo `.log` de uma pasta recebida como argumento.',
           language: 'bash',
@@ -165,6 +168,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'codigos-de-saida:1',
           title: 'Ouvindo o que os comandos respondem',
           task: 'Veja os códigos de saída de comandos que dão certo e errado, e depois do seu verificador.',
           prompt: 'ana@servidor:~/scripts$',
@@ -217,6 +221,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'codigos-de-saida:3',
           question:
             'Um script tem `set -e` mas não tem `pipefail`. A linha `grep ERROR app.log | wc -l` roda e o arquivo `app.log` não existe. O que acontece?',
           options: [
@@ -246,6 +251,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'codigos-de-saida:5',
           prompt: 'Rodar cada linha duas vezes seguidas é seguro?',
           buckets: ['Idempotente: pode repetir', 'Não idempotente: a segunda vez falha ou duplica'],
           items: [
@@ -318,6 +324,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'cron:3',
           title: 'Agendando o verificador',
           task: 'Faça o verificador rodar sozinho a cada 5 minutos.',
           prompt: 'ana@servidor:~$',
@@ -363,6 +370,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'cron:5',
           question: 'Quando roda a linha `0 3 * * 1 /opt/backup.sh`?',
           options: [
             {
@@ -435,6 +443,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'hora-do-python:4',
           title: 'Um alerta a partir do log',
           task: 'O texto `LOG` imita um log de servidor web. Complete o programa: pegue o status de cada linha (o penúltimo pedaço), conte quantas vezes cada status aparece no dicionário `contagem`, some em `erros_5xx` as respostas que começam com `5`, imprima uma linha `Status 200: 3` para cada status e, se mais de 10% das requisições forem erros 5xx, imprima uma linha começando com `ALERTA`.',
           code: 'LOG = """203.0.113.5 - - [14/Oct/2026:10:00:01 -0300] "GET /api/pedidos HTTP/1.1" 200 512\n198.51.100.7 - - [14/Oct/2026:10:00:02 -0300] "POST /api/pix HTTP/1.1" 201 87\n203.0.113.5 - - [14/Oct/2026:10:00:04 -0300] "GET /api/cardapio HTTP/1.1" 200 2048\n192.0.2.10 - - [14/Oct/2026:10:00:05 -0300] "GET /favicon.ico HTTP/1.1" 404 0\n198.51.100.7 - - [14/Oct/2026:10:00:07 -0300] "POST /api/pix HTTP/1.1" 502 0\n203.0.113.9 - - [14/Oct/2026:10:00:08 -0300] "GET /api/pedidos HTTP/1.1" 200 498\n192.0.2.10 - - [14/Oct/2026:10:00:09 -0300] "POST /api/pix HTTP/1.1" 503 0\n203.0.113.5 - - [14/Oct/2026:10:00:11 -0300] "GET /api/pedidos HTTP/1.1" 500 0\n\n"""\n\ncontagem = {}\nfor linha in LOG.splitlines():\n    if not linha.strip():\n        continue  # pula linhas vazias\n    partes = linha.split()\n    status = ""  # troque por: o penúltimo item de partes\n    # some 1 em contagem[status]; dica: contagem.get(status, 0)\n\nerros_5xx = 0  # some as contagens dos status que começam com "5"\ntotal = sum(contagem.values())\n\nprint(contagem)\n',

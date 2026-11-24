@@ -209,4 +209,25 @@ describe('Tutor da aula', () => {
     expect(send).toBeDisabled();
     expect(renderWidget).toHaveBeenCalledTimes(2);
   });
+
+  it('envia dúvida com Ctrl+Enter e permite iniciar uma nova conversa', async () => {
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce(response({ enabled: true }))
+      .mockResolvedValueOnce(response({ reply: 'Primeira resposta do tutor.' }));
+    vi.stubGlobal('fetch', fetchMock);
+    renderTutor();
+
+    const input = await screen.findByRole('textbox', { name: 'Sua dúvida' });
+    fireEvent.change(input, { target: { value: 'Dúvida com atalho' } });
+    fireEvent.keyDown(input, { key: 'Enter', ctrlKey: true });
+
+    const log = screen.getByRole('log', { name: 'Conversa' });
+    await within(log).findByText('Primeira resposta do tutor.');
+
+    const resetBtn = screen.getByRole('button', { name: 'Nova conversa' });
+    fireEvent.click(resetBtn);
+    expect(within(log).queryByText('Primeira resposta do tutor.')).not.toBeInTheDocument();
+    expect(screen.queryByRole('button', { name: 'Nova conversa' })).not.toBeInTheDocument();
+  });
 });

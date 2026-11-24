@@ -91,6 +91,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'o-que-e-efeito:4',
           prompt: 'Onde cada código deve ficar?',
           buckets: ['Na renderização', 'No tratador do evento', 'Num efeito'],
           items: [
@@ -142,6 +143,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'dependencias:3',
           question:
             'O título da aba mostra o nome da primeira sala, mas não muda quando a pessoa troca de sala. Qual é o defeito?',
           code: `function Chat({ sala }) {
@@ -172,6 +174,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'dependencias:4',
           title: 'Título da aba que acompanha o carrinho',
           framework: 'react',
           task: 'Crie um efeito que mantém `document.title` sincronizado com o número de itens: com 0 itens, o título é **Loja**; com 2 itens, **(2) Loja**. Não esqueça a lista de dependências.',
@@ -323,6 +326,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Carrinho />);`,
         },
         {
           type: 'playground',
+          activityId: 'limpeza:3',
           title: 'Cronômetro que não acelera',
           framework: 'react',
           task: 'Clique em **Iniciar**, depois em **Pausar**: o tempo não para. Pause e inicie algumas vezes: ele acelera. O efeito liga um `setInterval` e nunca desliga. Guarde o id do intervalo e devolva uma limpeza com `clearInterval`.',
@@ -443,6 +447,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Cronometro />);`,
         },
         {
           type: 'quiz',
+          activityId: 'armadilhas:1',
           question:
             'Ao abrir esta tela, o navegador trava e o console enche de renderizações. Por quê?',
           code: `function Perfil() {
@@ -576,6 +581,7 @@ const filtrados = produtos.filter((p) => p.nome.includes(busca));
         },
         {
           type: 'playground',
+          activityId: 'refs:4',
           title: 'Foco no lugar certo',
           framework: 'react',
           task: 'Crie duas refs. A primeira liga o campo de busca, e o botão **Ir para a busca** coloca o foco nele. A segunda liga o campo de nome; use um efeito com dependência `[editando]` para focar esse campo quando `editando` virar `true`.',
@@ -683,6 +689,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Perfil />);`,
         },
         {
           type: 'quiz',
+          activityId: 'refs:5',
           question:
             'Você quer contar quantas vezes o componente renderizou, só para depurar no console, sem mostrar na tela. O que usar?',
           options: [

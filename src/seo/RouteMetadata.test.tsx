@@ -1,15 +1,18 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { Link, MemoryRouter } from 'react-router-dom';
+import { siteUrl } from '../config/site';
 import { RouteMetadata } from './RouteMetadata';
 
 const canonical = () => document.head.querySelector('link[rel="canonical"]')?.getAttribute('href');
 const robots = () => document.head.querySelector('meta[name="robots"]')?.getAttribute('content');
 
-it('atualiza canonical, prévia, título e indexação ao navegar entre páginas públicas, pessoais e erros', async () => {
+it('atualiza canonical, prévia, título e indexação ao navegar entre páginas públicas, exclusivas do fork, pessoais e erros', async () => {
   const original = document.head.innerHTML;
   const view = render(
     <MemoryRouter initialEntries={['/guide/cors']}>
       <RouteMetadata />
+      <Link to="/aulas">Aulas</Link>
+      <Link to="/percurso/api-react-tailwind">Percurso</Link>
       <Link to="/aula/html-primeira-pagina?trilha=frontend">Aula</Link>
       <Link to="/hroadmap/frontend?view=map">Trilha</Link>
       <Link to="/profile">Perfil</Link>
@@ -18,16 +21,27 @@ it('atualiza canonical, prévia, título e indexação ao navegar entre páginas
     </MemoryRouter>,
   );
   try {
-    await waitFor(() => expect(canonical()).toBe('https://trilha.info/guide/cors'));
+    expect(siteUrl).toBe('https://trilha-mod.vercel.app');
+    await waitFor(() => expect(canonical()).toBe(`${siteUrl}/guide/cors`));
     expect(document.head.querySelectorAll('link[rel="canonical"]')).toHaveLength(1);
     expect(document.head.querySelector('meta[property="article:section"]')).not.toBeNull();
-    fireEvent.click(screen.getByText('Aula'));
-    await waitFor(() => expect(canonical()).toBe('https://trilha.info/aula/html-primeira-pagina'));
+    fireEvent.click(screen.getByText('Aulas'));
+    await waitFor(() => expect(canonical()).toBe(`${siteUrl}/aulas`));
+    expect(document.head.querySelector('meta[property="og:url"]')?.getAttribute('content')).toBe(
+      `${siteUrl}/aulas`,
+    );
+    fireEvent.click(screen.getByText('Percurso'));
+    await waitFor(() => expect(canonical()).toBe(`${siteUrl}/percurso/api-react-tailwind`));
     expect(document.head.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(
-      'https://trilha.info/og/aula-html-primeira-pagina.png',
+      `${siteUrl}/og/percurso-api-react-tailwind.png`,
+    );
+    fireEvent.click(screen.getByText('Aula'));
+    await waitFor(() => expect(canonical()).toBe(`${siteUrl}/aula/html-primeira-pagina`));
+    expect(document.head.querySelector('meta[property="og:image"]')?.getAttribute('content')).toBe(
+      `${siteUrl}/og/aula-html-primeira-pagina.png`,
     );
     fireEvent.click(screen.getByText('Trilha'));
-    await waitFor(() => expect(canonical()).toBe('https://trilha.info/roadmap/frontend'));
+    await waitFor(() => expect(canonical()).toBe(`${siteUrl}/roadmap/frontend`));
     expect(document.title).toBe('Trilha de Frontend | Trilha Info');
     expect(document.head.querySelector('meta[property="article:section"]')).toBeNull();
     fireEvent.click(screen.getByText('Perfil'));
@@ -38,7 +52,7 @@ it('atualiza canonical, prévia, título e indexação ao navegar entre páginas
     await waitFor(() => expect(document.title).toBe('Página não encontrada · Trilha Info'));
     expect(robots()).toBe('noindex, follow');
     fireEvent.click(screen.getByText('Início'));
-    await waitFor(() => expect(canonical()).toBe('https://trilha.info/'));
+    await waitFor(() => expect(canonical()).toBe(`${siteUrl}/`));
     expect(robots()).toBe('index, follow, max-image-preview:large');
     expect(document.head.querySelectorAll('script[data-seo-schema]')).toHaveLength(1);
     expect(document.title).toContain('Cursos e trilhas gratuitas');

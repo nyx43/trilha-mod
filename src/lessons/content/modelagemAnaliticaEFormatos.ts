@@ -90,6 +90,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'fato-e-dimensao:3',
           prompt:
             'Você está modelando as vendas de uma padaria. Cada informação vai para o fato ou para uma dimensão?',
           buckets: ['Medida no fato', 'Atributo de uma dimensão'],
@@ -149,6 +150,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'esquema-estrela:2',
           title: 'Faturamento por categoria e mês',
           task: 'Junte o fato com `dim_produto` e `dim_data` e devolva `categoria`, `mes` e `faturamento` (soma de `valor`), uma linha por categoria e mês.',
           setup: estrela,
@@ -178,6 +180,7 @@ ORDER BY d.mes, faturamento DESC;`,
         },
         {
           type: 'sql',
+          activityId: 'esquema-estrela:3',
           title: 'Feriados por região',
           task: 'Compare o faturamento em feriados e dias normais por região: devolva `regiao`, `feriado` (o 0 ou 1 de `dim_data`) e `faturamento`.',
           setup: estrela,
@@ -220,6 +223,7 @@ ORDER BY l.regiao, d.feriado;`,
         },
         {
           type: 'quiz',
+          activityId: 'granularidade-do-fato:1',
           question:
             'A rede quer descobrir quais produtos são comprados juntos, como café e pão. Qual granularidade da tabela fato permite essa análise?',
           options: [
@@ -284,6 +288,7 @@ ORDER BY l.regiao, d.feriado;`,
         },
         {
           type: 'sql',
+          activityId: 'historico-scd:4',
           title: 'Vendas pela cidade da época',
           task: 'A consulta usa a cidade **atual** de cada cliente e joga todas as compras da Joana em São Paulo. Corrija o JOIN para usar a versão válida na data de cada pedido (`f.data BETWEEN d.valido_de AND d.valido_ate`), devolvendo `cidade` e `faturamento`.',
           setup: `CREATE TABLE dim_cliente (
@@ -337,6 +342,7 @@ GROUP BY d.cidade;`,
         },
         {
           type: 'quiz',
+          activityId: 'historico-scd:5',
           question:
             'Uma cliente percebeu que o nome dela estava cadastrado como “Mraia” e pediu a correção para “Maria”. Como tratar na dimensão?',
           options: [
@@ -406,6 +412,7 @@ GROUP BY d.cidade;`,
         },
         {
           type: 'python',
+          activityId: 'formatos:3',
           title: 'De linhas para colunas',
           task: 'Transforme a lista `vendas` (uma linha por venda) no dicionário `colunas`, com uma lista por coluna (`data`, `cidade`, `valor`), na mesma ordem. Depois calcule `total` somando só a lista de valores. Veja no fim a diferença de tamanho depois de comprimir.',
           code: `import json
@@ -467,6 +474,7 @@ print('Por coluna, comprimido:', por_coluna, 'bytes')
         },
         {
           type: 'classify',
+          activityId: 'formatos:4',
           prompt: 'Qual formato combina melhor com cada situação?',
           buckets: ['CSV', 'JSON', 'Parquet', 'Avro'],
           items: [
@@ -494,6 +502,7 @@ print('Por coluna, comprimido:', por_coluna, 'bytes')
         },
         {
           type: 'terminal',
+          activityId: 'particionamento-e-armazenamento:1',
           title: 'Passeio por um data lake local',
           task: 'Explore as camadas do lake, encontre a partição de outubro e compare o tamanho do CSV bruto com o Parquet tratado.',
           prompt: '~/lake$',
@@ -540,6 +549,7 @@ print('Por coluna, comprimido:', por_coluna, 'bytes')
         },
         {
           type: 'quiz',
+          activityId: 'particionamento-e-armazenamento:2',
           question:
             'Quase todas as consultas na tabela de vendas filtram por período. Qual coluna faz mais sentido para particionar?',
           options: [

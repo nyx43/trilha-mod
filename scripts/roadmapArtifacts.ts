@@ -1,5 +1,6 @@
 import { LearningGroup, LearningNode, LearningStage, RoadmapCatalog } from '../src/learning/types';
 import { learningMetadata } from '../src/learning/metadata';
+import { siteUrl } from '../src/config/site';
 
 export const escapeHTML = (value: string): string =>
   value.replace(
@@ -55,7 +56,7 @@ export function roadmapMarkdown(catalog: RoadmapCatalog): string {
   ];
   if (catalog.prerequisite)
     lines.push(
-      `Entrada recomendada: [${catalog.prerequisite.label}](https://trilha.info${catalog.prerequisite.path})`,
+      `Entrada recomendada: [${catalog.prerequisite.label}](${siteUrl}${catalog.prerequisite.path})`,
       '',
     );
   for (const stage of catalog.stages) {
@@ -85,7 +86,7 @@ export function roadmapMarkdown(catalog: RoadmapCatalog): string {
         '',
       );
       if (group.ai) lines.push(`IA: ${aiClassification(group.ai)}`, '');
-      if (group.href) lines.push(`Trilha relacionada: https://trilha.info${group.href}`, '');
+      if (group.href) lines.push(`Trilha relacionada: ${siteUrl}${group.href}`, '');
       for (const nodeId of group.variants.deep.stepIds) {
         const node = catalog.nodes[nodeId];
         lines.push(
@@ -197,7 +198,7 @@ export function staticCatalogBody(catalog: RoadmapCatalog): string {
 }
 
 export function metadataHead(catalog: RoadmapCatalog): string {
-  return `<link data-trilha-meta rel="canonical" href="https://trilha.info/roadmap/${catalog.id}">
+  return `<link data-trilha-meta rel="canonical" href="${siteUrl}/roadmap/${catalog.id}">
   <link data-trilha-meta rel="alternate" type="application/json" href="/data/${
     catalog.id
   }.json" title="Dados da trilha">

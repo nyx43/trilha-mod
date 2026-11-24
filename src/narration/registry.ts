@@ -1,3 +1,4 @@
+import { resolveNarrationAssetUrl } from '../offline/audioPack';
 import { NarrationVoiceId } from './types';
 import catalog from './catalog.json';
 
@@ -20,11 +21,16 @@ function getBaseUrl(): string {
   return base.endsWith('/') ? base : `${base}/`;
 }
 
+function prefixBaseIfRelative(url: string): string {
+  if (!url.startsWith('/narration/')) return url;
+  return `${getBaseUrl()}${url.slice(1)}`;
+}
+
 export function getNarrationManifestUrl(lessonId: string): string {
-  return `${getBaseUrl()}narration/${lessonId}/manifest.json`;
+  return prefixBaseIfRelative(resolveNarrationAssetUrl(`${lessonId}/manifest.json`));
 }
 
 export function getNarrationAudioUrl(lessonId: string, src: string): string {
   const cleanSrc = src.startsWith('/') ? src.slice(1) : src;
-  return `${getBaseUrl()}narration/${lessonId}/${cleanSrc}`;
+  return prefixBaseIfRelative(resolveNarrationAssetUrl(`${lessonId}/${cleanSrc}`));
 }

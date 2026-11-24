@@ -35,6 +35,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'extrair-transformar-carregar:3',
           prompt: 'Em que etapa do pipeline cada tarefa acontece?',
           buckets: ['Extrair', 'Transformar', 'Carregar'],
           items: [
@@ -60,6 +61,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'extrair-transformar-carregar:6',
           question:
             'Sua equipe quer guardar os pedidos exatamente como vieram da API e decidir as regras de limpeza depois, com SQL, dentro do banco analítico. Que abordagem é essa?',
           options: [
@@ -97,6 +99,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'mini-pipeline:2',
           title: 'Pipeline de pedidos da padaria',
           task: 'Complete `transformar`: rejeite pedidos com `valor` vazio ou negativo (guarde o id e o motivo em `rejeitados`) e converta o valor dos válidos para número com `float`. Rode e leia o resumo.',
           code: `import csv
@@ -256,6 +259,7 @@ print("Rejeições:", rejeitados)
         },
         {
           type: 'sql',
+          activityId: 'idempotencia:4',
           title: 'Upsert da carga diária',
           task: 'Rode a consulta como está e leia o erro: o par (loja, dia) já existe. Depois acrescente `WHERE true` e `ON CONFLICT (loja, dia) DO UPDATE SET` para atualizar `total` e `carregado_em` com os valores novos (`excluded.total`, `excluded.carregado_em`).',
           setup: `CREATE TABLE vendas_diarias (
@@ -315,6 +319,7 @@ SELECT * FROM vendas_diarias ORDER BY loja;`,
         },
         {
           type: 'quiz',
+          activityId: 'idempotencia:6',
           question:
             'Um pipeline faz `INSERT` de todos os pedidos de ontem, sem chave. Ele falhou na metade e a nova tentativa automática rodou do começo. O que acontece?',
           options: [
@@ -403,6 +408,7 @@ SELECT * FROM vendas_diarias ORDER BY loja;`,
         },
         {
           type: 'quiz',
+          activityId: 'carga-incremental:4',
           question:
             'Um colega move a linha que salva a nova marca para **antes** de `carregar(novos)`. Num dia, a carga falha no meio. O que acontece na execução seguinte?',
           options: [
@@ -432,6 +438,7 @@ SELECT * FROM vendas_diarias ORDER BY loja;`,
         },
         {
           type: 'order',
+          activityId: 'carga-incremental:6',
           prompt: 'Coloque em ordem uma execução incremental segura.',
           items: [
             'Ler a última marca d’água na tabela de controle',
@@ -514,6 +521,7 @@ SELECT * FROM vendas_diarias ORDER BY loja;`,
         },
         {
           type: 'classify',
+          activityId: 'falhas-e-logs:2',
           prompt: 'Para cada falha, vale a pena tentar de novo automaticamente?',
           buckets: ['Passageira: tentar de novo', 'Permanente: precisa de correção'],
           items: [
@@ -581,6 +589,7 @@ SELECT * FROM vendas_diarias ORDER BY loja;`,
         },
         {
           type: 'quiz',
+          activityId: 'falhas-e-logs:6',
           question:
             'Um bug fez a carga do dia 2026-10-05 gravar valores errados. O bug já foi corrigido. Qual a melhor forma de consertar os dados?',
           options: [

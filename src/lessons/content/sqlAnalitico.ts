@@ -91,6 +91,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'granularidade:3',
           title: 'O frete que dobrou',
           task: 'A consulta abaixo diz que o frete total dos pedidos entregues é 91, mas o financeiro jura que é 53. Rode, entenda por que a conta inflou e corrija para devolver o valor certo.',
           setup: delivery,
@@ -149,6 +150,7 @@ WHERE status = 'entregue';`,
         },
         {
           type: 'sql',
+          activityId: 'cte:2',
           title: 'Ticket médio por cidade',
           task: 'A consulta calcula a média por **item**, não por pedido. Reescreva com uma CTE: primeiro o total de cada pedido entregue, depois a média desses totais por cidade, com as colunas `cidade` e `ticket_medio`.',
           setup: delivery,
@@ -206,6 +208,7 @@ ORDER BY ticket_medio DESC;`,
         },
         {
           type: 'fill',
+          activityId: 'case-when:1',
           prompt: 'Complete a consulta que classifica clientes por região.',
           language: 'sql',
           template:
@@ -215,6 +218,7 @@ ORDER BY ticket_medio DESC;`,
         },
         {
           type: 'sql',
+          activityId: 'case-when:2',
           title: 'Pedidos por faixa de valor',
           task: 'Complete o `CASE`: total abaixo de 30 é `pequeno` (já feito), de 30 até 50 é `médio`, acima de 50 é `grande`. O resultado deve ter as colunas `faixa` e `pedidos`.',
           setup: delivery,
@@ -254,6 +258,7 @@ GROUP BY faixa;`,
         },
         {
           type: 'quiz',
+          activityId: 'case-when:3',
           question:
             "Num `CASE`, a primeira regra é `WHEN total <= 50 THEN 'médio'` e a segunda é `WHEN total < 30 THEN 'pequeno'`. O que acontece com um pedido de 20 reais?",
           options: [
@@ -298,6 +303,7 @@ GROUP BY faixa;`,
         },
         {
           type: 'sql',
+          activityId: 'datas:2',
           title: 'Faturamento por mês',
           task: 'A consulta agrupa por dia. Mude para agrupar por mês, com as colunas `mes` (no formato `2026-08`) e `faturamento`, ordenada do mês mais antigo para o mais novo.',
           setup: delivery,
@@ -393,6 +399,7 @@ ORDER BY mes;`,
         },
         {
           type: 'sql',
+          activityId: 'window-functions:3',
           title: 'Ranking de clientes em cada cidade',
           task: 'Adicione a coluna `posicao`: o ranking de cada cliente pelo `gasto`, do maior para o menor, recomeçando em cada cidade. Use `RANK() OVER (PARTITION BY ... ORDER BY ...)`.',
           setup: delivery,
@@ -440,6 +447,7 @@ ORDER BY cidade, posicao;`,
         },
         {
           type: 'sql',
+          activityId: 'window-functions:4',
           title: 'Acumulado e variação mês a mês',
           task: 'A partir da CTE `mensal`, adicione `acumulado` (soma do faturamento até aquele mês, com `SUM(...) OVER (ORDER BY mes)`) e `variacao` (faturamento menos o do mês anterior, com `LAG`).',
           setup: delivery,
@@ -470,6 +478,7 @@ ORDER BY mes;`,
         },
         {
           type: 'quiz',
+          activityId: 'window-functions:5',
           question:
             'Você quer listar **cada pedido** e, ao lado, o total gasto pelo cliente em todos os pedidos dele. Qual caminho resolve?',
           options: [
@@ -508,6 +517,7 @@ ORDER BY mes;`,
         },
         {
           type: 'order',
+          activityId: 'deduplicacao-e-funil:1',
           prompt: 'Coloque as etapas na ordem em que o banco realmente as executa.',
           items: [
             '`FROM` e `JOIN`: monta as linhas de origem',
@@ -526,6 +536,7 @@ ORDER BY mes;`,
         },
         {
           type: 'sql',
+          activityId: 'deduplicacao-e-funil:3',
           title: 'Um cadastro por e-mail',
           task: 'A tabela `cadastros_brutos` tem versões repetidas. Devolva **uma linha por e-mail**, a mais recente (`atualizado_em`), com as colunas `email`, `nome` e `cidade`. O `DISTINCT` não resolve: descubra por quê.',
           setup: `CREATE TABLE cadastros_brutos (
@@ -573,6 +584,7 @@ WHERE versao = 1;`,
         },
         {
           type: 'sql',
+          activityId: 'deduplicacao-e-funil:5',
           title: 'O funil da loja',
           task: 'Devolva uma única linha com `visitaram`, `colocaram_no_carrinho` e `pagaram` (pessoas distintas em cada etapa) e `conversao`: a porcentagem de quem visitou e pagou, arredondada com uma casa (`ROUND(100.0 * pagaram / visitaram, 1)`).',
           setup: `CREATE TABLE eventos (
@@ -620,6 +632,7 @@ FROM funil;`,
         },
         {
           type: 'sql',
+          activityId: 'deduplicacao-e-funil:7',
           title: 'Explore: clientes ativos por coorte de cadastro',
           task: 'Não há objetivo aqui: rode, leia e tente mudar a coorte para semanas com `%W`.',
           setup: delivery,

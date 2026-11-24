@@ -1,9 +1,10 @@
 import { loadEnv, Plugin } from 'vite';
 import { handleContribution, handleLinkInfo } from '../server/contributions';
+import { handleFeedback } from '../server/feedback';
 import { handleLessonTutor } from '../server/lessonTutor';
 import { tutorPath } from '../src/tutor/types';
 
-const serverKeys = /^(GITHUB_APP_|TURNSTILE_SECRET_KEY|CONTRIBUTIONS_|SITE_URL)/;
+const serverKeys = /^(GITHUB_APP_|GITHUB_FEEDBACK_TOKEN|FEEDBACK_REPOSITORY|TURNSTILE_SECRET_KEY|CONTRIBUTIONS_|SITE_URL)/;
 
 // Runs the Vercel functions in api/ during `vite dev`, which does not execute them itself.
 export function apiDevPlugin(): Plugin {
@@ -23,6 +24,9 @@ export function apiDevPlugin(): Plugin {
       });
       server.middlewares.use('/api/link-info', (req, res) => {
         handleLinkInfo(req, res);
+      });
+      server.middlewares.use('/api/feedback', (req, res) => {
+        handleFeedback(req, res);
       });
       server.middlewares.use(tutorPath, (req, res) => {
         return handleLessonTutor(req, res, tutorEnv);

@@ -38,6 +38,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'portaria-e-cracha:2',
           prompt: 'Cada verificação é de autenticação ou de autorização?',
           buckets: ['Autenticação: quem é', 'Autorização: o que pode'],
           items: [
@@ -57,6 +58,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'portaria-e-cracha:4',
           question:
             'A Ana está logada e tenta abrir `/admin/usuarios`, que é só para administração. Qual status a API deve devolver?',
           options: [
@@ -113,6 +115,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'senhas:3',
           title: 'Pare de guardar a senha em texto',
           task: 'Hoje `cadastrar_senha` guarda a senha como veio. Reescreva usando a função pronta `calcular_hash`: gere um sal com `secrets.token_hex(16)` e devolva o texto `sal$hash`. Depois, em `conferir_senha`, separe o sal do hash com `guardado.split("$")`, recalcule e compare com `hmac.compare_digest`.',
           code: "import hashlib\nimport hmac\nimport secrets\n\n\ndef calcular_hash(senha, sal):\n    # Versão didática de um hash lento. Em projetos reais, use Argon2 ou bcrypt.\n    resultado = (sal + senha).encode()\n    for _ in range(10_000):\n        resultado = hashlib.sha256(resultado).digest()\n    return resultado.hex()\n\n\ndef cadastrar_senha(senha):\n    return senha\n\n\ndef conferir_senha(senha, guardado):\n    return senha == guardado\n\n\nguardado = cadastrar_senha('pao-de-queijo-42')\nprint('No banco:', guardado)\nprint('Senha certa:', conferir_senha('pao-de-queijo-42', guardado))\nprint('Senha errada:', conferir_senha('123456', guardado))",
@@ -146,6 +149,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'senhas:5',
           question: 'Por que não usar só `sha256(senha)`, sem sal e de uma vez só?',
           options: [
             {
@@ -250,6 +254,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'sessoes-e-tokens:5',
           question:
             'Uma pessoa decodifica o próprio JWT, troca `"papel":"pessoa"` por `"papel":"admin"` e envia de volta. O que acontece numa API bem feita?',
           options: [
@@ -304,6 +309,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'sessoes-e-tokens:7',
           prompt:
             'Complete o cookie: ele não pode ser lido por JavaScript, só pode viajar por HTTPS e não deve ir em pedidos disparados por outros sites.',
           language: 'http',
@@ -334,6 +340,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'permissoes:2',
           title: 'Escreva a regra de acesso às despesas',
           task: 'Complete `verificar_acesso`. Regras: sem usuário, devolve 401. A dona da despesa (`despesa["dono_id"]` igual a `usuario["id"]`) pode qualquer ação: devolve 200. Quem tem papel `suporte` pode **ler** qualquer despesa (200), mas não editar nem apagar. Todo o resto devolve 403.',
           code: "ana = {'id': 1, 'papel': 'pessoa'}\nbruno = {'id': 2, 'papel': 'pessoa'}\nsuporte = {'id': 9, 'papel': 'suporte'}\ndespesa_da_ana = {'id': 7, 'dono_id': 1, 'valor': 412.9}\n\n\ndef verificar_acesso(usuario, acao, despesa):\n    if usuario is None:\n        return 401\n    return 200\n\n\nprint('Bruno lendo a despesa da Ana:', verificar_acesso(bruno, 'ler', despesa_da_ana))",
@@ -364,6 +371,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'permissoes:3',
           title: 'Teste os acessos como quem ataca',
           task: 'Uma API de laboratório está no ar. A despesa 7 é da Ana; a despesa 12 é do Bruno. Para facilitar, o token da Ana é o texto curto `tok_ana`, enviado no cabeçalho `Authorization: Bearer tok_ana`. Teste o acesso sem login, o acesso legítimo e as tentativas de mexer no que não é dela.',
           prompt: '~/testes$',
@@ -464,6 +472,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'erros-comuns:2',
           prompt: 'Cada prática deixa o sistema mais seguro ou mais exposto?',
           buckets: ['Mais seguro', 'Mais exposto'],
           items: [

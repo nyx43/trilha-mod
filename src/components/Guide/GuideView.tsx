@@ -11,6 +11,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { adjacentGuides, categoryOf, GuideMeta, relatedGuides } from '../../guides';
 import { GuideContent } from '../../guides/types';
 import { roadmapTitles } from '../../roadmaps/titles';
+import { safeDecodeHash } from '../../support/hash';
 import { GuideBlockView } from './GuideBlock';
 import { GuideCard } from './GuideCard';
 import './guide.css';
@@ -65,12 +66,12 @@ export function GuideView({ guide }: { guide: GuideMeta }) {
 
   useEffect(() => {
     if (!content) return;
-    const target =
-      location.hash && document.getElementById(decodeURIComponent(location.hash.slice(1)));
+    const targetId = safeDecodeHash(location.hash);
+    const target = targetId ? document.getElementById(targetId) : null;
     if (target) target.scrollIntoView?.();
     else document.documentElement.scrollTop = 0;
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [content]);
+  }, [content, location.hash]);
 
   return (
     <article className="guide-page" aria-labelledby="guide-title">

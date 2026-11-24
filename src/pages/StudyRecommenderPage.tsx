@@ -15,10 +15,11 @@ import MainLayout from '../components/layouts/MainLayout';
 import { useLessonStore } from '../lessons/progress';
 import { LessonPlanPanel } from '../recommender/LessonPlanPanel';
 import {
-  lessonPlanStorageKey,
+  clearLessonPlan,
   makeLessonPlan,
-  readLessonPlan,
   SavedLessonPlan,
+  saveLessonPlan,
+  useSavedLessonPlan,
 } from '../recommender/savedLessonPlan';
 import {
   RecommendationKind,
@@ -128,7 +129,8 @@ export default function StudyRecommenderPage() {
   const [draft, setDraft] = useState(initialQuery);
   const [submittedQuery, setSubmittedQuery] = useState(initialQuery);
   const [emptyNotice, setEmptyNotice] = useState(false);
-  const [plan, setPlan] = useState(readLessonPlan);
+  const plan = useSavedLessonPlan();
+  const [removedPlan, setRemovedPlan] = useState<SavedLessonPlan | null>(null);
   const [selection, setSelection] = useState<string[] | null>(null);
   const [planError, setPlanError] = useState('');
   const inputRef = useRef<HTMLTextAreaElement>(null);
@@ -188,18 +190,30 @@ export default function StudyRecommenderPage() {
   }
 
   function persistPlan(next: SavedLessonPlan) {
-    try {
-      localStorage.setItem(lessonPlanStorageKey, JSON.stringify(next));
-      setPlan(next);
+    if (saveLessonPlan(next)) {
+      setRemovedPlan(null);
       setPlanError('');
       return true;
-    } catch {
-      setPlanError('Não foi possível salvar o plano neste navegador.');
-      return false;
+    }
+    setPlanError('Não foi possível salvar o plano neste navegador.');
+    return false;
+  }
+
+  function handleClearPlan() {
+    if (!plan) return;
+    const previous = plan;
+    if (clearLessonPlan()) {
+      setRemovedPlan(previous);
+      setPlanError('');
+    } else {
+      setPlanError('Não foi possível remover o plano neste navegador.');
     }
   }
 
   const suggestions = result ? [...result.sequence, ...result.supportSuggestions] : [];
+  const totalMinutes = result
+    ? result.sequence.reduce((sum, item) => sum + item.lesson.minutes, 0)
+    : 0;
 
   function saveSelection() {
     const chosen = suggestions.filter((item) => selection?.includes(item.lesson.id));
@@ -289,6 +303,7 @@ export default function StudyRecommenderPage() {
               <Link className="lesson-button-quiet" to="/aulas">
                 Voltar para Aulas
               </Link>
+              <span className="lesson-editor-hint">Atalho: Ctrl+Enter ou Cmd+Enter</span>
             </div>
           </form>
 
@@ -312,7 +327,22 @@ export default function StudyRecommenderPage() {
             {planError}
           </p>
         )}
-        {plan && <LessonPlanPanel plan={plan} update={persistPlan} />}
+        {plan ? (
+          <LessonPlanPanel plan={plan} update={persistPlan} onClear={handleClearPlan} />
+        ) : (
+          removedPlan && (
+            <div className="rec-panel rec-undo-banner" role="status">
+              <p className="guide-text">Plano de aulas removido deste navegador.</p>
+              <button
+                type="button"
+                className="lesson-button-quiet"
+                onClick={() => persistPlan(removedPlan)}
+              >
+                Desfazer remoção
+              </button>
+            </div>
+          )
+        )}
 
         {result && (
           <section aria-labelledby="rec-results-title" className="rec-results">
@@ -323,7 +353,9 @@ export default function StudyRecommenderPage() {
                 </h2>
                 <p className="guide-text">
                   {result.sequence.length > 0
-                    ? 'Pré-requisitos aparecem antes da prática. Você pode abrir qualquer aula e voltar para ajustar os termos.'
+                    ? `${result.sequence.length} ${
+                        result.sequence.length === 1 ? 'aula' : 'aulas'
+                      } · cerca de ${totalMinutes} min ao todo. Pré-requisitos aparecem antes da prática. Você pode abrir qualquer aula e voltar para ajustar os termos.`
                     : 'Não foi possível montar aulas diretas para o texto colado; ajuste os termos abaixo.'}
                 </p>
               </div>

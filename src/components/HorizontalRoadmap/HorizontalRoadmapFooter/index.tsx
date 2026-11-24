@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { Level } from '../../../entity/RoadmapModel';
@@ -15,13 +15,7 @@ export default function HorizontalRoadmapFooter(props: Props) {
   const [, setSelectedItem] = useSelectedItem();
   const [direction, setDirection] = useState<'left' | 'right'>('right');
 
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
-
   const levelQty = props.roadmapData.length;
-
-  const currentLevel = props.currentLevelIndex + 1;
-  const prevLevel = currentLevel - 1;
-  const nextLevel = currentLevel + 1;
 
   function handleNextLevel() {
     if (props.currentLevelIndex < props.roadmapData.length - 1) {

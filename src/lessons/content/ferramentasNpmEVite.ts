@@ -35,6 +35,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'por-que-ferramentas:3',
           question:
             'Você vai criar um site simples. Ele vai rodar no navegador das pessoas. Por que você precisa do Node.js instalado no seu computador?',
           options: [
@@ -115,6 +116,7 @@ npm run build            # roda o script "build"`,
         },
         {
           type: 'classify',
+          activityId: 'package-json:4',
           prompt: 'Num projeto de catálogo com Vite, onde cada pacote costuma ficar?',
           buckets: ['dependencies', 'devDependencies'],
           items: [
@@ -130,6 +132,7 @@ npm run build            # roda o script "build"`,
         },
         {
           type: 'quiz',
+          activityId: 'package-json:5',
           question:
             'Com o script `"build": "tsc --noEmit && vite build"`, o que acontece ao rodar `npm run build` num projeto com um erro de tipo?',
           options: [
@@ -179,6 +182,7 @@ npm run build            # roda o script "build"`,
         },
         {
           type: 'quiz',
+          activityId: 'lockfile:3',
           question:
             'O projeto não tem lockfile no Git. Ana instala em março, Bruno em junho, ambos com `"vite": "^7.1.0"`. O código funciona para Ana e quebra para Bruno. Qual a explicação mais provável?',
           options: [
@@ -323,6 +327,7 @@ console.log(formatarPreco(8)); // R$ 8,00`,
         },
         {
           type: 'fill',
+          activityId: 'vite:5',
           prompt: 'Complete para compartilhar a função `somarCarrinho` entre dois arquivos.',
           language: 'ts',
           template:
@@ -332,6 +337,7 @@ console.log(formatarPreco(8)); // R$ 8,00`,
         },
         {
           type: 'order',
+          activityId: 'vite:6',
           prompt:
             'Coloque em ordem os comandos para começar um projeto do zero e gerar a versão de publicação.',
           items: [
@@ -374,6 +380,7 @@ console.log(formatarPreco(8)); // R$ 8,00`,
         },
         {
           type: 'classify',
+          activityId: 'qualidade:2',
           prompt: 'Qual ferramenta aponta ou corrige cada problema?',
           buckets: ['ESLint', 'Prettier', 'TypeScript'],
           items: [
@@ -421,6 +428,7 @@ const resposta = await fetch(urlApi + '/produtos');`,
         },
         {
           type: 'classify',
+          activityId: 'publico-e-segredo:4',
           prompt:
             'Este valor pode ir para o frontend, ou é um segredo que só pode ficar no servidor?',
           buckets: ['Pode ir no frontend', 'Segredo: só no servidor'],

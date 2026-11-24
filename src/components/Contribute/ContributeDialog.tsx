@@ -11,6 +11,7 @@ import {
 } from 'react-icons/pi';
 import { LearningGroup, RoadmapCatalog } from '../../learning/types';
 import {
+  contributionTurnstileAction,
   ContributionLanguage,
   ContributionResourceKind,
   languageLabels,
@@ -26,6 +27,15 @@ import {
 import { fetchLinkInfo, submitContribution, SubmitResult } from '../../contributions/client';
 import { DevFlip } from '../../devmode/DevFlip';
 import { Turnstile } from './Turnstile';
+import { isOfflineApp } from '../../runtime/mode';
+import {
+  deleteContributionDraft,
+  exportContributionDraftsJson,
+  listContributionDrafts,
+  LocalContributionDraft,
+  saveContributionDraft,
+} from '../../offline/localStore';
+import { exportTextFile } from '../../offline/backup';
 import './contribute.css';
 
 type Choice = ContributionResourceKind | 'step';
@@ -57,15 +67,19 @@ const choices: Array<{ id: Choice; title: string; hint: string; icon: ReactNode 
   },
 ];
 
-const siteKey = import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined;
-
 export function ContributeDialog({
   catalog,
   group,
+  turnstileSiteKey,
 }: {
   catalog: RoadmapCatalog;
   group: LearningGroup;
+  turnstileSiteKey?: string;
 }) {
+  const offline = isOfflineApp();
+  const activeSiteKey = offline
+    ? undefined
+    : turnstileSiteKey ?? (import.meta.env.VITE_TURNSTILE_SITE_KEY as string | undefined);
   const [open, setOpen] = useState(false);
   const [formKey, setFormKey] = useState(0);
   return (
@@ -83,7 +97,7 @@ export function ContributeDialog({
           roadmapId: catalog.id,
           groupId: group.id,
           steps: group.variants.deep.stepIds,
-          turnstile: Boolean(siteKey),
+          turnstile: Boolean(activeSiteKey),
         }}
       >
         <aside className="group-contribute" aria-label={`Sugerir conteúdo para ${group.title}`}>
@@ -98,6 +112,7 @@ export function ContributeDialog({
             key={formKey}
             catalog={catalog}
             group={group}
+            siteKey={activeSiteKey}
             onReset={() => setFormKey((key) => key + 1)}
           />
           <Dialog.Close className="contribute-close" aria-label="Fechar">
@@ -112,12 +127,15 @@ export function ContributeDialog({
 function ContributeForm({
   catalog,
   group,
+  siteKey,
   onReset,
 }: {
   catalog: RoadmapCatalog;
   group: LearningGroup;
+  siteKey?: string;
   onReset: () => void;
 }) {
+  const offline = isOfflineApp();
   const uid = useId().replace(/:/g, '');
   const fieldId = (field: string) => `${uid}-${field.replace(/\./g, '-')}`;
   const steps = group.variants.deep.stepIds
@@ -138,12 +156,60 @@ function ContributeForm({
   const [github, setGithub] = useState('');
   const [website, setWebsite] = useState('');
   const [token, setToken] = useState('');
+  const [challengeVersion, setChallengeVersion] = useState(0);
   const [errors, setErrors] = useState<FieldErrors>({});
   const [notice, setNotice] = useState('');
   const [sending, setSending] = useState(false);
   const [result, setResult] = useState<SubmitResult | undefined>();
+  const [editingDraftId, setEditingDraftId] = useState<string | undefined>();
+  const [savedDraft, setSavedDraft] = useState<LocalContributionDraft | undefined>();
+  const [localDrafts, setLocalDrafts] = useState<LocalContributionDraft[]>(() =>
+    offline
+      ? listContributionDrafts().filter(
+          (item) => item.catalogId === catalog.id && item.groupId === group.id,
+        )
+      : [],
+  );
   const summary = useRef<HTMLDivElement>(null);
   const lastLookup = useRef('');
+
+  function refreshDrafts() {
+    setLocalDrafts(
+      listContributionDrafts().filter(
+        (item) => item.catalogId === catalog.id && item.groupId === group.id,
+      ),
+    );
+  }
+
+  function loadDraftIntoForm(draft: LocalContributionDraft) {
+    const p = draft.payload as Record<string, unknown>;
+    setSavedDraft(undefined);
+    setResult(undefined);
+    setEditingDraftId(draft.id);
+    if (p.kind === 'step' && p.step && typeof p.step === 'object') {
+      const stepObj = p.step as Record<string, unknown>;
+      const resObj = (stepObj.resource || {}) as Record<string, unknown>;
+      setChoice('step');
+      setStepTitle(String(stepObj.title || ''));
+      setStepDescription(String(stepObj.description || ''));
+      setURL(String(resObj.url || ''));
+      setTitle(String(resObj.title || ''));
+      setLinkKind((resObj.kind as ContributionResourceKind) || 'read');
+      setLanguage((resObj.language as ContributionLanguage) || 'pt-BR');
+    } else {
+      const resObj = (p.resource || {}) as Record<string, unknown>;
+      setChoice((resObj.kind as Choice) || 'read');
+      setNodeId(String(p.nodeId || steps[0]?.id || ''));
+      setURL(String(resObj.url || ''));
+      setTitle(String(resObj.title || ''));
+      setLanguage((resObj.language as ContributionLanguage) || 'pt-BR');
+    }
+    setFree(true);
+    setReason(String(p.reason || ''));
+    const authorObj = (p.author || {}) as Record<string, unknown>;
+    setName(String(authorObj.name || ''));
+    setGithub(String(authorObj.github || ''));
+  }
 
   const isStep = choice === 'step';
   const resourceKind: ContributionResourceKind = isStep ? linkKind : choice || 'read';
@@ -165,6 +231,7 @@ function ContributeForm({
   }
 
   async function lookUp() {
+    if (offline) return;
     const normalized = normalizeURL(url);
     if (!normalized || !youtubeId(normalized) || lastLookup.current === normalized) return;
     lastLookup.current = normalized;
@@ -234,9 +301,28 @@ function ContributeForm({
     setErrors(next);
     if (Object.keys(next).length) return focusFirst(next);
 
+    if (offline) {
+      const draft = saveContributionDraft({
+        id: editingDraftId,
+        catalogId: catalog.id,
+        catalogTitle: catalog.title,
+        groupId: group.id,
+        groupTitle: group.title,
+        payload: body as Record<string, unknown>,
+      });
+      setSavedDraft(draft);
+      setEditingDraftId(draft.id);
+      refreshDrafts();
+      return;
+    }
+
     setSending(true);
     const response = await submitContribution({ ...body, website, turnstileToken: token });
     setSending(false);
+    if (siteKey) {
+      setToken('');
+      setChallengeVersion((version) => version + 1);
+    }
     if (response.status === 'invalid') {
       serverErrorsFor.current = JSON.stringify(body);
       setErrors(response.errors);
@@ -244,6 +330,47 @@ function ContributeForm({
       return focusFirst(response.errors);
     }
     setResult(response);
+    if (response.status === 'failed') {
+      requestAnimationFrame(() => summary.current?.focus());
+    }
+  }
+
+  if (savedDraft) {
+    return (
+      <div className="contribute-outcome" role="status">
+        <PiCheckCircle aria-hidden="true" className="contribute-outcome-icon" />
+        <Dialog.Title className="contribute-title">Rascunho salvo localmente</Dialog.Title>
+        <Dialog.Description className="contribute-lead">
+          Sua sugestão foi guardada neste aparelho. Quando estiver conectado no computador, exporte
+          o arquivo para enviá-la ao GitHub.
+        </Dialog.Description>
+        <div className="contribute-actions">
+          <button
+            type="button"
+            className="contribute-submit"
+            onClick={() =>
+              exportTextFile(
+                'trilha-mod-rascunhos-sugestoes.json',
+                exportContributionDraftsJson(),
+                'application/json;charset=utf-8',
+              )
+            }
+          >
+            Exportar rascunhos (.json)
+          </button>
+          <button
+            type="button"
+            className="contribute-secondary"
+            onClick={() => loadDraftIntoForm(savedDraft)}
+          >
+            Editar rascunho
+          </button>
+          <button type="button" className="contribute-secondary" onClick={onReset}>
+            Criar outro rascunho
+          </button>
+        </div>
+      </div>
+    );
   }
 
   if (result && result.status !== 'invalid' && result.status !== 'failed')
@@ -267,9 +394,55 @@ function ContributeForm({
         </p>
         <Dialog.Title className="contribute-title">Sugerir conteúdo</Dialog.Title>
         <Dialog.Description className="contribute-lead">
-          Sua sugestão vira um pull request público no GitHub. Depois da revisão, ela aparece nesta
-          trilha para todo mundo.
+          {offline
+            ? 'No aplicativo offline, sua sugestão fica salva como rascunho local neste aparelho para editar ou exportar depois.'
+            : 'Sua sugestão vira um pull request público no GitHub. Depois da revisão, ela aparece nesta trilha para todo mundo.'}
         </Dialog.Description>
+        {offline && localDrafts.length > 0 && (
+          <div
+            className="contribute-summary"
+            role="region"
+            aria-label="Rascunhos salvos neste assunto"
+          >
+            <p>
+              <strong>Rascunhos locais ({localDrafts.length}):</strong>
+            </p>
+            <ul>
+              {localDrafts.map((draft) => {
+                const payloadObj = draft.payload as Record<string, unknown>;
+                const res = (payloadObj.resource ||
+                  (payloadObj.step as Record<string, unknown> | undefined)?.resource ||
+                  {}) as Record<string, unknown>;
+                const label = String(res.title || res.url || draft.id);
+                return (
+                  <li
+                    key={draft.id}
+                    style={{ display: 'flex', gap: 8, alignItems: 'center', marginTop: 4 }}
+                  >
+                    <span>{label}</span>
+                    <button
+                      type="button"
+                      className="contribute-secondary"
+                      onClick={() => loadDraftIntoForm(draft)}
+                    >
+                      Editar
+                    </button>
+                    <button
+                      type="button"
+                      className="contribute-secondary"
+                      onClick={() => {
+                        deleteContributionDraft(draft.id);
+                        refreshDrafts();
+                      }}
+                    >
+                      Excluir
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </header>
 
       {(errorCount > 0 || result?.status === 'failed') && (
@@ -549,16 +722,31 @@ function ContributeForm({
 
           {siteKey && (
             <div id={fieldId('turnstile')} tabIndex={-1}>
-              <Turnstile siteKey={siteKey} onToken={setToken} />
+              <Turnstile
+                key={challengeVersion}
+                siteKey={siteKey}
+                action={contributionTurnstileAction}
+                onToken={setToken}
+              />
               {fieldError('turnstile')}
             </div>
           )}
 
           <div className="contribute-actions">
             <button type="submit" className="contribute-submit" disabled={sending}>
-              {sending ? 'Enviando…' : 'Enviar sugestão'}
+              {offline
+                ? editingDraftId
+                  ? 'Atualizar rascunho local'
+                  : 'Salvar rascunho local'
+                : sending
+                ? 'Enviando…'
+                : 'Enviar sugestão'}
             </button>
-            <p>A equipe revisa antes de publicar. Não colocamos seu e-mail em lugar nenhum.</p>
+            <p>
+              {offline
+                ? 'Salvo apenas neste aparelho. Você pode exportar seus rascunhos em Meu espaço.'
+                : 'A equipe revisa antes de publicar. Não colocamos seu e-mail em lugar nenhum.'}
+            </p>
           </div>
         </>
       )}

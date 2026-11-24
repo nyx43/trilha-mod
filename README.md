@@ -4,7 +4,7 @@
 
 A **Trilha Info** é uma plataforma open source para aprender tecnologia com conteúdo gratuito, em português e organizado em percursos práticos. Criada em junho de 2022, reúne trilhas de carreira, aulas próprias e interativas, guias rápidos e projetos para o portfólio.
 
-O catálogo atual tem **8 trilhas, 8 cursos, 76 aulas e 34 guias**. Você pode começar sem cadastro e continuar de onde parou, com o progresso salvo no navegador.
+O catálogo atual tem **8 trilhas, 8 cursos, 78 aulas e 34 guias**. Você pode começar sem cadastro e continuar de onde parou, com o progresso salvo no navegador.
 
 ![Página inicial da Trilha Info, com a interface atual e as trilhas de aprendizado](public/preview.png)
 
@@ -74,11 +74,11 @@ O envio de sugestões usa os endpoints `/api/contributions` e `/api/link-info`, 
 | `TURNSTILE_SECRET_KEY`                    | Validação do desafio no servidor.                                         |
 | `GITHUB_APP_ID`, `GITHUB_APP_PRIVATE_KEY` | Credenciais do GitHub App que abre os pull requests, somente no servidor. |
 | `GITHUB_APP_INSTALLATION_ID`              | Instalação do App; pode ser descoberta automaticamente quando omitida.    |
-| `CONTRIBUTIONS_REPOSITORY`                | Repositório de destino; padrão: `flaviojmendes/trilhainfo`.               |
-| `CONTRIBUTIONS_BASE_BRANCH`               | Branch de destino; padrão: `main`.                                        |
-| `SITE_URL`                                | Origem pública usada pelo servidor para consultar o catálogo.             |
+| `CONTRIBUTIONS_REPOSITORY`                | Obrigatório para envio real. Use `nyx43/trilha-mod` neste fork.               |
+| `CONTRIBUTIONS_BASE_BRANCH`               | Obrigatória para envio real. Informe a branch que receberá os PRs.                                        |
+| `SITE_URL`                                | Origem pública do catálogo e dos metadados. Defina também no ambiente do build.             |
 
-Sem GitHub App, o desenvolvimento local retorna uma simulação e o JSON da sugestão, sem abrir um pull request. Em produção na Vercel, o envio exige GitHub App e Turnstile configurados. Veja o [formato das sugestões](src/contributions/entries/README.md).
+Sem GitHub App, o desenvolvimento local retorna uma simulação e o JSON da sugestão, sem abrir um pull request. Nas prévias e em produção na Vercel, o envio exige GitHub App e Turnstile configurados. Veja o [formato das sugestões](src/contributions/entries/README.md).
 
 ### Tutor opcional nas aulas
 

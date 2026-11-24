@@ -1,6 +1,7 @@
 import { CSSProperties, useId, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { compareSpecificity, contrastRatio, parseHex, specificity } from '../../lessons/tools';
+import { NarrationBlockButton } from '../../narration/NarrationPlayer';
 import { CodeBlock } from '../Guide/CodeBlock';
 import { Block } from './context';
 
@@ -67,7 +68,7 @@ function Choice<T extends string>({
   );
 }
 
-export function BoxModel() {
+export function BoxModel({ narrationClipId }: { narrationClipId?: string }) {
   const [width, setWidth] = useState(160);
   const [padding, setPadding] = useState(16);
   const [border, setBorder] = useState(4);
@@ -77,7 +78,12 @@ export function BoxModel() {
   const visible = content + 2 * padding + 2 * border;
   const scale = Math.min(1, 300 / (visible + 2 * margin));
   return (
-    <figure className="lesson-lab lesson-box">
+    <figure className="lesson-lab lesson-box" data-narration-clip={narrationClipId}>
+      {narrationClipId && (
+        <div className="narration-heading-row">
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir orientação" />
+        </div>
+      )}
       <div className="lesson-lab-controls">
         <Range label="width" value={width} min={60} max={240} onChange={setWidth} />
         <Range label="padding" value={padding} min={0} max={40} onChange={setPadding} />
@@ -145,7 +151,13 @@ const gridTemplates = [
 ] as const;
 const sizes = [56, 88, 64, 104, 72, 60];
 
-export function LayoutLab({ block }: { block: Block<'layoutLab'> }) {
+export function LayoutLab({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'layoutLab'>;
+  narrationClipId?: string;
+}) {
   const reduced = useReducedMotion();
   const [direction, setDirection] = useState<(typeof flexOptions.direction)[number]>('row');
   const [justify, setJustify] = useState<(typeof flexOptions.justify)[number]>('flex-start');
@@ -175,7 +187,16 @@ export function LayoutLab({ block }: { block: Block<'layoutLab'> }) {
     ? { duration: 0 }
     : { type: 'spring' as const, stiffness: 380, damping: 32 };
   return (
-    <figure className="lesson-lab lesson-layout-lab" data-mode={block.mode}>
+    <figure
+      className="lesson-lab lesson-layout-lab"
+      data-mode={block.mode}
+      data-narration-clip={narrationClipId}
+    >
+      {narrationClipId && (
+        <div className="narration-heading-row">
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir orientação" />
+        </div>
+      )}
       <div className="lesson-lab-controls">
         {flex ? (
           <>
@@ -256,13 +277,27 @@ export function LayoutLab({ block }: { block: Block<'layoutLab'> }) {
   );
 }
 
-export function SpecificityLab({ block }: { block: Block<'specificity'> }) {
+export function SpecificityLab({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'specificity'>;
+  narrationClipId?: string;
+}) {
   const [pair, setPair] = useState<[string, string]>(block.pairs[0] || ['p', '.texto']);
   const scores = pair.map((selector) => specificity(selector || ''));
   const result = compareSpecificity(scores[0], scores[1]);
   return (
-    <figure className="lesson-lab lesson-specificity">
-      <figcaption className="guide-figcaption">
+    <figure className="lesson-lab lesson-specificity" data-narration-clip={narrationClipId}>
+      {narrationClipId && (
+        <div className="narration-heading-row">
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir orientação" />
+        </div>
+      )}
+      <figcaption
+        className="guide-figcaption"
+        data-narration-field={narrationClipId ? 'caption' : undefined}
+      >
         Escreva dois seletores para o mesmo elemento e veja qual vence. A pontuação é comparada da
         esquerda para a direita: uma coluna só importa quando as anteriores empatam.
       </figcaption>
@@ -330,7 +365,19 @@ export function SpecificityLab({ block }: { block: Block<'specificity'> }) {
   );
 }
 
-export function ContrastLab({ block }: { block: Block<'contrast'> }) {
+function toFullHex(value: string): string {
+  const rgb = parseHex(value);
+  if (!rgb) return '#000000';
+  return `#${rgb.map((part) => part.toString(16).padStart(2, '0')).join('')}`;
+}
+
+export function ContrastLab({
+  block,
+  narrationClipId,
+}: {
+  block: Block<'contrast'>;
+  narrationClipId?: string;
+}) {
   const [foreground, setForeground] = useState(block.foreground);
   const [background, setBackground] = useState(block.background);
   const valid = parseHex(foreground) && parseHex(background);
@@ -346,7 +393,7 @@ export function ContrastLab({ block }: { block: Block<'contrast'> }) {
       <span>
         <input
           type="color"
-          value={parseHex(value) ? value : '#000000'}
+          value={toFullHex(value)}
           onChange={(event) => set(event.target.value)}
           aria-label={`${label}: seletor`}
         />
@@ -360,7 +407,12 @@ export function ContrastLab({ block }: { block: Block<'contrast'> }) {
     </label>
   );
   return (
-    <figure className="lesson-lab lesson-contrast">
+    <figure className="lesson-lab lesson-contrast" data-narration-clip={narrationClipId}>
+      {narrationClipId && (
+        <div className="narration-heading-row">
+          <NarrationBlockButton clipId={narrationClipId} label="Ouvir orientação" />
+        </div>
+      )}
       <div className="lesson-lab-controls">
         {field('Cor do texto', foreground, setForeground)}
         {field('Cor do fundo', background, setBackground)}

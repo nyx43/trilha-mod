@@ -13,6 +13,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'bug-que-motiva:1',
           question: 'O campo de preço tem `25` digitado. O que aparece no console?',
           code: 'function somarFrete(preco, frete) {\n  return preco + frete;\n}\n\nconst preco = campoPreco.value; // o campo mostra 25\nconsole.log(somarFrete(preco, 10));',
           language: 'js',
@@ -116,6 +117,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'o-que-e-typescript:3',
           question: 'Depois de compilado, o que sobra dos tipos no arquivo que roda no navegador?',
           options: [
             {
@@ -180,6 +182,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'anotacoes-e-inferencia:2',
           question: 'Onde o TypeScript aponta erro neste código?',
           code: 'function total(preco: number, quantidade: number): number {\n  return preco * quantidade;\n}\n\nfunction aoMudar(campo: HTMLInputElement) {\n  total(campo.value, 2);\n}',
           language: 'ts',
@@ -204,6 +207,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'anotacoes-e-inferencia:3',
           prompt:
             'Complete as anotações: a função recebe um nome e uma idade e devolve se a pessoa pode tirar habilitação.',
           language: 'ts',
@@ -283,6 +287,7 @@ function subtotal(itens: ItemCarrinho[]): number {
         },
         {
           type: 'quiz',
+          activityId: 'formato-dos-objetos:3',
           question: 'O que o TypeScript diz sobre a última linha?',
           code: 'type Produto = {\n  nome: string;\n  preco: number;\n  desconto?: number;\n};\n\nfunction precoFinal(produto: Produto) {\n  return produto.preco - produto.desconto;\n}',
           language: 'ts',
@@ -307,6 +312,7 @@ function subtotal(itens: ItemCarrinho[]): number {
         },
         {
           type: 'fill',
+          activityId: 'formato-dos-objetos:4',
           prompt: 'Descreva um produto do catálogo e um array deles. A avaliação é opcional.',
           language: 'ts',
           template:
@@ -385,6 +391,7 @@ situacao = 'sucesos';   // erro: não é uma das opções`,
         },
         {
           type: 'quiz',
+          activityId: 'unions-e-narrowing:5',
           question: 'Qual linha o TypeScript aceita sem erro?',
           code: 'function formatar(valor: string | number) {\n  // qual destas linhas pode ficar aqui?\n}',
           language: 'ts',
@@ -409,6 +416,7 @@ situacao = 'sucesos';   // erro: não é uma das opções`,
         },
         {
           type: 'classify',
+          activityId: 'unions-e-narrowing:6',
           prompt:
             'Com `type Estado` da animação acima, o que o TypeScript aceita e o que ele aponta como erro?',
           buckets: ['Aceita', 'Aponta erro'],
@@ -490,6 +498,7 @@ async function buscarProdutos(): Promise<Produto[]> {
         },
         {
           type: 'quiz',
+          activityId: 'limites-dos-tipos:4',
           question:
             'O código declara `const produto: Produto = await resposta.json()` e a API manda `{ "nome": "Pastel", "preco": "8" }`. O que acontece?',
           options: [
@@ -544,6 +553,7 @@ async function buscarProdutos(): Promise<Produto[]> {
         },
         {
           type: 'classify',
+          activityId: 'limites-dos-tipos:6',
           prompt:
             'Qual destes problemas o TypeScript pega antes de rodar, e qual só uma validação durante a execução pega?',
           buckets: ['O TypeScript pega antes', 'Só a validação ao rodar pega'],

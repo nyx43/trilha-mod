@@ -1,5 +1,6 @@
 import { findGuide } from '../guides';
 import { courseLessons, findCourse, findLesson, lessonPlace } from '../lessons';
+import { forkRepositoryUrl, UPSTREAM_REPOSITORY_URL } from '../config/site';
 import { homeQuestions } from './faq';
 import { siteUrl, SocialPage } from './pages';
 
@@ -36,7 +37,7 @@ export function structuredData(page: SocialPage) {
       name: 'Trilha Info',
       url: `${siteUrl}/`,
       logo: { '@type': 'ImageObject', url: `${siteUrl}/logo.png` },
-      sameAs: ['https://github.com/flaviojmendes/trilhainfo'],
+      sameAs: [forkRepositoryUrl, UPSTREAM_REPOSITORY_URL],
     },
     {
       '@type': 'WebSite',

@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'nao-funciona:3',
           prompt:
             'Você vai pedir ajuda com um bug. O que é evidência e o que é só suspeita ou ruído?',
           buckets: ['Evidência', 'Suspeita ou ruído'],
@@ -70,6 +71,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'reproduzir:2',
           prompt: 'Coloque em ordem o método de depuração com evidências.',
           items: [
             'Reproduzir o erro e anotar os passos',
@@ -130,6 +132,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'anatomia-do-erro:3',
           question: 'Com o erro acima na tela, qual é o primeiro lugar do código para olhar?',
           options: [
             {
@@ -253,6 +256,7 @@ console.log(somarCarrinho([{ preco: 5 }, { preco: 8 }, { preco: 3 }]));`,
         },
         {
           type: 'quiz',
+          activityId: 'hipoteses:4',
           question:
             'Você suspeitava de duas causas, trocou as duas ao mesmo tempo e o erro sumiu. Qual o problema disso?',
           options: [
@@ -304,6 +308,7 @@ e um teste de regressão.`,
         },
         {
           type: 'quiz',
+          activityId: 'evidencias-para-a-ia:3',
           question:
             'A IA responde: “O problema é que o preço vem como texto. Use `Number(itens[i].preco)`.” O que você faz?',
           options: [
@@ -342,6 +347,7 @@ e um teste de regressão.`,
         },
         {
           type: 'playground',
+          activityId: 'investigue:1',
           title: 'O carrinho que conta errado',
           task: 'Rode e compare o observado com o esperado (5). Investigue com `console.log`, por exemplo imprimindo `item.qtd` e `typeof item.qtd` dentro do laço. Depois faça a menor correção.',
           js: `// Os dados chegam de um formulário:

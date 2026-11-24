@@ -51,6 +51,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'arvore-de-pastas:4',
           title: 'Passeio por um servidor',
           task: 'Você entrou num servidor Ubuntu de laboratório. Ande pelas pastas usando caminhos absolutos e relativos. Digite `ajuda` se travar.',
           prompt: 'ana@servidor:~$',
@@ -90,6 +91,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'arvore-de-pastas:5',
           question:
             'Você está em `/home/ana/projetos` e digita `cd etc`. O terminal responde `No such file or directory`. Por quê?',
           options: [
@@ -184,6 +186,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'permissoes:4',
           title: 'O script que não queria rodar',
           task: 'Uma colega deixou um script de backup na sua pasta. Descubra por que ele não roda e resolva do jeito certo.',
           prompt: 'ana@servidor:~/scripts$',
@@ -229,6 +232,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'permissoes:6',
           question:
             'Um script dá `Permission denied`. Na internet, alguém sugere `chmod 777 script.sh`. Qual é a melhor escolha?',
           options: [
@@ -293,6 +297,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'ler-logs:3',
           title: 'Investigando o log da loja',
           task: 'Clientes reclamam que o checkout falhou por volta das 10h. Use o log da aplicação para descobrir o que aconteceu.',
           prompt: 'ana@servidor:/var/log/loja$',
@@ -359,6 +364,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'ler-logs:5',
           prompt:
             'Complete os comandos: filtrar avisos, contar quantos são, criar um arquivo novo com eles e depois acrescentar os erros no mesmo arquivo.',
           language: 'bash',
@@ -400,6 +406,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'processos:2',
           title: 'O relatório que travou o servidor',
           task: 'O servidor está lento desde as 9h40. Encontre o processo culpado e encerre-o com educação.',
           prompt: 'ana@servidor:~$',
@@ -442,6 +449,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'processos:4',
           prompt: 'Um servidor ficou lento. Coloque em ordem um jeito seguro de investigar.',
           items: [
             'Abrir o `top` e ver qual processo usa mais CPU ou memória',
@@ -470,6 +478,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'pacotes-variaveis-ajuda:2',
           title: 'Instalar, configurar e pedir ajuda',
           task: 'Instale uma ferramenta, crie uma variável de ambiente e descubra sozinha como usar um comando.',
           prompt: 'ana@servidor:~$',
@@ -527,6 +536,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'pacotes-variaveis-ajuda:4',
           question:
             'Você fez `export TOKEN=abc123` num terminal. Abriu uma segunda janela de terminal e `echo $TOKEN` mostrou uma linha vazia. O que aconteceu?',
           options: [

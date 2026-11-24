@@ -73,6 +73,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'variavel-nao-basta:4',
           title: 'Contador de copos de água',
           framework: 'react',
           task: 'Clique em **+1 copo** e repare: o console mostra o número subindo, a tela não. Troque a variável `let` por `useState` e chame `setCopos` no clique. Depois crie um botão **Zerar** que volta o total para 0.',
@@ -173,6 +174,7 @@ function curtir() { setCurtidas(curtidas + 1); }
         },
         {
           type: 'quiz',
+          activityId: 'eventos:2',
           question:
             'A tela trava com o erro “Too many re-renders” assim que abre. Qual destas linhas causa isso?',
           options: [
@@ -196,6 +198,7 @@ function curtir() { setCurtidas(curtidas + 1); }
         },
         {
           type: 'fill',
+          activityId: 'eventos:3',
           prompt:
             'Complete para que o clique remova o item certo e o campo atualize o estado `nome` a cada tecla.',
           language: 'jsx',
@@ -274,6 +277,7 @@ function curtir() { setCurtidas(curtidas + 1); }
         },
         {
           type: 'fill',
+          activityId: 'foto-e-atualizacao-funcional:3',
           prompt: 'Reescreva a soma com atualização funcional, para que as três chamadas somem 3.',
           language: 'jsx',
           template: `function somarTres() {
@@ -328,6 +332,7 @@ function curtir() { setCurtidas(curtidas + 1); }
         },
         {
           type: 'classify',
+          activityId: 'arrays-e-objetos:3',
           prompt: 'Qual destas atualizações o React percebe, e qual passa despercebida?',
           buckets: ['O React percebe', 'Passa despercebida'],
           items: [
@@ -392,6 +397,7 @@ function curtir() { setCurtidas(curtidas + 1); }
         },
         {
           type: 'playground',
+          activityId: 'formularios-controlados:3',
           title: 'Lista de compras',
           framework: 'react',
           task: 'Transforme o campo em controlado (crie o estado `texto`). No envio, se o texto sem espaços nas pontas não estiver vazio, crie um array **novo** com o item no fim e limpe o campo. Faça o **Remover** criar um array novo sem aquele item. Use `Date.now()` como id dos itens novos.',
@@ -569,6 +575,7 @@ function BarraDeBusca({ valor, aoMudar }) {
         },
         {
           type: 'playground',
+          activityId: 'elevar-e-derivar:3',
           title: 'Busca e favoritos',
           framework: 'react',
           task: 'Este código tem dois defeitos. A busca mora dentro de `BarraDeBusca`, então a lista não consegue filtrar: eleve o estado para `Loja` e passe valor e função por props. E o contador usa um estado espelho, `quantidade`, que não diminui ao desfavoritar: apague esse estado e mostre `favoritos.length`. A busca não deve diferenciar maiúsculas de minúsculas.',
@@ -733,6 +740,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Loja />);`,
         },
         {
           type: 'quiz',
+          activityId: 'elevar-e-derivar:4',
           question:
             'Um formulário tem os estados `nome` e `sobrenome`. Onde deve ficar o nome completo mostrado no topo?',
           options: [

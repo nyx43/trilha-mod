@@ -67,6 +67,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'dimensoes:3',
           prompt: 'Que dimensão de qualidade cada problema fere?',
           buckets: ['Completude', 'Unicidade', 'Validade', 'Atualidade'],
           items: [
@@ -84,6 +85,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'dimensoes:4',
           question:
             'No sistema de vendas, o pedido 5531 custa R$ 89,90. No data warehouse, o mesmo pedido aparece com R$ 8.990,00. Cada tabela, sozinha, parece válida. Qual dimensão está em jogo?',
           options: [
@@ -116,6 +118,7 @@ export const content: LessonContent = {
         },
         {
           type: 'sql',
+          activityId: 'checagens-em-sql:1',
           title: 'Caça aos duplicados',
           task: 'A consulta conta quantas vezes cada `pedido_id` aparece. Acrescente um `HAVING` para mostrar só os pedidos que aparecem mais de uma vez.',
           setup: lojaSetup,
@@ -143,6 +146,7 @@ HAVING COUNT(*) > 1;`,
         },
         {
           type: 'fill',
+          activityId: 'checagens-em-sql:2',
           prompt:
             'Complete a checagem de completude: quantos pedidos estão sem valor? Cuidado: em SQL, nada é igual a `NULL`, nem o próprio `NULL`.',
           language: 'sql',
@@ -152,6 +156,7 @@ HAVING COUNT(*) > 1;`,
         },
         {
           type: 'sql',
+          activityId: 'checagens-em-sql:3',
           title: 'Pedidos órfãos',
           task: 'Um pedido **órfão** aponta para um cliente que não existe. Troque o `JOIN` por `LEFT JOIN` e filtre as linhas em que o cliente não foi encontrado (`c.id IS NULL`).',
           setup: lojaSetup,
@@ -245,6 +250,7 @@ WHERE c.id IS NULL;`,
         },
         {
           type: 'python',
+          activityId: 'contratos:3',
           title: 'O portão do contrato',
           task: 'Complete `validar`: para cada coluna do `contrato`, registre um erro com o nome da coluna se ela estiver ausente ou com o tipo errado (`isinstance`). Registre também um erro se o `status` não estiver em `STATUS_VALIDOS`. Se mais de 20% do lote falhar, a carga deve ser bloqueada.',
           code: `contrato = {
@@ -349,6 +355,7 @@ for pedido, erros in problemas.items():
         },
         {
           type: 'quiz',
+          activityId: 'contratos:4',
           question:
             'O time de checkout quer renomear a coluna `valor` para `valor_total`. Com um contrato de dados em vigor, o que deveria acontecer?',
           options: [
@@ -386,6 +393,7 @@ for pedido, erros in problemas.items():
         },
         {
           type: 'quiz',
+          activityId: 'catalogo-e-linhagem:2',
           question:
             'Você precisa remover a coluna `desconto` de `stg_pedidos`. Antes de mexer, o que a linhagem permite descobrir?',
           options: [
@@ -443,6 +451,7 @@ for pedido, erros in problemas.items():
         },
         {
           type: 'classify',
+          activityId: 'lgpd:2',
           prompt: 'Como a LGPD classifica cada informação?',
           buckets: ['Dado pessoal', 'Dado pessoal sensível', 'Não é dado pessoal'],
           items: [
@@ -482,6 +491,7 @@ for pedido, erros in problemas.items():
         },
         {
           type: 'quiz',
+          activityId: 'lgpd:4',
           question:
             'Para “anonimizar”, um colega troca cada CPF pelo hash SHA-256 do CPF. Isso é anonimização?',
           options: [
@@ -532,6 +542,7 @@ for pedido, erros in problemas.items():
         },
         {
           type: 'quiz',
+          activityId: 'acesso-e-retencao:4',
           question:
             'Uma analista de marketing precisa saber quantos clientes existem por cidade. Que acesso faz mais sentido?',
           options: [

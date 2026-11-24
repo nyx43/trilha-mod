@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { PiArrowLeft } from 'react-icons/pi';
+import { Link, useParams } from 'react-router-dom';
 import MainLayout from '../components/layouts/MainLayout';
 import Markdown from 'markdown-to-jsx';
-import { useParams } from 'react-router';
 import posts from '../../public/posts/posts.json';
 import E404Page from './E404Page';
+import '../components/Guide/guide.css';
 
 type TitleProps = {
   children: React.ReactNode;
@@ -11,64 +13,42 @@ type TitleProps = {
 
 const Title = ({ children, ...props }: TitleProps) => (
   <div {...props} className="w-full">
-    {' '}
-    <h1 className="mx-auto mt-4 text-center font-title text-4xl text-title-primary">{children}</h1>
-    <div className="mb-16 mt-2 flex w-full gap-2">
-      <div className="mx-auto h-2 w-64 bg-gradient-to-r from-black via-primary to-black"></div>
+    <h1 className="mt-4 font-title text-3xl text-title-primary sm:text-4xl">{children}</h1>
+    <div className="mb-10 mt-3 flex w-full">
+      <div className="to-transparent h-1.5 w-48 rounded-full bg-gradient-to-r from-primary"></div>
     </div>
   </div>
 );
 
 const SecondaryTitle = ({ children, ...props }: TitleProps) => (
-  <div {...props} className="flex h-fit w-full">
-    <div className="flex">
-      <div className="mx-auto h-full w-4 bg-gradient-to-r from-text-secondary via-text-secondary to-black"></div>
-      <h2 className="mx-auto grow text-center font-title text-3xl text-title-primary">
-        {children}
-      </h2>
-    </div>
-  </div>
+  <h2 {...props} className="mb-3 mt-10 font-title text-2xl text-title-primary">
+    {children}
+  </h2>
 );
 
 const H3Title = ({ children, ...props }: TitleProps) => (
-  <div {...props} className="mt-8 flex h-fit w-full">
-    <div className="flex">
-      {/* <div className="mx-auto h-full w-4 bg-gradient-to-r from-text-secondary via-text-secondary to-black"></div> */}
-      <h3 className="mx-auto grow text-center font-title text-xl font-semibold text-text-primary">
-        {children}
-      </h3>
-    </div>
-  </div>
+  <h3 {...props} className="mb-2 mt-8 font-title text-xl font-semibold text-text-primary">
+    {children}
+  </h3>
 );
 
 const H4Title = ({ children, ...props }: TitleProps) => (
-  <div {...props} className="mt-8 flex h-fit w-full">
-    <div className="flex">
-      {/* <div className="mx-auto h-full w-4 bg-gradient-to-r from-text-secondary via-text-secondary to-black"></div> */}
-      <h4 className="mx-auto grow text-center font-title text-lg font-semibold text-text-primary">
-        {children}
-      </h4>
-    </div>
-  </div>
+  <h4 {...props} className="mb-2 mt-6 font-title text-lg font-semibold text-text-primary">
+    {children}
+  </h4>
 );
 
-const hr = ({ children, ...props }: TitleProps) => (
-  <div {...props} className="">
-    <div className="my-10 flex w-full gap-2">
-      <div className="flex-grow"></div>
-      <div className="h-3 w-4 bg-gradient-to-r from-text-secondary to-black"></div>
-      <div className="h-3 w-64 bg-gradient-to-r from-primary via-primary to-black"></div>
-    </div>
-  </div>
+const Divider = () => (
+  <hr className="via-white/15 to-transparent my-10 h-px border-0 bg-gradient-to-r from-primary/60" />
 );
 
 export default function BlogPostPage() {
   const { title } = useParams<string>();
-  const exists = posts.some((post) => post.url === title);
+  const post = posts.find((item) => item.url === title);
   const [state, setState] = useState<{ title?: string; text?: string; error?: boolean }>({});
 
   useEffect(() => {
-    if (!exists) return;
+    if (!post) return;
     const controller = new AbortController();
     fetch(`/posts/${title}.md`, { signal: controller.signal })
       .then((res) => {
@@ -82,9 +62,9 @@ export default function BlogPostPage() {
         if (!controller.signal.aborted) setState({ title, error: true });
       });
     return () => controller.abort();
-  }, [title, exists]);
+  }, [title, post]);
 
-  if (!exists)
+  if (!post)
     return (
       <MainLayout>
         <E404Page />
@@ -93,75 +73,96 @@ export default function BlogPostPage() {
 
   return (
     <MainLayout>
-      <div className="my-32 px-4 text-justify text-text-primary lg:mx-80 ">
-        {state.title !== title || (!state.text && !state.error) ? (
-          <p role="status">Carregando publicação…</p>
-        ) : state.error ? (
-          <p role="alert">
-            Não foi possível carregar a publicação. Recarregue a página para tentar novamente.
-          </p>
-        ) : (
-          <Markdown
-            options={{
-              disableParsingRawHTML: true,
-              forceWrapper: false,
-              overrides: {
-                article: {
-                  component: 'article',
-                  props: {
-                    className: 'flex',
+      <article className="guide-page" aria-label={post.title}>
+        <nav className="guide-crumbs mb-6" aria-label="Você está em">
+          <ol>
+            <li>
+              <Link to="/">Início</Link>
+            </li>
+            <li>
+              <Link to="/blog">Blog</Link>
+            </li>
+            <li>{post.title}</li>
+          </ol>
+        </nav>
+
+        <div className="max-w-[760px] leading-relaxed text-text-primary">
+          {state.title !== title || (!state.text && !state.error) ? (
+            <p role="status">Carregando publicação…</p>
+          ) : state.error ? (
+            <p role="alert">
+              Não foi possível carregar a publicação. Recarregue a página para tentar novamente.
+            </p>
+          ) : (
+            <Markdown
+              options={{
+                disableParsingRawHTML: true,
+                forceWrapper: false,
+                overrides: {
+                  article: {
+                    component: 'article',
+                    props: {
+                      className: 'flex flex-col',
+                    },
+                  },
+                  p: {
+                    component: 'p',
+                    props: {
+                      className: 'my-4 leading-7 text-[#dce2ee]',
+                    },
+                  },
+                  h1: {
+                    component: Title,
+                  },
+                  h2: {
+                    component: SecondaryTitle,
+                  },
+                  h3: {
+                    component: H3Title,
+                  },
+                  h4: {
+                    component: H4Title,
+                  },
+                  img: {
+                    component: 'img',
+                    props: {
+                      className: 'mx-auto my-6 rounded-xl',
+                    },
+                  },
+                  hr: {
+                    component: Divider,
+                  },
+                  a: {
+                    component: 'a',
+                    props: {
+                      className: 'text-primary hover:underline',
+                    },
+                  },
+                  pre: {
+                    component: 'pre',
+                    props: {
+                      className:
+                        'my-6 overflow-x-auto rounded-xl bg-[#0c0e14] p-4 text-left text-sm',
+                    },
+                  },
+                  code: {
+                    component: 'code',
+                    props: { className: 'font-mono text-sm' },
                   },
                 },
-                p: {
-                  component: 'p',
-                  props: {
-                    className: 'my-4',
-                  },
-                },
-                h1: {
-                  component: Title,
-                },
-                h2: {
-                  component: SecondaryTitle,
-                },
-                h3: {
-                  component: H3Title,
-                },
-                h4: {
-                  component: H4Title,
-                },
-                img: {
-                  component: 'img',
-                  props: {
-                    className: 'mx-auto',
-                  },
-                },
-                hr: {
-                  component: hr,
-                },
-                a: {
-                  component: 'a',
-                  props: {
-                    className: 'text-primary hover:text-primary-shadow',
-                  },
-                },
-                pre: {
-                  component: 'pre',
-                  props: {
-                    className: 'my-6 overflow-x-auto rounded-lg bg-[#1b202c] p-4 text-left text-sm',
-                  },
-                },
-                code: {
-                  component: 'code',
-                  props: { className: 'font-mono text-sm' },
-                },
-              },
-            }}
-          >
-            {state.text || ''}
-          </Markdown>
-        )}
-      </div>
+              }}
+            >
+              {state.text || ''}
+            </Markdown>
+          )}
+        </div>
+
+        <footer className="guide-end mt-12 max-w-[760px]">
+          <Link className="home-button" to="/blog">
+            <PiArrowLeft aria-hidden="true" /> Voltar para o blog
+          </Link>
+        </footer>
+      </article>
     </MainLayout>
   );
 }

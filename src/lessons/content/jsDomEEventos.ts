@@ -28,6 +28,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'arvore-viva:4',
           question:
             'Um script troca o preço do pastel de `8,00` para `7,00`. Você abre o arquivo `index.html` no editor. O que aparece lá?',
           options: [
@@ -137,6 +138,7 @@ console.log(itens.length);`,
         },
         {
           type: 'quiz',
+          activityId: 'selecionar-e-alterar:5',
           question: 'A página tem três botões com a classe `comprar`. O que este código faz?',
           code: "const botao = document.querySelector('.comprar');\nbotao.textContent = 'Esgotado';",
           language: 'js',
@@ -166,6 +168,7 @@ console.log(itens.length);`,
         },
         {
           type: 'fill',
+          activityId: 'selecionar-e-alterar:6',
           prompt:
             'Complete para marcar o item `#frete` como selecionado: coloque a classe `selecionado` e troque o texto para “Frete grátis”.',
           language: 'js',
@@ -340,6 +343,7 @@ formulario.addEventListener('submit', (evento) => {
         },
         {
           type: 'playground',
+          activityId: 'eventos:8',
           title: 'Um botão de curtir de verdade',
           task: 'Complete a função `curtir` para somar 1, mostrar o número no contador, colocar a classe `curtido` no botão e mudar `aria-pressed` para `"true"`. Depois, ligue a função ao clique. Teste clicando na prévia.',
           html: `<article class="cartao">
@@ -408,6 +412,7 @@ botaoCurtir.addEventListener('click', curtir);
         },
         {
           type: 'quiz',
+          activityId: 'eventos:9',
           question:
             'Uma lista tem um ouvinte de clique. A pessoa clica no terceiro item. O que `evento.target` contém dentro da função?',
           options: [
@@ -509,6 +514,7 @@ caixa.textContent = comentario;
         },
         {
           type: 'quiz',
+          activityId: 'criar-elementos:5',
           question:
             'Você vai mostrar o nome que a pessoa digitou no cadastro numa mensagem de boas-vindas. Qual linha usar?',
           options: [
@@ -532,6 +538,7 @@ caixa.textContent = comentario;
         },
         {
           type: 'playground',
+          activityId: 'criar-elementos:6',
           title: 'Busca que filtra enquanto você digita',
           task: 'Termine a função `renderizar` (criar, preencher, encaixar) para a lista aparecer. Depois faça `filtrar` mostrar só as frutas que contêm o texto digitado, sem diferenciar maiúsculas, e ligue `filtrar` ao evento `input` do campo.',
           html: `<label for="busca">Buscar fruta</label>
@@ -632,6 +639,7 @@ renderizar(frutas);
         },
         {
           type: 'order',
+          activityId: 'criar-elementos:7',
           prompt: 'Coloque em ordem os passos para mostrar um array de produtos na página.',
           items: [
             'Pegar o elemento da lista com `querySelector`',
@@ -682,6 +690,7 @@ renderizar(frutas);
         },
         {
           type: 'quiz',
+          activityId: 'erros-comuns:2',
           question: 'O console mostra este erro ao abrir a página. Qual a causa mais provável?',
           code: "const botao = document.querySelector('#enviar');\nbotao.addEventListener('click', enviar);\n\n// TypeError: Cannot read properties of null\n// (reading 'addEventListener')",
           language: 'js',
@@ -706,6 +715,7 @@ renderizar(frutas);
         },
         {
           type: 'quiz',
+          activityId: 'erros-comuns:3',
           question:
             'Ao abrir a página, aparece “Adicionado ao carrinho” no console, mas clicar no botão não faz nada. Por quê?',
           code: "function adicionar() {\n  console.log('Adicionado ao carrinho');\n}\n\nbotao.addEventListener('click', adicionar());",

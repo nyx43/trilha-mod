@@ -38,6 +38,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'sopa-de-divs:4',
           question:
             'As duas versões acima ficam idênticas na tela. Então por que a semântica importa?',
           options: [
@@ -98,6 +99,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'marcos-da-pagina:2',
           prompt: 'Num site de padaria, em que marco cada parte deveria ficar?',
           buckets: ['header', 'nav', 'main', 'footer'],
           items: [
@@ -115,6 +117,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'marcos-da-pagina:3',
           title: 'Coloque placas na sopa de divs',
           task: 'Reescreva a página trocando as `div` pelas tags certas: `header` com um `nav` para os links, `main` com o conteúdo, `footer` no fim. Transforme os textos com classe `titulo` em títulos de verdade: um único `h1` e um `h2` para a seção do cardápio.',
           html: '<div class="topo">\n  <div class="logo">Padaria Pão Quente</div>\n  <div class="menu">\n    <a href="#cardapio">Cardápio</a>\n    <a href="#contato">Contato</a>\n  </div>\n</div>\n<div class="conteudo">\n  <div class="titulo">Pão fresquinho no seu bairro</div>\n  <p>Abrimos todos os dias às 6h.</p>\n  <div class="titulo" id="cardapio">Cardápio</div>\n  <p>Pão francês, pão de queijo e bolo de milho.</p>\n</div>\n<div class="rodape" id="contato">Rua das Flores, 123. CEP 01000-000.</div>\n',
@@ -183,6 +186,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'link-ou-botao:3',
           question:
             'Numa loja online, “Ver detalhes” abre a página do produto e “Adicionar ao carrinho” coloca o item no carrinho sem sair da página. Que elementos usar?',
           options: [
@@ -230,6 +234,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'texto-alternativo:3',
           prompt: 'Para cada caso, o texto alternativo está bom ou precisa melhorar?',
           buckets: ['Está bom', 'Precisa melhorar'],
           items: [
@@ -329,6 +334,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'formularios:8',
           question: 'Qual tipo de campo usar para o CEP, como `01001-000`?',
           options: [
             {
@@ -356,6 +362,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'formularios:9',
           prompt:
             'Complete o formulário: o label do telefone ligado ao campo, um campo com teclado de telefone e uma data de nascimento obrigatória.',
           language: 'html',
@@ -376,6 +383,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'formulario-na-pratica:1',
           title: 'Formulário de inscrição acessível',
           task: 'Ligue cada campo a um `label`, troque o campo de e-mail para `type="email"` e deixe-o obrigatório com `required`, e troque a `div` de envio por um `button` de envio. Se quiser ir além, adicione a escolha de turno com `fieldset` e `legend`. Ao enviar, a prévia simula o envio.',
           html: '<form>\n  <h2>Inscrição na oficina de programação</h2>\n\n  <p>Nome completo</p>\n  <input type="text" id="nome" name="nome">\n\n  <input type="text" name="email" placeholder="Seu e-mail">\n\n  <div class="enviar">Enviar</div>\n</form>\n',

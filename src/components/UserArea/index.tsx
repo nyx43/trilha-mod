@@ -4,74 +4,114 @@ import { useEffect, useState, useCallback } from 'react';
 import { FiEdit, FiShare2, FiTrash2 } from 'react-icons/fi';
 import { Grid } from 'react-loader-spinner';
 import { Link, useNavigate } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import { RoadmapModel } from '../../entity/RoadmapModel';
 import IconButton from '../../components/IconButton';
 import { useToast } from '../../hooks/useToast';
-
-const cookies = new Cookies();
+import { getApiAuthHeader, logoutSession } from '../../auth/apiSession';
+import { isOfflineApp } from '../../runtime/mode';
+import { deleteLocalRoadmap, listLocalRoadmaps } from '../../offline/localStore';
+import { exportTextFile } from '../../offline/backup';
 
 export default function UserArea() {
-  const { isAuthenticated, user, isLoading, logout } = useAuth0();
+  const offline = isOfflineApp();
+  const { isAuthenticated, user, isLoading, logout, getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
-  const [isLoadingRoadmaps, setLoadingRoadmaps] = useState(true);
-  const [roadmaps, setRoadmaps] = useState<RoadmapModel[]>();
+  const [isLoadingRoadmaps, setLoadingRoadmaps] = useState(!offline);
+  const [roadmaps, setRoadmaps] = useState<RoadmapModel[] | undefined>(() =>
+    offline ? listLocalRoadmaps() : undefined,
+  );
   const { addToast } = useToast();
 
   function handleCreateNew() {
     navigate('/new-roadmap');
   }
   const getRoadmaps = useCallback(async () => {
+    if (offline) {
+      setRoadmaps(listLocalRoadmaps());
+      setLoadingRoadmaps(false);
+      return;
+    }
     setLoadingRoadmaps(true);
-    if (cookies.get('api_token')) {
-      try {
-        const response = await axios.get(
-          import.meta.env.VITE_API_URL + `/roadmap/${user?.email}` || '',
-          {
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: cookies.get('api_token'),
-            },
+    try {
+      const authorization = await getApiAuthHeader(isAuthenticated, getAccessTokenSilently);
+      if (!authorization) {
+        setRoadmaps([]);
+        return;
+      }
+      const response = await axios.get(
+        (import.meta.env.VITE_API_URL || '') + `/roadmap/${user?.email}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: authorization,
           },
-        );
+        },
+      );
 
-        setRoadmaps(response.data);
-      } catch (e) {
-        if (e instanceof AxiosError) {
-          if (e.response?.status === 403) {
-            logout();
-          }
+      setRoadmaps(response.data);
+    } catch (e) {
+      if (e instanceof AxiosError) {
+        if (e.response?.status === 403) {
+          logoutSession(logout);
         }
       }
-    } else {
-      logout();
+    } finally {
+      setLoadingRoadmaps(false);
     }
-    setLoadingRoadmaps(false);
-  }, [logout, user?.nickname]);
+  }, [getAccessTokenSilently, isAuthenticated, logout, offline, user?.email]);
 
   useEffect(() => {
-    if (user) {
+    if (offline || (isAuthenticated && user)) {
       getRoadmaps();
     }
-  }, [isLoading, getRoadmaps, user]);
+  }, [offline, isAuthenticated, isLoading, getRoadmaps, user]);
 
   async function handleDeleteRoadmap(roadmapId: string) {
     const answer = window.confirm('Tem certeza que quer deletar?');
     if (answer) {
+      if (offline) {
+        deleteLocalRoadmap(roadmapId);
+        setRoadmaps(listLocalRoadmaps());
+        return;
+      }
       setLoadingRoadmaps(true);
       setRoadmaps([]);
+      const authorization = await getApiAuthHeader(isAuthenticated, getAccessTokenSilently);
+      if (!authorization) {
+        setLoadingRoadmaps(false);
+        return;
+      }
       await axios.delete(import.meta.env.VITE_API_URL + `/roadmap/${roadmapId}` || '', {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: cookies.get('api_token'),
+          Authorization: authorization,
         },
       });
       getRoadmaps();
     }
   }
 
-  function handleCopyToClipboard(roadmapId: string) {
-    navigator.clipboard.writeText(`https://trilha.info/roadmap/view/${roadmapId}`);
+  async function handleCopyToClipboard(roadmap: RoadmapModel) {
+    if (!roadmap.id) return;
+    if (offline) {
+      const filename = `trilha-${(roadmap.slug || roadmap.id).replace(
+        /[^a-zA-Z0-9_-]/g,
+        '-',
+      )}.json`;
+      await exportTextFile(
+        filename,
+        JSON.stringify(roadmap, null, 2),
+        'application/json;charset=utf-8',
+      );
+      addToast({
+        title: 'Exportado!',
+        message: 'A trilha pessoal foi salva em JSON.',
+        status: 'info',
+        position: 'bottom',
+      });
+      return;
+    }
+    navigator.clipboard.writeText(`${window.location.origin}/roadmap/view/${roadmap.id}`);
 
     addToast({
       title: 'Feito!',
@@ -81,7 +121,7 @@ export default function UserArea() {
     });
   }
 
-  if (!isAuthenticated) return null;
+  if (!offline && !isAuthenticated) return null;
 
   return (
     <section className="mx-0 mt-10 flex w-full flex-col items-stretch justify-center bg-[#403C3B] px-10 py-10 shadow-inner xl:px-64">
@@ -124,9 +164,8 @@ export default function UserArea() {
                 <div className="group relative flex h-fit w-fit">
                   <IconButton
                     className="z-20"
-                    aria-label="Compartilhar Roadmap"
-                    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-                    onClick={() => handleCopyToClipboard(roadmap.id!)}
+                    aria-label={offline ? 'Exportar Roadmap' : 'Compartilhar Roadmap'}
+                    onClick={() => handleCopyToClipboard(roadmap)}
                     icon={<FiShare2 />}
                   />
                   <div className="absolute -bottom-1 -right-1 left-1 top-1 z-10 rounded-sm bg-red group-hover:bg-red"></div>

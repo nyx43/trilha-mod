@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { PiArrowRight } from 'react-icons/pi';
 import { DevFlip } from '../../devmode/DevFlip';
 import { latestSnapshot } from '../../learning/progressSnapshot';
+import { LESSON_COUNT } from '../../lessons/counts';
+import { readLessonPlan } from '../../recommender/savedLessonPlan';
 import { roadmapTitles } from '../../roadmaps/titles';
 import { mainRoadmapsData } from '../MainRoadmaps/mainRoadmapsData';
 
@@ -60,6 +62,9 @@ function HeroTrail() {
 
 export default function Hero() {
   const [resume] = useState(latestSnapshot);
+  const [savedPlan] = useState(readLessonPlan);
+  const hasResume = Boolean(resume && roadmapTitles[resume[0]]);
+  const hasPlan = !hasResume && Boolean(savedPlan);
   return (
     <DevFlip id="hero" data={{ resume: resume ?? null, trails: mainRoadmapsData.length }}>
       <section className="home-hero" aria-labelledby="home-title">
@@ -83,17 +88,25 @@ export default function Hero() {
             sabe onde está, o que vem depois e o que vai conseguir entregar.
           </p>
           <div className="home-actions">
-            {resume && roadmapTitles[resume[0]] && (
+            {hasResume && resume && (
               <Link className="home-button home-button-primary" to={`/roadmap/${resume[0]}`}>
                 Continuar {roadmapTitles[resume[0]]}
                 <span className="home-button-badge">{resume[1].percent}%</span>
               </Link>
             )}
-            <a className={`home-button ${resume ? '' : 'home-button-primary'}`} href="#trilhas">
+            {hasPlan && (
+              <Link className="home-button home-button-primary" to="/aulas/o-que-estudar#meu-plano">
+                Retomar meu plano
+              </Link>
+            )}
+            <a
+              className={`home-button ${hasResume || hasPlan ? '' : 'home-button-primary'}`}
+              href="#trilhas"
+            >
               Escolher uma trilha <PiArrowRight aria-hidden="true" />
             </a>
             <Link className="home-button" to="/aulas">
-              Aulas de Frontend do zero
+              Explorar as aulas
             </Link>
           </div>
           <dl className="home-facts">
@@ -102,12 +115,12 @@ export default function Hero() {
               <dd>{mainRoadmapsData.length}</dd>
             </div>
             <div>
-              <dt>para começar</dt>
-              <dd>Sem cadastro</dd>
+              <dt>aulas interativas</dt>
+              <dd>{LESSON_COUNT}</dd>
             </div>
             <div>
-              <dt>seu progresso</dt>
-              <dd>No navegador</dd>
+              <dt>no navegador</dt>
+              <dd>Sem cadastro</dd>
             </div>
           </dl>
         </div>

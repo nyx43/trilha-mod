@@ -160,7 +160,21 @@ export type LessonVisual =
       tabs: Array<{ label: string; language: string; code: string }>;
     };
 
-export type LessonBlock = GuideBlock | LessonActivity | LessonVisual;
+export type LessonBlock = (GuideBlock | LessonActivity | LessonVisual) & {
+  /** Permanent within the lesson for blocks that record an attempt. */
+  activityId?: string;
+};
+
+export const scoredBlockTypes = new Set<LessonBlock['type']>([
+  'quiz',
+  'order',
+  'classify',
+  'fill',
+  'playground',
+  'terminal',
+  'sql',
+  'python',
+]);
 
 export interface LessonSection {
   id: string;
@@ -176,6 +190,8 @@ export interface Flashcard {
 }
 
 export interface LessonContent {
+  /** Bump when publishing a revision. Initial content defaults to revision 1. */
+  revision?: number;
   /** Opening paragraph that answers "por que eu deveria me importar?". */
   hook: string;
   sections: LessonSection[];

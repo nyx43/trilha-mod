@@ -94,11 +94,12 @@
   display: inline-flex;
   align-items: center;
   min-height: 40px;
-  padding: 0 14px;
+  padding: 0 12px;
   border-radius: 10px;
   color: var(--site-muted);
   font-size: 0.9375rem;
   font-weight: 500;
+  white-space: nowrap;
   transition: color 160ms ease, background-color 160ms ease;
 }
 .site-nav a:hover,
@@ -806,8 +807,21 @@
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr));
   gap: 12px;
 }
-.guide-tiles > li {
+.study-modes-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+}
+.guide-tiles > li,
+.study-modes-grid > li {
   display: flex;
+}
+.guide-tile[data-accent='ai'] .guide-tile-icon {
+  background: rgb(110 231 200 / 0.14);
+  color: var(--site-ai);
+}
+.guide-tile[data-accent='ai'] .guide-tile-foot svg {
+  color: var(--site-ai);
 }
 .guide-tile {
   display: flex;
@@ -1245,6 +1259,19 @@
   }
 }
 
+@media (max-width: 1099px) and (min-width: 768px) {
+  .site-header-inner {
+    gap: 16px;
+    padding: 0 24px;
+  }
+  .site-logo img {
+    width: 108px;
+  }
+  .site-nav a {
+    padding: 0 9px;
+    font-size: 0.875rem;
+  }
+}
 @media (max-width: 1023px) {
   .open-card {
     grid-template-columns: minmax(0, 1fr);
@@ -1267,6 +1294,9 @@
     max-width: 420px;
   }
   .roadmap-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .study-modes-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -1311,7 +1341,8 @@
     padding-bottom: 48px;
   }
   .roadmap-grid,
-  .roadmap-grid-compact {
+  .roadmap-grid-compact,
+  .study-modes-grid {
     grid-template-columns: minmax(0, 1fr);
   }
   .open-card {
@@ -1358,4 +1389,212 @@
   margin: 0.75rem 0 0;
   color: var(--site-muted, #c5b9c1);
   line-height: 1.7;
+}
+
+/* Offline personal space, backup, audio packs & external-link badges */
+.site-content-version {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.78rem;
+  color: var(--site-muted, #9aa4b2);
+}
+
+.offline-space {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.offline-card {
+  background: var(--site-surface, #171b24);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 20px;
+  color: var(--site-text, #f4f6fa);
+}
+
+.offline-card h1,
+.offline-card h2 {
+  font-family: var(--site-display);
+  margin: 6px 0 10px;
+}
+
+.offline-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.offline-profile-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.92rem;
+}
+
+.offline-profile-form input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(16, 18, 24, 0.8);
+  color: var(--site-text, #f4f6fa);
+  font-size: 1rem;
+}
+
+.offline-feedback-ok {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(52, 211, 153, 0.14);
+  border: 1px solid rgba(52, 211, 153, 0.45);
+  color: #a7f3d0;
+  font-size: 0.92rem;
+}
+
+.offline-feedback-error {
+  margin-top: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(248, 113, 113, 0.14);
+  border: 1px solid rgba(248, 113, 113, 0.45);
+  color: #fecaca;
+  font-size: 0.92rem;
+}
+
+.offline-drafts-list {
+  list-style: none;
+  padding: 0;
+  margin: 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.offline-drafts-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.offline-drafts-list p {
+  margin: 2px 0 0;
+  font-size: 0.84rem;
+  opacity: 0.82;
+  word-break: break-word;
+}
+
+html[data-offline-app='true'] main a[target='_blank']:not(.site-icon-link)::after {
+  content: ' · externo (internet)';
+  font-size: 0.78em;
+  opacity: 0.78;
+  font-weight: 500;
+}
+
+/* Aba Estudando, Salvar Aulas, Favoritar Matérias e Ferramentas do Cabeçalho de Aula */
+.lesson-header-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 14px 0 6px;
+}
+
+.study-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 8px;
+}
+
+.study-section {
+  margin-top: 24px;
+}
+
+.study-item-row {
+  display: flex;
+  align-items: stretch;
+  gap: 10px;
+}
+
+.study-item-row > a {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.study-icon-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.04);
+  color: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.study-icon-action[aria-pressed='true'] {
+  border-color: #ff8ab5;
+  background: rgba(255, 138, 181, 0.14);
+  color: #ffb8d2;
+}
+
+.study-favorites-grid {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 14px;
+}
+
+.study-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.study-card-head h3 {
+  margin: 0;
+}
+
+.course-card-wrap {
+  position: relative;
+}
+
+.course-favorite-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(16, 18, 24, 0.82);
+  color: #f4f6fa;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.course-favorite-btn[aria-pressed='true'] {
+  border-color: #facc15;
+  color: #fde047;
+  background: rgba(250, 204, 21, 0.14);
 }

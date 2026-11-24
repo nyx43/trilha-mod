@@ -252,6 +252,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'o-que-e-e2e:5',
           question:
             'Sua equipe tem tempo para automatizar só um teste de ponta a ponta no app de delivery. Qual escolher?',
           options: [
@@ -346,6 +347,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'anatomia-do-teste:3',
           prompt:
             'Complete o teste de login: abrir a página, preencher o e-mail, clicar em Entrar e conferir a saudação.',
           language: 'ts',
@@ -402,6 +404,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'localizadores:3',
           prompt: 'Ordene os localizadores do mais recomendado ao último recurso.',
           items: [
             "`getByRole('button', { name: 'Finalizar compra' })`",
@@ -415,6 +418,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'localizadores:4',
           question:
             "O teste falhou com: `strict mode violation: getByRole('button', { name: 'Adicionar' }) resolved to 3 elements`. O que isso quer dizer?",
           options: [
@@ -459,6 +463,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'auto-espera:3',
           title: 'Conserte um teste E2E instável',
           task: 'A página da padaria é o site; o código abaixo traz um mini Playwright e dois testes. O primeiro usa classe CSS e uma espera fixa de 300 ms, mas o servidor leva 700 ms: ele falha. Reescreva-o com `getByLabel`, `getByRole` e `expect(...).toHaveText(...)`, e escreva o segundo teste. Não apague as linhas que começam com `// =====`. Leia o console: `✓` passou, `✗` falhou.',
           html,
@@ -582,6 +587,7 @@ test('vê o histórico de pedidos', async ({ paginaLogada }) => {
         },
         {
           type: 'quiz',
+          activityId: 'fixtures-e-isolamento:4',
           question:
             'O teste “cancela pedido” só passa se “faz pedido” rodar antes dele, porque usa o pedido criado ali. Rodando sozinho, falha. O que fazer?',
           options: [
@@ -638,6 +644,7 @@ test('vê o histórico de pedidos', async ({ paginaLogada }) => {
         },
         {
           type: 'terminal',
+          activityId: 'gravar-rodar-investigar:4',
           title: 'Rode a suíte e investigue a falha',
           task: 'Você está no projeto da loja. Rode os testes, leia com calma a mensagem de erro e use as ferramentas de investigação.',
           prompt: '~/loja$',
@@ -715,6 +722,7 @@ test('vê o histórico de pedidos', async ({ paginaLogada }) => {
         },
         {
           type: 'quiz',
+          activityId: 'gravar-rodar-investigar:5',
           question:
             'Pelo trace, a API agora recusa CEP com hífen (`422`), e o site mostra “CEP inválido” para `01310-100`. Na semana passada esse mesmo teste passava. O que você faz?',
           options: [
@@ -742,6 +750,7 @@ test('vê o histórico de pedidos', async ({ paginaLogada }) => {
         },
         {
           type: 'classify',
+          activityId: 'gravar-rodar-investigar:7',
           prompt: 'Cada falha abaixo é causa típica de teste instável ou sinal de bug do produto?',
           buckets: ['Teste instável', 'Bug do produto'],
           items: [

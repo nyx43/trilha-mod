@@ -48,16 +48,6 @@ export function NarrationPlayer() {
     return null;
   }
 
-  if (narration.manifestStatus === 'loading' || narration.manifestStatus === 'idle') {
-    return (
-      <section className="narration-bar" aria-label="Narração da aula">
-        <p className="narration-status" role="status" aria-live="polite">
-          Carregando narração sincronizada…
-        </p>
-      </section>
-    );
-  }
-
   if (narration.manifestStatus === 'error') {
     return (
       <section className="narration-bar narration-bar--error" aria-label="Narração da aula">
@@ -67,6 +57,8 @@ export function NarrationPlayer() {
       </section>
     );
   }
+
+  const isManifestLoading = narration.manifestStatus === 'loading';
 
   const {
     status,
@@ -93,7 +85,9 @@ export function NarrationPlayer() {
   const isPausedByUser = status === 'paused' && pauseReason === 'user';
   const isPausedByActivity = status === 'paused' && pauseReason === 'activity';
 
-  const queuePrimaryLabel = isPausedByActivity
+  const queuePrimaryLabel = isManifestLoading
+    ? 'Carregando narração…'
+    : isPausedByActivity
     ? 'Retomar leitura'
     : isPlaying
     ? 'Pausar leitura'
@@ -330,7 +324,13 @@ export function NarrationBlockButton({
   label = 'Ouvir parágrafo',
 }: NarrationBlockButtonProps) {
   const narration = useNarrationOptional();
-  if (!narration || !clipId || !narration.enabled || narration.manifestStatus !== 'ready') {
+  if (
+    !narration ||
+    !clipId ||
+    !narration.enabled ||
+    narration.manifestStatus === 'missing' ||
+    narration.manifestStatus === 'error'
+  ) {
     return null;
   }
 

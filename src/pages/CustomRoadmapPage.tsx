@@ -1,14 +1,15 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import axios from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { Grid } from 'react-loader-spinner';
 import { Link, useParams } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import MainLayout from '../components/layouts/MainLayout';
 import Roadmap from '../components/Roadmap';
 import useDocumentTitle from '../components/useDocumentTitle';
 import { RoadmapModel } from '../entity/RoadmapModel';
-
-const cookies = new Cookies();
+import { clearLegacyApiTokenCookie, getApiAuthHeader } from '../auth/apiSession';
+import { isOfflineApp } from '../runtime/mode';
+import { findLocalRoadmap } from '../offline/localStore';
 
 type CustomRoadmapStatus = 'loading' | 'ready' | 'error';
 
@@ -31,6 +32,7 @@ function isValidRoadmapPayload(data: unknown): data is Partial<RoadmapModel> {
 
 export default function CustomRoadmapPage() {
   const { roadmapId } = useParams<{ roadmapId?: string }>();
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const [attempt, setAttempt] = useState(0);
   const requestSeqRef = useRef(0);
   const [state, setState] = useState<CustomRoadmapState>(() => ({
@@ -47,20 +49,37 @@ export default function CustomRoadmapPage() {
       return;
     }
 
+    if (isOfflineApp()) {
+      const localFound = findLocalRoadmap(roadmapId);
+      setState(
+        localFound
+          ? { requestedId: roadmapId, status: 'ready', roadmap: localFound }
+          : { requestedId: roadmapId, status: 'error', roadmap: undefined },
+      );
+      return;
+    }
+
     const controller = new AbortController();
     setState({ requestedId: roadmapId, status: 'loading', roadmap: undefined });
 
     async function getRoadmap() {
       try {
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
+        if (isAuthenticated) {
+          const authHeader = await getApiAuthHeader(true, getAccessTokenSilently);
+          if (controller.signal.aborted || requestSeqRef.current !== requestId) return;
+          if (authHeader) headers.Authorization = authHeader;
+        } else {
+          clearLegacyApiTokenCookie();
+        }
         const response = await axios.get<RoadmapModel>(
           (import.meta.env.VITE_PUBLIC_URL || '') +
             `/roadmap/${encodeURIComponent(roadmapId || '')}`,
           {
             signal: controller.signal,
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: cookies.get('api_token'),
-            },
+            headers,
           },
         );
         if (controller.signal.aborted || requestSeqRef.current !== requestId) return;
@@ -88,7 +107,7 @@ export default function CustomRoadmapPage() {
     return () => {
       controller.abort();
     };
-  }, [roadmapId, attempt]);
+  }, [roadmapId, attempt, isAuthenticated, getAccessTokenSilently]);
 
   const matchesCurrent = state.requestedId === roadmapId;
   const isLoadingRoadmap = Boolean(roadmapId) && (!matchesCurrent || state.status === 'loading');
@@ -146,7 +165,7 @@ export default function CustomRoadmapPage() {
           data={activeRoadmap.getLevels()}
           title={activeRoadmap.title ?? ''}
           name={activeRoadmap.id ?? ''}
-          roadmapPath={activeRoadmap.slug ?? ''}
+          roadmapPath={activeRoadmap.slug || activeRoadmap.id || roadmapId || ''}
         />
       )}
     </MainLayout>

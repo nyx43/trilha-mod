@@ -35,6 +35,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'tres-sinais:3',
           prompt: 'Que tipo de sinal é cada informação?',
           buckets: ['Métrica', 'Log', 'Trace'],
           items: [
@@ -113,6 +114,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'logs-estruturados:3',
           title: 'Contando erros a partir dos logs',
           task: 'Cada linha é um log em JSON. Conte quantas requisições tiveram erro de servidor (status 500 ou mais), calcule a `taxa` de erro (erros dividido pelo total) e preencha `erros_por_rota` com quantos erros cada rota teve.',
           code: 'import json\n\nlinhas = [\n    \'{"nivel": "info", "rota": "/pedidos", "status": 200, "ms": 120}\',\n    \'{"nivel": "info", "rota": "/pedidos", "status": 201, "ms": 180}\',\n    \'{"nivel": "error", "rota": "/pagamento", "status": 502, "ms": 3000}\',\n    \'{"nivel": "info", "rota": "/cardapio", "status": 200, "ms": 45}\',\n    \'{"nivel": "error", "rota": "/pagamento", "status": 504, "ms": 5000}\',\n    \'{"nivel": "warn", "rota": "/pedidos", "status": 404, "ms": 30}\',\n    \'{"nivel": "info", "rota": "/cardapio", "status": 200, "ms": 50}\',\n    \'{"nivel": "error", "rota": "/pagamento", "status": 500, "ms": 900}\',\n]\n\nerros = 0\nerros_por_rota = {}\n\nfor linha in linhas:\n    evento = json.loads(linha)\n    # se evento["status"] for 500 ou mais:\n    #   some 1 em erros e 1 na rota do evento\n    pass\n\ntaxa = 0\n\nprint(f"Erros 5xx: {erros} de {len(linhas)} ({taxa:.1%})")\nprint("Por rota:", erros_por_rota)\n',
@@ -175,6 +177,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'sinais-de-ouro:3',
           question:
             'O painel mostra latência média de 180 ms, mas o p99 está em 6 segundos. Como você interpreta?',
           options: [
@@ -278,6 +281,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'slo-e-orcamento:4',
           title: 'Calculando o orçamento de erros do mês',
           task: 'O checkout recebeu 1.200.000 requisições no mês e 1.500 falharam. A meta é 99,9%. Calcule o `sli`, o `orcamento` (quantas falhas a meta permite), o `gasto` (que porcentagem do orçamento já foi usada) e diga em `dentro_do_slo` se a meta foi cumprida.',
           code: 'total = 1_200_000\nfalhas = 1_500\nslo = 0.999\n\nsli = 0             # fração de requisições boas\norcamento = 0       # total x (1 - slo)\ngasto = 0           # falhas / orcamento x 100\ndentro_do_slo = True\n\nprint(f"SLI: {sli:.3%}")\nprint(f"Orçamento: {orcamento:.0f} falhas | gasto: {gasto:.0f}%")\nprint("Dentro do SLO?", dentro_do_slo)\n',
@@ -325,6 +329,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'alertas:2',
           prompt: 'Este alerta deveria chamar alguém de madrugada?',
           buckets: [
             'Bom alerta: sintoma e acionável',
@@ -362,6 +367,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'incidentes:1',
           title: 'Diagnosticando uma API fora do ar',
           task: 'O alerta disparou: a API da loja responde erro. Ela roda com Docker Compose num servidor. Investigue e restaure o serviço.',
           prompt: 'voce@servidor:~/loja$',
@@ -426,6 +432,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'incidentes:3',
           prompt: 'Coloque em ordem as etapas de resposta a um incidente.',
           items: [
             'Um alerta de sintoma dispara',
@@ -449,6 +456,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'incidentes:6',
           question: 'No relato de um incidente, qual destas frases segue a cultura sem culpados?',
           options: [
             {

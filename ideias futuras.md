@@ -11,6 +11,23 @@ Manter uma tarefa principal por vez em `proxima ordem.md`. Pequenos ajustes inde
 - Antes de trabalhar simultaneamente com outro agente, delimitar os arquivos de cada um. Se houver arquivos compartilhados, dependência da tarefa principal ou necessidade de uma decisão do usuário, fazer o ajuste em sequência ou deixá-lo pendente.
 - Registrar ajustes concluídos e verificações no relatório da rodada. As ideias ainda não escolhidas permanecem aqui.
 
+## Ordem proposta para o Trilha Mod
+
+1. **Estabilizar a experiência de estudo.** Concluir a rodada registrada na próxima ordem. Conferir o terminal multilinha, a retomada da aula e a narração com Santa e Dora, incluindo exercícios, cartões e diagramas. Revisar a expectativa de navegação que ainda aponta para a aula anterior à inclusão de “Onde o dado mora”. Medir o peso dos áudios a publicar e automatizar a detecção de clipes ausentes ou desatualizados. Configurar checagens de tipos, testes e build no GitHub. Se o tutor for disponibilizado no site hospedado, implementar e testar a rota de produção. O estudo deve funcionar com o tutor desligado.
+2. **Integrar o recomendador ao planejador.** Acrescentar “Montar meu plano” à tela “O que preciso estudar?”. Deixar o aluno revisar as sugestões, escolher itens, salvar o plano localmente e retomar na seção exata. Cada item deve apontar para uma prática e um critério de conferência. Usar o enunciado de API Node e frontend com Tailwind como caso de aceite, com React como opção e um checklist dos dois repositórios. Manter o enunciado fora da URL por padrão.
+3. **Aprofundar Web e avaliar uma entrega completa.** Usar “Onde o dado mora” como referência para combinar previsão, explicação, prática e revisão. Verificar se um iniciante consegue ir do primeiro arquivo até o cadastro com atualização da lista. Aproveitar os cenários de API indisponível, CORS e lista desatualizada do laboratório. Usar a missão final como primeiro projeto avaliado, com evidências de funcionamento e rubrica para decisões abertas. Usar o piloto para orientar os próximos desafios, a simulação de freelancer e a progressão por habilidades.
+
+As configurações de leitura podem avançar em paralelo como ajuste independente, começando por tamanho do texto, largura da coluna e tema. Planejar exportação e restauração do progresso em uma rodada própria para facilitar a troca de navegador ou computador.
+
+## Piloto de narração mais leve com Opus
+
+**Objetivo.** Medir a economia em uma aula inteira e verificar se a fala continua clara e acompanhada pelo destaque das palavras. Usar “Integração entre front e API”, que já tem Santa e Dora e aparece tanto como aula avulsa quanto no Percurso Web.
+
+1. **Preparar a comparação.** Medir o total dos MP3s atuais, por voz. Gerar uma cópia piloto em Opus mono a 24 kbps, preferencialmente a partir do áudio original gerado pelo Kokoro. Manter os arquivos do piloto separados para poder alternar entre as versões. Se houver perda perceptível de clareza, repetir a comparação a 32 kbps.
+2. **Validar a sincronização.** Conferir se cada clipe tem as duas vozes e se consegue tocar até o fim. Medir a duração decodificada e checar se os tempos do manifesto correspondem ao áudio novo. No navegador, testar a primeira e a última frase de trechos curtos e longos, pausa, retomada, mudança de voz e reprodução a 1× e 1,35×.
+3. **Conferir o uso real.** Fazer a comparação de escuta com Santa e Dora, incluindo siglas, termos de código e falas rápidas. Testar a aula avulsa e o percurso, em desktop e celular. No painel Rede, conferir que abrir a aula busca o manifesto e que a reprodução carrega os clipes da voz escolhida sob demanda. Confirmar que o áudio para ao sair.
+4. **Decidir pela medição.** Usar uma meta inicial de pelo menos 50% de economia no total dos áudios da aula, com fala clara nas duas vozes e destaque sem atraso perceptível. Registrar tamanho por voz, navegadores testados e pontos que precisam de ajuste. Fazer a conversão do catálogo em uma rodada própria após revisar o piloto. Tratar download offline por aula como evolução separada.
+
 ## Estudo por objetivo e personalização
 
 - **O que preciso estudar?** *(MVP Web entregue em `/aulas/o-que-estudar`; ver [relatório](docs/RELATORIO_RECOMENDADOR.md))* — Já aceita enunciados em texto corrido ou lista, associa trechos às aulas e seções do catálogo por IDs, títulos, resumos, objetivos e sinônimos em português (sem IA e sem chave), diferencia pedido no enunciado de sugestão de apoio, aponta correspondência fraca e sinaliza trechos sem cobertura. **Próximos passos:** aproveitar a prévia do planejador, deixar o aluno escolher o que incluir e avaliar uma IA opcional no futuro para interpretar textos mais variados usando apenas o catálogo disponível.

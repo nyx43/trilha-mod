@@ -89,6 +89,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'spa-e-rotas:4',
           question:
             'Numa SPA, você está em `/produtos/2` e aperta F5. A página mostra “Cannot GET /produtos/2” só no servidor de produção. O que provavelmente aconteceu?',
           options: [
@@ -122,6 +123,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'react-router:1',
           title: 'Instalando o roteador num projeto Vite',
           task: 'Você está na pasta de um projeto React criado com Vite. Instale o roteador e suba o servidor de desenvolvimento.',
           prompt: '~/catalogo$',
@@ -226,6 +228,7 @@ function DetalheProduto() {
         },
         {
           type: 'quiz',
+          activityId: 'react-router:4',
           question:
             'Dentro da SPA, um colega usou `<a href="/produtos/2">` em vez de `<Link to="/produtos/2">`. O link funciona, mas o que se perde?',
           options: [
@@ -249,6 +252,7 @@ function DetalheProduto() {
         },
         {
           type: 'fill',
+          activityId: 'react-router:5',
           prompt: 'Complete a rota de detalhe de pedido e o componente que lê o número do pedido.',
           language: 'jsx',
           template: `<Route path="/pedidos/[[:numero]]" element={<Pedido />} />
@@ -272,6 +276,7 @@ function Pedido() {
         },
         {
           type: 'playground',
+          activityId: 'mini-roteador:1',
           title: 'Catálogo com rotas',
           framework: 'react',
           task: 'Complete o roteador. Para caminhos como `/produtos/2`, mostre `DetalheProduto` com um `<h1>` com o nome, o preço e um `Link` **Voltar** para `/`. Para qualquer outro caminho, inclusive um id que não existe, mostre **Página não encontrada**. Dica: `caminho.match(/^\\/produtos\\/(\\d+)$/)` devolve o id na posição 1.',
@@ -514,6 +519,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />);`,
         },
         {
           type: 'playground',
+          activityId: 'dados-no-efeito:3',
           title: 'Pedidos por cliente',
           framework: 'react',
           task: 'Crie os estados `carregando` e `erro`. No efeito, ligue o carregando antes de buscar, trate a falha com `.catch` e desligue o carregando no `.finally`. Na tela, mostre **Carregando...** durante a busca; o erro num elemento com `role="alert"`, sem a lista; e **Nenhum pedido ainda.** quando a lista vier vazia.',
@@ -661,6 +667,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Pedidos />);`,
         },
         {
           type: 'order',
+          activityId: 'dados-no-efeito:4',
           prompt:
             'A pessoa abre `/produtos/7`. Coloque em ordem o que acontece num componente bem-feito.',
           items: [
@@ -734,6 +741,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Pedidos />);`,
         },
         {
           type: 'playground',
+          activityId: 'corrida-e-cancelamento:3',
           title: 'Ignorar a resposta atrasada',
           framework: 'react',
           task: 'Clique em **Ana** e logo depois em **Bruno**: a tela termina mostrando Ana. Dentro do efeito, crie `let ignorar = false`, só chame `setPerfil` se `ignorar` for falso e devolva uma limpeza que faz `ignorar = true`.',
@@ -877,6 +885,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(<Perfil />);`,
         },
         {
           type: 'quiz',
+          activityId: 'corrida-e-cancelamento:5',
           question:
             'Por que o `ignorar = true` dentro da limpeza resolve a corrida, se a busca antiga continua acontecendo?',
           options: [
@@ -949,6 +958,7 @@ const { data: dados, isPending: carregando, error: erro } = useQuery({
         },
         {
           type: 'classify',
+          activityId: 'bibliotecas-de-dados:3',
           prompt: 'Quem resolve cada necessidade, com menos código?',
           buckets: ['React Router', 'Efeito com fetch basta', 'Biblioteca de dados'],
           items: [

@@ -33,6 +33,15 @@ export function saveProgressSnapshot(id: string, summary: Omit<ProgressSnapshot,
 
 export function latestSnapshot(): [string, ProgressSnapshot] | undefined {
   return Object.entries(readProgressSnapshots())
-    .filter(([, snapshot]) => snapshot.done > 0 && snapshot.percent < 100)
+    .filter(
+      ([, snapshot]) =>
+        !!snapshot &&
+        typeof snapshot === 'object' &&
+        typeof snapshot.done === 'number' &&
+        typeof snapshot.percent === 'number' &&
+        typeof snapshot.visitedAt === 'string' &&
+        snapshot.done > 0 &&
+        snapshot.percent < 100,
+    )
     .sort(([, a], [, b]) => b.visitedAt.localeCompare(a.visitedAt))[0];
 }

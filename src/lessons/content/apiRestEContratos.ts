@@ -40,6 +40,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'recursos-e-metodos:5',
           prompt: 'Complete o método de cada rota da API de despesas.',
           language: 'http',
           template:
@@ -49,6 +50,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'recursos-e-metodos:6',
           question: 'Qual destas rotas segue melhor o estilo REST para apagar a despesa 42?',
           options: [
             {
@@ -138,6 +140,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'json-e-status:4',
           prompt: 'Que família de status a API deveria devolver em cada situação?',
           buckets: ['2xx: deu certo', '4xx: problema no pedido', '5xx: falha no servidor'],
           items: [
@@ -154,6 +157,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'json-e-status:5',
           title: 'Conversando com a API pelo terminal',
           task: 'O `curl` é um programa que faz requisições HTTP pelo terminal, sem navegador. Use-o para conversar com uma API de despesas que está rodando no seu computador, na porta 8000.',
           prompt: '~/despesas$',
@@ -305,6 +309,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'idempotencia:4',
           question:
             'O app envia `DELETE /despesas/7`, a conexão cai e ele repete o pedido. O que deve acontecer?',
           options: [
@@ -362,6 +367,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'paginacao:4',
           title: 'Implemente a paginação',
           task: 'A função `listar` recebe a página (começando em 1) e quantos itens por página. Hoje ela sempre devolve os 10 primeiros. Calcule `inicio` e `fim` a partir de `pagina` e `por_pagina`, e limite `por_pagina` a no máximo 50 antes do cálculo. Dica: a página 2 com 10 por página começa no índice 10.',
           code: "despesas = [{'id': n, 'descricao': f'Despesa {n}'} for n in range(1, 24)]  # 23 despesas\n\n\ndef listar(pagina=1, por_pagina=10):\n    inicio = 0\n    fim = 10\n    return {\n        'itens': despesas[inicio:fim],\n        'pagina': pagina,\n        'por_pagina': por_pagina,\n        'total': len(despesas),\n    }\n\n\nresposta = listar(pagina=3, por_pagina=10)\nprint([d['id'] for d in resposta['itens']])",
@@ -418,6 +424,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'validacao-e-erros:4',
           title: 'Escreva a validação da rota POST /despesas',
           task: 'A função `criar_despesa` recebe a requisição como um dicionário e devolve a resposta como outro dicionário, como um framework faria. Hoje ela aceita qualquer coisa. Adicione à lista `erros` um item `{"campo": ..., "mensagem": ...}` quando: a `descricao` não for um texto com algo além de espaços; o `valor` não for um número (`int` ou `float`) maior que zero; a `categoria` não estiver em `CATEGORIAS`. Com qualquer erro, a função já devolve 400 e não salva nada.',
           code: "CATEGORIAS = {'mercado', 'transporte', 'moradia', 'lazer', 'saude'}\ndespesas = []\n\n\ndef criar_despesa(requisicao):\n    corpo = requisicao.get('corpo') or {}\n    descricao = corpo.get('descricao')\n    valor = corpo.get('valor')\n    categoria = corpo.get('categoria')\n    erros = []\n\n    # Escreva as validações aqui\n\n    if erros:\n        return {'status': 400, 'corpo': {'erro': 'validacao', 'detalhes': erros}}\n\n    despesa = {\n        'id': len(despesas) + 1,\n        'descricao': descricao,\n        'valor': valor,\n        'categoria': categoria,\n    }\n    despesas.append(despesa)\n    return {'status': 201, 'corpo': despesa}\n\n\nprint(criar_despesa({'corpo': {'descricao': 'Feira', 'valor': 52.3, 'categoria': 'mercado'}}))\nprint(criar_despesa({'corpo': {'descricao': '', 'valor': -5, 'categoria': 'viagem'}}))",
@@ -458,6 +465,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'validacao-e-erros:6',
           question:
             'A pessoa preencheu um formulário longo e a API devolveu `400` com `detalhes` dizendo que o campo `valor` está errado. O que a tela deveria fazer?',
           options: [
@@ -531,6 +539,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'contrato-e-versoes:4',
           prompt: 'Cada mudança quebra os clientes atuais da API?',
           buckets: ['Compatível: pode publicar', 'Incompatível: precisa de nova versão'],
           items: [
@@ -546,6 +555,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'contrato-e-versoes:5',
           question:
             'Quem testa a API percebe que `GET /despesas/7` devolve `valor` como `"412,90"` (texto), mas o contrato diz que é um número. O que isso é?',
           options: [

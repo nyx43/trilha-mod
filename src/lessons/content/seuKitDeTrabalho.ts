@@ -28,6 +28,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'navegador:4',
           question:
             'Você recebe um arquivo `index.html` por e-mail e dá dois cliques nele. Que programa mostra a página?',
           options: [
@@ -115,6 +116,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'devtools:5',
           title: 'Sua primeira linha de código',
           task: "Escreva `console.log('Olá, mundo')` no editor e veja a mensagem aparecer no Console ao lado. Os parênteses e as aspas fazem parte do comando. Depois, experimente trocar o texto pelo seu nome.",
           js: '// Esta linha começa com // e é um comentário: o computador ignora.\n// Escreva seu comando na linha de baixo.\n',
@@ -134,6 +136,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'devtools:6',
           question:
             'Você quer ver como ficaria o título de uma página em outra cor, só para testar, sem mexer em nenhum arquivo. Qual aba do DevTools usar?',
           options: [
@@ -199,6 +202,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'editor-arquivos:4',
           prompt: 'Que tipo de conteúdo cada arquivo provavelmente guarda?',
           buckets: [
             'Estrutura (HTML)',
@@ -281,6 +285,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'primeiro-arquivo:4',
           prompt: 'Coloque em ordem o caminho do zero até ver uma mudança na sua página.',
           items: [
             'Criar a pasta `meu-site`',
@@ -342,6 +347,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'terminal:6',
           prompt:
             'Complete os comandos para descobrir onde você está, ver o que tem na pasta, entrar em Documentos, criar a pasta do projeto e entrar nela.',
           language: 'bash',
@@ -352,6 +358,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'terminal:7',
           question:
             'Você está em `/home/ana/Documentos/meu-site` e digita `cd ..`. Onde você vai parar?',
           options: [

@@ -17,10 +17,15 @@ export interface SqlRun {
 let engine: Promise<SqlJsStatic> | undefined;
 
 export function loadSql(locate: (file: string) => string = () => wasmUrl) {
-  engine ||= import('sql.js').then((module) => {
-    const init = (module as unknown as { default: typeof module }).default || module;
-    return (init as unknown as (config: object) => Promise<SqlJsStatic>)({ locateFile: locate });
-  });
+  engine ||= import('sql.js')
+    .then((module) => {
+      const init = (module as unknown as { default: typeof module }).default || module;
+      return (init as unknown as (config: object) => Promise<SqlJsStatic>)({ locateFile: locate });
+    })
+    .catch((error) => {
+      engine = undefined;
+      throw error;
+    });
   return engine;
 }
 

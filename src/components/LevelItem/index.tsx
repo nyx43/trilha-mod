@@ -1,6 +1,5 @@
 import { Fragment } from 'react';
 import { TbGitFork } from 'react-icons/tb';
-import ReactGA from 'react-ga4';
 import { Level, RoadmapItem } from '../../entity/RoadmapModel';
 import { RoadmapRead } from '../../entity/RoadmapReadModel';
 import { DrawerTrigger } from '../Drawer';
@@ -22,9 +21,6 @@ export default function LevelItem(props: Props) {
   function select(item: RoadmapItem, trigger: HTMLElement) {
     props.onSelectTopic(item);
     props.updateLastSelectedElement(trigger);
-    if (!props.isPreview) {
-      ReactGA.event({ category: 'item_open', action: 'open_' + item.label });
-    }
   }
 
   return (

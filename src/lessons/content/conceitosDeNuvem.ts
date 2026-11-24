@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'aluguel-de-computador:3',
           question:
             'Uma loja online vende 10 vezes mais na Black Friday do que no resto do ano. Por que a nuvem ajuda especialmente esse caso?',
           options: [
@@ -91,6 +92,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'modelos-de-servico:3',
           prompt: 'Classifique cada situação pelo modelo de serviço.',
           buckets: ['IaaS', 'PaaS', 'Serverless', 'SaaS'],
           items: [
@@ -123,6 +125,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'regioes-e-zonas:2',
           question:
             'Uma clínica em Belo Horizonte vai guardar prontuários na nuvem. Qual é o critério que mais pesa na escolha da região?',
           options: [
@@ -187,6 +190,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'blocos-de-construcao:3',
           title: 'Explorando a conta pela linha de comando',
           task: 'Você recebeu acesso à conta de laboratório da empresa. Use a AWS CLI (`aws`) para descobrir quem você é e o que existe lá.',
           prompt: 'voce@computador:~$',
@@ -282,6 +286,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'iam-e-responsabilidade:4',
           question:
             'Um bucket com CPFs de clientes foi configurado como público e os dados vazaram. De quem é a responsabilidade?',
           options: [
@@ -315,6 +320,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'custos:1',
           title: 'Estimando a conta antes de criar',
           task: 'Calcule o custo mensal estimado de um ambiente simples. Os preços são ilustrativos, em dólar. Preencha `custo_servidores`, `custo_armazenamento`, `custo_transferencia` e `total`, e imprima o total.',
           code: 'horas_no_mes = 730\n\nservidores = 2\npreco_hora_servidor = 0.0208\n\narmazenamento_gb = 50\npreco_gb_mes = 0.023\n\ntransferencia_gb = 100\npreco_gb_saida = 0.09\n\n# custo = quantidade x preço (servidores também multiplicam pelas horas)\ncusto_servidores = 0\ncusto_armazenamento = 0\ncusto_transferencia = 0\ntotal = 0\n\nprint(f"Servidores: US$ {custo_servidores:.2f}")\nprint(f"Total: US$ {total:.2f}")\n',
@@ -354,6 +360,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'custos:4',
           prompt: 'Coloque em ordem um laboratório seguro na nuvem.',
           items: [
             'Criar um alerta de orçamento com valor baixo',

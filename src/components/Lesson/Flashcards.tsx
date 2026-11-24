@@ -17,12 +17,29 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
   const [queue, setQueue] = useState(cards);
   const [flipped, setFlipped] = useState(false);
   const [remembered, setRemembered] = useState(0);
+  const [missedKeys, setMissedKeys] = useState<Set<string>>(() => new Set());
+  const [ratedKeys, setRatedKeys] = useState<Set<string>>(() => new Set());
   const reduced = useReducedMotion();
   const card = queue[0];
 
   function answer(value: boolean) {
-    rateCard(card.key, value);
-    if (value) setRemembered((count) => count + 1);
+    if (!ratedKeys.has(card.key)) {
+      rateCard(card.key, value);
+      setRatedKeys((previous) => {
+        const next = new Set(previous);
+        next.add(card.key);
+        return next;
+      });
+    }
+    if (value) {
+      if (!missedKeys.has(card.key)) setRemembered((count) => count + 1);
+    } else {
+      setMissedKeys((previous) => {
+        const next = new Set(previous);
+        next.add(card.key);
+        return next;
+      });
+    }
     const rest = queue.slice(1);
     const next = value ? rest : [...rest, card];
     setQueue(next);
@@ -45,6 +62,7 @@ export function Flashcards({ cards, onFinish }: { cards: DeckCard[]; onFinish?: 
           onClick={() => {
             setQueue(cards);
             setRemembered(0);
+            setMissedKeys(new Set());
           }}
         >
           <PiArrowsClockwise aria-hidden="true" /> Revisar de novo

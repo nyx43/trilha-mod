@@ -47,6 +47,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'ip-e-porta:4',
           question:
             'Uma pessoa da equipe roda a API no notebook dela e manda para você: “acessa `http://localhost:8000`”. Você abre no seu computador e não carrega. Por quê?',
           options: [
@@ -101,6 +102,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'dns-tcp-firewall:5',
           prompt: 'Qual protocolo costuma ser usado em cada situação?',
           buckets: ['TCP: tudo precisa chegar, em ordem', 'UDP: rapidez importa mais'],
           items: [
@@ -152,6 +154,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'caminho-do-diagnostico:3',
           prompt: 'Coloque o roteiro de diagnóstico na ordem usada nesta aula.',
           items: [
             '`ping`: a máquina responde?',
@@ -175,6 +178,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'lendo-saidas:1',
           title: 'Chamado 1: “a API não abre”',
           task: 'A integração com a API da loja parou de funcionar depois de uma mudança de configuração. Descubra em que etapa a conversa quebra.',
           prompt: 'ana@notebook:~$',
@@ -214,6 +218,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'lendo-saidas:3',
           title: 'Chamado 2: “o site está fora”',
           task: 'O site da padaria parou de responder. O nome resolve normalmente. Siga em frente no roteiro.',
           prompt: 'ana@notebook:~$',
@@ -250,6 +255,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'lendo-saidas:5',
           question:
             'Na saída do `ss`, o PostgreSQL aparece em `127.0.0.1:5432`. A aplicação roda na mesma máquina. Isso é um problema?',
           options: [
@@ -272,6 +278,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'lendo-saidas:6',
           title: 'Chamado 3: “fica carregando para sempre”',
           task: 'Um painel interno não abre: o navegador fica girando até desistir. O nome resolve para `198.51.100.23`. Investigue.',
           prompt: 'ana@notebook:~$',
@@ -306,6 +313,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'lendo-saidas:8',
           question:
             'No chamado 3, alguém propõe reiniciar a aplicação do painel. Por que isso provavelmente não vai resolver?',
           options: [
@@ -339,6 +347,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'sintoma-e-camada:1',
           prompt: 'Em qual camada você começaria a investigar cada sintoma?',
           buckets: ['Nome (DNS)', 'Caminho de rede', 'Porta ou firewall', 'Aplicação'],
           items: [
@@ -361,6 +370,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'sintoma-e-camada:3',
           question:
             'Uma pessoa diz “a API caiu”. Você roda `curl -v` e recebe `HTTP/1.1 503 Service Unavailable`. O que dá para concluir?',
           options: [

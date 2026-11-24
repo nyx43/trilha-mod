@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'estrutura-e-significado:3',
           question:
             'Você quer que uma frase apareça bem grande na página, mas ela não é o título de nada. O que fazer?',
           options: [
@@ -113,6 +114,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'anatomia-do-elemento:5',
           question: 'Em `<p class="aviso">Loja fechada no feriado</p>`, o que é `class="aviso"`?',
           code: '<p class="aviso">Loja fechada no feriado</p>',
           language: 'html',
@@ -200,6 +202,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'esqueleto:3',
           prompt: 'Coloque as linhas do começo de um documento HTML na ordem certa.',
           items: [
             '`<!doctype html>`',
@@ -273,6 +276,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'elementos-essenciais:4',
           question: 'Qual destas estruturas de títulos está correta para uma página de receitas?',
           options: [
             {
@@ -300,6 +304,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'elementos-essenciais:5',
           prompt:
             'Complete o código: um link para a página `contato.html` e uma imagem `mapa.png` com texto alternativo.',
           language: 'html',
@@ -325,6 +330,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'aninhamento-e-arvore:2',
           question: 'Qual destas linhas está aninhada corretamente?',
           options: [
             {
@@ -374,6 +380,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'pagina-de-perfil:1',
           title: 'Uma página sobre você',
           task: 'Transforme o rascunho numa página de perfil: um título com seu nome, um parágrafo sobre você, uma lista com pelo menos três itens, um link e uma imagem com texto alternativo. Para a imagem, pode usar o endereço `https://picsum.photos/120`.',
           html: '<h1>Seu nome aqui</h1>\n\n<!-- Escreva um parágrafo contando quem você é -->\n\n<h2>Coisas de que eu gosto</h2>\n<ul>\n  <li>Primeira coisa</li>\n</ul>\n\n<!-- Coloque aqui um link e uma imagem -->\n',

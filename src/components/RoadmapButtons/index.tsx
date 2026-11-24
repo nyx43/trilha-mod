@@ -1,11 +1,10 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import ButtonElement from './ButtonElement';
 import domtoimage from 'dom-to-image';
 import { MutableRefObject } from 'react';
 import { Button, ButtonArgs } from './types';
 import axios from 'axios';
-import Cookies from 'universal-cookie';
-
-const cookies = new Cookies();
+import { getApiAuthHeader } from '../../auth/apiSession';
 
 type RoadmapButtonsProps = {
   buttons: Button[];
@@ -15,6 +14,7 @@ type RoadmapButtonsProps = {
 };
 
 const RoadmapButtons = ({ buttons, roadmapRef, title, roadmapPath }: RoadmapButtonsProps) => {
+  const { isAuthenticated, getAccessTokenSilently } = useAuth0();
   const handleDownloadImage = async () => {
     const element = roadmapRef.current || document.body;
     const data = await domtoimage.toPng(element);
@@ -34,10 +34,12 @@ const RoadmapButtons = ({ buttons, roadmapRef, title, roadmapPath }: RoadmapButt
   };
 
   const handleExportNotes = async () => {
+    const authorization = await getApiAuthHeader(isAuthenticated, getAccessTokenSilently);
+    if (!authorization) return;
     const response = await axios.get<string>(import.meta.env.VITE_API_URL + `/note/export` || '', {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: cookies.get('api_token'),
+        Authorization: authorization,
       },
     });
 
@@ -59,8 +61,6 @@ const RoadmapButtons = ({ buttons, roadmapRef, title, roadmapPath }: RoadmapButt
       {
         text: 'Visualizar Verticalmente',
         type: 'link',
-        category: 'download_roadmap',
-        analyticsActionTag: 'open_vertical_roadmap',
         href: `/roadmap/${roadmapPath}`,
       },
     ],
@@ -69,8 +69,6 @@ const RoadmapButtons = ({ buttons, roadmapRef, title, roadmapPath }: RoadmapButt
       {
         text: 'Modo Curso (beta)',
         type: 'link',
-        category: 'action',
-        analyticsActionTag: 'open_course_roadmap',
         href: `/course/${roadmapPath}`,
       },
     ],
@@ -79,8 +77,6 @@ const RoadmapButtons = ({ buttons, roadmapRef, title, roadmapPath }: RoadmapButt
       {
         text: 'Baixar meu Roadmap',
         type: 'button',
-        category: 'action',
-        analyticsActionTag: 'download_' + title,
         action: handleDownloadImage,
       },
     ],
@@ -90,8 +86,6 @@ const RoadmapButtons = ({ buttons, roadmapRef, title, roadmapPath }: RoadmapButt
       {
         text: 'Exportar Anotações',
         type: 'button',
-        category: 'action',
-        analyticsActionTag: 'export_notes_' + title,
         action: handleExportNotes,
       },
     ],

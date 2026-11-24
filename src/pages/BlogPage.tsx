@@ -9,6 +9,14 @@ export default function BlogPage() {
     <MainLayout>
       <div className="guide-page">
         <header className="guide-hero">
+          <nav className="guide-crumbs" aria-label="Você está em">
+            <ol>
+              <li>
+                <Link to="/">Início</Link>
+              </li>
+              <li>Blog</li>
+            </ol>
+          </nav>
           <h1>Blog de tecnologia e carreira</h1>
           <p className="guide-summary">
             Conceitos de desenvolvimento de software, livros e reflexões para quem estuda e trabalha

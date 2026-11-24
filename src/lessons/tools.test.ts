@@ -83,15 +83,31 @@ describe('lacunas', () => {
 });
 
 describe('revisão espaçada', () => {
-  it('avança de caixa ao lembrar e volta ao início ao esquecer', () => {
-    const today = '2026-10-14';
-    const first = nextCardState(undefined, true, today);
-    expect(first).toEqual({ box: 1, due: addDays(today, reviewIntervals[1]) });
-    const second = nextCardState(first, true, today);
-    expect(second.box).toBe(2);
-    expect(second.due).toBe('2026-10-17');
-    expect(nextCardState(second, false, today)).toEqual({ box: 1, due: today });
-    expect(nextCardState({ box: 5, due: today }, true, today).box).toBe(5);
+  it('avança de caixa ao lembrar em dias seguintes, agenda para amanhã ao esquecer e preserva a primeira avaliação do dia', () => {
+    const day1 = '2026-10-14';
+    const day2 = '2026-10-15';
+    const day5 = '2026-10-18';
+    const first = nextCardState(undefined, true, day1);
+    expect(first).toEqual({
+      box: 1,
+      due: addDays(day1, reviewIntervals[1]),
+      reviewedAt: day1,
+    });
+    // Reavaliar no mesmo dia não promove novamente
+    expect(nextCardState(first, true, day1)).toEqual(first);
+
+    // No dia seguinte, lembrar promove para a caixa 2 (+3 dias)
+    const second = nextCardState(first, true, day2);
+    expect(second).toEqual({ box: 2, due: '2026-10-18', reviewedAt: day2 });
+
+    // Esquecer em outro dia volta à caixa 1 com vencimento amanhã
+    const forgotten = nextCardState(second, false, day5);
+    expect(forgotten).toEqual({ box: 1, due: addDays(day5, 1), reviewedAt: day5 });
+    // Lembrar depois no mesmo dia mantém o vencimento de amanhã
+    expect(nextCardState(forgotten, true, day5)).toEqual(forgotten);
+
+    // Preserva compatibilidade com registros antigos sem reviewedAt
+    expect(nextCardState({ box: 5, due: day1 }, true, day1).box).toBe(5);
   });
 
   it('atravessa meses ao somar dias', () => {

@@ -1,6 +1,7 @@
 import { loadCatalog } from '../learning/loaders';
 import { courseLessons, courses, lessons, lessonsByGroup } from '.';
-import { LessonBlock, LessonContent } from './types';
+import { COURSE_COUNT, LESSON_COUNT } from './counts';
+import { LessonBlock, LessonContent, scoredBlockTypes } from './types';
 import { parseFill } from './tools';
 
 const contents = new Map<string, LessonContent>();
@@ -14,6 +15,17 @@ beforeAll(async () => {
     } catch (error) {
       loadErrors.set(lesson.id, String(error));
     }
+  }
+});
+
+it('atribui um ID único aos exercícios de cada aula que registram tentativas', () => {
+  for (const [lessonId, content] of contents) {
+    const ids = content.sections.flatMap(({ blocks }) =>
+      blocks.filter(({ type }) => scoredBlockTypes.has(type)).map(({ activityId }) => activityId),
+    );
+    if (ids.some((id) => typeof id !== 'string' || !id.trim()))
+      throw new Error(`${lessonId}: exercício sem ID`);
+    if (new Set(ids).size !== ids.length) throw new Error(`${lessonId}: ID de exercício duplicado`);
   }
 });
 
@@ -84,6 +96,11 @@ function problems(block: LessonBlock): string[] {
 }
 
 describe('Aulas', () => {
+  it('mantém as contagens resumidas sincronizadas com o catálogo', () => {
+    expect(LESSON_COUNT).toBe(lessons.length);
+    expect(COURSE_COUNT).toBe(courses.length);
+  });
+
   it('têm IDs únicos e aparecem em pelo menos um curso', () => {
     expect(new Set(lessons.map((lesson) => lesson.id)).size).toBe(lessons.length);
     const listed = new Set(courses.flatMap((course) => courseLessons(course).map((l) => l.id)));

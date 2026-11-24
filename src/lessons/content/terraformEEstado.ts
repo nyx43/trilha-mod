@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'infra-como-codigo:3',
           question:
             'Qual é a maior vantagem de criar um servidor com Terraform em vez de clicar no console do provedor?',
           options: [
@@ -97,6 +98,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'anatomia-hcl:2',
           prompt:
             'Complete o arquivo: declare a variável, o recurso do container usando a variável e a saída com o endereço.',
           language: 'hcl',
@@ -153,6 +155,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'plan-apply-destroy:2',
           title: 'O ciclo completo no laboratório Docker',
           task: 'Na pasta com o `main.tf` acima, crie o site, mude a porta e depois apague tudo. Leia cada saída antes de seguir.',
           prompt: 'voce@computador:~/lab-terraform$',
@@ -201,6 +204,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'plan-apply-destroy:3',
           question:
             'Você só queria mudar a porta, e o plano diz `Plan: 1 to add, 0 to change, 1 to destroy`. O que isso significa?',
           options: [
@@ -261,6 +265,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'estado:6',
           question:
             'Duas pessoas rodam `terraform apply` ao mesmo tempo, cada uma do seu computador, com o estado guardado só na própria máquina. O que pode acontecer?',
           options: [
@@ -315,6 +320,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'drift-e-modulos:5',
           prompt: 'Coloque em ordem uma mudança segura de infraestrutura em equipe.',
           items: [
             'Editar os arquivos `.tf` numa branch',
@@ -344,6 +350,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'erros-comuns:1',
           prompt: 'O que vai para o repositório Git e o que não vai?',
           buckets: ['Vai para o Git', 'Fica fora do Git'],
           items: [

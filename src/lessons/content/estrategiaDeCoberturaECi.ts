@@ -45,6 +45,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'formato-da-suite:4',
           question:
             'Uma equipe tem 15 testes de unidade e 400 testes de ponta a ponta. A suíte leva 50 minutos e falha em média uma vez por dia sem bug real. Qual o melhor primeiro passo?',
           options: [
@@ -107,6 +108,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'o-que-automatizar:3',
           prompt:
             'Para cada caso, o melhor caminho é automatizar ou manter como verificação manual/exploratória?',
           buckets: ['Automatizar', 'Manual ou exploratório'],
@@ -134,6 +136,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'cobertura:1',
           title: 'Meça a cobertura de um projeto',
           task: 'O projeto usa Vitest para testes de unidade. Rode os testes, peça o relatório de cobertura e veja o que acontece com uma meta mínima.',
           prompt: '~/loja$',
@@ -194,6 +197,7 @@ ERROR: Coverage for branches (72.72%) does not meet global threshold (80%)`,
         },
         {
           type: 'quiz',
+          activityId: 'cobertura:3',
           question:
             'O `frete.ts` tem 100% de cobertura de linhas e de ramos. Uma pessoa da equipe diz: “então o frete não tem bug”. Ela está certa?',
           options: [
@@ -226,6 +230,7 @@ ERROR: Coverage for branches (72.72%) does not meet global threshold (80%)`,
         },
         {
           type: 'python',
+          activityId: 'cobertura:5',
           title: 'Cobertura de 100% e mutantes que escapam',
           task: 'Os dois testes em `testar` já executam todas as linhas de `frete`: cobertura de 100%. Mesmo assim, dois mutantes escapam. Acrescente `assert` nos valores de fronteira até todos os mutantes serem pegos e a regra correta continuar passando.',
           code: `# Regra da loja: a partir de R$ 100, frete grátis; abaixo disso, R$ 12
@@ -391,6 +396,7 @@ for m in [mutante_maior, mutante_99, mutante_valor]:
         },
         {
           type: 'fill',
+          activityId: 'suite-na-ci:3',
           prompt:
             'Complete os passos finais do job de ponta a ponta para guardar o relatório mesmo quando um teste falha.',
           language: 'yaml',
@@ -456,6 +462,7 @@ test('aplica cupom de primeira compra', { tag: '@quarentena' }, async ({ page })
         },
         {
           type: 'order',
+          activityId: 'instaveis-e-quarentena:6',
           prompt: 'Coloque em ordem o tratamento de um teste instável.',
           items: [
             'Confirmar a instabilidade rodando o teste várias vezes com `--repeat-each`',
@@ -469,6 +476,7 @@ test('aplica cupom de primeira compra', { tag: '@quarentena' }, async ({ page })
         },
         {
           type: 'quiz',
+          activityId: 'instaveis-e-quarentena:7',
           question:
             'Alguém propõe: “vamos colocar `retries: 5` e acabou o problema dos testes instáveis”. Qual o maior risco?',
           options: [
@@ -525,6 +533,7 @@ test('aplica cupom de primeira compra', { tag: '@quarentena' }, async ({ page })
         },
         {
           type: 'classify',
+          activityId: 'ler-o-vermelho:2',
           prompt: 'Leia cada falha da CI e decida o suspeito principal.',
           buckets: ['Bug do produto', 'Problema no teste', 'Ambiente'],
           items: [

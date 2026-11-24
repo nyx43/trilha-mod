@@ -44,6 +44,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'aparencia:5',
           question:
             'Você quer que as 20 páginas do seu site tenham a mesma cor de fundo. Qual é o melhor caminho?',
           options: [
@@ -124,6 +125,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'anatomia-da-regra:2',
           prompt:
             'Complete a regra para que todo elemento com a classe `aviso` fique com o texto vermelho e em negrito.',
           language: 'css',
@@ -184,6 +186,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'seletores:4',
           prompt: 'Que tipo de seletor é cada um?',
           buckets: ['Tipo', 'Classe', 'Id', 'Descendente'],
           items: [
@@ -201,6 +204,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'seletores:5',
           question:
             'Uma loja mostra 12 cards de produto, todos com o mesmo visual. Qual seletor faz mais sentido para estilizá-los?',
           options: [
@@ -235,6 +239,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'seletores:7',
           title: 'Vista um card usando classes',
           task: 'O HTML já tem as classes. Escreva as regras no CSS para cada objetivo e veja a prévia mudar.',
           html: '<article class="card">\n  <h2 class="card-titulo">Feira de domingo</h2>\n  <p class="card-texto">Frutas e verduras fresquinhas a partir das 7h, na praça central.</p>\n  <a class="card-link" href="#mapa">Ver no mapa</a>\n</article>',
@@ -316,6 +321,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'cascata:6',
           question: 'O HTML é `<p class="preco">R$ 9,90</p>`. De que cor o preço aparece?',
           code: '.preco {\n  color: green;\n}\n\np {\n  color: black;\n}',
           language: 'css',
@@ -340,6 +346,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'cascata:7',
           question: 'O botão é `<button class="botao">`. Qual será a cor de fundo?',
           code: '.botao {\n  background: blue;\n}\n\n.botao {\n  background: orange;\n}',
           language: 'css',
@@ -364,6 +371,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'cascata:8',
           prompt: 'Ordene os seletores do **menos** específico para o **mais** específico.',
           items: [
             '`p`',
@@ -378,6 +386,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'cascata:9',
           title: 'Conserte o alerta cinza',
           task: 'O parágrafo `.alerta` deveria ficar vermelho, mas aparece cinza. Descubra qual regra está vencendo e conserte **sem** usar `!important`.',
           html: '<section id="avisos">\n  <p class="alerta">A biblioteca fecha mais cedo nesta sexta.</p>\n  <p>No sábado, horário normal.</p>\n</section>',
@@ -416,6 +425,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'heranca:2',
           prompt: 'Essa propriedade, aplicada num elemento pai, passa para os filhos?',
           buckets: ['Herdada pelos filhos', 'Não herdada'],
           items: [
@@ -433,6 +443,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'heranca:3',
           question:
             'Você escreveu `.card { color: navy; }`. Dentro do card há um `<p>` sem nenhuma regra própria. De que cor fica o texto do parágrafo?',
           options: [
@@ -507,6 +518,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'devtools-styles:3',
           question:
             'Você escreveu `.titulo { color: purple; }`, mas o título continua preto. No painel Styles, a sua declaração aparece riscada. O que isso indica?',
           options: [

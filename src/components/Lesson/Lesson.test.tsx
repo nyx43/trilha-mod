@@ -1,8 +1,10 @@
 import { fireEvent, render, screen, within } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { vi } from 'vitest';
 import { findLesson, lessonPlace } from '../../lessons';
-import { lessonStoreKey, reviewStoreKey } from '../../lessons/progress';
+import { dueCardKeys, lessonStoreKey, readReview, reviewStoreKey } from '../../lessons/progress';
 import LessonPage from '../../pages/LessonPage';
+import { Flashcards } from './Flashcards';
 import { buildDocument } from './Playground';
 import { LessonView } from './LessonView';
 
@@ -144,6 +146,108 @@ describe('Aula', () => {
     expect(resumed.getByRole('group', { name: 'Registrar o resultado' })).toBeVisible();
     expect(stored(lessonStoreKey)).toEqual(saved);
     expect(stored(reviewStoreKey)).toEqual(review);
+  });
+
+  it('conta nos cartões apenas os lembrados de primeira e ignora hash inválido na URL', async () => {
+    render(
+      <Flashcards
+        cards={[
+          { key: 'a:1', front: 'Pergunta 1', back: 'Resposta 1' },
+          { key: 'a:2', front: 'Pergunta 2', back: 'Resposta 2' },
+        ]}
+      />,
+    );
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Ainda não lembrei' }));
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Lembrei' }));
+
+    fireEvent.click(
+      screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
+    );
+    fireEvent.click(screen.getByRole('button', { name: 'Lembrei' }));
+
+    expect(screen.getByRole('status')).toHaveTextContent('1 de 2 cartões lembrados de primeira');
+
+    const lesson = findLesson('como-a-web-funciona');
+    const place = lesson ? lessonPlace(lesson.id, 'frontend') : undefined;
+    if (!lesson || !place) throw new Error('Aula como-a-web-funciona ausente');
+    render(
+      <MemoryRouter initialEntries={['/aula/como-a-web-funciona#%E0%A4%A']}>
+        <LessonView lesson={lesson} place={place} />
+      </MemoryRouter>,
+    );
+    expect(
+      await screen.findByRole('heading', { name: /Quem pede e quem responde/ }),
+    ).toBeInTheDocument();
+  });
+
+  it('mantém o vencimento da primeira avaliação do dia mesmo após repetir, usar Revisar de novo e recarregar (Item 7)', () => {
+    vi.useFakeTimers();
+    try {
+      vi.setSystemTime(new Date(2026, 10, 23, 12, 0, 0));
+      // Registro antigo sem campo reviewedAt
+      localStorage.setItem(
+        reviewStoreKey,
+        JSON.stringify({
+          schemaVersion: 1,
+          cards: { 'a:1': { box: 2, due: '2026-11-23' } },
+        }),
+      );
+
+      const deck = [{ key: 'a:1', front: 'Pergunta', back: 'Resposta' }];
+      const firstMount = render(<Flashcards cards={deck} />);
+
+      // Marca "Ainda não lembrei" e depois "Lembrei" na mesma sessão
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
+      );
+      fireEvent.click(screen.getByRole('button', { name: 'Ainda não lembrei' }));
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
+      );
+      fireEvent.click(screen.getByRole('button', { name: 'Lembrei' }));
+
+      expect(readReview().cards['a:1']).toEqual({
+        box: 1,
+        due: '2026-11-24',
+        reviewedAt: '2026-11-23',
+      });
+
+      // Usa "Revisar de novo" no mesmo dia -> vencimento continua amanhã
+      fireEvent.click(screen.getByRole('button', { name: /Revisar de novo/i }));
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
+      );
+      fireEvent.click(screen.getByRole('button', { name: 'Lembrei' }));
+      expect(readReview().cards['a:1']).toEqual({
+        box: 1,
+        due: '2026-11-24',
+        reviewedAt: '2026-11-23',
+      });
+      firstMount.unmount();
+
+      // Recarrega no mesmo dia -> vencimento continua igual e não vence hoje
+      const sameDayReload = render(<Flashcards cards={deck} />);
+      fireEvent.click(
+        screen.getByRole('button', { name: 'Tente lembrar, depois mostre a resposta' }),
+      );
+      fireEvent.click(screen.getByRole('button', { name: 'Lembrei' }));
+      expect(readReview().cards['a:1'].due).toBe('2026-11-24');
+      expect(dueCardKeys(readReview())).toEqual([]);
+      sameDayReload.unmount();
+
+      // Avança o relógio para amanhã -> aparece na lista de revisão
+      vi.setSystemTime(new Date(2026, 10, 24, 9, 0, 0));
+      expect(dueCardKeys(readReview())).toEqual(['a:1']);
+    } finally {
+      vi.useRealTimers();
+    }
   });
 });
 

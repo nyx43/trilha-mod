@@ -3,13 +3,18 @@ import axios from 'axios';
 import { ChangeEvent, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Grid } from 'react-loader-spinner';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import Cookies from 'universal-cookie';
 import MainLayout from '../components/layouts/MainLayout';
 import NewRoadmapEditor from '../components/NewRoadmap/NewRoadmapEditor';
 import NewRoadmapPreview from '../components/NewRoadmap/NewRoadmapPreview';
 import { RoadmapModel } from '../entity/RoadmapModel';
-
-const cookies = new Cookies();
+import { clearLegacyApiTokenCookie, getApiAuthHeader } from '../auth/apiSession';
+import { isOfflineApp } from '../runtime/mode';
+import {
+  findLocalRoadmap,
+  isLocalSlugTaken,
+  loadLocalProfile,
+  saveLocalRoadmap,
+} from '../offline/localStore';
 
 type EditorStatus = 'loading' | 'ready' | 'error';
 
@@ -54,8 +59,9 @@ function cloneRoadmapSnapshot(source: RoadmapModel, owner?: string): RoadmapMode
 }
 
 export default function NewRoadmapPage() {
+  const offline = isOfflineApp();
   const { roadmapId } = useParams<{ roadmapId?: string }>();
-  const { user } = useAuth0();
+  const { user, isAuthenticated, getAccessTokenSilently } = useAuth0();
   const navigate = useNavigate();
 
   const [shouldBlock, setShouldBlock] = useState(false);
@@ -131,6 +137,30 @@ export default function NewRoadmapPage() {
       };
     }
 
+    if (offline) {
+      const localFound = findLocalRoadmap(roadmapId);
+      if (localFound) {
+        editVersionRef.current = 0;
+        setEditorState({
+          targetId: roadmapId,
+          status: 'ready',
+          roadmap: localFound,
+          savedSlug: localFound.slug?.trim(),
+        });
+      } else {
+        setEditorState({
+          targetId: roadmapId,
+          status: 'error',
+          roadmap: new RoadmapModel(),
+          errorMessage: 'Roadmap pessoal não encontrado neste aparelho.',
+        });
+      }
+      return () => {
+        routeSessionRef.current += 1;
+        saveRequestRef.current += 1;
+      };
+    }
+
     const controller = new AbortController();
     setEditorState({
       targetId: roadmapId,
@@ -140,14 +170,21 @@ export default function NewRoadmapPage() {
 
     (async () => {
       try {
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
+        if (isAuthenticated) {
+          const authHeader = await getApiAuthHeader(true, getAccessTokenSilently);
+          if (controller.signal.aborted || loadRequestRef.current !== requestId) return;
+          if (authHeader) headers.Authorization = authHeader;
+        } else {
+          clearLegacyApiTokenCookie();
+        }
         const response = await axios.get<RoadmapModel>(
           (import.meta.env.VITE_PUBLIC_URL || '') + `/roadmap/${encodeURIComponent(roadmapId)}`,
           {
             signal: controller.signal,
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: cookies.get('api_token'),
-            },
+            headers,
           },
         );
         if (controller.signal.aborted || loadRequestRef.current !== requestId) return;
@@ -178,7 +215,7 @@ export default function NewRoadmapPage() {
       routeSessionRef.current += 1;
       saveRequestRef.current += 1;
     };
-  }, [roadmapId, reloadAttempt]);
+  }, [roadmapId, reloadAttempt, isAuthenticated, getAccessTokenSilently, offline]);
 
   useEffect(() => {
     if (!needsSlugCheck) {
@@ -186,18 +223,31 @@ export default function NewRoadmapPage() {
       return;
     }
 
+    if (offline) {
+      const taken = isLocalSlugTaken(currentSlug, editorState.roadmap.id || roadmapId);
+      setSlugValidation({ slug: currentSlug, status: taken ? 'taken' : 'available' });
+      return;
+    }
+
     const controller = new AbortController();
     setSlugValidation({ slug: currentSlug, status: 'checking' });
     async function checkAvailability() {
       try {
+        const headers: Record<string, string> = {
+          'Content-Type': 'application/json',
+        };
+        if (isAuthenticated) {
+          const authHeader = await getApiAuthHeader(true, getAccessTokenSilently);
+          if (controller.signal.aborted) return;
+          if (authHeader) headers.Authorization = authHeader;
+        } else {
+          clearLegacyApiTokenCookie();
+        }
         const response = await axios.get<boolean>(
           (import.meta.env.VITE_API_URL || '') + `/roadmap/slug/${encodeURIComponent(currentSlug)}`,
           {
             signal: controller.signal,
-            headers: {
-              'Content-Type': 'application/json',
-              Authorization: cookies.get('api_token'),
-            },
+            headers,
           },
         );
         if (controller.signal.aborted) return;
@@ -211,7 +261,15 @@ export default function NewRoadmapPage() {
 
     checkAvailability();
     return () => controller.abort();
-  }, [currentSlug, needsSlugCheck, roadmapId]);
+  }, [
+    currentSlug,
+    needsSlugCheck,
+    roadmapId,
+    isAuthenticated,
+    getAccessTokenSilently,
+    offline,
+    editorState.roadmap.id,
+  ]);
 
   const markEdited = useCallback(() => {
     editVersionRef.current += 1;
@@ -288,19 +346,37 @@ export default function NewRoadmapPage() {
     saveRequestRef.current += 1;
     const saveId = saveRequestRef.current;
     const versionAtSaveStart = editVersionRef.current;
-    const payload = cloneRoadmapSnapshot(editorState.roadmap, user?.nickname);
+    const payload = cloneRoadmapSnapshot(
+      editorState.roadmap,
+      offline ? loadLocalProfile().name : user?.nickname,
+    );
 
     setSaving(true);
     setSaveError(null);
     setSaveNotice(null);
 
     try {
+      if (offline) {
+        saveLocalRoadmap(payload);
+        setShouldBlock(false);
+        setPendingRedirect(true);
+        return;
+      }
+      const headers: Record<string, string> = {
+        'Content-Type': 'application/json',
+      };
+      if (isAuthenticated) {
+        const authHeader = await getApiAuthHeader(true, getAccessTokenSilently);
+        if (routeSessionRef.current !== sessionAtSaveStart || saveRequestRef.current !== saveId) {
+          return;
+        }
+        if (authHeader) headers.Authorization = authHeader;
+      } else {
+        clearLegacyApiTokenCookie();
+      }
       await axios.post((import.meta.env.VITE_API_URL || '') + `/roadmap`, payload, {
         withCredentials: true,
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: cookies.get('api_token'),
-        },
+        headers,
       });
       if (routeSessionRef.current !== sessionAtSaveStart || saveRequestRef.current !== saveId) {
         return;

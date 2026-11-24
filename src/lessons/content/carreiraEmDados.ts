@@ -28,6 +28,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'dados-sao-rastros:4',
           question:
             'Uma prefeitura quer saber quais linhas de ônibus lotam no horário de pico. Qual destas é uma fonte de dados para responder?',
           options: [
@@ -125,6 +126,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'ciclo-de-vida:3',
           prompt:
             'Coloque em ordem o caminho dos dados de vacinação até um relatório do ministério.',
           items: [
@@ -179,6 +181,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'papeis:2',
           prompt: 'Qual papel normalmente faz cada tarefa?',
           buckets: [
             'Engenharia de dados',
@@ -239,6 +242,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'oltp-olap-batch-streaming:4',
           question:
             'Um banco precisa bloquear um Pix suspeito antes que o dinheiro saia da conta. Que ritmo de processamento faz sentido?',
           options: [
@@ -376,6 +380,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'portfolio:3',
           question:
             'Qual destes projetos mostra melhor que você está pronto para uma vaga de engenharia de dados?',
           options: [

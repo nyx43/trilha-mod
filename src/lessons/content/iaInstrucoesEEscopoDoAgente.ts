@@ -28,6 +28,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'primeiro-dia:3',
           question: 'Qual é o principal motivo para ter um arquivo de instruções no projeto?',
           options: [
             {
@@ -107,6 +108,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'anatomia-das-instrucoes:2',
           prompt:
             'Quais linhas ajudam de verdade num arquivo de instruções e quais são vagas demais para fazer diferença?',
           buckets: ['Instrução útil', 'Vaga demais'],
@@ -138,6 +140,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'escopo-e-permissoes:2',
           prompt: 'Num projeto de laboratório, como você configuraria cada ação do agente?',
           buckets: ['Pode fazer sozinho', 'Pergunte antes', 'Nunca'],
           items: [
@@ -182,6 +185,7 @@ e outro para frete pago, e o resumo listar os comandos executados.`,
         },
         {
           type: 'fill',
+          activityId: 'tarefa-delimitada:2',
           prompt:
             'Complete o pedido de outra tarefa. Os arquivos ficam na pasta `src/produtos/`, nada de pacotes novos, e só está pronto com os testes passando.',
           language: 'text',
@@ -204,6 +208,7 @@ Pronto quando: npm [[test|run test]] passar e houver um teste para "PÃO" e "pã
         },
         {
           type: 'terminal',
+          activityId: 'revisando-a-sessao:1',
           title: 'Revisando a sessão do agente',
           task: 'Confira os arquivos alterados, investigue o que saiu do escopo, desfaça e rode os testes você mesmo.',
           prompt: '~/lojinha$',
@@ -290,6 +295,7 @@ Error: Failed to resolve import "currency-formatter-br" from "src/carrinho/Resum
         },
         {
           type: 'quiz',
+          activityId: 'revisando-a-sessao:2',
           question:
             'O agente disse que os testes passavam, e passavam mesmo, com o pacote instalado. O que essa sessão mostra?',
           options: [

@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'javascript-fora-do-navegador:3',
           prompt: 'Onde cada recurso existe?',
           buckets: ['Só no navegador', 'Só no Node.js', 'Nos dois'],
           items: [
@@ -38,6 +39,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'javascript-fora-do-navegador:4',
           title: 'Seu primeiro JavaScript no terminal',
           task: 'Confira se o Node está instalado e rode uma linha de JavaScript sem abrir navegador nenhum.',
           prompt: '~$',
@@ -85,6 +87,7 @@ Node.js v22.11.0`,
         },
         {
           type: 'terminal',
+          activityId: 'projeto-e-modulos:1',
           title: 'Comece a API de despesas',
           task: 'Crie a pasta do projeto, gere o `package.json`, instale o Express e ligue o servidor.',
           prompt: '~$',
@@ -187,6 +190,7 @@ import { despesas, buscarPorId } from './despesas.js';
         },
         {
           type: 'quiz',
+          activityId: 'projeto-e-modulos:5',
           question:
             'Você rodou `node server.js` e apareceu `SyntaxError: Cannot use import statement outside a module`. O que está faltando?',
           options: [
@@ -319,6 +323,7 @@ const despesas = [
         },
         {
           type: 'quiz',
+          activityId: 'anatomia-do-servidor:3',
           question:
             'Um handler faz `console.log(despesas)` mas esquece o `res.json(...)`. O que acontece com quem pediu?',
           options: [
@@ -382,6 +387,7 @@ app.post('/despesas', (req, res) => {
         },
         {
           type: 'terminal',
+          activityId: 'rotas-e-status:3',
           title: 'Converse com a API pelo curl',
           task: 'O servidor está rodando em outro terminal. Use o `curl`, um cliente HTTP de linha de comando, para testar cada rota.',
           prompt: '~$',
@@ -445,6 +451,7 @@ Content-Length: 43
         },
         {
           type: 'quiz',
+          activityId: 'rotas-e-status:4',
           question:
             'Alguém escreveu `despesas.find((d) => d.id === req.params.id)` e a rota `/despesas/2` sempre responde 404, mesmo com a despesa 2 existindo. Por quê?',
           options: [
@@ -468,6 +475,7 @@ Content-Length: 43
         },
         {
           type: 'fill',
+          activityId: 'rotas-e-status:5',
           prompt:
             'Complete a rota que apaga uma despesa: ela lê o id do caminho, responde 404 se não achar e 204 (sem corpo) se apagar.',
           language: 'js',
@@ -528,6 +536,7 @@ app.use((erro, req, res, next) => {
         },
         {
           type: 'order',
+          activityId: 'middleware-e-erros:4',
           prompt: 'Coloque as partes do `server.js` na ordem em que precisam aparecer.',
           items: [
             "import express from 'express'",
@@ -543,6 +552,7 @@ app.use((erro, req, res, next) => {
         },
         {
           type: 'quiz',
+          activityId: 'middleware-e-erros:5',
           question:
             "O POST de despesas quebra com `TypeError: Cannot destructure property 'descricao' of 'req.body' as it is undefined`. O `curl` envia o cabeçalho de JSON corretamente. Qual a causa mais provável?",
           options: [
@@ -582,6 +592,7 @@ app.use((erro, req, res, next) => {
         },
         {
           type: 'playground',
+          activityId: 'mini-roteador:1',
           title: 'O tratador da API de despesas',
           task: "Complete a função `tratar(req)`. Ela recebe `{ method, path, body }` e devolve `{ status, body }`. Faça `GET /despesas/2` devolver a despesa (ou 404 com `{ erro: 'Despesa não encontrada' }` se não existir) e `POST /despesas` validar `descricao` e `valor`, respondendo 400 com `erro` quando algo estiver errado e 201 com a despesa criada quando estiver certo. Veja os resultados no console.",
           height: 200,
@@ -711,6 +722,7 @@ console.log(tratar({ method: 'POST', path: '/despesas', body: { descricao: 'Pix'
         },
         {
           type: 'quiz',
+          activityId: 'mini-roteador:3',
           question:
             'Na sua API, quem precisa validar que o valor é maior que zero, se o formulário React já tem `min="0.01"` no campo?',
           options: [

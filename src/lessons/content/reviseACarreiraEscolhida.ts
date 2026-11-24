@@ -63,6 +63,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'mapa-da-revisao:4',
           prompt: 'Em qual carreira cada situação costuma aparecer numa entrevista?',
           buckets: ['Frontend', 'Backend', 'Dados', 'DevOps'],
           items: [
@@ -126,6 +127,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'diario-de-lacunas:2',
           prompt:
             'Planeje as revisões dessa lacuna em 1, 3 e 7 dias, sempre contando a partir da entrevista, no dia 10/10. Escreva as datas no formato dia/mês, como 10/10.',
           language: 'text',
@@ -151,6 +153,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'revisao-espacada:2',
           prompt: 'Quais atividades são prática ativa e quais são revisão passiva?',
           buckets: ['Prática ativa', 'Revisão passiva'],
           items: [
@@ -167,6 +170,7 @@ export const content: LessonContent = {
         },
         {
           type: 'python',
+          activityId: 'revisao-espacada:3',
           title: 'Gere o seu calendário de revisão',
           task: 'Complete o laço: para cada tema e cada intervalo, calcule a data com `inicio + timedelta(days=dias)` e adicione a tupla `(data, tema)` ao `plano`. Depois, acrescente em `temas` uma lacuna da sua carreira.',
           code: `from datetime import date, timedelta
@@ -236,6 +240,7 @@ for dia, tema in plano:
         },
         {
           type: 'order',
+          activityId: 'entrevista-simulada:1',
           prompt: 'Coloque em ordem uma entrevista simulada de uma hora com uma colega.',
           items: [
             'Combinar o formato e o tempo de cada parte',
@@ -265,6 +270,7 @@ respostas, com exemplos do que eu disse.`,
         },
         {
           type: 'quiz',
+          activityId: 'entrevista-simulada:4',
           question: 'O que torna esse pedido mais útil do que “me faça perguntas de entrevista”?',
           options: [
             {
@@ -326,6 +332,7 @@ respostas, com exemplos do que eu disse.`,
         },
         {
           type: 'quiz',
+          activityId: 'recusa-e-feedback:2',
           question:
             'Depois de três processos, você percebe que travou nas três vezes em perguntas de SQL. O que fazer?',
           options: [

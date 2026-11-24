@@ -1,4 +1,5 @@
 import { createSign } from 'crypto';
+import { normalizeRepositorySlug } from '../src/config/site';
 
 export interface GitHubConfig {
   appId: string;
@@ -8,17 +9,63 @@ export interface GitHubConfig {
   baseBranch: string;
 }
 
-export function githubConfig(env = process.env): GitHubConfig | undefined {
-  const appId = env.GITHUB_APP_ID;
-  const privateKey = env.GITHUB_APP_PRIVATE_KEY?.replace(/\\n/g, '\n');
-  if (!appId || !privateKey) return undefined;
+export type GitHubDestinationResult =
+  | { status: 'unconfigured' }
+  | { status: 'invalid'; error: string }
+  | { status: 'ready'; config: GitHubConfig };
+
+const branchPattern = /^[^\s~^:?*[\]\\]+$/;
+
+export function resolveGitHubConfig(env = process.env): GitHubDestinationResult {
+  const appId = env.GITHUB_APP_ID?.trim();
+  const privateKey = env.GITHUB_APP_PRIVATE_KEY?.replace(/\\n/g, '\n').trim();
+  const hasAnyAppCredential = Boolean(appId || privateKey);
+
+  if (!hasAnyAppCredential) {
+    return { status: 'unconfigured' };
+  }
+
+  if (!appId || !privateKey) {
+    return {
+      status: 'invalid',
+      error:
+        'Configuração do GitHub App incompleta: defina GITHUB_APP_ID e GITHUB_APP_PRIVATE_KEY.',
+    };
+  }
+
+  const repository = normalizeRepositorySlug(env.CONTRIBUTIONS_REPOSITORY);
+  if (!repository) {
+    return {
+      status: 'invalid',
+      error:
+        'Destino de contribuições não configurado: defina CONTRIBUTIONS_REPOSITORY com dono/repositório do fork.',
+    };
+  }
+
+  const baseBranch = env.CONTRIBUTIONS_BASE_BRANCH?.trim();
+  if (!baseBranch || !branchPattern.test(baseBranch) || baseBranch.includes('..')) {
+    return {
+      status: 'invalid',
+      error:
+        'Branch de destino não configurada: defina CONTRIBUTIONS_BASE_BRANCH para o repositório de contribuições.',
+    };
+  }
+
   return {
-    appId,
-    privateKey,
-    installationId: env.GITHUB_APP_INSTALLATION_ID || undefined,
-    repository: env.CONTRIBUTIONS_REPOSITORY || 'flaviojmendes/trilhainfo',
-    baseBranch: env.CONTRIBUTIONS_BASE_BRANCH || 'main',
+    status: 'ready',
+    config: {
+      appId,
+      privateKey,
+      installationId: env.GITHUB_APP_INSTALLATION_ID?.trim() || undefined,
+      repository,
+      baseBranch,
+    },
   };
+}
+
+export function githubConfig(env = process.env): GitHubConfig | undefined {
+  const resolved = resolveGitHubConfig(env);
+  return resolved.status === 'ready' ? resolved.config : undefined;
 }
 
 const base64url = (value: string | Buffer) =>
@@ -127,6 +174,17 @@ export async function installationClient(config: GitHubConfig) {
         body: JSON.stringify({ labels: input.labels }),
       }).catch(() => undefined);
       return pull;
+    },
+    async createIssue(input: { title: string; body: string; labels?: string[] }) {
+      const issue = await request<{ number: number; html_url: string }>(token, `${repo}/issues`, {
+        method: 'POST',
+        body: JSON.stringify({
+          title: input.title,
+          body: input.body,
+          ...(input.labels?.length ? { labels: input.labels } : {}),
+        }),
+      });
+      return issue;
     },
   };
 }

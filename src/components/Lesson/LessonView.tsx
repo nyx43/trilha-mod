@@ -1,8 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import {
   PiArrowLeft,
   PiArrowRight,
   PiArrowUpRight,
+  PiBookmarkSimple,
+  PiBookmarkSimpleFill,
   PiCheckBold,
   PiClock,
   PiLockSimple,
@@ -10,6 +12,8 @@ import {
 } from 'react-icons/pi';
 import { Link, useLocation } from 'react-router-dom';
 import { activityKey, LessonPlace, lessonUrl } from '../../lessons';
+import publishedSectionOrder from '../../lessons/publishedSectionOrder.json';
+import { resolveSectionPosition, sectionPosition } from '../../lessons/sectionPosition';
 import {
   cardKey,
   enrollCards,
@@ -17,26 +21,35 @@ import {
   localDay,
   useLessonRecord,
 } from '../../lessons/progress';
+import { toggleSavedLesson, touchRecentLesson, useBookmarks } from '../../offline/bookmarks';
+import { FeedbackDialog } from '../Feedback/FeedbackDialog';
 import { LessonContent, LessonMeta } from '../../lessons/types';
 import { persistenceLessonId, persistencePracticeSection } from '../../lessons/persistencePilot';
 import { Checklist } from '../Guide/Checklist';
 import { Inline } from '../Guide/inline';
 import { NarrationProvider } from '../../narration/controller';
 import { NarrationBlockButton, NarrationPlayer } from '../../narration/NarrationPlayer';
-import { LessonTutor } from '../../tutor/LessonTutor';
+import { isTutorEnabled, OFFLINE_APP_BUILD } from '../../runtime/mode';
 import { LessonContext } from './context';
 import { Flashcards } from './Flashcards';
 import { LessonBlockView } from './LessonBlock';
 import { PersistencePilot } from './PersistencePilot';
+import { safeDecodeHash } from '../../support/hash';
 import '../Guide/guide.css';
 import './lesson.css';
 
 const closingId = 'fechamento';
+const legacySectionOrder: Record<string, string[]> = publishedSectionOrder;
+const LazyLessonTutor = OFFLINE_APP_BUILD
+  ? null
+  : lazy(() => import('../../tutor/LessonTutor').then((m) => ({ default: m.LessonTutor })));
 
 export function LessonView({ lesson, place }: { lesson: LessonMeta; place: LessonPlace }) {
   const [content, setContent] = useState<LessonContent | null>(null);
   const [failed, setFailed] = useState(false);
   const [record, update] = useLessonRecord(lesson.id);
+  const bookmarks = useBookmarks();
+  const isSaved = Boolean(bookmarks.savedLessons[lesson.id]);
   const [showAll, setShowAll] = useState(false);
   const focusTarget = useRef<string>();
   const lessonContainerRef = useRef<HTMLElement>(null);
@@ -44,6 +57,10 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
   const { course, previous, next } = place;
   const trailGroup = course.groups[lesson.id] || lesson.groupIds[0];
   const hasPersistencePilot = lesson.id === persistenceLessonId;
+
+  useEffect(() => {
+    touchRecentLesson(lesson.id, course.id);
+  }, [lesson.id, course.id]);
 
   useEffect(() => {
     let current = true;
@@ -59,14 +76,27 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
     };
   }, [lesson]);
 
-  const sections = content?.sections || [];
+  const sections = useMemo(() => content?.sections || [], [content]);
   const total = sections.length + 1;
-  const reached = Math.min(record?.reached ?? 0, total - 1);
+  const ids = useMemo(() => [...sections.map((section) => section.id), closingId], [sections]);
+  const originalIds = legacySectionOrder[lesson.id];
+  const legacyIds = originalIds && [...originalIds, closingId];
+  const reached = resolveSectionPosition(ids, record?.position, record?.reached, legacyIds);
   const visible = showAll || record?.done ? total : reached + 1;
+  const visibleRef = useRef(visible);
+  visibleRef.current = visible;
   const done = !!record?.done;
-  const score = lessonScore(record);
+  const activityIds = useMemo(
+    () =>
+      new Set(
+        sections.flatMap(({ blocks }) =>
+          blocks.flatMap(({ activityId }) => (activityId ? [activityId] : [])),
+        ),
+      ),
+    [sections],
+  );
+  const score = lessonScore(record, activityIds);
   const percent = done ? 100 : Math.round((reached / total) * 100);
-  const ids = [...sections.map((section) => section.id), closingId];
 
   function scheduleFocusHeading(targetId: string) {
     return requestAnimationFrame(() => {
@@ -91,28 +121,42 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
 
   useEffect(() => {
     if (!content || !hash) return;
-    const targetId = decodeURIComponent(hash.slice(1));
+    const targetId = safeDecodeHash(hash);
     const targetIndex = ids.indexOf(targetId);
     if (targetIndex < 0) return;
-    focusTarget.current = targetId;
-    if (targetIndex >= visible) {
+    if (targetIndex >= visibleRef.current) {
+      focusTarget.current = targetId;
       setShowAll(true);
       return;
     }
-    const frame = scheduleFocusHeading(targetId);
     focusTarget.current = undefined;
+    const frame = scheduleFocusHeading(targetId);
     return () => cancelAnimationFrame(frame);
-  }, [content, hash]);
+  }, [content, hash, ids]);
 
   function advance(index: number) {
     if (index !== reached + 1 || index >= total) return;
     focusTarget.current = ids[index];
-    update((previous) => ({ ...previous, reached: Math.max(previous.reached, index) }));
+    update((previous) =>
+      resolveSectionPosition(ids, previous.position, previous.reached, legacyIds) >= index
+        ? previous
+        : { ...previous, reached: index, position: sectionPosition(ids, index) },
+    );
   }
 
   function complete() {
     if (!content) return;
-    update((previous) => ({ ...previous, reached: total - 1, done: previous.done || localDay() }));
+    update((previous) =>
+      previous.done
+        ? previous
+        : {
+            ...previous,
+            reached: total - 1,
+            position: sectionPosition(ids, total - 1),
+            done: localDay(),
+            doneRevision: content.revision ?? 1,
+          },
+    );
     enrollCards(content.cards.map((card) => cardKey(lesson.id, card.id)));
   }
 
@@ -124,7 +168,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
       scopeKey={lesson.id}
       hasMoreHiddenSections={Boolean(content && !showAll && visible < total)}
     >
-      <LessonContext.Provider value={{ lessonId: lesson.id }}>
+      <LessonContext.Provider value={{ lessonId: lesson.id, revision: content?.revision }}>
         <article
           ref={lessonContainerRef}
           className="guide-page lesson-page"
@@ -151,11 +195,35 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
             <p className="guide-summary" data-narration-field="summary">
               {lesson.summary}
             </p>
-            {content && (
-              <div className="narration-clip-controls">
-                <NarrationBlockButton clipId="header" label="Ouvir apresentação" />
-              </div>
-            )}
+            <div className="lesson-header-tools">
+              {content && (
+                <div className="narration-clip-controls">
+                  <NarrationBlockButton clipId="header" label="Ouvir apresentação" />
+                </div>
+              )}
+              <button
+                type="button"
+                className={isSaved ? 'lesson-button' : 'lesson-button-quiet'}
+                aria-pressed={isSaved}
+                onClick={() => toggleSavedLesson(lesson.id, course.id)}
+              >
+                {isSaved ? (
+                  <PiBookmarkSimpleFill aria-hidden="true" />
+                ) : (
+                  <PiBookmarkSimple aria-hidden="true" />
+                )}
+                <span>{isSaved ? 'Aula salva' : 'Salvar aula'}</span>
+              </button>
+              <FeedbackDialog
+                triggerLabel="Avaliar / relatar"
+                triggerClassName="lesson-button-quiet"
+                lessonId={lesson.id}
+                lessonTitle={lesson.title}
+                courseId={course.id}
+                courseTitle={course.title}
+                sectionId={sections[reached]?.id}
+              />
+            </div>
             <ul className="guide-facts">
               <li>
                 <PiClock aria-hidden="true" /> cerca de {lesson.minutes} min
@@ -310,7 +378,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                       )}
                       {section.blocks.map((block, blockIndex) => (
                         <LessonBlockView
-                          key={blockIndex}
+                          key={block.activityId ?? blockIndex}
                           block={block}
                           lessonId={lesson.id}
                           activityId={activityKey(section.id, blockIndex)}
@@ -407,7 +475,11 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                         />
                         <Link
                           className="lesson-trail-link"
-                          to={`/roadmap/${course.id}#${encodeURIComponent(trailGroup)}`}
+                          to={
+                            trailGroup
+                              ? `/roadmap/${course.id}#${encodeURIComponent(trailGroup)}`
+                              : `/roadmap/${course.id}`
+                          }
                         >
                           Registrar a prática na trilha {course.title}{' '}
                           <PiArrowUpRight aria-hidden="true" />
@@ -483,17 +555,19 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
             </nav>
           </footer>
         </article>
-        {content && (
-          <LessonTutor
-            title={lesson.title}
-            summary={lesson.summary}
-            hook={content.hook}
-            sections={sections.slice(0, visible)}
-            suggestedSection={
-              sections.slice(0, visible).find(({ id }) => hash === `#${id}`)?.id ??
-              sections[reached]?.id
-            }
-          />
+        {content && LazyLessonTutor && isTutorEnabled() && (
+          <Suspense fallback={null}>
+            <LazyLessonTutor
+              title={lesson.title}
+              summary={lesson.summary}
+              hook={content.hook}
+              sections={sections.slice(0, visible)}
+              suggestedSection={
+                sections.slice(0, visible).find(({ id }) => hash === `#${id}`)?.id ??
+                sections[reached]?.id
+              }
+            />
+          </Suspense>
         )}
       </LessonContext.Provider>
     </NarrationProvider>

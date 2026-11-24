@@ -22,6 +22,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'o-que-e-explorar:3',
           question:
             'O time vai lançar uma tela nova de cadastro amanhã, a especificação é curta e ninguém sabe direito como as pessoas vão usar. Qual abordagem traz mais informação hoje?',
           options: [
@@ -91,6 +92,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'charter-e-tempo:2',
           question: 'Qual destes é o melhor charter para uma sessão de 45 minutos?',
           options: [
             {
@@ -113,6 +115,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'charter-e-tempo:3',
           prompt: 'Coloque em ordem uma sessão exploratória.',
           items: [
             'Escrever o charter e combinar o timebox',
@@ -170,6 +173,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'heuristicas:2',
           prompt: 'De que letra da heurística vem cada ideia de teste?',
           buckets: ['Função', 'Dados', 'Plataforma', 'Tempo'],
           items: [
@@ -197,6 +201,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
+          activityId: 'sessao-na-pratica:1',
           title: 'Sessão exploratória: Clube de Descontos',
           task: 'Use a aba de resultado como pessoa usuária: tente nomes com acento, senhas no limite, CEPs estranhos e cliques rápidos. A cada descoberta, adicione uma nota na lista `anotacoes`, começando com `BUG:`, `PERGUNTA:` ou `IDEIA:`, e execute de novo para ver o diário. Não mexa no código abaixo da linha marcada: você está testando, não corrigindo.',
           html: `<main>
@@ -473,6 +478,7 @@ Severidade: alta (impede o cadastro de muita gente)`,
         },
         {
           type: 'classify',
+          activityId: 'relato-de-bug:4',
           prompt:
             'Severidade é o tamanho do estrago; prioridade é a urgência de corrigir. Classifique cada bug.',
           buckets: [
@@ -503,6 +509,7 @@ Severidade: alta (impede o cadastro de muita gente)`,
         },
         {
           type: 'quiz',
+          activityId: 'relato-de-bug:5',
           question:
             'Você achou o bug da senha com 7 caracteres. Antes de relatar, o que mais aumenta a chance de ele ser corrigido rápido?',
           options: [
@@ -536,6 +543,7 @@ Severidade: alta (impede o cadastro de muita gente)`,
         },
         {
           type: 'quiz',
+          activityId: 'comunicacao-sem-culpa:1',
           question:
             'O mesmo bug do CEP voltou depois de ser corrigido na semana passada. Como você avisa no canal do time?',
           options: [
@@ -559,6 +567,7 @@ Severidade: alta (impede o cadastro de muita gente)`,
         },
         {
           type: 'order',
+          activityId: 'comunicacao-sem-culpa:2',
           prompt: 'Coloque em ordem a vida típica de um bug no time.',
           items: [
             'Quem testa relata o bug com passos, esperado, obtido e evidência',

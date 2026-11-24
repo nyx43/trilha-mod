@@ -39,6 +39,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'conferencia-automatica:4',
           question:
             'Seu colega diz: “Não preciso de CI, eu sempre rodo os testes antes de subir”. Qual é o melhor argumento a favor da CI?',
           options: [
@@ -131,6 +132,7 @@ export const content: LessonContent = {
         },
         {
           type: 'fill',
+          activityId: 'anatomia-do-workflow:3',
           prompt:
             'Complete o workflow: ele deve rodar em pull requests, numa máquina Ubuntu, baixar o código e instalar as dependências travadas.',
           language: 'yaml',
@@ -195,6 +197,7 @@ export const content: LessonContent = {
         },
         {
           type: 'terminal',
+          activityId: 'ler-a-falha:2',
           title: 'Do X vermelho ao verde',
           task: 'Seu PR na loja falhou. Investigue pelo terminal com a CLI do GitHub (`gh`), reproduza, corrija e envie de novo.',
           prompt: 'voce@computador:~/loja$',
@@ -257,6 +260,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'ler-a-falha:3',
           question:
             'Um teste de interface falha na CI, você clica em “Re-run jobs” e ele passa, sem nenhuma mudança no código. O que isso indica?',
           options: [
@@ -313,6 +317,7 @@ export const content: LessonContent = {
         },
         {
           type: 'classify',
+          activityId: 'cache-e-segredos:4',
           prompt: 'Para cada item, onde ele deve ficar?',
           buckets: ['Pode ir no repositório', 'Deve ser um segredo'],
           items: [
@@ -381,6 +386,7 @@ export const content: LessonContent = {
         },
         {
           type: 'order',
+          activityId: 'publicar:3',
           prompt: 'Coloque em ordem o que acontece desde a sua mudança até o site atualizado.',
           items: [
             'Você abre um pull request com a mudança',
@@ -401,6 +407,7 @@ export const content: LessonContent = {
         },
         {
           type: 'quiz',
+          activityId: 'publicar:5',
           question:
             'Seu site no GitHub Pages abre em branco, e o console mostra `404` para `/assets/index.js`. O endereço é `ana.github.io/loja/`. Qual é a causa mais provável?',
           options: [
