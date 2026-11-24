@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Quando seu container Docker toma **OOMKilled**, quando duas threads corrompem o saldo de uma conta sem lançar erro, ou quando uma API fica lenta mesmo com 15% de CPU porque está presa em troca de contexto e *page faults*, quem explica o mistério não é o framework web — é o **Sistema Operacional** rodando por baixo de tudo.',
   sections: [
     {
@@ -161,9 +162,15 @@ export const content: LessonContent = {
             {
               text: 'endereco_fisico = tabela_paginas[pagina] * 4096 + deslocamento',
               label: 'Endereço físico final na RAM',
-              note: 'Se `pagina` não estiver presente na RAM, dispara um Page Fault e o kernel carrega do disco.',
+              note: 'A fórmula pressupõe uma página presente e um acesso permitido. Se a tradução ou a permissão impedir o acesso, a CPU gera um page fault para o kernel tratar.',
             },
           ],
+        },
+        {
+          type: 'callout',
+          tone: 'tip',
+          title: 'Um page fault pode ser resolvido sem acessar o disco',
+          text: 'No primeiro acesso a uma região alocada sob demanda, o kernel pode mapear uma página zerada. Em copy-on-write, uma tentativa de escrita pode levar à cópia de uma página já em RAM. Uma página que está no swap pode exigir leitura do armazenamento. Se o acesso for inválido, o Linux pode enviar `SIGSEGV` ao processo.',
         },
         {
           type: 'callout',
@@ -261,7 +268,7 @@ export const content: LessonContent = {
           type: 'python',
           activityId: 'so-py-n2-mmu-paginacao',
           title: 'Nível 2 — Simulador da MMU: tradução de endereços virtuais e Page Faults',
-          task: 'Implemente `traduzir_enderecos(enderecos_virtuais, tabela_paginas, tam_pagina=4096)` onde `tabela_paginas` mapeia `num_pagina -> frame_fisico` (se ausente ou `None`, ocorreu **Page Fault**). Retorne `{"fisicos": list[int | None], "page_faults": int}` calculando `frame * tam_pagina + offset` quando presente e `None` quando houver page fault.',
+          task: 'Implemente `traduzir_enderecos(enderecos_virtuais, tabela_paginas, tam_pagina=4096)`. A tabela mapeia `num_pagina -> frame_fisico`. Neste modelo, uma entrada ausente ou `None` representa uma página ainda sem moldura. O simulador apenas conta essa falha de página. Retorne `{"fisicos": list[int | None], "page_faults": int}` calculando `frame * tam_pagina + offset` quando houver moldura e incluindo `None` para cada falha.',
           code: `def traduzir_enderecos(enderecos_virtuais: list[int], tabela_paginas: dict[int, int | None], tam_pagina: int = 4096) -> dict:
     # TODO: calcular pagina = addr // tam_pagina, offset = addr % tam_pagina e consultar tabela_paginas
     return {"fisicos": [], "page_faults": 0}

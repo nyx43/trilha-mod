@@ -77,6 +77,48 @@ function runPythonLocally(code: string, tests: string[], where: string) {
 }
 
 describe('Exercícios de SQL e Python', () => {
+  it('verifica os saldos gravados e diferencia confirmar de desfazer uma transferência', async () => {
+    const confirmacao = blocks.find(
+      ([, block]) => block.activityId === 'java-sql-n1-transferencia-confirmada',
+    )?.[1];
+    const cancelamento = blocks.find(
+      ([, block]) => block.activityId === 'java-sql-n1-transferencia-cancelada',
+    )?.[1];
+    if (
+      confirmacao?.type !== 'sql' ||
+      !confirmacao.solution ||
+      cancelamento?.type !== 'sql' ||
+      !cancelamento.solution
+    ) {
+      throw new Error('Exercícios de transferência em SQLite não encontrados.');
+    }
+
+    const SQL = await loadSql((file) => resolve(__dirname, '../../node_modules/sql.js/dist', file));
+    const executar = (block: typeof confirmacao, consulta: string) =>
+      runSql(
+        SQL,
+        block.setup,
+        consulta,
+        (block.checks || []).map((check) => check.test),
+      ).checks;
+
+    expect(
+      executar(
+        confirmacao,
+        `-- BEGIN e COMMIT citados apenas no comentário
+SELECT 'C-01', -50 UNION ALL SELECT 'C-02', 300;`,
+      ),
+    ).toEqual([false, false]);
+
+    const semTransacao = confirmacao.solution
+      .replace('BEGIN TRANSACTION;', '')
+      .replace('COMMIT;', '');
+    expect(executar(confirmacao, semTransacao)).toEqual([true, false]);
+
+    const confirmarEmVezDeDesfazer = cancelamento.solution.replace('ROLLBACK;', 'COMMIT;');
+    expect(executar(cancelamento, confirmarEmVezDeDesfazer)).toEqual([true, false]);
+  });
+
   it('a solução cumpre todos os objetivos e o código inicial não', async () => {
     const SQL = await loadSql((file) => resolve(__dirname, '../../node_modules/sql.js/dist', file));
     const failures: string[] = [];

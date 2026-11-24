@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Você já tentou copiar um backup de 5 GB para um pendrive de 64 GB e recebeu *"arquivo grande demais"* mesmo com 50 GB livres? Ou perdeu um banco inteiro após uma queda de energia — ou descobriu meses depois que uma foto antiga corrompeu silenciosamente no HD (*bit-rot*)? Tudo isso é decidido por uma camada invisível: o **Sistema de Arquivos**.',
   sections: [
     {
@@ -208,8 +209,9 @@ export const content: LessonContent = {
           activityId: 'fs-term-n1-inodes-links',
           title: 'Nível 1 — Inspecionando sistemas de arquivos, inodes e links no Linux',
           task: 'Execute os comandos para inspecionar partições, esgotamento de inodes e comprovar na prática a diferença de inode entre hard link e symlink.',
-          prompt: 'eng@storage-01:~/lab$',
-          intro: 'Diretório ~/lab contém o arquivo relatorio.txt (inode 524290).',
+          prompt: 'eng@storage-01:/mnt/backups/lab$',
+          intro:
+            'O laboratório fica em /mnt/backups, no volume ZFS com inodes disponíveis. O diretório já contém relatorio.txt e copia_hard.txt, dois nomes para o inode 524290.',
           steps: [
             {
               goal: 'Veja o tipo de sistema de arquivos (`-T`) e espaço em formato legível (`-h`) das partições montadas com `df -Th`',
@@ -226,7 +228,7 @@ export const content: LessonContent = {
               hint: 'Digite: df -i (note 100% de IUse% na raiz /!)',
             },
             {
-              goal: 'Crie um **link simbólico** chamado `atalho.txt` apontando para `relatorio.txt` com `ln -s relatorio.txt atalho.txt`',
+              goal: 'A raiz ext4 está sem inodes livres. No diretório atual, que fica no volume ZFS, crie um **link simbólico** com `ln -s relatorio.txt atalho.txt`',
               command: ['ln -s relatorio.txt atalho.txt'],
               output: '',
               hint: 'Use: ln -s relatorio.txt atalho.txt',

@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Subir um tutorial que funciona no `localhost` é a parte fácil. O trabalho real em desenvolvimento web começa quando o React recebe **CORS bloqueado**, o endpoint Django retorna `500` num campo vazio, a página de catálogo dispara **41 consultas SQL (N+1)** para listar 40 jogos, ou o time precisa decidir se quebra o sistema em microsserviços cedo demais.',
   sections: [
     {
@@ -330,7 +331,7 @@ print(listar_jogos_api(catalogo, {"genero": "rpg", "pagina": "1", "limite": "1"}
         },
         {
           type: 'playground',
-          activityId: 'web-pg-n2-catalogo-react',
+          activityId: 'web-pg-n2-catalogo-react-formulario',
           title: 'Nível 2 — Catálogo de Jogos em React (filtro + cadastro imutável sem reload)',
           task: 'Complete o componente `CatalogoJogos`: (1) o input de busca filtra os jogos por título (case-insensitive); (2) o formulário adiciona um novo jogo sem recarregar a página (`preventDefault`), ignorando título vazio; (3) mostre a contagem exata de jogos exibidos no elemento `#contador`.',
           framework: 'react',
@@ -437,38 +438,56 @@ ReactDOM.createRoot(document.getElementById("root")).render(<CatalogoJogos />);`
           },
           checks: [
             {
-              label: 'Renderiza os 3 jogos iniciais e atualiza a contagem ao filtrar por "had"',
-              test: `return new Promise((resolve) => setTimeout(() => {
+              label: 'Mostra 3 jogos no início e 1 jogo ao filtrar por "HAD"',
+              test: `await new Promise(resolve => setTimeout(resolve, 350));
                 const input = document.getElementById('busca');
-                if (!input) return resolve(false);
+                const contador = document.getElementById('contador');
+                if (!input || !contador) return false;
+                const contagem = () => Number(contador.textContent.match(/\\d+/)?.[0]);
+                if (document.querySelectorAll('li').length !== 3 || contagem() !== 3) return false;
                 const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
-                setter.call(input, 'had');
-                input.dispatchEvent(new Event('input', { bubbles: true }));
-                setTimeout(() => {
-                  const itens = document.querySelectorAll('li');
-                  const cont = document.getElementById('contador')?.textContent || '';
-                  resolve(itens.length === 1 && itens[0].textContent.includes('Hades') && cont.includes('1'));
-                }, 80);
-              }, 350));`,
+                ReactDOM.flushSync(() => {
+                  setter.call(input, 'HAD');
+                  input.dispatchEvent(new Event('input', { bubbles: true }));
+                });
+                const itens = document.querySelectorAll('li');
+                return itens.length === 1 && itens[0].textContent.trim() === 'Hades' && contagem() === 1;`,
             },
             {
-              label: 'Adiciona um novo jogo pelo formulário sem recarregar a página',
-              test: `return new Promise((resolve) => setTimeout(() => {
+              label: 'Ignora título em branco, cadastra um título válido e cancela o envio padrão',
+              test: `await new Promise(resolve => setTimeout(resolve, 350));
+                const root = document.getElementById('root');
                 const busca = document.getElementById('busca');
                 const novo = document.getElementById('novo');
-                const form = document.querySelector('form');
-                if (!busca || !novo || !form) return resolve(false);
+                const form = novo?.form;
+                const contador = document.getElementById('contador');
+                if (!root || !busca || !novo || !form || !contador) return false;
                 const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
-                setter.call(busca, '');
-                busca.dispatchEvent(new Event('input', { bubbles: true }));
-                setter.call(novo, 'Chrono Trigger');
-                novo.dispatchEvent(new Event('input', { bubbles: true }));
-                form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-                setTimeout(() => {
-                  const textos = Array.from(document.querySelectorAll('li')).map((el) => el.textContent);
-                  resolve(textos.includes('Chrono Trigger') && textos.length >= 4);
-                }, 80);
-              }, 500));`,
+                function preencher(input, valor) {
+                  ReactDOM.flushSync(() => {
+                    setter.call(input, valor);
+                    input.dispatchEvent(new Event('input', { bubbles: true }));
+                  });
+                }
+                function enviar(titulo) {
+                  preencher(novo, titulo);
+                  let cancelado = false;
+                  // O React trata o envio na raiz antes do bloqueio da prévia no document.
+                  root.addEventListener('submit', event => {
+                    cancelado = event.defaultPrevented;
+                  }, { once: true });
+                  ReactDOM.flushSync(() => {
+                    form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+                  });
+                  return cancelado;
+                }
+                const titulos = () => Array.from(document.querySelectorAll('li'), el => el.textContent.trim());
+                preencher(busca, '');
+                if (!enviar('   ') || titulos().length !== 3) return false;
+                if (!enviar('Chrono Trigger')) return false;
+                const exibidos = titulos();
+                return exibidos.length === 4 && exibidos.includes('Chrono Trigger') &&
+                  Number(contador.textContent.match(/\\d+/)?.[0]) === 4;`,
             },
           ],
         },

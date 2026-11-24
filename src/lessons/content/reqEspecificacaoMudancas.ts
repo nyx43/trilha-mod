@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Requisitos nunca ficam congelados depois da primeira reunião. No meio do semestre — ou na véspera do lançamento — o cliente muda uma regra tributária, o financeiro briga com o marketing por prioridade e ninguém sabe quais telas, endpoints e testes serão quebrados pela mudança. **Especificação IEEE 830/29148, Prototipagem, Matriz de Rastreabilidade, Gestão de Mudanças e Priorização** são o sistema nervoso que mantém o projeto sob controle.',
   sections: [
     {
@@ -251,7 +252,7 @@ export const content: LessonContent = {
         },
         {
           type: 'playground',
-          activityId: 'req2-pg-n1-prototipo-catraca',
+          activityId: 'req2-pg-n1-catraca-faixas-de-atraso',
           title: 'Nível 1 — Protótipo clicável de alta fidelidade (validação de regra da catraca)',
           task: 'Valide a regra negociada entre Financeiro e Recepção no protótipo: complete a função `validarCheckin()` para que: `diasAtraso === 0` mostre `"LIBERADO"` com classe `ok`; `diasAtraso` entre `1` e `5` mostre `"LIBERADO COM AVISO"` com classe `warn`; `diasAtraso >= 6` mostre `"BLOQUEADO"` com classe `block` e exiba o botão `#btn-excecao`.',
           height: 260,
@@ -300,24 +301,35 @@ document.getElementById('btn-testar').addEventListener('click', validarCheckin);
           },
           checks: [
             {
-              label:
-                'Atraso de 3 dias exibe "LIBERADO COM AVISO" (classe warn) e mantém botão exceção oculto',
+              label: 'Sem atraso, mostra "LIBERADO" e oculta o botão de exceção',
               test: `const inp = document.getElementById('atraso');
               const btn = document.getElementById('btn-testar');
               const st = document.getElementById('status');
               const exc = document.getElementById('btn-excecao');
-              inp.value = '3'; btn.click();
-              return st.textContent.includes('AVISO') && st.className === 'warn' && exc.hidden === true;`,
+              inp.value = '0'; btn.click();
+              return st.textContent.trim() === 'LIBERADO' && st.className === 'ok' && exc.hidden;`,
             },
             {
-              label:
-                'Atraso de 7 dias exibe "BLOQUEADO" (classe block) e revela o botão de exceção auditada',
+              label: 'De 1 a 5 dias, mostra "LIBERADO COM AVISO" e oculta o botão de exceção',
               test: `const inp = document.getElementById('atraso');
               const btn = document.getElementById('btn-testar');
               const st = document.getElementById('status');
               const exc = document.getElementById('btn-excecao');
-              inp.value = '7'; btn.click();
-              return st.textContent.includes('BLOQUEADO') && st.className === 'block' && exc.hidden === false;`,
+              return ['1', '3', '5'].every(dias => {
+                inp.value = dias; btn.click();
+                return st.textContent.trim() === 'LIBERADO COM AVISO' && st.className === 'warn' && exc.hidden;
+              });`,
+            },
+            {
+              label: 'A partir de 6 dias, mostra "BLOQUEADO" e revela o botão de exceção',
+              test: `const inp = document.getElementById('atraso');
+              const btn = document.getElementById('btn-testar');
+              const st = document.getElementById('status');
+              const exc = document.getElementById('btn-excecao');
+              return ['6', '7'].every(dias => {
+                inp.value = dias; btn.click();
+                return st.textContent.trim() === 'BLOQUEADO' && st.className === 'block' && !exc.hidden;
+              });`,
             },
           ],
         },

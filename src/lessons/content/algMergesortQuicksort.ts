@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Ordenar 1 milhão de registros em `O(n²)` exige cerca de **500 bilhões** de operações; em `O(n log n)` cai para cerca de **20 milhões** — uma diferença de **25.000 vezes**. Mas escolher errado entre **Merge Sort**, **Quick Sort** e estruturas como **Heaps** ou **Árvores Balanceadas** ainda pode derrubar uma API por explosão de memória ou pior caso `O(n²)` sob ataque.',
   sections: [
     {
@@ -159,18 +160,18 @@ esq, dir = 1, len(v) - 1
     },
     {
       id: 'armadilhas-pivo-e-introsort',
-      title: 'Como a indústria blindou o Quick Sort: Mediana de Três, Aleatorização e Introsort',
+      title: 'Como limitar o pior caso do Quick Sort: escolha do pivô e Introsort',
       blocks: [
         {
           type: 'text',
-          text: 'Se Quick Sort ingênuo tem pior caso `O(n²)` em entradas ordenadas ou adversariais (um atacante pode enviar uma requisição HTTP crafted para travar sua CPU — ataque *Algorithmic Complexity DoS*), por que C++ e Rust usam derivados dele? Porque aplicam três defesas diretas:',
+          text: 'Partições muito desbalanceadas podem empurrar o Quick Sort para `O(n²)`. A escolha do pivô e a partição em três vias melhoram casos comuns. Para garantir um limite de pior caso, também é preciso limitar a profundidade e trocar de algoritmo quando esse limite for atingido.',
         },
         {
           type: 'steps',
           items: [
             {
               title: '1. Escolha inteligente de pivô (Mediana de Três ou Aleatório)',
-              text: 'Em vez de pegar `v[first]`, calcula-se a mediana entre `v[inicio]`, `v[meio]` e `v[fim]` (ou sorteia-se um índice aleatório). Isso elimina imediatamente o pior caso em entradas ordenadas ou reversas.',
+              text: 'A mediana entre o primeiro, o central e o último valor produz uma boa divisão em vetores já ordenados ou invertidos com valores distintos. Outras ordens ainda podem gerar partições ruins. Um pivô aleatório dá tempo esperado `O(n log n)`, com pior caso ainda quadrático.',
             },
             {
               title: '2. Particionamento de 3 vias (Dutch National Flag) para muitas duplicatas',
@@ -178,7 +179,7 @@ esq, dir = 1, len(v) - 1
             },
             {
               title: '3. Hibridização (Introsort = Quick + Heap + Insertion)',
-              text: 'Se a profundidade da recursão ultrapassar `2 * log₂(n)`, o algoritmo alterna automaticamente para **Heap Sort** (garantindo pior caso `O(n log n)` em espaço `O(1)`). Para fatias menores que ~16 itens, finaliza com **Insertion Sort**.',
+              text: 'Ao atingir um limite como `2 * floor(log₂(n))`, o Introsort troca para **Heap Sort** na fatia restante. Isso garante tempo `O(n log n)` no pior caso. O Heap Sort pode ordenar a fatia no lugar, e o limite mantém a pilha de chamadas em `O(log n)`. Fatias pequenas podem ser ordenadas com **Insertion Sort**.',
             },
           ],
         },
@@ -264,7 +265,7 @@ esq, dir = 1, len(v) - 1
       blocks: [
         {
           type: 'text',
-          text: 'Estes laboratórios conectam diretamente o conteúdo de 26.2 com problemas clássicos de entrevistas e sistemas reais: conte inversões usando Merge Sort (**Nível 1**), blinde o Quick Sort contra entrada ordenada (**Nível 2**) e resolva um problema real de Top-K sem ordenar a coleção inteira (**Nível 3**).',
+          text: 'Conte inversões usando Merge Sort (**Nível 1**), limite a profundidade do Quick Sort (**Nível 2**) e selecione os itens mais críticos de um fluxo sem ordenar todos eles (**Nível 3**).',
         },
         {
           type: 'python',
@@ -317,24 +318,32 @@ print(merge_sort_inversoes([2, 4, 1, 3, 5]))
         },
         {
           type: 'python',
-          activityId: 'mq-py-n2-quicksort-3vias',
-          title: 'Nível 2 — Quick Sort blindado (mediana de três + partição em 3 vias)',
-          task: 'Implemente `quicksort_seguro(lista)` que escolhe como pivô a **mediana entre o primeiro, o do meio e o último elemento** e particiona em três listas (`menores`, `iguais`, `maiores`). Ele deve ordenar sem travar tanto uma lista já ordenada de 3.000 itens quanto uma lista com 3.000 valores repetidos!',
+          activityId: 'mq-py-n2-quicksort-limite',
+          title: 'Nível 2 — Quick Sort com limite de profundidade',
+          task: 'Implemente `quicksort_seguro(lista)`: use a mediana entre o primeiro, o central e o último valor como pivô e particione a fatia em três listas. Limite a profundidade a `2 * floor(log₂(n))`, onde `n` é o tamanho original. Ao atingir o limite, use `sorted(fatia)` para ordenar apenas a fatia restante. Esse laboratório usa a mesma ideia do Introsort com a ordenação do Python no lugar de Heap Sort.',
           code: `def quicksort_seguro(lista: list[int]) -> list[int]:
-    # TODO: caso-base, mediana de 3 como pivô, partição 3 vias (<, ==, >)
+    # TODO: particionar em três vias e usar sorted() ao atingir o limite
     return list(lista)
 
 print(quicksort_seguro([9, 3, 7, 3, 1, 3, 8]))
 `,
           solution: `def quicksort_seguro(lista: list[int]) -> list[int]:
-    if len(lista) <= 1:
-        return list(lista)
-    a, b, c = lista[0], lista[len(lista) // 2], lista[-1]
-    pivo = sorted([a, b, c])[1]
-    menores = [x for x in lista if x < pivo]
-    iguais = [x for x in lista if x == pivo]
-    maiores = [x for x in lista if x > pivo]
-    return quicksort_seguro(menores) + iguais + quicksort_seguro(maiores)
+    limite = 2 * (max(1, len(lista)).bit_length() - 1)
+
+    def ordenar(fatia: list[int], profundidade: int) -> list[int]:
+        if len(fatia) <= 1:
+            return list(fatia)
+        if profundidade == limite:
+            return sorted(fatia)
+
+        primeiro, meio, ultimo = fatia[0], fatia[len(fatia) // 2], fatia[-1]
+        pivo = sorted([primeiro, meio, ultimo])[1]
+        menores = [x for x in fatia if x < pivo]
+        iguais = [x for x in fatia if x == pivo]
+        maiores = [x for x in fatia if x > pivo]
+        return ordenar(menores, profundidade + 1) + iguais + ordenar(maiores, profundidade + 1)
+
+    return ordenar(lista, 0)
 
 print(quicksort_seguro([9, 3, 7, 3, 1, 3, 8]))
 `,
@@ -344,42 +353,42 @@ print(quicksort_seguro([9, 3, 7, 3, 1, 3, 8]))
               test: `quicksort_seguro([9, -2, 3, 7, 3, 1, 3, 8]) == [-2, 1, 3, 3, 3, 7, 8, 9]`,
             },
             {
-              label: 'Não estoura recursão nem fica quadrático em lista já ordenada de 3.000 itens',
+              label: 'Ordena uma lista já ordenada de 3.000 itens sem estourar a recursão',
               test: `quicksort_seguro(list(range(3000))) == list(range(3000))`,
             },
             {
-              label: 'Lida em O(n) com 3.000 elementos idênticos sem estourar recursão',
+              label: 'Ordena 3.000 elementos idênticos sem estourar a recursão',
               test: `quicksort_seguro([7] * 3000) == [7] * 3000`,
+            },
+            {
+              label: 'Ordena 2.402 itens que geram partições muito desbalanceadas',
+              test: `quicksort_seguro(list(range(0, 2402, 2)) + list(range(1, 2402, 2))) == list(range(2402))`,
             },
           ],
         },
         {
           type: 'python',
-          activityId: 'mq-py-n3-topk-heap',
-          title: 'Nível 3 — Continuidade: Top-K alertas críticos em O(n log k) com Min-Heap',
-          task: 'Você recebe um fluxo de eventos `(nome, severidade)` e precisa retornar os `k` eventos de **maior severidade** (ordenados da maior para a menor, empatando por nome crescente), usando `heapq` para manter apenas `k` itens na memória em vez de ordenar tudo com `sorted()` na entrada inteira.',
-          code: `import heapq
+          activityId: 'mq-py-n3-topk-desempate',
+          title: 'Nível 3 — Continuidade: Top-K alertas críticos com um heap de tamanho k',
+          task: 'Receba um iterável de eventos `(nome, severidade)` e devolva os `k` primeiros na ordem de severidade decrescente e nome crescente. Use a mesma ordem para selecionar os itens e para devolver o resultado, inclusive quando houver empate na última vaga. Dica: `heapq.nsmallest` aceita uma chave de ordenação e mantém até `k` candidatos ao percorrer um fluxo.',
+          code: `from collections.abc import Iterable
+import heapq
 
-def top_k_criticos(eventos: list[tuple[str, int]], k: int) -> list[tuple[str, int]]:
-    # TODO: use um min-heap de tamanho máximo k com heapq
+def top_k_criticos(eventos: Iterable[tuple[str, int]], k: int) -> list[tuple[str, int]]:
+    # TODO: use heapq com uma chave que considere severidade e nome
     return []
 
 amostra = [("db-timeout", 90), ("cache-miss", 20), ("oom-kill", 99), ("disk-80", 75), ("auth-err", 90)]
 print(top_k_criticos(amostra, 3))
 `,
-          solution: `import heapq
+          solution: `from collections.abc import Iterable
+import heapq
 
-def top_k_criticos(eventos: list[tuple[str, int]], k: int) -> list[tuple[str, int]]:
+def top_k_criticos(eventos: Iterable[tuple[str, int]], k: int) -> list[tuple[str, int]]:
     if k <= 0:
         return []
-    heap = []
-    for nome, sev in eventos:
-        item = (sev, nome)
-        if len(heap) < k:
-            heapq.heappush(heap, item)
-        elif sev > heap[0][0] or (sev == heap[0][0] and nome < heap[0][1]):
-            heapq.heapreplace(heap, item)
-    return [(nome, sev) for sev, nome in sorted(heap, key=lambda x: (-x[0], x[1]))]
+    # Quanto menor a chave, mais alta é a prioridade do evento.
+    return heapq.nsmallest(k, eventos, key=lambda evento: (-evento[1], evento[0]))
 
 amostra = [("db-timeout", 90), ("cache-miss", 20), ("oom-kill", 99), ("disk-80", 75), ("auth-err", 90)]
 print(top_k_criticos(amostra, 3))
@@ -390,12 +399,16 @@ print(top_k_criticos(amostra, 3))
               test: `top_k_criticos([("db-timeout", 90), ("cache-miss", 20), ("oom-kill", 99), ("disk-80", 75), ("auth-err", 90)], 3) == [("oom-kill", 99), ("auth-err", 90), ("db-timeout", 90)]`,
             },
             {
+              label: 'Seleciona os nomes certos quando a última vaga está empatada em um fluxo',
+              test: `top_k_criticos(iter([("c", 90), ("b", 90), ("a", 90)]), 2) == [("a", 90), ("b", 90)]`,
+            },
+            {
               label: 'Trata k == 0 e k maior que o número de eventos',
               test: `top_k_criticos([("a", 5)], 0) == [] and top_k_criticos([("b", 2), ("a", 8)], 5) == [("a", 8), ("b", 2)]`,
             },
             {
               label: 'Utiliza o módulo heapq na implementação',
-              test: `'heapq' in __codigo__ and ('heappush' in __codigo__ or 'nlargest' in __codigo__)`,
+              test: `'heapq' in __codigo__ and any(nome in __codigo__ for nome in ("heappush", "nlargest", "nsmallest"))`,
             },
           ],
         },
@@ -420,7 +433,7 @@ print(top_k_criticos(amostra, 3))
   recap: [
     'Merge Sort garante Θ(n log n) em todos os casos e é estável (com `<=`), mas exige O(n) de memória auxiliar.',
     'Quick Sort é rápido em memória pela localidade de cache, mas escolher pivô fixo degrada para O(n²) em entradas ordenadas.',
-    'Mediana de três, particionamento de 3 vias e Introsort blindam o Quick Sort contra entradas adversariais e duplicatas.',
+    'Mediana de três melhora a escolha do pivô e a partição em três vias lida com duplicatas. No Introsort, o limite de profundidade e a troca para Heap Sort garantem o pior caso O(n log n).',
     'Heaps (Top-K e prioridades), Árvores Balanceadas (faixas ordenadas dinâmicas) e Tabelas Hash (chave exata O(1)) completam o arsenal de estruturas de dados.',
   ],
   cards: [

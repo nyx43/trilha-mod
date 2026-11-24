@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Imagine um cliente clicando em "Finalizar Compra" na Black Friday e a requisição HTTP ficar presa 18 segundos esperando o serviço de e-mail, a emissão de nota fiscal na prefeitura e o antifraude responderem em cadeia — e se o servidor de e-mail piscar, a venda inteira falha. **Mensageria assíncrona com RabbitMQ** resolve esse acoplamento temporal, mas traz novos desafios reais: mensagens duplicadas, venenosas e consistência eventual.',
   sections: [
     {
@@ -159,7 +160,7 @@ export const content: LessonContent = {
             },
             {
               title: '3. Consumidor Idempotente (entrega At-Least-Once)',
-              text: 'Se o worker processou a cobrança, gravou no banco, mas caiu **antes** de enviar o `ACK` ao RabbitMQ, o broker reenviará a mesma mensagem a outro worker! Toda ação com efeito colateral precisa checar um `event_id` único (chave de idempotência) para nunca cobrar o cliente duas vezes.',
+              text: 'Se um worker concluir uma cobrança e cair antes do ACK, o RabbitMQ pode reentregar a mensagem. Para um efeito no próprio banco, grave o `event_id` com uma restrição de unicidade e aplique a mudança na mesma transação. Para uma cobrança em serviço externo, envie a mesma chave de idempotência em todas as tentativas, conforme o contrato do provedor. Envie o ACK depois de registrar a conclusão.',
             },
           ],
         },
@@ -167,7 +168,7 @@ export const content: LessonContent = {
           type: 'callout',
           tone: 'tip',
           title: 'Regra de ouro em sistemas distribuídos',
-          text: 'Em mensageria real, assuma sempre entrega **pelo menos uma vez (at-least-once)** e fora de ordem eventual. Quem garante que o efeito final ocorra "exatamente uma vez" não é o broker — é o **consumidor idempotente**.',
+          text: 'A entrega **pelo menos uma vez (at-least-once)** admite reentregas. Use confirmações de publicação para saber o que o broker aceitou, filas duráveis e mensagens persistentes quando precisar sobreviver a reinícios, e ACK manual para confirmar o processamento. A idempotência evita repetir o efeito de negócio quando o mesmo evento é processado novamente.',
         },
       ],
     },
@@ -234,7 +235,7 @@ export const content: LessonContent = {
             },
           ],
           explanation:
-            'Manual ACK + `prefetch_count` protege entrega e justiça entre workers; DLQ isola poison messages; idempotência elimina duplicidade em redelivery; Outbox elimina inconsistência entre banco e broker.',
+            'ACK manual confirma processamento e `prefetch_count` limita entregas pendentes por consumidor. A DLQ isola falhas permanentes, a idempotência evita repetir efeitos e o Outbox permite retomar uma publicação pendente.',
         },
       ],
     },
@@ -244,7 +245,7 @@ export const content: LessonContent = {
       blocks: [
         {
           type: 'text',
-          text: 'Como ambientes web/mobile offline não exigem um servidor RabbitMQ rodando localmente, vamos programar o **coração algorítmico** do broker e do consumidor em Python puro: roteamento Topic AMQP (**Nível 1**), worker idempotente com retry e DLQ (**Nível 2**) e ordenação do padrão Transactional Outbox (**Nível 3**).',
+          text: 'Simule o roteamento Topic em Python (**Nível 1**), pratique retries, DLQ e deduplicação em memória durante um lote (**Nível 2**) e ordene as etapas do Transactional Outbox (**Nível 3**).',
         },
         {
           type: 'python',
@@ -305,7 +306,7 @@ print(casa_topic("pedido.#", "pedido.pago.pix"))
           type: 'python',
           activityId: 'rmq-py-n2-worker-dlq-idempotente',
           title: 'Nível 2 — Worker resiliente com Idempotência, Retries e Dead Letter Queue',
-          task: 'Implemente `processar_fila(mensagens, handler, max_tentativas=2)`. Cada mensagem é um dict `{"id": ..., "payload": ...}`. Regras: (1) se `id` já foi processado com sucesso, **ignore como duplicata** (conte em `duplicadas` e NÃO chame `handler`); (2) se `handler(payload)` levantar exceção, tente novamente até completar `max_tentativas`; se todas falharem, envie a mensagem para a lista `dlq`; (3) retorne `{"ok": [...ids], "duplicadas": int, "dlq": [...ids]}`.',
+          task: 'Implemente `processar_fila(mensagens, handler, max_tentativas=2)`. Cada mensagem tem `id` e `payload`. Dentro de uma chamada, conte repetições de IDs já processados com sucesso em `duplicadas` e pule o `handler`. Em caso de exceção, repita até `max_tentativas` e mande o ID para `dlq` se todas falharem. Retorne `{"ok": [...ids], "duplicadas": int, "dlq": [...ids]}`. O conjunto em memória simula apenas a deduplicação no mesmo lote.',
           code: `def processar_fila(mensagens: list[dict], handler, max_tentativas: int = 2) -> dict:
     # TODO: rastrear ids já processados, aplicar retry controlado e encaminhar falhas permanentes à DLQ
     return {"ok": [], "duplicadas": 0, "dlq": []}
@@ -369,7 +370,7 @@ print(casa_topic("pedido.#", "pedido.pago.pix"))
   recap: [
     'Mensageria assíncrona desacopla produtores e consumidores no tempo, absorve picos de tráfego e aumenta a resiliência de tarefas não imediatas.',
     'No RabbitMQ, o produtor publica em uma Exchange (Direct, Fanout ou Topic), que roteia para filas via bindings e routing keys.',
-    'Em produção, Manual ACK evita perda de mensagens, Dead Letter Queues isolam poison messages e consumidores idempotentes neutralizam reentregas duplicadas.',
+    'O ACK manual confirma que o consumidor concluiu o trabalho. Uma DLQ separa falhas permanentes, e a idempotência protege os efeitos de negócio em reentregas.',
     'O padrão Transactional Outbox resolve o problema de dual-write entre banco de dados e broker.',
   ],
   cards: [
@@ -396,7 +397,7 @@ print(casa_topic("pedido.#", "pedido.pago.pix"))
     {
       id: 'rmq-idempotencia',
       front: 'Por que consumidores de fila precisam ser idempotentes?',
-      back: 'Porque brokers garantem entrega at-least-once: se um worker cair após salvar no banco mas antes de mandar o ACK, a mesma mensagem será reentregue.',
+      back: 'Se um worker cair após salvar no banco e antes do ACK, o broker pode reentregar o evento. Registre o ID e o efeito local na mesma transação para que o próximo worker possa reconhecer o trabalho já concluído.',
     },
     {
       id: 'rmq-outbox',
@@ -410,7 +411,8 @@ print(casa_topic("pedido.#", "pedido.pago.pix"))
     steps: [
       'Desenhe uma Exchange Topic `pedidos.events` conectando 3 filas: `faturamento` (`pedido.pago.*`), `estoque` (`pedido.criado`), e `auditoria` (`pedido.#`).',
       'Adicione `auto_ack=False`, `prefetch_count=10` e uma fila `faturamento.dlq` para mensagens que falharem 3 vezes.',
-      'Implemente uma tabela ou conjunto de `event_id`s processados para provar que reenviar o mesmo JSON não gera cobrança dupla.',
+      'Para um efeito de negócio local, registre `event_id` com unicidade no banco e aplique o efeito na mesma transação. Se o efeito for uma cobrança externa, reutilize a mesma chave de idempotência no provedor, registre o resultado e só depois confirme a mensagem.',
+      'Em um ambiente de teste, simule a parada após o efeito confirmado e antes do ACK. Reinicie o worker e confirme que a reentrega conclui sem repetir o efeito.',
       'Documente em 1 tabela o que ficaria síncrono (HTTP) e o que iria para RabbitMQ no seu sistema.',
     ],
   },

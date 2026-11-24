@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Mais de metade do retrabalho em projetos de software não nasce de bug de código — nasce de **requisitos ambíguos** que cada pessoa interpretou de um jeito. Escrever "o sistema deve ser rápido e seguro" não orienta o desenvolvedor nem permite um teste objetivo. Dominar **elicitação, requisitos testáveis, Casos de Uso UML e Histórias INVEST/BDD** é o que impede você de construir o software perfeito para o problema errado.',
   sections: [
     {
@@ -221,21 +222,29 @@ export const content: LessonContent = {
       blocks: [
         {
           type: 'text',
-          text: 'Uma História de Usuário sem critérios de aceite ainda abre brecha para discussão no dia da entrega. Times maduros ligam a história diretamente a cenários **BDD (Gherkin: Dado / Quando / Então)** — que servem ao mesmo tempo como contrato com o cliente e especificação para testes automatizados. E atenção: ao usar IA para rascunhar requisitos, **a IA adora gerar requisitos genéricos e esquecer fluxos de exceção** (como estorno, horário limite, concorrência de última vaga).',
+          text: 'Critérios de aceite descrevem o que o produto deve fazer em situações observáveis. Escreva os cenários BDD em **Gherkin** e associe cada passo a uma definição de teste para executá-los com o Cucumber. No cenário da última vaga, a definição do passo Quando precisa disparar duas solicitações concorrentes. Ao revisar cenários sugeridos por IA, confira também estornos, horários limite e concorrência.',
         },
         {
           type: 'code',
           language: 'text',
-          caption: 'Critérios BDD executáveis para a história de reserva de aula',
-          code: `Cenário 1 (Caminho feliz): Reserva com vaga disponível
-  Dado que o aluno "Lucas" está adimplente e a aula "Spinning 19h" tem 1 vaga restante
-  Quando Lucas solicita reserva na aula "Spinning 19h"
-  Então a reserva é confirmada e as vagas restantes passam para 0
+          caption:
+            'Arquivo Gherkin para a reserva de aula. A execução requer as definições dos passos.',
+          code: `# language: pt
+Funcionalidade: Reserva de aula coletiva
 
-Cenário 2 (Borda / Concorrência): Dois alunos clicam juntos na última vaga
-  Dado que a aula "Spinning 19h" tem exatamente 1 vaga restante
-  Quando dois alunos adimplentes enviam solicitação simultânea de reserva
-  Então apenas 1 recebe confirmação (201) e o outro recebe opção de lista de espera (409)`,
+  Cenário: Reserva com vaga disponível
+    Dado que o aluno "Lucas" está adimplente
+    E que a aula "Spinning 19h" tem 1 vaga restante
+    Quando "Lucas" solicita uma reserva em "Spinning 19h"
+    Então a API confirma a reserva com status 201
+    E a aula fica com 0 vagas restantes
+
+  Cenário: Duas solicitações para a última vaga
+    Dado que a aula "Spinning 19h" tem 1 vaga restante
+    Quando dois alunos adimplentes solicitam a última vaga simultaneamente
+    Então uma solicitação recebe status 201
+    E a outra recebe status 409 com opção de lista de espera
+    E a aula fica com 0 vagas restantes`,
         },
         {
           type: 'reveal',
@@ -256,14 +265,14 @@ Cenário 2 (Borda / Concorrência): Dois alunos clicam juntos na última vaga
         },
         {
           type: 'python',
-          activityId: 'req-py-n1-auditor-ambiguidade',
-          title: 'Nível 1 — Auditor automático de termos ambíguos em requisitos',
-          task: 'Implemente `auditar_requisito(texto)` que recebe um requisito em português e retorna um dicionário `{"aprovado": bool, "alertas": list[str]}`: (1) sinalize cada termo vago encontrado na lista `TERMOS_VAGOS = ["rápido", "rapidamente", "fácil", "intuitivo", "bonito", "seguro", "adequado", "vários"]` (case-insensitive, sem acento opcional ou exato no texto em minúsculas); (2) exija que o requisito contenha verbo modal claro (`"deve"` ou `"não deve"`); (3) aprove apenas se `alertas` estiver vazia.',
+          activityId: 'req-py-n1-triagem-de-redacao',
+          title: 'Nível 1 — Triagem de termos vagos em requisitos',
+          task: 'Implemente `auditar_requisito(texto)` para retornar uma lista de alertas. Sinalize cada palavra de `TERMOS_VAGOS` presente no texto, ignorando maiúsculas e minúsculas. Inclua um alerta se faltar o verbo `deve`, que também aparece em `não deve`. Uma lista vazia indica apenas que a triagem não encontrou esses sinais. Por exemplo, “O sistema deve funcionar.” passa pela triagem, mas ainda precisa de um resultado observável para virar um requisito testável.',
           code: `TERMOS_VAGOS = ["rápido", "rapidamente", "fácil", "intuitivo", "bonito", "seguro", "adequado", "vários"]
 
-def auditar_requisito(texto: str) -> dict:
+def auditar_requisito(texto: str) -> list[str]:
     # TODO: verificar verbo "deve" e detectar termos vagos presentes no texto
-    return {"aprovado": True, "alertas": []}
+    return []
 
 print(auditar_requisito("O sistema precisa ser rápido e intuitivo."))
 print(auditar_requisito("O endpoint de check-in deve responder em até 300 ms no p95."))
@@ -272,32 +281,31 @@ print(auditar_requisito("O endpoint de check-in deve responder em até 300 ms no
 
 TERMOS_VAGOS = ["rápido", "rapidamente", "fácil", "intuitivo", "bonito", "seguro", "adequado", "vários"]
 
-def auditar_requisito(texto: str) -> dict:
+def auditar_requisito(texto: str) -> list[str]:
     alertas = []
-    lower = texto.lower()
-    if "deve" not in re.findall(r"[a-zà-ú]+", lower):
-        alertas.append("ausencia de verbo normativo 'deve'")
-    palavras = set(re.findall(r"[a-zà-ú]+", lower))
+    palavras = set(re.findall(r"[a-zà-ú]+", texto.lower()))
+    if "deve" not in palavras:
+        alertas.append("ausência de verbo normativo 'deve'")
     for termo in TERMOS_VAGOS:
         if termo in palavras:
             alertas.append(f"termo vago: {termo}")
-    return {"aprovado": len(alertas) == 0, "alertas": alertas}
+    return alertas
 
 print(auditar_requisito("O sistema precisa ser rápido e intuitivo."))
 print(auditar_requisito("O endpoint de check-in deve responder em até 300 ms no p95."))
 `,
           checks: [
             {
-              label: 'Reprova requisito vago e sem "deve", listando os termos problemáticos',
-              test: `(lambda r: r["aprovado"] is False and len(r["alertas"]) >= 3 and any("rápido" in a for a in r["alertas"]) and any("intuitivo" in a for a in r["alertas"]))(auditar_requisito("O sistema precisa ser rápido e intuitivo."))`,
+              label: 'Sinaliza a falta de "deve" e os termos vagos, mesmo em maiúsculas',
+              test: `(lambda alertas: len(alertas) == 3 and all(any(termo in a.lower() for a in alertas) for termo in ("deve", "rápido", "intuitivo")))(auditar_requisito("O sistema precisa ser RÁPIDO e intuitivo."))`,
             },
             {
-              label: 'Aprova requisito normativo e mensurável',
-              test: `auditar_requisito("O endpoint de check-in deve responder em até 300 ms no p95.") == {"aprovado": True, "alertas": []}`,
+              label: 'Devolve só a lista de alertas, sem decidir se o requisito é testável',
+              test: `auditar_requisito("O endpoint de check-in deve responder em até 300 ms no p95.") == [] and auditar_requisito("O sistema deve funcionar.") == []`,
             },
             {
-              label: 'Reprova requisito com "deve" mas contendo termo subjetivo "adequado"',
-              test: `auditar_requisito("O tempo de resposta deve ser adequado.")["aprovado"] is False`,
+              label: 'Sinaliza "adequado" e aceita o verbo na forma negativa',
+              test: `any("adequado" in alerta.lower() for alerta in auditar_requisito("O tempo de resposta deve ser adequado.")) and auditar_requisito("A catraca não deve liberar a entrada após 5 dias de atraso.") == []`,
             },
           ],
         },

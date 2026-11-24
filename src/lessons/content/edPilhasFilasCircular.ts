@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Um buffer de áudio em tempo real, a fila de pacotes da placa de rede ou o botão Desfazer do seu editor não podem realocar memória a cada milissegundo — nem perder dados quando chegam ao fim do vetor. Entender **pilhas**, **filas** e **fila circular** é o que separa um código didático que desperdiça memória de uma estrutura previsível em `O(1)` usada em produção.',
   sections: [
     {
@@ -179,46 +180,39 @@ dados[fim] = "D"; fim = (fim + 1) % 3; qtd += 1`,
       blocks: [
         {
           type: 'text',
-          text: 'No código de aula `48083.py` (Fila Circular), há armadilhas muito comuns em implementações iniciais: misturar lógica da estrutura com `print()`, ignorar o retorno booleano de métodos auxiliares e até emitir a mensagem errada no ramo de erro. Compare o código defeituoso com a versão segura.',
+          text: 'No arquivo `48083.py`, a inserção em fila cheia imprime “Fila Vazia!!”. Há também um erro na remoção. Execute `init(5)`, chame `push` cinco vezes e depois chame `pop()` cinco vezes. Os dois cursores ficam em 5. Na próxima remoção, `fila[rpos]` tenta acessar `fila[5]` antes de voltar o cursor para 0, e o Python lança `IndexError`.',
         },
         {
           type: 'codeTabs',
-          caption: 'Bug real do material da disciplina vs. implementação com contrato claro',
+          caption: 'Verificação de fila vazia no material original e contrato com contador',
           tabs: [
             {
-              label: 'Código com bugs (48083.py)',
+              label: 'Remoção original (48083.py)',
               language: 'python',
-              code: `def inserir(self, elem):
-    if self.cheia():
-        # Bug 1: mensagem contraditória ("Fila Vazia!!" quando está CHEIA!)
+              code: `def pop():
+    global fila, rpos
+
+    if rpos == spos and fila[rpos] == None:
         print("Fila Vazia!!")
         return
-    # Bug 2: misturar print na estrutura dificulta testes automatizados
-    # Bug 3: se o chamador não recebe erro/False, acha que o dado foi salvo!
-    self.fila[self.fim] = elem
-    self.fim = (self.fim + 1) % self.capacidade
-    self.quantidade += 1`,
+    if rpos == MAX:
+        rpos = 0
+    valor = fila[rpos]
+    fila[rpos] = None
+    rpos = rpos + 1
+    return valor`,
             },
             {
-              label: 'Contrato verificável (produção)',
+              label: 'Remoção com contador e índice modular',
               language: 'python',
-              code: `class FilaCircular:
-    def __init__(self, capacidade: int):
-        if capacidade <= 0:
-            raise ValueError("Capacidade deve ser positiva")
-        self._dados = [None] * capacidade
-        self._cap = capacidade
-        self._inicio = 0
-        self._fim = 0
-        self._qtd = 0
-
-    def enfileirar(self, item) -> bool:
-        if self._qtd == self._cap:
-            return False  # Sinal explícito de backpressure (ou raise OverflowError)
-        self._dados[self._fim] = item
-        self._fim = (self._fim + 1) % self._cap
-        self._qtd += 1
-        return True`,
+              code: `def desenfileirar(self):
+    if self.qtd == 0:
+        return None
+    item = self.dados[self.inicio]
+    self.dados[self.inicio] = None
+    self.inicio = (self.inicio + 1) % self.cap
+    self.qtd -= 1
+    return item`,
             },
           ],
         },
@@ -483,6 +477,13 @@ print(delimitadores_validos("([)]"))
             {
               label: 'Limpa referências antigas ao desenfileirar e trata fila vazia',
               test: `(lambda f: (f.enfileirar('X'), f.desenfileirar() == 'X' and f.dados == [None, None] and f.desenfileirar() is None)[-1])(FilaCircular(2))`,
+            },
+            {
+              label: 'Após encher e esvaziar, uma nova remoção sinaliza fila vazia',
+              test: `(lambda f: (
+    [f.enfileirar(i) for i in range(5)],
+    [f.desenfileirar() for i in range(6)] == [0, 1, 2, 3, 4, None]
+)[1])(FilaCircular(5))`,
             },
             {
               label: 'Não usa list.pop(0)',

@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Num catálogo de e-commerce, uma camiseta tem `tamanho` e `tecido`, um notebook tem `ram_gb` e `gpu`, e um livro tem `isbn` e `paginas`. Tentar enfiar centenas de atributos variáveis numa única tabela SQL rígida gera tabelas esparsas ou o temido padrão EAV impossível de consultar. **MongoDB e bancos orientados a documentos** brilham exatamente aí — mas escolher NoSQL sem critério em dados altamente relacionais ou financeiros cria dores de cabeça muito piores.',
   sections: [
     {
@@ -191,7 +192,7 @@ export const content: LessonContent = {
           type: 'callout',
           tone: 'tip',
           title: 'Regra ESR para Índices Compostos no MongoDB',
-          text: 'Ao criar um índice composto `createIndex({ a: 1, b: 1, c: 1 })`, siga a ordem **E → S → R**: primeiro campos de **E**quality (`status: "PAGO"`), depois **S**ort (`criado_em: -1`), por último **R**ange (`total: { $gte: 100 }`). Isso evita ordenação em memória (`SORT` stage) e evita `COLLSCAN` (varredura total da coleção).',
+          text: 'Comece pelos campos de igualdade, como `status: "PAGO"`. Se a prioridade for entregar os resultados já ordenados, experimente **ESR**: `db.pedidos.createIndex({ status: 1, criado_em: -1, total: 1 })`. Se a faixa de `total` selecionar poucos documentos, teste **ERS**: `{ status: 1, total: 1, criado_em: -1 }` pode examinar menos entradas e compensar uma ordenação extra. Compare o plano escolhido com `explain("executionStats")`: procure `IXSCAN`, `COLLSCAN` e `SORT` e confira quantas chaves e documentos foram examinados.',
         },
       ],
     },
@@ -343,13 +344,13 @@ print(pipeline_receita_categoria(PEDIDOS_SIMULADOS))
           type: 'quiz',
           activityId: 'mdb-q2-n3-indice-esr',
           question:
-            'Nível 3 (Performance de Índice ESR): Sua API executa 3.000 vezes por minuto a consulta `db.pedidos.find({ loja_id: "L1", total: { $gte: 100 } }).sort({ criado_em: -1 })`. Seguindo a regra **ESR (Equality → Sort → Range)**, qual índice composto evita ordenação em memória e `COLLSCAN`?',
+            'Nível 3 (Performance de índice): Sua API executa `db.pedidos.find({ loja_id: "L1", total: { $gte: 100 } }).sort({ criado_em: -1 })`. Se a prioridade é permitir que o índice entregue os resultados na ordem de `criado_em`, sem um estágio `SORT` quando esse índice for usado, qual índice composto segue ESR?',
           options: [
             {
               text: '`{ loja_id: 1, criado_em: -1, total: 1 }`',
               correct: true,
               feedback:
-                'Exatamente! `loja_id` é Equality (E), `criado_em` é Sort (S) e `total >= 100` é Range (R). Nessa ordem, o MongoDB já percorre as entradas do índice na ordem final de `criado_em`!',
+                'Com `loja_id` fixo, as entradas deste índice já estão na ordem de `criado_em`. Use `explain("executionStats")` para conferir se o MongoDB escolheu esse plano.',
             },
             {
               text: '`{ total: 1, loja_id: 1, criado_em: -1 }`',
@@ -374,7 +375,7 @@ print(pipeline_receita_categoria(PEDIDOS_SIMULADOS))
   recap: [
     'MongoDB armazena documentos BSON flexíveis ideais para esquemas polimórficos e leitura rápida de agregados inteiros, mas exige modelagem intencional orientada aos padrões de acesso.',
     'Aninhe (embedding) dados pequenos sempre lidos juntos; use referências para coleções sem limite (evitando o antipadrão de array ilimitado e o teto de 16 MB).',
-    'No Aggregation Pipeline, aplicar `$match` cedo aproveita índices; em índices compostos, a ordem ESR (Equality → Sort → Range) evita ordenação em memória.',
+    'No Aggregation Pipeline, um `$match` inicial pode usar um índice compatível. ESR favorece a ordenação no índice e ERS pode ser melhor com uma faixa muito seletiva. Compare os planos com `explain("executionStats")`.',
     'Bancos relacionais (ACID/JOINs) e NoSQL (documentos/chave-valor) são complementares na arquitetura real.',
   ],
   cards: [
@@ -416,7 +417,7 @@ print(pipeline_receita_categoria(PEDIDOS_SIMULADOS))
       'Escolha um domínio com 2 entidades principais (ex.: Pedidos+Itens ou Academia+Checkins) e modele o mesmo cenário em tabelas SQL e em documentos JSON.',
       'Identifique pelo menos uma relação que você aninharia (embedding) e uma que você separaria por referência, justificando pelo crescimento esperado.',
       'Escreva um Aggregation Pipeline de 3 estágios (`$match`, `$group`, `$sort`) e compare com o `SELECT ... GROUP BY` equivalente.',
-      'Proponha o índice composto ideal pela regra ESR para a consulta mais frequente do seu sistema.',
+      'Para a consulta mais frequente, compare índices ESR e ERS com `explain("executionStats")`. Registre o plano escolhido, se houve ordenação adicional e quantas chaves e documentos foram examinados.',
     ],
   },
   sources: [

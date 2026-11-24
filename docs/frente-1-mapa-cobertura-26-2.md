@@ -16,7 +16,7 @@ Cada disciplina foi auditada em texto integral (PDF, PPTX, DOCX, XLSX, TXT, PY e
 4. **Continuidade lógica além do conteúdo incompleto:** como os arquivos de 26.2 ainda não fecham todo o semestre, cada aula possui uma seção explícita de **continuidade** (ex.: Heaps/Árvores Balanceadas/Hash após Quick/Merge Sort; Outbox/Idempotência/Redis após RabbitMQ; BDD/ISO 29148/Kano após SRS; índices compostos/Aggregation/ACID×BASE após aclimatação MongoDB; DTO/JPA/`@Transactional` após `demo1` Spring; escalonamento/paginação/deadlock e journaling/CoW/bit-rot em SO).
 5. **Prática progressiva não trivial (`pratica-progressiva`):** cada aula termina com uma seção dedicada de exercícios em 3 níveis progressivos (**Nível 1: Mecanismo/Rastreamento**, **Nível 2: Aplicação/Depuração/Casos de Borda**, **Nível 3: Decisão Arquitetural/Integração**), com laboratórios executáveis em **Python (Pyodide)**, **SQL (SQLite/sql.js)**, **Playground HTML/CSS/React** e **Terminal Linux guiado**.
 
-> **Nota sobre áudios:** conforme decisão explícita desta entrega, as narrações em MP3 das 11 novas aulas ainda não foram geradas (`src/narration/catalog.json` permanece íntegro com as 78 aulas já narradas). O contrato estrutural de todos os blocos foi validado com `npm run narration:export -- --all --audit-catalog`.
+As 11 aulas de 26.2 têm 445 clipes por voz, em Santa e Dora. O catálogo de narração agora cobre as 89 aulas do Trilha Mod.
 
 ---
 

@@ -39,12 +39,12 @@ export const lessons: LessonMeta[] = [
     id: 'alg-mergesort-quicksort-e-continuidade',
     title: 'Merge Sort, Quick Sort e estruturas avançadas',
     summary:
-      'Entenda dividir e conquistar em O(n log n), blinde o Quick Sort contra o pior caso O(n²) com mediana de três e dê continuidade para Heaps, Árvores Balanceadas e Hash.',
+      'Entenda dividir e conquistar com Merge Sort e Quick Sort, limite o pior caso do Quick Sort e avance para heaps, árvores balanceadas e tabelas hash.',
     minutes: 26,
     groupIds: ['es262.dividir-conquistar-estruturas'],
     objectives: [
       'Comparar Merge Sort e Quick Sort em estabilidade, memória auxiliar, localidade de cache e pior caso',
-      'Rastrear o particionamento com marcadores convergentes e corrigir o pior caso de pivô fixo',
+      'Rastrear o particionamento com marcadores convergentes e distinguir escolha de pivô de garantia de pior caso',
       'Aplicar Merge Sort para contagem de inversões e Quick Sort de 3 vias para entradas adversariais',
       'Escolher entre External Merge, Heap (Top-K), B-Tree e Tabela Hash em cenários reais',
     ],

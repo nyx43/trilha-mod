@@ -1,6 +1,7 @@
 import { LessonContent } from '../types';
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Um código que roda em 15 milissegundos no seu notebook com 200 registros de teste pode travar o servidor por **38 segundos** quando a base chega a 100 mil clientes. Entender **notação assintótica (Big O, Ω e Θ)** e o custo real dos algoritmos de ordenação elementar é a habilidade que evita colocar bombas quadráticas em produção.',
   sections: [
     {
@@ -105,16 +106,16 @@ export const content: LessonContent = {
           rows: [
             [
               'Selection Sort',
-              'Ω(n²)',
-              'O(n²)',
+              'Θ(n²)',
+              'Θ(n²)',
               'No máximo n - 1 trocas',
               'Não (versão padrão por troca)',
               'Quando escrever na memória é muito caro (ex.: memória Flash com desgaste)',
             ],
             [
               'Insertion Sort',
-              'Ω(n)',
-              'O(n²)',
+              'Θ(n)',
+              'Θ(n²)',
               'O(n²) deslocamentos',
               'Sim',
               'Vetores pequenos (< 64 itens) ou quase ordenados (usado dentro do Timsort!)',
@@ -171,18 +172,18 @@ for i in range(1, len(v)):
           type: 'quiz',
           activityId: 'alg-q1-estabilidade-melhor-caso',
           question:
-            'Você recebe uma lista de 50.000 eventos de log que chegam **quase ordenados por timestamp** (no máximo 2 eventos fora do lugar por segundo). Entre os três elementares, por que o Insertion Sort vence com folga o Selection Sort nesse cenário?',
+            'Você recebe n eventos de log quase ordenados por timestamp. A lista tem no máximo 2n inversões, isto é, pares de eventos em ordem trocada. Qual é o custo do Insertion Sort nesse cenário, comparado ao Selection Sort?',
           options: [
             {
-              text: 'Porque o Insertion Sort interrompe o laço interno assim que encontra um elemento menor ou igual à chave, rodando em `O(n)` quase linear, enquanto o Selection Sort varre todo o sufixo sempre em `Θ(n²)`.',
+              text: 'O Insertion Sort roda em `Θ(n)`, pois o número de inversões cresce no máximo linearmente. O Selection Sort ainda varre todo o sufixo em cada rodada e leva `Θ(n²)`.',
               correct: true,
               feedback:
-                'Exatamente! O Selection Sort não tem "saída antecipada": mesmo numa lista 100% ordenada, ele executa `n(n-1)/2` comparações. Já o Insertion Sort faz cerca de `n` comparações quando há poucas inversões.',
+                'O Insertion Sort gasta `Θ(n + I)` para `I` inversões: há trabalho por item e um deslocamento para cada inversão. Com `I ≤ 2n`, isso dá `Θ(n)`. O Selection Sort faz `n(n-1)/2` comparações em qualquer ordem de entrada.',
             },
             {
               text: 'Porque o Insertion Sort é sempre `O(n log n)` em qualquer entrada.',
               feedback:
-                'Não: no pior caso (lista invertida), o Insertion Sort ainda é `O(n²)`. Ele só vira `O(n)` em listas ordenadas ou quase ordenadas.',
+                'No pior caso há `Θ(n²)` inversões. Uma entrada invertida com valores distintos é um exemplo.',
             },
             {
               text: 'Porque o Selection Sort exige memória auxiliar `O(n)` enquanto o Insertion Sort é in-place.',
@@ -475,7 +476,7 @@ print(primeira_ocorrencia([2, 4, 4, 4, 7, 9], 4))
   ],
   recap: [
     'Big O (limite superior), Ω (limite inferior) e Θ (limite exato) descrevem como operações crescem com o tamanho da entrada `n`, independentemente do hardware.',
-    'Selection Sort é sempre Θ(n²) com no máximo n - 1 trocas; Insertion Sort cai para Ω(n) em listas quase ordenadas e é estável.',
+    'O Selection Sort clássico faz Θ(n²) comparações e até n - 1 trocas. O Insertion Sort é estável e leva Θ(n + I) para I inversões, com tempo linear quando I cresce no máximo linearmente.',
     'Estabilidade preserva a ordem relativa de empates (essencial em ordenação por múltiplas colunas) e `in lista` dentro de laços cria `O(n²)` silencioso.',
     'Bibliotecas reais como o Timsort do Python combinam Insertion Sort (para trechos pequenos/ordenados) com Merge Sort, e ordenar desbloqueia busca binária em O(log n).',
   ],
@@ -488,7 +489,7 @@ print(primeira_ocorrencia([2, 4, 4, 4, 7, 9], 4))
     {
       id: 'alg-insertion-vs-selection',
       front: 'Por que Insertion Sort vence Selection Sort em dados quase ordenados?',
-      back: 'Porque Insertion Sort interrompe o laço interno assim que encontra um valor menor ou igual (Ω(n)), enquanto Selection Sort varre o restante inteiro toda vez (Θ(n²)).',
+      back: 'O Insertion Sort desloca um elemento por inversão, então leva Θ(n + I). Quando I = O(n), o custo vira Θ(n). O Selection Sort continua fazendo Θ(n²) comparações.',
     },
     {
       id: 'alg-estabilidade',

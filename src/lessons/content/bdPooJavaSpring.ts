@@ -1,6 +1,25 @@
 import { LessonContent } from '../types';
 
+const contasSetup = `CREATE TABLE conta_corrente (
+  numero TEXT PRIMARY KEY,
+  titular TEXT NOT NULL,
+  saldo REAL NOT NULL,
+  limite_especial REAL NOT NULL DEFAULT 0,
+  CHECK (saldo >= -limite_especial)
+);
+INSERT INTO conta_corrente VALUES ('C-01', 'Ana', 200.0, 100.0);
+INSERT INTO conta_corrente VALUES ('C-02', 'Bruno', 50.0, 0.0);`;
+
+const lerComandosSql = String.raw`const comandos = query
+  .replace(/--[^\r\n]*|\/\*[\s\S]*?\*\//g, '')
+  .split(';')
+  .map(comando => comando.trim());
+const inicio = comandos.findIndex(comando =>
+  /^BEGIN(?:\s+(?:DEFERRED|IMMEDIATE|EXCLUSIVE))?(?:\s+TRANSACTION)?$/i.test(comando)
+);`;
+
 export const content: LessonContent = {
+  revision: 2,
   hook: 'Na pasta da disciplina, você começa modelando `Lampada`, `ContaCorrente` e `Aluno` em Java orientado a objetos e logo salta para um Web Service Spring Boot (`demo1` com `SoftwareEngineer`). Na vida real — em bancos, fintechs e ERPs corporativos — é exatamente essa ponte entre **POO com invariantes fortes**, **Injeção de Dependências no Spring** e **persistência JPA/transacional** que sustenta sistemas críticos sem transformar o código em espaguete.',
   sections: [
     {
@@ -241,22 +260,14 @@ export const content: LessonContent = {
       blocks: [
         {
           type: 'text',
-          text: 'Vamos exercitar os dois pilares desta aula sem precisar de um servidor JVM rodando no navegador: primeiro execute consultas e transação real no **SQLite** sobre o schema do `demo1` e `conta_corrente` (**Nível 1**); depois implemente o domínio `ContaCorrente` + camada `TransferenciaService` com rollback em uma **simulação local em Python** aplicando exatamente os mesmos princípios de encapsulamento, DI e DTO do Java/Spring (**Nível 2**) e feche com diagnóstico de bug JPA (**Nível 3**).',
+          text: 'Comece com uma transferência confirmada e outra cancelada em **SQLite** sobre a tabela `conta_corrente` (**Nível 1**). Depois use uma simulação local em Python para praticar encapsulamento, injeção de dependências e DTOs (**Nível 2**) e feche com um diagnóstico de API Spring (**Nível 3**).',
         },
         {
           type: 'sql',
-          activityId: 'java-sql-n1-transacao-transferencia',
+          activityId: 'java-sql-n1-transferencia-confirmada',
           title: 'Nível 1 — Persistência real: transferência atômica entre contas no SQLite',
           task: "O banco abaixo tem `conta_corrente` com uma regra `CHECK (saldo >= -limite_especial)` (invariante no banco!). Execute uma transferência de `250.0` da conta `'C-01'` para `'C-02'` usando `UPDATE` dentro de `BEGIN TRANSACTION` ... `COMMIT`, e finalize com `SELECT numero, saldo FROM conta_corrente ORDER BY numero;` para conferir o estado final.",
-          setup: `CREATE TABLE conta_corrente (
-  numero TEXT PRIMARY KEY,
-  titular TEXT NOT NULL,
-  saldo REAL NOT NULL,
-  limite_especial REAL NOT NULL DEFAULT 0,
-  CHECK (saldo >= -limite_especial)
-);
-INSERT INTO conta_corrente VALUES ('C-01', 'Ana', 200.0, 100.0);
-INSERT INTO conta_corrente VALUES ('C-02', 'Bruno', 50.0, 0.0);`,
+          setup: contasSetup,
           query: `-- Transfira 250.0 de C-01 (usará 50 do cheque especial!) para C-02 dentro de uma transação
 SELECT numero, saldo FROM conta_corrente ORDER BY numero;`,
           solution: `BEGIN TRANSACTION;
@@ -267,13 +278,51 @@ SELECT numero, saldo FROM conta_corrente ORDER BY numero;`,
           checks: [
             {
               label:
-                'Debita 250 de C-01 (ficando em -50 dentro do cheque especial) e credita em C-02 (300)',
-              test: `if (!result || result.rows.length !== 2) return false;
-              return result.rows[0][0] === 'C-01' && Number(result.rows[0][1]) === -50 && result.rows[1][0] === 'C-02' && Number(result.rows[1][1]) === 300;`,
+                'Grava os saldos -50 e 300 em conta_corrente e exibe o resultado da transferência',
+              test: `const esperados = JSON.stringify([['C-01', -50], ['C-02', 300]]);
+              const gravados = run('SELECT numero, saldo FROM conta_corrente ORDER BY numero');
+              return JSON.stringify(result?.rows) === esperados &&
+                JSON.stringify(gravados?.rows) === esperados;`,
             },
             {
-              label: 'Usa transação explícita (BEGIN e COMMIT)',
-              test: `return /\\bBEGIN\\b/i.test(query) && /\\bCOMMIT\\b/i.test(query);`,
+              label: 'Executa as atualizações entre BEGIN e COMMIT',
+              test: `${lerComandosSql}
+              const fim = comandos.findIndex(comando => /^(COMMIT|END)(\\s+TRANSACTION)?$/i.test(comando));
+              const atualizacoes = comandos.flatMap((comando, indice) =>
+                /\\bUPDATE\\b/i.test(comando) ? [indice] : []
+              );
+              return inicio >= 0 && atualizacoes.length > 0 &&
+                atualizacoes.every(indice => inicio < indice && indice < fim);`,
+            },
+          ],
+        },
+        {
+          type: 'sql',
+          activityId: 'java-sql-n1-transferencia-cancelada',
+          title: 'Nível 1 — Desfaça o débito quando a conta de destino não existe',
+          task: "Abra uma transação e debite 250 de `C-01`. Tente creditar o mesmo valor em `C-99`, que não existe. No SQLite, um `UPDATE` sem linhas correspondentes é válido e `changes()` retorna 0. Observe o saldo provisório e esse retorno com `SELECT saldo, changes() AS contas_creditadas FROM conta_corrente WHERE numero = 'C-01';`. Termine com `ROLLBACK` para restaurar os dois saldos. Deixe o SELECT antes do ROLLBACK para exibir a evidência do que ocorreu dentro da transação.",
+          setup: contasSetup,
+          query: `BEGIN TRANSACTION;
+-- TODO: debitar C-01 e tentar creditar C-99.
+SELECT saldo, changes() AS contas_creditadas FROM conta_corrente WHERE numero = 'C-01';
+-- TODO: cancelar a transferência.`,
+          solution: `BEGIN TRANSACTION;
+UPDATE conta_corrente SET saldo = saldo - 250 WHERE numero = 'C-01';
+UPDATE conta_corrente SET saldo = saldo + 250 WHERE numero = 'C-99';
+SELECT saldo, changes() AS contas_creditadas FROM conta_corrente WHERE numero = 'C-01';
+ROLLBACK;`,
+          checks: [
+            {
+              label: 'Observa o débito provisório e zero contas creditadas',
+              test: 'return JSON.stringify(result?.rows) === JSON.stringify([[-50, 0]]);',
+            },
+            {
+              label: 'Desfaz a transação e confirma no banco que os saldos voltaram a 200 e 50',
+              test: `${lerComandosSql}
+              const fim = comandos.findIndex(comando => /^ROLLBACK(\\s+TRANSACTION)?$/i.test(comando));
+              const gravados = run('SELECT numero, saldo FROM conta_corrente ORDER BY numero');
+              return inicio >= 0 && fim > inicio &&
+                JSON.stringify(gravados?.rows) === JSON.stringify([['C-01', 200], ['C-02', 50]]);`,
             },
           ],
         },
