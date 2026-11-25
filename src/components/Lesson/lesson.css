@@ -10,6 +10,11 @@
   outline-offset: 3px;
 }
 
+.lesson-section {
+  grid-template-columns: minmax(0, 1fr);
+  overflow-wrap: anywhere;
+}
+
 /* Buttons */
 .lesson-button,
 .lesson-button-quiet {

@@ -231,8 +231,8 @@ it('abre missões de Rust sem progresso anterior e retoma o rascunho na mesma tr
   expect(screen.getAllByText('Disponível')).toHaveLength(rustMissions.length);
   fireEvent.click(screen.getByRole('button', { name: `Abrir missão ${mission.title}` }));
   const submit = screen.getByRole('button', { name: 'Concluir missão' });
-  mission.criteria.forEach((criterion) =>
-    fireEvent.click(screen.getByRole('checkbox', { name: criterion })),
+  mission.criteria.forEach(({ label }) =>
+    fireEvent.click(screen.getByRole('checkbox', { name: label })),
   );
   expect(submit).toBeDisabled();
   const evidence = 'cargo test executou os casos de lista vazia e duração igual a 20.';
@@ -244,14 +244,49 @@ it('abre missões de Rust sem progresso anterior e retoma o rascunho na mesma tr
   mountRust(`/roadmap/rust#missao-${mission.stageId}`);
   expect(screen.getByRole('heading', { name: mission.title })).toHaveFocus();
   expect(screen.getByRole('textbox', { name: 'Evidências da entrega' })).toHaveValue(evidence);
-  mission.criteria.forEach((criterion) =>
-    expect(screen.getByRole('checkbox', { name: criterion })).toBeChecked(),
+  mission.criteria.forEach(({ label }) =>
+    expect(screen.getByRole('checkbox', { name: label })).toBeChecked(),
   );
   fireEvent.click(screen.getByRole('button', { name: 'Concluir missão' }));
   expect(screen.getByText('Missão concluída.')).toBeVisible();
   fireEvent.click(screen.getByRole('button', { name: /Todas as missões/ }));
   expect(screen.getByRole('button', { name: `Rever missão ${mission.title}` })).toBeVisible();
   expect(JSON.parse(localStorage.getItem('trilha-progress:v1') || '{}').rust.done).toBe(0);
+});
+
+it('preserva a conclusão antiga da missão mesmo após mudar o texto de um critério', () => {
+  const storageKey = 'trilha:mission-review:rust:v1';
+  const [mission] = rustMissions;
+  const evidence = 'Saídas e testes confirmados no terminal.';
+  localStorage.setItem(
+    storageKey,
+    JSON.stringify({
+      [mission.stageId]: {
+        checked: [
+          'O resultado inclui Rust e Cargo e Empréstimos, nessa ordem.',
+          'Um teste cobre a duração de exatamente 20 minutos e outro cobre a lista vazia.',
+          'A evidência mostra o comando, a saída observada e onde a regra do limite é aplicada.',
+        ],
+        evidence,
+        completed: true,
+      },
+    }),
+  );
+  const first = mountRust(`/roadmap/rust#missao-${mission.stageId}`);
+  expect(screen.getByText('Missão concluída.')).toBeVisible();
+  const revised = screen.getByRole('checkbox', { name: mission.criteria[0].label });
+  expect(revised).toBeChecked();
+  fireEvent.click(revised);
+  fireEvent.click(revised);
+  fireEvent.click(screen.getByRole('button', { name: 'Concluir missão' }));
+  expect(JSON.parse(localStorage.getItem(storageKey) || '{}')[mission.stageId]).toEqual({
+    checked: expect.arrayContaining(mission.criteria.map(({ id }) => id)),
+    evidence,
+    completed: true,
+  });
+  first.unmount();
+  mountRust(`/roadmap/rust#missao-${mission.stageId}`);
+  expect(screen.getByText('Missão concluída.')).toBeVisible();
 });
 
 it('oferece a missão correspondente após o último passo essencial do módulo Rust', () => {

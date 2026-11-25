@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react';
 import { useLocalStorage } from '../../hooks/useLocalStorage';
 import type { LearningStage } from '../../learning/types';
 import { RustMission, rustMissions } from '../../roadmaps/rustMissions';
+import { rustMissionLegacyCriteria } from '../../roadmaps/rustMissionLegacyCriteria';
 
 interface MissionDraft {
   checked: string[];
@@ -24,7 +25,13 @@ function readProgress(raw: string): MissionProgress {
     const entry = parsed[mission.stageId];
     if (entry && Array.isArray(entry.checked) && typeof entry.evidence === 'string') {
       progress[mission.stageId] = {
-        checked: mission.criteria.filter((criterion) => entry.checked.includes(criterion)),
+        checked: mission.criteria
+          .filter(
+            ({ id }) =>
+              entry.checked.includes(id) ||
+              entry.checked.includes(rustMissionLegacyCriteria[mission.stageId]?.[id]),
+          )
+          .map(({ id }) => id),
         evidence: entry.evidence.slice(0, evidenceLimit),
         completed: entry.completed === true,
       };
@@ -35,7 +42,7 @@ function readProgress(raw: string): MissionProgress {
 
 function readyToComplete(mission: RustMission, draft: MissionDraft) {
   return (
-    Boolean(draft.evidence.trim()) && mission.criteria.every((item) => draft.checked.includes(item))
+    Boolean(draft.evidence.trim()) && mission.criteria.every(({ id }) => draft.checked.includes(id))
   );
 }
 
@@ -156,23 +163,23 @@ export function RustMissions({ stages, studiedStages, selected, onOpen }: RustMi
       </div>
       <fieldset className="rust-mission-criteria">
         <legend>Critérios de aceite</legend>
-        {selected.criteria.map((criterion) => (
-          <label className="option-check" key={criterion}>
+        {selected.criteria.map(({ id, label }) => (
+          <label className="option-check" key={id}>
             <input
               type="checkbox"
-              checked={draft.checked.includes(criterion)}
+              checked={draft.checked.includes(id)}
               onChange={(event) => {
                 const checked = event.target.checked;
                 save(selected.stageId, (current) => ({
                   ...current,
                   checked: checked
-                    ? [...new Set([...current.checked, criterion])]
-                    : current.checked.filter((item) => item !== criterion),
+                    ? [...new Set([...current.checked, id])]
+                    : current.checked.filter((item) => item !== id),
                   completed: false,
                 }));
               }}
             />
-            {criterion}
+            {label}
           </label>
         ))}
       </fieldset>

@@ -4,7 +4,7 @@ export interface RustMission {
   scenario: string;
   starter?: { title: string; code: string };
   steps: string[];
-  criteria: string[];
+  criteria: { id: string; label: string }[];
 }
 
 export const rustMissions: RustMission[] = [
@@ -26,9 +26,16 @@ export const rustMissions: RustMission[] = [
       'Execute cargo test e demonstre a saída para quem pediu a mudança.',
     ],
     criteria: [
-      'O resultado inclui Rust e Cargo e Empréstimos, nessa ordem.',
-      'Um teste cobre a duração de exatamente 20 minutos e outro cobre a lista vazia.',
-      'A evidência mostra o comando, a saída observada e onde a regra do limite é aplicada.',
+      { id: 'titulos-em-ordem', label: 'A saída mostra “Rust e Cargo” seguido de “Empréstimos”.' },
+      {
+        id: 'casos-limite',
+        label: 'Um teste cobre a duração de exatamente 20 minutos e outro cobre a lista vazia.',
+      },
+      {
+        id: 'evidencia',
+        label:
+          'A evidência mostra o comando, a saída observada e onde a regra do limite é aplicada.',
+      },
     ],
   },
   {
@@ -54,9 +61,13 @@ fn main() {
       'Use Result para representar a falha e trate-a em main. Explique de onde vem o &str devolvido, sem copiar o título para corrigir o problema.',
     ],
     criteria: [
-      'Linhas válidas preservam o título, incluindo acentos.',
-      'A ausência do separador ou do título é tratada sem panic.',
-      'A evidência mostra um teste que falhava antes, o resultado depois e uma explicação de quem possui o texto.',
+      { id: 'titulo-valido', label: 'Linhas válidas preservam o título, incluindo acentos.' },
+      { id: 'linha-invalida', label: 'A ausência do separador ou do título é tratada sem panic.' },
+      {
+        id: 'evidencia',
+        label:
+          'A evidência mostra um teste que falhava antes, o resultado depois e uma explicação de quem possui o texto.',
+      },
     ],
   },
   {
@@ -83,9 +94,16 @@ fn importar(catalogo: &mut Vec<Aula>, novas: Vec<Aula>) {
       'Corrija a função em um diff pequeno. Rode o teste novamente e acrescente um caso de importação repetida.',
     ],
     criteria: [
-      'O ID 7 recebe o novo título e continua estudado. O ID 8 permanece no catálogo.',
-      'Importar o mesmo lote duas vezes conserva uma aula por ID.',
-      'A evidência registra o comportamento da proposta, a correção e o resultado de cargo test.',
+      {
+        id: 'dados-preservados',
+        label: 'O ID 7 recebe o novo título e continua estudado. O ID 8 permanece no catálogo.',
+      },
+      { id: 'lote-repetido', label: 'Importar o mesmo lote duas vezes conserva uma aula por ID.' },
+      {
+        id: 'evidencia',
+        label:
+          'A evidência registra o comportamento da proposta, a correção e o resultado de cargo test.',
+      },
     ],
   },
   {
@@ -106,9 +124,21 @@ Para simular I/O, adicione a mesma espera curta por arquivo nas duas versões.`,
       'Compare as versões em release com a mesma carga e várias execuções. Registre os tempos e o critério para manter a mudança.',
     ],
     criteria: [
-      'Sem cancelamento, as duas versões entregam os mesmos 12 resultados, mesmo que a ordem de execução mude.',
-      'A fila e o número de workers respeitam os limites e o processo encerra ao cancelar.',
-      'A evidência inclui os comandos, a carga usada, os tempos medidos e a decisão de manter ou descartar a mudança.',
+      {
+        id: 'resultados-equivalentes',
+        label:
+          'Sem cancelamento, as duas versões entregam os mesmos 12 resultados, mesmo que a ordem de execução mude.',
+      },
+      {
+        id: 'limites-e-cancelamento',
+        label:
+          'A fila e o número de workers respeitam os limites e o processo encerra ao cancelar.',
+      },
+      {
+        id: 'evidencia',
+        label:
+          'A evidência inclui os comandos, a carga usada, os tempos medidos e a decisão de manter ou descartar a mudança.',
+      },
     ],
   },
   {
@@ -129,9 +159,19 @@ Novo título do ID 7: "Fundamentos". O progresso continua true.`,
       'Demonstre os dois cenários com chamadas HTTP e verifique o banco após cada uma.',
     ],
     criteria: [
-      'Após o lote válido, o ID 7 continua estudado e aparece uma aula com ID 8.',
-      'O lote inválido devolve um erro útil e os IDs 9 e 10 não aparecem no banco.',
-      'A evidência liga cada critério a uma requisição, sua resposta e o estado após a execução.',
+      {
+        id: 'lote-valido',
+        label: 'Após o lote válido, o ID 7 continua estudado e aparece uma aula com ID 8.',
+      },
+      {
+        id: 'lote-revertido',
+        label: 'O lote inválido devolve um erro útil e os IDs 9 e 10 não aparecem no banco.',
+      },
+      {
+        id: 'evidencia',
+        label:
+          'A evidência liga cada critério a uma requisição, sua resposta e o estado após a execução.',
+      },
     ],
   },
   {
@@ -145,9 +185,21 @@ Novo título do ID 7: "Fundamentos". O progresso continua true.`,
       'Simule a demonstração com os dados do cliente e peça a outra pessoa para reproduzir pelo roteiro. Use dados fictícios nas evidências.',
     ],
     criteria: [
-      'A revisão consegue seguir a entrada até o estado persistido ou a saída e identificar onde o comportamento mudou.',
-      'A entrega demonstra pelo menos um caso de sucesso, uma falha e a preservação dos dados existentes.',
-      'O roteiro contém os comandos, critérios de aceite e resultados observados, com um limite conhecido da solução.',
+      {
+        id: 'rastreabilidade',
+        label:
+          'A revisão consegue seguir a entrada até o estado persistido ou a saída e identificar onde o comportamento mudou.',
+      },
+      {
+        id: 'comportamento-e-dados',
+        label:
+          'A entrega demonstra pelo menos um caso de sucesso, uma falha e a preservação dos dados existentes.',
+      },
+      {
+        id: 'roteiro',
+        label:
+          'O roteiro contém os comandos, critérios de aceite e resultados observados, com um limite conhecido da solução.',
+      },
     ],
   },
 ];

@@ -9,18 +9,30 @@ INSERT INTO aulas (id, titulo, estudada) VALUES
   (7, 'Rust básico', 1),
   (8, 'Filas', 0);`;
 
-const migracao = `ALTER TABLE aulas ADD COLUMN titulo_exibicao TEXT;
+const reconciliarTitulos =
+  'UPDATE aulas SET titulo_exibicao = titulo WHERE titulo_exibicao IS NOT titulo;';
+
+const retomada = `ALTER TABLE aulas ADD COLUMN titulo_exibicao TEXT;
 
 -- A versão anterior ainda pode criar e editar aulas.
 INSERT INTO aulas (id, titulo, estudada) VALUES (9, 'API', 0);
 UPDATE aulas SET titulo = 'Fundamentos' WHERE id = 7;
 
--- Após parar as escritas antigas, preencha a coluna nova.
-UPDATE aulas SET titulo_exibicao = titulo WHERE titulo_exibicao IS NULL;
+-- Primeiro corte para a versão nova.
+${reconciliarTitulos}
 
+-- Voltamos à versão anterior. Ela muda apenas a coluna que conhece.
+UPDATE aulas SET titulo = 'Fundamentos de Rust' WHERE id = 7;
+
+-- As escritas antigas foram pausadas de novo.
+-- Reconcilie os títulos antes de retomar a versão nova.
+`;
+
+const consultarCatalogo = `
 SELECT id, titulo_exibicao AS titulo, estudada FROM aulas ORDER BY id;`;
 
 export const content: LessonContent = {
+  revision: 2,
   hook: 'A versão nova do catálogo quer separar o título de exibição do campo antigo. Planeje a mudança para que a versão anterior ainda consiga ler e escrever durante a troca, e teste uma sequência que preserva títulos e progresso.',
   sections: [
     {
@@ -56,27 +68,24 @@ export const content: LessonContent = {
       blocks: [
         {
           type: 'text',
-          text: 'Depois de retirar ou pausar os escritores antigos, faça o preenchimento e verifique a coluna nova antes de trocar as leituras. Neste roteiro, a coluna fica vazia até o corte, então copiamos apenas nas linhas com NULL. Enquanto uma versão anterior ainda puder mudar `titulo`, trate-o como a fonte canônica. Em bancos grandes, planeje lotes e um mecanismo explícito para sincronizar escritas que ocorrerem durante a cópia.',
+          text: 'Depois de pausar os escritores antigos, copie de `titulo` as linhas em que as colunas divergem. No SQLite, `IS NOT` detecta tanto um título diferente quanto um valor NULL na coluna nova. Repita essa reconciliação após uma volta de versão, pois a aplicação anterior pode mudar um título que já havia sido copiado.',
         },
         {
           type: 'sql',
           activityId: 'preencher-titulos-e-preservar-progresso',
           title: 'Teste a migração com o catálogo em memória',
-          task: 'Complete a atualização da coluna nova no trecho indicado. A aplicação anterior acaba de criar a aula 9 e mudar o título da aula 7. A consulta final precisa mostrar os títulos mais recentes e manter o progresso existente.',
+          task: 'A migração inicial já foi aplicada. Depois da volta, a versão antiga mudou o título da aula 7. Complete a reconciliação para que a consulta final mostre “Fundamentos de Rust” e preserve o progresso.',
           setup: schemaV1,
-          query: migracao.replace(
-            'UPDATE aulas SET titulo_exibicao = titulo WHERE titulo_exibicao IS NULL;',
-            '-- Preencha titulo_exibicao a partir de titulo.',
-          ),
-          solution: migracao,
+          query: retomada + consultarCatalogo,
+          solution: retomada + reconciliarTitulos + consultarCatalogo,
           checks: [
             {
-              label: 'Preenche a nova coluna para as três aulas',
-              test: 'const consulta = run("SELECT COUNT(*) FROM aulas WHERE titulo_exibicao IS NOT NULL"); return consulta?.rows[0][0] === 3;',
+              label: 'Reconcilia as duas colunas após a volta',
+              test: 'const consulta = run("SELECT COUNT(*) FROM aulas WHERE titulo_exibicao IS NOT titulo"); return consulta?.rows[0][0] === 0;',
             },
             {
               label: 'Mostra os títulos atualizados e preserva o progresso',
-              test: 'return !!result && JSON.stringify(result.rows) === JSON.stringify([[7, "Fundamentos", 1], [8, "Filas", 0], [9, "API", 0]]);',
+              test: 'return !!result && JSON.stringify(result.rows) === JSON.stringify([[7, "Fundamentos de Rust", 1], [8, "Filas", 0], [9, "API", 0]]);',
             },
           ],
         },
@@ -85,10 +94,11 @@ export const content: LessonContent = {
           activityId: 'preencher-sem-sobrescrever',
           language: 'sql',
           prompt:
-            'Complete a condição que limita a cópia aos registros ainda sem título de exibição.',
-          template: 'UPDATE aulas SET titulo_exibicao = titulo\nWHERE titulo_exibicao IS [[NULL]];',
+            'Complete a comparação que detecta tanto valores ausentes quanto títulos desatualizados.',
+          template:
+            'UPDATE aulas SET titulo_exibicao = titulo\nWHERE titulo_exibicao [[IS NOT]] titulo;',
           explanation:
-            'O preenchimento incide apenas sobre a parte ainda pendente. Execute a migração de esquema pela ordem registrada no histórico.',
+            'O SQLite compara as colunas mesmo na presença de NULL. A mesma atualização funciona no primeiro corte e depois de voltar à versão anterior.',
         },
       ],
     },
@@ -148,7 +158,7 @@ export const content: LessonContent = {
     text: 'Use dois conjuntos de operações, um de cada versão da aplicação.',
     steps: [
       'Suba o esquema expandido e prove que os comandos da versão anterior ainda funcionam.',
-      'Faça o preenchimento, compare todos os campos relevantes e registre em que momento deixaria de ser possível voltar.',
+      'Simule a volta, edite um título na versão anterior e repita a reconciliação antes de retomar a versão nova.',
     ],
   },
   sources: [
@@ -157,5 +167,9 @@ export const content: LessonContent = {
       url: 'https://www.sqlite.org/lang_altertable.html',
     },
     { title: 'SQLite — INSERT e lista de colunas', url: 'https://www.sqlite.org/lang_insert.html' },
+    {
+      title: 'SQLite — operadores IS e IS NOT',
+      url: 'https://www.sqlite.org/lang_expr.html#operators_and_parse_affecting_attributes',
+    },
   ],
 };

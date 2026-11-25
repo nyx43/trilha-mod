@@ -65,12 +65,32 @@ interface SpanMatch {
   phrase: string;
 }
 
-const ruleByLessonId = new Map<string, TopicRule>(
-  webTopicRules.map((rule) => [rule.lessonId, rule]),
-);
+const rustAsyncRule: TopicRule = {
+  id: 'rust-tokio',
+  lessonId: 'rust-tokio-e-cancelamento',
+  order: 32,
+  synonyms: [
+    'async/await em rust',
+    'async await em rust',
+    'async/await',
+    'async await',
+    'tokio',
+    'cancelamento',
+    'timeout',
+  ],
+  section: { id: 'prazo-observavel', title: 'Use timeout e trate os dois resultados' },
+  reason:
+    'Explica esperas assíncronas em Rust, prazos com Tokio e o estado deixado pelo cancelamento.',
+  practiceAction: 'Rode uma operação que termina no prazo e outra que expira.',
+  successCriteria:
+    'Explique o resultado de cada operação e confira o estado depois do cancelamento.',
+};
+
+const topicRules = [rustAsyncRule, ...webTopicRules];
+const ruleByLessonId = new Map<string, TopicRule>(topicRules.map((rule) => [rule.lessonId, rule]));
 
 const lessonOrderById = new Map<string, number>(
-  webTopicRules.map((rule) => [rule.lessonId, rule.order]),
+  topicRules.map((rule) => [rule.lessonId, rule.order]),
 );
 
 export function normalizeText(text: string): string {
@@ -276,10 +296,13 @@ export function recommendStudyPlan(rawInput: string): StudyRecommendation {
   }
 
   const map = normalizeWithMap(rawInput);
+  const prefersRust = ['rust', 'tokio'].some(
+    (phrase) => findPhraseOccurrences(map.norm, phrase).length > 0,
+  );
 
   // 1. Collect synonym candidates sorted longest-first so compound terms win over single words.
   const allRulesByPhraseLength: Array<{ phrase: string; rule: TopicRule }> = [];
-  for (const rule of webTopicRules) {
+  for (const rule of prefersRust ? topicRules : webTopicRules) {
     for (const phrase of rule.synonyms) {
       allRulesByPhraseLength.push({ phrase, rule });
     }
@@ -303,6 +326,12 @@ export function recommendStudyPlan(rawInput: string): StudyRecommendation {
         rule: entry.rule,
         phrase: entry.phrase,
       });
+    }
+  }
+
+  if (spanMatches.some(({ rule }) => rule === rustAsyncRule)) {
+    for (const hit of findPhraseOccurrences(map.norm, 'rust')) {
+      if (!overlaps(hit, coveredRanges)) coveredRanges.push(hit);
     }
   }
 

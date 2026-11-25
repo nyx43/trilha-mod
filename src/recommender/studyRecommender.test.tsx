@@ -11,6 +11,23 @@ import { recommendStudyPlan } from './studyRecommender';
 import { webTopicRules } from './webRules';
 
 describe('recommendStudyPlan', () => {
+  it('usa o contexto de Rust para recomendar Tokio na sequência principal', () => {
+    const result = recommendStudyPlan('async/await em Rust com Tokio e cancelamento');
+    expect(result.sequence.map(({ lesson }) => lesson.id)).toEqual(['rust-tokio-e-cancelamento']);
+    expect(result.sequence[0].url).toBe(
+      '/aula/rust-tokio-e-cancelamento?trilha=rust#prazo-observavel',
+    );
+    expect(result.unmatched).toEqual([]);
+  });
+
+  it('reconhece as duas linguagens quando o enunciado pede as duas explicitamente', () => {
+    const result = recommendStudyPlan('async/await em JavaScript e async/await em Rust');
+    expect(result.sequence.map(({ lesson }) => lesson.id)).toEqual(
+      expect.arrayContaining(['js-assincrono-e-apis', 'rust-tokio-e-cancelamento']),
+    );
+    expect(result.unmatched).toEqual([]);
+  });
+
   it('valida que todas as aulas e seções referenciadas nas regras Web existem no catálogo', async () => {
     for (const rule of webTopicRules) {
       const lesson = findLesson(rule.lessonId);

@@ -313,6 +313,8 @@ export const webTopicRules: TopicRule[] = [
       'requisicao assincrona',
       'requisicoes assincronas',
       'javascript assincrono',
+      'async/await em javascript',
+      'async await em javascript',
       'async/await',
       'async await',
       'promises',
@@ -322,6 +324,8 @@ export const webTopicRules: TopicRule[] = [
     section: { id: 'fetch', title: 'Buscar dados de verdade com fetch' },
     sectionByPhrase: {
       'async/await': { id: 'promises', title: 'Promises e async/await' },
+      'async/await em javascript': { id: 'promises', title: 'Promises e async/await' },
+      'async await em javascript': { id: 'promises', title: 'Promises e async/await' },
       'async await': { id: 'promises', title: 'Promises e async/await' },
       promises: { id: 'promises', title: 'Promises e async/await' },
       promise: { id: 'promises', title: 'Promises e async/await' },
