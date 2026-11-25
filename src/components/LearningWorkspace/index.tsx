@@ -23,11 +23,15 @@ import { saveProgressSnapshot } from '../../learning/progressSnapshot';
 import { curriculumReviewLabel } from '../../roadmaps/guides';
 import { lessonsByGroup } from '../../lessons';
 import { groupsToCredit, markCredited, readLessons } from '../../lessons/progress';
+import { rustMissions } from '../../roadmaps/rustMissions';
+import { RustMissions } from './RustMissions';
 import './workspace.css';
 
 const viewLabels: Record<LearningView, string> = { study: 'Estudar', map: 'Mapa', list: 'Lista' };
 const viewIcons = { map: MapIcon, study: BookIcon, list: ListIcon };
 const views: LearningView[] = ['map', 'study', 'list'];
+const missionListHash = '#missoes';
+const missionHashPrefix = '#missao-';
 
 function ProgressRing({ percent }: { percent: number }) {
   const radius = 34;
@@ -72,6 +76,26 @@ export default function LearningWorkspace({
   const active = catalog.groups[prefs.activeGroupId] || Object.values(catalog.groups)[0];
   const activeStage =
     catalog.stages.find((stage) => stage.id === active.stageId) || catalog.stages[0];
+  const hasMissions = catalog.id === 'rust';
+  const selectedMission = hasMissions
+    ? rustMissions.find(({ stageId }) => location.hash === `${missionHashPrefix}${stageId}`)
+    : undefined;
+  const missionsOpen = hasMissions && (location.hash === missionListHash || !!selectedMission);
+  const studiedStages = useMemo(() => {
+    if (!hasMissions) return new Set<string>();
+    const completed = new Set(prefs.completedNodeIds);
+    return new Set(
+      catalog.stages
+        .filter(
+          (stage) =>
+            stage.groupIds.length > 0 &&
+            stage.groupIds.every((id) =>
+              catalog.groups[id].requiredIds.every((nodeId) => completed.has(nodeId)),
+            ),
+        )
+        .map(({ id }) => id),
+    );
+  }, [catalog, hasMissions, prefs.completedNodeIds]);
   const summary = progressSummary(catalog, prefs);
   const upcoming = nextGroup(catalog, prefs);
   const reduced = useReducedMotion();
@@ -264,7 +288,7 @@ export default function LearningWorkspace({
   function switchView(view: LearningView) {
     if (view === 'map' && prefs.view !== 'map')
       mapFocusAfterRender.current = mapOrigin.current || `journey-topic-${prefs.activeGroupId}`;
-    if (view === 'map' && location.hash)
+    if (missionsOpen || (view === 'map' && location.hash))
       navigate(`${location.pathname}${location.search}`, { replace: true });
     update({ view });
     setAnnouncement(
@@ -274,13 +298,36 @@ export default function LearningWorkspace({
     );
   }
 
+  function openMission(stageId?: string) {
+    const hash = stageId ? `${missionHashPrefix}${stageId}` : missionListHash;
+    if (hash !== location.hash)
+      navigate({ pathname: location.pathname, search: location.search, hash });
+  }
+
+  function missionPrompt(stageId: string) {
+    if (!studiedStages.has(stageId)) return null;
+    const mission = rustMissions.find((item) => item.stageId === stageId);
+    if (!mission) return null;
+    return (
+      <aside className="rust-mission-prompt" aria-label="Missão recomendada">
+        <div>
+          <strong>Módulo concluído</strong>
+          <p>Pratique com a missão {mission.title}.</p>
+        </div>
+        <button type="button" className="learning-primary" onClick={() => openMission(stageId)}>
+          Abrir missão do módulo
+        </button>
+      </aside>
+    );
+  }
+
   const groupProps = { catalog, prefs, onDepth, onNode, onResource };
   return (
     <div
       className="learning-workspace"
       data-period={period}
       data-effects={prefs.effects ? 'on' : 'off'}
-      data-view={prefs.view}
+      data-view={missionsOpen ? 'missions' : prefs.view}
     >
       <div className="learning-shell">
         <header className="learning-intro">
@@ -333,18 +380,23 @@ export default function LearningWorkspace({
         </header>
 
         <div className="learning-toolbar">
-          <div className="view-controls" role="group" aria-label="Visualização da trilha">
+          <div
+            className="view-controls"
+            data-missions={hasMissions || undefined}
+            role="group"
+            aria-label="Visualização da trilha"
+          >
             {views.map((view) => {
               const Icon = viewIcons[view];
               return (
                 <button
                   type="button"
                   key={view}
-                  aria-pressed={prefs.view === view}
+                  aria-pressed={!missionsOpen && prefs.view === view}
                   aria-controls="learning-view"
                   onClick={() => switchView(view)}
                 >
-                  {prefs.view === view && (
+                  {!missionsOpen && prefs.view === view && (
                     <motion.span
                       className="view-indicator"
                       layoutId="view-indicator"
@@ -361,20 +413,34 @@ export default function LearningWorkspace({
                 </button>
               );
             })}
+            {hasMissions && (
+              <button
+                type="button"
+                aria-pressed={missionsOpen}
+                aria-controls="learning-view"
+                onClick={() => openMission()}
+              >
+                {missionsOpen && <span className="view-indicator" aria-hidden="true" />}
+                <CheckIcon />
+                <span>Missões</span>
+              </button>
+            )}
           </div>
-          <label className="learning-search">
-            <span className="sr-only">Buscar assunto na trilha</span>
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="10.5" cy="10.5" r="6.5" />
-              <path d="m16 16 5 5" />
-            </svg>
-            <input
-              type="search"
-              placeholder="Buscar um assunto"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </label>
+          {!missionsOpen && (
+            <label className="learning-search">
+              <span className="sr-only">Buscar assunto na trilha</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="6.5" />
+                <path d="m16 16 5 5" />
+              </svg>
+              <input
+                type="search"
+                placeholder="Buscar um assunto"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+              />
+            </label>
+          )}
           <details className="display-options">
             <summary>
               <svg viewBox="0 0 20 20" aria-hidden="true">
@@ -446,7 +512,7 @@ export default function LearningWorkspace({
           </p>
         )}
 
-        {prefs.view === 'study' && (
+        {!missionsOpen && prefs.view === 'study' && (
           <div className="journey-return">
             <button type="button" onClick={() => switchView('map')}>
               <span aria-hidden="true">← </span>
@@ -458,8 +524,18 @@ export default function LearningWorkspace({
             </span>
           </div>
         )}
-        <div id="learning-view" className={`learning-view learning-view-${prefs.view}`}>
-          {prefs.view === 'study' ? (
+        <div
+          id="learning-view"
+          className={`learning-view learning-view-${missionsOpen ? 'missions' : prefs.view}`}
+        >
+          {missionsOpen ? (
+            <RustMissions
+              stages={catalog.stages}
+              studiedStages={studiedStages}
+              selected={selectedMission}
+              onOpen={openMission}
+            />
+          ) : prefs.view === 'study' ? (
             <>
               <aside className="learning-sidebar">
                 <div className="sidebar-title">
@@ -566,6 +642,7 @@ export default function LearningWorkspace({
                 <div className="focus-plane">
                   <GroupContent {...groupProps} group={active} />
                 </div>
+                {missionPrompt(activeStage.id)}
                 <div className="learning-next">
                   <label>
                     Minha familiaridade com {active.title}
@@ -672,6 +749,7 @@ export default function LearningWorkspace({
                         animated={false}
                       />
                     ))}
+                    {missionPrompt(stage.id)}
                   </li>
                 ))}
               </ol>
@@ -684,41 +762,45 @@ export default function LearningWorkspace({
             {planIssue}
           </p>
         )}
-        <StudyTools
-          catalog={catalog}
-          prefs={prefs}
-          update={update}
-          plan={plan}
-          setPlan={setPlan}
-          onSelect={chooseGroup}
-        />
+        {!missionsOpen && (
+          <StudyTools
+            catalog={catalog}
+            prefs={prefs}
+            update={update}
+            plan={plan}
+            setPlan={setPlan}
+            onSelect={chooseGroup}
+          />
+        )}
         <footer className="learning-data-links">
           <span>Conteúdo aberto · Progresso no seu navegador</span>
           <nav aria-label="Formatos da trilha">
             <a href={`/data/${catalog.id}.json`}>JSON</a>
             <a href={`/data/${catalog.id}.md`}>Markdown</a>
             <a href={`/read/${catalog.id}/`}>Leitura completa</a>
-            <button
-              type="button"
-              disabled={exporting}
-              onClick={async () => {
-                setExporting(true);
-                try {
-                  await downloadVisualization(`trilha-${catalog.id}-${prefs.view}.png`);
-                  setAnnouncement('Imagem da visualização exportada.');
-                } catch (error) {
-                  setAnnouncement(
-                    error instanceof Error
-                      ? error.message
-                      : 'Não foi possível gerar a imagem. Use JSON ou Markdown.',
-                  );
-                } finally {
-                  setExporting(false);
-                }
-              }}
-            >
-              {exporting ? 'Gerando imagem…' : 'Baixar visualização em PNG'}
-            </button>
+            {!missionsOpen && (
+              <button
+                type="button"
+                disabled={exporting}
+                onClick={async () => {
+                  setExporting(true);
+                  try {
+                    await downloadVisualization(`trilha-${catalog.id}-${prefs.view}.png`);
+                    setAnnouncement('Imagem da visualização exportada.');
+                  } catch (error) {
+                    setAnnouncement(
+                      error instanceof Error
+                        ? error.message
+                        : 'Não foi possível gerar a imagem. Use JSON ou Markdown.',
+                    );
+                  } finally {
+                    setExporting(false);
+                  }
+                }}
+              >
+                {exporting ? 'Gerando imagem…' : 'Baixar visualização em PNG'}
+              </button>
+            )}
             {onExportNotes && (
               <button
                 type="button"

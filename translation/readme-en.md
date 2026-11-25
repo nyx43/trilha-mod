@@ -4,7 +4,7 @@
 
 **Trilha Info** is an open source platform for learning technology through free content in Portuguese, organized into practical learning paths. Created in June 2022, it brings together career roadmaps, original interactive lessons, quick guides, and portfolio projects.
 
-The current catalog includes **9 roadmaps, 9 courses, 89 lessons, and 34 guides**. You can start without an account and pick up where you left off, with progress saved in your browser.
+The current catalog includes **10 roadmaps, 10 courses, 119 lessons, and 34 guides**. You can start without an account and pick up where you left off, with progress saved in your browser.
 
 ![Trilha Info homepage, showing the current interface and learning paths](../public/preview.png)
 
@@ -38,6 +38,7 @@ The curriculum was revised in October 2026, with Portuguese resources as the fou
 | [DevOps](https://trilha.info/roadmap/devops)                  | Linux, networking, scripts, containers, CI/CD, infrastructure, and observability.           |
 | [Data Engineering](https://trilha.info/roadmap/data-engineer) | Python, SQL, modeling, pipelines, transformation, orchestration, and governance.            |
 | [React](https://trilha.info/roadmap/react)                    | Specialization in components, state, Effects, routing, data, testing, and performance.      |
+| [Rust](https://trilha.info/roadmap/rust)                      | Cargo, memory, testing, concurrency, and APIs, with six missions inside the roadmap.       |
 | [Interviews](https://trilha.info/roadmap/entrevistas)         | Project presentations, coding, debugging, algorithms, and career-specific mock interviews.  |
 
 To get started, choose a [roadmap](https://trilha.info/#trilhas), open the [courses and lessons](https://trilha.info/aulas), or browse the [guides](https://trilha.info/guias). Projects and exercises accompany the content; completing a reference and demonstrating a skill are tracked separately.

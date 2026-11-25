@@ -6,6 +6,7 @@ import {
   PiAtom,
   PiBug,
   PiChatsCircle,
+  PiCode,
   PiDatabase,
   PiFlowArrow,
   PiGraduationCap,
@@ -28,6 +29,7 @@ const icons: Record<string, IconType> = {
   react: PiAtom,
   entrevistas: PiChatsCircle,
   'es-26-2': PiGraduationCap,
+  rust: PiCode,
 };
 
 function RouteGlyph({ seed }: { seed: number }) {

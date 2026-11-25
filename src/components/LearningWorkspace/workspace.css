@@ -2685,3 +2685,150 @@
   border-radius: 50%;
   background: currentColor;
 }
+
+.rust-missions {
+  color: var(--learning-ink);
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.rust-missions h2 {
+  font-size: clamp(1.55rem, 4vw, 2.15rem);
+  font-weight: 700;
+  scroll-margin-top: 6rem;
+}
+
+.rust-missions p,
+.rust-missions ol {
+  color: var(--learning-muted);
+}
+
+.rust-mission-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+  gap: 14px;
+}
+
+.rust-mission-card,
+.rust-mission-detail,
+.rust-mission-prompt {
+  border: 1px solid var(--learning-line);
+  border-radius: 16px;
+  background: var(--learning-panel);
+}
+
+.rust-mission-card,
+.rust-mission-detail {
+  padding: clamp(16px, 3vw, 28px);
+}
+
+.rust-mission-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.rust-mission-card h3,
+.rust-mission-detail h3,
+.rust-mission-detail legend {
+  font-size: 1.125rem;
+  font-weight: 650;
+}
+
+.rust-mission-card > p:first-child,
+.rust-mission-status {
+  color: var(--learning-muted);
+  font-size: 0.875rem;
+}
+
+.rust-mission-card > .rust-mission-status {
+  margin-top: auto;
+}
+
+.rust-mission-back {
+  justify-self: start;
+  min-height: 44px;
+  color: var(--learning-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
+.rust-mission-detail ol {
+  list-style: decimal;
+  margin: 8px 0 12px;
+  padding-inline-start: 1.5rem;
+}
+
+.rust-mission-detail li + li {
+  margin-top: 8px;
+}
+
+.rust-mission-starter pre {
+  max-width: 100%;
+  overflow: auto;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid var(--learning-hairline);
+  border-radius: 10px;
+  background: var(--learning-surface-raised);
+}
+
+.rust-mission-criteria {
+  min-width: 0;
+  padding: 8px 14px;
+  border: 1px solid var(--learning-hairline);
+  border-radius: 12px;
+}
+
+.rust-mission-criteria legend {
+  padding-inline: 6px;
+}
+
+.rust-mission-evidence {
+  display: grid;
+  gap: 8px;
+}
+
+.rust-mission-evidence textarea {
+  width: 100%;
+  resize: vertical;
+  border-radius: 10px;
+}
+
+.rust-mission-prompt,
+.rust-mission-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.rust-mission-prompt {
+  justify-content: space-between;
+  margin-top: 14px;
+  padding: 14px;
+  color: var(--learning-ink);
+}
+
+.rust-mission-prompt p {
+  color: var(--learning-muted);
+}
+
+.rust-missions .learning-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 480px) {
+  .learning-workspace .view-controls[data-missions] button {
+    padding-inline: 7px;
+    gap: 4px;
+  }
+
+  .view-controls[data-missions] button svg {
+    width: 14px;
+    height: 14px;
+  }
+}

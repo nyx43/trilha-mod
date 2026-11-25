@@ -12,9 +12,10 @@ const featuredRoadmaps = [
   'react',
   'entrevistas',
   'es-26-2',
+  'rust',
 ] as const;
 
-const complementary: readonly string[] = ['react', 'entrevistas', 'es-26-2'];
+const complementary: readonly string[] = ['react', 'entrevistas', 'es-26-2', 'rust'];
 
 export const mainRoadmapsData = featuredRoadmaps.map((name) => {
   const guide = roadmapGuides[name];

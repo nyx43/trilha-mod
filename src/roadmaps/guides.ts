@@ -78,4 +78,11 @@ export const roadmapGuides: Partial<Record<keyof RoadmapFileModel, RoadmapGuide>
     outcome:
       'Domínio prático das cinco disciplinas do semestre com laboratórios executáveis, casos reais de produção e exercícios progressivos.',
   },
+  rust: {
+    kind: 'Especialização',
+    audience: 'Para quem quer aprender Rust e praticar mudanças em um projeto de verdade.',
+    start: 'Comece com Cargo e fundamentos ou abra Missões para escolher um desafio.',
+    outcome:
+      'Um catálogo de estudos com código testável, revisão de mudanças e critérios de aceite.',
+  },
 };

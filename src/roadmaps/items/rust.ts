@@ -2,6 +2,7 @@ import { LinkContentType, RoadmapItem } from '../../entity/RoadmapModel';
 
 export const rust: RoadmapItem = {
   label: 'Rust',
+  url: '/roadmap/rust',
   description:
     'Rust é uma linguagem de programação de sistemas moderna com foco em segurança, velocidade e simultaneidade. Ele atinge esses objetivos sendo seguro para a memória sem usar o garbage collector.',
   children: [

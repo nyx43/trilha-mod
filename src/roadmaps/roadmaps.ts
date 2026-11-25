@@ -8,6 +8,7 @@ import { data as fullstackData } from '../roadmaps/fullstack';
 import { data as entrevistasData } from '../roadmaps/entrevistas';
 import { dataEngineeringData } from '../roadmaps/dataEngineering';
 import { data as es262Data } from '../roadmaps/es262';
+import { data as rustData } from './rust';
 import { RoadmapFileModel } from '../entity/RoadmapFileModel';
 
 export const roadmaps: RoadmapFileModel = {
@@ -20,4 +21,5 @@ export const roadmaps: RoadmapFileModel = {
   test: { file: testData, title: roadmapTitles.test },
   entrevistas: { file: entrevistasData, title: roadmapTitles.entrevistas },
   'es-26-2': { file: es262Data, title: roadmapTitles['es-26-2'] },
+  rust: { file: rustData, title: roadmapTitles.rust },
 };

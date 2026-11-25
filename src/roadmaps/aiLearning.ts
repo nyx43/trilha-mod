@@ -88,6 +88,14 @@ const practices: Record<Specialty, AIPractice> = {
     challenge:
       'Introduza um caso-limite que a IA não previu e prove o comportamento com um teste executável.',
   },
+  rust: {
+    task: 'rastrear o importador em Rust e propor uma mudança pequena com teste de regressão',
+    context:
+      'contrato da importação, trecho do código, primeiro diagnóstico do compilador e dados fictícios',
+    verification:
+      'compare saída, erros e dados preservados com a versão anterior usando cargo test',
+    challenge: 'Explique a posse dos dados e acrescente um caso que falha antes da correção.',
+  },
 };
 
 const studyPrompt = `Estou aprendendo [conceito] na trilha [nome].
@@ -297,14 +305,23 @@ export function withAILearning(levels: Level[], specialty: Specialty): Level[] {
   const isProject = (level: Level) =>
     level.kind === 'project' || (!level.kind && level.label?.startsWith('Projeto: '));
   const projectCount = levels.filter(isProject).length;
+  const assistantInPrompting = specialty === 'rust';
   let projectIndex = 0;
   return levels.flatMap((level, index) => {
     if (!isProject(level)) {
-      return [{ ...level, items: index === 0 ? [...level.items, aiStart] : level.items }];
+      return [
+        {
+          ...level,
+          items: index === 0 && !assistantInPrompting ? [...level.items, aiStart] : level.items,
+        },
+      ];
     }
 
     const before: Level[] = [];
-    if (projectIndex === 0) before.push(prompting);
+    if (projectIndex === 0)
+      before.push(
+        assistantInPrompting ? { ...prompting, items: [aiStart, ...prompting.items] } : prompting,
+      );
     if (specialty === 'entrevistas') {
       before.push(interviewAI);
     } else {

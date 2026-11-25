@@ -4,7 +4,7 @@
 
 A **Trilha Info** é uma plataforma open source para aprender tecnologia com conteúdo gratuito, em português e organizado em percursos práticos. Criada em junho de 2022, reúne trilhas de carreira, aulas próprias e interativas, guias rápidos e projetos para o portfólio.
 
-O catálogo atual tem **9 trilhas, 9 cursos, 89 aulas e 34 guias**. Você pode começar sem cadastro e continuar de onde parou, com o progresso salvo no navegador.
+O catálogo atual tem **10 trilhas, 10 cursos, 119 aulas e 34 guias**. Você pode começar sem cadastro e continuar de onde parou, com o progresso salvo no navegador.
 
 ![Página inicial da Trilha Info, com a interface atual e as trilhas de aprendizado](public/preview.png)
 
@@ -38,6 +38,7 @@ O currículo foi revisado em outubro de 2026, com materiais em português na bas
 | [DevOps](https://trilha.info/roadmap/devops)                     | Linux, redes, scripts, containers, CI/CD, infraestrutura e observabilidade.              |
 | [Engenharia de Dados](https://trilha.info/roadmap/data-engineer) | Python, SQL, modelagem, pipelines, transformação, orquestração e governança.             |
 | [React](https://trilha.info/roadmap/react)                       | Especialização com componentes, estado, Effects, rotas, dados, testes e desempenho.      |
+| [Rust](https://trilha.info/roadmap/rust)                          | Cargo, memória, testes, concorrência e APIs, com seis missões dentro da trilha.          |
 | [Entrevistas](https://trilha.info/roadmap/entrevistas)           | Apresentação de projetos, código, depuração, algoritmos e simulações por carreira.       |
 
 Para começar, escolha uma [trilha](https://trilha.info/#trilhas), abra os [cursos e aulas](https://trilha.info/aulas) ou consulte os [guias](https://trilha.info/guias). Os projetos e exercícios acompanham o conteúdo; concluir uma referência e demonstrar uma prática são registros distintos.

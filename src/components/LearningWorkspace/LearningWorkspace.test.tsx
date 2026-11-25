@@ -1,10 +1,12 @@
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { MemoryRouter, useLocation } from 'react-router-dom';
 import { vi } from 'vitest';
 import LearningWorkspace from '.';
 import { createCatalog } from '../../learning/catalog';
 import { Level, LinkContentType } from '../../entity/RoadmapModel';
 import { initialPreferences } from '../../learning/progress';
+import { data as rustLevels } from '../../roadmaps/rust';
+import { rustMissions } from '../../roadmaps/rustMissions';
 
 const data: Level[] = [
   {
@@ -40,6 +42,7 @@ const data: Level[] = [
   },
 ];
 const catalog = createCatalog('sample', 'Exemplo', data);
+const rustCatalog = createCatalog('rust', 'Rust', rustLevels);
 
 beforeEach(() => {
   localStorage.clear();
@@ -186,6 +189,7 @@ it('preserva formatos desconhecidos recebidos de outra aba sem perder a sessão'
 
 it('começa pelo trajeto completo e preserva a visualização escolhida nas sessões anteriores', () => {
   const first = mount(false);
+  expect(screen.queryByRole('button', { name: 'Missões' })).not.toBeInTheDocument();
   expect(screen.getByRole('heading', { name: 'Seu trajeto, do começo à entrega' })).toBeVisible();
   expect(screen.getByRole('button', { name: 'Mapa', exact: true })).toHaveAttribute(
     'aria-pressed',
@@ -201,6 +205,84 @@ it('começa pelo trajeto completo e preserva a visualização escolhida nas sess
   expect(screen.getByRole('button', { name: 'Lista', exact: true })).toHaveAttribute(
     'aria-pressed',
     'true',
+  );
+});
+
+function RustLocation() {
+  const { pathname, hash } = useLocation();
+  return <output aria-label="Localização da trilha">{pathname + hash}</output>;
+}
+
+function mountRust(url = '/roadmap/rust') {
+  return render(
+    <MemoryRouter initialEntries={[url]}>
+      <LearningWorkspace catalog={rustCatalog} />
+      <RustLocation />
+    </MemoryRouter>,
+  );
+}
+
+it('abre missões de Rust sem progresso anterior e retoma o rascunho na mesma trilha', () => {
+  const mission = rustMissions[0];
+  const first = mountRust();
+  fireEvent.click(screen.getByRole('button', { name: 'Missões', exact: true }));
+  expect(screen.getByRole('heading', { name: 'Missões de Rust' })).toHaveFocus();
+  expect(screen.getByLabelText('Localização da trilha')).toHaveTextContent('/roadmap/rust#missoes');
+  expect(screen.getAllByText('Disponível')).toHaveLength(rustMissions.length);
+  fireEvent.click(screen.getByRole('button', { name: `Abrir missão ${mission.title}` }));
+  const submit = screen.getByRole('button', { name: 'Concluir missão' });
+  mission.criteria.forEach((criterion) =>
+    fireEvent.click(screen.getByRole('checkbox', { name: criterion })),
+  );
+  expect(submit).toBeDisabled();
+  const evidence = 'cargo test executou os casos de lista vazia e duração igual a 20.';
+  fireEvent.change(screen.getByRole('textbox', { name: 'Evidências da entrega' }), {
+    target: { value: evidence },
+  });
+  first.unmount();
+
+  mountRust(`/roadmap/rust#missao-${mission.stageId}`);
+  expect(screen.getByRole('heading', { name: mission.title })).toHaveFocus();
+  expect(screen.getByRole('textbox', { name: 'Evidências da entrega' })).toHaveValue(evidence);
+  mission.criteria.forEach((criterion) =>
+    expect(screen.getByRole('checkbox', { name: criterion })).toBeChecked(),
+  );
+  fireEvent.click(screen.getByRole('button', { name: 'Concluir missão' }));
+  expect(screen.getByText('Missão concluída.')).toBeVisible();
+  fireEvent.click(screen.getByRole('button', { name: /Todas as missões/ }));
+  expect(screen.getByRole('button', { name: `Rever missão ${mission.title}` })).toBeVisible();
+  expect(JSON.parse(localStorage.getItem('trilha-progress:v1') || '{}').rust.done).toBe(0);
+});
+
+it('oferece a missão correspondente após o último passo essencial do módulo Rust', () => {
+  const mission = rustMissions[0];
+  const stage = rustCatalog.stages.find(({ id }) => id === mission.stageId);
+  if (!stage) throw new Error(`Módulo da missão ausente: ${mission.stageId}`);
+  const group = rustCatalog.groups[stage.groupIds[0]];
+  const remaining = rustCatalog.nodes[group.requiredIds[0]];
+  const completedNodeIds = stage.groupIds
+    .flatMap((id) => rustCatalog.groups[id].requiredIds)
+    .filter((id) => id !== remaining.id);
+  localStorage.setItem(
+    'trilha-study:v1:rust',
+    JSON.stringify({
+      ...initialPreferences(rustCatalog),
+      activeGroupId: group.id,
+      view: 'study',
+      completedNodeIds,
+    }),
+  );
+  mountRust();
+
+  expect(screen.queryByRole('button', { name: 'Abrir missão do módulo' })).not.toBeInTheDocument();
+  fireEvent.click(
+    screen.getByRole('checkbox', { name: `Estudei: ${group.title}, ${remaining.title}` }),
+  );
+  expect(screen.getByText('Módulo concluído')).toBeVisible();
+  fireEvent.click(screen.getByRole('button', { name: 'Abrir missão do módulo' }));
+  expect(screen.getByRole('heading', { name: mission.title })).toBeVisible();
+  expect(screen.getByLabelText('Localização da trilha')).toHaveTextContent(
+    `/roadmap/rust#missao-${mission.stageId}`,
   );
 });
 

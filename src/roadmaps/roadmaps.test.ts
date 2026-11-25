@@ -64,7 +64,13 @@ describe('Currículo de outubro de 2026', () => {
 
   it.each(careerNames)('%s introduz IA cedo e tem prática contextual nos projetos', (name) => {
     const levels = roadmaps[name].file;
-    const introduction = levels[0].items.find((item) => item.label === 'Seu assistente de estudos');
+    const introductionStage =
+      name === 'rust'
+        ? levels.find((level) => level.label === 'IA: prompting e contexto')
+        : levels[0];
+    const introduction = introductionStage?.items.find(
+      (item) => item.label === 'Seu assistente de estudos',
+    );
     expect(introduction).toBeDefined();
     expect(
       introduction?.children?.find((child) => child.label === 'Escolha uma ferramenta')

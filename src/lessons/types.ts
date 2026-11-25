@@ -214,6 +214,8 @@ export interface LessonMeta {
   groupIds: string[];
   objectives: string[];
   updatedAt: string;
+  /** A lesson available for reading before its narration batch is published. */
+  narration?: 'deferred';
   load: () => Promise<{ content: LessonContent }>;
 }
 

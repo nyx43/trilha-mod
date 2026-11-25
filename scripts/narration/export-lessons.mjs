@@ -91,6 +91,9 @@ async function main() {
       const audit = {
         totalLessons: targets.length,
         lessonIds: lessonSummaries.map((lesson) => lesson.lessonId),
+        deferredLessonIds: targets
+          .filter((lesson) => lesson.narration === 'deferred')
+          .map((lesson) => lesson.id),
         totalClips: lessonSummaries.reduce((a, b) => a + b.clips, 0),
         totalWords: lessonSummaries.reduce((a, b) => a + b.words, 0),
         blockTypes: Object.fromEntries([...blockTypeStats.entries()].sort((a, b) => b[1] - a[1])),

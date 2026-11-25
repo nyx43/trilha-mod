@@ -14,5 +14,6 @@ export interface RoadmapFileModel {
   test: RoadmapObjectModel;
   fullstack: RoadmapObjectModel;
   entrevistas: RoadmapObjectModel;
+  rust: RoadmapObjectModel;
   'es-26-2': RoadmapObjectModel;
 }

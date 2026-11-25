@@ -80,14 +80,19 @@ def main():
     if args.jobs < 1:
         parser.error("--jobs must be at least 1")
 
-    available_ids = json.loads((CACHE / "catalog-audit.json").read_text())["lessonIds"]
+    audit = json.loads((CACHE / "catalog-audit.json").read_text())
+    available_ids = audit["lessonIds"]
     targets = list(dict.fromkeys(args.lesson or [*WEB_LESSONS, *available_ids]))
     if any(lesson_id not in available_ids for lesson_id in targets):
         parser.error("Unknown lesson ID in requested batch")
     (CACHE / "batch").mkdir(parents=True, exist_ok=True)
     published = set(json.loads(CATALOG.read_text()))
     if args.check:
-        errors = [f"Missing from the narration catalog: {item}" for item in sorted(set(available_ids) - published)]
+        deferred = set(audit.get("deferredLessonIds", [])) - published
+        errors = [
+            f"Missing from the narration catalog: {item}"
+            for item in sorted(set(available_ids) - published - deferred)
+        ]
         errors.extend(f"Unknown lesson in the narration catalog: {item}" for item in sorted(published - set(available_ids)))
         for lesson_id in available_ids:
             if lesson_id in published and needs_refresh(lesson_id):
@@ -95,7 +100,9 @@ def main():
         for error in errors:
             print(error, file=sys.stderr)
         if not errors:
-            print(f"Checked {len(available_ids)} lessons with Santa and Dora.")
+            print(f"Checked {len(available_ids) - len(deferred)} lessons with Santa and Dora.")
+            if deferred:
+                print(f"Narration pending for {len(deferred)} lessons: {', '.join(sorted(deferred))}.")
         return int(bool(errors))
     if args.remaining:
         targets = [lesson_id for lesson_id in targets if lesson_id not in published]

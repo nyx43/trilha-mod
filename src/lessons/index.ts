@@ -17,6 +17,9 @@ import { lessons as testesAutomacao } from './meta/testesAutomacao';
 import { lessons as entrevistasCarreira } from './meta/entrevistasCarreira';
 import { lessons as entrevistasTecnica } from './meta/entrevistasTecnica';
 import { lessons as es262 } from './meta/es262';
+import { lessons as rust } from './meta/rust';
+import { lessons as rustIntermediate } from './meta/rustIntermediate';
+import { lessons as rustAdvanced } from './meta/rustAdvanced';
 export type { LessonMeta, LessonContent, LessonBlock, LessonSection } from './types';
 export type { Course, CourseModule } from './courses';
 export { courses } from './courses';
@@ -40,6 +43,9 @@ export const lessons: LessonMeta[] = [
   ...entrevistasCarreira,
   ...entrevistasTecnica,
   ...es262,
+  ...rust,
+  ...rustIntermediate,
+  ...rustAdvanced,
 ];
 
 const byId = new Map(lessons.map((lesson) => [lesson.id, lesson]));

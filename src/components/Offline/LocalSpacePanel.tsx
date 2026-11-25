@@ -27,7 +27,7 @@ import {
   LocalProfile,
   saveLocalProfile,
 } from '../../offline/localStore';
-import { LESSON_COUNT } from '../../lessons/counts';
+import { NARRATED_LESSON_IDS } from '../../narration/registry';
 import {
   buildGitHubPrefilledIssueUrl,
   deleteFeedbackReport,
@@ -205,7 +205,7 @@ export function AudioPackSection() {
           </>
         ) : (
           <>
-            Áudio embutido no pacote: <strong>{LESSON_COUNT} aulas</strong> nas vozes{' '}
+            Áudio embutido no pacote: <strong>{NARRATED_LESSON_IDS.size} aulas</strong> nas vozes{' '}
             <strong>Santa</strong> e <strong>Dora</strong>, pronto em modo avião. Se no futuro você
             optar por um pacote de áudio externo (<code>.zip</code>), importe-o abaixo com
             verificação SHA-256.

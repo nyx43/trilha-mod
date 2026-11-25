@@ -3,5 +3,5 @@
  * not statically import the full lessons/courses metadata graph.
  * Verified against `lessons.length` and `courses.length` in `lessons.test.ts`.
  */
-export const LESSON_COUNT = 89;
-export const COURSE_COUNT = 9;
+export const LESSON_COUNT = 119;
+export const COURSE_COUNT = 10;

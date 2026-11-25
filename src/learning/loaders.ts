@@ -16,6 +16,7 @@ const loaders: Record<string, () => Promise<{ data: Level[] }>> = {
     data: (await import('../roadmaps/dataEngineering')).dataEngineeringData,
   }),
   'es-26-2': () => import('../roadmaps/es262'),
+  rust: () => import('../roadmaps/rust'),
 };
 
 export { roadmapTitles } from '../roadmaps/titles';
