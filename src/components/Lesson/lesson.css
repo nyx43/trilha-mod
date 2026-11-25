@@ -156,6 +156,9 @@
 }
 
 /* Body */
+.lesson-body {
+  scroll-margin-top: calc(var(--site-header) + 24px);
+}
 .lesson-hook {
   margin-bottom: 48px;
   max-width: 62ch;

@@ -5,10 +5,9 @@ import {
   PiArrowUpRight,
   PiCheckBold,
   PiClock,
-  PiLockSimple,
   PiTarget,
 } from 'react-icons/pi';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { activityKey, LessonPlace, lessonUrl } from '../../lessons';
 import {
   cardKey,
@@ -26,19 +25,21 @@ import { LessonTutor } from '../../tutor/LessonTutor';
 import { LessonContext } from './context';
 import { Flashcards } from './Flashcards';
 import { LessonBlockView } from './LessonBlock';
+import {
+  closingId,
+  LessonSectionLinks,
+  LessonSectionPager,
+  useLessonSection,
+} from './LessonSectionNavigation';
 import '../Guide/guide.css';
 import './lesson.css';
-
-const closingId = 'fechamento';
 
 export function LessonView({ lesson, place }: { lesson: LessonMeta; place: LessonPlace }) {
   const [content, setContent] = useState<LessonContent | null>(null);
   const [failed, setFailed] = useState(false);
   const [record, update] = useLessonRecord(lesson.id);
   const [showAll, setShowAll] = useState(false);
-  const focusTarget = useRef<string>();
   const lessonContainerRef = useRef<HTMLElement>(null);
-  const { hash } = useLocation();
   const { course, previous, next } = place;
   const trailGroup = course.groups[lesson.id] || lesson.groupIds[0];
 
@@ -58,53 +59,30 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
 
   const sections = content?.sections || [];
   const total = sections.length + 1;
-  const reached = Math.min(record?.reached ?? 0, total - 1);
-  const visible = showAll || record?.done ? total : reached + 1;
+  const savedReached = record?.reached ?? 0;
+  const reached = Number.isInteger(savedReached)
+    ? Math.max(0, Math.min(savedReached, total - 1))
+    : 0;
   const done = !!record?.done;
   const score = lessonScore(record);
   const percent = done ? 100 : Math.round((reached / total) * 100);
-  const ids = [...sections.map((section) => section.id), closingId];
+  const pages = [...sections, { id: closingId, title: 'Fechamento' }];
+  const navigation = useLessonSection(
+    content ? pages.map(({ id }) => id) : [],
+    Number.isInteger(savedReached) ? savedReached : 0,
+    showAll,
+  );
+  const includeIntro = showAll || navigation.index === 0;
+  const showClosing = showAll || navigation.id === closingId;
+  const displayedSections = showAll
+    ? sections
+    : sections.slice(navigation.index, navigation.index + 1);
 
-  function scheduleFocusHeading(targetId: string) {
-    return requestAnimationFrame(() => {
-      const heading = document.getElementById(`${targetId}-title`);
-      heading?.focus({ preventScroll: true });
-      heading?.scrollIntoView?.({
-        block: 'start',
-        behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-          ? 'auto'
-          : 'smooth',
-      });
-    });
-  }
-
-  useEffect(() => {
-    const target = focusTarget.current;
-    if (!target) return;
-    focusTarget.current = undefined;
-    const frame = scheduleFocusHeading(target);
-    return () => cancelAnimationFrame(frame);
-  }, [visible, reached]);
-
-  useEffect(() => {
-    if (!content || !hash) return;
-    const targetId = decodeURIComponent(hash.slice(1));
-    const targetIndex = ids.indexOf(targetId);
-    if (targetIndex < 0) return;
-    focusTarget.current = targetId;
-    if (targetIndex >= visible) {
-      setShowAll(true);
-      return;
+  function openSection(index: number) {
+    if (index > navigation.index && index > reached && !done) {
+      update((previous) => ({ ...previous, reached: Math.max(previous.reached, index) }));
     }
-    const frame = scheduleFocusHeading(targetId);
-    focusTarget.current = undefined;
-    return () => cancelAnimationFrame(frame);
-  }, [content, hash]);
-
-  function advance(index: number) {
-    if (index !== reached + 1 || index >= total) return;
-    focusTarget.current = ids[index];
-    update((previous) => ({ ...previous, reached: Math.max(previous.reached, index) }));
+    navigation.openSection(index);
   }
 
   function complete() {
@@ -119,7 +97,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
       content={content}
       containerRef={lessonContainerRef}
       scopeKey={lesson.id}
-      hasMoreHiddenSections={Boolean(content && !showAll && visible < total)}
+      hasMoreHiddenSections={!showAll && navigation.index < total - 1}
     >
       <LessonContext.Provider value={{ lessonId: lesson.id }}>
         <article
@@ -127,7 +105,10 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
           className="guide-page lesson-page"
           aria-labelledby="lesson-title"
         >
-          <header className="guide-hero lesson-hero" data-narration-clip="header">
+          <header
+            className="guide-hero lesson-hero"
+            data-narration-clip={includeIntro ? 'header' : undefined}
+          >
             <nav className="guide-crumbs" aria-label="Você está em">
               <ol>
                 <li>
@@ -148,7 +129,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
             <p className="guide-summary" data-narration-field="summary">
               {lesson.summary}
             </p>
-            {content && (
+            {content && includeIntro && (
               <div className="narration-clip-controls">
                 <NarrationBlockButton clipId="header" label="Ouvir apresentação" />
               </div>
@@ -202,59 +183,23 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                 Nesta aula
               </p>
               {content && (
-                <ol>
-                  {ids.map((id, index) => {
-                    const title = index < sections.length ? sections[index].title : 'Fechamento';
-                    const locked = index >= visible;
-                    return (
-                      <li key={id}>
-                        {locked ? (
-                          <span data-locked aria-disabled="true">
-                            <span aria-hidden="true">
-                              <PiLockSimple />
-                            </span>
-                            {title}
-                            <span className="sr-only"> (ainda não aberta)</span>
-                          </span>
-                        ) : (
-                          <a
-                            href={`#${id}`}
-                            data-done={index < reached || done || undefined}
-                            aria-current={
-                              index === Math.min(reached, visible - 1) && !done ? 'step' : undefined
-                            }
-                            onClick={(event) => {
-                              event.preventDefault();
-                              document
-                                .getElementById(`${id}-title`)
-                                ?.focus({ preventScroll: true });
-                              document.getElementById(id)?.scrollIntoView?.({ block: 'start' });
-                            }}
-                          >
-                            <span aria-hidden="true">
-                              {index < reached || done ? (
-                                <PiCheckBold />
-                              ) : (
-                                String(index + 1).padStart(2, '0')
-                              )}
-                            </span>
-                            {title}
-                          </a>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ol>
-              )}
-              {!done && (
-                <label className="option-check lesson-show-all">
-                  <input
-                    type="checkbox"
-                    checked={showAll}
-                    onChange={(event) => setShowAll(event.target.checked)}
+                <>
+                  <LessonSectionLinks
+                    sections={pages}
+                    navigation={navigation}
+                    reached={reached}
+                    showAll={showAll}
+                    done={done}
                   />
-                  Mostrar a aula inteira
-                </label>
+                  <label className="option-check lesson-show-all">
+                    <input
+                      type="checkbox"
+                      checked={showAll}
+                      onChange={(event) => setShowAll(event.target.checked)}
+                    />
+                    Mostrar a aula inteira
+                  </label>
+                </>
               )}
             </nav>
 
@@ -273,14 +218,19 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                 </div>
               ) : (
                 <>
-                  <NarrationPlayer />
-                  <p className="lesson-hook" data-narration-clip="hook">
-                    <span data-narration-field="text">
-                      <Inline text={content.hook} />
-                    </span>{' '}
-                    <NarrationBlockButton clipId="hook" label="Ouvir abertura" />
-                  </p>
-                  {sections.slice(0, visible).map((section, index) => (
+                  <NarrationPlayer
+                    sectionId={showAll ? undefined : navigation.id}
+                    includeIntro={includeIntro}
+                  />
+                  {includeIntro && (
+                    <p className="lesson-hook" data-narration-clip="hook">
+                      <span data-narration-field="text">
+                        <Inline text={content.hook} />
+                      </span>{' '}
+                      <NarrationBlockButton clipId="hook" label="Ouvir abertura" />
+                    </p>
+                  )}
+                  {displayedSections.map((section, offset) => (
                     <section
                       key={section.id}
                       id={section.id}
@@ -292,7 +242,9 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                         tabIndex={-1}
                         data-narration-clip={`${section.id}:heading`}
                       >
-                        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                        <span aria-hidden="true">
+                          {String((showAll ? offset : navigation.index) + 1).padStart(2, '0')}
+                        </span>
                         <span data-narration-field="title">{section.title}</span>
                       </h2>
                       <div className="narration-clip-controls">
@@ -309,26 +261,9 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                           activityId={activityKey(section.id, blockIndex)}
                         />
                       ))}
-                      {index === visible - 1 && (
-                        <div className="lesson-continue">
-                          <button
-                            type="button"
-                            className="lesson-button"
-                            onClick={() => advance(index + 1)}
-                          >
-                            {index + 1 < sections.length
-                              ? `Continuar: ${sections[index + 1].title}`
-                              : 'Ir para o fechamento'}
-                            <PiArrowRight aria-hidden="true" />
-                          </button>
-                          <span>
-                            Seção {index + 1} de {sections.length}
-                          </span>
-                        </div>
-                      )}
                     </section>
                   ))}
-                  {visible === total && (
+                  {showClosing && (
                     <section
                       id={closingId}
                       className="guide-section lesson-section lesson-closing"
@@ -424,7 +359,7 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                       </div>
                     </section>
                   )}
-                  {content.sources && content.sources.length > 0 && visible === total && (
+                  {content.sources && content.sources.length > 0 && showClosing && (
                     <section className="guide-sources" aria-labelledby="lesson-sources-title">
                       <h2 id="lesson-sources-title">Para ir além</h2>
                       <p className="guide-text">
@@ -442,6 +377,14 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
                         ))}
                       </ul>
                     </section>
+                  )}
+                  {!showAll && (
+                    <LessonSectionPager
+                      index={navigation.index}
+                      sectionCount={sections.length}
+                      nextTitle={sections[navigation.index + 1]?.title}
+                      onOpen={openSection}
+                    />
                   )}
                 </>
               )}
@@ -478,11 +421,9 @@ export function LessonView({ lesson, place }: { lesson: LessonMeta; place: Lesso
             title={lesson.title}
             summary={lesson.summary}
             hook={content.hook}
-            sections={sections.slice(0, visible)}
-            suggestedSection={
-              sections.slice(0, visible).find(({ id }) => hash === `#${id}`)?.id ??
-              sections[reached]?.id
-            }
+            key={showAll ? 'all' : navigation.id}
+            sections={displayedSections}
+            suggestedSection={sections[navigation.index]?.id}
           />
         )}
       </LessonContext.Provider>

@@ -1,5 +1,5 @@
-import { fireEvent, render, screen, within } from '@testing-library/react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
+import { MemoryRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import { findLesson, lessonPlace } from '../../lessons';
 import { lessonStoreKey, reviewStoreKey } from '../../lessons/progress';
 import LessonPage from '../../pages/LessonPage';
@@ -13,9 +13,15 @@ function renderLesson(id = 'como-a-web-funciona') {
   if (!place) throw new Error(`Aula fora dos cursos: ${id}`);
   return render(
     <MemoryRouter>
+      <BrowserBack />
       <LessonView lesson={lesson} place={place} />
     </MemoryRouter>,
   );
+}
+
+function BrowserBack() {
+  const navigate = useNavigate();
+  return <button onClick={() => navigate(-1)}>Voltar no navegador</button>;
 }
 
 const stored = (key: string) => JSON.parse(localStorage.getItem(key) || '{}');
@@ -41,17 +47,25 @@ describe('Aula', () => {
     expect(within(toc).queryByRole('link', { name: /Fechamento/ })).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: /Continuar: O endereço: a URL/ }));
-    expect(screen.getByRole('heading', { name: /O endereço: a URL/ })).toBeInTheDocument();
+    const nextSection = screen.getByRole('heading', { name: /O endereço: a URL/ });
+    expect(screen.queryByRole('heading', { name: /Quem pede e quem responde/ })).toBeNull();
+    await waitFor(() => expect(nextSection).toHaveFocus());
+    expect(stored(lessonStoreKey).lessons['como-a-web-funciona'].reached).toBe(1);
+
+    fireEvent.click(screen.getByRole('button', { name: 'Voltar no navegador' }));
+    expect(screen.queryByRole('heading', { name: /O endereço: a URL/ })).toBeNull();
+    expect(screen.getByRole('heading', { name: /Quem pede e quem responde/ })).toBeInTheDocument();
     expect(stored(lessonStoreKey).lessons['como-a-web-funciona'].reached).toBe(1);
 
     const showAll = screen.getByRole('checkbox', { name: 'Mostrar a aula inteira' });
     fireEvent.click(showAll);
     fireEvent.click(within(toc).getByRole('link', { name: 'Fechamento' }));
-    expect(screen.getByRole('heading', { name: 'Fechamento' })).toHaveFocus();
+    await waitFor(() => expect(screen.getByRole('heading', { name: 'Fechamento' })).toHaveFocus());
     expect(stored(lessonStoreKey).lessons['como-a-web-funciona'].reached).toBe(1);
 
     fireEvent.click(showAll);
-    expect(screen.queryByRole('heading', { name: 'Fechamento' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Quem pede e quem responde/ })).toBeNull();
+    expect(screen.getByRole('heading', { name: 'Fechamento' })).toBeInTheDocument();
   });
 
   it('explica a resposta errada e registra só a primeira tentativa', async () => {

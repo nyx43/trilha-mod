@@ -13,7 +13,10 @@ import {
 import { VOICE_OPTIONS } from './registry';
 import { NarrationVoiceId } from './types';
 
-export function NarrationPlayer() {
+export function NarrationPlayer({
+  sectionId,
+  includeIntro = false,
+}: { sectionId?: string; includeIntro?: boolean } = {}) {
   const narration = useNarrationOptional();
   const speedDetailsRef = useRef<HTMLDetailsElement | null>(null);
   const baseId = useId();
@@ -92,6 +95,12 @@ export function NarrationPlayer() {
   const isPlaying = status === 'playing';
   const isPausedByUser = status === 'paused' && pauseReason === 'user';
   const isPausedByActivity = status === 'paused' && pauseReason === 'activity';
+  const savedSectionId = savedPosition && narration.getClipSpec(savedPosition.clipId)?.sectionId;
+  const canResume =
+    savedPosition &&
+    (!sectionId ||
+      savedSectionId === sectionId ||
+      (includeIntro && (savedSectionId === 'header' || savedSectionId === 'hook')));
 
   const queuePrimaryLabel = isPausedByActivity
     ? 'Retomar leitura'
@@ -99,6 +108,8 @@ export function NarrationPlayer() {
     ? 'Pausar leitura'
     : isPausedByUser
     ? 'Continuar leitura'
+    : sectionId
+    ? 'Ouvir esta seção'
     : hasMoreHiddenSections
     ? 'Ouvir seções abertas'
     : 'Ouvir aula inteira';
@@ -131,7 +142,7 @@ export function NarrationPlayer() {
             {queuePrimaryLabel}
           </button>
 
-          {!isPlaying && !isPausedByActivity && savedPosition && (
+          {!isPlaying && !isPausedByActivity && canResume && (
             <button type="button" className="narration-btn" onClick={narration.resumeSavedPosition}>
               Retomar posição
             </button>
@@ -298,7 +309,9 @@ export function NarrationPlayer() {
       <div className="narration-row narration-row--footer">
         <p className="narration-status" role="status" aria-live="polite">
           {statusMessage ||
-            (hasMoreHiddenSections
+            (sectionId
+              ? 'Pronto para narrar esta seção.'
+              : hasMoreHiddenSections
               ? 'Pronto para narrar as seções abertas. Abra a aula inteira para ouvir tudo.'
               : 'Pronto para narrar toda a aula com destaque por palavra.')}
         </p>

@@ -340,10 +340,14 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
 
     await screen.findByRole('region', { name: 'Controles de narração da aula' });
 
-    // #cors abriu automaticamente toda a aula neste componente
     await waitFor(() => {
       expect(document.getElementById('cors')).toBeInTheDocument();
     });
+    expect(document.getElementById('caminho-da-requisicao')).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir esta seção' }));
+    expect(getActiveAudio().src).toContain('cors__heading.mp3');
+    fireEvent.click(screen.getByRole('button', { name: 'Parar' }));
+    fireEvent.click(screen.getByLabelText('Mostrar a aula inteira'));
 
     // Testa pausa em atividade avançando clipe de reveal/quiz no fluxo
     const flowClipTrigger = document.querySelector(
@@ -414,7 +418,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     expect(getActiveAudio().src).toContain('fetch-com-corpo__heading.mp3');
   });
 
-  it('inicia apenas com as seções abertas e libera toda a aula ao marcar Mostrar a aula inteira', async () => {
+  it('interrompe a seção anterior e inicia a narração no título da seção atual', async () => {
     render(
       <MemoryRouter initialEntries={['/aula/integracao-front-e-api']}>
         <Routes>
@@ -424,7 +428,30 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     );
 
     await screen.findByRole('region', { name: 'Controles de narração da aula' });
-    expect(screen.getByRole('button', { name: 'Ouvir seções abertas' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir esta seção' }));
+    const audio = getActiveAudio();
+    expect(audio.paused).toBe(false);
+    expect(audio.src).toContain('header.mp3');
+    fireEvent.click(screen.getByRole('button', { name: /^Continuar:/ }));
+    await waitFor(() => expect(audio.paused).toBe(true));
+    expect(audio.src).toBe('');
+    expect(document.getElementById('caminho-da-requisicao')).toBeNull();
+    expect(screen.queryByRole('button', { name: 'Retomar posição' })).toBeNull();
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir esta seção' }));
+    expect(getActiveAudio().src).toContain('fetch-com-corpo__heading.mp3');
+  });
+
+  it('inicia pela primeira seção e libera toda a aula ao marcar Mostrar a aula inteira', async () => {
+    render(
+      <MemoryRouter initialEntries={['/aula/integracao-front-e-api']}>
+        <Routes>
+          <Route path="/aula/:lesson" element={<LessonPage />} />
+        </Routes>
+      </MemoryRouter>,
+    );
+
+    await screen.findByRole('region', { name: 'Controles de narração da aula' });
+    expect(screen.getByRole('button', { name: 'Ouvir esta seção' })).toBeInTheDocument();
     expect(document.getElementById('fechamento')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByLabelText('Mostrar a aula inteira'));
@@ -472,7 +499,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     );
     await screen.findByRole('region', { name: 'Controles de narração da aula' });
     expect(screen.queryByRole('button', { name: 'Ouvir feedback' })).toBeNull();
-    fireEvent.click(screen.getByRole('button', { name: 'Ouvir seções abertas' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir esta seção' }));
     const audio = getActiveAudio();
     for (let i = 0; i < 12 && !audio.src.includes('caminho-da-requisicao__3.mp3'); i += 1) {
       act(() => audio.emit('ended'));
@@ -587,7 +614,7 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
       ),
     ).toBe(true);
 
-    fireEvent.click(screen.getByRole('button', { name: 'Ouvir seções abertas' }));
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir esta seção' }));
     const audio = getActiveAudio();
     expect(audio.src).toContain('/narration/integracao-front-e-api/santa/hook.mp3');
 
@@ -629,7 +656,9 @@ describe('Narração sincronizada — extrator, manifesto e player piloto', () =
     await waitFor(() => {
       expect(document.getElementById('cors')).toBeInTheDocument();
     });
-    expect(screen.getByRole('button', { name: 'Ouvir aula inteira' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Ouvir esta seção' })).toBeInTheDocument();
+    fireEvent.click(screen.getByRole('button', { name: 'Ouvir esta seção' }));
+    expect(getActiveAudio().src).toContain('cors__heading.mp3');
   });
 
   it('para a narração imediatamente ao trocar para outra aula sem buscar manifesto inexistente', async () => {

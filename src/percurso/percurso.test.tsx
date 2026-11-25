@@ -66,6 +66,7 @@ describe('Percurso curto API Node, React e Tailwind', () => {
 
     fireEvent.click(screen.getByRole('button', { name: /Continuar: Respostas fora de ordem/ }));
     expect(screen.getByRole('heading', { name: /Respostas fora de ordem/ })).toBeInTheDocument();
+    expect(screen.queryByRole('heading', { name: /Buscar dados quando a tela abre/ })).toBeNull();
     expect(screen.getByText('25% da etapa')).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Mostrar todas as seções' }));
@@ -74,7 +75,7 @@ describe('Percurso curto API Node, React e Tailwind', () => {
       screen.getByRole('heading', { name: /Quando usar uma biblioteca de dados/ }),
     ).toBeInTheDocument();
     fireEvent.click(within(toc).getByRole('link', { name: 'Fechamento' }));
-    expect(screen.getByRole('heading', { name: 'Fechamento' })).toHaveFocus();
+    await waitFor(() => expect(screen.getByRole('heading', { name: 'Fechamento' })).toHaveFocus());
     expect(screen.getByText('25% da etapa')).toBeInTheDocument();
 
     fireEvent.click(screen.getByRole('button', { name: 'Concluir etapa' }));

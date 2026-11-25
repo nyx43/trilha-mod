@@ -593,7 +593,7 @@ export function NarrationProvider({
       if (s.playbackMode === 'queue') {
         setStatusMessage(
           hasMoreHiddenSections
-            ? 'Leitura das seções abertas concluída. Use "Mostrar a aula inteira" ou abra a próxima seção para continuar.'
+            ? 'Leitura da seção concluída. Avance para continuar.'
             : 'Leitura concluída.',
         );
         saveReadingPosition(scopeKey, null);
@@ -704,7 +704,7 @@ export function NarrationProvider({
     if (index >= 0 && index + 1 < queue.length) {
       playQueueFrom(queue[index + 1]);
     } else {
-      setStatusMessage('Abra a próxima seção e clique em Retomar leitura para continuar.');
+      setStatusMessage('Avance para a próxima seção para continuar a leitura.');
     }
   }, [activeClipId, discoverVisibleReadyQueue, playQueueFrom]);
 

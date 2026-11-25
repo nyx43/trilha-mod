@@ -7,10 +7,9 @@ import {
   PiCheckBold,
   PiClock,
   PiFlagCheckered,
-  PiLockSimple,
   PiTarget,
 } from 'react-icons/pi';
-import { Link, useLocation, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Checklist } from '../components/Guide/Checklist';
 import { CodeBlock } from '../components/Guide/CodeBlock';
 import { GuideBlockView } from '../components/Guide/GuideBlock';
@@ -18,6 +17,12 @@ import { Inline } from '../components/Guide/inline';
 import MainLayout from '../components/layouts/MainLayout';
 import { Flashcards } from '../components/Lesson/Flashcards';
 import { LessonBlockView } from '../components/Lesson/LessonBlock';
+import {
+  closingId,
+  LessonSectionLinks,
+  LessonSectionPager,
+  useLessonSection,
+} from '../components/Lesson/LessonSectionNavigation';
 import { LessonContext } from '../components/Lesson/context';
 import { activityKey, findLesson } from '../lessons';
 import { NarrationProvider } from '../narration/controller';
@@ -45,8 +50,6 @@ import {
 } from '../percurso/progress';
 import '../components/Guide/guide.css';
 import '../components/Lesson/lesson.css';
-
-const closingId = 'fechamento';
 
 function PercursoOverview({ percurso }: { percurso: Percurso }) {
   const percursoStore = usePercursoStore();
@@ -203,9 +206,7 @@ function PercursoLessonStageView({
   const [content, setContent] = useState<LessonContent | null>(null);
   const [failed, setFailed] = useState(false);
   const [showAll, setShowAll] = useState(false);
-  const focusTarget = useRef<string>();
   const stageContainerRef = useRef<HTMLElement>(null);
-  const { hash } = useLocation();
   const sourceLesson = useMemo(
     () =>
       findLesson(stage.lessonId) ?? {
@@ -266,53 +267,25 @@ function PercursoLessonStageView({
   const reached = Number.isInteger(savedReached)
     ? Math.max(0, Math.min(savedReached, total - 1))
     : 0;
-  const visible = showAll || done ? total : Math.min(reached + 1, total);
-  const percent = done ? 100 : Math.round((Math.min(reached, total - 1) / total) * 100);
-  const ids = [...sections.map((section) => section.id), closingId];
-
+  const percent = done ? 100 : Math.round((reached / total) * 100);
+  const pages = [...sections, { id: closingId, title: 'Fechamento' }];
+  const navigation = useLessonSection(
+    content ? pages.map(({ id }) => id) : [],
+    done ? stage.sectionIds.length : Number.isInteger(savedReached) ? savedReached : 0,
+    showAll,
+  );
+  const includeIntro = showAll || navigation.index === 0;
+  const showClosing = showAll || navigation.id === closingId;
+  const displayedSections = showAll
+    ? sections
+    : sections.slice(navigation.index, navigation.index + 1);
   const previous = index > 0 ? percurso.stages[index - 1] : undefined;
   const next = index + 1 < percurso.stages.length ? percurso.stages[index + 1] : undefined;
 
-  useEffect(() => {
-    const target = focusTarget.current;
-    if (!target) return;
-    focusTarget.current = undefined;
-    const frame = requestAnimationFrame(() => {
-      const heading = document.getElementById(`${target}-title`);
-      heading?.focus({ preventScroll: true });
-      heading?.scrollIntoView?.({
-        block: 'start',
-        behavior: window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
-          ? 'auto'
-          : 'smooth',
-      });
-    });
-    return () => cancelAnimationFrame(frame);
-  }, [visible, reached]);
-
-  useEffect(() => {
-    if (!content || !hash) return;
-    const targetId = decodeURIComponent(hash.slice(1));
-    const targetIndex = ids.indexOf(targetId);
-    if (targetIndex < 0) return;
-    focusTarget.current = targetId;
-    if (targetIndex >= visible) {
-      setShowAll(true);
-      return;
-    }
-    const frame = requestAnimationFrame(() => {
-      const heading = document.getElementById(`${targetId}-title`);
-      heading?.focus({ preventScroll: true });
-      heading?.scrollIntoView?.({ block: 'start' });
-    });
-    focusTarget.current = undefined;
-    return () => cancelAnimationFrame(frame);
-  }, [content, hash]);
-
-  function advance(nextIndex: number) {
-    if (nextIndex !== reached + 1 || nextIndex >= total) return;
-    focusTarget.current = ids[nextIndex];
-    advanceStage(percurso.id, stage.slug, nextIndex);
+  function openSection(index: number) {
+    if (index > navigation.index && index > reached && !done)
+      advanceStage(percurso.id, stage.slug, index);
+    navigation.openSection(index);
   }
 
   function completeStage() {
@@ -335,7 +308,7 @@ function PercursoLessonStageView({
       containerRef={stageContainerRef}
       scopeKey={`${stage.lessonId}:percurso:${stage.slug}`}
       scopeSectionIds={stage.sectionIds}
-      hasMoreHiddenSections={Boolean(content && !showAll && visible < total)}
+      hasMoreHiddenSections={!showAll && navigation.index < total - 1}
     >
       <LessonContext.Provider value={{ lessonId: stage.lessonId }}>
         <article
@@ -374,15 +347,13 @@ function PercursoLessonStageView({
               <p>{done ? 'Etapa concluída' : `${percent}% da etapa`}</p>
             </div>
             <div className="lessons-actions">
-              {!done && (
-                <button
-                  type="button"
-                  className="lesson-button-quiet"
-                  onClick={() => setShowAll((prev) => !prev)}
-                >
-                  {showAll ? 'Voltar para leitura passo a passo' : 'Mostrar todas as seções'}
-                </button>
-              )}
+              <button
+                type="button"
+                className="lesson-button-quiet"
+                onClick={() => setShowAll((prev) => !prev)}
+              >
+                {showAll ? 'Voltar para leitura passo a passo' : 'Mostrar todas as seções'}
+              </button>
               <Link className="lesson-button-quiet" to={`/aula/${stage.lessonId}`}>
                 Abrir aula completa avulsa <PiArrowUpRight aria-hidden="true" />
               </Link>
@@ -395,59 +366,25 @@ function PercursoLessonStageView({
                 Nesta etapa
               </p>
               {content && (
-                <ol>
-                  {ids.map((id, sectionIndex) => {
-                    const title =
-                      sectionIndex < sections.length ? sections[sectionIndex].title : 'Fechamento';
-                    const locked = sectionIndex >= visible;
-                    return (
-                      <li key={id}>
-                        {locked ? (
-                          <span data-locked aria-disabled="true">
-                            <span aria-hidden="true">
-                              <PiLockSimple />
-                            </span>
-                            {title}
-                            <span className="sr-only"> (ainda não aberta)</span>
-                          </span>
-                        ) : (
-                          <a
-                            href={`#${id}`}
-                            data-done={sectionIndex < reached || done || undefined}
-                            onClick={(event) => {
-                              event.preventDefault();
-                              document
-                                .getElementById(`${id}-title`)
-                                ?.focus({ preventScroll: true });
-                              document.getElementById(id)?.scrollIntoView?.({ block: 'start' });
-                            }}
-                          >
-                            <span aria-hidden="true">
-                              {sectionIndex < reached || done ? (
-                                <PiCheckBold />
-                              ) : (
-                                String(sectionIndex + 1).padStart(2, '0')
-                              )}
-                            </span>
-                            {title}
-                          </a>
-                        )}
-                      </li>
-                    );
-                  })}
-                </ol>
-              )}
-              {!done && (
-                <label className="option-check lesson-show-all" htmlFor="percurso-show-all">
-                  <input
-                    id="percurso-show-all"
-                    name="percursoShowAll"
-                    type="checkbox"
-                    checked={showAll}
-                    onChange={(event) => setShowAll(event.target.checked)}
+                <>
+                  <LessonSectionLinks
+                    sections={pages}
+                    navigation={navigation}
+                    reached={reached}
+                    showAll={showAll}
+                    done={done}
                   />
-                  Mostrar a aula inteira
-                </label>
+                  <label className="option-check lesson-show-all" htmlFor="percurso-show-all">
+                    <input
+                      id="percurso-show-all"
+                      name="percursoShowAll"
+                      type="checkbox"
+                      checked={showAll}
+                      onChange={(event) => setShowAll(event.target.checked)}
+                    />
+                    Mostrar a aula inteira
+                  </label>
+                </>
               )}
             </nav>
 
@@ -466,23 +403,30 @@ function PercursoLessonStageView({
                 </div>
               ) : (
                 <>
-                  <NarrationPlayer />
-                  <p className="lesson-hook" data-narration-clip="hook">
-                    <span data-narration-field="text">
-                      <Inline text={content.hook} />
-                    </span>{' '}
-                    <NarrationBlockButton clipId="hook" label="Ouvir abertura" />
-                  </p>
-                  <GuideBlockView
-                    block={{
-                      type: 'callout',
-                      tone: 'tip',
-                      title: 'Como aproveitar esta etapa na entrega',
-                      text: stage.focusNote,
-                    }}
-                    guideId={`percurso-${percurso.id}-${stage.slug}`}
+                  <NarrationPlayer
+                    sectionId={showAll ? undefined : navigation.id}
+                    includeIntro={includeIntro}
                   />
-                  {sections.slice(0, visible).map((section, sectionIndex) => (
+                  {includeIntro && (
+                    <>
+                      <p className="lesson-hook" data-narration-clip="hook">
+                        <span data-narration-field="text">
+                          <Inline text={content.hook} />
+                        </span>{' '}
+                        <NarrationBlockButton clipId="hook" label="Ouvir abertura" />
+                      </p>
+                      <GuideBlockView
+                        block={{
+                          type: 'callout',
+                          tone: 'tip',
+                          title: 'Como aproveitar esta etapa na entrega',
+                          text: stage.focusNote,
+                        }}
+                        guideId={`percurso-${percurso.id}-${stage.slug}`}
+                      />
+                    </>
+                  )}
+                  {displayedSections.map((section, offset) => (
                     <section
                       key={section.id}
                       id={section.id}
@@ -494,7 +438,9 @@ function PercursoLessonStageView({
                         tabIndex={-1}
                         data-narration-clip={`${section.id}:heading`}
                       >
-                        <span aria-hidden="true">{String(sectionIndex + 1).padStart(2, '0')}</span>
+                        <span aria-hidden="true">
+                          {String((showAll ? offset : navigation.index) + 1).padStart(2, '0')}
+                        </span>
                         <span data-narration-field="title">{section.title}</span>
                       </h2>
                       <div className="narration-clip-controls">
@@ -511,26 +457,9 @@ function PercursoLessonStageView({
                           activityId={activityKey(section.id, blockIndex)}
                         />
                       ))}
-                      {sectionIndex === visible - 1 && (
-                        <div className="lesson-continue">
-                          <button
-                            type="button"
-                            className="lesson-button"
-                            onClick={() => advance(sectionIndex + 1)}
-                          >
-                            {sectionIndex + 1 < sections.length
-                              ? `Continuar: ${sections[sectionIndex + 1].title}`
-                              : 'Ir para o fechamento'}
-                            <PiArrowRight aria-hidden="true" />
-                          </button>
-                          <span>
-                            Seção {sectionIndex + 1} de {sections.length}
-                          </span>
-                        </div>
-                      )}
                     </section>
                   ))}
-                  {visible === total && (
+                  {showClosing && (
                     <section
                       id={closingId}
                       className="guide-section lesson-section lesson-closing"
@@ -626,6 +555,14 @@ function PercursoLessonStageView({
                       </div>
                     </section>
                   )}
+                  {!showAll && (
+                    <LessonSectionPager
+                      index={navigation.index}
+                      sectionCount={sections.length}
+                      nextTitle={sections[navigation.index + 1]?.title}
+                      onOpen={openSection}
+                    />
+                  )}
                 </>
               )}
             </div>
@@ -668,15 +605,12 @@ function PercursoLessonStageView({
         </article>
         {content && (
           <LessonTutor
-            key={stage.slug}
+            key={showAll ? 'all' : navigation.id}
             title={stage.title}
             summary={stage.summary}
             hook={content.hook}
-            sections={sections.slice(0, visible)}
-            suggestedSection={
-              sections.slice(0, visible).find(({ id }) => hash === `#${id}`)?.id ??
-              sections[reached]?.id
-            }
+            sections={displayedSections}
+            suggestedSection={sections[navigation.index]?.id}
           />
         )}
       </LessonContext.Provider>
@@ -928,7 +862,7 @@ export default function PercursoPage() {
       {stage.kind === 'mission' ? (
         <PercursoMissionStageView percurso={percurso} stage={stage} index={index} />
       ) : (
-        <PercursoLessonStageView percurso={percurso} stage={stage} index={index} />
+        <PercursoLessonStageView key={stage.slug} percurso={percurso} stage={stage} index={index} />
       )}
     </MainLayout>
   );
