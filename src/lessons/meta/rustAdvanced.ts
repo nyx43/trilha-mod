@@ -15,7 +15,6 @@ export const lessons: LessonMeta[] = [
       'Materializar a posse na fronteira que realmente a exige',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustApiDeDadosEmprestados'),
   },
   {
@@ -31,7 +30,6 @@ export const lessons: LessonMeta[] = [
       'Avaliar mudanças públicas com testes de consumidores',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustContratosDeBiblioteca'),
   },
   {
@@ -47,7 +45,6 @@ export const lessons: LessonMeta[] = [
       'Verificar a interface a partir de um consumidor C',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustFronteiraComC'),
   },
   {
@@ -62,7 +59,6 @@ export const lessons: LessonMeta[] = [
       'Descrever o comportamento de drenagem e interrupção',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustPoolAssincrono'),
   },
   {
@@ -78,7 +74,6 @@ export const lessons: LessonMeta[] = [
       'Conferir as contagens esperadas para um lote sintético',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustObservabilidade'),
   },
   {
@@ -94,7 +89,6 @@ export const lessons: LessonMeta[] = [
       'Justificar a mudança com reuso, repetições e uso de memória',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustPerfilDeDesempenho'),
   },
   {
@@ -109,7 +103,6 @@ export const lessons: LessonMeta[] = [
       'Verificar o banco depois de uma falha ou repetição',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustIdempotencia'),
   },
   {
@@ -125,7 +118,6 @@ export const lessons: LessonMeta[] = [
       'Reproduzir uma gravação parcial e provar a regressão',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustTestesDeApi'),
   },
   {
@@ -141,7 +133,6 @@ export const lessons: LessonMeta[] = [
       'Planejar o corte de leitura e testar a possibilidade de volta',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustMigracoesCompativeis'),
   },
   {
@@ -157,7 +148,6 @@ export const lessons: LessonMeta[] = [
       'Demonstrar a mudança e a volta em um ambiente de teste',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustEntregaDeProducao'),
   },
 ];

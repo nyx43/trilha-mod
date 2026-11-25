@@ -16,7 +16,6 @@ export const lessons: LessonMeta[] = [
       'Explicar a relação entre os empréstimos de entrada e o retorno',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustLeituraDeLegado'),
   },
   {
@@ -32,7 +31,6 @@ export const lessons: LessonMeta[] = [
       'Demonstrar entradas válidas e inválidas com testes de contrato',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustImportacaoLegada'),
   },
   {
@@ -47,7 +45,6 @@ export const lessons: LessonMeta[] = [
       'Verificar o comportamento por meio de um teste de integração',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustBibliotecaECli'),
   },
   {
@@ -62,7 +59,6 @@ export const lessons: LessonMeta[] = [
       'Escolher entre percorrer todos os itens e encerrar na primeira correspondência',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustTraitsEIteradores'),
   },
   {
@@ -78,7 +74,6 @@ export const lessons: LessonMeta[] = [
       'Justificar o custo da solução e o que seria necessário medir',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustRevisaoDeImportador'),
   },
   {
@@ -93,7 +88,6 @@ export const lessons: LessonMeta[] = [
       'Encerrar o canal e verificar o resultado da thread',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustThreadsEFilas'),
   },
   {
@@ -108,7 +102,6 @@ export const lessons: LessonMeta[] = [
       'Explicar como observar o cancelamento e verificar o estado resultante',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustTokioECancelamento'),
   },
   {
@@ -123,7 +116,6 @@ export const lessons: LessonMeta[] = [
       'Justificar a decisão com tempos repetidos e limites da medição',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustMedicaoDeConcorrencia'),
   },
   {
@@ -139,7 +131,6 @@ export const lessons: LessonMeta[] = [
       'Demonstrar o contrato com requisições reproduzíveis',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustApiComAxum'),
   },
   {
@@ -154,7 +145,6 @@ export const lessons: LessonMeta[] = [
       'Verificar o estado do banco ao repetir um lote válido e ao rejeitar um inválido',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustSqliteETransacoes'),
   },
 ];

@@ -1,0 +1,7354 @@
+{
+  "schemaVersion": 1,
+  "lessonId": "rust-importacao-legada",
+  "lessonTitle": "Importação de arquivos e erros de domínio",
+  "generatorVersion": "1.0.0",
+  "lexiconVersion": "1.0.0",
+  "defaultVoice": "santa",
+  "availableVoices": [
+    "santa",
+    "dora"
+  ],
+  "generatedAt": "2026-11-25T02:38:52.053199+00:00",
+  "totalDurationMs": {
+    "santa": 210435,
+    "dora": 204560
+  },
+  "totalBytes": {
+    "santa": 1701120,
+    "dora": 1654464
+  },
+  "clips": [
+    {
+      "id": "header",
+      "sectionId": "header",
+      "kind": "header",
+      "label": "Cabeçalho da aula: Importação de arquivos e erros de domínio",
+      "textHash": "5b54c7644bac5de8392caf7702d412f0fc30f13857d2688c4e5b31abb5741cef",
+      "clipKey": "3f5989431fcd441573dcc9b4",
+      "audio": {
+        "santa": {
+          "src": "santa/header.mp3",
+          "durationMs": 10135,
+          "bytes": 81792,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 935
+            },
+            {
+              "field": "title",
+              "from": 11,
+              "to": 13,
+              "startMs": 960,
+              "endMs": 1035
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 22,
+              "startMs": 1060,
+              "endMs": 1685
+            },
+            {
+              "field": "title",
+              "from": 23,
+              "to": 24,
+              "startMs": 1760,
+              "endMs": 1810
+            },
+            {
+              "field": "title",
+              "from": 25,
+              "to": 30,
+              "startMs": 1860,
+              "endMs": 2185
+            },
+            {
+              "field": "title",
+              "from": 31,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2285
+            },
+            {
+              "field": "title",
+              "from": 34,
+              "to": 41,
+              "startMs": 2335,
+              "endMs": 2935
+            },
+            {
+              "field": "summary",
+              "from": 0,
+              "to": 6,
+              "startMs": 3520,
+              "endMs": 3970
+            },
+            {
+              "field": "summary",
+              "from": 7,
+              "to": 10,
+              "startMs": 4020,
+              "endMs": 4470
+            },
+            {
+              "field": "summary",
+              "from": 11,
+              "to": 12,
+              "startMs": 4520,
+              "endMs": 4545
+            },
+            {
+              "field": "summary",
+              "from": 13,
+              "to": 26,
+              "startMs": 4570,
+              "endMs": 5320
+            },
+            {
+              "field": "summary",
+              "from": 27,
+              "to": 29,
+              "startMs": 5345,
+              "endMs": 5495
+            },
+            {
+              "field": "summary",
+              "from": 30,
+              "to": 36,
+              "startMs": 5545,
+              "endMs": 6145
+            },
+            {
+              "field": "summary",
+              "from": 38,
+              "to": 46,
+              "startMs": 6675,
+              "endMs": 7225
+            },
+            {
+              "field": "summary",
+              "from": 47,
+              "to": 52,
+              "startMs": 7275,
+              "endMs": 7625
+            },
+            {
+              "field": "summary",
+              "from": 53,
+              "to": 60,
+              "startMs": 7700,
+              "endMs": 8250
+            },
+            {
+              "field": "summary",
+              "from": 61,
+              "to": 62,
+              "startMs": 8300,
+              "endMs": 8350
+            },
+            {
+              "field": "summary",
+              "from": 63,
+              "to": 68,
+              "startMs": 8425,
+              "endMs": 8725
+            },
+            {
+              "field": "summary",
+              "from": 69,
+              "to": 71,
+              "startMs": 8750,
+              "endMs": 8850
+            },
+            {
+              "field": "summary",
+              "from": 72,
+              "to": 77,
+              "startMs": 8900,
+              "endMs": 9225
+            },
+            {
+              "field": "summary",
+              "from": 78,
+              "to": 80,
+              "startMs": 9250,
+              "endMs": 9400
+            },
+            {
+              "field": "summary",
+              "from": 81,
+              "to": 86,
+              "startMs": 9500,
+              "endMs": 9950
+            }
+          ],
+          "normalizedScript": "Importação de arquivos e erros de domínio\nSepare I O e interpretação de linhas\nPreserve dados válidos e prove os casos de falha"
+        },
+        "dora": {
+          "src": "dora/header.mp3",
+          "durationMs": 9785,
+          "bytes": 78912,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 935
+            },
+            {
+              "field": "title",
+              "from": 11,
+              "to": 13,
+              "startMs": 960,
+              "endMs": 1035
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 22,
+              "startMs": 1060,
+              "endMs": 1685
+            },
+            {
+              "field": "title",
+              "from": 23,
+              "to": 24,
+              "startMs": 1760,
+              "endMs": 1810
+            },
+            {
+              "field": "title",
+              "from": 25,
+              "to": 30,
+              "startMs": 1860,
+              "endMs": 2135
+            },
+            {
+              "field": "title",
+              "from": 31,
+              "to": 33,
+              "startMs": 2160,
+              "endMs": 2235
+            },
+            {
+              "field": "title",
+              "from": 34,
+              "to": 41,
+              "startMs": 2285,
+              "endMs": 2835
+            },
+            {
+              "field": "summary",
+              "from": 0,
+              "to": 6,
+              "startMs": 3420,
+              "endMs": 3845
+            },
+            {
+              "field": "summary",
+              "from": 7,
+              "to": 10,
+              "startMs": 3895,
+              "endMs": 4395
+            },
+            {
+              "field": "summary",
+              "from": 11,
+              "to": 12,
+              "startMs": 4445,
+              "endMs": 4470
+            },
+            {
+              "field": "summary",
+              "from": 13,
+              "to": 26,
+              "startMs": 4495,
+              "endMs": 5245
+            },
+            {
+              "field": "summary",
+              "from": 27,
+              "to": 29,
+              "startMs": 5270,
+              "endMs": 5370
+            },
+            {
+              "field": "summary",
+              "from": 30,
+              "to": 36,
+              "startMs": 5420,
+              "endMs": 5945
+            },
+            {
+              "field": "summary",
+              "from": 38,
+              "to": 46,
+              "startMs": 6500,
+              "endMs": 7025
+            },
+            {
+              "field": "summary",
+              "from": 47,
+              "to": 52,
+              "startMs": 7075,
+              "endMs": 7400
+            },
+            {
+              "field": "summary",
+              "from": 53,
+              "to": 60,
+              "startMs": 7475,
+              "endMs": 8025
+            },
+            {
+              "field": "summary",
+              "from": 61,
+              "to": 62,
+              "startMs": 8075,
+              "endMs": 8125
+            },
+            {
+              "field": "summary",
+              "from": 63,
+              "to": 68,
+              "startMs": 8175,
+              "endMs": 8450
+            },
+            {
+              "field": "summary",
+              "from": 69,
+              "to": 71,
+              "startMs": 8475,
+              "endMs": 8575
+            },
+            {
+              "field": "summary",
+              "from": 72,
+              "to": 77,
+              "startMs": 8625,
+              "endMs": 8925
+            },
+            {
+              "field": "summary",
+              "from": 78,
+              "to": 80,
+              "startMs": 8950,
+              "endMs": 9075
+            },
+            {
+              "field": "summary",
+              "from": 81,
+              "to": 86,
+              "startMs": 9150,
+              "endMs": 9600
+            }
+          ],
+          "normalizedScript": "Importação de arquivos e erros de domínio\nSepare I O e interpretação de linhas\nPreserve dados válidos e prove os casos de falha"
+        }
+      }
+    },
+    {
+      "id": "hook",
+      "sectionId": "hook",
+      "kind": "hook",
+      "label": "Abertura da aula",
+      "textHash": "45242fe1c0647dcea7537e9ef7d57adc323f6a02e79dcfb913c8c524ee6fd4d4",
+      "clipKey": "c9ae248adc569ab938c397a8",
+      "audio": {
+        "santa": {
+          "src": "santa/hook.mp3",
+          "durationMs": 13575,
+          "bytes": 109248,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 9,
+              "startMs": 410,
+              "endMs": 935
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 17,
+              "startMs": 985,
+              "endMs": 1460
+            },
+            {
+              "field": "text",
+              "from": 18,
+              "to": 25,
+              "startMs": 1485,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 27,
+              "startMs": 2035,
+              "endMs": 2060
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 33,
+              "startMs": 2110,
+              "endMs": 2335
+            },
+            {
+              "field": "text",
+              "from": 34,
+              "to": 46,
+              "startMs": 2385,
+              "endMs": 3485
+            },
+            {
+              "field": "text",
+              "from": 47,
+              "to": 49,
+              "startMs": 3560,
+              "endMs": 3635
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 52,
+              "startMs": 3660,
+              "endMs": 3735
+            },
+            {
+              "field": "text",
+              "from": 53,
+              "to": 60,
+              "startMs": 3760,
+              "endMs": 4210
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 64,
+              "startMs": 4285,
+              "endMs": 4510
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 71,
+              "startMs": 4560,
+              "endMs": 4910
+            },
+            {
+              "field": "text",
+              "from": 72,
+              "to": 73,
+              "startMs": 4935,
+              "endMs": 4960
+            },
+            {
+              "field": "text",
+              "from": 74,
+              "to": 85,
+              "startMs": 5010,
+              "endMs": 5785
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 88,
+              "startMs": 5810,
+              "endMs": 5910
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 94,
+              "startMs": 5960,
+              "endMs": 6460
+            },
+            {
+              "field": "text",
+              "from": 96,
+              "to": 100,
+              "startMs": 7015,
+              "endMs": 7240
+            },
+            {
+              "field": "text",
+              "from": 101,
+              "to": 104,
+              "startMs": 7265,
+              "endMs": 7415
+            },
+            {
+              "field": "text",
+              "from": 105,
+              "to": 112,
+              "startMs": 7465,
+              "endMs": 7915
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 114,
+              "startMs": 7940,
+              "endMs": 7965
+            },
+            {
+              "field": "text",
+              "from": 115,
+              "to": 122,
+              "startMs": 7990,
+              "endMs": 8390
+            },
+            {
+              "field": "text",
+              "from": 123,
+              "to": 125,
+              "startMs": 8415,
+              "endMs": 8465
+            },
+            {
+              "field": "text",
+              "from": 126,
+              "to": 133,
+              "startMs": 8490,
+              "endMs": 9265
+            },
+            {
+              "field": "text",
+              "from": 135,
+              "to": 136,
+              "startMs": 9365,
+              "endMs": 9390
+            },
+            {
+              "field": "text",
+              "from": 137,
+              "to": 150,
+              "startMs": 9415,
+              "endMs": 10190
+            },
+            {
+              "field": "text",
+              "from": 151,
+              "to": 153,
+              "startMs": 10215,
+              "endMs": 10290
+            },
+            {
+              "field": "text",
+              "from": 154,
+              "to": 157,
+              "startMs": 10315,
+              "endMs": 10465
+            },
+            {
+              "field": "text",
+              "from": 158,
+              "to": 163,
+              "startMs": 10515,
+              "endMs": 10965
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 165,
+              "startMs": 11040,
+              "endMs": 11065
+            },
+            {
+              "field": "text",
+              "from": 166,
+              "to": 167,
+              "startMs": 11115,
+              "endMs": 11140
+            },
+            {
+              "field": "text",
+              "from": 168,
+              "to": 175,
+              "startMs": 11190,
+              "endMs": 11740
+            },
+            {
+              "field": "text",
+              "from": 176,
+              "to": 178,
+              "startMs": 11790,
+              "endMs": 11865
+            },
+            {
+              "field": "text",
+              "from": 179,
+              "to": 188,
+              "startMs": 11915,
+              "endMs": 12565
+            },
+            {
+              "field": "text",
+              "from": 189,
+              "to": 190,
+              "startMs": 12590,
+              "endMs": 12615
+            },
+            {
+              "field": "text",
+              "from": 191,
+              "to": 201,
+              "startMs": 12640,
+              "endMs": 13415
+            }
+          ],
+          "normalizedScript": "O suporte precisa indicar a linha problemática de um arquivo sem perder o diagnóstico da causa\nVocê vai separar a leitura do arquivo a interpretação de uma linha e a decisão de continuar a importação"
+        },
+        "dora": {
+          "src": "dora/hook.mp3",
+          "durationMs": 13350,
+          "bytes": 107520,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 9,
+              "startMs": 410,
+              "endMs": 935
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 17,
+              "startMs": 985,
+              "endMs": 1460
+            },
+            {
+              "field": "text",
+              "from": 18,
+              "to": 25,
+              "startMs": 1485,
+              "endMs": 2010
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 27,
+              "startMs": 2060,
+              "endMs": 2085
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 33,
+              "startMs": 2135,
+              "endMs": 2360
+            },
+            {
+              "field": "text",
+              "from": 34,
+              "to": 46,
+              "startMs": 2410,
+              "endMs": 3535
+            },
+            {
+              "field": "text",
+              "from": 47,
+              "to": 49,
+              "startMs": 3610,
+              "endMs": 3685
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 52,
+              "startMs": 3710,
+              "endMs": 3785
+            },
+            {
+              "field": "text",
+              "from": 53,
+              "to": 60,
+              "startMs": 3810,
+              "endMs": 4235
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 64,
+              "startMs": 4310,
+              "endMs": 4535
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 71,
+              "startMs": 4585,
+              "endMs": 4910
+            },
+            {
+              "field": "text",
+              "from": 72,
+              "to": 73,
+              "startMs": 4935,
+              "endMs": 4960
+            },
+            {
+              "field": "text",
+              "from": 74,
+              "to": 85,
+              "startMs": 4985,
+              "endMs": 5710
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 88,
+              "startMs": 5735,
+              "endMs": 5835
+            },
+            {
+              "field": "text",
+              "from": 89,
+              "to": 94,
+              "startMs": 5885,
+              "endMs": 6385
+            },
+            {
+              "field": "text",
+              "from": 96,
+              "to": 100,
+              "startMs": 6940,
+              "endMs": 7165
+            },
+            {
+              "field": "text",
+              "from": 101,
+              "to": 104,
+              "startMs": 7190,
+              "endMs": 7340
+            },
+            {
+              "field": "text",
+              "from": 105,
+              "to": 112,
+              "startMs": 7390,
+              "endMs": 7815
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 114,
+              "startMs": 7840,
+              "endMs": 7865
+            },
+            {
+              "field": "text",
+              "from": 115,
+              "to": 122,
+              "startMs": 7890,
+              "endMs": 8290
+            },
+            {
+              "field": "text",
+              "from": 123,
+              "to": 125,
+              "startMs": 8315,
+              "endMs": 8365
+            },
+            {
+              "field": "text",
+              "from": 126,
+              "to": 133,
+              "startMs": 8390,
+              "endMs": 9140
+            },
+            {
+              "field": "text",
+              "from": 135,
+              "to": 136,
+              "startMs": 9265,
+              "endMs": 9290
+            },
+            {
+              "field": "text",
+              "from": 137,
+              "to": 150,
+              "startMs": 9315,
+              "endMs": 10090
+            },
+            {
+              "field": "text",
+              "from": 151,
+              "to": 153,
+              "startMs": 10115,
+              "endMs": 10190
+            },
+            {
+              "field": "text",
+              "from": 154,
+              "to": 157,
+              "startMs": 10215,
+              "endMs": 10365
+            },
+            {
+              "field": "text",
+              "from": 158,
+              "to": 163,
+              "startMs": 10415,
+              "endMs": 10890
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 165,
+              "startMs": 10965,
+              "endMs": 10990
+            },
+            {
+              "field": "text",
+              "from": 166,
+              "to": 167,
+              "startMs": 11040,
+              "endMs": 11065
+            },
+            {
+              "field": "text",
+              "from": 168,
+              "to": 175,
+              "startMs": 11115,
+              "endMs": 11615
+            },
+            {
+              "field": "text",
+              "from": 176,
+              "to": 178,
+              "startMs": 11665,
+              "endMs": 11740
+            },
+            {
+              "field": "text",
+              "from": 179,
+              "to": 188,
+              "startMs": 11790,
+              "endMs": 12390
+            },
+            {
+              "field": "text",
+              "from": 189,
+              "to": 190,
+              "startMs": 12415,
+              "endMs": 12440
+            },
+            {
+              "field": "text",
+              "from": 191,
+              "to": 201,
+              "startMs": 12465,
+              "endMs": 13190
+            }
+          ],
+          "normalizedScript": "O suporte precisa indicar a linha problemática de um arquivo sem perder o diagnóstico da causa\nVocê vai separar a leitura do arquivo a interpretação de uma linha e a decisão de continuar a importação"
+        }
+      }
+    },
+    {
+      "id": "contrato-do-parser:heading",
+      "sectionId": "contrato-do-parser",
+      "kind": "section-heading",
+      "label": "Seção: Defina o formato e as falhas da linha",
+      "textHash": "af79f48ef2f04ade952734b255cd4dcc87af01322937249c501f4f1be691cf62",
+      "clipKey": "4063a140f42448d82ec0ab61",
+      "audio": {
+        "santa": {
+          "src": "santa/contrato-do-parser__heading.mp3",
+          "durationMs": 2870,
+          "bytes": 23616,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 685
+            },
+            {
+              "field": "title",
+              "from": 7,
+              "to": 8,
+              "startMs": 710,
+              "endMs": 735
+            },
+            {
+              "field": "title",
+              "from": 9,
+              "to": 16,
+              "startMs": 785,
+              "endMs": 1385
+            },
+            {
+              "field": "title",
+              "from": 17,
+              "to": 18,
+              "startMs": 1435,
+              "endMs": 1460
+            },
+            {
+              "field": "title",
+              "from": 19,
+              "to": 21,
+              "startMs": 1510,
+              "endMs": 1635
+            },
+            {
+              "field": "title",
+              "from": 22,
+              "to": 28,
+              "startMs": 1710,
+              "endMs": 2035
+            },
+            {
+              "field": "title",
+              "from": 29,
+              "to": 31,
+              "startMs": 2085,
+              "endMs": 2185
+            },
+            {
+              "field": "title",
+              "from": 32,
+              "to": 37,
+              "startMs": 2235,
+              "endMs": 2735
+            }
+          ],
+          "normalizedScript": "Defina o formato e as falhas da linha"
+        },
+        "dora": {
+          "src": "dora/contrato-do-parser__heading.mp3",
+          "durationMs": 2720,
+          "bytes": 22464,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 685
+            },
+            {
+              "field": "title",
+              "from": 7,
+              "to": 8,
+              "startMs": 710,
+              "endMs": 735
+            },
+            {
+              "field": "title",
+              "from": 9,
+              "to": 16,
+              "startMs": 785,
+              "endMs": 1335
+            },
+            {
+              "field": "title",
+              "from": 17,
+              "to": 18,
+              "startMs": 1385,
+              "endMs": 1410
+            },
+            {
+              "field": "title",
+              "from": 19,
+              "to": 21,
+              "startMs": 1460,
+              "endMs": 1560
+            },
+            {
+              "field": "title",
+              "from": 22,
+              "to": 28,
+              "startMs": 1610,
+              "endMs": 1935
+            },
+            {
+              "field": "title",
+              "from": 29,
+              "to": 31,
+              "startMs": 1960,
+              "endMs": 2060
+            },
+            {
+              "field": "title",
+              "from": 32,
+              "to": 37,
+              "startMs": 2110,
+              "endMs": 2585
+            }
+          ],
+          "normalizedScript": "Defina o formato e as falhas da linha"
+        }
+      }
+    },
+    {
+      "id": "contrato-do-parser:0",
+      "sectionId": "contrato-do-parser",
+      "kind": "prose",
+      "label": "Parágrafo",
+      "textHash": "f63b8c3dd4b2348f379e783a8e1d55fb9241861a0853bf7978ba6705934901ba",
+      "clipKey": "d436e8a0b6eda35f09454669",
+      "audio": {
+        "santa": {
+          "src": "santa/contrato-do-parser__0.mp3",
+          "durationMs": 21210,
+          "bytes": 170304,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 335
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 9,
+              "startMs": 360,
+              "endMs": 860
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 910,
+              "endMs": 1210
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 25,
+              "startMs": 1235,
+              "endMs": 1910
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 29,
+              "startMs": 1960,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 44,
+              "startMs": 2185,
+              "endMs": 3235
+            },
+            {
+              "field": "text",
+              "from": 46,
+              "to": 52,
+              "startMs": 3790,
+              "endMs": 4165
+            },
+            {
+              "field": "text",
+              "from": 53,
+              "to": 57,
+              "startMs": 4215,
+              "endMs": 4440
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 64,
+              "startMs": 4490,
+              "endMs": 4815
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 74,
+              "startMs": 4840,
+              "endMs": 5740
+            },
+            {
+              "field": "text",
+              "from": 76,
+              "to": 85,
+              "startMs": 5865,
+              "endMs": 6390
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 93,
+              "startMs": 6415,
+              "endMs": 7065
+            },
+            {
+              "field": "text",
+              "from": 95,
+              "to": 102,
+              "startMs": 7115,
+              "endMs": 7515
+            },
+            {
+              "field": "text",
+              "from": 103,
+              "to": 112,
+              "startMs": 7540,
+              "endMs": 8140
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 114,
+              "startMs": 8190,
+              "endMs": 8240
+            },
+            {
+              "field": "text",
+              "from": 115,
+              "to": 121,
+              "startMs": 8290,
+              "endMs": 8665
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 127,
+              "startMs": 8715,
+              "endMs": 9265
+            },
+            {
+              "field": "text",
+              "from": 129,
+              "to": 130,
+              "startMs": 9820,
+              "endMs": 9870
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 137,
+              "startMs": 9920,
+              "endMs": 10295
+            },
+            {
+              "field": "text",
+              "from": 138,
+              "to": 146,
+              "startMs": 10345,
+              "endMs": 10870
+            },
+            {
+              "field": "text",
+              "from": 147,
+              "to": 152,
+              "startMs": 10920,
+              "endMs": 11120
+            },
+            {
+              "field": "text",
+              "from": 153,
+              "to": 156,
+              "startMs": 11145,
+              "endMs": 11295
+            },
+            {
+              "field": "text",
+              "from": 157,
+              "to": 162,
+              "startMs": 11345,
+              "endMs": 11545
+            },
+            {
+              "field": "text",
+              "from": 163,
+              "to": 173,
+              "startMs": 11570,
+              "endMs": 12595
+            },
+            {
+              "field": "text",
+              "from": 174,
+              "to": 175,
+              "startMs": 12670,
+              "endMs": 12695
+            },
+            {
+              "field": "text",
+              "from": 176,
+              "to": 183,
+              "startMs": 12745,
+              "endMs": 13145
+            },
+            {
+              "field": "text",
+              "from": 184,
+              "to": 186,
+              "startMs": 13170,
+              "endMs": 13245
+            },
+            {
+              "field": "text",
+              "from": 187,
+              "to": 195,
+              "startMs": 13270,
+              "endMs": 13870
+            },
+            {
+              "field": "text",
+              "from": 196,
+              "to": 199,
+              "startMs": 13920,
+              "endMs": 14045
+            },
+            {
+              "field": "text",
+              "from": 200,
+              "to": 201,
+              "startMs": 14070,
+              "endMs": 14095
+            },
+            {
+              "field": "text",
+              "from": 202,
+              "to": 208,
+              "startMs": 14145,
+              "endMs": 14445
+            },
+            {
+              "field": "text",
+              "from": 209,
+              "to": 221,
+              "startMs": 14470,
+              "endMs": 15420
+            },
+            {
+              "field": "text",
+              "from": 222,
+              "to": 223,
+              "startMs": 15495,
+              "endMs": 15520
+            },
+            {
+              "field": "text",
+              "from": 224,
+              "to": 227,
+              "startMs": 15545,
+              "endMs": 15720
+            },
+            {
+              "field": "text",
+              "from": 228,
+              "to": 233,
+              "startMs": 15770,
+              "endMs": 16245
+            },
+            {
+              "field": "text",
+              "from": 234,
+              "to": 236,
+              "startMs": 16270,
+              "endMs": 16395
+            },
+            {
+              "field": "text",
+              "from": 237,
+              "to": 242,
+              "startMs": 16470,
+              "endMs": 16995
+            },
+            {
+              "field": "text",
+              "from": 244,
+              "to": 248,
+              "startMs": 17525,
+              "endMs": 17750
+            },
+            {
+              "field": "text",
+              "from": 249,
+              "to": 255,
+              "startMs": 17800,
+              "endMs": 18300
+            },
+            {
+              "field": "text",
+              "from": 256,
+              "to": 262,
+              "startMs": 18350,
+              "endMs": 18750
+            },
+            {
+              "field": "text",
+              "from": 263,
+              "to": 267,
+              "startMs": 18800,
+              "endMs": 19050
+            },
+            {
+              "field": "text",
+              "from": 268,
+              "to": 275,
+              "startMs": 19100,
+              "endMs": 19525
+            },
+            {
+              "field": "text",
+              "from": 276,
+              "to": 279,
+              "startMs": 19550,
+              "endMs": 19700
+            },
+            {
+              "field": "text",
+              "from": 280,
+              "to": 286,
+              "startMs": 19750,
+              "endMs": 20125
+            },
+            {
+              "field": "text",
+              "from": 287,
+              "to": 289,
+              "startMs": 20175,
+              "endMs": 20325
+            },
+            {
+              "field": "text",
+              "from": 290,
+              "to": 292,
+              "startMs": 20350,
+              "endMs": 20450
+            },
+            {
+              "field": "text",
+              "from": 293,
+              "to": 298,
+              "startMs": 20500,
+              "endMs": 21025
+            }
+          ],
+          "normalizedScript": "A entrada deste exercício usa minutos título\nDefina três falhas esperadas separador ausente minutos inválidos e título vazio\nO parser trabalha sobre uma linha emprestada e devolve um registro com o número interpretado e uma fatia de texto\nEssa função também pode receber uma string em um teste"
+        },
+        "dora": {
+          "src": "dora/contrato-do-parser__0.mp3",
+          "durationMs": 20735,
+          "bytes": 166464,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 335
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 9,
+              "startMs": 360,
+              "endMs": 860
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 910,
+              "endMs": 1235
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 25,
+              "startMs": 1260,
+              "endMs": 1885
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 29,
+              "startMs": 1935,
+              "endMs": 2110
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 44,
+              "startMs": 2135,
+              "endMs": 3135
+            },
+            {
+              "field": "text",
+              "from": 46,
+              "to": 52,
+              "startMs": 3690,
+              "endMs": 4065
+            },
+            {
+              "field": "text",
+              "from": 53,
+              "to": 57,
+              "startMs": 4115,
+              "endMs": 4365
+            },
+            {
+              "field": "text",
+              "from": 58,
+              "to": 64,
+              "startMs": 4415,
+              "endMs": 4715
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 74,
+              "startMs": 4740,
+              "endMs": 5665
+            },
+            {
+              "field": "text",
+              "from": 76,
+              "to": 85,
+              "startMs": 5815,
+              "endMs": 6340
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 93,
+              "startMs": 6365,
+              "endMs": 7015
+            },
+            {
+              "field": "text",
+              "from": 95,
+              "to": 102,
+              "startMs": 7090,
+              "endMs": 7465
+            },
+            {
+              "field": "text",
+              "from": 103,
+              "to": 112,
+              "startMs": 7490,
+              "endMs": 8090
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 114,
+              "startMs": 8140,
+              "endMs": 8190
+            },
+            {
+              "field": "text",
+              "from": 115,
+              "to": 121,
+              "startMs": 8240,
+              "endMs": 8590
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 127,
+              "startMs": 8615,
+              "endMs": 9165
+            },
+            {
+              "field": "text",
+              "from": 129,
+              "to": 130,
+              "startMs": 9720,
+              "endMs": 9770
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 137,
+              "startMs": 9820,
+              "endMs": 10170
+            },
+            {
+              "field": "text",
+              "from": 138,
+              "to": 146,
+              "startMs": 10220,
+              "endMs": 10770
+            },
+            {
+              "field": "text",
+              "from": 147,
+              "to": 152,
+              "startMs": 10820,
+              "endMs": 11020
+            },
+            {
+              "field": "text",
+              "from": 153,
+              "to": 156,
+              "startMs": 11045,
+              "endMs": 11195
+            },
+            {
+              "field": "text",
+              "from": 157,
+              "to": 162,
+              "startMs": 11245,
+              "endMs": 11445
+            },
+            {
+              "field": "text",
+              "from": 163,
+              "to": 173,
+              "startMs": 11470,
+              "endMs": 12545
+            },
+            {
+              "field": "text",
+              "from": 174,
+              "to": 175,
+              "startMs": 12620,
+              "endMs": 12645
+            },
+            {
+              "field": "text",
+              "from": 176,
+              "to": 183,
+              "startMs": 12695,
+              "endMs": 13095
+            },
+            {
+              "field": "text",
+              "from": 184,
+              "to": 186,
+              "startMs": 13120,
+              "endMs": 13195
+            },
+            {
+              "field": "text",
+              "from": 187,
+              "to": 195,
+              "startMs": 13220,
+              "endMs": 13745
+            },
+            {
+              "field": "text",
+              "from": 196,
+              "to": 199,
+              "startMs": 13795,
+              "endMs": 13920
+            },
+            {
+              "field": "text",
+              "from": 200,
+              "to": 201,
+              "startMs": 13945,
+              "endMs": 13970
+            },
+            {
+              "field": "text",
+              "from": 202,
+              "to": 208,
+              "startMs": 14020,
+              "endMs": 14295
+            },
+            {
+              "field": "text",
+              "from": 209,
+              "to": 221,
+              "startMs": 14320,
+              "endMs": 15270
+            },
+            {
+              "field": "text",
+              "from": 222,
+              "to": 223,
+              "startMs": 15345,
+              "endMs": 15370
+            },
+            {
+              "field": "text",
+              "from": 224,
+              "to": 227,
+              "startMs": 15395,
+              "endMs": 15545
+            },
+            {
+              "field": "text",
+              "from": 228,
+              "to": 233,
+              "startMs": 15595,
+              "endMs": 15970
+            },
+            {
+              "field": "text",
+              "from": 234,
+              "to": 236,
+              "startMs": 15995,
+              "endMs": 16095
+            },
+            {
+              "field": "text",
+              "from": 237,
+              "to": 242,
+              "startMs": 16145,
+              "endMs": 16620
+            },
+            {
+              "field": "text",
+              "from": 244,
+              "to": 248,
+              "startMs": 17175,
+              "endMs": 17400
+            },
+            {
+              "field": "text",
+              "from": 249,
+              "to": 255,
+              "startMs": 17450,
+              "endMs": 17925
+            },
+            {
+              "field": "text",
+              "from": 256,
+              "to": 262,
+              "startMs": 17975,
+              "endMs": 18375
+            },
+            {
+              "field": "text",
+              "from": 263,
+              "to": 267,
+              "startMs": 18425,
+              "endMs": 18675
+            },
+            {
+              "field": "text",
+              "from": 268,
+              "to": 275,
+              "startMs": 18725,
+              "endMs": 19150
+            },
+            {
+              "field": "text",
+              "from": 276,
+              "to": 279,
+              "startMs": 19175,
+              "endMs": 19325
+            },
+            {
+              "field": "text",
+              "from": 280,
+              "to": 286,
+              "startMs": 19375,
+              "endMs": 19700
+            },
+            {
+              "field": "text",
+              "from": 287,
+              "to": 289,
+              "startMs": 19750,
+              "endMs": 19850
+            },
+            {
+              "field": "text",
+              "from": 290,
+              "to": 292,
+              "startMs": 19875,
+              "endMs": 19950
+            },
+            {
+              "field": "text",
+              "from": 293,
+              "to": 298,
+              "startMs": 20000,
+              "endMs": 20550
+            }
+          ],
+          "normalizedScript": "A entrada deste exercício usa minutos título\nDefina três falhas esperadas separador ausente minutos inválidos e título vazio\nO parser trabalha sobre uma linha emprestada e devolve um registro com o número interpretado e uma fatia de texto\nEssa função também pode receber uma string em um teste"
+        }
+      }
+    },
+    {
+      "id": "contrato-do-parser:1",
+      "sectionId": "contrato-do-parser",
+      "kind": "classify",
+      "label": "Atividade: classificação",
+      "textHash": "30c0e966e11d00ec584b20d052c5dd78c18c57e8db23004e12d9fdcbe6d436ad",
+      "clipKey": "46670b56d65c4344c8f3b333",
+      "audio": {
+        "santa": {
+          "src": "santa/contrato-do-parser__1.mp3",
+          "durationMs": 13430,
+          "bytes": 108096,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "prompt",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 735
+            },
+            {
+              "field": "prompt",
+              "from": 8,
+              "to": 9,
+              "startMs": 760,
+              "endMs": 785
+            },
+            {
+              "field": "prompt",
+              "from": 10,
+              "to": 18,
+              "startMs": 835,
+              "endMs": 1235
+            },
+            {
+              "field": "prompt",
+              "from": 19,
+              "to": 24,
+              "startMs": 1335,
+              "endMs": 1660
+            },
+            {
+              "field": "prompt",
+              "from": 25,
+              "to": 34,
+              "startMs": 1710,
+              "endMs": 2335
+            },
+            {
+              "field": "prompt",
+              "from": 35,
+              "to": 37,
+              "startMs": 2360,
+              "endMs": 2560
+            },
+            {
+              "field": "prompt",
+              "from": 38,
+              "to": 42,
+              "startMs": 2635,
+              "endMs": 2885
+            },
+            {
+              "field": "prompt",
+              "from": 43,
+              "to": 48,
+              "startMs": 2935,
+              "endMs": 3360
+            },
+            {
+              "field": "bucket:0",
+              "from": 0,
+              "to": 3,
+              "startMs": 3995,
+              "endMs": 4245
+            },
+            {
+              "field": "bucket:0",
+              "from": 4,
+              "to": 13,
+              "startMs": 4320,
+              "endMs": 5145
+            },
+            {
+              "field": "bucket:1",
+              "from": 0,
+              "to": 7,
+              "startMs": 5705,
+              "endMs": 6180
+            },
+            {
+              "field": "bucket:1",
+              "from": 8,
+              "to": 17,
+              "startMs": 6205,
+              "endMs": 7080
+            },
+            {
+              "field": "bucket:2",
+              "from": 0,
+              "to": 6,
+              "startMs": 7665,
+              "endMs": 8140
+            },
+            {
+              "field": "bucket:2",
+              "from": 7,
+              "to": 12,
+              "startMs": 8190,
+              "endMs": 8790
+            },
+            {
+              "field": "item:1",
+              "from": 0,
+              "to": 12,
+              "startMs": 9375,
+              "endMs": 10400
+            },
+            {
+              "field": "item:2",
+              "from": 0,
+              "to": 2,
+              "startMs": 10985,
+              "endMs": 11635
+            },
+            {
+              "field": "item:0",
+              "from": 0,
+              "to": 2,
+              "startMs": 12270,
+              "endMs": 12645
+            },
+            {
+              "field": "item:0",
+              "from": 3,
+              "to": 8,
+              "startMs": 12720,
+              "endMs": 13295
+            }
+          ],
+          "normalizedScript": "Escolha a primeira falha detectada em cada linha\nSem separador\nMinutos inválidos\nTítulo vazio\nquinze Cargo\nquinze\nquinze Cargo"
+        },
+        "dora": {
+          "src": "dora/contrato-do-parser__1.mp3",
+          "durationMs": 12980,
+          "bytes": 104448,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "prompt",
+              "from": 0,
+              "to": 7,
+              "startMs": 285,
+              "endMs": 735
+            },
+            {
+              "field": "prompt",
+              "from": 8,
+              "to": 9,
+              "startMs": 760,
+              "endMs": 785
+            },
+            {
+              "field": "prompt",
+              "from": 10,
+              "to": 18,
+              "startMs": 835,
+              "endMs": 1235
+            },
+            {
+              "field": "prompt",
+              "from": 19,
+              "to": 24,
+              "startMs": 1335,
+              "endMs": 1660
+            },
+            {
+              "field": "prompt",
+              "from": 25,
+              "to": 34,
+              "startMs": 1710,
+              "endMs": 2285
+            },
+            {
+              "field": "prompt",
+              "from": 35,
+              "to": 37,
+              "startMs": 2310,
+              "endMs": 2510
+            },
+            {
+              "field": "prompt",
+              "from": 38,
+              "to": 42,
+              "startMs": 2560,
+              "endMs": 2810
+            },
+            {
+              "field": "prompt",
+              "from": 43,
+              "to": 48,
+              "startMs": 2860,
+              "endMs": 3260
+            },
+            {
+              "field": "bucket:0",
+              "from": 0,
+              "to": 3,
+              "startMs": 3895,
+              "endMs": 4145
+            },
+            {
+              "field": "bucket:0",
+              "from": 4,
+              "to": 13,
+              "startMs": 4195,
+              "endMs": 4945
+            },
+            {
+              "field": "bucket:1",
+              "from": 0,
+              "to": 7,
+              "startMs": 5505,
+              "endMs": 5980
+            },
+            {
+              "field": "bucket:1",
+              "from": 8,
+              "to": 17,
+              "startMs": 6005,
+              "endMs": 6855
+            },
+            {
+              "field": "bucket:2",
+              "from": 0,
+              "to": 6,
+              "startMs": 7415,
+              "endMs": 7890
+            },
+            {
+              "field": "bucket:2",
+              "from": 7,
+              "to": 12,
+              "startMs": 7940,
+              "endMs": 8515
+            },
+            {
+              "field": "item:1",
+              "from": 0,
+              "to": 12,
+              "startMs": 9100,
+              "endMs": 10075
+            },
+            {
+              "field": "item:2",
+              "from": 0,
+              "to": 2,
+              "startMs": 10635,
+              "endMs": 11260
+            },
+            {
+              "field": "item:0",
+              "from": 0,
+              "to": 2,
+              "startMs": 11895,
+              "endMs": 12270
+            },
+            {
+              "field": "item:0",
+              "from": 3,
+              "to": 8,
+              "startMs": 12345,
+              "endMs": 12870
+            }
+          ],
+          "normalizedScript": "Escolha a primeira falha detectada em cada linha\nSem separador\nMinutos inválidos\nTítulo vazio\nquinze Cargo\nquinze\nquinze Cargo"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "contrato-do-parser:1:feedback:correct",
+      "sectionId": "contrato-do-parser",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "050dc1d283ad3ae902eb5e48e0f798fdd114cdfe3ea0823f9861b579f71fc5bb",
+      "clipKey": "4920ce5e8659ee183a5f13dd",
+      "audio": {
+        "santa": {
+          "src": "santa/contrato-do-parser__1__feedback__correct.mp3",
+          "durationMs": 10235,
+          "bytes": 82560,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1260,
+              "endMs": 1810
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2420,
+              "endMs": 2470
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 8,
+              "startMs": 2520,
+              "endMs": 2895
+            },
+            {
+              "field": "text",
+              "from": 9,
+              "to": 15,
+              "startMs": 2945,
+              "endMs": 3445
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 25,
+              "startMs": 3520,
+              "endMs": 4070
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 27,
+              "startMs": 4095,
+              "endMs": 4120
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 34,
+              "startMs": 4170,
+              "endMs": 4645
+            },
+            {
+              "field": "text",
+              "from": 36,
+              "to": 41,
+              "startMs": 4720,
+              "endMs": 5020
+            },
+            {
+              "field": "text",
+              "from": 42,
+              "to": 47,
+              "startMs": 5070,
+              "endMs": 5595
+            },
+            {
+              "field": "text",
+              "from": 49,
+              "to": 53,
+              "startMs": 6150,
+              "endMs": 6400
+            },
+            {
+              "field": "text",
+              "from": 54,
+              "to": 59,
+              "startMs": 6475,
+              "endMs": 6750
+            },
+            {
+              "field": "text",
+              "from": 60,
+              "to": 67,
+              "startMs": 6775,
+              "endMs": 7275
+            },
+            {
+              "field": "text",
+              "from": 68,
+              "to": 69,
+              "startMs": 7300,
+              "endMs": 7350
+            },
+            {
+              "field": "text",
+              "from": 70,
+              "to": 75,
+              "startMs": 7425,
+              "endMs": 7900
+            },
+            {
+              "field": "text",
+              "from": 76,
+              "to": 79,
+              "startMs": 7975,
+              "endMs": 8025
+            },
+            {
+              "field": "text",
+              "from": 80,
+              "to": 81,
+              "startMs": 8050,
+              "endMs": 8075
+            },
+            {
+              "field": "text",
+              "from": 82,
+              "to": 89,
+              "startMs": 8100,
+              "endMs": 8600
+            },
+            {
+              "field": "text",
+              "from": 90,
+              "to": 93,
+              "startMs": 8650,
+              "endMs": 8800
+            },
+            {
+              "field": "text",
+              "from": 94,
+              "to": 103,
+              "startMs": 8825,
+              "endMs": 9350
+            },
+            {
+              "field": "text",
+              "from": 104,
+              "to": 112,
+              "startMs": 9400,
+              "endMs": 10050
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nO parser separa converte e valida nessa ordem\nCada falha informa o passo que a entrada não conseguiu concluir"
+        },
+        "dora": {
+          "src": "dora/contrato-do-parser__1__feedback__correct.mp3",
+          "durationMs": 10110,
+          "bytes": 81600,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "title",
+              "from": 5,
+              "to": 7,
+              "startMs": 660,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 8,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1160
+            },
+            {
+              "field": "title",
+              "from": 14,
+              "to": 19,
+              "startMs": 1235,
+              "endMs": 1760
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 1,
+              "startMs": 2395,
+              "endMs": 2445
+            },
+            {
+              "field": "text",
+              "from": 2,
+              "to": 8,
+              "startMs": 2495,
+              "endMs": 2870
+            },
+            {
+              "field": "text",
+              "from": 9,
+              "to": 15,
+              "startMs": 2920,
+              "endMs": 3445
+            },
+            {
+              "field": "text",
+              "from": 17,
+              "to": 25,
+              "startMs": 3545,
+              "endMs": 4095
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 27,
+              "startMs": 4120,
+              "endMs": 4145
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 34,
+              "startMs": 4195,
+              "endMs": 4670
+            },
+            {
+              "field": "text",
+              "from": 36,
+              "to": 41,
+              "startMs": 4745,
+              "endMs": 5020
+            },
+            {
+              "field": "text",
+              "from": 42,
+              "to": 47,
+              "startMs": 5070,
+              "endMs": 5570
+            },
+            {
+              "field": "text",
+              "from": 49,
+              "to": 53,
+              "startMs": 6125,
+              "endMs": 6375
+            },
+            {
+              "field": "text",
+              "from": 54,
+              "to": 59,
+              "startMs": 6450,
+              "endMs": 6725
+            },
+            {
+              "field": "text",
+              "from": 60,
+              "to": 67,
+              "startMs": 6750,
+              "endMs": 7200
+            },
+            {
+              "field": "text",
+              "from": 68,
+              "to": 69,
+              "startMs": 7225,
+              "endMs": 7275
+            },
+            {
+              "field": "text",
+              "from": 70,
+              "to": 75,
+              "startMs": 7350,
+              "endMs": 7850
+            },
+            {
+              "field": "text",
+              "from": 76,
+              "to": 79,
+              "startMs": 7925,
+              "endMs": 7975
+            },
+            {
+              "field": "text",
+              "from": 80,
+              "to": 81,
+              "startMs": 8000,
+              "endMs": 8025
+            },
+            {
+              "field": "text",
+              "from": 82,
+              "to": 89,
+              "startMs": 8050,
+              "endMs": 8525
+            },
+            {
+              "field": "text",
+              "from": 90,
+              "to": 93,
+              "startMs": 8575,
+              "endMs": 8725
+            },
+            {
+              "field": "text",
+              "from": 94,
+              "to": 103,
+              "startMs": 8750,
+              "endMs": 9250
+            },
+            {
+              "field": "text",
+              "from": 104,
+              "to": 112,
+              "startMs": 9300,
+              "endMs": 9925
+            }
+          ],
+          "normalizedScript": "Tudo no lugar certo\nO parser separa converte e valida nessa ordem\nCada falha informa o passo que a entrada não conseguiu concluir"
+        }
+      }
+    },
+    {
+      "id": "contrato-do-parser:1:feedback:retry",
+      "sectionId": "contrato-do-parser",
+      "kind": "activity-feedback",
+      "label": "Feedback da classificação",
+      "textHash": "81561027ee9f29f7596ecf4e18c88de8e61d1f7638a0e2f2c97bfc502c6daa73",
+      "clipKey": "2ebffecf32682307f181c8f3",
+      "audio": {
+        "santa": {
+          "src": "santa/contrato-do-parser__1__feedback__retry.mp3",
+          "durationMs": 2845,
+          "bytes": 23424,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 2035,
+              "endMs": 2210
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2260,
+              "endMs": 2660
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        },
+        "dora": {
+          "src": "dora/contrato-do-parser__1__feedback__retry.mp3",
+          "durationMs": 2795,
+          "bytes": 23040,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 735
+            },
+            {
+              "field": "text",
+              "from": 7,
+              "to": 9,
+              "startMs": 785,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 15,
+              "startMs": 960,
+              "endMs": 1385
+            },
+            {
+              "field": "text",
+              "from": 16,
+              "to": 24,
+              "startMs": 1435,
+              "endMs": 1935
+            },
+            {
+              "field": "text",
+              "from": 25,
+              "to": 28,
+              "startMs": 1985,
+              "endMs": 2160
+            },
+            {
+              "field": "text",
+              "from": 29,
+              "to": 33,
+              "startMs": 2210,
+              "endMs": 2610
+            }
+          ],
+          "normalizedScript": "Revise os itens marcados com erro"
+        }
+      }
+    },
+    {
+      "id": "contrato-do-parser:2",
+      "sectionId": "contrato-do-parser",
+      "kind": "quiz",
+      "label": "Atividade: múltipla escolha",
+      "textHash": "c14625b4d8c59bf8fd22651c3532681eb2ab6e8cd413e2eb7da9dd66b8b003f7",
+      "clipKey": "8708ed6889601181a1d8dac8",
+      "audio": {
+        "santa": {
+          "src": "santa/contrato-do-parser__2.mp3",
+          "durationMs": 10365,
+          "bytes": 83520,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "question",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 610
+            },
+            {
+              "field": "question",
+              "from": 5,
+              "to": 9,
+              "startMs": 660,
+              "endMs": 910
+            },
+            {
+              "field": "question",
+              "from": 10,
+              "to": 17,
+              "startMs": 960,
+              "endMs": 1610
+            },
+            {
+              "field": "question",
+              "from": 18,
+              "to": 20,
+              "startMs": 1685,
+              "endMs": 1760
+            },
+            {
+              "field": "question",
+              "from": 21,
+              "to": 23,
+              "startMs": 1785,
+              "endMs": 1860
+            },
+            {
+              "field": "question",
+              "from": 24,
+              "to": 28,
+              "startMs": 1910,
+              "endMs": 2135
+            },
+            {
+              "field": "question",
+              "from": 29,
+              "to": 31,
+              "startMs": 2160,
+              "endMs": 2285
+            },
+            {
+              "field": "question",
+              "from": 32,
+              "to": 37,
+              "startMs": 2335,
+              "endMs": 2560
+            },
+            {
+              "field": "question",
+              "from": 38,
+              "to": 45,
+              "startMs": 2610,
+              "endMs": 3085
+            },
+            {
+              "field": "question",
+              "from": 46,
+              "to": 47,
+              "startMs": 3110,
+              "endMs": 3135
+            },
+            {
+              "field": "question",
+              "from": 48,
+              "to": 52,
+              "startMs": 3185,
+              "endMs": 3460
+            },
+            {
+              "field": "question",
+              "from": 53,
+              "to": 60,
+              "startMs": 3485,
+              "endMs": 4135
+            },
+            {
+              "field": "option:0",
+              "from": 0,
+              "to": 1,
+              "startMs": 4770,
+              "endMs": 4820
+            },
+            {
+              "field": "option:0",
+              "from": 2,
+              "to": 10,
+              "startMs": 4895,
+              "endMs": 5420
+            },
+            {
+              "field": "option:0",
+              "from": 11,
+              "to": 14,
+              "startMs": 5470,
+              "endMs": 5545
+            },
+            {
+              "field": "option:0",
+              "from": 15,
+              "to": 22,
+              "startMs": 5595,
+              "endMs": 6120
+            },
+            {
+              "field": "option:0",
+              "from": 23,
+              "to": 24,
+              "startMs": 6145,
+              "endMs": 6170
+            },
+            {
+              "field": "option:0",
+              "from": 25,
+              "to": 33,
+              "startMs": 6220,
+              "endMs": 6745
+            },
+            {
+              "field": "option:0",
+              "from": 34,
+              "to": 36,
+              "startMs": 6770,
+              "endMs": 6870
+            },
+            {
+              "field": "option:0",
+              "from": 37,
+              "to": 41,
+              "startMs": 6920,
+              "endMs": 7520
+            },
+            {
+              "field": "option:1",
+              "from": 0,
+              "to": 1,
+              "startMs": 8155,
+              "endMs": 8205
+            },
+            {
+              "field": "option:1",
+              "from": 2,
+              "to": 11,
+              "startMs": 8255,
+              "endMs": 8780
+            },
+            {
+              "field": "option:1",
+              "from": 12,
+              "to": 19,
+              "startMs": 8805,
+              "endMs": 9330
+            },
+            {
+              "field": "option:1",
+              "from": 20,
+              "to": 22,
+              "startMs": 9355,
+              "endMs": 9480
+            },
+            {
+              "field": "option:1",
+              "from": 23,
+              "to": 30,
+              "startMs": 9530,
+              "endMs": 10180
+            }
+          ],
+          "normalizedScript": "Quem deve decidir se um erro de linha cancela o lote inteiro\nO chamador que conhece o contrato do lote\nA conversão interna de minutos"
+        },
+        "dora": {
+          "src": "dora/contrato-do-parser__2.mp3",
+          "durationMs": 9965,
+          "bytes": 80448,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "question",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "question",
+              "from": 5,
+              "to": 9,
+              "startMs": 635,
+              "endMs": 885
+            },
+            {
+              "field": "question",
+              "from": 10,
+              "to": 17,
+              "startMs": 935,
+              "endMs": 1560
+            },
+            {
+              "field": "question",
+              "from": 18,
+              "to": 20,
+              "startMs": 1635,
+              "endMs": 1710
+            },
+            {
+              "field": "question",
+              "from": 21,
+              "to": 23,
+              "startMs": 1735,
+              "endMs": 1810
+            },
+            {
+              "field": "question",
+              "from": 24,
+              "to": 28,
+              "startMs": 1860,
+              "endMs": 2085
+            },
+            {
+              "field": "question",
+              "from": 29,
+              "to": 31,
+              "startMs": 2110,
+              "endMs": 2235
+            },
+            {
+              "field": "question",
+              "from": 32,
+              "to": 37,
+              "startMs": 2285,
+              "endMs": 2510
+            },
+            {
+              "field": "question",
+              "from": 38,
+              "to": 45,
+              "startMs": 2560,
+              "endMs": 3035
+            },
+            {
+              "field": "question",
+              "from": 46,
+              "to": 47,
+              "startMs": 3060,
+              "endMs": 3085
+            },
+            {
+              "field": "question",
+              "from": 48,
+              "to": 52,
+              "startMs": 3135,
+              "endMs": 3360
+            },
+            {
+              "field": "question",
+              "from": 53,
+              "to": 60,
+              "startMs": 3385,
+              "endMs": 3985
+            },
+            {
+              "field": "option:0",
+              "from": 0,
+              "to": 1,
+              "startMs": 4620,
+              "endMs": 4670
+            },
+            {
+              "field": "option:0",
+              "from": 2,
+              "to": 10,
+              "startMs": 4745,
+              "endMs": 5270
+            },
+            {
+              "field": "option:0",
+              "from": 11,
+              "to": 14,
+              "startMs": 5320,
+              "endMs": 5420
+            },
+            {
+              "field": "option:0",
+              "from": 15,
+              "to": 22,
+              "startMs": 5470,
+              "endMs": 5970
+            },
+            {
+              "field": "option:0",
+              "from": 23,
+              "to": 24,
+              "startMs": 5995,
+              "endMs": 6020
+            },
+            {
+              "field": "option:0",
+              "from": 25,
+              "to": 33,
+              "startMs": 6070,
+              "endMs": 6545
+            },
+            {
+              "field": "option:0",
+              "from": 34,
+              "to": 36,
+              "startMs": 6570,
+              "endMs": 6645
+            },
+            {
+              "field": "option:0",
+              "from": 37,
+              "to": 41,
+              "startMs": 6695,
+              "endMs": 7245
+            },
+            {
+              "field": "option:1",
+              "from": 0,
+              "to": 1,
+              "startMs": 7855,
+              "endMs": 7905
+            },
+            {
+              "field": "option:1",
+              "from": 2,
+              "to": 11,
+              "startMs": 7955,
+              "endMs": 8480
+            },
+            {
+              "field": "option:1",
+              "from": 12,
+              "to": 19,
+              "startMs": 8505,
+              "endMs": 8980
+            },
+            {
+              "field": "option:1",
+              "from": 20,
+              "to": 22,
+              "startMs": 9005,
+              "endMs": 9105
+            },
+            {
+              "field": "option:1",
+              "from": 23,
+              "to": 30,
+              "startMs": 9130,
+              "endMs": 9780
+            }
+          ],
+          "normalizedScript": "Quem deve decidir se um erro de linha cancela o lote inteiro\nO chamador que conhece o contrato do lote\nA conversão interna de minutos"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "arquivo-e-falhas:heading",
+      "sectionId": "arquivo-e-falhas",
+      "kind": "section-heading",
+      "label": "Seção: Interpretar arquivos em partes permite informar o número da linha",
+      "textHash": "3540e2ed68efc6535ebf7cfa79c7cd7ddbb5fdfc0eb4ef36015deb488ad2e7c4",
+      "clipKey": "5bf6f7d69781baed114a6475",
+      "audio": {
+        "santa": {
+          "src": "santa/arquivo-e-falhas__heading.mp3",
+          "durationMs": 4545,
+          "bytes": 37056,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 11,
+              "startMs": 285,
+              "endMs": 885
+            },
+            {
+              "field": "title",
+              "from": 12,
+              "to": 20,
+              "startMs": 910,
+              "endMs": 1585
+            },
+            {
+              "field": "title",
+              "from": 21,
+              "to": 23,
+              "startMs": 1635,
+              "endMs": 1785
+            },
+            {
+              "field": "title",
+              "from": 24,
+              "to": 30,
+              "startMs": 1860,
+              "endMs": 2335
+            },
+            {
+              "field": "title",
+              "from": 31,
+              "to": 38,
+              "startMs": 2385,
+              "endMs": 2810
+            },
+            {
+              "field": "title",
+              "from": 39,
+              "to": 47,
+              "startMs": 2835,
+              "endMs": 3360
+            },
+            {
+              "field": "title",
+              "from": 48,
+              "to": 49,
+              "startMs": 3410,
+              "endMs": 3460
+            },
+            {
+              "field": "title",
+              "from": 50,
+              "to": 56,
+              "startMs": 3510,
+              "endMs": 3835
+            },
+            {
+              "field": "title",
+              "from": 57,
+              "to": 59,
+              "startMs": 3860,
+              "endMs": 3960
+            },
+            {
+              "field": "title",
+              "from": 60,
+              "to": 65,
+              "startMs": 4010,
+              "endMs": 4435
+            }
+          ],
+          "normalizedScript": "Interpretar arquivos em partes permite informar o número da linha"
+        },
+        "dora": {
+          "src": "dora/arquivo-e-falhas__heading.mp3",
+          "durationMs": 4420,
+          "bytes": 36096,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 11,
+              "startMs": 285,
+              "endMs": 885
+            },
+            {
+              "field": "title",
+              "from": 12,
+              "to": 20,
+              "startMs": 910,
+              "endMs": 1560
+            },
+            {
+              "field": "title",
+              "from": 21,
+              "to": 23,
+              "startMs": 1610,
+              "endMs": 1760
+            },
+            {
+              "field": "title",
+              "from": 24,
+              "to": 30,
+              "startMs": 1835,
+              "endMs": 2285
+            },
+            {
+              "field": "title",
+              "from": 31,
+              "to": 38,
+              "startMs": 2335,
+              "endMs": 2760
+            },
+            {
+              "field": "title",
+              "from": 39,
+              "to": 47,
+              "startMs": 2785,
+              "endMs": 3285
+            },
+            {
+              "field": "title",
+              "from": 48,
+              "to": 49,
+              "startMs": 3310,
+              "endMs": 3335
+            },
+            {
+              "field": "title",
+              "from": 50,
+              "to": 56,
+              "startMs": 3385,
+              "endMs": 3685
+            },
+            {
+              "field": "title",
+              "from": 57,
+              "to": 59,
+              "startMs": 3710,
+              "endMs": 3810
+            },
+            {
+              "field": "title",
+              "from": 60,
+              "to": 65,
+              "startMs": 3860,
+              "endMs": 4310
+            }
+          ],
+          "normalizedScript": "Interpretar arquivos em partes permite informar o número da linha"
+        }
+      }
+    },
+    {
+      "id": "arquivo-e-falhas:0",
+      "sectionId": "arquivo-e-falhas",
+      "kind": "prose",
+      "label": "Parágrafo",
+      "textHash": "8e8bb2deaf9d116f149cfd6e4723549e4612570c6f071965648c8eb4acced602",
+      "clipKey": "b2ce0c21579231e1159dc424",
+      "audio": {
+        "santa": {
+          "src": "santa/arquivo-e-falhas__0.mp3",
+          "durationMs": 17785,
+          "bytes": 143040,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 14,
+              "startMs": 310,
+              "endMs": 1110
+            },
+            {
+              "field": "text",
+              "from": 15,
+              "to": 22,
+              "startMs": 1135,
+              "endMs": 1585
+            },
+            {
+              "field": "text",
+              "from": 23,
+              "to": 25,
+              "startMs": 1610,
+              "endMs": 1685
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 39,
+              "startMs": 1735,
+              "endMs": 2660
+            },
+            {
+              "field": "text",
+              "from": 41,
+              "to": 51,
+              "startMs": 2760,
+              "endMs": 3235
+            },
+            {
+              "field": "text",
+              "from": 52,
+              "to": 55,
+              "startMs": 3285,
+              "endMs": 3410
+            },
+            {
+              "field": "text",
+              "from": 56,
+              "to": 63,
+              "startMs": 3460,
+              "endMs": 4060
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 67,
+              "startMs": 4615,
+              "endMs": 4715
+            },
+            {
+              "field": "text",
+              "from": 68,
+              "to": 72,
+              "startMs": 4765,
+              "endMs": 4990
+            },
+            {
+              "field": "text",
+              "from": 73,
+              "to": 75,
+              "startMs": 5015,
+              "endMs": 5140
+            },
+            {
+              "field": "text",
+              "from": 76,
+              "to": 79,
+              "startMs": 5190,
+              "endMs": 5390
+            },
+            {
+              "field": "text",
+              "from": 80,
+              "to": 87,
+              "startMs": 5415,
+              "endMs": 5990
+            },
+            {
+              "field": "text",
+              "from": 88,
+              "to": 92,
+              "startMs": 6015,
+              "endMs": 6215
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 100,
+              "startMs": 6240,
+              "endMs": 6690
+            },
+            {
+              "field": "text",
+              "from": 101,
+              "to": 104,
+              "startMs": 6740,
+              "endMs": 7065
+            },
+            {
+              "field": "text",
+              "from": 108,
+              "to": 112,
+              "startMs": 7545,
+              "endMs": 7720
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 118,
+              "startMs": 7745,
+              "endMs": 7970
+            },
+            {
+              "field": "text",
+              "from": 119,
+              "to": 121,
+              "startMs": 7995,
+              "endMs": 8070
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 129,
+              "startMs": 8120,
+              "endMs": 8820
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 132,
+              "startMs": 8920,
+              "endMs": 8970
+            },
+            {
+              "field": "text",
+              "from": 133,
+              "to": 140,
+              "startMs": 8995,
+              "endMs": 9470
+            },
+            {
+              "field": "text",
+              "from": 141,
+              "to": 146,
+              "startMs": 9495,
+              "endMs": 9870
+            },
+            {
+              "field": "text",
+              "from": 147,
+              "to": 149,
+              "startMs": 9895,
+              "endMs": 9970
+            },
+            {
+              "field": "text",
+              "from": 150,
+              "to": 161,
+              "startMs": 9995,
+              "endMs": 10795
+            },
+            {
+              "field": "text",
+              "from": 162,
+              "to": 163,
+              "startMs": 10845,
+              "endMs": 10870
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 172,
+              "startMs": 10920,
+              "endMs": 11645
+            },
+            {
+              "field": "text",
+              "from": 174,
+              "to": 177,
+              "startMs": 12200,
+              "endMs": 12325
+            },
+            {
+              "field": "text",
+              "from": 178,
+              "to": 187,
+              "startMs": 12350,
+              "endMs": 13125
+            },
+            {
+              "field": "text",
+              "from": 189,
+              "to": 193,
+              "startMs": 13250,
+              "endMs": 13450
+            },
+            {
+              "field": "text",
+              "from": 194,
+              "to": 196,
+              "startMs": 13475,
+              "endMs": 13550
+            },
+            {
+              "field": "text",
+              "from": 197,
+              "to": 199,
+              "startMs": 13575,
+              "endMs": 13675
+            },
+            {
+              "field": "text",
+              "from": 200,
+              "to": 206,
+              "startMs": 13725,
+              "endMs": 14175
+            },
+            {
+              "field": "text",
+              "from": 207,
+              "to": 211,
+              "startMs": 14225,
+              "endMs": 14350
+            },
+            {
+              "field": "text",
+              "from": 212,
+              "to": 216,
+              "startMs": 14400,
+              "endMs": 14700
+            },
+            {
+              "field": "text",
+              "from": 217,
+              "to": 218,
+              "startMs": 14725,
+              "endMs": 14750
+            },
+            {
+              "field": "text",
+              "from": 219,
+              "to": 228,
+              "startMs": 14775,
+              "endMs": 15325
+            },
+            {
+              "field": "text",
+              "from": 229,
+              "to": 231,
+              "startMs": 15350,
+              "endMs": 15500
+            },
+            {
+              "field": "text",
+              "from": 232,
+              "to": 238,
+              "startMs": 15550,
+              "endMs": 16075
+            },
+            {
+              "field": "text",
+              "from": 239,
+              "to": 242,
+              "startMs": 16150,
+              "endMs": 16200
+            },
+            {
+              "field": "text",
+              "from": 243,
+              "to": 244,
+              "startMs": 16225,
+              "endMs": 16250
+            },
+            {
+              "field": "text",
+              "from": 245,
+              "to": 251,
+              "startMs": 16300,
+              "endMs": 16675
+            },
+            {
+              "field": "text",
+              "from": 252,
+              "to": 254,
+              "startMs": 16725,
+              "endMs": 16850
+            },
+            {
+              "field": "text",
+              "from": 255,
+              "to": 257,
+              "startMs": 16875,
+              "endMs": 16925
+            },
+            {
+              "field": "text",
+              "from": 258,
+              "to": 264,
+              "startMs": 16950,
+              "endMs": 17600
+            }
+          ],
+          "normalizedScript": "BufRead  lines entrega um Result<String io  Error> por leitura\nUm erro de I O encerra este exemplo com\nPara erros de formato o exemplo emite um diagnóstico e continua\nCom enumerate some um ao índice para usar a numeração de linhas que a pessoa vê no editor"
+        },
+        "dora": {
+          "src": "dora/arquivo-e-falhas__0.mp3",
+          "durationMs": 17360,
+          "bytes": 139584,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 14,
+              "startMs": 310,
+              "endMs": 1085
+            },
+            {
+              "field": "text",
+              "from": 15,
+              "to": 22,
+              "startMs": 1110,
+              "endMs": 1535
+            },
+            {
+              "field": "text",
+              "from": 23,
+              "to": 25,
+              "startMs": 1560,
+              "endMs": 1635
+            },
+            {
+              "field": "text",
+              "from": 26,
+              "to": 39,
+              "startMs": 1660,
+              "endMs": 2585
+            },
+            {
+              "field": "text",
+              "from": 41,
+              "to": 51,
+              "startMs": 2685,
+              "endMs": 3110
+            },
+            {
+              "field": "text",
+              "from": 52,
+              "to": 55,
+              "startMs": 3160,
+              "endMs": 3285
+            },
+            {
+              "field": "text",
+              "from": 56,
+              "to": 63,
+              "startMs": 3310,
+              "endMs": 3885
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 67,
+              "startMs": 4440,
+              "endMs": 4540
+            },
+            {
+              "field": "text",
+              "from": 68,
+              "to": 72,
+              "startMs": 4590,
+              "endMs": 4815
+            },
+            {
+              "field": "text",
+              "from": 73,
+              "to": 75,
+              "startMs": 4865,
+              "endMs": 5015
+            },
+            {
+              "field": "text",
+              "from": 76,
+              "to": 79,
+              "startMs": 5065,
+              "endMs": 5315
+            },
+            {
+              "field": "text",
+              "from": 80,
+              "to": 87,
+              "startMs": 5340,
+              "endMs": 5890
+            },
+            {
+              "field": "text",
+              "from": 88,
+              "to": 92,
+              "startMs": 5915,
+              "endMs": 6115
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 100,
+              "startMs": 6140,
+              "endMs": 6565
+            },
+            {
+              "field": "text",
+              "from": 101,
+              "to": 104,
+              "startMs": 6615,
+              "endMs": 6940
+            },
+            {
+              "field": "text",
+              "from": 108,
+              "to": 112,
+              "startMs": 7445,
+              "endMs": 7620
+            },
+            {
+              "field": "text",
+              "from": 113,
+              "to": 118,
+              "startMs": 7670,
+              "endMs": 7895
+            },
+            {
+              "field": "text",
+              "from": 119,
+              "to": 121,
+              "startMs": 7920,
+              "endMs": 7995
+            },
+            {
+              "field": "text",
+              "from": 122,
+              "to": 129,
+              "startMs": 8045,
+              "endMs": 8720
+            },
+            {
+              "field": "text",
+              "from": 131,
+              "to": 132,
+              "startMs": 8845,
+              "endMs": 8870
+            },
+            {
+              "field": "text",
+              "from": 133,
+              "to": 140,
+              "startMs": 8895,
+              "endMs": 9370
+            },
+            {
+              "field": "text",
+              "from": 141,
+              "to": 146,
+              "startMs": 9395,
+              "endMs": 9770
+            },
+            {
+              "field": "text",
+              "from": 147,
+              "to": 149,
+              "startMs": 9795,
+              "endMs": 9870
+            },
+            {
+              "field": "text",
+              "from": 150,
+              "to": 161,
+              "startMs": 9895,
+              "endMs": 10645
+            },
+            {
+              "field": "text",
+              "from": 162,
+              "to": 163,
+              "startMs": 10670,
+              "endMs": 10695
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 172,
+              "startMs": 10745,
+              "endMs": 11420
+            },
+            {
+              "field": "text",
+              "from": 174,
+              "to": 177,
+              "startMs": 11975,
+              "endMs": 12100
+            },
+            {
+              "field": "text",
+              "from": 178,
+              "to": 187,
+              "startMs": 12125,
+              "endMs": 12950
+            },
+            {
+              "field": "text",
+              "from": 189,
+              "to": 193,
+              "startMs": 13100,
+              "endMs": 13300
+            },
+            {
+              "field": "text",
+              "from": 194,
+              "to": 196,
+              "startMs": 13325,
+              "endMs": 13400
+            },
+            {
+              "field": "text",
+              "from": 197,
+              "to": 199,
+              "startMs": 13425,
+              "endMs": 13525
+            },
+            {
+              "field": "text",
+              "from": 200,
+              "to": 206,
+              "startMs": 13575,
+              "endMs": 14025
+            },
+            {
+              "field": "text",
+              "from": 207,
+              "to": 211,
+              "startMs": 14075,
+              "endMs": 14200
+            },
+            {
+              "field": "text",
+              "from": 212,
+              "to": 216,
+              "startMs": 14250,
+              "endMs": 14550
+            },
+            {
+              "field": "text",
+              "from": 217,
+              "to": 218,
+              "startMs": 14575,
+              "endMs": 14600
+            },
+            {
+              "field": "text",
+              "from": 219,
+              "to": 228,
+              "startMs": 14625,
+              "endMs": 15150
+            },
+            {
+              "field": "text",
+              "from": 229,
+              "to": 231,
+              "startMs": 15175,
+              "endMs": 15275
+            },
+            {
+              "field": "text",
+              "from": 232,
+              "to": 238,
+              "startMs": 15325,
+              "endMs": 15750
+            },
+            {
+              "field": "text",
+              "from": 239,
+              "to": 242,
+              "startMs": 15825,
+              "endMs": 15875
+            },
+            {
+              "field": "text",
+              "from": 243,
+              "to": 244,
+              "startMs": 15900,
+              "endMs": 15925
+            },
+            {
+              "field": "text",
+              "from": 245,
+              "to": 251,
+              "startMs": 15975,
+              "endMs": 16325
+            },
+            {
+              "field": "text",
+              "from": 252,
+              "to": 254,
+              "startMs": 16375,
+              "endMs": 16450
+            },
+            {
+              "field": "text",
+              "from": 255,
+              "to": 257,
+              "startMs": 16475,
+              "endMs": 16525
+            },
+            {
+              "field": "text",
+              "from": 258,
+              "to": 264,
+              "startMs": 16550,
+              "endMs": 17175
+            }
+          ],
+          "normalizedScript": "BufRead  lines entrega um Result<String io  Error> por leitura\nUm erro de I O encerra este exemplo com\nPara erros de formato o exemplo emite um diagnóstico e continua\nCom enumerate some um ao índice para usar a numeração de linhas que a pessoa vê no editor"
+        }
+      }
+    },
+    {
+      "id": "arquivo-e-falhas:1",
+      "sectionId": "arquivo-e-falhas",
+      "kind": "code-caption",
+      "label": "Legenda de código",
+      "textHash": "d6fed09407a9a58ac7cbff58b836af571bdb7213016f4cfd8cd77582963a58a6",
+      "clipKey": "b0f63d774f4b98a6cf4d73a1",
+      "audio": {
+        "santa": {
+          "src": "santa/arquivo-e-falhas__1.mp3",
+          "durationMs": 4195,
+          "bytes": 34176,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "caption",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 535
+            },
+            {
+              "field": "caption",
+              "from": 5,
+              "to": 7,
+              "startMs": 560,
+              "endMs": 635
+            },
+            {
+              "field": "caption",
+              "from": 8,
+              "to": 15,
+              "startMs": 660,
+              "endMs": 1110
+            },
+            {
+              "field": "caption",
+              "from": 16,
+              "to": 18,
+              "startMs": 1160,
+              "endMs": 1260
+            },
+            {
+              "field": "caption",
+              "from": 19,
+              "to": 26,
+              "startMs": 1285,
+              "endMs": 1785
+            },
+            {
+              "field": "caption",
+              "from": 27,
+              "to": 30,
+              "startMs": 1835,
+              "endMs": 1960
+            },
+            {
+              "field": "caption",
+              "from": 31,
+              "to": 32,
+              "startMs": 1985,
+              "endMs": 2010
+            },
+            {
+              "field": "caption",
+              "from": 33,
+              "to": 38,
+              "startMs": 2060,
+              "endMs": 2335
+            },
+            {
+              "field": "caption",
+              "from": 39,
+              "to": 48,
+              "startMs": 2360,
+              "endMs": 3010
+            },
+            {
+              "field": "caption",
+              "from": 49,
+              "to": 51,
+              "startMs": 3060,
+              "endMs": 3160
+            },
+            {
+              "field": "caption",
+              "from": 52,
+              "to": 54,
+              "startMs": 3185,
+              "endMs": 3260
+            },
+            {
+              "field": "caption",
+              "from": 55,
+              "to": 64,
+              "startMs": 3310,
+              "endMs": 4060
+            }
+          ],
+          "normalizedScript": "Leia um arquivo em memória com a mesma interface de um Buf Reader"
+        },
+        "dora": {
+          "src": "dora/arquivo-e-falhas__1.mp3",
+          "durationMs": 4145,
+          "bytes": 33792,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "caption",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 535
+            },
+            {
+              "field": "caption",
+              "from": 5,
+              "to": 7,
+              "startMs": 560,
+              "endMs": 635
+            },
+            {
+              "field": "caption",
+              "from": 8,
+              "to": 15,
+              "startMs": 660,
+              "endMs": 1135
+            },
+            {
+              "field": "caption",
+              "from": 16,
+              "to": 18,
+              "startMs": 1210,
+              "endMs": 1310
+            },
+            {
+              "field": "caption",
+              "from": 19,
+              "to": 26,
+              "startMs": 1335,
+              "endMs": 1835
+            },
+            {
+              "field": "caption",
+              "from": 27,
+              "to": 30,
+              "startMs": 1885,
+              "endMs": 2010
+            },
+            {
+              "field": "caption",
+              "from": 31,
+              "to": 32,
+              "startMs": 2035,
+              "endMs": 2060
+            },
+            {
+              "field": "caption",
+              "from": 33,
+              "to": 38,
+              "startMs": 2110,
+              "endMs": 2360
+            },
+            {
+              "field": "caption",
+              "from": 39,
+              "to": 48,
+              "startMs": 2385,
+              "endMs": 3035
+            },
+            {
+              "field": "caption",
+              "from": 49,
+              "to": 51,
+              "startMs": 3085,
+              "endMs": 3160
+            },
+            {
+              "field": "caption",
+              "from": 52,
+              "to": 54,
+              "startMs": 3185,
+              "endMs": 3260
+            },
+            {
+              "field": "caption",
+              "from": 55,
+              "to": 64,
+              "startMs": 3310,
+              "endMs": 4010
+            }
+          ],
+          "normalizedScript": "Leia um arquivo em memória com a mesma interface de um Buf Reader"
+        }
+      }
+    },
+    {
+      "id": "arquivo-e-falhas:2",
+      "sectionId": "arquivo-e-falhas",
+      "kind": "fill",
+      "label": "Atividade: completar lacunas",
+      "textHash": "c9ff891008b810b7d3bff5859787f039e27704e900251ca6ba31d4208d290403",
+      "clipKey": "d8b9cf137fa837a8583da802",
+      "audio": {
+        "santa": {
+          "src": "santa/arquivo-e-falhas__2.mp3",
+          "durationMs": 4245,
+          "bytes": 34560,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "prompt",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 910
+            },
+            {
+              "field": "prompt",
+              "from": 11,
+              "to": 12,
+              "startMs": 935,
+              "endMs": 960
+            },
+            {
+              "field": "prompt",
+              "from": 13,
+              "to": 21,
+              "startMs": 985,
+              "endMs": 1560
+            },
+            {
+              "field": "prompt",
+              "from": 22,
+              "to": 24,
+              "startMs": 1585,
+              "endMs": 1685
+            },
+            {
+              "field": "prompt",
+              "from": 25,
+              "to": 34,
+              "startMs": 1735,
+              "endMs": 2435
+            },
+            {
+              "field": "prompt",
+              "from": 35,
+              "to": 37,
+              "startMs": 2485,
+              "endMs": 2660
+            },
+            {
+              "field": "prompt",
+              "from": 38,
+              "to": 41,
+              "startMs": 2685,
+              "endMs": 2835
+            },
+            {
+              "field": "prompt",
+              "from": 42,
+              "to": 47,
+              "startMs": 2910,
+              "endMs": 3160
+            },
+            {
+              "field": "prompt",
+              "from": 48,
+              "to": 58,
+              "startMs": 3185,
+              "endMs": 4060
+            }
+          ],
+          "normalizedScript": "Transforme a ausência de separador em uma falha específica"
+        },
+        "dora": {
+          "src": "dora/arquivo-e-falhas__2.mp3",
+          "durationMs": 4070,
+          "bytes": 33216,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "prompt",
+              "from": 0,
+              "to": 10,
+              "startMs": 310,
+              "endMs": 910
+            },
+            {
+              "field": "prompt",
+              "from": 11,
+              "to": 12,
+              "startMs": 960,
+              "endMs": 985
+            },
+            {
+              "field": "prompt",
+              "from": 13,
+              "to": 21,
+              "startMs": 1010,
+              "endMs": 1535
+            },
+            {
+              "field": "prompt",
+              "from": 22,
+              "to": 24,
+              "startMs": 1560,
+              "endMs": 1635
+            },
+            {
+              "field": "prompt",
+              "from": 25,
+              "to": 34,
+              "startMs": 1685,
+              "endMs": 2310
+            },
+            {
+              "field": "prompt",
+              "from": 35,
+              "to": 37,
+              "startMs": 2360,
+              "endMs": 2535
+            },
+            {
+              "field": "prompt",
+              "from": 38,
+              "to": 41,
+              "startMs": 2560,
+              "endMs": 2710
+            },
+            {
+              "field": "prompt",
+              "from": 42,
+              "to": 47,
+              "startMs": 2785,
+              "endMs": 3010
+            },
+            {
+              "field": "prompt",
+              "from": 48,
+              "to": 58,
+              "startMs": 3035,
+              "endMs": 3885
+            }
+          ],
+          "normalizedScript": "Transforme a ausência de separador em uma falha específica"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "regressao-do-parser:heading",
+      "sectionId": "regressao-do-parser",
+      "kind": "section-heading",
+      "label": "Seção: Teste cada falha e preserve a leitura já aceita",
+      "textHash": "e76de8ec585e61e4cae22d7309b805e69d22b06796688b130cc6edccf9c1cd0c",
+      "clipKey": "53fd8087fae14cb8295559fe",
+      "audio": {
+        "santa": {
+          "src": "santa/regressao-do-parser__heading.mp3",
+          "durationMs": 3545,
+          "bytes": 28992,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 685
+            },
+            {
+              "field": "title",
+              "from": 6,
+              "to": 10,
+              "startMs": 735,
+              "endMs": 985
+            },
+            {
+              "field": "title",
+              "from": 11,
+              "to": 16,
+              "startMs": 1085,
+              "endMs": 1410
+            },
+            {
+              "field": "title",
+              "from": 17,
+              "to": 18,
+              "startMs": 1460,
+              "endMs": 1485
+            },
+            {
+              "field": "title",
+              "from": 19,
+              "to": 27,
+              "startMs": 1535,
+              "endMs": 2060
+            },
+            {
+              "field": "title",
+              "from": 28,
+              "to": 29,
+              "startMs": 2110,
+              "endMs": 2135
+            },
+            {
+              "field": "title",
+              "from": 30,
+              "to": 37,
+              "startMs": 2160,
+              "endMs": 2585
+            },
+            {
+              "field": "title",
+              "from": 38,
+              "to": 40,
+              "startMs": 2635,
+              "endMs": 2760
+            },
+            {
+              "field": "title",
+              "from": 41,
+              "to": 47,
+              "startMs": 2785,
+              "endMs": 3435
+            }
+          ],
+          "normalizedScript": "Teste cada falha e preserve a leitura já aceita"
+        },
+        "dora": {
+          "src": "dora/regressao-do-parser__heading.mp3",
+          "durationMs": 3570,
+          "bytes": 29184,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 5,
+              "startMs": 310,
+              "endMs": 685
+            },
+            {
+              "field": "title",
+              "from": 6,
+              "to": 10,
+              "startMs": 735,
+              "endMs": 985
+            },
+            {
+              "field": "title",
+              "from": 11,
+              "to": 16,
+              "startMs": 1085,
+              "endMs": 1460
+            },
+            {
+              "field": "title",
+              "from": 17,
+              "to": 18,
+              "startMs": 1510,
+              "endMs": 1535
+            },
+            {
+              "field": "title",
+              "from": 19,
+              "to": 27,
+              "startMs": 1585,
+              "endMs": 2110
+            },
+            {
+              "field": "title",
+              "from": 28,
+              "to": 29,
+              "startMs": 2160,
+              "endMs": 2185
+            },
+            {
+              "field": "title",
+              "from": 30,
+              "to": 37,
+              "startMs": 2210,
+              "endMs": 2635
+            },
+            {
+              "field": "title",
+              "from": 38,
+              "to": 40,
+              "startMs": 2685,
+              "endMs": 2785
+            },
+            {
+              "field": "title",
+              "from": 41,
+              "to": 47,
+              "startMs": 2810,
+              "endMs": 3435
+            }
+          ],
+          "normalizedScript": "Teste cada falha e preserve a leitura já aceita"
+        }
+      }
+    },
+    {
+      "id": "regressao-do-parser:0",
+      "sectionId": "regressao-do-parser",
+      "kind": "prose",
+      "label": "Parágrafo",
+      "textHash": "d7aff866485c29d5556f91bcc6ad3a6cef4f5e13febbb02934e69b9ba3da5009",
+      "clipKey": "d4ca8a6a664bc8a7ecf6bdea",
+      "audio": {
+        "santa": {
+          "src": "santa/regressao-do-parser__0.mp3",
+          "durationMs": 24240,
+          "bytes": 194496,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 835
+            },
+            {
+              "field": "text",
+              "from": 11,
+              "to": 13,
+              "startMs": 860,
+              "endMs": 960
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 20,
+              "startMs": 1010,
+              "endMs": 1585
+            },
+            {
+              "field": "text",
+              "from": 21,
+              "to": 27,
+              "startMs": 1635,
+              "endMs": 2035
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 30,
+              "startMs": 2060,
+              "endMs": 2110
+            },
+            {
+              "field": "text",
+              "from": 31,
+              "to": 36,
+              "startMs": 2160,
+              "endMs": 2460
+            },
+            {
+              "field": "text",
+              "from": 37,
+              "to": 39,
+              "startMs": 2485,
+              "endMs": 2535
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 47,
+              "startMs": 2560,
+              "endMs": 3035
+            },
+            {
+              "field": "text",
+              "from": 48,
+              "to": 49,
+              "startMs": 3085,
+              "endMs": 3135
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 54,
+              "startMs": 3185,
+              "endMs": 3510
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 60,
+              "startMs": 3560,
+              "endMs": 3885
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 65,
+              "startMs": 3960,
+              "endMs": 4460
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 71,
+              "startMs": 5015,
+              "endMs": 5290
+            },
+            {
+              "field": "text",
+              "from": 72,
+              "to": 77,
+              "startMs": 5365,
+              "endMs": 5815
+            },
+            {
+              "field": "text",
+              "from": 78,
+              "to": 85,
+              "startMs": 5865,
+              "endMs": 6215
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 89,
+              "startMs": 6240,
+              "endMs": 6340
+            },
+            {
+              "field": "text",
+              "from": 90,
+              "to": 97,
+              "startMs": 6365,
+              "endMs": 7140
+            },
+            {
+              "field": "text",
+              "from": 98,
+              "to": 99,
+              "startMs": 7215,
+              "endMs": 7240
+            },
+            {
+              "field": "text",
+              "from": 100,
+              "to": 101,
+              "startMs": 7265,
+              "endMs": 7290
+            },
+            {
+              "field": "text",
+              "from": 102,
+              "to": 111,
+              "startMs": 7340,
+              "endMs": 7890
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 121,
+              "startMs": 7940,
+              "endMs": 8740
+            },
+            {
+              "field": "text",
+              "from": 123,
+              "to": 126,
+              "startMs": 9295,
+              "endMs": 9495
+            },
+            {
+              "field": "text",
+              "from": 127,
+              "to": 129,
+              "startMs": 9520,
+              "endMs": 9595
+            },
+            {
+              "field": "text",
+              "from": 130,
+              "to": 134,
+              "startMs": 9645,
+              "endMs": 9970
+            },
+            {
+              "field": "text",
+              "from": 135,
+              "to": 138,
+              "startMs": 10020,
+              "endMs": 10145
+            },
+            {
+              "field": "text",
+              "from": 139,
+              "to": 145,
+              "startMs": 10170,
+              "endMs": 10645
+            },
+            {
+              "field": "text",
+              "from": 146,
+              "to": 150,
+              "startMs": 10695,
+              "endMs": 10820
+            },
+            {
+              "field": "text",
+              "from": 151,
+              "to": 159,
+              "startMs": 10845,
+              "endMs": 11395
+            },
+            {
+              "field": "text",
+              "from": 160,
+              "to": 163,
+              "startMs": 11445,
+              "endMs": 11495
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 165,
+              "startMs": 11520,
+              "endMs": 11570
+            },
+            {
+              "field": "text",
+              "from": 166,
+              "to": 172,
+              "startMs": 11620,
+              "endMs": 12045
+            },
+            {
+              "field": "text",
+              "from": 173,
+              "to": 181,
+              "startMs": 12095,
+              "endMs": 12620
+            },
+            {
+              "field": "text",
+              "from": 182,
+              "to": 188,
+              "startMs": 12670,
+              "endMs": 13145
+            },
+            {
+              "field": "text",
+              "from": 189,
+              "to": 191,
+              "startMs": 13195,
+              "endMs": 13295
+            },
+            {
+              "field": "text",
+              "from": 192,
+              "to": 197,
+              "startMs": 13320,
+              "endMs": 14445
+            },
+            {
+              "field": "text",
+              "from": 199,
+              "to": 203,
+              "startMs": 14975,
+              "endMs": 15150
+            },
+            {
+              "field": "text",
+              "from": 204,
+              "to": 207,
+              "startMs": 15200,
+              "endMs": 15350
+            },
+            {
+              "field": "text",
+              "from": 208,
+              "to": 210,
+              "startMs": 15375,
+              "endMs": 15450
+            },
+            {
+              "field": "text",
+              "from": 211,
+              "to": 218,
+              "startMs": 15475,
+              "endMs": 15825
+            },
+            {
+              "field": "text",
+              "from": 219,
+              "to": 221,
+              "startMs": 15850,
+              "endMs": 15925
+            },
+            {
+              "field": "text",
+              "from": 222,
+              "to": 229,
+              "startMs": 15975,
+              "endMs": 16700
+            },
+            {
+              "field": "text",
+              "from": 231,
+              "to": 236,
+              "startMs": 16800,
+              "endMs": 17075
+            },
+            {
+              "field": "text",
+              "from": 237,
+              "to": 270,
+              "startMs": 17150,
+              "endMs": 19200
+            },
+            {
+              "field": "text",
+              "from": 274,
+              "to": 275,
+              "startMs": 19755,
+              "endMs": 19805
+            },
+            {
+              "field": "text",
+              "from": 276,
+              "to": 279,
+              "startMs": 19855,
+              "endMs": 20130
+            },
+            {
+              "field": "text",
+              "from": 281,
+              "to": 284,
+              "startMs": 20180,
+              "endMs": 20305
+            },
+            {
+              "field": "text",
+              "from": 285,
+              "to": 287,
+              "startMs": 20330,
+              "endMs": 20405
+            },
+            {
+              "field": "text",
+              "from": 288,
+              "to": 295,
+              "startMs": 20455,
+              "endMs": 20905
+            },
+            {
+              "field": "text",
+              "from": 296,
+              "to": 298,
+              "startMs": 20930,
+              "endMs": 21005
+            },
+            {
+              "field": "text",
+              "from": 299,
+              "to": 317,
+              "startMs": 21030,
+              "endMs": 22430
+            },
+            {
+              "field": "text",
+              "from": 318,
+              "to": 319,
+              "startMs": 22505,
+              "endMs": 22530
+            },
+            {
+              "field": "text",
+              "from": 320,
+              "to": 333,
+              "startMs": 22555,
+              "endMs": 24055
+            }
+          ],
+          "normalizedScript": "Acrescente os testes abaixo ao final do arquivo e rode cargo test\nCada teste declara uma entrada e o resultado prometido\nUse um caso com acento para observar que o título continua válido em UTF 8\nPara ler um arquivo de verdade passe BufReader  new(File  open(caminho\na ler com os imports de std  io  BufReader e std  fs  File"
+        },
+        "dora": {
+          "src": "dora/regressao-do-parser__0.mp3",
+          "durationMs": 23415,
+          "bytes": 187968,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "text",
+              "from": 0,
+              "to": 10,
+              "startMs": 285,
+              "endMs": 785
+            },
+            {
+              "field": "text",
+              "from": 11,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 910
+            },
+            {
+              "field": "text",
+              "from": 14,
+              "to": 20,
+              "startMs": 960,
+              "endMs": 1535
+            },
+            {
+              "field": "text",
+              "from": 21,
+              "to": 27,
+              "startMs": 1585,
+              "endMs": 1985
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 30,
+              "startMs": 2010,
+              "endMs": 2060
+            },
+            {
+              "field": "text",
+              "from": 31,
+              "to": 36,
+              "startMs": 2110,
+              "endMs": 2410
+            },
+            {
+              "field": "text",
+              "from": 37,
+              "to": 39,
+              "startMs": 2435,
+              "endMs": 2485
+            },
+            {
+              "field": "text",
+              "from": 40,
+              "to": 47,
+              "startMs": 2510,
+              "endMs": 2960
+            },
+            {
+              "field": "text",
+              "from": 48,
+              "to": 49,
+              "startMs": 3010,
+              "endMs": 3035
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 54,
+              "startMs": 3085,
+              "endMs": 3385
+            },
+            {
+              "field": "text",
+              "from": 55,
+              "to": 60,
+              "startMs": 3435,
+              "endMs": 3710
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 65,
+              "startMs": 3760,
+              "endMs": 4260
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 71,
+              "startMs": 4815,
+              "endMs": 5090
+            },
+            {
+              "field": "text",
+              "from": 72,
+              "to": 77,
+              "startMs": 5165,
+              "endMs": 5615
+            },
+            {
+              "field": "text",
+              "from": 78,
+              "to": 85,
+              "startMs": 5665,
+              "endMs": 6015
+            },
+            {
+              "field": "text",
+              "from": 86,
+              "to": 89,
+              "startMs": 6040,
+              "endMs": 6140
+            },
+            {
+              "field": "text",
+              "from": 90,
+              "to": 97,
+              "startMs": 6165,
+              "endMs": 6865
+            },
+            {
+              "field": "text",
+              "from": 98,
+              "to": 99,
+              "startMs": 6940,
+              "endMs": 6965
+            },
+            {
+              "field": "text",
+              "from": 100,
+              "to": 101,
+              "startMs": 6990,
+              "endMs": 7015
+            },
+            {
+              "field": "text",
+              "from": 102,
+              "to": 111,
+              "startMs": 7065,
+              "endMs": 7565
+            },
+            {
+              "field": "text",
+              "from": 112,
+              "to": 121,
+              "startMs": 7615,
+              "endMs": 8365
+            },
+            {
+              "field": "text",
+              "from": 123,
+              "to": 126,
+              "startMs": 8920,
+              "endMs": 9120
+            },
+            {
+              "field": "text",
+              "from": 127,
+              "to": 129,
+              "startMs": 9145,
+              "endMs": 9220
+            },
+            {
+              "field": "text",
+              "from": 130,
+              "to": 134,
+              "startMs": 9270,
+              "endMs": 9620
+            },
+            {
+              "field": "text",
+              "from": 135,
+              "to": 138,
+              "startMs": 9670,
+              "endMs": 9795
+            },
+            {
+              "field": "text",
+              "from": 139,
+              "to": 145,
+              "startMs": 9820,
+              "endMs": 10270
+            },
+            {
+              "field": "text",
+              "from": 146,
+              "to": 150,
+              "startMs": 10320,
+              "endMs": 10445
+            },
+            {
+              "field": "text",
+              "from": 151,
+              "to": 159,
+              "startMs": 10470,
+              "endMs": 11020
+            },
+            {
+              "field": "text",
+              "from": 160,
+              "to": 163,
+              "startMs": 11070,
+              "endMs": 11120
+            },
+            {
+              "field": "text",
+              "from": 164,
+              "to": 165,
+              "startMs": 11145,
+              "endMs": 11170
+            },
+            {
+              "field": "text",
+              "from": 166,
+              "to": 172,
+              "startMs": 11220,
+              "endMs": 11645
+            },
+            {
+              "field": "text",
+              "from": 173,
+              "to": 181,
+              "startMs": 11695,
+              "endMs": 12195
+            },
+            {
+              "field": "text",
+              "from": 182,
+              "to": 188,
+              "startMs": 12245,
+              "endMs": 12670
+            },
+            {
+              "field": "text",
+              "from": 189,
+              "to": 191,
+              "startMs": 12720,
+              "endMs": 12820
+            },
+            {
+              "field": "text",
+              "from": 192,
+              "to": 197,
+              "startMs": 12845,
+              "endMs": 13870
+            },
+            {
+              "field": "text",
+              "from": 199,
+              "to": 203,
+              "startMs": 14425,
+              "endMs": 14600
+            },
+            {
+              "field": "text",
+              "from": 204,
+              "to": 207,
+              "startMs": 14650,
+              "endMs": 14800
+            },
+            {
+              "field": "text",
+              "from": 208,
+              "to": 210,
+              "startMs": 14825,
+              "endMs": 14900
+            },
+            {
+              "field": "text",
+              "from": 211,
+              "to": 218,
+              "startMs": 14925,
+              "endMs": 15275
+            },
+            {
+              "field": "text",
+              "from": 219,
+              "to": 221,
+              "startMs": 15300,
+              "endMs": 15375
+            },
+            {
+              "field": "text",
+              "from": 222,
+              "to": 229,
+              "startMs": 15400,
+              "endMs": 16150
+            },
+            {
+              "field": "text",
+              "from": 231,
+              "to": 236,
+              "startMs": 16275,
+              "endMs": 16575
+            },
+            {
+              "field": "text",
+              "from": 237,
+              "to": 270,
+              "startMs": 16625,
+              "endMs": 18525
+            },
+            {
+              "field": "text",
+              "from": 274,
+              "to": 275,
+              "startMs": 19080,
+              "endMs": 19130
+            },
+            {
+              "field": "text",
+              "from": 276,
+              "to": 279,
+              "startMs": 19180,
+              "endMs": 19480
+            },
+            {
+              "field": "text",
+              "from": 281,
+              "to": 284,
+              "startMs": 19555,
+              "endMs": 19680
+            },
+            {
+              "field": "text",
+              "from": 285,
+              "to": 287,
+              "startMs": 19705,
+              "endMs": 19780
+            },
+            {
+              "field": "text",
+              "from": 288,
+              "to": 295,
+              "startMs": 19830,
+              "endMs": 20255
+            },
+            {
+              "field": "text",
+              "from": 296,
+              "to": 298,
+              "startMs": 20280,
+              "endMs": 20355
+            },
+            {
+              "field": "text",
+              "from": 299,
+              "to": 317,
+              "startMs": 20380,
+              "endMs": 21655
+            },
+            {
+              "field": "text",
+              "from": 318,
+              "to": 319,
+              "startMs": 21730,
+              "endMs": 21755
+            },
+            {
+              "field": "text",
+              "from": 320,
+              "to": 333,
+              "startMs": 21780,
+              "endMs": 23230
+            }
+          ],
+          "normalizedScript": "Acrescente os testes abaixo ao final do arquivo e rode cargo test\nCada teste declara uma entrada e o resultado prometido\nUse um caso com acento para observar que o título continua válido em UTF 8\nPara ler um arquivo de verdade passe BufReader  new(File  open(caminho\na ler com os imports de std  io  BufReader e std  fs  File"
+        }
+      }
+    },
+    {
+      "id": "regressao-do-parser:1",
+      "sectionId": "regressao-do-parser",
+      "kind": "code-caption",
+      "label": "Legenda de código",
+      "textHash": "0b69f0111940568364f4acbcda4bfb3353dc892d2582f94c7fa4450b85a3c95f",
+      "clipKey": "548e6069b72d464d04ab8cb1",
+      "audio": {
+        "santa": {
+          "src": "santa/regressao-do-parser__1.mp3",
+          "durationMs": 2420,
+          "bytes": 19968,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "caption",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 810
+            },
+            {
+              "field": "caption",
+              "from": 7,
+              "to": 9,
+              "startMs": 860,
+              "endMs": 935
+            },
+            {
+              "field": "caption",
+              "from": 10,
+              "to": 18,
+              "startMs": 985,
+              "endMs": 1510
+            },
+            {
+              "field": "caption",
+              "from": 19,
+              "to": 21,
+              "startMs": 1535,
+              "endMs": 1610
+            },
+            {
+              "field": "caption",
+              "from": 22,
+              "to": 28,
+              "startMs": 1660,
+              "endMs": 2310
+            }
+          ],
+          "normalizedScript": "Testes do contrato do parser"
+        },
+        "dora": {
+          "src": "dora/regressao-do-parser__1.mp3",
+          "durationMs": 2295,
+          "bytes": 19008,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "caption",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 810
+            },
+            {
+              "field": "caption",
+              "from": 7,
+              "to": 9,
+              "startMs": 860,
+              "endMs": 935
+            },
+            {
+              "field": "caption",
+              "from": 10,
+              "to": 18,
+              "startMs": 985,
+              "endMs": 1460
+            },
+            {
+              "field": "caption",
+              "from": 19,
+              "to": 21,
+              "startMs": 1485,
+              "endMs": 1535
+            },
+            {
+              "field": "caption",
+              "from": 22,
+              "to": 28,
+              "startMs": 1585,
+              "endMs": 2185
+            }
+          ],
+          "normalizedScript": "Testes do contrato do parser"
+        }
+      }
+    },
+    {
+      "id": "regressao-do-parser:2",
+      "sectionId": "regressao-do-parser",
+      "kind": "quiz",
+      "label": "Atividade: múltipla escolha",
+      "textHash": "69ce314e6d95e155dba0e6a6a3954779caae2e7ea14553d501237ff0c4519146",
+      "clipKey": "837cd4986a2b2f59045e9ac7",
+      "audio": {
+        "santa": {
+          "src": "santa/regressao-do-parser__2.mp3",
+          "durationMs": 11640,
+          "bytes": 93696,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "question",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "question",
+              "from": 2,
+              "to": 5,
+              "startMs": 410,
+              "endMs": 485
+            },
+            {
+              "field": "question",
+              "from": 6,
+              "to": 14,
+              "startMs": 510,
+              "endMs": 1160
+            },
+            {
+              "field": "question",
+              "from": 15,
+              "to": 18,
+              "startMs": 1210,
+              "endMs": 1335
+            },
+            {
+              "field": "question",
+              "from": 19,
+              "to": 20,
+              "startMs": 1360,
+              "endMs": 1410
+            },
+            {
+              "field": "question",
+              "from": 21,
+              "to": 29,
+              "startMs": 1460,
+              "endMs": 1935
+            },
+            {
+              "field": "question",
+              "from": 30,
+              "to": 35,
+              "startMs": 1985,
+              "endMs": 2285
+            },
+            {
+              "field": "question",
+              "from": 36,
+              "to": 38,
+              "startMs": 2310,
+              "endMs": 2360
+            },
+            {
+              "field": "question",
+              "from": 39,
+              "to": 46,
+              "startMs": 2385,
+              "endMs": 3035
+            },
+            {
+              "field": "option:0",
+              "from": 0,
+              "to": 1,
+              "startMs": 3670,
+              "endMs": 3720
+            },
+            {
+              "field": "option:0",
+              "from": 2,
+              "to": 12,
+              "startMs": 3770,
+              "endMs": 4470
+            },
+            {
+              "field": "option:0",
+              "from": 13,
+              "to": 17,
+              "startMs": 4545,
+              "endMs": 4995
+            },
+            {
+              "field": "option:0",
+              "from": 18,
+              "to": 19,
+              "startMs": 5045,
+              "endMs": 5070
+            },
+            {
+              "field": "option:0",
+              "from": 20,
+              "to": 25,
+              "startMs": 5095,
+              "endMs": 5495
+            },
+            {
+              "field": "option:0",
+              "from": 26,
+              "to": 31,
+              "startMs": 5545,
+              "endMs": 5770
+            },
+            {
+              "field": "option:0",
+              "from": 32,
+              "to": 33,
+              "startMs": 5795,
+              "endMs": 5820
+            },
+            {
+              "field": "option:0",
+              "from": 34,
+              "to": 41,
+              "startMs": 5870,
+              "endMs": 6295
+            },
+            {
+              "field": "option:0",
+              "from": 42,
+              "to": 47,
+              "startMs": 6345,
+              "endMs": 6820
+            },
+            {
+              "field": "option:1",
+              "from": 0,
+              "to": 1,
+              "startMs": 7455,
+              "endMs": 7505
+            },
+            {
+              "field": "option:1",
+              "from": 2,
+              "to": 12,
+              "startMs": 7555,
+              "endMs": 8205
+            },
+            {
+              "field": "option:1",
+              "from": 13,
+              "to": 28,
+              "startMs": 8230,
+              "endMs": 9530
+            },
+            {
+              "field": "option:1",
+              "from": 29,
+              "to": 35,
+              "startMs": 9630,
+              "endMs": 9855
+            },
+            {
+              "field": "option:1",
+              "from": 36,
+              "to": 39,
+              "startMs": 9880,
+              "endMs": 10030
+            },
+            {
+              "field": "option:1",
+              "from": 40,
+              "to": 45,
+              "startMs": 10080,
+              "endMs": 10305
+            },
+            {
+              "field": "option:1",
+              "from": 46,
+              "to": 54,
+              "startMs": 10330,
+              "endMs": 10830
+            },
+            {
+              "field": "option:1",
+              "from": 55,
+              "to": 61,
+              "startMs": 10905,
+              "endMs": 11455
+            }
+          ],
+          "normalizedScript": "O que acontece com a terceira linha do exemplo\nÉ processada após o aviso sobre a segunda linha\nÉ descartada automaticamente porque uma linha anterior falhou"
+        },
+        "dora": {
+          "src": "dora/regressao-do-parser__2.mp3",
+          "durationMs": 11290,
+          "bytes": 91008,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "question",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "question",
+              "from": 2,
+              "to": 5,
+              "startMs": 410,
+              "endMs": 485
+            },
+            {
+              "field": "question",
+              "from": 6,
+              "to": 14,
+              "startMs": 510,
+              "endMs": 1185
+            },
+            {
+              "field": "question",
+              "from": 15,
+              "to": 18,
+              "startMs": 1235,
+              "endMs": 1360
+            },
+            {
+              "field": "question",
+              "from": 19,
+              "to": 20,
+              "startMs": 1385,
+              "endMs": 1410
+            },
+            {
+              "field": "question",
+              "from": 21,
+              "to": 29,
+              "startMs": 1460,
+              "endMs": 1935
+            },
+            {
+              "field": "question",
+              "from": 30,
+              "to": 35,
+              "startMs": 1985,
+              "endMs": 2260
+            },
+            {
+              "field": "question",
+              "from": 36,
+              "to": 38,
+              "startMs": 2285,
+              "endMs": 2335
+            },
+            {
+              "field": "question",
+              "from": 39,
+              "to": 46,
+              "startMs": 2360,
+              "endMs": 3010
+            },
+            {
+              "field": "option:0",
+              "from": 0,
+              "to": 1,
+              "startMs": 3645,
+              "endMs": 3695
+            },
+            {
+              "field": "option:0",
+              "from": 2,
+              "to": 12,
+              "startMs": 3745,
+              "endMs": 4495
+            },
+            {
+              "field": "option:0",
+              "from": 13,
+              "to": 17,
+              "startMs": 4570,
+              "endMs": 4995
+            },
+            {
+              "field": "option:0",
+              "from": 18,
+              "to": 19,
+              "startMs": 5045,
+              "endMs": 5070
+            },
+            {
+              "field": "option:0",
+              "from": 20,
+              "to": 25,
+              "startMs": 5095,
+              "endMs": 5470
+            },
+            {
+              "field": "option:0",
+              "from": 26,
+              "to": 31,
+              "startMs": 5520,
+              "endMs": 5720
+            },
+            {
+              "field": "option:0",
+              "from": 32,
+              "to": 33,
+              "startMs": 5745,
+              "endMs": 5770
+            },
+            {
+              "field": "option:0",
+              "from": 34,
+              "to": 41,
+              "startMs": 5820,
+              "endMs": 6170
+            },
+            {
+              "field": "option:0",
+              "from": 42,
+              "to": 47,
+              "startMs": 6220,
+              "endMs": 6695
+            },
+            {
+              "field": "option:1",
+              "from": 0,
+              "to": 1,
+              "startMs": 7330,
+              "endMs": 7380
+            },
+            {
+              "field": "option:1",
+              "from": 2,
+              "to": 12,
+              "startMs": 7430,
+              "endMs": 8055
+            },
+            {
+              "field": "option:1",
+              "from": 13,
+              "to": 28,
+              "startMs": 8080,
+              "endMs": 9330
+            },
+            {
+              "field": "option:1",
+              "from": 29,
+              "to": 35,
+              "startMs": 9430,
+              "endMs": 9655
+            },
+            {
+              "field": "option:1",
+              "from": 36,
+              "to": 39,
+              "startMs": 9680,
+              "endMs": 9830
+            },
+            {
+              "field": "option:1",
+              "from": 40,
+              "to": 45,
+              "startMs": 9880,
+              "endMs": 10080
+            },
+            {
+              "field": "option:1",
+              "from": 46,
+              "to": 54,
+              "startMs": 10105,
+              "endMs": 10580
+            },
+            {
+              "field": "option:1",
+              "from": 55,
+              "to": 61,
+              "startMs": 10630,
+              "endMs": 11105
+            }
+          ],
+          "normalizedScript": "O que acontece com a terceira linha do exemplo\nÉ processada após o aviso sobre a segunda linha\nÉ descartada automaticamente porque uma linha anterior falhou"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:heading",
+      "sectionId": "fechamento",
+      "kind": "fechamento-heading",
+      "label": "Fechamento",
+      "textHash": "3fd795001a0186f180f5f0a6bb32f198cf4d507b2e1166f63fe5cd4943b54e8d",
+      "clipKey": "867093b1286dcafb687ea317",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__heading.mp3",
+          "durationMs": 1370,
+          "bytes": 11712,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 10,
+              "startMs": 310,
+              "endMs": 1235
+            }
+          ],
+          "normalizedScript": "Fechamento"
+        },
+        "dora": {
+          "src": "dora/fechamento__heading.mp3",
+          "durationMs": 1320,
+          "bytes": 11136,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 10,
+              "startMs": 310,
+              "endMs": 1185
+            }
+          ],
+          "normalizedScript": "Fechamento"
+        }
+      }
+    },
+    {
+      "id": "fechamento:recap",
+      "sectionId": "fechamento",
+      "kind": "fechamento-recap",
+      "label": "Síntese de fechamento",
+      "textHash": "1453d34a5763f25c134ebaf7867871921d50a44b3d8e8a2bbf842fb9237adc0b",
+      "clipKey": "6ff94290febe88acb6d28444",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__recap.mp3",
+          "durationMs": 13065,
+          "bytes": 105216,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "item:0",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 685
+            },
+            {
+              "field": "item:0",
+              "from": 7,
+              "to": 13,
+              "startMs": 785,
+              "endMs": 1160
+            },
+            {
+              "field": "item:0",
+              "from": 14,
+              "to": 16,
+              "startMs": 1210,
+              "endMs": 1285
+            },
+            {
+              "field": "item:0",
+              "from": 17,
+              "to": 24,
+              "startMs": 1335,
+              "endMs": 1810
+            },
+            {
+              "field": "item:0",
+              "from": 25,
+              "to": 26,
+              "startMs": 1860,
+              "endMs": 1910
+            },
+            {
+              "field": "item:0",
+              "from": 27,
+              "to": 33,
+              "startMs": 2010,
+              "endMs": 2385
+            },
+            {
+              "field": "item:0",
+              "from": 34,
+              "to": 36,
+              "startMs": 2435,
+              "endMs": 2485
+            },
+            {
+              "field": "item:0",
+              "from": 37,
+              "to": 50,
+              "startMs": 2510,
+              "endMs": 3435
+            },
+            {
+              "field": "item:1",
+              "from": 0,
+              "to": 7,
+              "startMs": 4045,
+              "endMs": 4545
+            },
+            {
+              "field": "item:1",
+              "from": 8,
+              "to": 20,
+              "startMs": 4595,
+              "endMs": 5420
+            },
+            {
+              "field": "item:1",
+              "from": 21,
+              "to": 32,
+              "startMs": 5445,
+              "endMs": 6395
+            },
+            {
+              "field": "item:1",
+              "from": 33,
+              "to": 34,
+              "startMs": 6445,
+              "endMs": 6470
+            },
+            {
+              "field": "item:1",
+              "from": 35,
+              "to": 43,
+              "startMs": 6520,
+              "endMs": 7070
+            },
+            {
+              "field": "item:1",
+              "from": 44,
+              "to": 46,
+              "startMs": 7095,
+              "endMs": 7195
+            },
+            {
+              "field": "item:1",
+              "from": 47,
+              "to": 54,
+              "startMs": 7245,
+              "endMs": 7720
+            },
+            {
+              "field": "item:1",
+              "from": 55,
+              "to": 62,
+              "startMs": 7770,
+              "endMs": 8395
+            },
+            {
+              "field": "item:2",
+              "from": 0,
+              "to": 5,
+              "startMs": 9030,
+              "endMs": 9380
+            },
+            {
+              "field": "item:2",
+              "from": 6,
+              "to": 10,
+              "startMs": 9455,
+              "endMs": 9705
+            },
+            {
+              "field": "item:2",
+              "from": 11,
+              "to": 18,
+              "startMs": 9755,
+              "endMs": 10105
+            },
+            {
+              "field": "item:2",
+              "from": 19,
+              "to": 21,
+              "startMs": 10130,
+              "endMs": 10180
+            },
+            {
+              "field": "item:2",
+              "from": 22,
+              "to": 28,
+              "startMs": 10230,
+              "endMs": 10655
+            },
+            {
+              "field": "item:2",
+              "from": 29,
+              "to": 32,
+              "startMs": 10705,
+              "endMs": 10830
+            },
+            {
+              "field": "item:2",
+              "from": 33,
+              "to": 35,
+              "startMs": 10855,
+              "endMs": 10955
+            },
+            {
+              "field": "item:2",
+              "from": 36,
+              "to": 41,
+              "startMs": 11030,
+              "endMs": 11430
+            },
+            {
+              "field": "item:2",
+              "from": 42,
+              "to": 44,
+              "startMs": 11480,
+              "endMs": 11580
+            },
+            {
+              "field": "item:2",
+              "from": 45,
+              "to": 52,
+              "startMs": 11605,
+              "endMs": 12155
+            },
+            {
+              "field": "item:2",
+              "from": 53,
+              "to": 54,
+              "startMs": 12205,
+              "endMs": 12255
+            },
+            {
+              "field": "item:2",
+              "from": 55,
+              "to": 60,
+              "startMs": 12330,
+              "endMs": 12880
+            }
+          ],
+          "normalizedScript": "Separo falhas da leitura e falhas da interpretação\nRetorno diagnósticos específicos e preservo os títulos válidos\nProvo cada caminho do parser com um teste de entrada e saída"
+        },
+        "dora": {
+          "src": "dora/fechamento__recap.mp3",
+          "durationMs": 12665,
+          "bytes": 101952,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "item:0",
+              "from": 0,
+              "to": 6,
+              "startMs": 310,
+              "endMs": 710
+            },
+            {
+              "field": "item:0",
+              "from": 7,
+              "to": 13,
+              "startMs": 810,
+              "endMs": 1185
+            },
+            {
+              "field": "item:0",
+              "from": 14,
+              "to": 16,
+              "startMs": 1235,
+              "endMs": 1335
+            },
+            {
+              "field": "item:0",
+              "from": 17,
+              "to": 24,
+              "startMs": 1385,
+              "endMs": 1885
+            },
+            {
+              "field": "item:0",
+              "from": 25,
+              "to": 26,
+              "startMs": 1935,
+              "endMs": 1985
+            },
+            {
+              "field": "item:0",
+              "from": 27,
+              "to": 33,
+              "startMs": 2085,
+              "endMs": 2435
+            },
+            {
+              "field": "item:0",
+              "from": 34,
+              "to": 36,
+              "startMs": 2460,
+              "endMs": 2510
+            },
+            {
+              "field": "item:0",
+              "from": 37,
+              "to": 50,
+              "startMs": 2535,
+              "endMs": 3460
+            },
+            {
+              "field": "item:1",
+              "from": 0,
+              "to": 7,
+              "startMs": 4070,
+              "endMs": 4545
+            },
+            {
+              "field": "item:1",
+              "from": 8,
+              "to": 20,
+              "startMs": 4595,
+              "endMs": 5420
+            },
+            {
+              "field": "item:1",
+              "from": 21,
+              "to": 32,
+              "startMs": 5445,
+              "endMs": 6345
+            },
+            {
+              "field": "item:1",
+              "from": 33,
+              "to": 34,
+              "startMs": 6395,
+              "endMs": 6420
+            },
+            {
+              "field": "item:1",
+              "from": 35,
+              "to": 43,
+              "startMs": 6470,
+              "endMs": 6945
+            },
+            {
+              "field": "item:1",
+              "from": 44,
+              "to": 46,
+              "startMs": 6970,
+              "endMs": 7070
+            },
+            {
+              "field": "item:1",
+              "from": 47,
+              "to": 54,
+              "startMs": 7095,
+              "endMs": 7520
+            },
+            {
+              "field": "item:1",
+              "from": 55,
+              "to": 62,
+              "startMs": 7570,
+              "endMs": 8220
+            },
+            {
+              "field": "item:2",
+              "from": 0,
+              "to": 5,
+              "startMs": 8855,
+              "endMs": 9205
+            },
+            {
+              "field": "item:2",
+              "from": 6,
+              "to": 10,
+              "startMs": 9280,
+              "endMs": 9530
+            },
+            {
+              "field": "item:2",
+              "from": 11,
+              "to": 18,
+              "startMs": 9580,
+              "endMs": 9930
+            },
+            {
+              "field": "item:2",
+              "from": 19,
+              "to": 21,
+              "startMs": 9955,
+              "endMs": 10005
+            },
+            {
+              "field": "item:2",
+              "from": 22,
+              "to": 28,
+              "startMs": 10055,
+              "endMs": 10505
+            },
+            {
+              "field": "item:2",
+              "from": 29,
+              "to": 32,
+              "startMs": 10555,
+              "endMs": 10680
+            },
+            {
+              "field": "item:2",
+              "from": 33,
+              "to": 35,
+              "startMs": 10705,
+              "endMs": 10805
+            },
+            {
+              "field": "item:2",
+              "from": 36,
+              "to": 41,
+              "startMs": 10855,
+              "endMs": 11205
+            },
+            {
+              "field": "item:2",
+              "from": 42,
+              "to": 44,
+              "startMs": 11230,
+              "endMs": 11305
+            },
+            {
+              "field": "item:2",
+              "from": 45,
+              "to": 52,
+              "startMs": 11330,
+              "endMs": 11805
+            },
+            {
+              "field": "item:2",
+              "from": 53,
+              "to": 54,
+              "startMs": 11830,
+              "endMs": 11880
+            },
+            {
+              "field": "item:2",
+              "from": 55,
+              "to": 60,
+              "startMs": 11930,
+              "endMs": 12480
+            }
+          ],
+          "normalizedScript": "Separo falhas da leitura e falhas da interpretação\nRetorno diagnósticos específicos e preservo os títulos válidos\nProvo cada caminho do parser com um teste de entrada e saída"
+        }
+      }
+    },
+    {
+      "id": "fechamento:card:parser:front",
+      "sectionId": "fechamento",
+      "kind": "fechamento-card",
+      "label": "Cartão de revisão (frente)",
+      "textHash": "630a8336a741f48a071164014f16e85edc55701b59b94cfd31889de606013709",
+      "clipKey": "dd7ba349633680ebed6fab4b",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__parser__front.mp3",
+          "durationMs": 2670,
+          "bytes": 22080,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 3,
+              "startMs": 285,
+              "endMs": 435
+            },
+            {
+              "field": "front",
+              "from": 4,
+              "to": 7,
+              "startMs": 485,
+              "endMs": 585
+            },
+            {
+              "field": "front",
+              "from": 8,
+              "to": 15,
+              "startMs": 635,
+              "endMs": 1110
+            },
+            {
+              "field": "front",
+              "from": 16,
+              "to": 27,
+              "startMs": 1135,
+              "endMs": 1835
+            },
+            {
+              "field": "front",
+              "from": 28,
+              "to": 30,
+              "startMs": 1885,
+              "endMs": 2035
+            },
+            {
+              "field": "front",
+              "from": 31,
+              "to": 34,
+              "startMs": 2085,
+              "endMs": 2485
+            }
+          ],
+          "normalizedScript": "Por que separar interpretar de ler"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__parser__front.mp3",
+          "durationMs": 2620,
+          "bytes": 21696,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 460
+            },
+            {
+              "field": "front",
+              "from": 4,
+              "to": 7,
+              "startMs": 510,
+              "endMs": 610
+            },
+            {
+              "field": "front",
+              "from": 8,
+              "to": 15,
+              "startMs": 660,
+              "endMs": 1135
+            },
+            {
+              "field": "front",
+              "from": 16,
+              "to": 27,
+              "startMs": 1160,
+              "endMs": 1810
+            },
+            {
+              "field": "front",
+              "from": 28,
+              "to": 30,
+              "startMs": 1860,
+              "endMs": 2010
+            },
+            {
+              "field": "front",
+              "from": 31,
+              "to": 34,
+              "startMs": 2060,
+              "endMs": 2435
+            }
+          ],
+          "normalizedScript": "Por que separar interpretar de ler"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:parser:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "0bff5a9934c27c3348c9dd43d9ca87986c88e0c09145176516c9fb7887f1b324",
+      "clipKey": "26cbdbc711879a0b617fdb27",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__parser__back.mp3",
+          "durationMs": 5520,
+          "bytes": 44736,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 8,
+              "startMs": 410,
+              "endMs": 785
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 13,
+              "startMs": 835,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 17,
+              "startMs": 1160,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 25,
+              "startMs": 1360,
+              "endMs": 1885
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1935,
+              "endMs": 2035
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 33,
+              "startMs": 2060,
+              "endMs": 2210
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2260,
+              "endMs": 2810
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 2910,
+              "endMs": 2960
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 45,
+              "startMs": 3010,
+              "endMs": 3110
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 47,
+              "startMs": 3135,
+              "endMs": 3160
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 53,
+              "startMs": 3210,
+              "endMs": 3510
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 61,
+              "startMs": 3560,
+              "endMs": 4085
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 64,
+              "startMs": 4135,
+              "endMs": 4260
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 73,
+              "startMs": 4310,
+              "endMs": 4710
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 80,
+              "startMs": 4735,
+              "endMs": 5335
+            }
+          ],
+          "normalizedScript": "O parser pode ser testado com uma string e lê o mesmo formato em qualquer origem"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__parser__back.mp3",
+          "durationMs": 5295,
+          "bytes": 43008,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 8,
+              "startMs": 410,
+              "endMs": 785
+            },
+            {
+              "field": "back",
+              "from": 9,
+              "to": 13,
+              "startMs": 835,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 14,
+              "to": 17,
+              "startMs": 1160,
+              "endMs": 1310
+            },
+            {
+              "field": "back",
+              "from": 18,
+              "to": 25,
+              "startMs": 1360,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1910,
+              "endMs": 1985
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 33,
+              "startMs": 2010,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 34,
+              "to": 40,
+              "startMs": 2210,
+              "endMs": 2785
+            },
+            {
+              "field": "back",
+              "from": 41,
+              "to": 42,
+              "startMs": 2885,
+              "endMs": 2935
+            },
+            {
+              "field": "back",
+              "from": 43,
+              "to": 45,
+              "startMs": 2985,
+              "endMs": 3085
+            },
+            {
+              "field": "back",
+              "from": 46,
+              "to": 47,
+              "startMs": 3110,
+              "endMs": 3135
+            },
+            {
+              "field": "back",
+              "from": 48,
+              "to": 53,
+              "startMs": 3185,
+              "endMs": 3460
+            },
+            {
+              "field": "back",
+              "from": 54,
+              "to": 61,
+              "startMs": 3510,
+              "endMs": 3985
+            },
+            {
+              "field": "back",
+              "from": 62,
+              "to": 64,
+              "startMs": 4010,
+              "endMs": 4110
+            },
+            {
+              "field": "back",
+              "from": 65,
+              "to": 73,
+              "startMs": 4135,
+              "endMs": 4460
+            },
+            {
+              "field": "back",
+              "from": 74,
+              "to": 80,
+              "startMs": 4485,
+              "endMs": 5110
+            }
+          ],
+          "normalizedScript": "O parser pode ser testado com uma string e lê o mesmo formato em qualquer origem"
+        }
+      }
+    },
+    {
+      "id": "fechamento:card:erro-io:front",
+      "sectionId": "fechamento",
+      "kind": "fechamento-card",
+      "label": "Cartão de revisão (frente)",
+      "textHash": "311a1763590b14a0b927e6bf05ead5b25db6428d23ab5d886b2b5ebd5d2e5fac",
+      "clipKey": "f67843f32d7324f8ed53f1d7",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__erro-io__front.mp3",
+          "durationMs": 3470,
+          "bytes": 28416,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 410
+            },
+            {
+              "field": "front",
+              "from": 4,
+              "to": 8,
+              "startMs": 485,
+              "endMs": 810
+            },
+            {
+              "field": "front",
+              "from": 9,
+              "to": 16,
+              "startMs": 835,
+              "endMs": 1385
+            },
+            {
+              "field": "front",
+              "from": 17,
+              "to": 19,
+              "startMs": 1435,
+              "endMs": 1510
+            },
+            {
+              "field": "front",
+              "from": 20,
+              "to": 29,
+              "startMs": 1560,
+              "endMs": 2085
+            },
+            {
+              "field": "front",
+              "from": 30,
+              "to": 44,
+              "startMs": 2160,
+              "endMs": 3285
+            }
+          ],
+          "normalizedScript": "Que tipo aparece ao percorrer BufRead  lines"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__erro-io__front.mp3",
+          "durationMs": 3295,
+          "bytes": 27072,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 3,
+              "startMs": 310,
+              "endMs": 410
+            },
+            {
+              "field": "front",
+              "from": 4,
+              "to": 8,
+              "startMs": 485,
+              "endMs": 785
+            },
+            {
+              "field": "front",
+              "from": 9,
+              "to": 16,
+              "startMs": 810,
+              "endMs": 1360
+            },
+            {
+              "field": "front",
+              "from": 17,
+              "to": 19,
+              "startMs": 1410,
+              "endMs": 1485
+            },
+            {
+              "field": "front",
+              "from": 20,
+              "to": 29,
+              "startMs": 1535,
+              "endMs": 2060
+            },
+            {
+              "field": "front",
+              "from": 30,
+              "to": 44,
+              "startMs": 2110,
+              "endMs": 3110
+            }
+          ],
+          "normalizedScript": "Que tipo aparece ao percorrer BufRead  lines"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:erro-io:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "4d1078e5e0986a8e762c0fd7bfefeff2064bbb5554ce43b91fa9cdf97b30627a",
+      "clipKey": "ee43dc42a3e2b24b7531abb6",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__erro-io__back.mp3",
+          "durationMs": 2820,
+          "bytes": 23232,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 13,
+              "startMs": 310,
+              "endMs": 1135
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 25,
+              "startMs": 1210,
+              "endMs": 1685
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1735,
+              "endMs": 1860
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 35,
+              "startMs": 1910,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 40,
+              "startMs": 2210,
+              "endMs": 2635
+            }
+          ],
+          "normalizedScript": "Result<String io  Error> por linha lida"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__erro-io__back.mp3",
+          "durationMs": 2820,
+          "bytes": 23232,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 13,
+              "startMs": 310,
+              "endMs": 1160
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 25,
+              "startMs": 1260,
+              "endMs": 1710
+            },
+            {
+              "field": "back",
+              "from": 26,
+              "to": 29,
+              "startMs": 1760,
+              "endMs": 1885
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 35,
+              "startMs": 1935,
+              "endMs": 2160
+            },
+            {
+              "field": "back",
+              "from": 36,
+              "to": 40,
+              "startMs": 2210,
+              "endMs": 2635
+            }
+          ],
+          "normalizedScript": "Result<String io  Error> por linha lida"
+        }
+      }
+    },
+    {
+      "id": "fechamento:card:numero-linha:front",
+      "sectionId": "fechamento",
+      "kind": "fechamento-card",
+      "label": "Cartão de revisão (frente)",
+      "textHash": "cae7aac7d12b7702960d8f5976622483648f576941d81305e85cba495936cf35",
+      "clipKey": "f0025cd200ae3eb67a7bb944",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__numero-linha__front.mp3",
+          "durationMs": 4695,
+          "bytes": 38208,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 485
+            },
+            {
+              "field": "front",
+              "from": 5,
+              "to": 14,
+              "startMs": 535,
+              "endMs": 1110
+            },
+            {
+              "field": "front",
+              "from": 15,
+              "to": 16,
+              "startMs": 1160,
+              "endMs": 1210
+            },
+            {
+              "field": "front",
+              "from": 17,
+              "to": 23,
+              "startMs": 1260,
+              "endMs": 1710
+            },
+            {
+              "field": "front",
+              "from": 24,
+              "to": 26,
+              "startMs": 1760,
+              "endMs": 1835
+            },
+            {
+              "field": "front",
+              "from": 27,
+              "to": 36,
+              "startMs": 1860,
+              "endMs": 2535
+            },
+            {
+              "field": "front",
+              "from": 37,
+              "to": 39,
+              "startMs": 2585,
+              "endMs": 2710
+            },
+            {
+              "field": "front",
+              "from": 40,
+              "to": 46,
+              "startMs": 2760,
+              "endMs": 3110
+            },
+            {
+              "field": "front",
+              "from": 47,
+              "to": 49,
+              "startMs": 3160,
+              "endMs": 3310
+            },
+            {
+              "field": "front",
+              "from": 50,
+              "to": 55,
+              "startMs": 3360,
+              "endMs": 3660
+            },
+            {
+              "field": "front",
+              "from": 56,
+              "to": 60,
+              "startMs": 3710,
+              "endMs": 3835
+            },
+            {
+              "field": "front",
+              "from": 61,
+              "to": 69,
+              "startMs": 3860,
+              "endMs": 4535
+            }
+          ],
+          "normalizedScript": "Como converter o índice de enumerate em número de linha para exibição"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__numero-linha__front.mp3",
+          "durationMs": 4645,
+          "bytes": 37824,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 535
+            },
+            {
+              "field": "front",
+              "from": 5,
+              "to": 14,
+              "startMs": 585,
+              "endMs": 1135
+            },
+            {
+              "field": "front",
+              "from": 15,
+              "to": 16,
+              "startMs": 1210,
+              "endMs": 1260
+            },
+            {
+              "field": "front",
+              "from": 17,
+              "to": 23,
+              "startMs": 1310,
+              "endMs": 1735
+            },
+            {
+              "field": "front",
+              "from": 24,
+              "to": 26,
+              "startMs": 1760,
+              "endMs": 1835
+            },
+            {
+              "field": "front",
+              "from": 27,
+              "to": 36,
+              "startMs": 1860,
+              "endMs": 2535
+            },
+            {
+              "field": "front",
+              "from": 37,
+              "to": 39,
+              "startMs": 2585,
+              "endMs": 2710
+            },
+            {
+              "field": "front",
+              "from": 40,
+              "to": 46,
+              "startMs": 2760,
+              "endMs": 3085
+            },
+            {
+              "field": "front",
+              "from": 47,
+              "to": 49,
+              "startMs": 3110,
+              "endMs": 3260
+            },
+            {
+              "field": "front",
+              "from": 50,
+              "to": 55,
+              "startMs": 3310,
+              "endMs": 3585
+            },
+            {
+              "field": "front",
+              "from": 56,
+              "to": 60,
+              "startMs": 3635,
+              "endMs": 3760
+            },
+            {
+              "field": "front",
+              "from": 61,
+              "to": 69,
+              "startMs": 3785,
+              "endMs": 4460
+            }
+          ],
+          "normalizedScript": "Como converter o índice de enumerate em número de linha para exibição"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:numero-linha:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "a75e6cf4e91daf98de20838e0e8298c4286a00a9456101da41cda2893f43d3da",
+      "clipKey": "d64620410401dcdb16e3442c",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__numero-linha__back.mp3",
+          "durationMs": 1770,
+          "bytes": 14784,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 7,
+              "startMs": 610,
+              "endMs": 685
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 10,
+              "startMs": 735,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 17,
+              "startMs": 885,
+              "endMs": 1585
+            }
+          ],
+          "normalizedScript": "Some um ao índice"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__numero-linha__back.mp3",
+          "durationMs": 1695,
+          "bytes": 14208,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 4,
+              "startMs": 310,
+              "endMs": 585
+            },
+            {
+              "field": "back",
+              "from": 5,
+              "to": 7,
+              "startMs": 610,
+              "endMs": 685
+            },
+            {
+              "field": "back",
+              "from": 8,
+              "to": 10,
+              "startMs": 735,
+              "endMs": 835
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 17,
+              "startMs": 885,
+              "endMs": 1510
+            }
+          ],
+          "normalizedScript": "Some um ao índice"
+        }
+      }
+    },
+    {
+      "id": "fechamento:card:borda:front",
+      "sectionId": "fechamento",
+      "kind": "fechamento-card",
+      "label": "Cartão de revisão (frente)",
+      "textHash": "6840dba5685c13baef16ebff0f43fb3b685c8c70140de60bc858953b49d11c80",
+      "clipKey": "ea0bf5f34b2ff767be46f8bb",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__borda__front.mp3",
+          "durationMs": 3720,
+          "bytes": 30336,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 510
+            },
+            {
+              "field": "front",
+              "from": 5,
+              "to": 10,
+              "startMs": 560,
+              "endMs": 835
+            },
+            {
+              "field": "front",
+              "from": 11,
+              "to": 18,
+              "startMs": 860,
+              "endMs": 1260
+            },
+            {
+              "field": "front",
+              "from": 19,
+              "to": 28,
+              "startMs": 1310,
+              "endMs": 1985
+            },
+            {
+              "field": "front",
+              "from": 29,
+              "to": 33,
+              "startMs": 2060,
+              "endMs": 2360
+            },
+            {
+              "field": "front",
+              "from": 34,
+              "to": 37,
+              "startMs": 2385,
+              "endMs": 2560
+            },
+            {
+              "field": "front",
+              "from": 38,
+              "to": 43,
+              "startMs": 2610,
+              "endMs": 2810
+            },
+            {
+              "field": "front",
+              "from": 44,
+              "to": 52,
+              "startMs": 2835,
+              "endMs": 3535
+            }
+          ],
+          "normalizedScript": "Qual parte escolhe continuar após uma linha inválida"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__borda__front.mp3",
+          "durationMs": 3595,
+          "bytes": 29376,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "front",
+              "from": 0,
+              "to": 4,
+              "startMs": 285,
+              "endMs": 510
+            },
+            {
+              "field": "front",
+              "from": 5,
+              "to": 10,
+              "startMs": 560,
+              "endMs": 835
+            },
+            {
+              "field": "front",
+              "from": 11,
+              "to": 18,
+              "startMs": 860,
+              "endMs": 1210
+            },
+            {
+              "field": "front",
+              "from": 19,
+              "to": 28,
+              "startMs": 1260,
+              "endMs": 1935
+            },
+            {
+              "field": "front",
+              "from": 29,
+              "to": 33,
+              "startMs": 2010,
+              "endMs": 2310
+            },
+            {
+              "field": "front",
+              "from": 34,
+              "to": 37,
+              "startMs": 2335,
+              "endMs": 2510
+            },
+            {
+              "field": "front",
+              "from": 38,
+              "to": 43,
+              "startMs": 2560,
+              "endMs": 2760
+            },
+            {
+              "field": "front",
+              "from": 44,
+              "to": 52,
+              "startMs": 2785,
+              "endMs": 3410
+            }
+          ],
+          "normalizedScript": "Qual parte escolhe continuar após uma linha inválida"
+        }
+      },
+      "pauseAfter": true
+    },
+    {
+      "id": "fechamento:card:borda:back",
+      "sectionId": "fechamento",
+      "kind": "revealed-answer",
+      "label": "Cartão de revisão (resposta)",
+      "textHash": "a2d37a71c4afbc8906430a745bd85f46810e2bad9e64ec0801d94cc86d55044d",
+      "clipKey": "55e75d050403214c75f63097",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__card__borda__back.mp3",
+          "durationMs": 3395,
+          "bytes": 27840,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 10,
+              "startMs": 435,
+              "endMs": 960
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 14,
+              "startMs": 1010,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 20,
+              "startMs": 1185,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 22,
+              "startMs": 1535,
+              "endMs": 1560
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 29,
+              "startMs": 1610,
+              "endMs": 2185
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 32,
+              "startMs": 2235,
+              "endMs": 2285
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 46,
+              "startMs": 2310,
+              "endMs": 3235
+            }
+          ],
+          "normalizedScript": "O chamador que trata o Result da interpretação"
+        },
+        "dora": {
+          "src": "dora/fechamento__card__borda__back.mp3",
+          "durationMs": 3345,
+          "bytes": 27456,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "back",
+              "from": 0,
+              "to": 1,
+              "startMs": 310,
+              "endMs": 360
+            },
+            {
+              "field": "back",
+              "from": 2,
+              "to": 10,
+              "startMs": 435,
+              "endMs": 960
+            },
+            {
+              "field": "back",
+              "from": 11,
+              "to": 14,
+              "startMs": 1010,
+              "endMs": 1110
+            },
+            {
+              "field": "back",
+              "from": 15,
+              "to": 20,
+              "startMs": 1185,
+              "endMs": 1510
+            },
+            {
+              "field": "back",
+              "from": 21,
+              "to": 22,
+              "startMs": 1535,
+              "endMs": 1560
+            },
+            {
+              "field": "back",
+              "from": 23,
+              "to": 29,
+              "startMs": 1610,
+              "endMs": 2135
+            },
+            {
+              "field": "back",
+              "from": 30,
+              "to": 32,
+              "startMs": 2185,
+              "endMs": 2235
+            },
+            {
+              "field": "back",
+              "from": 33,
+              "to": 46,
+              "startMs": 2260,
+              "endMs": 3185
+            }
+          ],
+          "normalizedScript": "O chamador que trata o Result da interpretação"
+        }
+      }
+    },
+    {
+      "id": "fechamento:mission",
+      "sectionId": "fechamento",
+      "kind": "fechamento-mission",
+      "label": "Missão: Adapte o parser ao leitor da missão",
+      "textHash": "62e837773e20db7ea790e5e7da0febe6268b18a6f1083ea13c58d6db91aef3f9",
+      "clipKey": "f80fc61f6cb92557b92969be",
+      "audio": {
+        "santa": {
+          "src": "santa/fechamento__mission.mp3",
+          "durationMs": 10660,
+          "bytes": 86016,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 6,
+              "startMs": 285,
+              "endMs": 710
+            },
+            {
+              "field": "title",
+              "from": 7,
+              "to": 8,
+              "startMs": 735,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 9,
+              "to": 15,
+              "startMs": 810,
+              "endMs": 1260
+            },
+            {
+              "field": "title",
+              "from": 16,
+              "to": 18,
+              "startMs": 1310,
+              "endMs": 1385
+            },
+            {
+              "field": "title",
+              "from": 19,
+              "to": 25,
+              "startMs": 1435,
+              "endMs": 1860
+            },
+            {
+              "field": "title",
+              "from": 26,
+              "to": 28,
+              "startMs": 1885,
+              "endMs": 1960
+            },
+            {
+              "field": "title",
+              "from": 29,
+              "to": 35,
+              "startMs": 1985,
+              "endMs": 2560
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 2,
+              "startMs": 3095,
+              "endMs": 3195
+            },
+            {
+              "field": "text",
+              "from": 3,
+              "to": 9,
+              "startMs": 3220,
+              "endMs": 3545
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 12,
+              "startMs": 3570,
+              "endMs": 3695
+            },
+            {
+              "field": "text",
+              "from": 13,
+              "to": 19,
+              "startMs": 3745,
+              "endMs": 4145
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 26,
+              "startMs": 4195,
+              "endMs": 4820
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 29,
+              "startMs": 4920,
+              "endMs": 4945
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 37,
+              "startMs": 4970,
+              "endMs": 5470
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 41,
+              "startMs": 5520,
+              "endMs": 5745
+            },
+            {
+              "field": "text",
+              "from": 42,
+              "to": 49,
+              "startMs": 5795,
+              "endMs": 6295
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 59,
+              "startMs": 6345,
+              "endMs": 7195
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 64,
+              "startMs": 7750,
+              "endMs": 8025
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 66,
+              "startMs": 8075,
+              "endMs": 8125
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 72,
+              "startMs": 8175,
+              "endMs": 8550
+            },
+            {
+              "field": "text",
+              "from": 73,
+              "to": 83,
+              "startMs": 8600,
+              "endMs": 9325
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 87,
+              "startMs": 9375,
+              "endMs": 9500
+            },
+            {
+              "field": "text",
+              "from": 88,
+              "to": 92,
+              "startMs": 9525,
+              "endMs": 9725
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 101,
+              "startMs": 9775,
+              "endMs": 10475
+            }
+          ],
+          "normalizedScript": "Adapte o parser ao leitor da missão\nNa missão de código legado a entrada tem formato id|título\nUse o mesmo raciocínio com esse contrato"
+        },
+        "dora": {
+          "src": "dora/fechamento__mission.mp3",
+          "durationMs": 10260,
+          "bytes": 82752,
+          "sampleRate": 24000,
+          "words": [
+            {
+              "field": "title",
+              "from": 0,
+              "to": 6,
+              "startMs": 285,
+              "endMs": 710
+            },
+            {
+              "field": "title",
+              "from": 7,
+              "to": 8,
+              "startMs": 735,
+              "endMs": 760
+            },
+            {
+              "field": "title",
+              "from": 9,
+              "to": 15,
+              "startMs": 810,
+              "endMs": 1260
+            },
+            {
+              "field": "title",
+              "from": 16,
+              "to": 18,
+              "startMs": 1310,
+              "endMs": 1385
+            },
+            {
+              "field": "title",
+              "from": 19,
+              "to": 25,
+              "startMs": 1410,
+              "endMs": 1760
+            },
+            {
+              "field": "title",
+              "from": 26,
+              "to": 28,
+              "startMs": 1785,
+              "endMs": 1860
+            },
+            {
+              "field": "title",
+              "from": 29,
+              "to": 35,
+              "startMs": 1885,
+              "endMs": 2410
+            },
+            {
+              "field": "text",
+              "from": 0,
+              "to": 2,
+              "startMs": 2945,
+              "endMs": 3045
+            },
+            {
+              "field": "text",
+              "from": 3,
+              "to": 9,
+              "startMs": 3070,
+              "endMs": 3420
+            },
+            {
+              "field": "text",
+              "from": 10,
+              "to": 12,
+              "startMs": 3445,
+              "endMs": 3545
+            },
+            {
+              "field": "text",
+              "from": 13,
+              "to": 19,
+              "startMs": 3595,
+              "endMs": 3995
+            },
+            {
+              "field": "text",
+              "from": 20,
+              "to": 26,
+              "startMs": 4045,
+              "endMs": 4670
+            },
+            {
+              "field": "text",
+              "from": 28,
+              "to": 29,
+              "startMs": 4795,
+              "endMs": 4820
+            },
+            {
+              "field": "text",
+              "from": 30,
+              "to": 37,
+              "startMs": 4845,
+              "endMs": 5345
+            },
+            {
+              "field": "text",
+              "from": 38,
+              "to": 41,
+              "startMs": 5395,
+              "endMs": 5595
+            },
+            {
+              "field": "text",
+              "from": 42,
+              "to": 49,
+              "startMs": 5645,
+              "endMs": 6120
+            },
+            {
+              "field": "text",
+              "from": 50,
+              "to": 59,
+              "startMs": 6170,
+              "endMs": 6920
+            },
+            {
+              "field": "text",
+              "from": 61,
+              "to": 64,
+              "startMs": 7475,
+              "endMs": 7750
+            },
+            {
+              "field": "text",
+              "from": 65,
+              "to": 66,
+              "startMs": 7775,
+              "endMs": 7825
+            },
+            {
+              "field": "text",
+              "from": 67,
+              "to": 72,
+              "startMs": 7875,
+              "endMs": 8250
+            },
+            {
+              "field": "text",
+              "from": 73,
+              "to": 83,
+              "startMs": 8300,
+              "endMs": 9000
+            },
+            {
+              "field": "text",
+              "from": 84,
+              "to": 87,
+              "startMs": 9050,
+              "endMs": 9175
+            },
+            {
+              "field": "text",
+              "from": 88,
+              "to": 92,
+              "startMs": 9200,
+              "endMs": 9375
+            },
+            {
+              "field": "text",
+              "from": 93,
+              "to": 101,
+              "startMs": 9400,
+              "endMs": 10075
+            }
+          ],
+          "normalizedScript": "Adapte o parser ao leitor da missão\nNa missão de código legado a entrada tem formato id|título\nUse o mesmo raciocínio com esse contrato"
+        }
+      }
+    }
+  ],
+  "uncoveredBlocks": []
+}

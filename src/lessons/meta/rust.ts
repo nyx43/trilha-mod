@@ -15,7 +15,6 @@ export const lessons: LessonMeta[] = [
       'Ler a causa de um erro de tipo e confirmar a correção com Cargo',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustDoZero'),
   },
   {
@@ -30,7 +29,6 @@ export const lessons: LessonMeta[] = [
       'Calcular proporções convertendo inteiros antes da divisão',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustValoresETipos'),
   },
   {
@@ -45,7 +43,6 @@ export const lessons: LessonMeta[] = [
       'Prever quais valores passam por um filtro em um laço for',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustDecisoesEFuncoes'),
   },
   {
@@ -61,7 +58,6 @@ export const lessons: LessonMeta[] = [
       'Distinguir bytes e valores escalares Unicode',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustTextoETerminal'),
   },
   {
@@ -76,7 +72,6 @@ export const lessons: LessonMeta[] = [
       'Escolher quando faz sentido criar outra String com clone',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustOwnership'),
   },
   {
@@ -91,7 +86,6 @@ export const lessons: LessonMeta[] = [
       'Passar uma fatia de uma coleção para uma função',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustReferenciasEFatias'),
   },
   {
@@ -106,7 +100,6 @@ export const lessons: LessonMeta[] = [
       'Escrever e rodar testes para o limite exato e a lista vazia',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustCatalogoETestes'),
   },
   {
@@ -121,7 +114,6 @@ export const lessons: LessonMeta[] = [
       'Propagar a falha de uma função e decidir a resposta no chamador',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustOptionEResult'),
   },
   {
@@ -136,7 +128,6 @@ export const lessons: LessonMeta[] = [
       'Consultar um HashMap e prever a substituição de uma chave',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustColecoes'),
   },
   {
@@ -151,7 +142,6 @@ export const lessons: LessonMeta[] = [
       'Testar casos-limite e documentar comandos e resultados',
     ],
     updatedAt,
-    narration: 'deferred',
     load: () => import('../content/rustEntregaNoTerminal'),
   },
 ];
