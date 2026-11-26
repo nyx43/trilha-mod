@@ -1,0 +1,125 @@
+.freelancer-page {
+  max-width: 880px;
+  overflow-wrap: anywhere;
+}
+
+.freelancer-page,
+.freelancer-heading,
+.freelancer-stack,
+.freelancer-form,
+.freelancer-fieldset,
+.freelancer-note,
+.freelancer-questions {
+  display: grid;
+  gap: 16px;
+  min-width: 0;
+}
+
+.freelancer-page,
+.freelancer-stack {
+  gap: 24px;
+}
+
+.freelancer-heading h1 {
+  scroll-margin-top: calc(var(--site-header) + 20px);
+  font: 700 clamp(2rem, 5vw, 3.5rem) / 1.1 var(--site-display);
+}
+
+.freelancer-page h2 {
+  font: 650 1.25rem / 1.25 var(--site-display);
+}
+
+.freelancer-steps,
+.freelancer-pager {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.freelancer-steps li > * {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 6px 12px;
+  border: 1px solid var(--site-line);
+  border-radius: 10px;
+  font-size: 0.875rem;
+}
+
+.freelancer-steps li > span {
+  color: var(--site-muted);
+}
+
+.freelancer-steps [aria-current='step'] {
+  color: var(--site-ink);
+  border-color: var(--site-accent);
+}
+
+.freelancer-panel {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid var(--site-line);
+  border-radius: 12px;
+  background: var(--site-panel);
+}
+
+.freelancer-panel blockquote,
+.freelancer-saved-note {
+  white-space: pre-wrap;
+}
+
+.freelancer-question {
+  min-height: 44px;
+  text-align: left;
+  font-weight: 650;
+}
+
+.freelancer-question:not([aria-disabled='true']):hover,
+.freelancer-references a,
+.freelancer-panel a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.freelancer-question[aria-disabled='true'] {
+  cursor: default;
+}
+
+.freelancer-note span {
+  color: var(--site-muted);
+}
+
+.freelancer-note textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--site-line);
+  border-radius: 10px;
+  background: var(--site-canvas);
+  resize: vertical;
+}
+
+.freelancer-page :focus-visible {
+  outline: 2px solid var(--site-accent);
+  outline-offset: 3px;
+}
+
+.freelancer-page button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.freelancer-page [role='alert'] {
+  color: #ffb6c6;
+}
+
+.freelancer-cases {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.freelancer-cases :is(th, td) {
+  padding: 10px 6px;
+  border-bottom: 1px solid var(--site-line);
+  text-align: left;
+}

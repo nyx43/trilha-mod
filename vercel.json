@@ -14,6 +14,7 @@
     { "source": "/edit-roadmap/:roadmapId", "destination": "/private" },
     { "source": "/roadmap/view/:roadmapId", "destination": "/private" },
     { "source": "/roadmap/v/:roadmapId", "destination": "/private" },
-    { "source": "/course/:name", "destination": "/private" }
+    { "source": "/course/:name", "destination": "/private" },
+    { "source": "/aulas/freelancer/reservas/:etapa", "destination": "/private" }
   ]
 }

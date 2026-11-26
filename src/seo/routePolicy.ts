@@ -2,4 +2,5 @@
 export const isPersonalPath = (path: string) =>
   /^\/(?:profile|login|new-roadmap|edit-roadmap|course|percurso)(?:\/|$)/.test(path) ||
   /^\/aulas\/o-que-estudar(?:\/|$)/.test(path) ||
+  /^\/aulas\/freelancer\/reservas\//.test(path) ||
   /^\/roadmap\/(?:view|v)(?:\/|$)/.test(path);

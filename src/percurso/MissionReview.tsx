@@ -1,4 +1,10 @@
 import { FormEvent, useState } from 'react';
+import {
+  missingReviewEvidence,
+  parseReview,
+  Review,
+  ReviewFields,
+} from '../components/DeliveryReview';
 
 const criteria = [
   {
@@ -28,37 +34,9 @@ const criteria = [
   },
 ];
 
-const sources = {
-  pending: 'Pendente',
-  adjustment: 'Precisa de ajuste',
-  observed: 'Cumprido · observação própria',
-  tested: 'Cumprido · teste que executei',
-  reviewed: 'Cumprido · revisão de outra pessoa',
-} as const;
-
-type Result = keyof typeof sources;
-type RecordEntry = { result: Result; evidence: string };
-type Review = Record<string, RecordEntry>;
-
-const maxEvidence = 1500;
-const emptyEntry: RecordEntry = { result: 'pending', evidence: '' };
-
-function knownResult(value: unknown): value is Result {
-  return typeof value === 'string' && Object.prototype.hasOwnProperty.call(sources, value);
-}
-
 function readReview(key: string): Review {
   try {
-    const saved = JSON.parse(localStorage.getItem(key) || '{}');
-    if (!saved || typeof saved !== 'object' || Array.isArray(saved)) return {};
-    const entries: Review = {};
-    for (const { id } of criteria) {
-      const entry = saved[id];
-      if (entry && knownResult(entry.result) && typeof entry.evidence === 'string') {
-        entries[id] = { result: entry.result, evidence: entry.evidence.slice(0, maxEvidence) };
-      }
-    }
-    return entries;
+    return parseReview(JSON.parse(localStorage.getItem(key) || '{}'), criteria);
   } catch {
     return {};
   }
@@ -69,20 +47,14 @@ export function MissionReview({ storageId }: { storageId: string }) {
   const [review, setReview] = useState(() => readReview(key));
   const [notice, setNotice] = useState<{ text: string; error: boolean }>();
 
-  function update(id: string, change: Partial<RecordEntry>) {
-    setReview((previous) => ({
-      ...previous,
-      [id]: { ...emptyEntry, ...previous[id], ...change },
-    }));
+  function update(next: Review) {
+    setReview(next);
     setNotice(undefined);
   }
 
   function save(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const missing = criteria.find(({ id }) => {
-      const entry = review[id];
-      return entry && entry.result !== 'pending' && !entry.evidence.trim();
-    });
+    const missing = missingReviewEvidence(review, criteria);
     if (missing) {
       setNotice({ text: `Registre uma evidência para “${missing.title}”.`, error: true });
       return;
@@ -113,40 +85,7 @@ export function MissionReview({ storageId }: { storageId: string }) {
               Registre o que você conferiu no seu projeto e como chegou ao resultado. As anotações
               ficam neste navegador.
             </p>
-            {criteria.map(({ id, title, hint }) => {
-              const entry = review[id] ?? emptyEntry;
-              return (
-                <fieldset className="mission-review-item" key={id}>
-                  <legend>{title}</legend>
-                  <label>
-                    Resultado
-                    <select
-                      value={entry.result}
-                      onChange={(event) => {
-                        const result = event.target.value;
-                        if (knownResult(result)) update(id, { result });
-                      }}
-                    >
-                      {Object.entries(sources).map(([value, label]) => (
-                        <option key={value} value={value}>
-                          {label}
-                        </option>
-                      ))}
-                    </select>
-                  </label>
-                  <label>
-                    Evidência
-                    <textarea
-                      rows={3}
-                      maxLength={maxEvidence}
-                      placeholder={hint}
-                      value={entry.evidence}
-                      onChange={(event) => update(id, { evidence: event.target.value })}
-                    />
-                  </label>
-                </fieldset>
-              );
-            })}
+            <ReviewFields criteria={criteria} value={review} onChange={update} />
             <div className="lessons-actions">
               <button className="lesson-button" type="submit">
                 Salvar avaliação

@@ -250,6 +250,13 @@ export function socialPages(catalogs: RoadmapCatalog[], posts: BlogPost[]): Soci
       'Planejamento de estudo',
       ['Catálogo Web', 'Sem cadastro'],
     ),
+    studyPage(
+      '/aulas/freelancer/reservas',
+      'Simulação freelancer · Agenda de salas',
+      'Converse com um cliente fictício, combine as regras de uma agenda de salas e adapte sua entrega quando o escopo mudar.',
+      'Prática por projeto',
+      ['Cliente simulado', 'Duas entregas'],
+    ),
     ...coursePages,
     ...lessonPages,
     ...percursoPages,

@@ -103,6 +103,19 @@ export default function LessonsPage() {
           </div>
         </section>
 
+        <section aria-labelledby="freelancer-title" className="lessons-review">
+          <div>
+            <h2 id="freelancer-title">Simulação freelancer</h2>
+            <p>
+              Combine o escopo de uma agenda de salas com um cliente fictício, faça a primeira
+              entrega e adapte sua solução quando surgir um novo requisito.
+            </p>
+            <Link className="lesson-button" to="/aulas/freelancer/reservas">
+              Começar simulação <PiArrowRight aria-hidden="true" />
+            </Link>
+          </div>
+        </section>
+
         <section aria-labelledby="courses-title">
           <h2 id="courses-title" className="lessons-modules-title">
             Escolha um curso
